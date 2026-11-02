@@ -1,0 +1,87 @@
+name: PyPI download monitor (read-only)
+
+on:
+  schedule:
+    # Once daily at 10:17 Europe/Istanbul (07:17 UTC).
+    - cron: "17 7 * * *"
+  workflow_dispatch:
+
+# This monitor only reads a public statistics endpoint. It needs no GitHub token.
+permissions: {}
+
+jobs:
+  inspect:
+    name: Read PyPI download statistics
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Query PyPI Stats API (one GET; no package installation or download)
+        env:
+          PACKAGE_NAME: scientific-reasoning-auditor
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          package = os.environ["PACKAGE_NAME"]
+          url = f"https://pypistats.org/api/packages/{quote(package, safe='')}/recent"
+          request = Request(
+              url,
+              headers={
+                  "Accept": "application/json",
+                  "User-Agent": "Furox-Art-PyPI-Download-Monitor/1.0 (read-only)",
+              },
+              method="GET",
+          )
+
+          summary = os.environ.get("GITHUB_STEP_SUMMARY")
+
+          def report(markdown):
+              print(markdown)
+              if summary:
+                  with open(summary, "a", encoding="utf-8") as stream:
+                      stream.write(markdown + "\n")
+
+          try:
+              with urlopen(request, timeout=15) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+          except HTTPError as exc:
+              if exc.code == 404:
+                  report(
+                      f"## PyPI download statistics: {package}\n\n"
+                      "Statistics are not available yet. PyPI Stats updates daily; "
+                      "the monitor will check again on its next daily run.\n\n"
+                      "No package artifact was requested or downloaded."
+                  )
+                  sys.exit(0)
+              raise SystemExit(f"PyPI Stats API returned HTTP {exc.code}.") from exc
+          except (URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+              raise SystemExit(f"Read-only statistics request failed: {exc}") from exc
+
+          if payload.get("package") != package or payload.get("type") != "recent_downloads":
+              raise SystemExit("PyPI Stats API returned an unexpected response.")
+          data = payload.get("data")
+          if not isinstance(data, dict):
+              raise SystemExit("PyPI Stats API response has no valid data object.")
+
+          periods = (("Last 24 hours", "last_day"), ("Last 7 days", "last_week"),
+                     ("Last 30 days", "last_month"))
+          rows = []
+          for label, key in periods:
+              value = data.get(key)
+              if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                  raise SystemExit(f"Invalid download count for {key}.")
+              rows.append(f"| {label} | {value:,} |")
+
+          report(
+              f"## PyPI download statistics: {package}\n\n"
+              "| Period | Downloads |\n|---|---:|\n"
+              + "\n".join(rows)
+              + "\n\nSource: PyPI Stats API. This job makes one read-only JSON request; "
+                "it does not call pip, install packages, or request wheel/source archives."
+          )
+          PY
