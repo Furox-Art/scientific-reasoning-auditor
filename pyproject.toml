@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scientific-reasoning-auditor"
-version = "0.1.0"
-description = "Evidence-grounded screening of scientific manuscripts"
+version = "0.2.0"
+description = "Evidence-traceable screening and reasoning review for scientific manuscripts"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -14,6 +14,7 @@ dependencies = []
 
 [project.optional-dependencies]
 pdf = ["pypdf>=5.0"]
+statistics = ["scipy>=1.11"]
 
 [project.scripts]
 sra = "sra.cli:main"

@@ -1,0 +1,25 @@
+{
+  "test": "welch_t",
+  "group_a": {
+    "mean": 5.0,
+    "sd": 1.0,
+    "n": 25
+  },
+  "group_b": {
+    "mean": 4.0,
+    "sd": 1.0,
+    "n": 25
+  },
+  "reported": {
+    "mean_difference": 1.0,
+    "t": 3.536,
+    "df": 48.0,
+    "p_two_sided": 0.001
+  },
+  "tolerances": {
+    "mean_difference": 0.001,
+    "t": 0.01,
+    "df": 0.1,
+    "p_two_sided": 0.001
+  }
+}
