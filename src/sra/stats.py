@@ -1,12 +1,13 @@
 import hashlib
 import json
 import math
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
 
 def _finite_number(value: Any, field: str) -> float:
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
         raise ValueError(f"{field} must be a number.")
     number = float(value)
     if not math.isfinite(number):
@@ -28,6 +29,12 @@ def _group(spec: dict, name: str) -> tuple[float, float, int]:
     return mean, sd, n_value
 
 
+def _display_precision_tolerance(value: Any) -> float:
+    decimal_value = value if isinstance(value, Decimal) else Decimal(str(value))
+    resolution = Decimal(1).scaleb(decimal_value.as_tuple().exponent)
+    return float(abs(resolution) / 2)
+
+
 def _compare_reported(
     calculated: dict[str, float],
     reported: dict[str, Any],
@@ -45,8 +52,12 @@ def _compare_reported(
             })
             continue
         expected = _finite_number(observed, f"reported.{field}")
+        if field == "p_two_sided" and not 0 < expected <= 1:
+            raise ValueError("reported.p_two_sided must be > 0 and <= 1; do not encode p=0.")
         actual = calculated[field]
-        tolerance = tolerances.get(field, tolerances.get("default", 0.02))
+        tolerance = tolerances.get(field, tolerances.get("default"))
+        if tolerance is None:
+            tolerance = _display_precision_tolerance(observed)
         difference = abs(actual - expected)
         passed = difference <= tolerance
         checks.append({
@@ -71,7 +82,8 @@ def verify_welch_t_test(spec: dict[str, Any], input_sha256: str | None = None) -
     Expected input:
       group_a/group_b: mean, sample standard deviation (sd), sample size (n)
       reported (optional): mean_difference, t, df, p_two_sided
-      tolerances (optional): per-field absolute tolerances or default
+      tolerances (optional): per-field absolute tolerances or default. Without
+      an override, tolerance is half the last displayed decimal place.
     """
     if spec.get("test") != "welch_t":
         raise ValueError("Only test='welch_t' is supported by this verifier.")
@@ -179,7 +191,7 @@ def verify_welch_t_test(spec: dict[str, Any], input_sha256: str | None = None) -
 def verify_stats_file(path: str | Path) -> dict:
     file_path = Path(path).expanduser().resolve()
     raw = file_path.read_bytes()
-    spec = json.loads(raw.decode("utf-8-sig"))
+    spec = json.loads(raw.decode("utf-8-sig"), parse_float=Decimal)
     if not isinstance(spec, dict):
         raise ValueError("Statistics input must be a JSON object.")
     return verify_welch_t_test(spec, hashlib.sha256(raw).hexdigest())

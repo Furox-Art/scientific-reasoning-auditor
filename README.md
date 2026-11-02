@@ -52,13 +52,17 @@ For PDF input:
 
 The command writes reports/sample.json and reports/sample.md. JSON includes the reproducibility manifest; Markdown is the human-readable review.
 
+A synthetic document with deliberately planted inference and direction-conflict signals is provided:
+
+    sra audit examples/logic_review_demo.md --out reports/logic-review-demo
+
 ## Independently verify a Welch t-test
 
 Create a JSON file with two groups' mean, sample SD and n, plus the reported statistics to compare. Example:
 
     sra verify-stats examples/welch_t_example.json --out reports/welch-verification.json
 
-Each reported value is compared with the independently calculated value using the configured absolute tolerance. A mismatch returns a non-zero exit code. The command supports only independent two-group Welch t-tests in this version.
+Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version.
 
 ## Scientific validation roadmap
 

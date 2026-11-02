@@ -89,6 +89,14 @@ class AuditTests(unittest.TestCase):
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
         json.dumps(report.to_dict(), ensure_ascii=False)
 
+    def test_synthetic_logic_demo_emits_the_expected_review_signals(self):
+        example = Path(__file__).resolve().parents[1] / "examples" / "logic_review_demo.md"
+        report = audit_file(example)
+        ids = {finding.check_id for finding in report.findings}
+        self.assertIn("reasoning.causal_claim_observational_design", ids)
+        self.assertIn("reasoning.directional_contradiction", ids)
+        self.assertIn("reasoning.correlation_causation_review", ids)
+
     def test_turkish_discussion_is_not_confused_with_results(self):
         report = self.audit_text(
             "# Yöntem\nKontrollü deney.\n"
@@ -152,6 +160,28 @@ class StatisticalVerificationTests(unittest.TestCase):
         result = verify_welch_t_test(spec)
         self.assertEqual(result["status"], "FAIL")
         self.assertEqual(result["reported_checks"][0]["status"], "FAIL")
+
+    def test_default_tolerance_uses_reported_decimal_precision(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 5.0, "sd": 1.0, "n": 25},
+            "group_b": {"mean": 4.0, "sd": 1.0, "n": 25},
+            "reported": {"p_two_sided": 0.02},
+        }
+        result = verify_welch_t_test(spec)
+        check = result["reported_checks"][0]
+        self.assertEqual(check["status"], "FAIL")
+        self.assertAlmostEqual(check["absolute_tolerance"], 0.005)
+
+    def test_welch_rejects_zero_reported_p_value(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 5.0, "sd": 1.0, "n": 25},
+            "group_b": {"mean": 4.0, "sd": 1.0, "n": 25},
+            "reported": {"p_two_sided": 0.0},
+        }
+        with self.assertRaises(ValueError):
+            verify_welch_t_test(spec)
 
     def test_welch_rejects_invalid_sample_sizes(self):
         spec = {
