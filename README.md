@@ -6,9 +6,9 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.5.0
+## Current status: v0.5.1
 
-This release advances the original v0.1 screening baseline with a traceable reasoning-review layer and an independently recalculable statistical summary check.
+This patch release hardens authenticated model API transport and JSON handling, stabilizes Welch and pooled-standard-deviation calculations across extreme numeric scales, and corrects Hedges' g for very large degrees of freedom. It retains the traceable reasoning-review layer and independently recalculable statistical summary checks introduced in earlier releases.
 
 ### Implemented
 
@@ -125,7 +125,7 @@ For a direct single-model API review, set the API key in the environment and run
     export OPENAI_API_KEY="your-api-key"
     sra review-model examples/logic_review_demo.md --model "your-model-id" --base-url "https://api.openai.com/v1" --out reports/semantic-review-completed.json
 
-The command sends the complete manuscript and source-bound template to one model, parses its JSON response, then validates the returned review against the manuscript and reasoning graph. Any OpenAI-compatible Chat Completions endpoint can be configured with --base-url and --api-key-env. The API key is read from the environment and is not written to reports. Model/API charges and provider data-retention policies are controlled by the provider.
+The command sends the complete manuscript and source-bound template to one model, parses its JSON response, then validates the returned review against the manuscript and reasoning graph. Any OpenAI-compatible Chat Completions endpoint can be configured with --base-url and --api-key-env. Remote endpoints must use HTTPS so the API key is encrypted in transit; plain HTTP is accepted only for localhost or IP loopback addresses (127.0.0.0/8 and ::1) for inference servers, and these local clear-text requests bypass environment-configured HTTP proxies. URLs containing embedded credentials or query/fragment delimiters are rejected, and HTTP redirects are not followed to prevent forwarding authorization headers to another host. Statistical inputs that underflow or overflow the supported floating-point range are rejected with a validation error rather than producing silently rounded or non-finite report values; the Welch and pooled-standard-deviation calculations use scaled formulas to preserve valid extreme-range inputs. Statistics JSON input rejects non-standard NaN/Infinity constants. The API key is read from the environment and is not written to reports. Model/API charges and provider data-retention policies are controlled by the provider.
 
 For parallel mode, export the template and pass it to the connected external parallel-agent orchestrator. Each agent must receive the full manuscript and its assigned assessment subset; merge all results by inference ID before importing. The current CLI does not launch the ChatGPT UI-based parallel-agent tool.
 

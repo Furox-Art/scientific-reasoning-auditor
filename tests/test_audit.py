@@ -1,4 +1,5 @@
 import json
+import math
 import tempfile
 import unittest
 from pathlib import Path
@@ -183,9 +184,9 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(report.schema_version, "1.4")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.5.0")
-        self.assertEqual(manifest["auditor_version"], "0.5.0")
-        self.assertEqual(manifest["installed_package_version"], "0.5.0")
+        self.assertEqual(manifest["ruleset_version"], "0.5.1")
+        self.assertEqual(manifest["auditor_version"], "0.5.1")
+        self.assertEqual(manifest["installed_package_version"], "0.5.1")
         self.assertIn("source_code_revision", manifest)
         self.assertEqual(len(manifest["source_code_sha256"]), 64)
         self.assertIn("working_tree_dirty", manifest)
@@ -771,6 +772,93 @@ class StatisticalVerificationTests(unittest.TestCase):
         self.assertEqual(check["status"], "FAIL")
         self.assertAlmostEqual(check["absolute_tolerance"], 0.005)
 
+    def test_welch_rejects_positive_standard_error_contribution_underflow(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 0.0, "sd": 5e-324, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 1.0, "n": 10},
+        }
+        with self.assertRaisesRegex(ValueError, "group_a standard-error contribution underflowed"):
+            verify_welch_t_test(spec)
+
+    def test_welch_rejects_nonzero_decimal_that_underflows_to_float_zero(self):
+        from decimal import Decimal
+
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 0, "sd": 1, "n": 10},
+            "group_b": {"mean": 0, "sd": 1, "n": 10},
+            "reported": {"mean_difference": Decimal("1e-400")},
+        }
+        with self.assertRaisesRegex(ValueError, "too small to be represented"):
+            verify_welch_t_test(spec)
+
+    def test_welch_rejects_decimal_precision_lost_during_float_conversion(self):
+        from decimal import Decimal
+
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 0, "sd": 1, "n": 10},
+            "group_b": {"mean": 0, "sd": 1, "n": 10},
+            "reported": {"mean_difference": Decimal("1.000000000000000000001")},
+        }
+        with self.assertRaisesRegex(ValueError, "more decimal precision"):
+            verify_welch_t_test(spec)
+
+    def test_welch_rejects_integer_precision_lost_during_float_conversion(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 9007199254740993, "sd": 1, "n": 10},
+            "group_b": {"mean": 0, "sd": 1, "n": 10},
+        }
+        with self.assertRaisesRegex(ValueError, "not exactly representable"):
+            verify_welch_t_test(spec)
+
+    def test_precision_tolerance_rejects_decimal_resolution_below_float_range(self):
+        from decimal import Decimal
+        from sra.stats import _display_precision_tolerance
+
+        precise_one = Decimal("1." + "0" * 400)
+        with self.assertRaisesRegex(ValueError, "too small to be represented"):
+            _display_precision_tolerance(precise_one)
+
+    def test_verify_stats_file_rejects_all_nonstandard_json_constants(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "nonstandard.json"
+            prefix = (
+                '{"test":"welch_t","group_a":{"mean":4.2,"sd":1.3,"n":23},'
+                '"group_b":{"mean":3.1,"sd":2.0,"n":31},"unused_metadata":'
+            )
+            for constant in ("NaN", "Infinity", "-Infinity"):
+                with self.subTest(constant=constant):
+                    source.write_text(prefix + constant + "}", encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "Non-standard JSON numeric constant"):
+                        verify_stats_file(source)
+
+    def test_unknown_reported_decimal_fields_remain_json_serializable(self):
+        import json
+        from decimal import Decimal
+
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 4.2, "sd": 1.3, "n": 23},
+            "group_b": {"mean": 3.1, "sd": 2.0, "n": 31},
+            "reported": {
+                "extra_metric": {
+                    "regular": Decimal("1.25"),
+                    "high_precision": Decimal("1.000000000000000000001"),
+                    "below_float_range": Decimal("1e-400"),
+                }
+            },
+        }
+        result = verify_welch_t_test(spec)
+        self.assertEqual(result["reported_checks"][0]["status"], "NOT_VERIFIED")
+        reported = result["reported_checks"][0]["reported"]
+        self.assertEqual(reported["regular"], 1.25)
+        self.assertEqual(reported["high_precision"], "1.000000000000000000001")
+        self.assertEqual(reported["below_float_range"], "1E-400")
+        json.dumps(result, allow_nan=False)
+
     def test_welch_rejects_zero_reported_p_value(self):
         spec = {
             "test": "welch_t",
@@ -786,6 +874,125 @@ class StatisticalVerificationTests(unittest.TestCase):
         result = verify_stats_file(example)
         self.assertEqual(result["status"], "PASS")
         self.assertEqual(len(result["input_sha256"]), 64)
+
+    def test_welch_scaled_formula_handles_variance_squares_that_would_overflow(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 0.0, "sd": 1e308, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 1e308, "n": 10},
+        }
+        result = verify_welch_t_test(spec)
+        calculated = result["calculated"]
+        self.assertAlmostEqual(calculated["standard_error"] / 1e308, (2 / 10) ** 0.5)
+        self.assertAlmostEqual(calculated["df"], 18.0)
+        self.assertTrue(all(math.isfinite(value) for value in calculated["confidence_interval_95"]))
+        self.assertEqual(calculated["cohen_d_pooled"], 0.0)
+
+    def test_welch_scaled_formula_handles_tiny_variance_contributions(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 1e-150, "sd": 1e-150, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 1e-150, "n": 10},
+        }
+        result = verify_welch_t_test(spec)
+        calculated = result["calculated"]
+        self.assertTrue(math.isfinite(calculated["standard_error"]))
+        self.assertAlmostEqual(calculated["df"], 18.0)
+        self.assertAlmostEqual(calculated["t"], 2.23606797749979)
+
+    def test_hedges_correction_stays_below_one_for_very_large_degrees(self):
+        for sample_size, expected_ratio in (
+            (500_000_000, 0.99999999925),
+            (500_000_000_000, 0.99999999999925),
+        ):
+            with self.subTest(sample_size=sample_size):
+                spec = {
+                    "test": "welch_t",
+                    "group_a": {"mean": 1e-5, "sd": 1.0, "n": sample_size},
+                    "group_b": {"mean": 0.0, "sd": 1.0, "n": sample_size},
+                }
+                calculated = verify_welch_t_test(spec)["calculated"]
+                ratio = calculated["hedges_g"] / calculated["cohen_d_pooled"]
+                self.assertGreater(ratio, 0.0)
+                self.assertLess(ratio, 1.0)
+                self.assertAlmostEqual(ratio, expected_ratio, delta=1e-15)
+
+    def test_pooled_standard_deviation_does_not_underflow_to_missing_effect_sizes(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 0.0, "sd": 0.0, "n": 10**200},
+            "group_b": {"mean": 0.0, "sd": 1e-70, "n": 10},
+        }
+        calculated = verify_welch_t_test(spec)["calculated"]
+        self.assertGreater(calculated["cohen_d_pooled"], -1e-12)
+        self.assertEqual(calculated["cohen_d_pooled"], 0.0)
+        self.assertEqual(calculated["hedges_g"], 0.0)
+
+    def test_welch_rejects_p_value_underflow_instead_of_reporting_zero(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 1e20, "sd": 1.0, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 1.0, "n": 10},
+        }
+        with self.assertRaisesRegex(ValueError, "p-value underflowed"):
+            verify_welch_t_test(spec)
+
+    def test_welch_rejects_mean_difference_overflow(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 1e308, "sd": 1.0, "n": 10},
+            "group_b": {"mean": -1e308, "sd": 1.0, "n": 10},
+        }
+        with self.assertRaisesRegex(ValueError, "mean difference"):
+            verify_welch_t_test(spec)
+
+    def test_cli_reports_numeric_overflow_without_writing_nonstandard_json(self):
+        import contextlib
+        import io
+        from unittest.mock import patch
+        from sra.cli import main
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "overflow.json"
+            output = Path(directory) / "result.json"
+            source.write_text(json.dumps({
+                "test": "welch_t",
+                "group_a": {"mean": 1e308, "sd": 1.0, "n": 10},
+                "group_b": {"mean": -1e308, "sd": 1.0, "n": 10},
+            }), encoding="utf-8")
+            stderr = io.StringIO()
+            with patch("sys.argv", ["sra", "verify-stats", str(source), "--out", str(output)]):
+                with contextlib.redirect_stderr(stderr):
+                    with self.assertRaises(SystemExit) as caught:
+                        main()
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn("mean difference", stderr.getvalue())
+            self.assertFalse(output.exists())
+
+    def test_cli_handles_extreme_decimal_exponent_without_traceback(self):
+        import contextlib
+        import io
+        from unittest.mock import patch
+        from sra.cli import main
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "extreme-exponent.json"
+            output = Path(directory) / "result.json"
+            source.write_text(
+                '{"test":"welch_t","group_a":{"mean":1,"sd":1,"n":10},'
+                '"group_b":{"mean":0,"sd":1,"n":10},'
+                '"reported":{"mean_difference":1e-999999999}}',
+                encoding="utf-8",
+            )
+            stderr = io.StringIO()
+            with patch("sys.argv", ["sra", "verify-stats", str(source), "--out", str(output)]):
+                with contextlib.redirect_stderr(stderr):
+                    with self.assertRaises(SystemExit) as caught:
+                        main()
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn("too small to be represented", stderr.getvalue())
+            self.assertNotIn("Traceback", stderr.getvalue())
+            self.assertFalse(output.exists())
 
     def test_welch_rejects_invalid_sample_sizes(self):
         spec = {
@@ -806,6 +1013,28 @@ class ModelClientTests(unittest.TestCase):
         from sra.model_client import _extract_json_object
         self.assertEqual(_extract_json_object(chr(96)*3 + 'json\n{"ok": true}\n' + chr(96)*3), {"ok": True})
 
+    def test_model_response_parser_rejects_nonstandard_json_constants(self):
+        from sra.model_client import _extract_json_object
+
+        for constant in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(constant=constant):
+                with self.assertRaisesRegex(ValueError, "Non-standard JSON numeric constant"):
+                    _extract_json_object(f'{{"confidence": {constant}}}')
+
+    def test_model_response_parser_rejects_non_finite_or_lossy_json_numbers(self):
+        from sra.model_client import _extract_json_object
+
+        invalid_numbers = (
+            ("1e9999", "outside the supported floating-point range"),
+            ("1e-9999", "too small for floating-point representation"),
+            ("1e-99999999999999999999999999", "outside the supported floating-point range"),
+            ("1.000000000000000000001", "precision beyond floating-point representation"),
+        )
+        for number, message in invalid_numbers:
+            with self.subTest(number=number):
+                with self.assertRaisesRegex(ValueError, message):
+                    _extract_json_object(f'{{"metric": {number}}}')
+
     def test_rejects_non_object_model_response(self):
         from sra.model_client import _extract_json_object
         with self.assertRaises(ValueError):
@@ -820,6 +1049,289 @@ class ModelClientTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "not set"):
                 request_single_model_review({"review_mode":"single"}, "paper", model="m",
                     base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY")
+
+    def test_authenticated_request_opener_installs_redirect_blocker(self):
+        from unittest.mock import Mock, patch
+        from urllib.request import Request
+        from sra.model_client import _NoRedirectHandler, _open_api_request
+
+        request = Request("https://trusted.example/v1/chat/completions", data=b"{}")
+        response = object()
+        opener = Mock()
+        opener.open.return_value = response
+        with patch("sra.model_client.build_opener", return_value=opener) as build_opener:
+            self.assertIs(_open_api_request(request, timeout=17), response)
+        build_opener.assert_called_once_with(_NoRedirectHandler)
+        opener.open.assert_called_once_with(request, timeout=17)
+
+    def test_local_http_opener_bypasses_environment_proxies(self):
+        from unittest.mock import Mock, patch
+        from urllib.request import ProxyHandler, Request
+        from sra.model_client import _NoRedirectHandler, _open_api_request
+
+        request = Request("http://127.0.0.1:8000/v1/chat/completions", data=b"{}")
+        opener = Mock()
+        opener.open.return_value = object()
+        with patch("sra.model_client.build_opener", return_value=opener) as build_opener:
+            _open_api_request(request, timeout=9)
+        handlers = build_opener.call_args.args
+        self.assertEqual(len(handlers), 2)
+        self.assertIsInstance(handlers[0], ProxyHandler)
+        self.assertEqual(handlers[0].proxies, {})
+        self.assertIs(handlers[1], _NoRedirectHandler)
+        opener.open.assert_called_once_with(request, timeout=9)
+
+    def test_all_ipv4_loopback_addresses_are_allowed_for_local_http(self):
+        import json
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        class FakeResponse:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self):
+                return json.dumps({"choices": [{"message": {"content": '{"ok": true}'}}]}).encode()
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            for host in ("127.0.0.1", "127.0.0.2", "127.255.255.254", "[::1]", "localhost"):
+                with self.subTest(host=host):
+                    with patch("sra.model_client._open_api_request", return_value=FakeResponse()) as mocked:
+                        result = request_single_model_review(
+                            {"review_mode": "single"}, "paper", model="m",
+                            base_url=f"http://{host}:8000/v1", api_key_env="SRA_TEST_KEY"
+                        )
+                    self.assertEqual(result, {"ok": True})
+                    self.assertEqual(
+                        mocked.call_args.args[0].full_url,
+                        f"http://{host}:8000/v1/chat/completions",
+                    )
+
+    def test_local_http_redirect_never_reaches_redirect_target(self):
+        import threading
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        observed = {
+            "redirect_requests": 0, "target_requests": 0,
+            "proxy_requests": 0, "authorization": None,
+        }
+        target = None
+
+        class TargetHandler(BaseHTTPRequestHandler):
+            def do_POST(self):
+                observed["target_requests"] += 1
+                self.send_response(200)
+                self.end_headers()
+
+            def log_message(self, *args):
+                pass
+
+        target = ThreadingHTTPServer(("127.0.0.1", 0), TargetHandler)
+
+        class RedirectHandler(BaseHTTPRequestHandler):
+            def do_POST(self):
+                observed["redirect_requests"] += 1
+                observed["authorization"] = self.headers.get("Authorization")
+                self.send_response(302)
+                self.send_header("Location", f"http://127.0.0.1:{target.server_port}/redirect-target")
+                self.end_headers()
+
+            def log_message(self, *args):
+                pass
+
+        redirect = ThreadingHTTPServer(("127.0.0.1", 0), RedirectHandler)
+
+        class ProxyServerHandler(BaseHTTPRequestHandler):
+            def do_POST(self):
+                observed["proxy_requests"] += 1
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(b'{"choices":[{"message":{"content":"{\"ok\":true}"}}]}')
+
+            def log_message(self, *args):
+                pass
+
+        proxy_server = ThreadingHTTPServer(("127.0.0.1", 0), ProxyServerHandler)
+        proxy_url = f"http://127.0.0.1:{proxy_server.server_port}"
+        threads = [
+            threading.Thread(target=target.serve_forever, daemon=True),
+            threading.Thread(target=redirect.serve_forever, daemon=True),
+            threading.Thread(target=proxy_server.serve_forever, daemon=True),
+        ]
+        for thread in threads:
+            thread.start()
+        try:
+            with patch.dict("os.environ", {
+                "SRA_TEST_KEY": "integration-test-key",
+                "HTTP_PROXY": proxy_url,
+                "http_proxy": proxy_url,
+                "NO_PROXY": "",
+                "no_proxy": "",
+            }):
+                with self.assertRaisesRegex(RuntimeError, "HTTP 302"):
+                    request_single_model_review(
+                        {"review_mode": "single"}, "paper", model="test-model",
+                        base_url=f"http://127.0.0.1:{redirect.server_port}/v1",
+                        api_key_env="SRA_TEST_KEY", timeout=3,
+                    )
+            self.assertEqual(observed["redirect_requests"], 1)
+            self.assertEqual(observed["target_requests"], 0)
+            self.assertEqual(observed["proxy_requests"], 0)
+            self.assertEqual(observed["authorization"], "Bearer integration-test-key")
+        finally:
+            redirect.shutdown()
+            target.shutdown()
+            proxy_server.shutdown()
+            redirect.server_close()
+            target.server_close()
+            proxy_server.server_close()
+            for thread in threads:
+                thread.join(timeout=2)
+
+    def test_authenticated_model_client_rejects_http_redirects(self):
+        from email.message import Message
+        from urllib.error import HTTPError
+        from urllib.request import Request
+        from sra.model_client import _NoRedirectHandler
+
+        request = Request(
+            "https://trusted.example/v1/chat/completions", data=b"{}",
+            headers={"Authorization": "Bearer test-key"}, method="POST"
+        )
+        with self.assertRaises(HTTPError) as caught:
+            _NoRedirectHandler().redirect_request(
+                request, None, 302, "Found", Message(),
+                "https://untrusted.example/collect"
+            )
+        self.assertEqual(caught.exception.code, 302)
+        self.assertIn("Redirects are disabled", caught.exception.msg)
+        self.assertEqual(request.get_header("Authorization"), "Bearer test-key")
+
+    def test_single_model_rejects_nonstandard_constants_in_provider_envelope(self):
+        import json
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        class FakeResponse:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self):
+                return b'{"choices":[{"message":{"content":"{}"}}],"usage":{"total_tokens":NaN}}'
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            with patch("sra.model_client._open_api_request", return_value=FakeResponse()):
+                with self.assertRaisesRegex(ValueError, "Non-standard JSON numeric constant"):
+                    request_single_model_review(
+                        {"review_mode": "single"}, "paper", model="m",
+                        base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY"
+                    )
+
+    def test_single_model_rejects_remote_plain_http_before_sending_api_key(self):
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "must-not-leak"}):
+            with patch("sra.model_client._open_api_request") as mocked:
+                with self.assertRaisesRegex(ValueError, "HTTPS for remote model APIs"):
+                    request_single_model_review(
+                        {"review_mode": "single"}, "paper", model="m",
+                        base_url="http://model.example/v1", api_key_env="SRA_TEST_KEY"
+                    )
+                mocked.assert_not_called()
+
+    def test_single_model_rejects_empty_query_and_fragment_delimiters(self):
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            for base_url in (
+                "https://example.test/v1?",
+                "https://example.test/v1#",
+            ):
+                with self.subTest(base_url=base_url):
+                    with patch("sra.model_client._open_api_request") as mocked:
+                        with self.assertRaisesRegex(ValueError, "delimiters"):
+                            request_single_model_review(
+                                {"review_mode": "single"}, "paper", model="m",
+                                base_url=base_url, api_key_env="SRA_TEST_KEY"
+                            )
+                        mocked.assert_not_called()
+
+    def test_single_model_accepts_encoded_query_fragment_characters_in_path(self):
+        import json
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        class FakeResponse:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self):
+                return json.dumps({"choices": [{"message": {"content": '{"ok": true}'}}]}).encode()
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            with patch("sra.model_client._open_api_request", return_value=FakeResponse()) as mocked:
+                result = request_single_model_review(
+                    {"review_mode": "single"}, "paper", model="m",
+                    base_url="https://example.test/v1/%3F/%23", api_key_env="SRA_TEST_KEY"
+                )
+        self.assertEqual(result, {"ok": True})
+        self.assertEqual(
+            mocked.call_args.args[0].full_url,
+            "https://example.test/v1/%3F/%23/chat/completions",
+        )
+
+    def test_single_model_rejects_credentials_and_query_in_base_url(self):
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            for base_url in (
+                "https://user:password@example.test/v1",
+                "https://%75ser:password@example.test/v1",
+                "https://example.test/v1?redirect=http://other.test",
+                "https://example.test/v1#fragment",
+            ):
+                with self.subTest(base_url=base_url):
+                    with patch("sra.model_client._open_api_request") as mocked:
+                        with self.assertRaises(ValueError):
+                            request_single_model_review(
+                                {"review_mode": "single"}, "paper", model="m",
+                                base_url=base_url, api_key_env="SRA_TEST_KEY"
+                            )
+                        mocked.assert_not_called()
+
+    def test_review_model_cli_does_not_write_nonstandard_json(self):
+        import contextlib
+        import io
+        import math
+        from unittest.mock import patch
+        from sra.cli import main
+
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "review.json"
+            fake_report = type("FakeReport", (), {"to_dict": lambda self: {}})()
+            fake_document = type("FakeDocument", (), {"text": "paper"})()
+            stderr = io.StringIO()
+            with (
+                patch("sys.argv", [
+                    "sra", "review-model", "input.md", "--model", "model",
+                    "--base-url", "https://example.test/v1", "--api-key-env", "SRA_TEST_KEY",
+                    "--out", str(output),
+                ]),
+                patch("sra.cli.audit_file", return_value=fake_report),
+                patch("sra.cli.load_document", return_value=fake_document),
+                patch("sra.cli.build_review_template", return_value={"review_mode": "single"}),
+                patch("sra.cli.request_single_model_review", return_value={"confidence": math.nan}),
+                patch("sra.cli.validate_semantic_review", return_value={"status": "REJECTED", "errors": ["confidence must be finite"]}),
+                contextlib.redirect_stderr(stderr),
+            ):
+                with self.assertRaises(SystemExit) as caught:
+                    main()
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn("Out of range float values", stderr.getvalue())
+            self.assertFalse(output.exists())
 
     def test_single_model_posts_to_openai_compatible_endpoint(self):
         import json
@@ -836,7 +1348,7 @@ class ModelClientTests(unittest.TestCase):
 
         template = {"review_mode":"single", "assessments":[]}
         with patch.dict("os.environ", {"SRA_TEST_KEY":"test-key"}):
-            with patch("sra.model_client.urlopen", return_value=FakeResponse()) as mocked:
+            with patch("sra.model_client._open_api_request", return_value=FakeResponse()) as mocked:
                 result = request_single_model_review(
                     template, "Full manuscript", model="test-model",
                     base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY"
@@ -848,3 +1360,15 @@ class ModelClientTests(unittest.TestCase):
         sent = json.loads(request.data.decode())
         self.assertEqual(sent["model"], "test-model")
         self.assertEqual(sent["temperature"], 0)
+
+        # Local inference servers may use HTTP because traffic stays on loopback.
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            with patch("sra.model_client._open_api_request", return_value=FakeResponse()) as local_mock:
+                request_single_model_review(
+                    template, "Full manuscript", model="test-model",
+                    base_url="http://127.0.0.1:8000/v1", api_key_env="SRA_TEST_KEY"
+                )
+        self.assertEqual(
+            local_mock.call_args.args[0].full_url,
+            "http://127.0.0.1:8000/v1/chat/completions",
+        )

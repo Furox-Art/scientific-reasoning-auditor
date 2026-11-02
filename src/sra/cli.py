@@ -85,11 +85,14 @@ def main() -> int:
                 api_key_env=args.api_key_env, timeout=args.timeout,
             )
             validation = validate_semantic_review(completed, report.to_dict(), document.text)
-        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
+            serialized_completed = json.dumps(
+                completed, ensure_ascii=False, indent=2, allow_nan=False
+            )
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError, TypeError) as exc:
             parser.error(str(exc))
         output = Path(args.out)
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(completed, ensure_ascii=False, indent=2), encoding="utf-8")
+        output.write_text(serialized_completed, encoding="utf-8")
         print(f"Model review saved: {output.resolve()}")
         print(f"Structural validation: {validation['status']}")
         for error in validation["errors"]:
@@ -99,11 +102,12 @@ def main() -> int:
 
     try:
         result = verify_stats_file(args.input)
-    except (OSError, ValueError, RuntimeError) as exc:
+        serialized_result = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+    except (OSError, ValueError, RuntimeError, ArithmeticError, TypeError) as exc:
         parser.error(str(exc))
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    output.write_text(serialized_result, encoding="utf-8")
     print(f"Statistics verification status: {result['status']}")
     print(f"Result: {output.resolve()}")
     return 0 if result["status"] == "PASS" else 1
