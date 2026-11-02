@@ -1,0 +1,58 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "npm-v*"
+
+permissions: {}
+
+jobs:
+  publish:
+    name: Test and publish with npm Trusted Publishing (OIDC)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js and npm registry
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Verify npm CLI and release tag
+        run: |
+          node <<'NODE'
+          const [major, minor] = process.versions.node.split(".").map(Number);
+          if (major < 22 || (major === 22 && minor < 14)) {
+            throw new Error("npm Trusted Publishing requires Node.js 22.14+.");
+          }
+          const { execFileSync } = require("node:child_process");
+          const npmVersion = execFileSync("npm", ["--version"], { encoding: "utf8" }).trim();
+          const [npmMajor, npmMinor, npmPatch] = npmVersion.split(".").map(Number);
+          if (npmMajor < 11 || (npmMajor === 11 && (npmMinor < 5 || (npmMinor === 5 && npmPatch < 1)))) {
+            throw new Error("npm " + npmVersion + " is too old; Trusted Publishing requires npm 11.5.1+.");
+          }
+          const fs = require("node:fs");
+          const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+          const expectedTag = "npm-v" + pkg.version;
+          if (process.env.GITHUB_REF_NAME !== expectedTag) {
+            throw new Error("Tag " + process.env.GITHUB_REF_NAME + " does not match " + expectedTag + ".");
+          }
+          console.log("Node.js " + process.versions.node + "; npm " + npmVersion + "; publishing " + pkg.name + "@" + pkg.version);
+          NODE
+
+      - name: Run Node.js tests
+        run: npm test
+
+      - name: Validate npm package contents
+        run: npm pack --dry-run
+
+      - name: Publish using GitHub OIDC (no npm token)
+        run: npm publish --access public
