@@ -6,7 +6,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.2.1
+## Current status: v0.2.2
 
 This release advances the original v0.1 screening baseline with a traceable reasoning-review layer and an independently recalculable statistical summary check.
 

@@ -10,8 +10,8 @@ from importlib.metadata import PackageNotFoundError, version
 from sra.document import ParsedDocument
 
 
-AUDITOR_VERSION = "0.2.1"
-RULESET_VERSION = "0.2.1"
+AUDITOR_VERSION = "0.2.2"
+RULESET_VERSION = "0.2.2"
 RULE_CONFIGURATION = {
     "claim_marker_version": 1,
     "causal_design_rule_version": 1,

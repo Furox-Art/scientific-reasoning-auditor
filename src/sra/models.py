@@ -24,6 +24,8 @@ class ClaimEvidenceCandidate:
     interpretation: str
     claim_line: int | None = None
     support_line: int | None = None
+    claim_section: str | None = None
+    support_section: str | None = None
     match_status: str = "heuristic_candidate"
 
     def to_dict(self) -> dict[str, Any]:

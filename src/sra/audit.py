@@ -4,7 +4,7 @@ from sra.models import AuditReport
 from sra.provenance import build_manifest
 
 SCOPE_NOTE = (
-    "Version 0.2 adds line-aware evidence references, heuristic result/conclusion direction-conflict "
+    "Version 0.2.2 adds line- and section-aware evidence references, heuristic result/conclusion direction-conflict "
     "signals, observational-design/causal-language review, unmatched conclusion-claim signals, and a "
     "reproducibility manifest. These are deterministic screening heuristics, not semantic entailment, "
     "proof checking, causal identification, statistical re-analysis, or verification that a conclusion "
@@ -17,7 +17,7 @@ def audit_file(path: str) -> AuditReport:
     document = load_document(path)
     findings, candidates, reasoning_map = build_findings(document)
     return AuditReport(
-        schema_version="1.1",
+        schema_version="1.2",
         source=document.source,
         sha256=document.sha256,
         section_names=list(document.sections),

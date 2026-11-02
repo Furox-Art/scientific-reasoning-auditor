@@ -39,6 +39,8 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(candidate.match_status, "heuristic_candidate")
         self.assertEqual(candidate.claim_line, 6)
         self.assertEqual(candidate.support_line, 4)
+        self.assertEqual(candidate.claim_section, "Conclusion")
+        self.assertEqual(candidate.support_section, "Results")
 
     def test_flags_possible_direction_conflict_between_results_and_conclusion(self):
         report = self.audit_text(
@@ -93,7 +95,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(manifest["input"]["format"], "md")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.2.1")
+        self.assertEqual(manifest["ruleset_version"], "0.2.2")
         self.assertIn("source_code_revision", manifest)
         self.assertIn("working_tree_dirty", manifest)
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
@@ -115,6 +117,7 @@ class AuditTests(unittest.TestCase):
         )
         self.assertGreaterEqual(len(report.claim_evidence_candidates), 1)
         self.assertEqual(report.section_names[:3], ["Yöntem", "Bulgular", "Tartışma"])
+        self.assertEqual(report.claim_evidence_candidates[0].claim_section, "Tartışma")
 
 
 class StatisticalVerificationTests(unittest.TestCase):

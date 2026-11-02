@@ -74,7 +74,7 @@ def _norm_words(value: str, remove_direction: bool = False) -> set[str]:
     }
 
 
-def _sentences(value: str, start_line: int = 1) -> list[dict]:
+def _sentences(value: str, start_line: int = 1, section: str | None = None) -> list[dict]:
     output: list[dict] = []
     for match in re.finditer(r"[^.!?\n]+(?:[.!?]+|$)", value):
         sentence = match.group().strip()
@@ -82,6 +82,7 @@ def _sentences(value: str, start_line: int = 1) -> list[dict]:
             output.append({
                 "text": sentence,
                 "line": start_line + value.count("\n", 0, match.start()),
+                "section": section,
             })
     return output
 
@@ -90,7 +91,7 @@ def _section_entries(document: ParsedDocument, aliases: tuple[str, ...]) -> list
     entries = []
     for name, value in document.sections.items():
         if _heading_matches(name, aliases):
-            entries.extend(_sentences(value, document.section_start_lines.get(name, 1)))
+            entries.extend(_sentences(value, document.section_start_lines.get(name, 1), name))
     return entries
 
 
@@ -143,6 +144,8 @@ def _candidate_links(
             ),
             claim_line=claim["line"],
             support_line=best_sentence["line"] if matched and best_sentence else None,
+            claim_section=claim.get("section"),
+            support_section=best_sentence.get("section") if matched and best_sentence else None,
             match_status="heuristic_candidate" if matched else "unmatched_review_required",
         ))
         if not matched:
@@ -229,13 +232,13 @@ def build_findings(
     if unmatched:
         findings.append(Finding(
             "reasoning.conclusion_without_lexical_candidate",
-            "Conclusion claims lack a lexical result candidate",
+            "Discussion/Conclusion claims lack a lexical result candidate",
             "warning", "review_required",
-            "No result sentence passed the lexical-overlap threshold for these conclusion claims. "
+            "No result sentence passed the lexical-overlap threshold for these Discussion/Conclusion claims. "
             "This is not proof of unsupported reasoning: paraphrase, cross-section evidence, or extraction "
             "failure may explain the mismatch.",
             [item["text"] for item in unmatched[:5]],
-            [{"line": item["line"], "section": "conclusion"} for item in unmatched[:5]],
+            [{"line": item["line"], "section": item.get("section")} for item in unmatched[:5]],
         ))
 
     association_claims = [s for s in conclusion_sentences if CORRELATION.search(s["text"])]
@@ -259,7 +262,7 @@ def build_findings(
             "Association language and causal language appear in the conclusion. Check whether the design "
             "and identification assumptions justify the causal interpretation.",
             [s["text"] for s in association_claims[:2] + causal_claims[:2]],
-            [{"line": s["line"], "section": "conclusion"} for s in association_claims[:2] + causal_claims[:2]],
+            [{"line": s["line"], "section": s.get("section")} for s in association_claims[:2] + causal_claims[:2]],
         ))
 
     methods_text = _section_text(document, METHODS)
@@ -279,7 +282,7 @@ def build_findings(
             "invalidity; causal identification may rely on design features or assumptions not detected here.",
             [causal_claims[0]["text"], method_excerpt],
             [
-                {"line": causal_claims[0]["line"], "section": "conclusion"},
+                {"line": causal_claims[0]["line"], "section": causal_claims[0].get("section")},
                 ({"line": method_evidence["line"], "section": "methods"}
                  if method_evidence else {"section": "methods"}),
             ],
@@ -295,15 +298,17 @@ def build_findings(
                 conflict["conclusion"]["text"],
             ])
             locations.extend([
-                {"line": conflict["result"]["line"], "section": "results"},
-                {"line": conflict["conclusion"]["line"], "section": "conclusion"},
+                {"line": conflict["result"]["line"], "section": conflict["result"].get("section")},
+                {"line": conflict["conclusion"]["line"], "section": conflict["conclusion"].get("section")},
             ])
             reasoning_map.append({
                 "relation": "possible_directional_contradiction",
                 "results_line": conflict["result"]["line"],
                 "results_sentence": conflict["result"]["text"],
                 "conclusion_line": conflict["conclusion"]["line"],
+                "conclusion_section": conflict["conclusion"].get("section"),
                 "conclusion_sentence": conflict["conclusion"]["text"],
+                "results_section": conflict["result"].get("section"),
                 "topic_overlap": conflict["topic_overlap"],
                 "status": "heuristic_review_required",
             })
@@ -320,8 +325,10 @@ def build_findings(
         reasoning_map.append({
             "relation": "lexical_support_candidate" if candidate.candidate_support else "no_lexical_candidate",
             "claim_line": candidate.claim_line,
+            "claim_section": candidate.claim_section,
             "claim": candidate.claim,
             "candidate_support_line": candidate.support_line,
+            "candidate_support_section": candidate.support_section,
             "candidate_support": candidate.candidate_support,
             "overlap": candidate.lexical_overlap,
             "status": candidate.match_status,
