@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from sra.audit import audit_file
-from sra.stats import verify_welch_t_test
+from sra.stats import verify_stats_file, verify_welch_t_test
 
 
 class AuditTests(unittest.TestCase):
@@ -54,6 +54,16 @@ class AuditTests(unittest.TestCase):
         )
         self.assertEqual(relation["status"], "heuristic_review_required")
 
+    def test_weak_lexical_overlap_is_not_presented_as_support(self):
+        report = self.audit_text(
+            "# Methods\nA protocol was followed.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Discussion\nThe outcome was correlated with a biomarker."
+        )
+        candidate = report.claim_evidence_candidates[0]
+        self.assertLess(candidate.lexical_overlap, 0.15)
+        self.assertEqual(candidate.match_status, "unmatched_review_required")
+
     def test_flags_causal_claim_in_observational_design(self):
         report = self.audit_text(
             "# Methods\nThis was a cross-sectional observational study.\n"
@@ -83,7 +93,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(manifest["input"]["format"], "md")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.2.0")
+        self.assertEqual(manifest["ruleset_version"], "0.2.1")
         self.assertIn("source_code_revision", manifest)
         self.assertIn("working_tree_dirty", manifest)
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
@@ -182,6 +192,12 @@ class StatisticalVerificationTests(unittest.TestCase):
         }
         with self.assertRaises(ValueError):
             verify_welch_t_test(spec)
+
+    def test_checked_in_welch_example_file_parses_and_passes(self):
+        example = Path(__file__).resolve().parents[1] / "examples" / "welch_t_example.json"
+        result = verify_stats_file(example)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(len(result["input_sha256"]), 64)
 
     def test_welch_rejects_invalid_sample_sizes(self):
         spec = {

@@ -10,8 +10,8 @@ from importlib.metadata import PackageNotFoundError, version
 from sra.document import ParsedDocument
 
 
-AUDITOR_VERSION = "0.2.0"
-RULESET_VERSION = "0.2.0"
+AUDITOR_VERSION = "0.2.1"
+RULESET_VERSION = "0.2.1"
 RULE_CONFIGURATION = {
     "claim_marker_version": 1,
     "causal_design_rule_version": 1,
@@ -19,7 +19,7 @@ RULE_CONFIGURATION = {
     "section_heading_match_version": 1,
     "welch_test_calculation_version": 1,
     "reported_value_tolerance_policy": "half_displayed_unit_last_place_or_explicit_override-v1",
-    "lexical_candidate_minimum_jaccard": 0.08,
+    "lexical_candidate_minimum_jaccard": 0.15,
     "max_evidence_excerpts_per_finding": 5,
 }
 

@@ -131,7 +131,7 @@ def _candidate_links(
             score = len(claim_words & support_words) / len(union) if union else 0.0
             if score > best_score:
                 best_score, best_sentence = score, support
-        matched = best_sentence is not None and best_score >= 0.08
+        matched = best_sentence is not None and best_score >= 0.15
         candidates.append(ClaimEvidenceCandidate(
             claim=claim["text"],
             candidate_support=best_sentence["text"] if matched and best_sentence else None,
@@ -263,7 +263,13 @@ def build_findings(
         ))
 
     methods_text = _section_text(document, METHODS)
+    method_evidence = next(
+        (item for item in _section_entries(document, METHODS)
+         if OBSERVATIONAL_DESIGN.search(item["text"])),
+        None,
+    )
     if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and not RANDOMIZED_DESIGN.search(methods_text):
+        method_excerpt = method_evidence["text"] if method_evidence else methods_text[:500]
         findings.append(Finding(
             "reasoning.causal_claim_observational_design",
             "Causal conclusion in a non-randomized observational design",
@@ -271,10 +277,11 @@ def build_findings(
             "The methods text contains observational/non-randomized design wording while the conclusion "
             "contains causal language. This is a high-priority review signal, not an automatic proof of "
             "invalidity; causal identification may rely on design features or assumptions not detected here.",
-            [causal_claims[0]["text"], methods_text[:500]],
+            [causal_claims[0]["text"], method_excerpt],
             [
                 {"line": causal_claims[0]["line"], "section": "conclusion"},
-                {"section": "methods", "excerpt": methods_text[:500]},
+                ({"line": method_evidence["line"], "section": "methods"}
+                 if method_evidence else {"section": "methods"}),
             ],
         ))
 
@@ -284,8 +291,8 @@ def build_findings(
         locations = []
         for conflict in conflicts:
             evidence.extend([
-                "Results: " + conflict["result"]["text"],
-                "Conclusion: " + conflict["conclusion"]["text"],
+                conflict["result"]["text"],
+                conflict["conclusion"]["text"],
             ])
             locations.extend([
                 {"line": conflict["result"]["line"], "section": "results"},
