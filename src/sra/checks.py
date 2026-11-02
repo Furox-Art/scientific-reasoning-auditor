@@ -28,7 +28,7 @@ CAUSAL = re.compile(
 )
 CLAIM_MARKERS = re.compile(
     r"\b(show|shows|demonstrate|demonstrates|indicate|indicates|suggest|suggests|"
-    r"support|supports|increased|decreased|associated|correlated|causes?|"
+    r"support|supports|increased|decreased|associated|correlated|causes?|caused|causing|"
     r"göstermektedir|ortaya koymaktadır|bulgular|artırdı|azalttı|ilişkilidir|"
     r"desteklemektedir|neden olur|yol açar)\b", re.IGNORECASE
 )

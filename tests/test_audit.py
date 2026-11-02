@@ -4,6 +4,9 @@ import unittest
 from pathlib import Path
 
 from sra.audit import audit_file
+from sra.graph import validate_reasoning_graph
+from sra.semantic_review import build_semantic_review_template, validate_semantic_review
+from sra.report import to_markdown
 from sra.stats import verify_stats_file, verify_welch_t_test
 
 
@@ -97,7 +100,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(manifest["input"]["format"], "md")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.2.2")
+        self.assertEqual(manifest["ruleset_version"], "0.3.0")
         self.assertIn("source_code_revision", manifest)
         self.assertIn("working_tree_dirty", manifest)
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
@@ -110,6 +113,259 @@ class AuditTests(unittest.TestCase):
         self.assertIn("reasoning.causal_claim_observational_design", ids)
         self.assertIn("reasoning.directional_contradiction", ids)
         self.assertIn("reasoning.correlation_causation_review", ids)
+
+    def test_reasoning_graph_has_typed_nodes_and_linked_relations(self):
+        report = self.audit_text(
+            "# Methods\nWe used a randomized experiment.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        graph = report.reasoning_graph
+        node_types = {node["node_type"] for node in graph["nodes"]}
+        relations = {edge["relation"] for edge in graph["edges"]}
+        self.assertTrue({"method", "evidence", "claim", "inference"}.issubset(node_types))
+        self.assertIn("lexical_candidate_basis", relations)
+        self.assertIn("yields_claim", relations)
+        self.assertIn("method_document_context", relations)
+        self.assertEqual(graph["validation"]["status"], "PASS")
+        self.assertTrue(any(edge["status"] == "document_context_only" for edge in graph["edges"]))
+        self.assertEqual(len(graph["graph_fingerprint"]), 64)
+
+    def test_explicit_assumptions_and_missing_assumption_gaps_are_distinguished(self):
+        report = self.audit_text(
+            "# Methods\nWe assume that there is no unmeasured confounding.\n"
+            "# Results\nExposure was associated with outcome.\n"
+            "# Conclusion\nExposure caused the outcome."
+        )
+        nodes = report.reasoning_graph["nodes"]
+        self.assertTrue(any(n["node_type"] == "assumption" for n in nodes))
+        self.assertTrue(any(n["node_type"] == "assumption_gap" for n in nodes))
+        gap = next(n for n in nodes if n["node_type"] == "assumption_gap")
+        self.assertEqual(gap["status"], "not_linked_to_claim_review_required")
+        self.assertIn("not proof", gap["text"])
+        no_assumption = self.audit_text(
+            "# Methods\nA cross-sectional study was conducted.\n"
+            "# Results\nExposure was associated with outcome.\n"
+            "# Conclusion\nExposure caused the outcome."
+        )
+        missing_gap = next(
+            n for n in no_assumption.reasoning_graph["nodes"] if n["node_type"] == "assumption_gap"
+        )
+        self.assertEqual(missing_gap["status"], "not_extracted_review_required")
+
+    def test_graph_integrity_validator_detects_dangling_edges_and_cycles(self):
+        nodes = [
+            {"node_id": "a", "node_type": "evidence"},
+            {"node_id": "b", "node_type": "inference"},
+        ]
+        edges = [
+            {"edge_id": "ab", "source": "a", "target": "b", "relation": "uses"},
+            {"edge_id": "ba", "source": "b", "target": "a", "relation": "back"},
+            {"edge_id": "dangling", "source": "missing", "target": "b", "relation": "bad"},
+        ]
+        result = validate_reasoning_graph(nodes, edges)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertTrue(result["dependency_cycle_detected"])
+        self.assertIn("dangling", result["dangling_edges"])
+        duplicates = validate_reasoning_graph(
+            [{"node_id": "same", "node_type": "claim"}, {"node_id": "same", "node_type": "evidence"}],
+            [],
+        )
+        self.assertEqual(duplicates["status"], "FAIL")
+        self.assertIn("same", duplicates["duplicate_node_ids"])
+        duplicate_edges = validate_reasoning_graph(
+            [{"node_id": "x", "node_type": "claim"}, {"node_id": "y", "node_type": "evidence"}],
+            [
+                {"edge_id": "same-edge", "source": "x", "target": "y"},
+                {"edge_id": "same-edge", "source": "x", "target": "y"},
+            ],
+        )
+        self.assertEqual(duplicate_edges["status"], "FAIL")
+        self.assertIn("same-edge", duplicate_edges["duplicate_edge_ids"])
+
+    def test_semantic_review_json_schema_documents_the_review_contract(self):
+        schema_path = Path(__file__).resolve().parents[1] / "schemas" / "semantic-review.schema.json"
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
+        self.assertIn("source_sha256", schema["properties"])
+        self.assertIn("graph_fingerprint", schema["properties"])
+        self.assertIn("assessments", schema["required"])
+        self.assertIn("partially_supported", schema["properties"]["assessments"]["items"]["properties"]["relation"]["enum"])
+
+    def test_semantic_review_template_is_bound_to_source_and_graph(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        self.assertEqual(template["source_sha256"], report["sha256"])
+        self.assertEqual(template["graph_fingerprint"], report["reasoning_graph"]["graph_fingerprint"])
+        self.assertEqual(len(template["assessments"]), 1)
+        assessment = template["assessments"][0]
+        evidence_id = assessment["evidence_node_ids"][0]
+        evidence = next(n for n in report["reasoning_graph"]["nodes"] if n["node_id"] == evidence_id)
+        assessment.update({
+            "relation": "entailed",
+            "confidence": 0.93,
+            "rationale": "The result sentence directly reports the same direction and measured outcome as the claim.",
+            "source_quotes": [evidence["text"]],
+            "missing_assumptions": [],
+            "counter_evidence_node_ids": [],
+        })
+        template["reviewer"] = {
+            "name": "Test reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+        accepted = validate_semantic_review(template, report, text)
+        self.assertEqual(accepted["status"], "ACCEPTED_FOR_REVIEW")
+        self.assertEqual(accepted["validated_assessments"][0]["validation_status"],
+                         "structurally_validated_not_truth_verified")
+
+    def test_semantic_review_rejects_wrong_claim_link_and_missing_reviewer(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score.\n"
+            "The intervention decreased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        assessment = template["assessments"][0]
+        assessment.update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "Direct match.",
+            "source_quotes": ["The intervention increased the measured score."],
+        })
+        template["reviewer"] = {"name": "", "model_or_agent": "", "reviewed_at_utc": ""}
+        other_claim_id = next(
+            node["node_id"] for node in report["reasoning_graph"]["nodes"]
+            if node["node_type"] == "claim" and node["node_id"] != assessment["claim_node_id"]
+        )
+        assessment["claim_node_id"] = other_claim_id
+        rejected = validate_semantic_review(template, report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("reviewer.name" in err for err in rejected["errors"]))
+        self.assertTrue(any("does not match" in err for err in rejected["errors"]))
+
+    def test_semantic_review_quote_must_match_the_selected_evidence_node(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        assessment = template["assessments"][0]
+        method_node = next(
+            node for node in report["reasoning_graph"]["nodes"]
+            if node["node_type"] == "method"
+        )
+        assessment.update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "A quote from the methods section is not result evidence.",
+            "source_quotes": [method_node["text"]],
+        })
+        template["reviewer"] = {
+            "name": "Test reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+        rejected = validate_semantic_review(template, report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("cited evidence node" in err for err in rejected["errors"]))
+
+    def test_semantic_review_rejects_extreme_confidence_without_crashing(self):
+        text = """# Methods
+A randomized study was conducted.
+# Results
+The intervention increased the measured score.
+# Conclusion
+The intervention increased the measured score.
+"""
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        template["reviewer"] = {
+            "name": "Test reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+        template["assessments"][0].update({
+            "relation": "entailed",
+            "confidence": 10**1000,
+            "rationale": "Extreme value test.",
+            "source_quotes": ["The intervention increased the measured score."],
+        })
+        rejected = validate_semantic_review(template, report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("confidence" in err for err in rejected["errors"]))
+
+    def test_semantic_review_rejects_unhashable_node_id_inputs_without_crashing(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        template["assessments"][0]["evidence_node_ids"] = [{"not": "an id"}]
+        rejected = validate_semantic_review(template, report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("evidence_node_ids" in err for err in rejected["errors"]))
+
+    def test_rejected_semantic_review_still_renders_a_markdown_report(self):
+        text = """# Methods
+A randomized study was conducted.
+# Results
+The intervention increased the measured score.
+# Conclusion
+The intervention increased the measured score.
+"""
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        source = Path(tmp.name) / "paper.md"
+        review_path = Path(tmp.name) / "review.json"
+        source.write_text(text, encoding="utf-8")
+        report = audit_file(source)
+        template = build_semantic_review_template(report.to_dict())
+        template["reviewer"] = {"name": "", "model_or_agent": "", "reviewed_at_utc": ""}
+        assessment = template["assessments"][0]
+        assessment.update({
+            "relation": "entailed",
+            "confidence": "not-a-number",
+            "rationale": "Invalid test fixture.",
+            "source_quotes": ["The intervention increased the measured score."],
+        })
+        review_path.write_text(json.dumps(template), encoding="utf-8")
+        rejected_report = audit_file(source, str(review_path))
+        markdown = to_markdown(rejected_report)
+        self.assertEqual(rejected_report.semantic_review["status"], "REJECTED")
+        self.assertIn("confidence invalid", markdown)
+
+    def test_semantic_review_rejects_wrong_source_hash_and_fabricated_quote(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = build_semantic_review_template(report)
+        assessment = template["assessments"][0]
+        assessment.update({
+            "relation": "partially_supported",
+            "confidence": 0.8,
+            "rationale": "Partially supported.",
+            "source_quotes": ["A fabricated sentence not present in the document."],
+        })
+        template["source_sha256"] = "0" * 64
+        rejected = validate_semantic_review(template, report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("SHA-256" in err for err in rejected["errors"]))
+        self.assertTrue(any("quote" in err for err in rejected["errors"]))
 
     def test_turkish_discussion_is_not_confused_with_results(self):
         report = self.audit_text(

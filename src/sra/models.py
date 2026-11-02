@@ -43,6 +43,8 @@ class AuditReport:
     scope_note: str
     reproducibility_manifest: dict[str, Any] = field(default_factory=dict)
     reasoning_map: list[dict[str, Any]] = field(default_factory=list)
+    reasoning_graph: dict[str, Any] = field(default_factory=dict)
+    semantic_review: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -51,10 +53,10 @@ class AuditReport:
             "sha256": self.sha256,
             "section_names": self.section_names,
             "findings": [item.to_dict() for item in self.findings],
-            "claim_evidence_candidates": [
-                item.to_dict() for item in self.claim_evidence_candidates
-            ],
+            "claim_evidence_candidates": [item.to_dict() for item in self.claim_evidence_candidates],
             "scope_note": self.scope_note,
             "reproducibility_manifest": self.reproducibility_manifest,
             "reasoning_map": self.reasoning_map,
+            "reasoning_graph": self.reasoning_graph,
+            "semantic_review": self.semantic_review,
         }

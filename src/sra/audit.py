@@ -1,23 +1,27 @@
 from sra.checks import build_findings
 from sra.document import load_document
+from sra.graph import build_reasoning_graph
 from sra.models import AuditReport
 from sra.provenance import build_manifest
+from sra.semantic_review import load_semantic_review, validate_semantic_review
 
 SCOPE_NOTE = (
-    "Version 0.2.2 adds line- and section-aware evidence references, heuristic result/conclusion direction-conflict "
-    "signals, observational-design/causal-language review, unmatched conclusion-claim signals, and a "
-    "reproducibility manifest. These are deterministic screening heuristics, not semantic entailment, "
-    "proof checking, causal identification, statistical re-analysis, or verification that a conclusion "
-    "is true. They may produce false positives and false negatives. Missing flags do not imply correctness; "
-    "human expert review and independent computational checks remain necessary."
+    "Version 0.3.0 adds an explicit claim-evidence-assumption-method-inference graph and an "
+    "external semantic-review import/validation workflow. Graph relations are extracted with "
+    "rules and lexical similarity; they are not proof of semantic support. Imported semantic reviews "
+    "are structurally validated against source hashes, graph fingerprints, node IDs and source quotes, "
+    "but the reviewer’s semantic judgment is not independently proven by this software. Existing "
+    "direction, causality and claim-matching checks remain heuristics. Missing flags do not imply "
+    "correctness; expert review and independent computational verification remain necessary."
 )
 
 
-def audit_file(path: str) -> AuditReport:
+def audit_file(path: str, semantic_review_path: str | None = None) -> AuditReport:
     document = load_document(path)
     findings, candidates, reasoning_map = build_findings(document)
-    return AuditReport(
-        schema_version="1.2",
+    graph = build_reasoning_graph(document, candidates, reasoning_map)
+    report = AuditReport(
+        schema_version="1.3",
         source=document.source,
         sha256=document.sha256,
         section_names=list(document.sections),
@@ -26,4 +30,15 @@ def audit_file(path: str) -> AuditReport:
         scope_note=SCOPE_NOTE,
         reproducibility_manifest=build_manifest(document),
         reasoning_map=reasoning_map,
+        reasoning_graph=graph,
     )
+    if semantic_review_path:
+        raw_review = load_semantic_review(semantic_review_path)
+        report.semantic_review = validate_semantic_review(raw_review, report.to_dict(), document.text)
+    return report
+
+
+def build_review_template(path: str) -> dict:
+    from sra.semantic_review import build_semantic_review_template
+    report = audit_file(path)
+    return build_semantic_review_template(report.to_dict())

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Furox-Art/scientific-reasoning-auditor/blob/main/schemas/semantic-review.schema.json",
+  "title": "Scientific Reasoning Auditor external semantic review",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "review_type",
+    "source_sha256",
+    "graph_fingerprint",
+    "reviewer",
+    "instructions",
+    "relation_labels",
+    "assessments"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "review_type": {
+      "const": "external_semantic_reasoning_review"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "graph_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "reviewer": {
+      "type": "object",
+      "required": [
+        "name",
+        "model_or_agent",
+        "reviewed_at_utc"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "model_or_agent": {
+          "type": "string"
+        },
+        "reviewed_at_utc": {
+          "type": "string",
+          "description": "ISO-8601 timestamp with timezone; blank only in an unfilled template."
+        }
+      },
+      "additionalProperties": false
+    },
+    "instructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relation_labels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "entailed",
+          "partially_supported",
+          "contradicted",
+          "not_supported",
+          "unclear"
+        ]
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "inference_node_id",
+          "claim_node_id",
+          "evidence_node_ids",
+          "relation",
+          "confidence",
+          "rationale",
+          "source_quotes",
+          "missing_assumptions",
+          "counter_evidence_node_ids"
+        ],
+        "properties": {
+          "inference_node_id": {
+            "type": "string",
+            "pattern": "^inference:[a-f0-9]{16}$"
+          },
+          "claim_node_id": {
+            "type": "string",
+            "pattern": "^claim:[a-f0-9]{16}$"
+          },
+          "evidence_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^evidence:[a-f0-9]{16}$"
+            },
+            "uniqueItems": true
+          },
+          "relation": {
+            "enum": [
+              "",
+              "entailed",
+              "partially_supported",
+              "contradicted",
+              "not_supported",
+              "unclear"
+            ]
+          },
+          "confidence": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "source_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "counter_evidence_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^evidence:[a-f0-9]{16}$"
+            },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
