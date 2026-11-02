@@ -61,6 +61,34 @@ For PDF input:
 
     python -m pip install -e ".[pdf,statistics]"
 
+## Use from Node.js / npm
+
+The npm package is a small Node.js adapter around the Python engine; it is not a separate JavaScript reimplementation. Install the Python engine explicitly first (Node.js does not download or install it):
+
+    python -m pip install "scientific-reasoning-auditor[statistics]"
+
+Then install the Node.js adapter in your project:
+
+    npm install scientific-reasoning-auditor
+
+The npm package requires Node.js 18+ and Python 3.11+ with the Python package available to the selected interpreter. It has no npm runtime dependencies and performs no network requests or package installation itself. Set `SRA_PYTHON` to the Python executable when the engine is installed in a non-default environment.
+
+Use the CLI after installation:
+
+    npx sra audit examples/sample_manuscript.md --out reports/sample
+    npx sra review-template examples/sample_manuscript.md --mode single
+    npx sra verify-stats examples/welch_t_example.json
+
+Or call it from JavaScript:
+
+    const { audit, createReviewTemplate, verifyStats } = require("scientific-reasoning-auditor");
+
+    await audit("manuscript.md", { out: "reports/manuscript" });
+    await createReviewTemplate("manuscript.md", { mode: "parallel" });
+    await verifyStats("welch-input.json");
+
+The functions return `{ code, signal, stdout, stderr }`. By default command output is inherited from the current terminal; pass `stdio: "pipe"` to capture output. The `reviewModel` function also accepts `model`, `baseUrl`, `apiKeyEnv`, `timeout` and `out` options. The Python engine remains the source of truth for audit behavior and output schemas.
+
 ## Run manuscript audit
 
     sra audit examples/sample_manuscript.md --out reports/sample

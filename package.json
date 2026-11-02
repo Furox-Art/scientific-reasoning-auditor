@@ -1,0 +1,40 @@
+{
+  "name": "scientific-reasoning-auditor",
+  "version": "0.1.0",
+  "description": "Node.js adapter for the Scientific Reasoning Auditor Python engine.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": {
+    "sra": "bin/sra.js"
+  },
+  "files": [
+    "bin/",
+    "index.js",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "scientific-reasoning",
+    "research",
+    "reproducibility",
+    "manuscript-review",
+    "statistics"
+  ],
+  "author": "Furox-Art",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Furox-Art/scientific-reasoning-auditor.git"
+  },
+  "homepage": "https://github.com/Furox-Art/scientific-reasoning-auditor#readme",
+  "bugs": {
+    "url": "https://github.com/Furox-Art/scientific-reasoning-auditor/issues"
+  }
+}
