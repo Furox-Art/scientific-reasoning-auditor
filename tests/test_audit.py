@@ -74,6 +74,8 @@ class AuditTests(unittest.TestCase):
         )
         ids = {finding.check_id for finding in report.findings}
         self.assertIn("reasoning.causal_claim_observational_design", ids)
+        finding = next(f for f in report.findings if f.check_id == "reasoning.causal_claim_observational_design")
+        self.assertEqual(finding.evidence_locations[1]["section"], "Methods")
 
     def test_unmatched_conclusion_claim_gets_review_signal(self):
         report = self.audit_text(

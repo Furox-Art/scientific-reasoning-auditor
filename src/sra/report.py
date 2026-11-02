@@ -35,10 +35,10 @@ def to_markdown(report: AuditReport) -> str:
     for item in report.claim_evidence_candidates:
         claim_location = f"line {item.claim_line}" if item.claim_line else "line unknown"
         if item.claim_section:
-            claim_location += f" ({item.claim_section})"
+            claim_location += f" — {item.claim_section}"
         support_location = f"line {item.support_line}" if item.support_line else "not located"
         if item.support_section:
-            support_location += f" ({item.support_section})"
+            support_location += f" — {item.support_section}"
         lines.extend([
             f"**Claim ({claim_location}):** {item.claim}",
             "",

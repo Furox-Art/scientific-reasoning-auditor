@@ -275,16 +275,16 @@ def build_findings(
         method_excerpt = method_evidence["text"] if method_evidence else methods_text[:500]
         findings.append(Finding(
             "reasoning.causal_claim_observational_design",
-            "Causal conclusion in a non-randomized observational design",
+            "Causal wording under a non-randomized observational design",
             "warning", "review_required",
-            "The methods text contains observational/non-randomized design wording while the conclusion "
+            "The methods text contains observational/non-randomized design wording while the Discussion/Conclusion "
             "contains causal language. This is a high-priority review signal, not an automatic proof of "
             "invalidity; causal identification may rely on design features or assumptions not detected here.",
             [causal_claims[0]["text"], method_excerpt],
             [
                 {"line": causal_claims[0]["line"], "section": causal_claims[0].get("section")},
-                ({"line": method_evidence["line"], "section": "methods"}
-                 if method_evidence else {"section": "methods"}),
+                ({"line": method_evidence["line"], "section": method_evidence.get("section")}
+                 if method_evidence else {"section": "Methods"}),
             ],
         ))
 
