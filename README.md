@@ -41,6 +41,16 @@ This release advances the original v0.1 screening baseline with a traceable reas
 
 ## Install
 
+Install the published release from PyPI:
+
+    python -m pip install "scientific-reasoning-auditor[statistics]"
+
+For PDF input:
+
+    python -m pip install "scientific-reasoning-auditor[pdf,statistics]"
+
+To work from source:
+
     git clone https://github.com/Furox-Art/scientific-reasoning-auditor.git
     cd scientific-reasoning-auditor
     python3 -m venv .venv
@@ -67,7 +77,7 @@ Run an audit to include a graph in the JSON and Markdown reports:
 
     sra audit examples/logic_review_demo.md --out reports/logic-review
 
-The output contract is documented in schemas/semantic-review.schema.json.
+The output contract is documented in the [semantic-review JSON Schema](https://github.com/Furox-Art/scientific-reasoning-auditor/blob/main/schemas/semantic-review.schema.json).
 
 Create a JSON template and choose the review mode:
 

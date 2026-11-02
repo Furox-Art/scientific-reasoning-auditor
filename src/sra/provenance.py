@@ -7,11 +7,12 @@ from pathlib import Path
 from datetime import datetime, timezone
 from importlib.metadata import PackageNotFoundError, version
 
+from sra import __version__
 from sra.document import ParsedDocument
 
 
-AUDITOR_VERSION = "0.4.0"
-RULESET_VERSION = "0.4.0"
+AUDITOR_VERSION = __version__
+RULESET_VERSION = "0.5.0"
 RULE_CONFIGURATION = {
     "audit_report_schema_version": "1.4",
     "manifest_schema_version": "1.1",
@@ -61,24 +62,31 @@ def _source_revision() -> tuple[str | None, bool | None]:
 
 
 def _source_tree_sha256() -> str | None:
-    """Hash the exact auditor source/config files, including uncommitted changes."""
+    """Hash the repository snapshot or, in an installed wheel, package source files."""
     repository_root = Path(__file__).resolve().parents[2]
-    included = [
+    repository_files = [
         *repository_root.glob("src/sra/**/*.py"),
         *repository_root.glob("schemas/**/*.json"),
         repository_root / "pyproject.toml",
     ]
-    files = sorted(path for path in included if path.is_file())
-    if not files:
-        return None
+    files = sorted(path for path in repository_files if path.is_file())
+    if files:
+        hash_root = repository_root
+    else:
+        package_root = Path(__file__).resolve().parent
+        files = sorted(path for path in package_root.rglob("*.py") if path.is_file())
+        if not files:
+            return None
+        hash_root = package_root.parent
+
     digest = hashlib.sha256()
     try:
         for path in files:
-            relative = path.relative_to(repository_root).as_posix()
+            relative = path.relative_to(hash_root).as_posix()
             digest.update(relative.encode("utf-8"))
-            digest.update(b"\0")
+            digest.update(b"\\0")
             digest.update(path.read_bytes())
-            digest.update(b"\0")
+            digest.update(b"\\0")
     except OSError:
         return None
     return digest.hexdigest()
@@ -143,6 +151,8 @@ def build_manifest(document: ParsedDocument) -> dict:
         "source_code_sha256": source_code_sha256,
         "working_tree_dirty": working_tree_dirty,
         "revision_note": (
+            "The source_code_sha256 identifies the exact installed Python package source files; repository-only build/config files are not present."
+            if revision is None and source_code_sha256 else
             "The source_code_sha256 identifies the exact included source/config snapshot, including uncommitted changes."
             if working_tree_dirty and source_code_sha256 else
             "The working tree was modified during the run, but the source snapshot hash could not be generated; preserve the exact source files."
