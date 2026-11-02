@@ -797,3 +797,52 @@ class StatisticalVerificationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ModelClientTests(unittest.TestCase):
+    def test_extracts_json_from_model_fenced_response(self):
+        from sra.model_client import _extract_json_object
+        self.assertEqual(_extract_json_object(chr(96)*3 + 'json\n{"ok": true}\n' + chr(96)*3), {"ok": True})
+
+    def test_rejects_non_object_model_response(self):
+        from sra.model_client import _extract_json_object
+        with self.assertRaises(ValueError):
+            _extract_json_object('[{"not":"an object"}]')
+
+    def test_single_model_requires_single_template_and_api_key(self):
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+        with self.assertRaises(ValueError):
+            request_single_model_review({"review_mode":"parallel"}, "paper", model="m", base_url="https://example.test/v1")
+        with patch.dict("os.environ", {}, clear=True):
+            with self.assertRaisesRegex(ValueError, "not set"):
+                request_single_model_review({"review_mode":"single"}, "paper", model="m",
+                    base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY")
+
+    def test_single_model_posts_to_openai_compatible_endpoint(self):
+        import json
+        from unittest.mock import patch
+        from sra.model_client import request_single_model_review
+
+        class FakeResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                return False
+            def read(self):
+                return json.dumps({"choices":[{"message":{"content":'{"review_mode":"single"}'}}]}).encode()
+
+        template = {"review_mode":"single", "assessments":[]}
+        with patch.dict("os.environ", {"SRA_TEST_KEY":"test-key"}):
+            with patch("sra.model_client.urlopen", return_value=FakeResponse()) as mocked:
+                result = request_single_model_review(
+                    template, "Full manuscript", model="test-model",
+                    base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY"
+                )
+        self.assertEqual(result, {"review_mode":"single"})
+        request = mocked.call_args.args[0]
+        self.assertEqual(request.full_url, "https://example.test/v1/chat/completions")
+        self.assertEqual(request.get_header("Authorization"), "Bearer test-key")
+        sent = json.loads(request.data.decode())
+        self.assertEqual(sent["model"], "test-model")
+        self.assertEqual(sent["temperature"], 0)

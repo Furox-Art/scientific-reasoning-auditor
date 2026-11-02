@@ -3,6 +3,9 @@ import json
 from pathlib import Path
 
 from sra.audit import audit_file, build_review_template
+from sra.document import load_document
+from sra.model_client import request_single_model_review
+from sra.semantic_review import validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
 
@@ -25,6 +28,14 @@ def main() -> int:
         default="single",
         help="Choose one model (single) or parallel agents (parallel).",
     )
+
+    model_review = sub.add_parser("review-model", help="Run a single-model semantic review through an OpenAI-compatible API.")
+    model_review.add_argument("input", help="Path to the manuscript.")
+    model_review.add_argument("--model", required=True, help="Model identifier accepted by the configured endpoint.")
+    model_review.add_argument("--base-url", default="https://api.openai.com/v1", help="OpenAI-compatible API base URL.")
+    model_review.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key.")
+    model_review.add_argument("--timeout", type=int, default=120, help="Request timeout in seconds.")
+    model_review.add_argument("--out", default="semantic-review-completed.json", help="Output JSON path.")
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
     stats.add_argument("input", help="JSON input; currently supports test=welch_t.")
@@ -63,6 +74,28 @@ def main() -> int:
         print(f"Review mode: {result['review_mode']}")
         print(f"Template: {output.resolve()}")
         return 0
+
+    if args.command == "review-model":
+        try:
+            report = audit_file(args.input)
+            document = load_document(args.input)
+            template = build_review_template(args.input, review_mode="single")
+            completed = request_single_model_review(
+                template, document.text, model=args.model, base_url=args.base_url,
+                api_key_env=args.api_key_env, timeout=args.timeout,
+            )
+            validation = validate_semantic_review(completed, report.to_dict(), document.text)
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
+            parser.error(str(exc))
+        output = Path(args.out)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(completed, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"Model review saved: {output.resolve()}")
+        print(f"Structural validation: {validation['status']}")
+        for error in validation["errors"]:
+            print(f"- {error}")
+        print("Structural acceptance does not prove semantic correctness.")
+        return 0 if validation["status"] == "ACCEPTED_FOR_REVIEW" else 2
 
     try:
         result = verify_stats_file(args.input)

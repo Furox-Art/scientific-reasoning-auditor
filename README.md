@@ -6,7 +6,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.4.0
+## Current status: v0.5.0
 
 This release advances the original v0.1 screening baseline with a traceable reasoning-review layer and an independently recalculable statistical summary check.
 
@@ -74,13 +74,22 @@ Create a JSON template and choose the review mode:
     sra review-template examples/logic_review_demo.md --mode single --out reports/semantic-review-single.json
     sra review-template examples/logic_review_demo.md --mode parallel --out reports/semantic-review-parallel.json
 
-The single mode (default) prepares the whole review for one model. The parallel mode asks an external orchestrator to distribute assessment subsets among parallel agents, giving each agent the complete manuscript, then merge results by inference ID. The mode is selected by the user for each run.
+The single mode (default) prepares the whole review for one model. It can now call an OpenAI-compatible Chat Completions endpoint directly. The parallel mode remains an external agent-orchestrator workflow; the user selects the mode for each run. The Python CLI does not pretend to launch ChatGPT parallel agents.
+
+For a direct single-model API review, set the API key in the environment and run:
+
+    export OPENAI_API_KEY="your-api-key"
+    sra review-model examples/logic_review_demo.md --model "your-model-id" --base-url "https://api.openai.com/v1" --out reports/semantic-review-completed.json
+
+The command sends the complete manuscript and source-bound template to one model, parses its JSON response, then validates the returned review against the manuscript and reasoning graph. Any OpenAI-compatible Chat Completions endpoint can be configured with --base-url and --api-key-env. The API key is read from the environment and is not written to reports. Model/API charges and provider data-retention policies are controlled by the provider.
+
+For parallel mode, export the template and pass it to the connected external parallel-agent orchestrator. Each agent must receive the full manuscript and its assigned assessment subset; merge all results by inference ID before importing. The current CLI does not launch the ChatGPT UI-based parallel-agent tool.
 
 Give the template and full manuscript to the selected model or external orchestration layer for passage-grounded assessment. Fill every assessment with a relation (entailed, partially_supported, contradicted, not_supported, or unclear), confidence, rationale and exact source quotations where applicable. Then import the completed file:
 
     sra audit examples/logic_review_demo.md --semantic-review reports/semantic-review-completed.json --out reports/semantic-reviewed
 
-The template includes a complete source-bound catalog of Results evidence-node IDs, passages and locations. The importer checks the manuscript hash and reasoning-graph fingerprint, requires graph-linked support IDs or explicit reviewer-selected Results evidence IDs, and validates the existence, type and source quotation provenance of selected nodes. Reviewer-selected evidence provenance is checked, but its semantic relevance is not proven. Current-schema quotations must be at least 20 characters and match both the manuscript and selected node text. The importer also enforces the review contract and UTC timestamps. It does not prove the external reviewer’s semantic judgment; expert adjudication remains necessary. The application does not make an LLM/API call or start parallel agents by itself in this release; the mode option records the user's requested review strategy for a later model/API or agent integration.
+The template includes a complete source-bound catalog of Results evidence-node IDs, passages and locations. The importer checks the manuscript hash and reasoning-graph fingerprint, requires graph-linked support IDs or explicit reviewer-selected Results evidence IDs, and validates the existence, type and source quotation provenance of selected nodes. Reviewer-selected evidence provenance is checked, but its semantic relevance is not proven. Current-schema quotations must be at least 20 characters and match both the manuscript and selected node text. The importer also enforces the review contract and UTC timestamps. It does not prove the external reviewer’s semantic judgment; expert adjudication remains necessary. The application can call one OpenAI-compatible model in single mode. Parallel-agent execution remains an external orchestration step.
 
 ## Independently verify a Welch t-test
 

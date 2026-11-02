@@ -6,7 +6,7 @@ from sra.provenance import build_manifest
 from sra.semantic_review import load_semantic_review, validate_semantic_review
 
 SCOPE_NOTE = (
-    "Version 0.4.0 hardens evidence provenance, semantic-review input validation, Markdown/plain-text "
+    "Version 0.5.0 adds an OpenAI-compatible single-model review client and hardens evidence provenance, semantic-review input validation, Markdown/plain-text "
     "section extraction, and negation-aware screening. Directional and causal language checks remain "
     "heuristics, not semantic proofs. It also retains the explicit claim-evidence-assumption-method-inference graph and an "
     "external semantic-review import/validation workflow. Graph relations are extracted with "
