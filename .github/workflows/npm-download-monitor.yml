@@ -1,0 +1,109 @@
+name: npm download monitor (read-only)
+
+on:
+  schedule:
+    # Once daily at 10:23 Europe/Istanbul (07:23 UTC).
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  inspect:
+    name: Read npm download statistics
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Query npm downloads API (one GET; no install or package download)
+        env:
+          PACKAGE_NAME: scientific-reasoning-auditor
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          from datetime import date, timedelta
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          package = os.environ["PACKAGE_NAME"]
+          url = (
+              "https://api.npmjs.org/downloads/range/last-month/"
+              + quote(package, safe="")
+          )
+          request = Request(
+              url,
+              headers={
+                  "Accept": "application/json",
+                  "User-Agent": "Furox-Art-npm-Download-Monitor/1.0 (read-only)",
+              },
+              method="GET",
+          )
+          summary = os.environ.get("GITHUB_STEP_SUMMARY")
+
+          def report(markdown):
+              print(markdown)
+              if summary:
+                  with open(summary, "a", encoding="utf-8") as stream:
+                      stream.write(markdown + "\n")
+
+          try:
+              with urlopen(request, timeout=15) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+          except HTTPError as exc:
+              if exc.code == 404:
+                  report(
+                      f"## npm download statistics: {package}\n\n"
+                      "This package name is not currently present in the npm registry "
+                      "or its download statistics are not available. No package was "
+                      "installed or downloaded. The monitor will check again tomorrow."
+                  )
+                  sys.exit(0)
+              raise SystemExit(f"npm Downloads API returned HTTP {exc.code}.") from exc
+          except (URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+              raise SystemExit(f"Read-only npm statistics request failed: {exc}") from exc
+
+          if payload.get("package") != package:
+              raise SystemExit("npm Downloads API returned an unexpected package name.")
+          entries = payload.get("downloads")
+          if not isinstance(entries, list) or not entries:
+              raise SystemExit("npm Downloads API returned no daily download records.")
+
+          counts = {}
+          for entry in entries:
+              if not isinstance(entry, dict):
+                  raise SystemExit("npm Downloads API returned an invalid daily record.")
+              try:
+                  day = date.fromisoformat(entry["day"])
+                  downloads = entry["downloads"]
+              except (KeyError, TypeError, ValueError) as exc:
+                  raise SystemExit("npm Downloads API returned an invalid date/count.") from exc
+              if isinstance(downloads, bool) or not isinstance(downloads, int) or downloads < 0:
+                  raise SystemExit("npm Downloads API returned an invalid download count.")
+              if day in counts:
+                  raise SystemExit("npm Downloads API returned duplicate dates.")
+              counts[day] = downloads
+
+          latest_day = max(counts)
+          windows = (
+              ("Last 24 hours (latest available UTC day)", 1),
+              ("Last 7 days", 7),
+              ("Last 30 days", 30),
+          )
+          rows = []
+          for label, days in windows:
+              cutoff = latest_day - timedelta(days=days - 1)
+              total = sum(value for day, value in counts.items() if cutoff <= day <= latest_day)
+              rows.append(f"| {label} | {total:,} |")
+
+          report(
+              f"## npm download statistics: {package}\n\n"
+              f"Latest statistics date: {latest_day.isoformat()} UTC\n\n"
+              "| Period | Downloads |\n|---|---:|\n"
+              + "\n".join(rows)
+              + "\n\nSource: npm Downloads API. This job makes one read-only JSON GET "
+                "request. It does not invoke npm, install dependencies, request package "
+                "archives, write to the registry, or send notifications."
+          )
+          PY
