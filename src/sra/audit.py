@@ -6,7 +6,9 @@ from sra.provenance import build_manifest
 from sra.semantic_review import load_semantic_review, validate_semantic_review
 
 SCOPE_NOTE = (
-    "Version 0.3.1 adds an explicit claim-evidence-assumption-method-inference graph and an "
+    "Version 0.4.0 hardens evidence provenance, semantic-review input validation, Markdown/plain-text "
+    "section extraction, and negation-aware screening. Directional and causal language checks remain "
+    "heuristics, not semantic proofs. It also retains the explicit claim-evidence-assumption-method-inference graph and an "
     "external semantic-review import/validation workflow. Graph relations are extracted with "
     "rules and lexical similarity; they are not proof of semantic support. Imported semantic reviews "
     "are structurally validated against source hashes, graph fingerprints, node IDs and source quotes, "
@@ -21,7 +23,7 @@ def audit_file(path: str, semantic_review_path: str | None = None) -> AuditRepor
     findings, candidates, reasoning_map = build_findings(document)
     graph = build_reasoning_graph(document, candidates, reasoning_map)
     report = AuditReport(
-        schema_version="1.3",
+        schema_version="1.4",
         source=document.source,
         sha256=document.sha256,
         section_names=list(document.sections),

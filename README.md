@@ -6,24 +6,26 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.3.1
+## Current status: v0.4.0
 
 This release advances the original v0.1 screening baseline with a traceable reasoning-review layer and an independently recalculable statistical summary check.
 
 ### Implemented
 
 - Read Markdown and UTF-8 text manuscripts; optional PDF text extraction.
-- Detect common methods, limitations, results, discussion/conclusion and references headings (English and Turkish labels).
-- Record source SHA-256, file size, parser details, ruleset/configuration hashes, Python/runtime details and an environment fingerprint.
+- Preserve repeated section headings, ignore fenced code blocks during section/heuristic extraction, and conservatively detect standard standalone headings in plain text/PDF extraction.
+- Apply negation-aware causal/directional screening and avoid treating a cited prior randomized trial as proof that the current study was randomized.
+- Record manuscript SHA-256, exact source/config tree SHA-256 (including uncommitted changes), file size, parser details, ruleset/configuration hashes, Python/runtime details and an environment fingerprint.
 - Attach line and section references to extracted Discussion/Conclusion claims and candidate result passages.
 - Identify conclusion claims for which no lexical result candidate is found.
 - Flag possible opposite-direction statements between Results and Conclusion (for example, increased versus decreased for overlapping topics).
 - Flag causal conclusion language when Methods text describes an observational or non-randomized design.
 - Flag selected absolute/conclusive wording.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
-- Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation and inference nodes, source locations, relation edges and a graph fingerprint.
+- Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
 - Validate graph structure for dangling references, duplicate IDs and dependency cycles; report inferences without lexical evidence.
-- Create source-bound semantic-review templates for external LLMs/agents and validate returned source hashes, graph fingerprints, node IDs, confidence fields and exact source quotations.
+- Create source-bound semantic-review templates for external LLMs/agents and validate returned source hashes, graph fingerprints, inference-linked support evidence, explicitly reviewer-selected additional evidence, confidence fields and meaningful source quotations.
+- Require explicit causal-assumption review even when a lexically similar assumption sentence was extracted; lexical overlap no longer clears the causal assumption gap.
 - Produce JSON and Markdown audit reports plus a machine-readable statistical verification result.
 - Run tests using Python's standard library plus the optional SciPy statistics extra.
 
@@ -78,7 +80,7 @@ Give the template and full manuscript to the selected model or external orchestr
 
     sra audit examples/logic_review_demo.md --semantic-review reports/semantic-review-completed.json --out reports/semantic-reviewed
 
-The importer checks that the manuscript hash and reasoning-graph fingerprint match, node references exist, and quoted text appears in the source. It does not prove the external reviewer’s semantic judgment. That still requires expert adjudication. The application does not make an LLM/API call or start parallel agents by itself in this release; the mode option records the user's requested review strategy in the template for a later model/API or agent integration.
+The template includes a complete source-bound catalog of Results evidence-node IDs, passages and locations. The importer checks the manuscript hash and reasoning-graph fingerprint, requires graph-linked support IDs or explicit reviewer-selected Results evidence IDs, and validates the existence, type and source quotation provenance of selected nodes. Reviewer-selected evidence provenance is checked, but its semantic relevance is not proven. Current-schema quotations must be at least 20 characters and match both the manuscript and selected node text. The importer also enforces the review contract and UTC timestamps. It does not prove the external reviewer’s semantic judgment; expert adjudication remains necessary. The application does not make an LLM/API call or start parallel agents by itself in this release; the mode option records the user's requested review strategy for a later model/API or agent integration.
 
 ## Independently verify a Welch t-test
 

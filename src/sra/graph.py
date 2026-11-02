@@ -11,6 +11,8 @@ from sra.checks import (
     _norm_words,
     _section_entries,
     _jaccard,
+    _has_affirmed_match,
+    _sentences,
 )
 from sra.document import ParsedDocument
 from sra.models import ClaimEvidenceCandidate
@@ -22,8 +24,9 @@ ASSUMPTION_MARKER = re.compile(
     re.IGNORECASE,
 )
 CAUSAL_MARKER = re.compile(
-    r"\b(cause|causes|caused|causal|effect|effects|leads? to|resulted in|induces?)\b|"
-    r"neden olur|sebep olur|yol açar|etkisine neden",
+    r"\b(cause|causes|caused|causal|leads? to|resulted in|induces?|"
+    r"increas\w*|decreas\w*|reduc\w*|improv\w*|worsen\w*|raises?|lowers?)\b|"
+    r"neden olur|sebep olur|yol açar|artır\w*|azalt\w*|iyileştir\w*|kötüleştir\w*",
     re.IGNORECASE,
 )
 
@@ -97,7 +100,7 @@ def _explicit_assumption_entries(document: ParsedDocument) -> list[dict]:
     for name, value in document.sections.items():
         if name.lower().strip() in {"references", "bibliography", "kaynakça"}:
             continue
-        section_entries = _section_entries(document, (name.lower(),))
+        section_entries = _sentences(value, document.section_start_lines.get(name, 1), name)
         entries.extend(item for item in section_entries if ASSUMPTION_MARKER.search(item["text"]))
     return entries
 
@@ -179,19 +182,40 @@ def build_reasoning_graph(
                     lexical_overlap=candidate.lexical_overlap,
                 ))
 
-    # Retain document-level methods/limitations context for every inference.
-    # These edges are explicitly contextual and never count as evidential support.
-    for method in methods:
-        for inference in inference_nodes:
+    # Group document-level context once per section, avoiding a Cartesian
+    # product between every method/limitation sentence and every inference.
+    context_groups = (
+        ("methods", methods, "method_document_context"),
+        ("limitations", limitations, "limitation_document_context"),
+    )
+    for context_type, members, inference_relation in context_groups:
+        if not members:
+            continue
+        counters["document_context"] = counters.get("document_context", 0) + 1
+        context_entry = {
+            "text": f"Document-level {context_type} context containing {len(members)} extracted passage(s).",
+            "line": None,
+            "section": context_type,
+        }
+        context_node = _node(
+            document.sha256, "document_context", context_entry,
+            counters["document_context"], "section_context_group_v1", "document_context_only"
+        )
+        context_node["metadata"] = {
+            "context_type": context_type,
+            "member_count": len(members),
+        }
+        nodes.append(context_node)
+        for member in members:
             edges.append(_make_edge(
-                method["node_id"], inference["node_id"],
-                "method_document_context", "document_context_only",
+                member["node_id"], context_node["node_id"],
+                "document_context_membership", "structural_grouping_only",
+                member_type=member["node_type"],
             ))
-    for limitation in limitations:
         for inference in inference_nodes:
             edges.append(_make_edge(
-                limitation["node_id"], inference["node_id"],
-                "limitation_document_context", "document_context_only",
+                context_node["node_id"], inference["node_id"],
+                inference_relation, "document_context_only",
             ))
 
     # Connect methods to evidence only when text overlap is present. Never imply
@@ -222,8 +246,15 @@ def build_reasoning_graph(
                     "heuristic_only", lexical_overlap=round(overlap, 3),
                 ))
                 linked = True
-        if CAUSAL_MARKER.search(claim["text"]) and not linked:
-            if assumptions:
+        if _has_affirmed_match(claim["text"], CAUSAL_MARKER):
+            if linked:
+                gap_text = (
+                    "Lexically similar assumption statement(s) were found, but lexical overlap does not establish "
+                    "that they satisfy causal-identification requirements. Review confounding, exchangeability, "
+                    "consistency, positivity, selection, measurement and interference as applicable."
+                )
+                gap_status = "candidate_assumptions_found_review_required"
+            elif assumptions:
                 gap_text = (
                     "Explicit assumption statement(s) were extracted, but no lexical relation to this causal claim "
                     "was established. This is not proof the assumptions are irrelevant."
@@ -279,17 +310,18 @@ def build_reasoning_graph(
             ))
 
     graph = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "source_sha256": document.sha256,
         "node_types": [
             "method", "evidence", "assumption", "assumption_gap",
-            "limitation", "inference", "claim",
+            "limitation", "inference", "claim", "document_context",
         ],
         "edge_relations": [
             "method_context_candidate", "method_document_context", "limitation_document_context",
             "lexical_candidate_basis", "yields_claim",
             "assumption_candidate_required_for", "assumption_review_required",
             "qualifies_claim_candidate", "possible_contradiction_candidate",
+            "document_context_membership",
         ],
         "nodes": nodes,
         "edges": edges,
@@ -300,20 +332,58 @@ def build_reasoning_graph(
 
 
 def validate_reasoning_graph(nodes: list[dict], edges: list[dict]) -> dict[str, Any]:
-    ids = [node.get("node_id") for node in nodes]
+    invalid_nodes: list[int] = []
+    invalid_edges: list[int] = []
+    ids: list[str] = []
+    node_records: list[dict] = []
+
+    if not isinstance(nodes, list):
+        nodes = []
+        invalid_nodes.append(-1)
+    for index, node in enumerate(nodes):
+        if not isinstance(node, dict):
+            invalid_nodes.append(index)
+            continue
+        node_id = node.get("node_id")
+        if not isinstance(node_id, str) or not node_id.strip():
+            invalid_nodes.append(index)
+            continue
+        ids.append(node_id)
+        node_records.append(node)
+
     duplicate_ids = sorted(node_id for node_id, count in Counter(ids).items() if count > 1)
-    edge_ids = [edge.get("edge_id") for edge in edges]
-    duplicate_edge_ids = sorted(edge_id for edge_id, count in Counter(edge_ids).items() if count > 1)
     known = set(ids)
-    dangling = [
-        edge.get("edge_id") for edge in edges
-        if edge.get("source") not in known or edge.get("target") not in known
-    ]
+
+    if not isinstance(edges, list):
+        edges = []
+        invalid_edges.append(-1)
+    valid_edges: list[dict] = []
+    edge_ids: list[str] = []
+    dangling: list[str] = []
+    for index, edge in enumerate(edges):
+        if not isinstance(edge, dict):
+            invalid_edges.append(index)
+            continue
+        edge_id = edge.get("edge_id")
+        source = edge.get("source")
+        target = edge.get("target")
+        if any(not isinstance(value, str) or not value.strip()
+               for value in (edge_id, source, target)):
+            invalid_edges.append(index)
+            continue
+        edge_ids.append(edge_id)
+        valid_edges.append(edge)
+        if source not in known or target not in known:
+            dangling.append(edge_id)
+
+    duplicate_edge_ids = sorted(
+        edge_id for edge_id, count in Counter(edge_ids).items() if count > 1
+    )
 
     adjacency: dict[str, list[str]] = {node_id: [] for node_id in known}
     indegree: dict[str, int] = {node_id: 0 for node_id in known}
-    for edge in edges:
-        source, target = edge.get("source"), edge.get("target")
+    for edge in valid_edges:
+        source, target = edge["source"], edge["target"]
         if source in known and target in known:
             adjacency[source].append(target)
             indegree[target] += 1
@@ -329,16 +399,26 @@ def validate_reasoning_graph(nodes: list[dict], edges: list[dict]) -> dict[str, 
                 queue.append(target)
     cycle_present = visited != len(known)
 
-    inference_ids = {node["node_id"] for node in nodes if node.get("node_type") == "inference"}
+    inference_ids = {
+        node["node_id"] for node in node_records
+        if node.get("node_type") == "inference"
+    }
     evidence_inputs = {
-        edge["target"] for edge in edges
+        edge["target"] for edge in valid_edges
         if edge.get("relation") == "lexical_candidate_basis"
+        and edge["source"] in known and edge["target"] in known
     }
     missing_evidence = sorted(inference_ids - evidence_inputs)
+    failed = bool(
+        invalid_nodes or invalid_edges or duplicate_ids or duplicate_edge_ids
+        or dangling or cycle_present
+    )
     return {
-        "status": "FAIL" if duplicate_ids or duplicate_edge_ids or dangling or cycle_present else "PASS",
+        "status": "FAIL" if failed else "PASS",
         "node_count": len(nodes),
         "edge_count": len(edges),
+        "invalid_node_entries": invalid_nodes,
+        "invalid_edge_entries": invalid_edges,
         "duplicate_node_ids": duplicate_ids,
         "duplicate_edge_ids": duplicate_edge_ids,
         "dangling_edges": dangling,

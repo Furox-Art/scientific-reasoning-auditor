@@ -75,8 +75,14 @@ def to_markdown(report: AuditReport) -> str:
             lines.append(f"- **{item.get('relation', 'unknown')}** (confidence {confidence_text}) — {item.get('rationale', '')}")
             if item.get("missing_assumptions"):
                 lines.append(f"  - Missing assumptions: {'; '.join(item['missing_assumptions'])}")
+            selected_ids = item.get("reviewer_selected_evidence_node_ids", [])
+            if selected_ids:
+                lines.append(
+                    "  - Reviewer-selected evidence IDs (provenance checked; relevance not verified): "
+                    + "; ".join(selected_ids)
+                )
         for error in semantic.get("errors", []):
             lines.append(f"- Validation error: {error}")
 
-    lines.extend(["", "## Reproducibility manifest", "", f"- Manifest schema: {manifest.get('manifest_schema_version', 'unknown')}", f"- Generated (UTC): {manifest.get('generated_at_utc', 'unknown')}", f"- Python: {manifest.get('runtime', {}).get('python_version', 'unknown')}", f"- Platform: {manifest.get('runtime', {}).get('platform', 'unknown')}", f"- Parser: {manifest.get('parser', {}).get('backend', 'unknown')}", f"- Ruleset: {manifest.get('ruleset_version', 'unknown')}", f"- Configuration SHA-256: {manifest.get('configuration_sha256', 'unknown')}", f"- Source-code revision: {manifest.get('source_code_revision') or 'not captured by this runtime'}", "", "## Scope and limitations", "", report.scope_note, ""])
+    lines.extend(["", "## Reproducibility manifest", "", f"- Manifest schema: {manifest.get('manifest_schema_version', 'unknown')}", f"- Generated (UTC): {manifest.get('generated_at_utc', 'unknown')}", f"- Python: {manifest.get('runtime', {}).get('python_version', 'unknown')}", f"- Platform: {manifest.get('runtime', {}).get('platform', 'unknown')}", f"- Parser: {manifest.get('parser', {}).get('backend', 'unknown')}", f"- Ruleset: {manifest.get('ruleset_version', 'unknown')}", f"- Configuration SHA-256: {manifest.get('configuration_sha256', 'unknown')}", f"- Source-code revision: {manifest.get('source_code_revision') or 'not captured by this runtime'}", f"- Source-code SHA-256: {manifest.get('source_code_sha256') or 'not captured'}", "", "## Scope and limitations", "", report.scope_note, ""])
     return "\n".join(lines)

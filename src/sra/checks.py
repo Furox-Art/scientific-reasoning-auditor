@@ -1,7 +1,7 @@
 import re
 from collections.abc import Iterable
 
-from sra.document import ParsedDocument
+from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
 
 METHODS = ("method", "methods", "methodology", "materials and methods", "methods and materials",
@@ -39,13 +39,19 @@ OBSERVATIONAL_DESIGN = re.compile(
     re.IGNORECASE,
 )
 RANDOMIZED_DESIGN = re.compile(
-    r"\b(randomi[sz]ed|random allocation|random assignment|randomized controlled)\b|"
-    r"rastgele atama|randomize kontrollü|randomize edildi",
+    r"\b(?:we (?:used|conducted|performed) a randomi[sz]ed (?:design|trial|study|experiment)|"
+    r"(?:this|our|the present|the current) randomi[sz]ed controlled (?:trial|study|experiment)|"
+    r"(?:this|the present|the current) study was randomi[sz]ed|"
+    r"the study used random allocation|participants in this study were randomly assigned|"
+    r"(?:we|the investigators) randomly assigned (?:participants|patients|subjects|groups)|"
+    r"random allocation to (?:treatment )?groups|random assignment to (?:treatment )?groups)\b|"
+    r"bu çalışma randomize edildi|katılımcılar bu çalışmada rastgele atandı",
     re.IGNORECASE,
 )
 INCREASE = re.compile(
-    r"\b(increas\w*|higher|greater|elevat\w*|improv\w*|raised|rise|"
-    r"art\w*|yüksel\w*|daha yüksek)\b", re.IGNORECASE
+    r"\b(increas\w*|higher|greater|elevat\w*|improv\w*|raised|rise)\b|"
+    r"\b(arttı|artırdı|artırma|artış|artıyor|artmıştır|yüksel\w*|daha yüksek)\b",
+    re.IGNORECASE,
 )
 DECREASE = re.compile(
     r"\b(decreas\w*|lower|reduc\w*|declin\w*|worsen\w*|fell|fall|"
@@ -58,6 +64,11 @@ over under into about than then also can may could should would study paper resu
 using used method data analysis which while where bir ve ile için bu şu olan olarak
 göre daha çok az da de the study our results findings show showed demonstrates
 demonstrated suggests suggested indicates indicated""".split())
+NEGATION = re.compile(
+    r"\b(?:not|never|no|without|didn't|doesn't|don't|cannot|can't|failed to|"
+    r"değil|değildir|olmadı|olmamış|olamaz|yoktur|bulunmadı)\b",
+    re.IGNORECASE,
+)
 DIRECTION_WORDS = {
     "increase", "increased", "increasing", "higher", "greater", "elevated", "improved",
     "raised", "rise", "decrease", "decreased", "decreasing", "lower", "reduced",
@@ -153,9 +164,43 @@ def _candidate_links(
     return candidates, unmatched
 
 
+def _negation_in_scope(prefix: str) -> bool:
+    # Do not carry negation across a new clause such as "but", "however" or ";"
+    scoped_prefix = re.split(
+        r"[;,]|\b(?:but|however|whereas|although|while)\b",
+        prefix,
+        flags=re.IGNORECASE,
+    )[-1]
+    return bool(NEGATION.search(scoped_prefix))
+
+
+def _has_affirmed_direction(sentence: str, pattern: re.Pattern) -> bool:
+    for match in pattern.finditer(sentence):
+        prefix = sentence[max(0, match.start() - 50):match.start()]
+        if re.search(r"\bnot\s+only\s*$", prefix, re.IGNORECASE):
+            return True
+        if not _negation_in_scope(prefix):
+            return True
+    return False
+
+
+def _has_affirmed_match(sentence: str, pattern: re.Pattern) -> bool:
+    for match in pattern.finditer(sentence):
+        prefix = sentence[max(0, match.start() - 60):match.start()]
+        if re.search(r"\bnot\s+only\s*$", prefix, re.IGNORECASE):
+            return True
+        if not _negation_in_scope(prefix):
+            return True
+    return False
+
+
+def _has_affirmed_causal_language(sentence: str) -> bool:
+    return _has_affirmed_match(sentence, CAUSAL)
+
+
 def _direction(sentence: str) -> int:
-    up = bool(INCREASE.search(sentence))
-    down = bool(DECREASE.search(sentence))
+    up = _has_affirmed_direction(sentence, INCREASE)
+    down = _has_affirmed_direction(sentence, DECREASE)
     if up == down:
         return 0
     return 1 if up else -1
@@ -215,7 +260,7 @@ def build_findings(
             "No recognizable references heading was detected; citation completeness cannot be assessed.",
         ))
 
-    all_sentences = _sentences(document.text)
+    all_sentences = _sentences(without_fenced_code(document.text))
     overclaims = [s for s in all_sentences if OVERCLAIM.search(s["text"])]
     if overclaims:
         findings.append(Finding(
@@ -243,7 +288,10 @@ def build_findings(
 
     association_claims = [s for s in conclusion_sentences if CORRELATION.search(s["text"])]
     association_anywhere = [s for s in all_sentences if CORRELATION.search(s["text"])]
-    causal_claims = [s for s in conclusion_sentences if CAUSAL.search(s["text"])]
+    causal_claims = [
+        s for s in conclusion_sentences
+        if _has_affirmed_causal_language(s["text"])
+    ]
     if association_anywhere and causal_claims:
         findings.append(Finding(
             "reasoning.correlation_causation_review",
@@ -266,12 +314,15 @@ def build_findings(
         ))
 
     methods_text = _section_text(document, METHODS)
+    method_entries = _section_entries(document, METHODS)
     method_evidence = next(
-        (item for item in _section_entries(document, METHODS)
-         if OBSERVATIONAL_DESIGN.search(item["text"])),
+        (item for item in method_entries if OBSERVATIONAL_DESIGN.search(item["text"])),
         None,
     )
-    if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and not RANDOMIZED_DESIGN.search(methods_text):
+    randomized_evidence = any(
+        RANDOMIZED_DESIGN.search(item["text"]) for item in method_entries
+    )
+    if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and not randomized_evidence:
         method_excerpt = method_evidence["text"] if method_evidence else methods_text[:500]
         findings.append(Finding(
             "reasoning.causal_claim_observational_design",
