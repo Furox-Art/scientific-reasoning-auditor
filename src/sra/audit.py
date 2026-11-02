@@ -6,7 +6,7 @@ from sra.provenance import build_manifest
 from sra.semantic_review import load_semantic_review, validate_semantic_review
 
 SCOPE_NOTE = (
-    "Version 0.3.0 adds an explicit claim-evidence-assumption-method-inference graph and an "
+    "Version 0.3.1 adds an explicit claim-evidence-assumption-method-inference graph and an "
     "external semantic-review import/validation workflow. Graph relations are extracted with "
     "rules and lexical similarity; they are not proof of semantic support. Imported semantic reviews "
     "are structurally validated against source hashes, graph fingerprints, node IDs and source quotes, "
@@ -38,7 +38,7 @@ def audit_file(path: str, semantic_review_path: str | None = None) -> AuditRepor
     return report
 
 
-def build_review_template(path: str) -> dict:
+def build_review_template(path: str, review_mode: str = "single") -> dict:
     from sra.semantic_review import build_semantic_review_template
     report = audit_file(path)
-    return build_semantic_review_template(report.to_dict())
+    return build_semantic_review_template(report.to_dict(), review_mode=review_mode)

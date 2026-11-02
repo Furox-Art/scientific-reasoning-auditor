@@ -6,6 +6,7 @@
   "required": [
     "schema_version",
     "review_type",
+    "review_mode",
     "source_sha256",
     "graph_fingerprint",
     "reviewer",
@@ -15,10 +16,14 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "review_type": {
       "const": "external_semantic_reasoning_review"
+    },
+    "review_mode": {
+      "enum": ["single", "parallel"],
+      "description": "User-selected review orchestration preference; this field does not execute a model or start agents."
     },
     "source_sha256": {
       "type": "string",

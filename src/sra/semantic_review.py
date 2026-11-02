@@ -17,7 +17,12 @@ ALLOWED_RELATIONS = {
 }
 
 
-def build_semantic_review_template(audit_report: dict[str, Any]) -> dict[str, Any]:
+def build_semantic_review_template(
+    audit_report: dict[str, Any],
+    review_mode: str = "single",
+) -> dict[str, Any]:
+    if review_mode not in {"single", "parallel"}:
+        raise ValueError("review_mode must be 'single' or 'parallel'.")
     graph = audit_report["reasoning_graph"]
     assessments = []
     for inference in (n for n in graph["nodes"] if n["node_type"] == "inference"):
@@ -41,8 +46,9 @@ def build_semantic_review_template(audit_report: dict[str, Any]) -> dict[str, An
             "counter_evidence_node_ids": [],
         })
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "review_type": "external_semantic_reasoning_review",
+        "review_mode": review_mode,
         "source_sha256": audit_report["sha256"],
         "graph_fingerprint": graph_fingerprint(graph),
         "reviewer": {
@@ -51,6 +57,11 @@ def build_semantic_review_template(audit_report: dict[str, Any]) -> dict[str, An
             "reviewed_at_utc": "",
         },
         "instructions": [
+            (
+                "Use one model to review all assessments."
+                if review_mode == "single"
+                else "Use parallel agents. Give every agent the complete manuscript and a clearly assigned subset of assessments; merge their outputs by inference_node_id and ensure none are missing or duplicated."
+            ),
             "Review each claim-inference pair against the complete supplied manuscript, not only the lexical candidates.",
             "Distinguish entailment, partial support, contradiction, no support, and uncertainty.",
             "Do not infer causality from association alone. Examine design, assumptions, confounding, selection, measurement and alternative explanations where relevant.",
@@ -93,8 +104,17 @@ def validate_semantic_review(
         except ValueError:
             errors.append("reviewer.reviewed_at_utc must be ISO-8601.")
 
-    if review.get("schema_version") != "1.0":
+    input_schema_version = review.get("schema_version")
+    if input_schema_version not in {"1.0", "1.1"}:
         errors.append("Unsupported semantic review schema_version.")
+    if input_schema_version == "1.0":
+        if review.get("review_mode") not in {None, "single"}:
+            errors.append("Legacy semantic review schema 1.0 supports single-model mode only.")
+        effective_review_mode = "single"
+    else:
+        effective_review_mode = review.get("review_mode")
+        if effective_review_mode not in {"single", "parallel"}:
+            errors.append("review_mode must be 'single' or 'parallel'.")
     if review.get("review_type") != "external_semantic_reasoning_review":
         errors.append("Unsupported semantic review review_type.")
     if review.get("source_sha256") != audit_report.get("sha256"):
@@ -218,9 +238,10 @@ def validate_semantic_review(
         errors.append(f"Missing semantic assessments for {len(missing)} inference node(s).")
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "status": "ACCEPTED_FOR_REVIEW" if not errors else "REJECTED",
         "structural_validation_only": True,
+        "review_mode": effective_review_mode,
         "assessment_count": len(validated),
         "validated_assessments": validated,
         "errors": errors,

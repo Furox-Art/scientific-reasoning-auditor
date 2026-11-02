@@ -100,7 +100,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(manifest["input"]["format"], "md")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.3.0")
+        self.assertEqual(manifest["ruleset_version"], "0.3.1")
         self.assertIn("source_code_revision", manifest)
         self.assertIn("working_tree_dirty", manifest)
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
@@ -187,10 +187,57 @@ class AuditTests(unittest.TestCase):
         schema_path = Path(__file__).resolve().parents[1] / "schemas" / "semantic-review.schema.json"
         schema = json.loads(schema_path.read_text(encoding="utf-8"))
         self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
+        self.assertEqual(schema["properties"]["schema_version"]["const"], "1.1")
+        self.assertIn("review_mode", schema["required"])
         self.assertIn("source_sha256", schema["properties"])
         self.assertIn("graph_fingerprint", schema["properties"])
         self.assertIn("assessments", schema["required"])
         self.assertIn("partially_supported", schema["properties"]["assessments"]["items"]["properties"]["relation"]["enum"])
+
+    def test_semantic_review_mode_is_user_selectable(self):
+        report = self.audit_text(
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        ).to_dict()
+        single = build_semantic_review_template(report)
+        parallel = build_semantic_review_template(report, review_mode="parallel")
+        self.assertEqual(single["review_mode"], "single")
+        self.assertEqual(parallel["review_mode"], "parallel")
+        self.assertIn("one model", single["instructions"][0])
+        self.assertIn("parallel agents", parallel["instructions"][0])
+        with self.assertRaises(ValueError):
+            build_semantic_review_template(report, review_mode="automatic")
+
+    def test_legacy_semantic_review_v10_imports_as_single_mode(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        legacy = build_semantic_review_template(report)
+        evidence_id = legacy["assessments"][0]["evidence_node_ids"][0]
+        evidence = next(
+            node for node in report["reasoning_graph"]["nodes"]
+            if node["node_id"] == evidence_id
+        )
+        legacy["assessments"][0].update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "The result passage matches the conclusion claim.",
+            "source_quotes": [evidence["text"]],
+        })
+        legacy["reviewer"] = {
+            "name": "Legacy reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+        legacy["schema_version"] = "1.0"
+        legacy.pop("review_mode")
+        result = validate_semantic_review(legacy, report, text)
+        self.assertEqual(result["status"], "ACCEPTED_FOR_REVIEW")
+        self.assertEqual(result["review_mode"], "single")
 
     def test_semantic_review_template_is_bound_to_source_and_graph(self):
         text = (

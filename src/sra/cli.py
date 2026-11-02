@@ -19,6 +19,12 @@ def main() -> int:
     template = sub.add_parser("review-template", help="Create a source-bound template for an external semantic reviewer.")
     template.add_argument("input", help="Path to the manuscript already audited by SRA.")
     template.add_argument("--out", default="semantic-review-template.json", help="Output JSON path.")
+    template.add_argument(
+        "--mode",
+        choices=("single", "parallel"),
+        default="single",
+        help="Choose one model (single) or parallel agents (parallel).",
+    )
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
     stats.add_argument("input", help="JSON input; currently supports test=welch_t.")
@@ -47,13 +53,14 @@ def main() -> int:
 
     if args.command == "review-template":
         try:
-            result = build_review_template(args.input)
+            result = build_review_template(args.input, review_mode=args.mode)
         except (OSError, ValueError, RuntimeError) as exc:
             parser.error(str(exc))
         output = Path(args.out)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"Semantic review template created for {len(result['assessments'])} inference(s).")
+        print(f"Review mode: {result['review_mode']}")
         print(f"Template: {output.resolve()}")
         return 0
 

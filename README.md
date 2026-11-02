@@ -6,7 +6,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.3.0
+## Current status: v0.3.1
 
 This release advances the original v0.1 screening baseline with a traceable reasoning-review layer and an independently recalculable statistical summary check.
 
@@ -67,15 +67,18 @@ Run an audit to include a graph in the JSON and Markdown reports:
 
 The output contract is documented in schemas/semantic-review.schema.json.
 
-Create a JSON template for a semantic reviewer or parallel agent:
+Create a JSON template and choose the review mode:
 
-    sra review-template examples/logic_review_demo.md --out reports/semantic-review-template.json
+    sra review-template examples/logic_review_demo.md --mode single --out reports/semantic-review-single.json
+    sra review-template examples/logic_review_demo.md --mode parallel --out reports/semantic-review-parallel.json
 
-Give the template and full manuscript to a capable LLM/agent for passage-grounded assessment. Fill every assessment with a relation (entailed, partially_supported, contradicted, not_supported, or unclear), confidence, rationale and exact source quotations where applicable. Then import the completed file:
+The single mode (default) prepares the whole review for one model. The parallel mode asks an external orchestrator to distribute assessment subsets among parallel agents, giving each agent the complete manuscript, then merge results by inference ID. The mode is selected by the user for each run.
+
+Give the template and full manuscript to the selected model or external orchestration layer for passage-grounded assessment. Fill every assessment with a relation (entailed, partially_supported, contradicted, not_supported, or unclear), confidence, rationale and exact source quotations where applicable. Then import the completed file:
 
     sra audit examples/logic_review_demo.md --semantic-review reports/semantic-review-completed.json --out reports/semantic-reviewed
 
-The importer checks that the manuscript hash and reasoning-graph fingerprint match, node references exist, and quoted text appears in the source. It does not prove the external reviewer’s semantic judgment. That still requires expert adjudication. The application does not make an LLM/API call by itself in this release.
+The importer checks that the manuscript hash and reasoning-graph fingerprint match, node references exist, and quoted text appears in the source. It does not prove the external reviewer’s semantic judgment. That still requires expert adjudication. The application does not make an LLM/API call or start parallel agents by itself in this release; the mode option records the user's requested review strategy in the template for a later model/API or agent integration.
 
 ## Independently verify a Welch t-test
 
