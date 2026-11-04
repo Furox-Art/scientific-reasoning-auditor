@@ -217,6 +217,55 @@ observational cohort. The rule does **not** establish whether other causal
 statements elsewhere in this paper are valid; the code still produces heuristic
 flags requiring adjudication. The causal-design rule version increases to 4.
 
+## Advanced scientific checks (structured input)
+
+Run `sra verify-science examples/advanced_scientific_checks.json --out science-checks.json`.
+This command checks explicitly supplied structured values and emits a JSON
+result with `PASS`, `FAIL`, or `PARTIAL`. It does **not** automatically
+interpret whole papers or replace scientific peer review.
+
+- **`semantic_ci`:** Checks a researcher-specified claim category against
+  a 95% confidence interval. Supported ratio effects include risk, odds,
+  hazard and rate ratios (null=1); additive effects use null=0.
+  A displayed bound exactly at the null returns `NOT_VERIFIED` because
+  rounding can affect interpretation. `no_effect` and `equivalent`
+  never establish equivalence; explicit `exact_null_effect` is contradicted
+  only when the CI excludes the null. `risk_difference` estimates must be
+  in [-1,1]. Free-text `claim_text` is **not** interpreted, and results
+  explicitly mark `claim_text_checked: false`.
+  CI decisions preserve supplied decimal precision; `reported_interval_exact` and `estimate_exact` retain exact decimal strings.
+- **`dimension_equation`:** Checks SI-base dimensional consistency and
+  an optional supplied numeric example. Safe, restricted expressions
+  (`+`, `-`, `*`, `/`, literal integer powers -8..8) are evaluated
+  using bounded exact rational arithmetic on decimal inputs; numeric
+  results are represented as rational strings. This is not a symbolic
+  proof or validation of physical model assumptions.
+- **`unadjusted_risk_ratio`:** Independently calculates crude cumulative
+  risk ratio and an approximate Katz log-Wald 95% CI from 2×2 counts.
+  Reported crude estimates are checked with displayed-precision and
+  relative numerical tolerances. Sparse cells, very coarse precision
+  and a collapsed printed CI can yield `NOT_VERIFIED`.
+  Do not compare this result directly with a Cox hazard/rate ratio,
+  adjusted estimate, or causal effect.
+
+**Example:** The 2025 RECOVERY mortality rate ratio (0.87,
+95% CI 0.64–1.18) differs in estimand from the crude cumulative
+risk ratio calculated from 86/246 versus 86/231 deaths (about 0.94).
+Those two estimates cannot be declared inconsistent solely because
+their values differ.
+
+**Input and output safeguards:** Input JSON is limited to 1 MiB with
+unique keys, finite numbers and bounded arithmetic; formulas are never
+executed as supplied Python code. File-based results include an input
+SHA-256, available code provenance, Python and dependency versions.
+Packaging verifies reproducible wheel/sdist bytes using a fixed
+`SOURCE_DATE_EPOCH` and canonical TAR/GZIP metadata. The standard
+`audit` and review interfaces remain unchanged.
+
+**Limitations:** These are checks of user-supplied structured values;
+general scientific language interpretation, theorem proving, automatic
+formula extraction and expert-rated precision/recall are not established.
+
 ## Development
 
     python -m coverage run --source=src/sra -m unittest discover -s tests -v

@@ -70,8 +70,14 @@ jobs:
       - name: Test Node.js adapter before PyPI release
         run: npm test
 
-      - name: Build wheel and source distribution
-        run: python -m build
+      - name: Build and independently compare reproducible distributions
+        run: |
+          export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+          python -m build
+          python tools/normalize_sdist.py dist/*.tar.gz
+          python -m build --outdir "$RUNNER_TEMP/sra-dist-repeat"
+          python tools/normalize_sdist.py "$RUNNER_TEMP"/sra-dist-repeat/*.tar.gz
+          python tools/verify_reproducible_distributions.py dist "$RUNNER_TEMP/sra-dist-repeat"
 
       - name: Verify distribution provenance inventories
         env:

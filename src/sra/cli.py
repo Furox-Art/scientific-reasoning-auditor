@@ -8,6 +8,7 @@ from sra.model_client import request_single_model_review
 from sra.semantic_review import build_semantic_review_template, validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
+from sra.scientific_validation import verify_scientific_file
 
 
 def _reject_input_overwrite(
@@ -64,6 +65,13 @@ def main() -> int:
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
     stats.add_argument("input", help="JSON input; currently supports test=welch_t.")
     stats.add_argument("--out", default="stats-verification.json", help="Output JSON path.")
+
+    science = sub.add_parser(
+        "verify-science",
+        help="Validate explicitly structured CI claims, SI-dimension equations, and crude risk ratios.",
+    )
+    science.add_argument("input", help="Bounded JSON scientific-check specification.")
+    science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
     if args.command == "audit":
@@ -152,14 +160,16 @@ def main() -> int:
         return 0 if validation["status"] == "ACCEPTED_FOR_REVIEW" else 2
 
     try:
-        result = verify_stats_file(args.input)
+        result = (verify_scientific_file(args.input)
+                  if args.command == "verify-science"
+                  else verify_stats_file(args.input))
         serialized_result = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
     except (OSError, ValueError, RuntimeError, ArithmeticError, TypeError) as exc:
         parser.error(str(exc))
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(serialized_result, encoding="utf-8")
-    print(f"Statistics verification status: {result['status']}")
+    print(f"{'Scientific' if args.command == 'verify-science' else 'Statistics'} verification status: {result['status']}")
     print(f"Result: {output.resolve()}")
     return 0 if result["status"] == "PASS" else 1
 
