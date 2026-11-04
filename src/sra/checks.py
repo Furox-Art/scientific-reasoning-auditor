@@ -1,5 +1,6 @@
 import re
 from collections.abc import Iterable
+from decimal import Decimal
 
 from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
@@ -39,6 +40,22 @@ OBSERVATIONAL_DESIGN = re.compile(
     r"gözlemsel|kesitsel|vaka kontrol|geriye dönük|randomize olmayan",
     re.IGNORECASE,
 )
+# A review of published study designs must not automatically be treated as the
+# review authors' *own* exposure/outcome cohort. This is deliberately narrow:
+# absence of these markers does not prove a paper is primary observational work.
+META_RESEARCH_DESIGN = re.compile(
+    r"\b(?:meta[- ]research|research on research|methodological (?:study|review))\b",
+    re.IGNORECASE,
+)
+OWN_OBSERVATIONAL_DESIGN = re.compile(
+    r"\b(?:this|our|the present|the current)\s+(?:was\s+an?\s+|is\s+an?\s+)?"
+    r"(?:cross[- ]sectional\s+)?(?:observational|retrospective|cohort|case[- ]control)"
+    r"(?:\s+cohort)?\s+(?:study|design|analysis)\b"
+    r"|\b(?:we|the investigators)\s+(?:conducted|performed|undertook|carried out)"
+    r"\s+an?\s+(?:observational|retrospective|cohort|cross[- ]sectional)"
+    r"(?:\s+cohort)?\s+(?:study|design|analysis)\b",
+    re.IGNORECASE,
+)
 RANDOMIZED_DESIGN = re.compile(
     r"\b(?:we (?:used|conducted|performed) a randomi[sz]ed (?:design|trial|study|experiment)|"
     r"(?:this|our|the present|the current) randomi[sz]ed controlled (?:trial|study|experiment)|"
@@ -59,6 +76,18 @@ DECREASE = re.compile(
     r"azal\w*|düş\w*|gerile\w*|daha düşük)\b", re.IGNORECASE
 )
 WORD = re.compile(r"[a-zA-Z0-9ğüşöçıİĞÜŞÖÇ]+", re.UNICODE)
+# This narrow, conservative check does not infer an outcome or scientific error:
+# it compares repeated explicitly formatted rate ratios and intervals.
+REPEATED_RATE_RATIO = re.compile(
+    r"\brate\s+ratio(?:\s*\[\s*RR\s*\])?\s*[:=]?\s*"
+    r"(?P<estimate>\d+(?:[.·]\d+)?)\s*;\s*"
+    r"95\s*%\s*CI\s*"
+    r"(?P<lower>\d+(?:[.·]\d+)?)\s*[-–—−]\s*"
+    r"(?P<upper>\d+(?:[.·]\d+)?)\s*;\s*"
+    r"p\s*=\s*(?P<p>\d+(?:[.·]\d+)?)",
+    re.IGNORECASE,
+)
+DOSAGE_GROUP_MODIFIER = re.compile(r"\b(?:higher|lower)\s*[- ]?\s*(?:dose|dosage|dosing)\b", re.I)
 STOP = set("""the and for with from that this these those were was are is be to of in on
 at by as an a or we our it its their they them have has had after before between
 over under into about than then also can may could should would study paper result
@@ -227,8 +256,11 @@ def _has_affirmed_causal_language(sentence: str) -> bool:
 
 
 def _direction(sentence: str) -> int:
-    up = _has_affirmed_direction(sentence, INCREASE)
-    down = _has_affirmed_direction(sentence, DECREASE)
+    # Higher/lower *dose* is a treatment-arm description, not necessarily an
+    # outcome direction. Preserve genuine verbs such as "increased mortality".
+    outcome_text = DOSAGE_GROUP_MODIFIER.sub("dose", sentence)
+    up = _has_affirmed_direction(outcome_text, INCREASE)
+    down = _has_affirmed_direction(outcome_text, DECREASE)
     if up == down:
         return 0
     return 1 if up else -1
@@ -310,6 +342,34 @@ def _direction_conflicts(
     return conflicts
 
 
+def _repeated_rate_ratio_ci_conflict(text: str) -> list[dict]:
+    """First discordant 95% CI pair for a repeated rate ratio and p-value.
+
+    This is a same-number screening signal. It cannot establish that the
+    comparison, outcome or statistical method was the same.
+    """
+    first_by_estimate: dict[tuple[Decimal, Decimal], dict] = {}
+    for match in REPEATED_RATE_RATIO.finditer(without_fenced_code(text)):
+        number = lambda key: Decimal(match.group(key).replace("·", "."))
+        key = number("estimate"), number("p")
+        interval = number("lower"), number("upper")
+        # Include nearby endpoint/population context for human adjudication.
+        excerpt = " ".join(
+            text[max(0, match.start() - 110):match.end() + 50].split()
+        )
+        entry = {
+            "text": excerpt,
+            "line": text.count("\n", 0, match.start()) + 1,
+            "interval": interval,
+        }
+        earlier = first_by_estimate.get(key)
+        if earlier is None:
+            first_by_estimate[key] = entry
+        elif earlier["interval"] != interval:
+            return [earlier, entry]
+    return []
+
+
 def build_findings(
     document: ParsedDocument,
 ) -> tuple[list[Finding], list[ClaimEvidenceCandidate], list[dict]]:
@@ -341,6 +401,20 @@ def build_findings(
         findings.append(Finding(
             "structure.references_missing", "References section not detected", "info", "review_required",
             "No recognizable references heading was detected; citation completeness cannot be assessed.",
+        ))
+
+    rate_ratio_discrepancy = _repeated_rate_ratio_ci_conflict(document.text)
+    if rate_ratio_discrepancy:
+        findings.append(Finding(
+            "statistics.repeated_rate_ratio_ci_conflict",
+            "Repeated rate ratio has inconsistent confidence intervals",
+            "warning", "review_required",
+            "The same displayed rate ratio and p-value occur with different "
+            "95% confidence intervals. Confirm that both refer to the same "
+            "endpoint, population, model and analysis before treating this "
+            "as a reporting inconsistency.",
+            [item["text"] for item in rate_ratio_discrepancy],
+            [{"line": item["line"]} for item in rate_ratio_discrepancy],
         ))
 
     all_sentences = _sentences(without_fenced_code(document.text))
@@ -428,7 +502,15 @@ def build_findings(
         return False
 
     randomized_evidence = affirmed_current_randomization(methods_text)
-    if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and randomized_evidence:
+    # "Reviewers screened observational studies" is not necessarily this
+    # manuscript's own observational exposure design. Retain the warning when
+    # the current manuscript explicitly identifies its own empirical design.
+    observational_evidence = bool(OBSERVATIONAL_DESIGN.search(methods_text))
+    observational_applicable = observational_evidence and (
+        not META_RESEARCH_DESIGN.search(methods_text)
+        or bool(OWN_OBSERVATIONAL_DESIGN.search(methods_text))
+    )
+    if causal_claims and observational_applicable and randomized_evidence:
         findings.append(Finding(
             "reasoning.mixed_design_causal_review",
             "Causal claim in a manuscript mentioning randomized and observational methods",
@@ -439,7 +521,7 @@ def build_findings(
             [causal_claims[0]["text"]],
             [{"line": causal_claims[0]["line"], "section": causal_claims[0].get("section")}],
         ))
-    if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and not randomized_evidence:
+    if causal_claims and observational_applicable and not randomized_evidence:
         method_excerpt = method_evidence["text"] if method_evidence else methods_text[:500]
         findings.append(Finding(
             "reasoning.causal_claim_observational_design",

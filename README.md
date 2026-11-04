@@ -21,7 +21,10 @@ This candidate limits model API response memory use, validates reasoning-graph n
 - Attach line and section references to extracted Discussion/Conclusion claims and candidate result passages.
 - Identify conclusion claims for which no lexical result candidate is found.
 - Flag possible opposite-direction statements between Results and Conclusion (for example, increased versus decreased for overlapping topics).
+- Exclude `higher dose` and `lower-dose` treatment-arm labels as standalone outcome directions while retaining actual increase/decrease predicates.
+- Flag a repeated, explicitly formatted **rate ratio + p-value** when its reported **95% CI bounds differ**. This is a narrowly scoped reporting-consistency screening rule, not an independent reanalysis or proof of an error.
 - Flag causal conclusion language when Methods text describes an observational or non-randomized design.
+- Avoid attributing observational designs of reviewed papers to the authors of an explicitly identified methodological / meta-research review, unless the review itself explicitly reports its own observational design.
 - Flag selected absolute/conclusive wording.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
 - Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
@@ -37,6 +40,7 @@ This candidate limits model API response memory use, validates reasoning-graph n
 - Lexical overlap is not semantic entailment and does not prove that evidence supports a claim.
 - A missing lexical match is not proof that a conclusion is unsupported; relevant evidence may be paraphrased or located elsewhere.
 - A possible direction conflict may be caused by subgroup definitions, recoding, different endpoints or sentence-extraction errors.
+- A repeated rate ratio with a differing CI may still refer to different endpoints, populations or statistical models; the check requires explicit `rate ratio …; 95% CI …; p = …` formatting, and misses other estimate types or layouts. Human adjudication remains necessary.
 - Observational wording does not by itself invalidate a causal inference; causal identification may be justified by design and assumptions not detected by these rules.
 - Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test. Pooled-SD Cohen's d uses a common within-group variance reference and is not heteroskedasticity-adjusted; the classical Hedges' J correction is derived under a normally distributed, two-independent-group model with a common variance.
 - No finding does not mean that the paper is logically valid.
@@ -176,6 +180,42 @@ The project is split into separate assurance layers. A rule-based text scan must
 5. **Literature and citation verification** — resolve references and verify whether cited sources support the exact claims.
 6. **Specialist review** — task-specific expert analysis, disagreement tracking and human adjudication.
 7. **Benchmarking** — curated positive/negative examples, false-positive/false-negative rates, calibration and regression tests.
+
+## Published-manuscript regression pilot (development branch only)
+
+Using the published, open-access 2025 RECOVERY ventilatory-support paper (PMCID
+[PMC11872607](https://pmc.ncbi.nlm.nih.gov/articles/PMC11872607/),
+DOI [10.1016/j.eclinm.2025.103080](https://doi.org/10.1016/j.eclinm.2025.103080)),
+the main Results text reports a rate ratio 0.87 with a 95% CI of
+0.64–1.18 (p = 0.37), while the paper's *Added value of this study* section
+prints 0.64–1.33 with the same rate ratio and p-value. This observable
+inconsistency is a **review signal**, not proof that the underlying analysis is
+incorrect. The new `statistics.repeated_rate_ratio_ci_conflict` check
+detects that specific class of repeated-value mismatch. The
+`reasoning.directional_contradiction` heuristic is also less likely to treat
+higher/lower *dose labels* as an effect-direction reversal.
+
+Positive and negative unit tests in `tests/test_published_paper_regressions.py`
+reproduce both problems and guard against a matching CI, distinct estimates or
+p-values, and manuscript code fences. A published-paper pilot is not an
+expert-labeled representative validation corpus. Real-world precision, recall,
+false-positive and false-negative rates remain **unknown**. Existing semantic
+review schema versions 1.0–1.3 are preserved; direction-rule version changes
+from 3 to 4 in the reproducibility manifest, and a new CI-rule version 1 is
+recorded.
+
+### Methodological-review safeguard (published-paper pilot)
+
+The 2021 BMJ Open paper [PMC8141434](https://pmc.ncbi.nlm.nih.gov/articles/PMC8141434/)
+reviews causal language in 60 published observational articles. The manuscript
+describes its own work as a methodological study (research on research), rather
+than asserting that the authors measured an exposure-to-outcome effect in a
+patient cohort. A narrow safeguard now prevents treating the *reviewed papers'*
+observational design as this manuscript's study design. This check is supported
+by negative controls for meta-research plus positive controls for an actual
+observational cohort. The rule does **not** establish whether other causal
+statements elsewhere in this paper are valid; the code still produces heuristic
+flags requiring adjudication. The causal-design rule version increases to 4.
 
 ## Development
 
