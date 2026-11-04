@@ -3,13 +3,14 @@
 const { spawn, spawnSync } = require('node:child_process');
 
 const PYTHON_PROBE = [
+  '-I',
   '-c',
   "import importlib.util,sys; sys.exit(0 if sys.version_info >= (3,11) and importlib.util.find_spec('sra') else 1)",
 ];
 
-function pythonCandidates() {
-  if (process.env.SRA_PYTHON) {
-    return [{ command: process.env.SRA_PYTHON, prefix: [] }];
+function pythonCandidates(env = process.env) {
+  if (env.SRA_PYTHON) {
+    return [{ command: env.SRA_PYTHON, prefix: [] }];
   }
 
   const candidates = [
@@ -22,13 +23,17 @@ function pythonCandidates() {
   return candidates;
 }
 
-function resolvePython() {
+function resolvePython(env = process.env, cwd = process.cwd()) {
   let pythonFound = false;
 
-  for (const candidate of pythonCandidates()) {
+  for (const candidate of pythonCandidates(env)) {
     const probe = spawnSync(candidate.command, [...candidate.prefix, ...PYTHON_PROBE], {
       encoding: 'utf8',
       windowsHide: true,
+      env,
+      cwd,
+      timeout: 2000,
+      maxBuffer: 64 * 1024,
     });
 
     if (probe.error) continue;
@@ -56,9 +61,13 @@ function run(args, options = {}) {
     return Promise.reject(new TypeError('args must be an array of strings'));
   }
 
+  const childEnv = { ...process.env, ...(options.env || {}) };
+  // Python -P does not ignore PYTHONPATH; block import shadowing from caller CWD.
+  delete childEnv.PYTHONPATH;
+  const childCwd = options.cwd || process.cwd();
   let python;
   try {
-    python = resolvePython();
+    python = resolvePython(childEnv, childCwd);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -67,10 +76,10 @@ function run(args, options = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       python.command,
-      [...python.prefix, '-m', 'sra.cli', ...args],
+      [...python.prefix, '-I', '-m', 'sra.cli', ...args],
       {
-        cwd: options.cwd || process.cwd(),
-        env: { ...process.env, ...(options.env || {}) },
+        cwd: childCwd,
+        env: childEnv,
         stdio,
         windowsHide: true,
       }
@@ -78,12 +87,27 @@ function run(args, options = {}) {
 
     let stdout = '';
     let stderr = '';
-    if (child.stdout) child.stdout.setEncoding('utf8').on('data', (chunk) => { stdout += chunk; });
-    if (child.stderr) child.stderr.setEncoding('utf8').on('data', (chunk) => { stderr += chunk; });
+    let outputBytes = 0;
+    let outputExceeded = false;
+    const MAX_CAPTURED_OUTPUT_BYTES = 8 * 1024 * 1024;
+    const collect = (stream, chunk) => {
+      if (outputExceeded) return;
+      outputBytes += Buffer.byteLength(chunk, 'utf8');
+      if (outputBytes > MAX_CAPTURED_OUTPUT_BYTES) {
+        outputExceeded = true;
+        child.kill();
+        reject(new Error('Python CLI captured output exceeded the 8 MiB limit.'));
+        return;
+      }
+      if (stream === 'stdout') stdout += chunk;
+      else stderr += chunk;
+    };
+    if (child.stdout) child.stdout.setEncoding('utf8').on('data', chunk => collect('stdout', chunk));
+    if (child.stderr) child.stderr.setEncoding('utf8').on('data', chunk => collect('stderr', chunk));
 
     child.once('error', reject);
     child.once('close', (code, signal) => {
-      resolve({ code: code === null ? 1 : code, signal, stdout, stderr });
+      if (!outputExceeded) resolve({ code: code === null ? 1 : code, signal, stdout, stderr });
     });
   });
 }

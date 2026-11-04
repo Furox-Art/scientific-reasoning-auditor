@@ -46,7 +46,7 @@ def without_fenced_code(text: str) -> str:
             elif (
                 marker[0] == fence_char
                 and len(marker) >= fence_length
-                and not line_without_ending[len(marker):].strip()
+                and not line_without_ending[fence.end():].strip()
             ):
                 fence_char, fence_length = None, 0
             output.append("\n" if line.endswith(("\n", "\r")) else "")
@@ -74,7 +74,7 @@ def _heading_records(text: str, allow_plain: bool) -> list[tuple[str, int, int]]
             elif (
                 marker[0] == fence_char
                 and len(marker) >= fence_length
-                and not line_without_ending[len(marker):].strip()
+                and not line_without_ending[fence.end():].strip()
             ):
                 fence_char, fence_length = None, 0
             offset += len(line)
@@ -97,6 +97,26 @@ def _heading_records(text: str, allow_plain: bool) -> list[tuple[str, int, int]]
 
 def _split_sections(text: str, allow_plain: bool = False) -> tuple[dict[str, str], dict[str, int]]:
     matches = _heading_records(text, allow_plain=allow_plain)
+    # Include contents of noncanonical nested Markdown subheadings in the
+    # enclosing Results/Methods/etc. section instead of hiding evidence.
+    # Standalone headings always start a new logical section.
+    filtered = []
+    current_root_level = None
+    current_root_canonical = False
+    for record in matches:
+        heading, _, start = record
+        line = text[start:text.find("\n", start) if "\n" in text[start:] else len(text)]
+        markdown = HEADING.match(line.rstrip("\r"))
+        level = len(markdown.group(0).lstrip().split(" ", 1)[0]) if markdown else 0
+        normalized = PLAIN_PREFIX.match(heading)
+        canonical = bool(normalized and normalized.group(1).lower().strip() in PLAIN_HEADING_ALIASES)
+        if (level and current_root_level is not None and
+                level > current_root_level and current_root_canonical and not canonical):
+            continue
+        filtered.append(record)
+        current_root_level = level
+        current_root_canonical = canonical
+    matches = filtered
     if not matches:
         return {"full_text": without_fenced_code(text).strip()}, {"full_text": 1}
 
@@ -108,6 +128,10 @@ def _split_sections(text: str, allow_plain: bool = False) -> tuple[dict[str, str
         occurrences[raw_name] = occurrences.get(raw_name, 0) + 1
         occurrence = occurrences[raw_name]
         name = raw_name if occurrence == 1 else f"{raw_name} ({occurrence})"
+        while name in sections:
+            occurrence += 1
+            name = f"{raw_name} ({occurrence})"
+        occurrences[raw_name] = occurrence
         end = matches[index + 1][2] if index + 1 < len(matches) else len(text)
         raw_section = without_fenced_code(text[content_start:end])
         leading = len(raw_section) - len(raw_section.lstrip())
@@ -146,8 +170,7 @@ def load_document(path: str | Path) -> ParsedDocument:
         raise ValueError("No extractable text found in the input document.")
     # Prefer explicit Markdown headings. If none exist, conservatively recognize
     # standalone conventional headings in text/PDF extraction.
-    has_markdown_headings = bool(_heading_records(text, allow_plain=False))
-    sections, start_lines = _split_sections(text, allow_plain=not has_markdown_headings)
+    sections, start_lines = _split_sections(text, allow_plain=True)
     return ParsedDocument(
         source=file_path.name,
         text=text,
@@ -156,5 +179,29 @@ def load_document(path: str | Path) -> ParsedDocument:
         section_start_lines=start_lines,
         input_format=suffix.lstrip("."),
         source_size_bytes=len(raw),
+        parser_backend=parser_backend,
+    )
+
+
+def parse_document_text(
+    text: str,
+    *,
+    sha256: str,
+    source: str = "provided-text",
+    input_format: str = "text",
+    parser_backend: str = "python-utf8",
+) -> ParsedDocument:
+    """Recreate the parser view from text already extracted from a manuscript."""
+    if not isinstance(text, str):
+        raise TypeError("Manuscript source text must be a string.")
+    sections, section_start_lines = _split_sections(text, allow_plain=True)
+    return ParsedDocument(
+        source=source,
+        text=text,
+        sha256=sha256,
+        sections=sections,
+        section_start_lines=section_start_lines,
+        input_format=input_format,
+        source_size_bytes=len(text.encode("utf-8")),
         parser_backend=parser_backend,
     )

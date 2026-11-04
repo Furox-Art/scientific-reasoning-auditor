@@ -6,16 +6,18 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.5.1
+## Current status: v0.5.2 release candidate (unreleased)
 
-This patch release hardens authenticated model API transport and JSON handling, stabilizes Welch and pooled-standard-deviation calculations across extreme numeric scales, and corrects Hedges' g for very large degrees of freedom. It retains the traceable reasoning-review layer and independently recalculable statistical summary checks introduced in earlier releases.
+The published PyPI release remains **v0.5.1**. This v0.5.2 work is a draft release candidate, not yet merged into main or released. Do not treat draft branch features as installed from PyPI.
+
+This candidate limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 
 ### Implemented
 
 - Read Markdown and UTF-8 text manuscripts; optional PDF text extraction.
 - Preserve repeated section headings, ignore fenced code blocks during section/heuristic extraction, and conservatively detect standard standalone headings in plain text/PDF extraction.
 - Apply negation-aware causal/directional screening and avoid treating a cited prior randomized trial as proof that the current study was randomized.
-- Record manuscript SHA-256, exact source/config tree SHA-256 (including uncommitted changes), file size, parser details, ruleset/configuration hashes, Python/runtime details and an environment fingerprint.
+- Record the raw manuscript-file SHA-256 and a separate SHA-256 of the exact extracted/parser text (so PDF and BOM inputs retain both identities), plus a scoped source hash (runtime Python source, schemas, tests, Node adapter sources, GitHub Actions workflows, examples and package/build metadata when running from a repository), file size, parser details, ruleset/configuration hashes, Python/runtime details and an environment fingerprint. The manifest lists every relative file path included in the hash. Source archives include the selected tests, workflows, schemas, examples and Node adapter inputs so their full source inventory can be reproduced. CI compares every declared sdist provenance file byte-for-byte with the checkout, verifies the wheel's exact Python source inventory and metadata, installs the wheel with pip in an isolated temporary virtual environment, checks the installed CLI entry point, and runs an audit using only the installed package.
 - Attach line and section references to extracted Discussion/Conclusion claims and candidate result passages.
 - Identify conclusion claims for which no lexical result candidate is found.
 - Flag possible opposite-direction statements between Results and Conclusion (for example, increased versus decreased for overlapping topics).
@@ -23,8 +25,8 @@ This patch release hardens authenticated model API transport and JSON handling, 
 - Flag selected absolute/conclusive wording.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
 - Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
-- Validate graph structure for dangling references, duplicate IDs and dependency cycles; report inferences without lexical evidence.
-- Create source-bound semantic-review templates for external LLMs/agents and validate returned source hashes, graph fingerprints, inference-linked support evidence, explicitly reviewer-selected additional evidence, confidence fields and meaningful source quotations.
+- Validate complete graph objects through the strict graph validator, including supported schema version, fingerprint algorithm, canonical node/edge metadata, allowed top-level fields, deterministic edge IDs, endpoint types, dangling references, duplicate IDs and dependency cycles. The lower-level node/edge validator remains available for structural-only checks. Full validation checks required node/edge fields and types, the stored derived validation result, and the graph fingerprint; the derived validation result itself is intentionally excluded from the fingerprint and is recomputed. Graph fingerprints include schema version, fingerprint algorithm, schema metadata, nodes and edges; report inferences without lexical evidence.
+- Create source-bound semantic-review 1.4 templates for external LLMs/agents using the original manuscript text (required by the Python template API); the text is checked against the extracted-text digest recorded in the audit manifest, while the raw-file digest remains separate for PDF/BOM inputs. The graph schema and fingerprint algorithm are bound explicitly; the graph's manuscript SHA-256 must equal the audited manuscript SHA-256 when templates are built or reviews are imported. Importers continue to accept review schemas 1.0–1.3 when their fingerprint matches either the current graph or the historical v1.1 fingerprint for unchanged node/edge data; changed graph content is still rejected.
 - Require explicit causal-assumption review even when a lexically similar assumption sentence was extracted; lexical overlap no longer clears the causal assumption gap.
 - Produce JSON and Markdown audit reports plus a machine-readable statistical verification result.
 - Run tests using Python's standard library plus the optional SciPy statistics extra.
@@ -36,7 +38,7 @@ This patch release hardens authenticated model API transport and JSON handling, 
 - A missing lexical match is not proof that a conclusion is unsupported; relevant evidence may be paraphrased or located elsewhere.
 - A possible direction conflict may be caused by subgroup definitions, recoding, different endpoints or sentence-extraction errors.
 - Observational wording does not by itself invalidate a causal inference; causal identification may be justified by design and assumptions not detected by these rules.
-- Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test.
+- Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test. Pooled-SD Cohen's d uses a common within-group variance reference and is not heteroskedasticity-adjusted; the classical Hedges' J correction is derived under a normally distributed, two-independent-group model with a common variance.
 - No finding does not mean that the paper is logically valid.
 
 ## Install
@@ -71,13 +73,13 @@ Then install the Node.js adapter in your project:
 
     npm install scientific-reasoning-auditor
 
-The npm package requires Node.js 18+ and Python 3.11+ with the Python package available to the selected interpreter. It has no npm runtime dependencies and performs no network requests or package installation itself. Set `SRA_PYTHON` to the Python executable when the engine is installed in a non-default environment.
+The npm package requires Node.js 18+ and Python 3.11+ with the Python package available to the selected interpreter. It has no npm runtime dependencies and performs no network requests or package installation itself. Set `SRA_PYTHON` to the Python executable when the engine is installed in a non-default environment. For safety, the Node adapter launches Python in isolated mode (`-I`) and clears inherited/per-call `PYTHONPATH`, excluding user-site packages and untrusted working-directory modules. Install the engine in the selected interpreter or virtual environment rather than relying on `PYTHONPATH` or `pip install --user`.
 
 Use the CLI after installation:
 
-    npx sra audit examples/sample_manuscript.md --out reports/sample
-    npx sra review-template examples/sample_manuscript.md --mode single
-    npx sra verify-stats examples/welch_t_example.json
+    npx sra audit manuscript.md --out reports/sample
+    npx sra review-template manuscript.md --mode single
+    npx sra verify-stats welch-input.json
 
 Or call it from JavaScript:
 
@@ -111,7 +113,7 @@ Run an audit to include a graph in the JSON and Markdown reports:
 
     sra audit examples/logic_review_demo.md --out reports/logic-review
 
-The output contract is documented in the [semantic-review JSON Schema](https://github.com/Furox-Art/scientific-reasoning-auditor/blob/main/schemas/semantic-review.schema.json).
+The [review template JSON Schema](schemas/semantic-review.schema.json) accepts unfilled values; completed submissions must additionally conform to the [completed-review JSON Schema](schemas/semantic-review-completed.schema.json).
 
 Create a JSON template and choose the review mode:
 
@@ -125,7 +127,7 @@ For a direct single-model API review, set the API key in the environment and run
     export OPENAI_API_KEY="your-api-key"
     sra review-model examples/logic_review_demo.md --model "your-model-id" --base-url "https://api.openai.com/v1" --out reports/semantic-review-completed.json
 
-The command sends the complete manuscript and source-bound template to one model, parses its JSON response, then validates the returned review against the manuscript and reasoning graph. Any OpenAI-compatible Chat Completions endpoint can be configured with --base-url and --api-key-env. Remote endpoints must use HTTPS so the API key is encrypted in transit; plain HTTP is accepted only for localhost or IP loopback addresses (127.0.0.0/8 and ::1) for inference servers, and these local clear-text requests bypass environment-configured HTTP proxies. URLs containing embedded credentials or query/fragment delimiters are rejected, and HTTP redirects are not followed to prevent forwarding authorization headers to another host. Statistical inputs that underflow or overflow the supported floating-point range are rejected with a validation error rather than producing silently rounded or non-finite report values; the Welch and pooled-standard-deviation calculations use scaled formulas to preserve valid extreme-range inputs. Statistics JSON input rejects non-standard NaN/Infinity constants. The API key is read from the environment and is not written to reports. Model/API charges and provider data-retention policies are controlled by the provider.
+The command also writes a .provenance.json sidecar containing hashed request/response data, selected model, endpoint and any provider fingerprint; it does not store the API key. Temperature zero does not guarantee identical provider output. The command sends the complete manuscript and source-bound template to one model, parses its JSON response, then validates the returned review against the manuscript and reasoning graph. Any OpenAI-compatible Chat Completions endpoint can be configured with --base-url and --api-key-env. Remote endpoints must use HTTPS so the API key is encrypted in transit; plain HTTP is accepted only for localhost or IP loopback addresses (127.0.0.0/8 and ::1) for inference servers, and these local clear-text requests bypass environment-configured HTTP proxies. URLs containing embedded credentials or query/fragment delimiters are rejected, and HTTP redirects are not followed to prevent forwarding authorization headers to another host. Statistical inputs that underflow or overflow the supported floating-point range are rejected with a validation error rather than producing silently rounded or non-finite report values; the Welch and pooled-standard-deviation calculations use scaled formulas to preserve valid extreme-range inputs. Statistics JSON input rejects non-standard NaN/Infinity constants. The API key is read from the environment and is not written to reports. Model/API charges and provider data-retention policies are controlled by the provider.
 
 For parallel mode, export the template and pass it to the connected external parallel-agent orchestrator. Each agent must receive the full manuscript and its assigned assessment subset; merge all results by inference ID before importing. The current CLI does not launch the ChatGPT UI-based parallel-agent tool.
 
@@ -135,13 +137,33 @@ Give the template and full manuscript to the selected model or external orchestr
 
 The template includes a complete source-bound catalog of Results evidence-node IDs, passages and locations. The importer checks the manuscript hash and reasoning-graph fingerprint, requires graph-linked support IDs or explicit reviewer-selected Results evidence IDs, and validates the existence, type and source quotation provenance of selected nodes. Reviewer-selected evidence provenance is checked, but its semantic relevance is not proven. Current-schema quotations must be at least 20 characters and match both the manuscript and selected node text. The importer also enforces the review contract and UTC timestamps. It does not prove the external reviewer’s semantic judgment; expert adjudication remains necessary. The application can call one OpenAI-compatible model in single mode. Parallel-agent execution remains an external orchestration step.
 
+### Python API migration note for v0.5.2
+
+Direct Python callers must now provide the manuscript text when creating a source-bound semantic-review template. The caller-supplied source_sha256 override was removed: the implementation verifies the supplied text against reproducibility_manifest.input.extracted_text_sha256, while the audit report separately retains the raw-file SHA-256 (important for PDF and UTF-8 BOM inputs). Existing CLI commands are unchanged.
+
+~~~python
+from sra.audit import audit_file
+from sra.document import load_document
+from sra.semantic_review import build_semantic_review_template, validate_semantic_review
+
+path = "manuscript.md"
+document = load_document(path)
+report = audit_file(path).to_dict()
+
+template = build_semantic_review_template(report, source_text=document.text)
+# After the external reviewer completes the template:
+result = validate_semantic_review(completed_review, report, document.text)
+~~~
+
+Calls that previously used build_semantic_review_template(report) or passed source_sha256 must migrate to this source-text-based API. This is an intentional Python API compatibility change in v0.5.2; an external hash override is not accepted as proof of the supplied text's identity. Older PDF audit reports created before manifest schema 1.4 do not contain an extracted-text digest and must be regenerated from the original PDF before source-verified template creation or review import.
+
 ## Independently verify a Welch t-test
 
 Create a JSON file with two groups' mean, sample SD and n, plus the reported statistics to compare. Example:
 
     sra verify-stats examples/welch_t_example.json --out reports/welch-verification.json
 
-Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version.
+Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version. It also reports pooled-SD Cohen's d and classical Hedges' g; these effect-size estimates use a common within-group variance reference and are not heteroskedasticity-adjusted. The classical Hedges' J small-sample correction is derived under a normally distributed, two-independent-group model with a common variance. Interpret them cautiously when group variances differ substantially, even though the Welch test itself permits unequal variances.
 
 ## Scientific validation roadmap
 
@@ -157,7 +179,8 @@ The project is split into separate assurance layers. A rule-based text scan must
 
 ## Development
 
-    python -m unittest discover -s tests -v
+    python -m coverage run --source=src/sra -m unittest discover -s tests -v
+    python -m coverage report --fail-under=100
 
 ## Safety and scope
 
@@ -170,3 +193,9 @@ GitHub Actions checks this project's public PyPI download statistics once per da
 ## Read-only npm download monitoring
 
 A separate GitHub Actions workflow checks the npm Downloads API once per day using one read-only GET request. It does not invoke npm, install dependencies, request package archives, publish packages, write to the registry, or send notifications. It reports daily, weekly and 30-day aggregate download counts when the package exists on npm. A 404 is reported as “not published/statistics unavailable,” not as zero downloads. The workflow can also be run manually from GitHub Actions.
+
+## Pre-release validation caveats
+
+Parsing improvements can change extracted claims, node IDs and reasoning-graph fingerprints. Regenerate templates and re-review affected manuscripts; historical imports remain supported only when the reconstructed source-bound graph matches. CI enforces 100% Python statement coverage over src/sra without coverage exclusions. This is not a claim of 100% branch/path coverage, defect absence or scientific validity. A synthetic rule benchmark tests planted warnings, not real scientific precision/recall. Full-text literature verification, raw-data/code execution, discipline-specific validation and independent expert adjudication remain future work.
+
+Release tags are permitted to publish only if the tagged commit is reachable from `origin/main`; both PyPI and npm workflows enforce this ancestry before build or publishing. This repository-side guard complements, but does not replace, GitHub protected tags and release-environment approval.

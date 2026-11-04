@@ -28,12 +28,13 @@ CAUSAL = re.compile(
 )
 CLAIM_MARKERS = re.compile(
     r"\b(show|shows|demonstrate|demonstrates|indicate|indicates|suggest|suggests|"
-    r"support|supports|increased|decreased|associated|correlated|causes?|caused|causing|"
+    r"support|supports|increased|decreased|elevated|higher|greater|exceeds?|exceeded|"
+    r"associated|correlated|causes?|caused|causing|"
     r"göstermektedir|ortaya koymaktadır|bulgular|artırdı|azalttı|ilişkilidir|"
     r"desteklemektedir|neden olur|yol açar)\b", re.IGNORECASE
 )
 OBSERVATIONAL_DESIGN = re.compile(
-    r"\b(observational|cross.sectional|case.control|retrospective|"
+    r"\b(observational(?:ly)?|cross.sectional|case.control|retrospective|"
     r"non.randomi[sz]ed|survey study|registry study|cohort study)\b|"
     r"gözlemsel|kesitsel|vaka kontrol|geriye dönük|randomize olmayan",
     re.IGNORECASE,
@@ -85,16 +86,42 @@ def _norm_words(value: str, remove_direction: bool = False) -> set[str]:
     }
 
 
+_ABBREVIATIONS = {
+    "dr.", "mr.", "mrs.", "ms.", "prof.", "fig.", "eq.", "ref.",
+    "vol.", "no.", "vs.", "etc.", "e.g.", "i.e.", "et al.",
+}
+
+
 def _sentences(value: str, start_line: int = 1, section: str | None = None) -> list[dict]:
+    """Keep source lines while protecting decimals and common abbreviations.
+
+    This is a conservative rule-based segmenter, not a language-complete parser.
+    """
     output: list[dict] = []
-    for match in re.finditer(r"[^.!?\n]+(?:[.!?]+|$)", value):
-        sentence = match.group().strip()
-        if sentence:
-            output.append({
-                "text": sentence,
-                "line": start_line + value.count("\n", 0, match.start()),
-                "section": section,
-            })
+    for line_match in re.finditer(r"[^\r\n]+", value):
+        line = line_match.group()
+        # Nested Markdown headings are section metadata, not evidence text.
+        if re.match(r"^\s{0,3}#{1,6}\s+", line):
+            continue
+        line_number = start_line + value.count("\n", 0, line_match.start())
+        cursor = 0
+
+        def append_until(end: int) -> None:
+            nonlocal cursor
+            sentence = line[cursor:end].strip()
+            if sentence:
+                output.append({"text": sentence, "line": line_number, "section": section})
+            cursor = end
+
+        for mark in re.finditer(r"[.!?]+(?=\s|$)", line):
+            if mark.group().endswith("."):
+                preceding = line[cursor:mark.end()].rstrip().casefold()
+                if any(preceding.endswith(token) for token in _ABBREVIATIONS):
+                    continue
+                if re.search(r"(?:\b[a-z]\.){2,}$", preceding):
+                    continue
+            append_until(mark.end())
+        append_until(len(line))
     return output
 
 
@@ -115,6 +142,7 @@ def _section_text(document: ParsedDocument, aliases: tuple[str, ...]) -> str:
 
 def _heading_matches(name: str, aliases: tuple[str, ...]) -> bool:
     normalized = re.sub(r"\s+", " ", name.lower().strip())
+    normalized = re.sub(r"^(?:(?:\d+(?:\.\d+)*|[ivxlc]+)[.)]?\s+)", "", normalized)
     return any(
         normalized == alias or normalized.startswith(alias + " ")
         or normalized.startswith(alias + ":") or normalized.startswith(alias + "(")
@@ -212,29 +240,74 @@ def _jaccard(left: set[str], right: set[str]) -> float:
 
 
 def _direction_conflicts(
-    result_sentences: list[dict], conclusion_sentences: list[dict]
+    result_sentences: list[dict], conclusion_sentences: list[dict],
+    limit: int = 5,
 ) -> list[dict]:
+    """Flag opposite endpoint-level directions in contrastive clauses.
+
+    Sharing only a generic intervention term never suffices for a conflict.
+    """
+    generic = {"treatment", "intervention", "exposure", "group", "patients"}
+
+    def clauses(entry: dict) -> list[tuple[int, set[str]]]:
+        parts = re.split(
+            r";|\b(?:but|whereas|while)\b|"
+            r"\band\b(?=\s+(?:increas\w*|decreas\w*|reduc\w*|higher|lower|improv\w*|worsen\w*))",
+            entry["text"], flags=re.I,
+        )
+        result = []
+        for part in parts:
+            direction = _direction(part)
+            terms = _norm_words(part, remove_direction=True) - generic
+            if direction and terms:
+                result.append((direction, terms))
+        return result
+
+    # Distinct named subgroups or measurement times are not same-scope
+    # contradictions. Missing context on either side is ambiguous: do not
+    # manufacture a conflict without a matching scope.
+    def scope(text: str) -> tuple[str | None, str | None]:
+        subgroup = re.search(r"\b(?:among|in|for)\s+(women|men|females?|males?)\b", text, re.I)
+        timepoint = re.search(
+            r"\b(?:on|at|after|by)\s+(day|week|month|year)\s+([a-z0-9]+)\b",
+            text, re.I,
+        )
+        return (
+            subgroup.group(1).lower() if subgroup else None,
+            (timepoint.group(1) + ":" + timepoint.group(2)).lower() if timepoint else None,
+        )
+
     conflicts: list[dict] = []
+    seen: set[tuple[str, str, int | None, int | None]] = set()
     for result in result_sentences:
-        result_direction = _direction(result["text"])
-        if result_direction == 0:
-            continue
-        result_topic = _norm_words(result["text"], remove_direction=True)
-        if len(result_topic) < 2:
-            continue
         for conclusion in conclusion_sentences:
-            conclusion_direction = _direction(conclusion["text"])
-            if conclusion_direction == 0 or conclusion_direction == result_direction:
+            result_scope, conclusion_scope = scope(result["text"]), scope(conclusion["text"])
+            if any((a or b) and a != b for a, b in zip(result_scope, conclusion_scope)):
                 continue
-            conclusion_topic = _norm_words(conclusion["text"], remove_direction=True)
-            overlap = _jaccard(result_topic, conclusion_topic)
-            if overlap >= 0.25 and len(result_topic & conclusion_topic) >= 2:
-                conflicts.append({
-                    "result": result,
-                    "conclusion": conclusion,
-                    "topic_overlap": round(overlap, 3),
-                })
-    return conflicts[:5]
+            key = (
+                result["text"], conclusion["text"],
+                result.get("line"), conclusion.get("line"),
+            )
+            if key in seen:
+                continue
+            for result_direction, result_terms in clauses(result):
+                for conclusion_direction, conclusion_terms in clauses(conclusion):
+                    if result_direction == conclusion_direction:
+                        continue
+                    overlap = _jaccard(result_terms, conclusion_terms)
+                    if result_terms & conclusion_terms and overlap >= 0.25:
+                        seen.add(key)
+                        conflicts.append({
+                            "result": result,
+                            "conclusion": conclusion,
+                            "topic_overlap": round(overlap, 3),
+                        })
+                        if len(conflicts) >= limit:
+                            return conflicts
+                        break
+                if key in seen:
+                    break
+    return conflicts
 
 
 def build_findings(
@@ -248,6 +321,16 @@ def build_findings(
         findings.append(Finding(
             "structure.methods_missing", "Methods section not detected", "warning", "review_required",
             "No recognizable methods heading was detected. It may be present under another name.",
+        ))
+    if not _has_section(names, RESULTS):
+        findings.append(Finding(
+            "structure.results_missing", "Results section not detected", "warning", "review_required",
+            "No recognizable Results heading was detected; result-to-conclusion checks may be incomplete.",
+        ))
+    if not _has_section(names, CONCLUSION):
+        findings.append(Finding(
+            "structure.conclusion_missing", "Discussion/Conclusion section not detected", "warning", "review_required",
+            "No recognizable Discussion or Conclusion heading was detected; claim extraction may be incomplete.",
         ))
     if not _has_section(names, LIMITATIONS):
         findings.append(Finding(
@@ -319,9 +402,43 @@ def build_findings(
         (item for item in method_entries if OBSERVATIONAL_DESIGN.search(item["text"])),
         None,
     )
-    randomized_evidence = any(
-        RANDOMIZED_DESIGN.search(item["text"]) for item in method_entries
-    )
+    # Exclude explicit negations and previous/unrelated trials from current-study
+    # design claims. Ambiguous mixed designs require expert interpretation.
+    def affirmed_current_randomization(text: str) -> bool:
+        for match in RANDOMIZED_DESIGN.finditer(text):
+            before = re.split(r"[.;:!?]", text[max(0, match.start() - 100):match.start()])[-1]
+            after = text[match.end():match.end() + 120]
+            if re.search(r"\b(?:no|not|never|without|denied|lacks?|lacking)\s*$",
+                         before, flags=re.IGNORECASE):
+                continue
+            if re.match(r"\s*\?\s*(?:no|false|not)\b", after, flags=re.IGNORECASE):
+                continue
+            if re.match(r"\s+(?:years? earlier|previously|in (?:a|the) prior study)\b",
+                        after, flags=re.IGNORECASE):
+                continue
+            if re.search(r"\bunrelated to (?:the|our) (?:current|present)\b",
+                         after, flags=re.IGNORECASE):
+                continue
+            if (re.search(r"\b(?:unrelated|previous|prior|earlier|historical|separate)\b",
+                          before, flags=re.IGNORECASE)
+                    and re.search(r"\b(?:study|trial|dataset|experiment)\b",
+                                  before, flags=re.IGNORECASE)):
+                continue
+            return True
+        return False
+
+    randomized_evidence = affirmed_current_randomization(methods_text)
+    if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and randomized_evidence:
+        findings.append(Finding(
+            "reasoning.mixed_design_causal_review",
+            "Causal claim in a manuscript mentioning randomized and observational methods",
+            "warning", "review_required",
+            "Both randomized and observational design wording appear in Methods. "
+            "Check which population, period, endpoint and identification assumptions "
+            "apply to this causal claim; text screening cannot resolve mixed designs.",
+            [causal_claims[0]["text"]],
+            [{"line": causal_claims[0]["line"], "section": causal_claims[0].get("section")}],
+        ))
     if causal_claims and OBSERVATIONAL_DESIGN.search(methods_text) and not randomized_evidence:
         method_excerpt = method_evidence["text"] if method_evidence else methods_text[:500]
         findings.append(Finding(
@@ -339,7 +456,19 @@ def build_findings(
             ],
         ))
 
-    conflicts = _direction_conflicts(result_sentences, conclusion_sentences)
+    # Request one extra candidate to detect and report truncation without
+    # unbounded storage or exhaustive Cartesian output.
+    conflict_probe = _direction_conflicts(result_sentences, conclusion_sentences, limit=6)
+    conflicts = conflict_probe[:5]
+    if len(conflict_probe) > 5:
+        findings.append(Finding(
+            "reasoning.directional_conflicts_truncated",
+            "Additional possible directional conflicts omitted",
+            "warning", "review_required",
+            "At least six candidate result-conclusion conflicts were detected; "
+            "only the first five are included in the evidence map. "
+            "Further comparisons require separate review.",
+        ))
     if conflicts:
         evidence = []
         locations = []
