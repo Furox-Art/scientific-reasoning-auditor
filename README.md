@@ -141,7 +141,7 @@ Create a JSON file with two groups' mean, sample SD and n, plus the reported sta
 
     sra verify-stats examples/welch_t_example.json --out reports/welch-verification.json
 
-Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version.
+Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version. Input JSON rejects duplicate object keys (including nested keys) and non-standard numeric constants rather than silently accepting ambiguous reported values.
 
 ## Scientific validation roadmap
 

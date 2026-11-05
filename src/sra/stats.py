@@ -363,10 +363,21 @@ def verify_stats_file(path: str | Path) -> dict:
     def reject_nonstandard_constant(token: str) -> None:
         raise ValueError(f"Non-standard JSON numeric constant {token!r} is not permitted.")
 
+    def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        # A duplicate key makes a reported scientific input ambiguous across
+        # JSON parsers (first-wins vs last-wins). Reject it at every depth.
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"Duplicate JSON key {key!r} is not permitted.")
+            result[key] = value
+        return result
+
     spec = json.loads(
         raw.decode("utf-8-sig"),
         parse_float=Decimal,
         parse_constant=reject_nonstandard_constant,
+        object_pairs_hook=reject_duplicate_keys,
     )
     if not isinstance(spec, dict):
         raise ValueError("Statistics input must be a JSON object.")

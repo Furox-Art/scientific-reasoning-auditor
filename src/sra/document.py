@@ -46,7 +46,7 @@ def without_fenced_code(text: str) -> str:
             elif (
                 marker[0] == fence_char
                 and len(marker) >= fence_length
-                and not line_without_ending[len(marker):].strip()
+                and not line_without_ending[fence.end(1):].strip()
             ):
                 fence_char, fence_length = None, 0
             output.append("\n" if line.endswith(("\n", "\r")) else "")
@@ -74,7 +74,7 @@ def _heading_records(text: str, allow_plain: bool) -> list[tuple[str, int, int]]
             elif (
                 marker[0] == fence_char
                 and len(marker) >= fence_length
-                and not line_without_ending[len(marker):].strip()
+                and not line_without_ending[fence.end(1):].strip()
             ):
                 fence_char, fence_length = None, 0
             offset += len(line)
