@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0",
+  "kind": "unlabeled_real_paper_smoke_test",
+  "manifest_sha256": "639d78a07b9a0c7068ca1699e3d61d008c3a577da6f31697715c010ed3ba6014",
+  "source": "NIH NCBI PMC BioC API; user-provided PMCID allowlist",
+  "total_requested": 12,
+  "processed": 12,
+  "failed": 0,
+  "paper_results": [
+    {
+      "pmcid": "PMC1790863",
+      "status": "PROCESSED",
+      "doi": "10.1371/journal.pone.0000217",
+      "title": "Quantifying Organismal Complexity using a Population Genetic Approach",
+      "license_present": true,
+      "license_text_sha256": "dcf0ad30ac0f44bc7a6eb2b819166930d438c4124d234334e7fcf362c74e66e7",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC1790863/unicode",
+      "response_sha256": "150a2483fead8e97e2094815e5e8ceabd34590218860927c0d10b09d1e6f7d66",
+      "text_sha256": "b6ef60a35be6022aeb0d7122ce9ddd8282b4e89c8b6779a5059cfbaef57ae726",
+      "word_count": 5685,
+      "writing_review_prompts": 1,
+      "writing_finding_codes": [
+        "potential_overclaim"
+      ],
+      "reasoning_review_prompts": 5,
+      "reasoning_graph_nodes": 128
+    },
+    {
+      "pmcid": "PMC10217082",
+      "status": "PROCESSED",
+      "doi": "10.3390/foods12102003",
+      "title": "Optimisation and Characterisation of the Protein Hydrolysate of Scallops (Argopecten purpuratus) Visceral By-Products",
+      "license_present": true,
+      "license_text_sha256": "ca838ad6efff7132773a1acf46b8822bcb496722ad995a52eb8738e200108d75",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC10217082/unicode",
+      "response_sha256": "58d58066cdf01536b9ea3e25ad6449b6e84bb4f54b0accd0d4e2121c593b005f",
+      "text_sha256": "47e0e9aaa9e0f189aa527c5077c68400b1a4cf5a860ac224bf7dfa08ed7878a7",
+      "word_count": 4722,
+      "writing_review_prompts": 0,
+      "writing_finding_codes": [],
+      "reasoning_review_prompts": 2,
+      "reasoning_graph_nodes": 323
+    },
+    {
+      "pmcid": "PMC7216588",
+      "status": "PROCESSED",
+      "doi": "10.1186/s12245-020-00282-0",
+      "title": "Male infant patient with a mesenteric cyst in the greater and lesser omenta: a case report",
+      "license_present": true,
+      "license_text_sha256": "b2fe242f5bf9bede3305e52b4c91ccd4b13ed63f6bbb5ccfba144a3e866adf68",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC7216588/unicode",
+      "response_sha256": "19312767c0ca280f22112539cf7037dea5e47d5099085cc632604632385d2571",
+      "text_sha256": "0e175ac8ccd9c86d8dd1a6f5920a9597f344bc30aca88fa4bd643bd6dfab978c",
+      "word_count": 716,
+      "writing_review_prompts": 0,
+      "writing_finding_codes": [],
+      "reasoning_review_prompts": 6,
+      "reasoning_graph_nodes": 4
+    },
+    {
+      "pmcid": "PMC8793676",
+      "status": "PROCESSED",
+      "doi": "10.3389/fped.2021.793215",
+      "title": "Effects of Complementary Feeding With Different Protein-Rich Foods on Infant Growth and Gut Health: Study Protocol",
+      "license_present": true,
+      "license_text_sha256": "6cc5142f5173aa1ee3a153bc28d1042446b4043975bae56ab5d71a8b5aea7d70",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC8793676/unicode",
+      "response_sha256": "cd046ca59a7fbe77d4b90575b2bc0b41cb2ca578fe6b8ee9e7650dda359279fa",
+      "text_sha256": "744e703e7a272f719f29ffafd51a548202d1399920b3a81ec66d23d16ed4c126",
+      "word_count": 4873,
+      "writing_review_prompts": 1,
+      "writing_finding_codes": [
+        "references_section_missing"
+      ],
+      "reasoning_review_prompts": 3,
+      "reasoning_graph_nodes": 174
+    },
+    {
+      "pmcid": "PMC5730454",
+      "status": "PROCESSED",
+      "doi": "10.1038/onc.2012.391",
+      "title": "RAD52 inactivation is synthetically lethal with deficiencies in BRCA1 and PALB2 in addition to BRCA2 through RAD51-mediated homologous recombination",
+      "license_present": true,
+      "license_text_sha256": "e32998d8f10094810b6a230d53da35bda29efa0ef731fbe890e76049c9902201",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC5730454/unicode",
+      "response_sha256": "c42435b19bbd9a5ff366802c96cf1b7029ed0b2d50cee08a0ce528a218c9317b",
+      "text_sha256": "bc17d9e5d24ebe674e602d5b2cec176bb2fe8d873674b74eeeaf1d2d6fcfaba6",
+      "word_count": 2878,
+      "writing_review_prompts": 1,
+      "writing_finding_codes": [
+        "potential_overclaim"
+      ],
+      "reasoning_review_prompts": 4,
+      "reasoning_graph_nodes": 61
+    },
+    {
+      "pmcid": "PMC7901593",
+      "status": "PROCESSED",
+      "doi": "10.2196/23026",
+      "title": "Learning From Past Respiratory Infections to Predict COVID-19 Outcomes: Retrospective Study",
+      "license_present": true,
+      "license_text_sha256": "e7a79aad20ccd1468bb46ea42c494febdacf19183e1dbcbb9ed98bf517d3d8b2",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC7901593/unicode",
+      "response_sha256": "192d076d541598fb5502614cf7f486a30099779e62d279f2c7f2c4a55220570b",
+      "text_sha256": "05bda3dc74d4a132faebd8e8ddef3b7227db1c20d954309333170d3f59f64367",
+      "word_count": 5388,
+      "writing_review_prompts": 1,
+      "writing_finding_codes": [
+        "potential_overclaim"
+      ],
+      "reasoning_review_prompts": 6,
+      "reasoning_graph_nodes": 199
+    },
+    {
+      "pmcid": "PMC6770124",
+      "status": "PROCESSED",
+      "doi": "10.3390/cancers11091264",
+      "title": "Human Cachexia Induces Changes in Mitochondria, Autophagy and Apoptosis in the Skeletal Muscle",
+      "license_present": true,
+      "license_text_sha256": "fe5e19487af168143062b7d5676c94a3f5f3979e8c690574ed3035df8fcddbce",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC6770124/unicode",
+      "response_sha256": "6735d162b5cd254354bc193efc65a9c3d349f5386216dd0201c1bdfe4937d484",
+      "text_sha256": "16752232551e0c29e31db1eedf207bf77b22c696404f8f0c21cfb967e33ecd23",
+      "word_count": 5200,
+      "writing_review_prompts": 2,
+      "writing_finding_codes": [
+        "potential_overclaim",
+        "references_section_missing"
+      ],
+      "reasoning_review_prompts": 5,
+      "reasoning_graph_nodes": 247
+    },
+    {
+      "pmcid": "PMC6590505",
+      "status": "PROCESSED",
+      "doi": "10.1111/nph.15609",
+      "title": "Biome: evolution of a crucial ecological and biogeographical concept",
+      "license_present": true,
+      "license_text_sha256": "070cdec8a63b434ae572b67eab673f52d1f9aa9caee0a7f6be8d11d41a5f47bb",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC6590505/unicode",
+      "response_sha256": "a35847620270469300325252e6a5fd9dfc3eebfe2e2a9449a57898e730aa64d2",
+      "text_sha256": "b80aa3f8bd5ff1a03828148ea6669c39738c7bfa300c28be60821bc468a00885",
+      "word_count": 8330,
+      "writing_review_prompts": 3,
+      "writing_finding_codes": [
+        "potential_overclaim",
+        "references_section_missing"
+      ],
+      "reasoning_review_prompts": 3,
+      "reasoning_graph_nodes": 3
+    },
+    {
+      "pmcid": "PMC9982341",
+      "status": "PROCESSED",
+      "doi": "10.1159/000525546",
+      "title": "Dietary Fat Composition Affects Hepatic Angiogenesis and Lymphangiogenesis in Hepatitis C Virus Core Gene Transgenic Mice",
+      "license_present": true,
+      "license_text_sha256": "a7503441c79f1e25176ef212d6d1d636f80804c3ec70b061dcc7fadbc217b6de",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC9982341/unicode",
+      "response_sha256": "535b8ccc630db84eec2376ca368ea2eca9da772596f30bd9c701e306e1d5c18b",
+      "text_sha256": "7131bfde957d23e36805e4c96ca87a88d14806c6057752a282aa483732fa174e",
+      "word_count": 3967,
+      "writing_review_prompts": 0,
+      "writing_finding_codes": [],
+      "reasoning_review_prompts": 5,
+      "reasoning_graph_nodes": 152
+    },
+    {
+      "pmcid": "PMC7434990",
+      "status": "PROCESSED",
+      "doi": "10.1186/s13568-020-01082-8",
+      "title": "MicroRNA-1179 suppresses the proliferation and enhances vincristine sensitivity of oral cancer cells via induction of apoptosis and modulation of MEK/ERK and PI3K/AKT signalling pathways",
+      "license_present": true,
+      "license_text_sha256": "b4f6aa644f82898c5743ab419e18c35116d41c6282f009c7c520e425dab11830",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC7434990/unicode",
+      "response_sha256": "023b170897d39ac7b307e129dcc795ea399ddddbc759ccbb970dcfedbe1aa6b6",
+      "text_sha256": "8f8bd29e466fa4a0ec15830c4f8a7245e3060e60ad7b2cf584982695d0d7767b",
+      "word_count": 2391,
+      "writing_review_prompts": 0,
+      "writing_finding_codes": [],
+      "reasoning_review_prompts": 5,
+      "reasoning_graph_nodes": 82
+    },
+    {
+      "pmcid": "PMC7567989",
+      "status": "PROCESSED",
+      "doi": "10.1016/j.isci.2020.101625",
+      "title": "Do You See what I See? Tracking the Perceptual Beliefs of Robots",
+      "license_present": true,
+      "license_text_sha256": "f92ebfb1af887b7db28874f795a0e1172c70f01391e82793b0180a350efa3a43",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC7567989/unicode",
+      "response_sha256": "1d0bc4c0c52ea3afb5f25939f25f57402f4a60a8b6b0c8c5941fac03e635b1b8",
+      "text_sha256": "9b914c7bfa0b965c6c84213d813b89d44e9522959ddf053a84876dbe160434a2",
+      "word_count": 5305,
+      "writing_review_prompts": 0,
+      "writing_finding_codes": [],
+      "reasoning_review_prompts": 3,
+      "reasoning_graph_nodes": 170
+    },
+    {
+      "pmcid": "PMC11843627",
+      "status": "PROCESSED",
+      "doi": "10.1080/20008066.2025.2463277",
+      "title": "Raising a child bereaved by domestic homicide: caregivers’ experiences",
+      "license_present": true,
+      "license_text_sha256": "b4edc53eb085636bb6ee10ea03cdae81f2fd1be912c98784b280eb1d4157289b",
+      "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC11843627/unicode",
+      "response_sha256": "82222d421a2ba4f668cca07319b48c51cf660709a3c36bc503984c8361d3b91f",
+      "text_sha256": "71555b12b44f56c6c03e1fa629700770a374fb467f43eec537442babcba889c8",
+      "word_count": 11329,
+      "writing_review_prompts": 7,
+      "writing_finding_codes": [
+        "potential_overclaim"
+      ],
+      "reasoning_review_prompts": 3,
+      "reasoning_graph_nodes": 404
+    }
+  ],
+  "independent_expert_labels": 0,
+  "sensitivity": null,
+  "specificity": null,
+  "precision": null,
+  "limitations": [
+    "This is a real-paper integration and robustness test, not independent scientific performance validation.",
+    "No expert-adjudicated truth labels were available; sensitivity, specificity and false-positive rates are NOT estimated.",
+    "BioC text extraction may omit tables, figures, and other evidence; results must not imply manuscript deficiencies.",
+    "Response SHA-256 and source links enable audit of external data; full texts are not stored or redistributed.",
+    "Review publisher licenses and PMC terms for any separate storage or redistribution of source texts."
+  ]
+}

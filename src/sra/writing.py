@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 from sra.document import ParsedDocument, load_document
+from sra.writing_style import style_review
+from sra.discipline import reporting_cues, CHECKLISTS
 
 _WORD = re.compile(r"\b[\w]+(?:['’\-][\w]+)*\b", re.UNICODE)
 _NUMBERED_CITATION = re.compile(
@@ -90,6 +92,8 @@ def audit_academic_writing(
     genre: str = "general",
     abstract_min_words: int | None = None,
     abstract_max_words: int | None = None,
+    style_language: str = "en",
+    design: str | None = None,
 ) -> dict[str, Any]:
     """Check section structure, placeholders, cautious phrasing and citation candidates.
 
@@ -108,6 +112,8 @@ def audit_academic_writing(
             and abstract_min_words > abstract_max_words):
         raise ValueError("abstract_min_words cannot exceed abstract_max_words.")
 
+    if design is not None and design not in CHECKLISTS:
+        raise ValueError("Unsupported study design. Choose from: " + ", ".join(CHECKLISTS))
     document: ParsedDocument = load_document(path)
     sections = list(document.sections.items())
     groups: dict[str, list[str]] = {
@@ -222,6 +228,10 @@ def audit_academic_writing(
                 _add(findings, "uncited_author_year_reference",
                      f"Reference {key!r} has no recognized in-text citation.", lines[0])
 
+    style_suggestions = style_review(
+        document, language=style_language, excluded_sections=reference_names,
+    )
+    checklist = reporting_cues(document, design) if design is not None else None
     findings.sort(key=lambda finding: (finding["line"] is None, finding["line"] or 0, finding["code"]))
     return {
         "schema_version": "1.0",
@@ -229,7 +239,7 @@ def audit_academic_writing(
         "source": document.source,
         "source_sha256": document.sha256,
         "genre": genre,
-        "status": "REVIEW_REQUIRED" if findings else "NO_AUTOMATED_FLAGS",
+        "status": "REVIEW_REQUIRED" if (findings or style_suggestions) else "NO_AUTOMATED_FLAGS",
         "metrics": {
             "document_word_count": sum(len(_WORD.findall(text)) for _, text in body_sections),
             "abstract_word_count": abstract_words if groups["abstract"] else None,
@@ -244,6 +254,9 @@ def audit_academic_writing(
             "abstract_max_words": abstract_max_words,
         },
         "findings": findings,
+        "style_language": style_language,
+        "style_suggestions": style_suggestions,
+        "reporting_checklist": checklist,
         "limitations": [
             "Heuristic checks are editorial review prompts, not proof of correctness or scientific validity.",
             "Only explicit bracket-number and simple first-author/year citation formats are checked; others are unverified.",
@@ -273,6 +286,23 @@ def writing_report_markdown(result: dict[str, Any]) -> str:
     for finding in result["findings"]:
         label = f"line {finding['line']}" if finding["line"] is not None else "document"
         lines.append(f"- **{finding['code']} ({label}):** {html.escape(finding['message'])}")
+    lines += ["", "## Academic language suggestions"]
+    if not result.get("style_suggestions"):
+        lines.append("No supported language patterns flagged.")
+    for item in result.get("style_suggestions", []):
+        lines.append(
+            f"- **{item['code']} (line {item['line']}):** "
+            f"{html.escape(item['excerpt'])} — "
+            f"{html.escape(item['suggestion'])}"
+        )
+    checklist = result.get("reporting_checklist")
+    if checklist is not None:
+        lines += ["", "## Study-design reporting cues"]
+        lines.append(f"Advisory framework: {html.escape(checklist['guideline'])}")
+        for item in checklist["items"]:
+            lines.append(f"- {item['item']}: {item['status']}"
+                         + (f" (line {item['line']})" if item['line'] else ""))
+        lines.append("Cue detection is not guideline compliance.")
     lines += ["", "## Limits"]
     lines.extend(f"- {html.escape(item)}" for item in result["limitations"])
     return "\n".join(lines) + "\n"

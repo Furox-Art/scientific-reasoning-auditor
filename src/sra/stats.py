@@ -381,4 +381,8 @@ def verify_stats_file(path: str | Path) -> dict:
     )
     if not isinstance(spec, dict):
         raise ValueError("Statistics input must be a JSON object.")
-    return verify_welch_t_test(spec, hashlib.sha256(raw).hexdigest())
+    fingerprint = hashlib.sha256(raw).hexdigest()
+    if spec.get("test") == "welch_t":
+        return verify_welch_t_test(spec, fingerprint)
+    from sra.stats_extended import verify_extended_stats
+    return verify_extended_stats(spec, fingerprint)

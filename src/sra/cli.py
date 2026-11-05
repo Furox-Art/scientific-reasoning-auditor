@@ -9,6 +9,10 @@ from sra.semantic_review import validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
 from sra.writing import audit_academic_writing, writing_report_markdown
+from sra.doi import verify_dois
+from sra.benchmark import run_pmc_benchmark
+from sra.discipline import CHECKLISTS
+from sra.validation import evaluate_blinded_labels
 
 
 def main() -> int:
@@ -39,7 +43,7 @@ def main() -> int:
     model_review.add_argument("--out", default="semantic-review-completed.json", help="Output JSON path.")
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
-    stats.add_argument("input", help="JSON input; currently supports test=welch_t.")
+    stats.add_argument("input", help="JSON input for Welch, one-sample/paired t, chi-square or Fisher exact.")
     stats.add_argument("--out", default="stats-verification.json", help="Output JSON path.")
 
     writing = sub.add_parser(
@@ -53,6 +57,30 @@ def main() -> int:
     )
     writing.add_argument("--abstract-min-words", type=int, default=None)
     writing.add_argument("--abstract-max-words", type=int, default=None)
+    writing.add_argument("--style-language", choices=("en", "tr", "none"), default="en")
+    writing.add_argument("--design", choices=tuple(CHECKLISTS), default=None,
+                         help="Optional study-design reporting cues (not formal compliance).")
+
+    doi = sub.add_parser("doi-check", help="Extract DOIs and optionally check Crossref registry metadata.")
+    doi.add_argument("input", help="Manuscript path.")
+    doi.add_argument("--out", default="doi-check.json")
+    doi.add_argument("--online", action="store_true",
+                     help="Explicitly enable network metadata requests to Crossref.")
+    doi.add_argument("--limit", type=int, default=50)
+
+    benchmark = sub.add_parser("benchmark-pmc", help="Run external PMC BioC real-paper smoke tests.")
+    benchmark.add_argument("manifest", help="JSON manifest with pmcids list.")
+    benchmark.add_argument("--out", default="pmc-benchmark.json")
+    benchmark.add_argument("--online", action="store_true",
+                           help="Explicitly retrieve full text via authorized NIH BioC API.")
+    benchmark.add_argument("--limit", type=int, default=20)
+
+    evaluate = sub.add_parser(
+        "evaluate-labels", help="Evaluate complete, expert-adjudicated labels against frozen PMC outputs."
+    )
+    evaluate.add_argument("benchmark", help="Frozen PMC benchmark JSON report.")
+    evaluate.add_argument("labels", help="External blinded expert-label JSON file.")
+    evaluate.add_argument("--out", default="expert-validation-report.json")
 
     args = parser.parse_args()
     if args.command == "writing-audit":
@@ -61,6 +89,7 @@ def main() -> int:
                 args.input, genre=args.genre,
                 abstract_min_words=args.abstract_min_words,
                 abstract_max_words=args.abstract_max_words,
+                style_language=args.style_language, design=args.design,
             )
             prefix = Path(args.out)
             json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")
@@ -77,6 +106,52 @@ def main() -> int:
         print(f"Writing audit: {len(result['findings'])} advisory review prompt(s).")
         print(f"JSON: {json_path.resolve()}")
         print(f"Markdown: {md_path.resolve()}")
+        return 0
+
+    if args.command == "doi-check":
+        try:
+            result = verify_dois(args.input, online=args.online, limit=args.limit)
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, RuntimeError, TypeError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        if out.resolve() == Path(args.input).expanduser().resolve():
+            parser.error("Output must not overwrite the original document.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(f"DOI scan: {result['found_count']} found; {result['checked_count']} returned.")
+        print(f"Report: {out.resolve()}")
+        return 0
+
+    if args.command == "benchmark-pmc":
+        try:
+            result = run_pmc_benchmark(args.manifest, online=args.online, limit=args.limit)
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, RuntimeError, TypeError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        if out.resolve() == Path(args.manifest).expanduser().resolve():
+            parser.error("Output must not overwrite the input manifest.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(f"PMC test: {result['processed']}/{result['total_requested']} processed.")
+        print("Expert-labeled scientific performance: NOT EVALUATED.")
+        print(f"Report: {out.resolve()}")
+        return 0 if result["failed"] == 0 else 1
+
+    if args.command == "evaluate-labels":
+        try:
+            result = evaluate_blinded_labels(args.benchmark, args.labels)
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, RuntimeError, TypeError, KeyError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        if out.resolve() in (Path(args.benchmark).resolve(), Path(args.labels).resolve()):
+            parser.error("Output must not overwrite the benchmark or label source.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(f"Evaluated {result['labelled_units']} blinded-labelled units.")
+        print(f"Report: {out.resolve()}")
         return 0
 
     if args.command == "audit":

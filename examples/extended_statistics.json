@@ -1,0 +1,7 @@
+{
+  "test": "one_sample_t",
+  "sample": {"mean": 10, "sd": 2, "n": 25},
+  "mu0": 9,
+  "reported": {"t": 2.5, "df": 24, "p_two_sided": 0.0197},
+  "tolerances": {"t": 0.001, "df": 0, "p_two_sided": 0.0001}
+}

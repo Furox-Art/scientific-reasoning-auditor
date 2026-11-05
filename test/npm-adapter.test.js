@@ -14,6 +14,9 @@ test('exports the documented Node API', () => {
   assert.equal(typeof sra.reviewModel, 'function');
   assert.equal(typeof sra.verifyStats, 'function');
   assert.equal(typeof sra.writingAudit, 'function');
+  assert.equal(typeof sra.verifyDoi, 'function');
+  assert.equal(typeof sra.benchmarkPmc, 'function');
+  assert.equal(typeof sra.evaluateLabels, 'function');
 });
 
 test('rejects invalid arguments before starting Python', async () => {
@@ -25,6 +28,14 @@ test('rejects invalid arguments before starting Python', async () => {
   await assert.rejects(sra.writingAudit(''), /non-empty file path/);
   await assert.rejects(sra.writingAudit('file.md', { genre: 'invalid' }), /genre/);
   await assert.rejects(sra.writingAudit('file.md', { abstractMaxWords: -1 }), /non-negative integer/);
+  await assert.rejects(sra.verifyDoi(''), /non-empty file path/);
+  await assert.rejects(sra.verifyDoi('file.md', { limit: 0 }), /limit/);
+  await assert.rejects(sra.benchmarkPmc(''), /non-empty file path/);
+  await assert.rejects(sra.benchmarkPmc('test.json', { online: false }), /online: true/);
+  await assert.rejects(sra.evaluateLabels('', 'labels.json'), /benchmark/);
+  await assert.rejects(sra.evaluateLabels('benchmark.json', ''), /labels/);
+  await assert.rejects(sra.writingAudit('file.md', { styleLanguage: 'unknown' }), /styleLanguage/);
+  await assert.rejects(sra.writingAudit('file.md', { design: 'unknown' }), /study design/);
 });
 
 test('runs the existing Python CLI without installing dependencies', async () => {
@@ -87,4 +98,16 @@ test('runs academic writing audit from Node and reads advisory reports', async (
   assert.ok(report.findings.some((finding) => finding.code === 'unmatched_numeric_citation'));
   assert.ok(report.findings.some((finding) => finding.code === 'abstract_above_limit'));
   assert.match(fs.readFileSync(target + '.md', 'utf8'), /Review prompts/);
+});
+
+test('runs registry identifier scan in offline mode', async (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sra-doi-adapter-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const manuscript = path.join(dir, 'source.md');
+  const target = path.join(dir, 'doi.json');
+  fs.writeFileSync(manuscript, '# References\nA doi:10.1371/journal.pone.0000217 citation.\n');
+  const outcome = await sra.verifyDoi(manuscript, { out: target, stdio: 'pipe' });
+  assert.equal(outcome.code, 0, outcome.stderr);
+  const result = JSON.parse(fs.readFileSync(target, 'utf8'));
+  assert.equal(result.results[0].status, 'NOT_CHECKED_OFFLINE');
 });

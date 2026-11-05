@@ -1,0 +1,17 @@
+{
+  "notes": "Independent-source smoke-test allowlist (NCBI BioC); not an expert-labelled validation set. Every paper was checked for an accessible BioC record and DOI metadata on 2026-11-05.",
+  "pmcids": [
+    "PMC1790863",
+    "PMC10217082",
+    "PMC7216588",
+    "PMC8793676",
+    "PMC5730454",
+    "PMC7901593",
+    "PMC6770124",
+    "PMC6590505",
+    "PMC9982341",
+    "PMC7434990",
+    "PMC7567989",
+    "PMC11843627"
+  ]
+}

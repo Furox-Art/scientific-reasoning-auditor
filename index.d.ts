@@ -35,6 +35,8 @@ export interface WritingAuditOptions extends RunOptions {
   genre?: 'general' | 'original-research';
   abstractMinWords?: number;
   abstractMaxWords?: number;
+  styleLanguage?: 'en' | 'tr' | 'none';
+  design?: 'clinical-trial' | 'observational' | 'systematic-review' | 'computational';
 }
 
 export interface OutputOptions extends RunOptions {
@@ -47,3 +49,12 @@ export function createReviewTemplate(input: string, options?: ReviewTemplateOpti
 export function reviewModel(input: string, options: ModelReviewOptions): Promise<CommandResult>;
 export function verifyStats(input: string, options?: OutputOptions): Promise<CommandResult>;
 export function writingAudit(input: string, options?: WritingAuditOptions): Promise<CommandResult>;
+
+export interface OnlineCheckOptions extends OutputOptions {
+  online?: boolean;
+  limit?: number;
+}
+export function verifyDoi(input: string, options?: OnlineCheckOptions): Promise<CommandResult>;
+export function benchmarkPmc(manifest: string, options: OnlineCheckOptions): Promise<CommandResult>;
+
+export function evaluateLabels(benchmark: string, labels: string, options?: OutputOptions): Promise<CommandResult>;

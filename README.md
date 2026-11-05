@@ -8,6 +8,8 @@ The software exposes reviewable reasoning risks with evidence locations and repr
 
 ## Current status: v0.5.1 (latest tagged release)
 
+New source-only experimental tools are listed below; the tagged release does not include them.
+
 The main branch also contains source changes that are not yet in a new tagged Python or npm release. Install from source to use the latest academic-writing module.
 
 This patch release hardens authenticated model API transport and JSON handling, stabilizes Welch and pooled-standard-deviation calculations across extreme numeric scales, and corrects Hedges' g for very large degrees of freedom. It retains the traceable reasoning-review layer and independently recalculable statistical summary checks introduced in earlier releases.
@@ -162,6 +164,98 @@ Create a JSON file with two groups' mean, sample SD and n, plus the reported sta
     sra verify-stats examples/welch_t_example.json --out reports/welch-verification.json
 
 Each reported value is compared with the independently calculated value using the configured absolute tolerance. Without an explicit tolerance, the verifier uses half the last displayed decimal place; field-specific or default overrides can be supplied in the JSON input. A mismatch returns a non-zero exit code. Report p-values as positive values in (0, 1], not as zero. The command supports only independent two-group Welch t-tests in this version. Input JSON rejects duplicate object keys (including nested keys) and non-standard numeric constants rather than silently accepting ambiguous reported values.
+
+## Expanded validation tools (main branch; not in v0.5.1 release)
+
+These features are available only by installing from the repository's current
+source. They have not been published to PyPI or npm as a new release.
+
+### Five independently calculated statistics
+
+The `sra verify-stats` command now supports:
+
+| `test` | Inputs | Calculated summary |
+| --- | --- | --- |
+| `welch_t` | Two independent groups (mean, sample SD, n) | Welch t, df, two-sided p, 95% CI |
+| `one_sample_t` | `sample` (mean, sd, n); optional `mu0` | Student one-sample t, df, p, 95% CI |
+| `paired_t` | `differences` (paired-difference mean, sd, n); optional `mu0` | Paired t on differences, df, p, 95% CI |
+| `chi_square_2x2` | `table`: 2 x 2 nonnegative integer counts | Pearson chi-square, df, upper-tail `p_value`, expected counts |
+| `fisher_exact_2x2` | `table`: 2 x 2 counts | Fisher two-sided p, finite sample odds ratio |
+
+    sra verify-stats examples/extended_statistics.json --out reports/stats.json
+
+For paired t, supply **within-pair differences**, not two independent
+groups' summary statistics. The Pearson chi-square test uses no Yates
+correction and emits a caution when expected cell counts are below five.
+No result confirms statistical-test suitability, input validity or scientific
+causality. `PASS` compares only explicitly reported statistics.
+
+### Academic grammar, style and study-design reporting cues
+
+    sra writing-audit examples/academic_writing_sample.md --style-language en --design observational --out reports/writing
+
+Source-located, conservative editing suggestions include repeated words,
+selected English article agreement and modal verb constructions, Turkish
+spelling patterns, concision suggestions and long lines. The tool never
+automatically edits scientific claims. It is not a full grammar corrector.
+`--style-language` accepts `en`, `tr` and `none`.
+
+The optional `--design` profiles are `clinical-trial`, `observational`,
+`systematic-review` and `computational`. They inspect short reporting cues
+inspired by CONSORT 2025, STROBE, PRISMA 2020 and project-specific
+computational reproducibility, respectively. Keyword detection is neither
+adherence to the official checklist nor evidence of study quality.
+
+Official references:
+- CONSORT 2025: https://www.consort-spirit.org/
+- STROBE: https://www.strobe-statement.org/
+- PRISMA 2020: https://www.prisma-statement.org/prisma-2020
+
+### DOI and bibliographic metadata
+
+Offline DOI extraction does not contact third parties:
+
+    sra doi-check examples/doi_metadata_demo.md --out reports/doi-offline.json
+
+Explicit `--online` uses official Crossref metadata first and DataCite when
+Crossref has no record:
+
+    sra doi-check examples/doi_metadata_demo.md --online --out reports/doi-online.json
+
+Only DOI identifiers are transmitted. The report indicates registry presence,
+title, first author and year when available, with optional *weak* token
+overlap against the reference line. Neither DOI registration nor word overlap
+establishes that the source supports any manuscript claim. Registry outages
+are reported as unverified and absent DOI records are never called proof
+of a fabricated citation.
+
+Official API documentation:
+- Crossref: https://www.crossref.org/documentation/retrieve-metadata/rest-api/
+- DataCite: https://support.datacite.org/docs/rest-api
+
+### Real published papers and independently adjudicated annotations
+
+The reproducible PMC BioC runner processes a configured allowlist of real
+papers. It stores source URLs, identifiers, SHA-256 hashes, counts and
+finding-code names, but **does not redistribute full article texts**:
+
+    sra benchmark-pmc benchmarks/pmc_real_papers.json --online --limit 12 --out benchmarks/pmc_smoke.json
+
+The corpus and method exercise the tool against independent external
+manuscript texts; they are **not an expert-labeled scientific accuracy
+benchmark**. Runs can handle a configurable 1–200 article allowlist per
+invocation. Respect publisher copyright and the PMC BioC service conditions:
+https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/
+
+A separate command evaluates *complete* blinded two-reviewer expert labels
+against frozen per-paper automated outputs, with source-hash matching,
+confusion matrices and Wilson 95% intervals:
+
+    sra evaluate-labels benchmarks/pmc_smoke.json experts/adjudicated.json --out reports/validation.json
+
+No external expert labels are bundled or fabricated. Thus no sensitivity,
+specificity or independent scientific performance score is available yet.
+See [independent validation protocol](benchmarks/VALIDATION_PROTOCOL.md).
 
 ## Scientific validation roadmap
 

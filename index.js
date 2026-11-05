@@ -157,7 +157,60 @@ function writingAudit(input, options = {}) {
       args.push(flag, String(options[name]));
     }
   }
+  if (options.styleLanguage) {
+    if (!['en','tr','none'].includes(options.styleLanguage)) {
+      return Promise.reject(new TypeError('styleLanguage must be en, tr or none'));
+    }
+    args.push('--style-language', options.styleLanguage);
+  }
+  if (options.design) {
+    if (!['clinical-trial','observational','systematic-review','computational'].includes(options.design)) {
+      return Promise.reject(new TypeError('unsupported study design'));
+    }
+    args.push('--design', options.design);
+  }
   args.push('--out', options.out || 'academic-writing-report');
+  return run(args, options);
+}
+
+function evaluateLabels(benchmark, labels, options = {}) {
+  if (typeof benchmark !== 'string' || !benchmark.length) {
+    return Promise.reject(new TypeError('benchmark must be a non-empty file path'));
+  }
+  if (typeof labels !== 'string' || !labels.length) {
+    return Promise.reject(new TypeError('labels must be a non-empty file path'));
+  }
+  return run(['evaluate-labels', benchmark, labels, '--out',
+    options.out || 'expert-validation-report.json'], options);
+}
+
+function verifyDoi(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  if (options.limit !== undefined &&
+      (!Number.isSafeInteger(options.limit) || options.limit < 1 || options.limit > 200)) {
+    return Promise.reject(new TypeError('limit must be an integer from 1 to 200'));
+  }
+  const args = ['doi-check', input, '--out', options.out || 'doi-check.json'];
+  if (options.online === true) args.push('--online');
+  if (options.limit !== undefined) args.push('--limit', String(options.limit));
+  return run(args, options);
+}
+
+function benchmarkPmc(manifest, options = {}) {
+  if (typeof manifest !== 'string' || !manifest.length) {
+    return Promise.reject(new TypeError('manifest must be a non-empty file path'));
+  }
+  if (options.online !== true) {
+    return Promise.reject(new TypeError('benchmarkPmc requires online: true'));
+  }
+  if (options.limit !== undefined &&
+      (!Number.isSafeInteger(options.limit) || options.limit < 1 || options.limit > 200)) {
+    return Promise.reject(new TypeError('limit must be an integer from 1 to 200'));
+  }
+  const args = ['benchmark-pmc', manifest, '--online', '--out', options.out || 'pmc-benchmark.json'];
+  if (options.limit !== undefined) args.push('--limit', String(options.limit));
   return run(args, options);
 }
 
@@ -168,4 +221,7 @@ module.exports = {
   reviewModel,
   verifyStats,
   writingAudit,
+  verifyDoi,
+  benchmarkPmc,
+  evaluateLabels,
 };
