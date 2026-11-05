@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Furox-Art/scientific-reasoning-auditor/blob/main/schemas/semantic-review-completed.schema.json",
+  "title": "Scientific Reasoning Auditor completed external semantic review",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "review_type",
+    "review_mode",
+    "source_sha256",
+    "graph_schema_version",
+    "graph_fingerprint_algorithm",
+    "graph_fingerprint",
+    "evidence_catalog",
+    "reviewer",
+    "instructions",
+    "relation_labels",
+    "assessments"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.4"
+    },
+    "review_type": {
+      "const": "external_semantic_reasoning_review"
+    },
+    "review_mode": {
+      "enum": [
+        "single",
+        "parallel"
+      ],
+      "description": "User-selected review orchestration preference; this field does not execute a model or start agents."
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "graph_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reviewer": {
+      "type": "object",
+      "required": [
+        "name",
+        "model_or_agent",
+        "reviewed_at_utc"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "model_or_agent": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "reviewed_at_utc": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|\\+00:00)$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "instructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relation_labels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "entailed",
+          "partially_supported",
+          "contradicted",
+          "not_supported",
+          "unclear"
+        ]
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "inference_node_id",
+          "claim_node_id",
+          "evidence_node_ids",
+          "relation",
+          "confidence",
+          "rationale",
+          "source_quotes",
+          "missing_assumptions",
+          "counter_evidence_node_ids",
+          "reviewer_selected_evidence_node_ids"
+        ],
+        "properties": {
+          "inference_node_id": {
+            "type": "string",
+            "pattern": "^inference:[a-f0-9]{16}$"
+          },
+          "claim_node_id": {
+            "type": "string",
+            "pattern": "^claim:[a-f0-9]{16}$"
+          },
+          "evidence_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^evidence:[a-f0-9]{16}$"
+            },
+            "uniqueItems": true
+          },
+          "relation": {
+            "enum": [
+              "entailed",
+              "partially_supported",
+              "contradicted",
+              "not_supported",
+              "unclear"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "source_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 20,
+              "pattern": "\\S"
+            }
+          },
+          "missing_assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "counter_evidence_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^evidence:[a-f0-9]{16}$"
+            },
+            "uniqueItems": true
+          },
+          "reviewer_selected_evidence_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^evidence:[a-f0-9]{16}$"
+            },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id",
+          "text",
+          "source_location"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "pattern": "^evidence:[a-f0-9]{16}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_location": {
+            "type": "object",
+            "required": [
+              "line",
+              "section"
+            ],
+            "properties": {
+              "line": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "section": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "graph_schema_version": {
+      "const": "1.4"
+    },
+    "graph_fingerprint_algorithm": {
+      "const": "sha256-canonical-json-graph-contract-v2"
+    }
+  },
+  "additionalProperties": false
+}

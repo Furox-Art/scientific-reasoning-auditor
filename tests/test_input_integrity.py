@@ -104,7 +104,7 @@ class StatisticsInputIntegrityTests(unittest.TestCase):
             for name, payload in cases.items():
                 with self.subTest(case=name):
                     path.write_text(payload, encoding="utf-8")
-                    with self.assertRaisesRegex(ValueError, "Duplicate JSON key"):
+                    with self.assertRaisesRegex(ValueError, "Duplicate JSON object key"):
                         verify_stats_file(path)
 
     def test_cli_does_not_write_report_from_ambiguous_json(self):
@@ -121,7 +121,7 @@ class StatisticsInputIntegrityTests(unittest.TestCase):
                 capture_output=True, text=True, check=False,
             )
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Duplicate JSON key", result.stderr)
+            self.assertIn("Duplicate JSON object key", result.stderr)
             self.assertFalse(output.exists())
 
     def test_distinct_keys_in_different_groups_are_allowed(self):

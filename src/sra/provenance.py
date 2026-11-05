@@ -12,19 +12,20 @@ from sra.document import ParsedDocument
 
 
 AUDITOR_VERSION = __version__
-RULESET_VERSION = "0.5.1"
+RULESET_VERSION = "0.5.2"
 RULE_CONFIGURATION = {
-    "audit_report_schema_version": "1.4",
-    "manifest_schema_version": "1.1",
-    "claim_marker_version": 1,
-    "causal_design_rule_version": 2,
-    "direction_conflict_rule_version": 2,
+    "audit_report_schema_version": "1.5",
+    "manifest_schema_version": "1.4",
+    "claim_marker_version": 2,
+    "causal_design_rule_version": 4,
+    "direction_conflict_rule_version": 4,
+    "repeated_rate_ratio_ci_rule_version": 1,
     "document_context_grouping_version": 2,
-    "section_heading_match_version": 2,
-    "welch_test_calculation_version": 1,
+    "section_heading_match_version": 3,
+    "welch_test_calculation_version": 2,
     "reported_value_tolerance_policy": "half_displayed_unit_last_place_or_explicit_override-v1",
-    "reasoning_graph_schema_version": "1.1",
-    "semantic_review_schema_version": "1.3",
+    "reasoning_graph_schema_version": "1.4",
+    "semantic_review_schema_version": "1.4",
     "lexical_candidate_minimum_jaccard": 0.15,
     "max_evidence_excerpts_per_finding": 5,
 }
@@ -61,35 +62,81 @@ def _source_revision() -> tuple[str | None, bool | None]:
         return None, None
 
 
-def _source_tree_sha256() -> str | None:
-    """Hash the repository snapshot or, in an installed wheel, package source files."""
-    repository_root = Path(__file__).resolve().parents[2]
-    repository_files = [
-        *repository_root.glob("src/sra/**/*.py"),
-        *repository_root.glob("schemas/**/*.json"),
-        repository_root / "pyproject.toml",
+REPOSITORY_HASH_GROUPS = (
+    ("Python runtime source", ("src/sra/**/*.py",)),
+    ("JSON schemas", ("schemas/**/*.json",)),
+    ("Python tests", ("tests/**/*.py",)),
+    ("Node adapter sources and tests", ("test/**/*.js", "bin/**/*.js")),
+    ("Build verification tools", ("tools/**/*.py",)),
+    ("GitHub Actions workflows", (".github/workflows/**/*.yml",)),
+    ("examples", ("examples/**/*.md", "examples/**/*.json")),
+)
+REPOSITORY_HASH_FILES = (
+    "pyproject.toml",
+    "package.json",
+    "index.js",
+    "index.d.ts",
+    "MANIFEST.in",
+    "README.md",
+    "LICENSE",
+)
+INSTALLED_PACKAGE_HASH_SCOPE = "installed Python package source files only"
+
+
+def _source_tree_sha256(
+    repository_root: Path | None = None,
+) -> tuple[str | None, str, list[str]]:
+    """Hash selected runtime, test, workflow, adapter, schema and build inputs."""
+    repository_root = (
+        Path(repository_root).resolve()
+        if repository_root is not None
+        else Path(__file__).resolve().parents[2]
+    )
+    files_by_category: list[tuple[str, list[Path]]] = []
+    for category, patterns in REPOSITORY_HASH_GROUPS:
+        category_files = sorted({
+            path
+            for pattern in patterns
+            for path in repository_root.glob(pattern)
+            if path.is_file()
+        })
+        if category_files:
+            files_by_category.append((category, category_files))
+
+    metadata_files = [
+        repository_root / name
+        for name in REPOSITORY_HASH_FILES
+        if (repository_root / name).is_file()
     ]
-    files = sorted(path for path in repository_files if path.is_file())
+    if metadata_files:
+        files_by_category.append(("package/build/documentation metadata", metadata_files))
+
+    files = sorted({
+        path for _, category_files in files_by_category for path in category_files
+    })
     if files:
         hash_root = repository_root
+        scope = "; ".join(category for category, _ in files_by_category)
     else:
         package_root = Path(__file__).resolve().parent
         files = sorted(path for path in package_root.rglob("*.py") if path.is_file())
         if not files:
-            return None
+            return None, INSTALLED_PACKAGE_HASH_SCOPE, []
         hash_root = package_root.parent
+        scope = INSTALLED_PACKAGE_HASH_SCOPE
 
+    included_files = [path.relative_to(hash_root).as_posix() for path in files]
     digest = hashlib.sha256()
     try:
         for path in files:
             relative = path.relative_to(hash_root).as_posix()
             digest.update(relative.encode("utf-8"))
-            digest.update(b"\\0")
+            digest.update(b"\0")
             digest.update(path.read_bytes())
-            digest.update(b"\\0")
+            digest.update(b"\0")
     except OSError:
-        return None
-    return digest.hexdigest()
+        return None, scope, included_files
+    return digest.hexdigest(), scope, included_files
 
 
 def build_manifest(document: ParsedDocument) -> dict:
@@ -99,7 +146,8 @@ def build_manifest(document: ParsedDocument) -> dict:
         "pypdf": _package_version("pypdf"),
     }
     revision, working_tree_dirty = _source_revision()
-    source_code_sha256 = _source_tree_sha256()
+    source_code_sha256, source_code_hash_scope, source_code_hash_files = _source_tree_sha256()
+    extracted_text_sha256 = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
 
     configuration_json = json.dumps(
         RULE_CONFIGURATION, sort_keys=True, separators=(",", ":")
@@ -111,18 +159,21 @@ def build_manifest(document: ParsedDocument) -> dict:
         "implementation": platform.python_implementation(),
         "platform": platform.platform(),
         "parser_backend": document.parser_backend,
+        "extracted_text_sha256": extracted_text_sha256,
         "ruleset_version": RULESET_VERSION,
         "configuration_sha256": configuration_hash,
         "dependencies": dependencies,
         "source_code_revision": revision,
         "source_code_sha256": source_code_sha256,
+        "source_code_hash_scope": source_code_hash_scope,
+        "source_code_hash_files": source_code_hash_files,
         "working_tree_dirty": working_tree_dirty,
     }
     environment_json = json.dumps(environment, sort_keys=True, separators=(",", ":"))
     environment_fingerprint = hashlib.sha256(environment_json.encode("utf-8")).hexdigest()
 
     return {
-        "manifest_schema_version": "1.1",
+        "manifest_schema_version": "1.4",
         "auditor_version": AUDITOR_VERSION,
         "installed_package_version": package_version,
         "ruleset_version": RULESET_VERSION,
@@ -132,6 +183,7 @@ def build_manifest(document: ParsedDocument) -> dict:
             "format": document.input_format,
             "size_bytes": document.source_size_bytes,
             "sha256": document.sha256,
+            "extracted_text_sha256": extracted_text_sha256,
         },
         "parser": {
             "backend": document.parser_backend,
@@ -149,15 +201,13 @@ def build_manifest(document: ParsedDocument) -> dict:
         "environment_fingerprint": environment_fingerprint,
         "source_code_revision": revision,
         "source_code_sha256": source_code_sha256,
+        "source_code_hash_scope": source_code_hash_scope,
+        "source_code_hash_files": source_code_hash_files,
         "working_tree_dirty": working_tree_dirty,
         "revision_note": (
-            "The source_code_sha256 identifies the exact installed Python package source files; repository-only build/config files are not present."
-            if revision is None and source_code_sha256 else
-            "The source_code_sha256 identifies the exact included source/config snapshot, including uncommitted changes."
-            if working_tree_dirty and source_code_sha256 else
-            "The working tree was modified during the run, but the source snapshot hash could not be generated; preserve the exact source files."
-            if working_tree_dirty else
-            "The source_code_sha256 identifies the exact included source/config snapshot."
+            "The source_code_sha256 covers exactly the installed Python package source files listed in source_code_hash_files; repository-only tests, workflows, schemas and build metadata are not all available in an installed wheel."
+            if source_code_hash_scope == INSTALLED_PACKAGE_HASH_SCOPE and source_code_sha256 else
+            "The source_code_sha256 covers exactly the relative paths listed in source_code_hash_files; source_code_hash_scope describes their categories. Other repository files are not included."
             if source_code_sha256 else
             "The source tree hash could not be generated; preserve the exact source files."
         ),

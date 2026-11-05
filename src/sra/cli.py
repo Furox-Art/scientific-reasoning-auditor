@@ -2,10 +2,10 @@ import argparse
 import json
 from pathlib import Path
 
-from sra.audit import audit_file, build_review_template
+from sra.audit import audit_file, audit_parsed_document, build_review_template
 from sra.document import load_document
 from sra.model_client import request_single_model_review
-from sra.semantic_review import validate_semantic_review
+from sra.semantic_review import build_semantic_review_template, validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
 from sra.writing import audit_academic_writing, writing_report_markdown
@@ -17,6 +17,30 @@ from sra.domain_evidence import PROFILES, audit_domain_file
 from sra.domain_adjudication import make_domain_template, validate_domain_adjudication
 from sra.academic_benchmark import evaluate_arxiv_edit_pairs
 from sra.domain_cohort import aggregate_domain_reports
+from sra.scientific_validation import verify_scientific_file
+
+
+def _reject_input_overwrite(
+    parser: argparse.ArgumentParser,
+    input_paths: list[str | None],
+    output_paths: list[Path],
+) -> None:
+    """Fail before reads, network requests or writes on resolved path collisions.
+
+    Resolving symlinks prevents accidental source clobbering through output
+    aliases. This is a local preflight check, not a defence against concurrent
+    filesystem modifications by a hostile process.
+    """
+    try:
+        protected = {
+            Path(name).resolve(strict=False) for name in input_paths if name
+        }
+        if any(path.resolve(strict=False) in protected for path in output_paths):
+            parser.error(
+                "Output path would overwrite an input or imported review file; choose a different --out."
+            )
+    except (OSError, RuntimeError):
+        parser.error("Could not safely resolve input/output paths.")
 
 
 def main() -> int:
@@ -134,6 +158,13 @@ def main() -> int:
     )
     cohort.add_argument("reports", nargs="+", help="JSON reports from domain-validate.")
     cohort.add_argument("--out", default="domain-cohort.json")
+
+    science = sub.add_parser(
+        "verify-science",
+        help="Validate explicitly structured CI claims, SI-dimension equations, and crude risk ratios.",
+    )
+    science.add_argument("input", help="Bounded JSON scientific-check specification.")
+    science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
     if args.command == "benchmark-language":
@@ -280,6 +311,18 @@ def main() -> int:
         return 0
 
     if args.command == "audit":
+        prefix = Path(args.out)
+        outputs = [prefix.with_suffix(".json"), prefix.with_suffix(".md")]
+        inputs = [args.input, args.semantic_review]
+    elif args.command == "review-model":
+        output = Path(args.out)
+        outputs = [output, output.with_name(output.stem + ".provenance.json")]
+        inputs = [args.input]
+    else:
+        outputs = [Path(args.out)]
+        inputs = [args.input]
+    _reject_input_overwrite(parser, inputs, outputs)
+    if args.command == "audit":
         try:
             report = audit_file(args.input, args.semantic_review)
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
@@ -314,14 +357,23 @@ def main() -> int:
 
     if args.command == "review-model":
         try:
-            report = audit_file(args.input)
             document = load_document(args.input)
-            template = build_review_template(args.input, review_mode="single")
+            report = audit_parsed_document(document)
+            template = build_semantic_review_template(
+                report.to_dict(), review_mode="single", source_text=document.text
+            )
+            provenance = {
+                "source_sha256": report.to_dict().get("sha256"),
+                "graph_fingerprint": report.to_dict().get("reasoning_graph", {}).get("graph_fingerprint"),
+            }
             completed = request_single_model_review(
                 template, document.text, model=args.model, base_url=args.base_url,
                 api_key_env=args.api_key_env, timeout=args.timeout,
+                provenance=provenance,
             )
-            validation = validate_semantic_review(completed, report.to_dict(), document.text)
+            validation = validate_semantic_review(
+                completed, report.to_dict(), document.text
+            )
             serialized_completed = json.dumps(
                 completed, ensure_ascii=False, indent=2, allow_nan=False
             )
@@ -330,7 +382,13 @@ def main() -> int:
         output = Path(args.out)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(serialized_completed, encoding="utf-8")
+        provenance_path = output.with_name(output.stem + ".provenance.json")
+        provenance_path.write_text(
+            json.dumps(provenance, ensure_ascii=False, indent=2, allow_nan=False),
+            encoding="utf-8",
+        )
         print(f"Model review saved: {output.resolve()}")
+        print(f"Model request provenance: {provenance_path.resolve()}")
         print(f"Structural validation: {validation['status']}")
         for error in validation["errors"]:
             print(f"- {error}")
@@ -338,14 +396,16 @@ def main() -> int:
         return 0 if validation["status"] == "ACCEPTED_FOR_REVIEW" else 2
 
     try:
-        result = verify_stats_file(args.input)
+        result = (verify_scientific_file(args.input)
+                  if args.command == "verify-science"
+                  else verify_stats_file(args.input))
         serialized_result = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
     except (OSError, ValueError, RuntimeError, ArithmeticError, TypeError) as exc:
         parser.error(str(exc))
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(serialized_result, encoding="utf-8")
-    print(f"Statistics verification status: {result['status']}")
+    print(f"{'Scientific' if args.command == 'verify-science' else 'Statistics'} verification status: {result['status']}")
     print(f"Result: {output.resolve()}")
     return 0 if result["status"] == "PASS" else 1
 

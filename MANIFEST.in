@@ -1,2 +1,8 @@
 recursive-include examples *.md *.json
 recursive-include schemas *.json
+recursive-include tests *.py
+recursive-include test *.js
+recursive-include bin *.js
+recursive-include .github/workflows *.yml
+include index.js index.d.ts package.json
+recursive-include tools *.py
