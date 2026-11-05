@@ -8,6 +8,7 @@ from sra.model_client import request_single_model_review
 from sra.semantic_review import validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
+from sra.writing import audit_academic_writing, writing_report_markdown
 
 
 def main() -> int:
@@ -41,7 +42,43 @@ def main() -> int:
     stats.add_argument("input", help="JSON input; currently supports test=welch_t.")
     stats.add_argument("--out", default="stats-verification.json", help="Output JSON path.")
 
+    writing = sub.add_parser(
+        "writing-audit", help="Review academic structure and citation consistency."
+    )
+    writing.add_argument("input", help="Manuscript .md, .txt, or optional .pdf file.")
+    writing.add_argument("--out", default="academic-writing-report", help="Output path prefix.")
+    writing.add_argument(
+        "--genre", choices=("general", "original-research"), default="general",
+        help="Use optional original-research section checklist.",
+    )
+    writing.add_argument("--abstract-min-words", type=int, default=None)
+    writing.add_argument("--abstract-max-words", type=int, default=None)
+
     args = parser.parse_args()
+    if args.command == "writing-audit":
+        try:
+            result = audit_academic_writing(
+                args.input, genre=args.genre,
+                abstract_min_words=args.abstract_min_words,
+                abstract_max_words=args.abstract_max_words,
+            )
+            prefix = Path(args.out)
+            json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")
+            source = Path(args.input).expanduser().resolve()
+            if source in (json_path.resolve(), md_path.resolve()):
+                raise ValueError("Output paths must not overwrite the input manuscript.")
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+            markdown = writing_report_markdown(result)
+        except (OSError, ValueError, RuntimeError, TypeError) as exc:
+            parser.error(str(exc))
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        json_path.write_text(serialized, encoding="utf-8")
+        md_path.write_text(markdown, encoding="utf-8")
+        print(f"Writing audit: {len(result['findings'])} advisory review prompt(s).")
+        print(f"JSON: {json_path.resolve()}")
+        print(f"Markdown: {md_path.resolve()}")
+        return 0
+
     if args.command == "audit":
         try:
             report = audit_file(args.input, args.semantic_review)

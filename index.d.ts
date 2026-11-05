@@ -30,6 +30,13 @@ export interface ModelReviewOptions extends RunOptions {
   out?: string;
 }
 
+export interface WritingAuditOptions extends RunOptions {
+  out?: string;
+  genre?: 'general' | 'original-research';
+  abstractMinWords?: number;
+  abstractMaxWords?: number;
+}
+
 export interface OutputOptions extends RunOptions {
   out?: string;
 }
@@ -39,3 +46,4 @@ export function audit(input: string, options?: AuditOptions): Promise<CommandRes
 export function createReviewTemplate(input: string, options?: ReviewTemplateOptions): Promise<CommandResult>;
 export function reviewModel(input: string, options: ModelReviewOptions): Promise<CommandResult>;
 export function verifyStats(input: string, options?: OutputOptions): Promise<CommandResult>;
+export function writingAudit(input: string, options?: WritingAuditOptions): Promise<CommandResult>;

@@ -13,6 +13,7 @@ test('exports the documented Node API', () => {
   assert.equal(typeof sra.createReviewTemplate, 'function');
   assert.equal(typeof sra.reviewModel, 'function');
   assert.equal(typeof sra.verifyStats, 'function');
+  assert.equal(typeof sra.writingAudit, 'function');
 });
 
 test('rejects invalid arguments before starting Python', async () => {
@@ -21,6 +22,9 @@ test('rejects invalid arguments before starting Python', async () => {
   await assert.rejects(sra.createReviewTemplate('file.md', { mode: 'bad' }), /single.*parallel/);
   await assert.rejects(sra.reviewModel('file.md', {}), /model is required/);
   await assert.rejects(sra.verifyStats(''), /non-empty file path/);
+  await assert.rejects(sra.writingAudit(''), /non-empty file path/);
+  await assert.rejects(sra.writingAudit('file.md', { genre: 'invalid' }), /genre/);
+  await assert.rejects(sra.writingAudit('file.md', { abstractMaxWords: -1 }), /non-negative integer/);
 });
 
 test('runs the existing Python CLI without installing dependencies', async () => {
@@ -66,4 +70,21 @@ test('runs audit, template, and statistics workflows end-to-end', async (t) => {
   assert.equal(stats.code, 0, stats.stderr);
   const statsJson = JSON.parse(fs.readFileSync(path.join(outputDir, 'stats.json'), 'utf8'));
   assert.equal(statsJson.status, 'PASS');
+});
+
+test('runs academic writing audit from Node and reads advisory reports', async (t) => {
+  const projectRoot = path.resolve(__dirname, '..');
+  const outputDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sra-writing-adapter-'));
+  t.after(() => fs.rmSync(outputDir, { recursive: true, force: true }));
+  const target = path.join(outputDir, 'writing');
+  const result = await sra.writingAudit(path.join(projectRoot, 'examples/academic_writing_sample.md'), {
+    cwd: projectRoot, out: target, genre: 'original-research',
+    abstractMaxWords: 4, stdio: 'pipe',
+  });
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(fs.readFileSync(target + '.json', 'utf8'));
+  assert.equal(report.tool, 'academic-writing-audit');
+  assert.ok(report.findings.some((finding) => finding.code === 'unmatched_numeric_citation'));
+  assert.ok(report.findings.some((finding) => finding.code === 'abstract_above_limit'));
+  assert.match(fs.readFileSync(target + '.md', 'utf8'), /Review prompts/);
 });

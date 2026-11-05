@@ -137,10 +137,35 @@ function verifyStats(input, options = {}) {
   return run(args, options);
 }
 
+function writingAudit(input, options = {}) {
+  if (typeof input !== 'string' || input.length === 0) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  const genre = options.genre || 'general';
+  if (!['general', 'original-research'].includes(genre)) {
+    return Promise.reject(new TypeError('genre must be "general" or "original-research"'));
+  }
+  const args = ['writing-audit', input, '--genre', genre];
+  for (const [name, flag] of [
+    ['abstractMinWords', '--abstract-min-words'],
+    ['abstractMaxWords', '--abstract-max-words'],
+  ]) {
+    if (options[name] !== undefined) {
+      if (!Number.isSafeInteger(options[name]) || options[name] < 0) {
+        return Promise.reject(new TypeError(name + ' must be a non-negative integer'));
+      }
+      args.push(flag, String(options[name]));
+    }
+  }
+  args.push('--out', options.out || 'academic-writing-report');
+  return run(args, options);
+}
+
 module.exports = {
   run,
   audit,
   createReviewTemplate,
   reviewModel,
   verifyStats,
+  writingAudit,
 };

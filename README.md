@@ -6,7 +6,9 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.5.1
+## Current status: v0.5.1 (latest tagged release)
+
+The main branch also contains source changes that are not yet in a new tagged Python or npm release. Install from source to use the latest academic-writing module.
 
 This patch release hardens authenticated model API transport and JSON handling, stabilizes Welch and pooled-standard-deviation calculations across extreme numeric scales, and corrects Hedges' g for very large degrees of freedom. It retains the traceable reasoning-review layer and independently recalculable statistical summary checks introduced in earlier releases.
 
@@ -28,6 +30,7 @@ This patch release hardens authenticated model API transport and JSON handling, 
 - Require explicit causal-assumption review even when a lexically similar assumption sentence was extracted; lexical overlap no longer clears the causal assumption gap.
 - Produce JSON and Markdown audit reports plus a machine-readable statistical verification result.
 - Run tests using Python's standard library plus the optional SciPy statistics extra.
+- Check academic writing structure, citations/reference-list candidates, placeholders and potentially overconfident wording using a separate advisory report.
 
 ### Interpretation rules
 
@@ -78,14 +81,16 @@ Use the CLI after installation:
     npx sra audit examples/sample_manuscript.md --out reports/sample
     npx sra review-template examples/sample_manuscript.md --mode single
     npx sra verify-stats examples/welch_t_example.json
+    npx sra writing-audit examples/academic_writing_sample.md --genre original-research
 
 Or call it from JavaScript:
 
-    const { audit, createReviewTemplate, verifyStats } = require("scientific-reasoning-auditor");
+    const { audit, createReviewTemplate, verifyStats, writingAudit } = require("scientific-reasoning-auditor");
 
     await audit("manuscript.md", { out: "reports/manuscript" });
     await createReviewTemplate("manuscript.md", { mode: "parallel" });
     await verifyStats("welch-input.json");
+    await writingAudit("manuscript.md", { genre: "original-research", abstractMaxWords: 250 });
 
 The functions return `{ code, signal, stdout, stderr }`. By default command output is inherited from the current terminal; pass `stdio: "pipe"` to capture output. The `reviewModel` function also accepts `model`, `baseUrl`, `apiKeyEnv`, `timeout` and `out` options. The Python engine remains the source of truth for audit behavior and output schemas.
 
@@ -134,6 +139,21 @@ Give the template and full manuscript to the selected model or external orchestr
     sra audit examples/logic_review_demo.md --semantic-review reports/semantic-review-completed.json --out reports/semantic-reviewed
 
 The template includes a complete source-bound catalog of Results evidence-node IDs, passages and locations. The importer checks the manuscript hash and reasoning-graph fingerprint, requires graph-linked support IDs or explicit reviewer-selected Results evidence IDs, and validates the existence, type and source quotation provenance of selected nodes. Reviewer-selected evidence provenance is checked, but its semantic relevance is not proven. Current-schema quotations must be at least 20 characters and match both the manuscript and selected node text. The importer also enforces the review contract and UTC timestamps. It does not prove the external reviewer’s semantic judgment; expert adjudication remains necessary. The application can call one OpenAI-compatible model in single mode. Parallel-agent execution remains an external orchestration step.
+
+## Academic writing review
+
+Run a separate, offline academic-writing checklist without changing the manuscript. This main-branch feature is not part of the last tagged release (v0.5.1):
+
+    sra writing-audit examples/academic_writing_sample.md --genre original-research --abstract-max-words 250 --out reports/writing-review
+
+This creates a structured JSON report and a readable Markdown report. Review prompts include:
+
+- Recognizable section headings (English/Turkish), with an optional original-research checklist.
+- Abstract word count; word limits apply **only if configured** for the target journal.
+- Numeric references such as [1] and [2-3], and simple author-year references such as (Smith, 2020) / Smith (2020), matched conservatively to entries in a References/Kaynakça section.
+- Unmatched citations, unrecognized reference formats, uncited entries, duplicate numbers/author-year keys, editing placeholders, and potentially absolute wording, with source line numbers where available.
+
+The default genre is general, so non-IMRaD manuscripts are not automatically treated as incomplete. Warnings are advisory and do not produce a nonzero process exit code. Citation style support is limited and matching an author and year is **not** proof of bibliographic identity or support for a scientific claim. This tool is **not** a full grammar corrector, plagiarism detector, DOI validator, copyeditor, or substitute for journal-specific and expert review. No source content is sent to any external API.
 
 ## Independently verify a Welch t-test
 
