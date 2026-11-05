@@ -25,6 +25,35 @@ specificity, false-positive rate or claim-support verification.
    agreement, representativeness, uncertainty and discipline differences.
    Wilson intervals here do not adjust for sampling bias or paper clustering.
 
+## Executable pack and adjudication workflow
+
+A frozen pilot plan is in
+[PREREGISTRATION_20261106.md](PREREGISTRATION_20261106.md). It fixes the
+12-paper corpus, two finding codes, reviewer qualifications and analysis
+before any label is collected.
+
+`sra validation-pack` refetches the frozen papers, refuses changed source
+hashes, and writes one prediction-free worksheet per reviewer plus the
+supplied paper texts. `sra adjudicate-labels` verifies both worksheets,
+requires every paper/code unit, and merges only third-party decisions for
+disagreements. Reviewers receive the separate
+[CODING_MANUAL_20261106.md](CODING_MANUAL_20261106.md), not this full
+protocol, the preregistration or the frozen benchmark:
+
+    sra validation-pack benchmarks/pmc_smoke_20261105.json \
+      --reviewer reviewer_1 --reviewer reviewer_2 \
+      --code potential_overclaim --code references_section_missing \
+      --manual benchmarks/CODING_MANUAL_20261106.md \
+      --out-dir /external/validation-20261106 --online
+
+    sra adjudicate-labels benchmarks/pmc_smoke_20261105.json \
+      reviewer_1.json reviewer_2.json adjudications.json \
+      --out final-labels.json
+
+These commands verify structure and hashes only. They do not verify that
+the declared reviewers are qualified, independent or actually blinded, and
+they cannot create expert labels.
+
 ## Label schema
 
 The following is an illustrative **format only**, not real expert evidence.

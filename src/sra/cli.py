@@ -13,6 +13,7 @@ from sra.doi import verify_dois
 from sra.benchmark import run_pmc_benchmark
 from sra.discipline import CHECKLISTS
 from sra.validation import evaluate_blinded_labels
+from sra.labeling import build_validation_pack, merge_adjudicated_labels
 from sra.domain_evidence import PROFILES, audit_domain_file
 from sra.domain_adjudication import make_domain_template, validate_domain_adjudication
 from sra.academic_benchmark import evaluate_arxiv_edit_pairs
@@ -139,6 +140,32 @@ def main() -> int:
     evaluate.add_argument("benchmark", help="Frozen PMC benchmark JSON report.")
     evaluate.add_argument("labels", help="External blinded expert-label JSON file.")
     evaluate.add_argument("--out", default="expert-validation-report.json")
+
+    pack = sub.add_parser(
+        "validation-pack",
+        help="Fetch frozen PMC papers and create blinded reviewer worksheets without predictions.",
+    )
+    pack.add_argument("benchmark", help="Frozen PMC benchmark JSON report.")
+    pack.add_argument("--reviewer", action="append", required=True,
+                      help="Declared reviewer ID; repeat exactly twice.")
+    pack.add_argument("--code", action="append", required=True,
+                      help="Preregistered finding code; repeatable.")
+    pack.add_argument("--manual", default=None,
+                      help="Optional coding manual copied into the pack.")
+    pack.add_argument("--out-dir", required=True,
+                      help="New or empty external directory for texts and worksheets.")
+    pack.add_argument("--online", action="store_true",
+                      help="Explicitly retrieve full text via authorized NIH BioC API.")
+
+    merge = sub.add_parser(
+        "adjudicate-labels",
+        help="Merge two blinded worksheets and third-party disagreement decisions.",
+    )
+    merge.add_argument("benchmark", help="Frozen PMC benchmark JSON report.")
+    merge.add_argument("reviewer_a", help="First reviewer's completed worksheet.")
+    merge.add_argument("reviewer_b", help="Second reviewer's completed worksheet.")
+    merge.add_argument("adjudications", help="Adjudicator decisions for every disagreement.")
+    merge.add_argument("--out", default="adjudicated-labels.json")
 
     language_benchmark = sub.add_parser(
         "benchmark-language",
@@ -308,6 +335,40 @@ def main() -> int:
         out.write_text(serialized, encoding="utf-8")
         print(f"Evaluated {result['labelled_units']} blinded-labelled units.")
         print(f"Report: {out.resolve()}")
+        return 0
+
+    if args.command == "validation-pack":
+        try:
+            result = build_validation_pack(
+                args.benchmark, args.out_dir, args.reviewer, args.code,
+                online=args.online, manual_path=args.manual,
+            )
+        except (OSError, ValueError, RuntimeError, TypeError) as exc:
+            parser.error(str(exc))
+        print(f"Validation pack: {result['paper_count']} papers, {result['unit_count']} units.")
+        print("Automated predictions: NOT INCLUDED; two independent reviewers must label every unit.")
+        print(f"Pack: {Path(args.out_dir).resolve()}")
+        return 0
+
+    if args.command == "adjudicate-labels":
+        try:
+            result = merge_adjudicated_labels(
+                args.benchmark, args.reviewer_a, args.reviewer_b, args.adjudications
+            )
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, RuntimeError, TypeError, KeyError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        inputs = [args.benchmark, args.reviewer_a, args.reviewer_b, args.adjudications]
+        if out.resolve() in {Path(item).resolve() for item in inputs}:
+            parser.error("Output must not overwrite the benchmark, worksheets or adjudications.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(
+            f"Merged {len(result['cases'])} units; "
+            f"{result['inter_reviewer_agreement']['disagreements']} disagreement(s)."
+        )
+        print(f"Labels: {out.resolve()}")
         return 0
 
     if args.command == "audit":

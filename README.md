@@ -333,6 +333,24 @@ No external expert labels are bundled or fabricated. Thus no sensitivity,
 specificity or independent scientific performance score is available yet.
 See [independent validation protocol](benchmarks/VALIDATION_PROTOCOL.md).
 
+Before evaluation, build a prediction-free review pack and merge the two
+independent worksheets with third-party disagreement decisions:
+
+    sra validation-pack benchmarks/pmc_smoke_20261105.json \
+      --reviewer reviewer_1 --reviewer reviewer_2 \
+      --code potential_overclaim --code references_section_missing \
+      --manual benchmarks/CODING_MANUAL_20261106.md \
+      --out-dir /external/validation-20261106 --online
+
+    sra adjudicate-labels benchmarks/pmc_smoke_20261105.json \
+      reviewer_1.json reviewer_2.json adjudications.json \
+      --out final-labels.json
+
+The frozen pilot plan is
+[benchmarks/PREREGISTRATION_20261106.md](benchmarks/PREREGISTRATION_20261106.md).
+The commands verify hashes, coverage and declared roles only; they cannot
+verify reviewer identity, qualifications, independence or actual blinding.
+
 ## Measured academic-language limitations and blinded expert review (main only)
 
 **Real human-annotated evidence:** we evaluated all 200 examples in the
