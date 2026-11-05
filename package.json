@@ -1,6 +1,6 @@
 {
   "name": "scientific-reasoning-auditor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node.js adapter for the Scientific Reasoning Auditor Python engine.",
   "main": "index.js",
   "types": "index.d.ts",
