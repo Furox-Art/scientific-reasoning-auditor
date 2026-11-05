@@ -176,6 +176,72 @@ class NewStatisticalTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "limit"):
             verify_extended_stats(spec)
 
+    def test_two_proportion_matches_independent_scipy(self):
+        from scipy import stats
+        table = [[40, 60], [30, 90]]
+        result = verify_extended_stats({"test": "two_proportion_z", "table": table})
+        p_a, p_b = 40 / 100, 30 / 120
+        pooled = (40 + 30) / 220
+        standard_error = math.sqrt(pooled * (1 - pooled) * (1 / 100 + 1 / 120))
+        z_stat = (p_a - p_b) / standard_error
+        reference = 2.0 * stats.norm.sf(abs(z_stat))
+        self.assertAlmostEqual(result["calculated"]["z"], z_stat, places=13)
+        self.assertAlmostEqual(result["calculated"]["p_two_sided"], reference, places=13)
+        self.assertAlmostEqual(result["calculated"]["difference"], 0.4 - 0.25, places=15)
+        self.assertEqual(result["calculated"]["total_n"], 220)
+        self.assertEqual(result["status"], "PARTIAL")
+        self.assertEqual(result["warnings"], [])
+        interval = result["calculated"]["confidence_interval_95"]
+        self.assertLess(interval[0], 0.15)
+        self.assertGreater(interval[1], 0.15)
+        self.assertTrue(any("unpooled Wald" in item for item in result["limitations"]))
+        json.dumps(result, allow_nan=False)
+
+    def test_two_proportion_reported_pass_and_fail(self):
+        from scipy import stats
+        table = [[40, 60], [30, 90]]
+        p_a, p_b = 40 / 100, 30 / 120
+        pooled = 70 / 220
+        standard_error = math.sqrt(pooled * (1 - pooled) * (1 / 100 + 1 / 120))
+        z_stat = (p_a - p_b) / standard_error
+        p_value = 2.0 * stats.norm.sf(abs(z_stat))
+        spec = {
+            "test": "two_proportion_z", "table": table,
+            "reported": {"z": round(z_stat, 6), "p_two_sided": round(p_value, 6)},
+            "tolerances": {"z": 1e-6, "p_two_sided": 1e-6},
+        }
+        self.assertEqual(verify_extended_stats(spec)["status"], "PASS")
+        spec["reported"] = {"z": round(z_stat, 6) + 0.5}
+        self.assertEqual(verify_extended_stats(spec)["status"], "FAIL")
+
+    def test_two_proportion_warns_on_sparse_counts_and_degenerate_interval(self):
+        low = verify_extended_stats({"test": "two_proportion_z", "table": [[1, 3], [4, 4]]})
+        self.assertTrue(any("below 5" in item for item in low["warnings"]))
+        degenerate = verify_extended_stats({
+            "test": "two_proportion_z", "table": [[0, 10], [10, 0]],
+        })
+        self.assertIsNone(degenerate["calculated"]["confidence_interval_95"])
+        self.assertTrue(any("degenerate" in item for item in degenerate["warnings"]))
+        json.dumps(degenerate, allow_nan=False)
+
+    def test_two_proportion_p_underflow_is_explicit(self):
+        spec = {"test": "two_proportion_z", "table": [[2**51, 2**51], [0, 2**52]]}
+        with self.assertRaisesRegex(ValueError, "underflowed p=0"):
+            verify_extended_stats(spec)
+
+    def test_two_proportion_table_validation_and_file_dispatch(self):
+        with self.assertRaisesRegex(ValueError, "two rows of two counts"):
+            verify_extended_stats({
+                "test": "two_proportion_z", "table": [[1, 2], [3, 4], [5, 6]],
+            })
+        payload = json.dumps({"test": "two_proportion_z", "table": [[12, 8], [7, 13]]})
+        tmp, path = temporary_file(payload, ".json")
+        with tmp:
+            result = verify_stats_file(path)
+        self.assertEqual(result["test"], "two_proportion_z")
+        self.assertEqual(len(result["input_sha256"]), 64)
+        json.dumps(result, allow_nan=False)
+
     def test_unknown_test_rejected(self):
         with self.assertRaisesRegex(ValueError, "Supported extended tests"):
             verify_extended_stats({"test": "invented_test"})

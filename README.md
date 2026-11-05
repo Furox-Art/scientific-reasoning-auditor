@@ -27,6 +27,7 @@ This release limits model API response memory use, validates reasoning-graph nod
 - Avoid attributing observational designs of reviewed papers to the authors of an explicitly identified methodological / meta-research review, unless the review itself explicitly reports its own observational design.
 - Flag selected absolute/conclusive wording.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
+- Recalculate a two-sided two-proportion z-test from a 2x2 event-count table; compare reported proportions, difference, z statistic and p-value within explicit tolerances, and report a pooled normal approximation with an unpooled Wald 95% confidence interval.
 - Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
 - Validate complete graph objects through the strict graph validator, including supported schema version, fingerprint algorithm, canonical node/edge metadata, allowed top-level fields, deterministic edge IDs, endpoint types, dangling references, duplicate IDs and dependency cycles. The lower-level node/edge validator remains available for structural-only checks. Full validation checks required node/edge fields and types, the stored derived validation result, and the graph fingerprint; the derived validation result itself is intentionally excluded from the fingerprint and is recomputed. Graph fingerprints include schema version, fingerprint algorithm, schema metadata, nodes and edges; report inferences without lexical evidence.
 - Create source-bound semantic-review 1.4 templates for external LLMs/agents using the original manuscript text (required by the Python template API); the text is checked against the extracted-text digest recorded in the audit manifest, while the raw-file digest remains separate for PDF/BOM inputs. The graph schema and fingerprint algorithm are bound explicitly; the graph's manuscript SHA-256 must equal the audited manuscript SHA-256 when templates are built or reviews are imported. Importers continue to accept review schemas 1.0–1.3 when their fingerprint matches either the current graph or the historical v1.1 fingerprint for unchanged node/edge data; changed graph content is still rejected.
@@ -200,12 +201,16 @@ The `sra verify-stats` command now supports:
 | `paired_t` | `differences` (paired-difference mean, sd, n); optional `mu0` | Paired t on differences, df, p, 95% CI |
 | `chi_square_2x2` | `table`: 2 x 2 nonnegative integer counts | Pearson chi-square, df, upper-tail `p_value`, expected counts |
 | `fisher_exact_2x2` | `table`: 2 x 2 counts | Fisher two-sided p, finite sample odds ratio |
+| `two_proportion_z` | `table`: 2 x 2 event counts (rows = groups, columns = event/non-event) | Pooled z, two-sided p, difference in proportions, unpooled Wald 95% CI |
 
     sra verify-stats examples/extended_statistics.json --out reports/stats.json
 
 For paired t, supply **within-pair differences**, not two independent
 groups' summary statistics. The Pearson chi-square test uses no Yates
 correction and emits a caution when expected cell counts are below five.
+The two-proportion z-test uses a pooled-variance normal approximation and
+emits a caution for sparse expected counts; its confidence interval is an
+unpooled Wald interval without continuity correction.
 No result confirms statistical-test suitability, input validity or scientific
 causality. `PASS` compares only explicitly reported statistics.
 

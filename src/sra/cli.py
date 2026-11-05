@@ -71,7 +71,7 @@ def main() -> int:
     model_review.add_argument("--out", default="semantic-review-completed.json", help="Output JSON path.")
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
-    stats.add_argument("input", help="JSON input for Welch, one-sample/paired t, chi-square or Fisher exact.")
+    stats.add_argument("input", help="JSON input for Welch, one-sample/paired t, two-proportion z, chi-square or Fisher exact.")
     stats.add_argument("--out", default="stats-verification.json", help="Output JSON path.")
 
     writing = sub.add_parser(

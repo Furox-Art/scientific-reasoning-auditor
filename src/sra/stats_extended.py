@@ -11,7 +11,7 @@ from typing import Any
 from sra.stats import _compare_reported, _finite_number, _finite_result, _group, _display_precision_tolerance, _json_safe_report_value
 
 
-SUPPORTED_TESTS = ("welch_t", "one_sample_t", "paired_t", "chi_square_2x2", "fisher_exact_2x2")
+SUPPORTED_TESTS = ("welch_t", "one_sample_t", "paired_t", "chi_square_2x2", "fisher_exact_2x2", "two_proportion_z")
 
 
 def _settings(spec: dict[str, Any], calculated: dict[str, float]) -> tuple[list[dict], str]:
@@ -93,6 +93,10 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
     warnings: list[str] = []
     assumptions: list[str]
     method: str
+    interval_limitation = (
+        "CI estimates are two-sided 95% t intervals on mean differences when available; "
+        "Fisher's exact test does not calculate a confidence interval here."
+    )
 
     if test in ("one_sample_t", "paired_t"):
         key = "sample" if test == "one_sample_t" else "differences"
@@ -136,6 +140,80 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
                 "Pairs are independent and differences are approximately normal or sample is sufficiently large.",
             ]
         extra["inputs"] = {key: {"mean": mean, "sd": sd, "n": n}}
+    elif test == "two_proportion_z":
+        table = _table_2x2(spec)
+        (a, b), (c, d) = table
+        n_a = a + b
+        n_b = c + d
+        n = n_a + n_b
+        p_a = _finite_result(a / n_a, "group_a proportion")
+        p_b = _finite_result(c / n_b, "group_b proportion")
+        difference = _finite_result(p_a - p_b, "difference in proportions")
+        pooled_p = _finite_result((a + c) / n, "pooled proportion")
+        pooled_variance = _finite_result(pooled_p * (1.0 - pooled_p), "pooled variance")
+        standard_error = _finite_result(
+            math.sqrt(pooled_variance * (1.0 / n_a + 1.0 / n_b)),
+            "pooled standard error",
+        )
+        z_stat = _finite_result(difference / standard_error, "z statistic")
+        p = _valid_probability(2.0 * stats.norm.sf(abs(z_stat)))
+        unpooled_variance = _finite_result(
+            p_a * (1.0 - p_a) / n_a + p_b * (1.0 - p_b) / n_b,
+            "unpooled variance",
+        )
+        unpooled_se = _finite_result(math.sqrt(unpooled_variance), "unpooled standard error")
+        if unpooled_se > 0:
+            critical = _finite_result(float(stats.norm.ppf(0.975)), "z critical")
+            half_width = _finite_result(
+                critical * unpooled_se, "confidence interval half-width"
+            )
+            ci = [
+                _finite_result(difference - half_width, "confidence interval lower"),
+                _finite_result(difference + half_width, "confidence interval upper"),
+            ]
+        else:
+            ci = None
+            warnings.append(
+                "The unpooled Wald confidence interval is degenerate because both proportions "
+                "are 0 or 1; no interval is reported."
+            )
+        expected_counts = [
+            n_a * pooled_p,
+            n_a * (1.0 - pooled_p),
+            n_b * pooled_p,
+            n_b * (1.0 - pooled_p),
+        ]
+        if min(expected_counts) < 5:
+            warnings.append(
+                "At least one expected success/failure count is below 5; the pooled normal "
+                "approximation may be unreliable. Consider Fisher's exact test."
+            )
+        calculated = {
+            "p_a": p_a,
+            "p_b": p_b,
+            "difference": difference,
+            "pooled_p": pooled_p,
+            "standard_error": standard_error,
+            "z": z_stat,
+            "p_two_sided": p,
+        }
+        extra = {
+            "inputs": {"table": table},
+            "total_n": n,
+            "expected_counts": expected_counts,
+            "confidence_interval_95": ci,
+            "standard_error_unpooled": unpooled_se,
+        }
+        method = "Two-sided two-proportion z-test (pooled-variance normal approximation)"
+        interval_limitation = (
+            "The confidence interval is an unpooled Wald interval for the difference in "
+            "proportions without continuity correction; it is not a pooled-null interval."
+        )
+        assumptions = [
+            "The two groups are independent and each row contains absolute event counts.",
+            "The pooled normal approximation is adequate for the sample sizes and expected counts.",
+            "The confidence interval uses an unpooled Wald standard error without continuity correction.",
+        ]
     else:
         table = _table_2x2(spec)
         if test == "fisher_exact_2x2" and sum(map(sum, table)) > 1_000_000:
@@ -193,6 +271,6 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
         "limitations": [
             "Recalculation is conditional on supplied summary data; raw data, study design, data integrity and assumptions are not independently verified.",
             "A PASS means selected reported numbers agree within tolerance, not that the inference or choice of statistical method is valid.",
-            "CI estimates are two-sided 95% t intervals on mean differences when available; Fisher's exact test does not calculate a confidence interval here.",
+            interval_limitation,
         ],
     }
