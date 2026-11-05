@@ -112,7 +112,15 @@ def _split_sections(text: str, allow_plain: bool = False) -> tuple[dict[str, str
         raw_section = without_fenced_code(text[content_start:end])
         leading = len(raw_section) - len(raw_section.lstrip())
         sections[name] = raw_section.strip()
-        start_lines[name] = text.count("\n", 0, content_start + leading) + 1
+        # Raw fenced-code contents were replaced with line breaks. Their
+        # original character lengths do NOT correspond to sanitized offsets.
+        # Count preserved line breaks rather than adding sanitized lengths to
+        # original source byte/character offsets.
+        start_lines[name] = (
+            text.count("\n", 0, content_start)
+            + raw_section[:leading].count("\n")
+            + 1
+        )
 
     preamble = without_fenced_code(text[:matches[0][2]]).strip()
     if preamble:

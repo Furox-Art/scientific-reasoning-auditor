@@ -169,6 +169,30 @@ function writingAudit(input, options = {}) {
     }
     args.push('--design', options.design);
   }
+  if (options.discipline !== undefined) {
+    if (!['clinical','animal','physics','chemistry','computing','social-science'].includes(options.discipline)) {
+      return Promise.reject(new TypeError('unsupported discipline'));
+    }
+    args.push('--discipline', options.discipline);
+  }
+  if (options.grammarEngine !== undefined) {
+    if (!['rules','local-languagetool'].includes(options.grammarEngine)) {
+      return Promise.reject(new TypeError('unsupported grammarEngine'));
+    }
+    args.push('--grammar-engine', options.grammarEngine);
+  }
+  if (options.grammarPort !== undefined) {
+    if (!Number.isSafeInteger(options.grammarPort) || options.grammarPort < 1024 || options.grammarPort > 65535) {
+      return Promise.reject(new TypeError('grammarPort must be in 1024..65535'));
+    }
+    args.push('--grammar-port', String(options.grammarPort));
+  }
+  if (options.grammarTimeout !== undefined) {
+    if (!Number.isFinite(options.grammarTimeout) || options.grammarTimeout < 0.5 || options.grammarTimeout > 30) {
+      return Promise.reject(new TypeError('grammarTimeout must be in 0.5..30'));
+    }
+    args.push('--grammar-timeout', String(options.grammarTimeout));
+  }
   args.push('--out', options.out || 'academic-writing-report');
   return run(args, options);
 }
@@ -214,6 +238,41 @@ function benchmarkPmc(manifest, options = {}) {
   return run(args, options);
 }
 
+const DISCIPLINES = ['clinical','animal','physics','chemistry','computing','social-science'];
+
+function domainReview(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  if (!DISCIPLINES.includes(options.discipline)) {
+    return Promise.reject(new TypeError('a supported discipline is required'));
+  }
+  return run(['domain-review', input, '--discipline', options.discipline,
+    '--out', options.out || 'domain-review.json'], options);
+}
+
+function domainTemplate(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  if (!DISCIPLINES.includes(options.discipline)) {
+    return Promise.reject(new TypeError('a supported discipline is required'));
+  }
+  return run(['domain-template', input, '--discipline', options.discipline,
+    '--out', options.out || 'domain-template.json'], options);
+}
+
+function domainValidate(input, assessments, options = {}) {
+  if (typeof input !== 'string' || !input.length || typeof assessments !== 'string' || !assessments.length) {
+    return Promise.reject(new TypeError('input and assessments must be non-empty file paths'));
+  }
+  if (!DISCIPLINES.includes(options.discipline)) {
+    return Promise.reject(new TypeError('a supported discipline is required'));
+  }
+  return run(['domain-validate', input, assessments, '--discipline', options.discipline,
+    '--out', options.out || 'domain-adjudication.json'], options);
+}
+
 module.exports = {
   run,
   audit,
@@ -224,4 +283,7 @@ module.exports = {
   verifyDoi,
   benchmarkPmc,
   evaluateLabels,
+  domainReview,
+  domainTemplate,
+  domainValidate,
 };

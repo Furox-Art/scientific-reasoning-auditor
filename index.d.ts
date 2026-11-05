@@ -37,6 +37,10 @@ export interface WritingAuditOptions extends RunOptions {
   abstractMaxWords?: number;
   styleLanguage?: 'en' | 'tr' | 'none';
   design?: 'clinical-trial' | 'observational' | 'systematic-review' | 'computational';
+  discipline?: 'clinical' | 'animal' | 'physics' | 'chemistry' | 'computing' | 'social-science';
+  grammarEngine?: 'rules' | 'local-languagetool';
+  grammarPort?: number;
+  grammarTimeout?: number;
 }
 
 export interface OutputOptions extends RunOptions {
@@ -58,3 +62,11 @@ export function verifyDoi(input: string, options?: OnlineCheckOptions): Promise<
 export function benchmarkPmc(manifest: string, options: OnlineCheckOptions): Promise<CommandResult>;
 
 export function evaluateLabels(benchmark: string, labels: string, options?: OutputOptions): Promise<CommandResult>;
+
+export interface DomainReviewOptions extends RunOptions {
+  out?: string;
+  discipline: 'clinical' | 'animal' | 'physics' | 'chemistry' | 'computing' | 'social-science';
+}
+export function domainReview(input: string, options: DomainReviewOptions): Promise<CommandResult>;
+export function domainTemplate(input: string, options: DomainReviewOptions): Promise<CommandResult>;
+export function domainValidate(input: string, assessments: string, options: DomainReviewOptions): Promise<CommandResult>;

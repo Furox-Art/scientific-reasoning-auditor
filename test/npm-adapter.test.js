@@ -17,6 +17,9 @@ test('exports the documented Node API', () => {
   assert.equal(typeof sra.verifyDoi, 'function');
   assert.equal(typeof sra.benchmarkPmc, 'function');
   assert.equal(typeof sra.evaluateLabels, 'function');
+  assert.equal(typeof sra.domainReview, 'function');
+  assert.equal(typeof sra.domainTemplate, 'function');
+  assert.equal(typeof sra.domainValidate, 'function');
 });
 
 test('rejects invalid arguments before starting Python', async () => {
@@ -36,6 +39,13 @@ test('rejects invalid arguments before starting Python', async () => {
   await assert.rejects(sra.evaluateLabels('benchmark.json', ''), /labels/);
   await assert.rejects(sra.writingAudit('file.md', { styleLanguage: 'unknown' }), /styleLanguage/);
   await assert.rejects(sra.writingAudit('file.md', { design: 'unknown' }), /study design/);
+  await assert.rejects(sra.writingAudit('file.md', { discipline: 'unknown' }), /discipline/);
+  await assert.rejects(sra.writingAudit('file.md', { grammarEngine: 'external' }), /grammarEngine/);
+  await assert.rejects(sra.writingAudit('file.md', { grammarPort: 99 }), /grammarPort/);
+  await assert.rejects(sra.writingAudit('file.md', { grammarTimeout: 99 }), /grammarTimeout/);
+  await assert.rejects(sra.domainReview('file.md', { discipline: 'wrong' }), /discipline/);
+  await assert.rejects(sra.domainTemplate('', { discipline: 'clinical' }), /non-empty file path/);
+  await assert.rejects(sra.domainValidate('file.md', '', { discipline: 'physics' }), /non-empty file paths/);
 });
 
 test('runs the existing Python CLI without installing dependencies', async () => {
@@ -110,4 +120,28 @@ test('runs registry identifier scan in offline mode', async (t) => {
   assert.equal(outcome.code, 0, outcome.stderr);
   const result = JSON.parse(fs.readFileSync(target, 'utf8'));
   assert.equal(result.results[0].status, 'NOT_CHECKED_OFFLINE');
+});
+
+test('runs grounded domain review and exports expert template via Node', async (t) => {
+  const projectRoot = path.resolve(__dirname, '..');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sra-domain-adapter-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const manuscript = path.join(dir, 'article.md');
+  fs.writeFileSync(manuscript, '# Methods\nWe calibrated the instrument with a NIST reference.\n'
+    + '# Results\nA measured field was 1.5 ± 0.2 mT.\n');
+  const review = path.join(dir, 'review.json');
+  const outcome = await sra.domainReview(manuscript, {
+    discipline: 'physics', out: review, stdio: 'pipe', cwd: projectRoot,
+  });
+  assert.equal(outcome.code, 0, outcome.stderr);
+  const result = JSON.parse(fs.readFileSync(review, 'utf8'));
+  assert.equal(result.summary.textual_candidates, 2);
+  const template = path.join(dir, 'template.json');
+  const templateOutcome = await sra.domainTemplate(manuscript, {
+    discipline: 'physics', out: template, stdio: 'pipe', cwd: projectRoot,
+  });
+  assert.equal(templateOutcome.code, 0, templateOutcome.stderr);
+  const draft = JSON.parse(fs.readFileSync(template, 'utf8'));
+  assert.equal(draft.kind, 'manual_domain_expert_assessment_template');
+  assert.equal(draft.assessments.length, result.items.length);
 });

@@ -13,6 +13,8 @@ from typing import Any
 from sra.document import ParsedDocument, load_document
 from sra.writing_style import style_review
 from sra.discipline import reporting_cues, CHECKLISTS
+from sra.domain_evidence import review_domain, PROFILES
+from sra.grammar_engine import check_local_languagetool
 
 _WORD = re.compile(r"\b[\w]+(?:['’\-][\w]+)*\b", re.UNICODE)
 _NUMBERED_CITATION = re.compile(
@@ -94,6 +96,10 @@ def audit_academic_writing(
     abstract_max_words: int | None = None,
     style_language: str = "en",
     design: str | None = None,
+    discipline: str | None = None,
+    grammar_engine: str = "rules",
+    grammar_port: int = 8081,
+    grammar_timeout: float = 8.0,
 ) -> dict[str, Any]:
     """Check section structure, placeholders, cautious phrasing and citation candidates.
 
@@ -114,6 +120,12 @@ def audit_academic_writing(
 
     if design is not None and design not in CHECKLISTS:
         raise ValueError("Unsupported study design. Choose from: " + ", ".join(CHECKLISTS))
+    if discipline is not None and discipline not in PROFILES:
+        raise ValueError("Unsupported discipline. Choose from: " + ", ".join(PROFILES))
+    if grammar_engine not in ("rules", "local-languagetool"):
+        raise ValueError("grammar_engine must be rules or local-languagetool.")
+    if grammar_engine == "local-languagetool" and style_language == "none":
+        raise ValueError("A language en or tr must be selected for local grammar checking.")
     document: ParsedDocument = load_document(path)
     sections = list(document.sections.items())
     groups: dict[str, list[str]] = {
@@ -231,6 +243,13 @@ def audit_academic_writing(
     style_suggestions = style_review(
         document, language=style_language, excluded_sections=reference_names,
     )
+    grammar_suggestions = (
+        check_local_languagetool(
+            document, language=style_language, excluded_sections=reference_names,
+            port=grammar_port, timeout=grammar_timeout,
+        ) if grammar_engine == "local-languagetool" else []
+    )
+    domain = review_domain(document, discipline) if discipline is not None else None
     checklist = reporting_cues(document, design) if design is not None else None
     findings.sort(key=lambda finding: (finding["line"] is None, finding["line"] or 0, finding["code"]))
     return {
@@ -239,7 +258,11 @@ def audit_academic_writing(
         "source": document.source,
         "source_sha256": document.sha256,
         "genre": genre,
-        "status": "REVIEW_REQUIRED" if (findings or style_suggestions) else "NO_AUTOMATED_FLAGS",
+        "status": (
+            "REVIEW_REQUIRED"
+            if (findings or style_suggestions or grammar_suggestions or domain is not None)
+            else "NO_AUTOMATED_FLAGS"
+        ),
         "metrics": {
             "document_word_count": sum(len(_WORD.findall(text)) for _, text in body_sections),
             "abstract_word_count": abstract_words if groups["abstract"] else None,
@@ -256,6 +279,9 @@ def audit_academic_writing(
         "findings": findings,
         "style_language": style_language,
         "style_suggestions": style_suggestions,
+        "grammar_engine": grammar_engine,
+        "grammar_suggestions": grammar_suggestions,
+        "discipline_review": domain,
         "reporting_checklist": checklist,
         "limitations": [
             "Heuristic checks are editorial review prompts, not proof of correctness or scientific validity.",
@@ -295,6 +321,33 @@ def writing_report_markdown(result: dict[str, Any]) -> str:
             f"{html.escape(item['excerpt'])} — "
             f"{html.escape(item['suggestion'])}"
         )
+    lines += ["", "## Local grammar suggestions"]
+    local = result.get("grammar_suggestions") or []
+    if not local:
+        lines.append("No local grammar engine suggestions (engine may be disabled).")
+    for item in local:
+        lines.append(
+            f"- **{html.escape(item['rule_id'])} (line {item['line']}):** "
+            f"{html.escape(item['excerpt'])} — "
+            f"{html.escape(item['suggestion'])} "
+            "(review before editing)"
+        )
+    domain = result.get("discipline_review")
+    if domain is not None:
+        lines += ["", "## Discipline-specific evidence candidates"]
+        lines.append(f"Discipline: {html.escape(domain['discipline'])}")
+        lines.append(f"Ruleset SHA-256: {domain['ruleset_sha256']}")
+        for entry in domain["items"]:
+            lines.append(
+                f"- **{html.escape(entry['rule_id'])}:** "
+                f"{entry['status']}; expert assessment required"
+            )
+            for evidence in entry["evidence"]:
+                lines.append(
+                    f"  - {html.escape(evidence['section'])} "
+                    f"(line {evidence['line']}): {html.escape(evidence['excerpt'])}"
+                )
+        lines.append("Text matches are NOT expert verification or guideline compliance.")
     checklist = result.get("reporting_checklist")
     if checklist is not None:
         lines += ["", "## Study-design reporting cues"]

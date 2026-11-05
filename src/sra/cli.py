@@ -13,6 +13,8 @@ from sra.doi import verify_dois
 from sra.benchmark import run_pmc_benchmark
 from sra.discipline import CHECKLISTS
 from sra.validation import evaluate_blinded_labels
+from sra.domain_evidence import PROFILES, audit_domain_file
+from sra.domain_adjudication import make_domain_template, validate_domain_adjudication
 
 
 def main() -> int:
@@ -60,6 +62,36 @@ def main() -> int:
     writing.add_argument("--style-language", choices=("en", "tr", "none"), default="en")
     writing.add_argument("--design", choices=tuple(CHECKLISTS), default=None,
                          help="Optional study-design reporting cues (not formal compliance).")
+    writing.add_argument("--discipline", choices=tuple(PROFILES), default=None,
+                         help="Source-located discipline-specific evidence prompts.")
+    writing.add_argument(
+        "--grammar-engine", choices=("rules", "local-languagetool"), default="rules",
+        help="Optional local-only LanguageTool service (no cloud API calls).",
+    )
+    writing.add_argument("--grammar-port", type=int, default=8081)
+    writing.add_argument("--grammar-timeout", type=float, default=8.0)
+
+    domain_review = sub.add_parser(
+        "domain-review", help="Paragraph-grounded discipline reporting cues, not expert verdicts."
+    )
+    domain_review.add_argument("input")
+    domain_review.add_argument("--discipline", choices=tuple(PROFILES), required=True)
+    domain_review.add_argument("--out", default="domain-review.json")
+
+    domain_template = sub.add_parser(
+        "domain-template", help="Export a source-bound template for two external experts."
+    )
+    domain_template.add_argument("input")
+    domain_template.add_argument("--discipline", choices=tuple(PROFILES), required=True)
+    domain_template.add_argument("--out", default="domain-template.json")
+
+    domain_validate = sub.add_parser(
+        "domain-validate", help="Check completed external expert assessments and source quotes."
+    )
+    domain_validate.add_argument("input")
+    domain_validate.add_argument("assessments")
+    domain_validate.add_argument("--discipline", choices=tuple(PROFILES), required=True)
+    domain_validate.add_argument("--out", default="domain-adjudication.json")
 
     doi = sub.add_parser("doi-check", help="Extract DOIs and optionally check Crossref registry metadata.")
     doi.add_argument("input", help="Manuscript path.")
@@ -90,6 +122,8 @@ def main() -> int:
                 abstract_min_words=args.abstract_min_words,
                 abstract_max_words=args.abstract_max_words,
                 style_language=args.style_language, design=args.design,
+                discipline=args.discipline, grammar_engine=args.grammar_engine,
+                grammar_port=args.grammar_port, grammar_timeout=args.grammar_timeout,
             )
             prefix = Path(args.out)
             json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")
@@ -103,9 +137,40 @@ def main() -> int:
         json_path.parent.mkdir(parents=True, exist_ok=True)
         json_path.write_text(serialized, encoding="utf-8")
         md_path.write_text(markdown, encoding="utf-8")
-        print(f"Writing audit: {len(result['findings'])} advisory review prompt(s).")
+        print(f"Writing audit: {len(result['findings'])} editorial finding(s); "
+              f"{len(result['style_suggestions'])} rule-based language suggestion(s); "
+              f"{len(result['grammar_suggestions'])} local grammar suggestion(s).")
+        if result.get("discipline_review"):
+            print(f"Domain evidence items: {len(result['discipline_review']['items'])}; "
+                  "all require expert oversight.")
         print(f"JSON: {json_path.resolve()}")
         print(f"Markdown: {md_path.resolve()}")
+        return 0
+
+    if args.command in ("domain-review", "domain-template", "domain-validate"):
+        try:
+            if args.command == "domain-review":
+                result = audit_domain_file(args.input, args.discipline)
+            elif args.command == "domain-template":
+                result = make_domain_template(load_document(args.input), args.discipline)
+            else:
+                with Path(args.assessments).open("r", encoding="utf-8") as stream:
+                    completed = json.load(stream)
+                result = validate_domain_adjudication(
+                    load_document(args.input), args.discipline, completed,
+                )
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, RuntimeError, TypeError, KeyError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        source_paths = [Path(args.input).expanduser().resolve()]
+        if args.command == "domain-validate":
+            source_paths.append(Path(args.assessments).expanduser().resolve())
+        if out.resolve() in source_paths:
+            parser.error("Output must not overwrite manuscript or assessments.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(f"{args.command}: {out.resolve()}")
         return 0
 
     if args.command == "doi-check":

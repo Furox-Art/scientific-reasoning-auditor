@@ -8,6 +8,8 @@ The software exposes reviewable reasoning risks with evidence locations and repr
 
 ## Current status: v0.5.1 (latest tagged release)
 
+The main branch contains additional **unreleased** language and domain-review tooling. Tagged PyPI/npm packages do not yet include those additions.
+
 New source-only experimental tools are listed below; the tagged release does not include them.
 
 The main branch also contains source changes that are not yet in a new tagged Python or npm release. Install from source to use the latest academic-writing module.
@@ -210,6 +212,58 @@ Official references:
 - CONSORT 2025: https://www.consort-spirit.org/
 - STROBE: https://www.strobe-statement.org/
 - PRISMA 2020: https://www.prisma-statement.org/prisma-2020
+
+### Expanded academic grammar and field review (unreleased main branch)
+
+The offline writing checker now includes additional, conservative
+English/Turkish grammar and academic phrasing patterns. Suggestions do
+**not** change the manuscript and should be judged in context.
+
+For broader spell/grammar detection, connect to a **separately installed
+and running LanguageTool local HTTP server** on your own computer
+([setup instructions](https://dev.languagetool.org/http-server)):
+
+```bash
+sra writing-audit examples/academic_writing_sample.md \
+  --style-language en --grammar-engine local-languagetool \
+  --grammar-port 8081 --out reports/writing-local
+```
+
+This mode is explicitly opt-in. The connector sends non-reference prose
+without fenced code to `http://127.0.0.1:8081/v2/check` using HTTP POST.
+Requests cannot target external hosts or inherited proxies; redirects are
+disallowed. The server is **not downloaded, started or installed** by SRA.
+A missing local server produces an explicit error. Text/reply sizes are
+bounded, suggestions preserve source-line provenance and Unicode-safe
+offsets, and no correction is automatically applied. The public
+LanguageTool endpoint is never used.
+
+Six additional **discipline-specific** reporting evidence profiles operate
+locally: `clinical`, `animal`, `physics`, `chemistry`, `computing`,
+`social-science`. Each profile contains several source-section-scoped
+questions, matching multiple required cues *in one paragraph*.
+Statuses are textual evidence candidates, partial cues or undetected cues;
+none means scientifically correct, guideline-compliant or missing information.
+
+```bash
+sra writing-audit examples/physics_domain_demo.md --discipline physics --out reports/writing-physics
+sra domain-review examples/physics_domain_demo.md --discipline physics --out reports/physics-evidence.json
+sra domain-template examples/physics_domain_demo.md --discipline physics --out reports/physics-template.json
+sra domain-validate examples/physics_domain_demo.md reports/human-completed.json --discipline physics --out reports/physics-reviewed.json
+```
+
+Two genuinely qualified independent experts must complete every assessment
+with reasoned verdicts and source quotations before the last command can
+accept a review. Acceptance checks only review completeness, document and
+ruleset hashes, and quotation provenance; it **does not verify experts or
+scientific accuracy**. No external human expert adjudication was performed
+for these software changes. Read [the full domain expert protocol](docs/DOMAIN_EXPERT_PROTOCOL.md).
+
+This layer draws on the original [CONSORT 2025](https://www.bmj.com/content/389/bmj-2024-081123),
+[ARRIVE 2.0](https://arriveguidelines.org/arrive-guidelines),
+[NIST measurement uncertainty](https://www.nist.gov/itl/sed/topic-areas/measurement-uncertainty)
+and [STROBE](https://www.strobe-statement.org/) guidance where applicable,
+but is **not a complete implementation** of these standards.
 
 ### DOI and bibliographic metadata
 
