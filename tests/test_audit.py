@@ -1,3 +1,4 @@
+import io
 import json
 import math
 import tempfile
@@ -15,11 +16,22 @@ from sra.stats import verify_stats_file, verify_welch_t_test
 
 class AuditTests(unittest.TestCase):
     def audit_text(self, text: str):
+        self._last_source_text = text
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         path = Path(tmp.name) / "paper.md"
         path.write_text(text, encoding="utf-8")
         return audit_file(path)
+
+    def build_template(self, report, review_mode: str = "single", source_text: str | None = None):
+        manuscript = source_text or getattr(self, "_last_source_text", None)
+        if manuscript is None:
+            raise AssertionError("Test must provide manuscript source text.")
+        return build_semantic_review_template(
+            report,
+            review_mode=review_mode,
+            source_text=manuscript,
+        )
 
     def test_flags_absolute_claim_and_missing_sections(self):
         report = self.audit_text(
@@ -179,19 +191,673 @@ class AuditTests(unittest.TestCase):
         )
         manifest = report.reproducibility_manifest
         self.assertEqual(manifest["input"]["sha256"], report.sha256)
+        self.assertEqual(
+            manifest["input"]["extracted_text_sha256"],
+            __import__("hashlib").sha256(
+                "# Methods\nA test was performed.\n# Results\nThe result was stable.".encode("utf-8")
+            ).hexdigest(),
+        )
         self.assertEqual(manifest["input"]["format"], "md")
-        self.assertEqual(manifest["manifest_schema_version"], "1.1")
-        self.assertEqual(report.schema_version, "1.4")
+        self.assertEqual(manifest["manifest_schema_version"], "1.4")
+        self.assertEqual(report.schema_version, "1.5")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.5.1")
-        self.assertEqual(manifest["auditor_version"], "0.5.1")
-        self.assertEqual(manifest["installed_package_version"], "0.5.1")
+        self.assertEqual(manifest["ruleset_version"], "0.5.2")
+        self.assertEqual(manifest["auditor_version"], "0.5.2")
+        self.assertEqual(manifest["installed_package_version"], "0.5.2")
         self.assertIn("source_code_revision", manifest)
         self.assertEqual(len(manifest["source_code_sha256"]), 64)
+        self.assertIn("Python tests", manifest["source_code_hash_scope"])
+        self.assertIn("GitHub Actions workflows", manifest["source_code_hash_scope"])
+        self.assertIn("tests/test_audit.py", manifest["source_code_hash_files"])
+        self.assertIn(".github/workflows/tests.yml", manifest["source_code_hash_files"])
+        self.assertIn("tools/verify_distributions.py", manifest["source_code_hash_files"])
+        self.assertEqual(
+            manifest["source_code_hash_files"],
+            sorted(manifest["source_code_hash_files"]),
+        )
         self.assertIn("working_tree_dirty", manifest)
         self.assertIn("scipy", manifest["runtime"]["dependencies"])
         json.dumps(report.to_dict(), ensure_ascii=False)
+
+    def test_distribution_verifier_rejects_duplicate_and_unexpected_archive_entries(self):
+        import importlib.util
+        import stat
+        import tarfile
+        import warnings
+        import zipfile
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_distribution_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        with tempfile.TemporaryDirectory() as directory:
+            temporary = Path(directory)
+
+            for drive_path in (
+                "C:/scientific_reasoning_auditor-0.5.2/PKG-INFO",
+                "C:relative/scientific_reasoning_auditor-0.5.2/PKG-INFO",
+            ):
+                with self.subTest(drive_path=drive_path):
+                    with self.assertRaisesRegex(SystemExit, "drive-prefixed"):
+                        verifier._safe_archive_path(drive_path, "windows-path.tar.gz")
+
+            renamed_root_sdist = temporary / "renamed-root.tar.gz"
+            with tarfile.open(renamed_root_sdist, "w:gz") as archive:
+                root_entry = tarfile.TarInfo("unexpected-project-root/")
+                root_entry.type = tarfile.DIRTYPE
+                archive.addfile(root_entry)
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.2\n"
+                info = tarfile.TarInfo("unexpected-project-root/PKG-INFO")
+                info.size = len(payload)
+                archive.addfile(info, io.BytesIO(payload))
+            with self.assertRaisesRegex(SystemExit, "does not match canonical project root"):
+                verifier._verify_sdist(
+                    renamed_root_sdist, project_root, [],
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            duplicate_sdist = temporary / "duplicate.tar.gz"
+            with tarfile.open(duplicate_sdist, "w:gz") as archive:
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.2\n"
+                for _ in range(2):
+                    info = tarfile.TarInfo("source/PKG-INFO")
+                    info.size = len(payload)
+                    archive.addfile(info, io.BytesIO(payload))
+            with self.assertRaisesRegex(SystemExit, "duplicate archive member path"):
+                verifier._verify_sdist(
+                    duplicate_sdist, project_root, [],
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            canonical_root = "scientific_reasoning_auditor-0.5.2"
+            unexpected_sdist = temporary / "unexpected.tar.gz"
+            with tarfile.open(unexpected_sdist, "w:gz") as archive:
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.2\n"
+                info = tarfile.TarInfo(f"{canonical_root}/PKG-INFO")
+                info.size = len(payload)
+                archive.addfile(info, io.BytesIO(payload))
+                extra = b"UNEXPECTED = True\n"
+                info = tarfile.TarInfo(f"{canonical_root}/src/sra/unlisted.py")
+                info.size = len(extra)
+                archive.addfile(info, io.BytesIO(extra))
+            with self.assertRaisesRegex(SystemExit, "complete source archive file inventory differs"):
+                verifier._verify_sdist(
+                    unexpected_sdist, project_root, [],
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            setup_payload_sdist = temporary / "setup-payload.tar.gz"
+            with tarfile.open(setup_payload_sdist, "w:gz") as archive:
+                root_entry = tarfile.TarInfo(f"{canonical_root}/")
+                root_entry.type = tarfile.DIRTYPE
+                archive.addfile(root_entry)
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.2\n"
+                info = tarfile.TarInfo(f"{canonical_root}/PKG-INFO")
+                info.size = len(payload)
+                archive.addfile(info, io.BytesIO(payload))
+                payload = b"from setuptools import setup\nsetup()\n"
+                info = tarfile.TarInfo(f"{canonical_root}/setup.py")
+                info.size = len(payload)
+                archive.addfile(info, io.BytesIO(payload))
+            with self.assertRaisesRegex(SystemExit, "complete source archive file inventory differs"):
+                verifier._verify_sdist(
+                    setup_payload_sdist, project_root, [],
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            for member_type, label in (
+                (tarfile.SYMTYPE, "symlink"),
+                (tarfile.LNKTYPE, "hardlink"),
+            ):
+                with self.subTest(archive_member=label):
+                    non_regular_sdist = temporary / f"{label}.tar.gz"
+                    with tarfile.open(non_regular_sdist, "w:gz") as archive:
+                        root_entry = tarfile.TarInfo("source/")
+                        root_entry.type = tarfile.DIRTYPE
+                        archive.addfile(root_entry)
+                        entry = tarfile.TarInfo("source/src/sra/unlisted.py")
+                        entry.type = member_type
+                        entry.linkname = "source/PKG-INFO"
+                        archive.addfile(entry)
+                    with self.assertRaisesRegex(SystemExit, "non-regular archive member is forbidden"):
+                        verifier._verify_sdist(
+                            non_regular_sdist, project_root, [],
+                            "scientific-reasoning-auditor", "0.5.2",
+                        )
+
+            payload_directory_sdist = temporary / "directory-payload.tar.gz"
+            with tarfile.open(payload_directory_sdist, "w:gz") as archive:
+                root_entry = tarfile.TarInfo(f"{canonical_root}/")
+                root_entry.type = tarfile.DIRTYPE
+                archive.addfile(root_entry)
+                directory_entry = tarfile.TarInfo(f"{canonical_root}/src/")
+                directory_entry.type = tarfile.DIRTYPE
+                directory_entry.size = len(b"hidden-directory-payload")
+                archive.addfile(directory_entry, io.BytesIO(b"hidden-directory-payload"))
+            with self.assertRaisesRegex(SystemExit, "directory member must be a zero-size directory"):
+                verifier._verify_sdist(
+                    payload_directory_sdist, project_root, [],
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            duplicate_wheel = temporary / "duplicate.whl"
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", UserWarning)
+                with zipfile.ZipFile(duplicate_wheel, "w") as archive:
+                    archive.writestr("sra/__init__.py", b"")
+                    archive.writestr("sra/__init__.py", b"")
+            with self.assertRaisesRegex(SystemExit, "duplicate wheel member path"):
+                verifier._verify_wheel(
+                    duplicate_wheel, project_root,
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            disguised_directory_symlink = temporary / "directory-symlink.whl"
+            with zipfile.ZipFile(disguised_directory_symlink, "w") as archive:
+                symlink_info = zipfile.ZipInfo("sra/")
+                symlink_info.create_system = 3
+                symlink_info.external_attr = (stat.S_IFLNK | 0o777) << 16
+                archive.writestr(symlink_info, "outside-package")
+            with self.assertRaisesRegex(SystemExit, "non-directory ZIP type has a directory path"):
+                verifier._verify_wheel(
+                    disguised_directory_symlink, project_root,
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            pth_wheel = temporary / "unexpected-root-pth.whl"
+            with zipfile.ZipFile(pth_wheel, "w") as archive:
+                archive.writestr("sra/__init__.py", b"VALUE = 1\n")
+                archive.writestr("audit_probe.pth", b"import pathlib; pathlib.Path('/tmp/sra-pth-ran').touch()\n")
+            symlink_wheel = temporary / "symlink.whl"
+            with zipfile.ZipFile(symlink_wheel, "w") as archive:
+                archive.writestr("sra/__init__.py", b"VALUE = 1\n")
+                symlink_info = zipfile.ZipInfo("sra/injected.py")
+                symlink_info.create_system = 3
+                symlink_info.external_attr = (stat.S_IFLNK | 0o777) << 16
+                archive.writestr(symlink_info, "injected-target.py")
+            symlink_root = temporary / "symlink-root"
+            (symlink_root / "src" / "sra").mkdir(parents=True)
+            (symlink_root / "src" / "sra" / "__init__.py").write_text(
+                "VALUE = 1\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SystemExit, "non-regular wheel member is forbidden"):
+                verifier._verify_wheel(
+                    symlink_wheel, symlink_root,
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            pth_root = temporary / "pth-root"
+            (pth_root / "src" / "sra").mkdir(parents=True)
+            (pth_root / "src" / "sra" / "__init__.py").write_text(
+                "VALUE = 1\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SystemExit, "complete wheel file inventory differs"):
+                verifier._verify_wheel(
+                    pth_wheel, pth_root,
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+            wheel_root = temporary / "wheel-root"
+            (wheel_root / "src" / "sra").mkdir(parents=True)
+            (wheel_root / "src" / "sra" / "__init__.py").write_text(
+                "VALUE = 1\n", encoding="utf-8"
+            )
+            unexpected_wheel = temporary / "unexpected.whl"
+            with zipfile.ZipFile(unexpected_wheel, "w") as archive:
+                archive.writestr("sra/__init__.py", b"VALUE = 1\n")
+                archive.writestr("sra/unlisted.txt", b"unexpected")
+            with self.assertRaisesRegex(SystemExit, "complete wheel file inventory differs"):
+                verifier._verify_wheel(
+                    unexpected_wheel, wheel_root,
+                    "scientific-reasoning-auditor", "0.5.2",
+                )
+
+    def test_distribution_verifier_rejects_tampered_wheel_entrypoint_and_record(self):
+        import base64
+        import csv
+        import hashlib
+        import importlib.util
+        import io
+        import zipfile
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_distribution_verifier_metadata", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        dist_info = "scientific_reasoning_auditor-0.5.2.dist-info"
+        sources = {
+            path.relative_to(project_root / "src").as_posix(): path.read_bytes()
+            for path in sorted((project_root / "src" / "sra").rglob("*.py"))
+            if path.is_file()
+        }
+
+        def make_wheel(
+            path: Path,
+            *,
+            bad_entrypoint: bool = False,
+            bad_record: bool = False,
+            extra_wheel_tag: bool = False,
+        ) -> None:
+            files = dict(sources)
+            files[f"{dist_info}/METADATA"] = (
+                b"Metadata-Version: 2.1\n"
+                b"Name: scientific-reasoning-auditor\n"
+                b"Version: 0.5.2\n"
+            )
+            files[f"{dist_info}/WHEEL"] = (
+                b"Wheel-Version: 1.0\n"
+                b"Generator: setuptools (78.1.0)\n"
+                b"Root-Is-Purelib: true\n"
+                b"Tag: py3-none-any\n"
+                + (
+                    b"Tag: cp312-cp312-win_amd64\n"
+                    if extra_wheel_tag
+                    else b""
+                )
+            )
+            files[f"{dist_info}/entry_points.txt"] = (
+                b"[console_scripts]\nsra = os:system\n"
+                if bad_entrypoint
+                else b"[console_scripts]\nsra = sra.cli:main\n"
+            )
+            files[f"{dist_info}/top_level.txt"] = b"sra\n"
+            files[f"{dist_info}/licenses/LICENSE"] = (project_root / "LICENSE").read_bytes()
+
+            record = io.StringIO(newline="")
+            writer = csv.writer(record, lineterminator="\n")
+            for filename, content in sorted(files.items()):
+                digest = base64.urlsafe_b64encode(
+                    hashlib.sha256(content).digest()
+                ).decode("ascii").rstrip("=")
+                if bad_record and filename == "sra/__init__.py":
+                    digest = "sha256=" + ("A" * 43)
+                else:
+                    digest = "sha256=" + digest
+                writer.writerow((filename, digest, str(len(content))))
+            writer.writerow((f"{dist_info}/RECORD", "", ""))
+            files[f"{dist_info}/RECORD"] = record.getvalue().encode("utf-8")
+
+            with zipfile.ZipFile(path, "w") as archive:
+                for filename, content in files.items():
+                    archive.writestr(filename, content)
+
+        bad_entrypoint_wheel = project_root / "tests" / "_bad-entrypoint-test.whl"
+        bad_record_wheel = project_root / "tests" / "_bad-record-test.whl"
+        bad_tag_wheel = project_root / "tests" / "_bad-tag-test.whl"
+        self.addCleanup(lambda: bad_entrypoint_wheel.unlink(missing_ok=True))
+        self.addCleanup(lambda: bad_record_wheel.unlink(missing_ok=True))
+        self.addCleanup(lambda: bad_tag_wheel.unlink(missing_ok=True))
+        make_wheel(bad_entrypoint_wheel, bad_entrypoint=True)
+        with self.assertRaisesRegex(SystemExit, "unexpected console entry-point metadata"):
+            verifier._verify_wheel(
+                bad_entrypoint_wheel, project_root,
+                "scientific-reasoning-auditor", "0.5.2",
+            )
+
+        make_wheel(bad_record_wheel, bad_record=True)
+        with self.assertRaisesRegex(SystemExit, "wheel RECORD hash/size mismatch"):
+            verifier._verify_wheel(
+                bad_record_wheel, project_root,
+                "scientific-reasoning-auditor", "0.5.2",
+            )
+
+        make_wheel(bad_tag_wheel, extra_wheel_tag=True)
+        with self.assertRaisesRegex(SystemExit, "duplicate WHEEL metadata headers"):
+            verifier._verify_wheel(
+                bad_tag_wheel, project_root,
+                "scientific-reasoning-auditor", "0.5.2",
+            )
+
+    def test_distribution_verifier_rejects_wheel_dependency_metadata_mismatch(self):
+        import base64
+        import csv
+        import hashlib
+        import importlib.util
+        import io
+        import tomllib
+        import zipfile
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_distribution_verifier_dep_metadata", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+        project = tomllib.loads(
+            (project_root / "pyproject.toml").read_text(encoding="utf-8")
+        )["project"]
+        dist_info = "scientific_reasoning_auditor-0.5.2.dist-info"
+        files = {
+            path.relative_to(project_root / "src").as_posix(): path.read_bytes()
+            for path in sorted((project_root / "src" / "sra").rglob("*.py"))
+            if path.is_file()
+        }
+        expected_fields = verifier._expected_metadata_fields(project)
+        expected_fields["Requires-Dist"] = [
+            *expected_fields["Requires-Dist"],
+            "malicious-package>=99",
+        ]
+        metadata_lines = []
+        for field, values in expected_fields.items():
+            if values is None:
+                continue
+            if isinstance(values, list):
+                metadata_lines.extend(f"{field}: {value}" for value in values)
+            else:
+                metadata_lines.append(f"{field}: {values}")
+        metadata = (
+            "\n".join(metadata_lines)
+            + "\n\n"
+            + (project_root / "README.md").read_text(encoding="utf-8")
+        ).encode("utf-8")
+        files[f"{dist_info}/METADATA"] = metadata
+        files[f"{dist_info}/WHEEL"] = (
+            b"Wheel-Version: 1.0\nRoot-Is-Purelib: true\nTag: py3-none-any\n"
+        )
+        files[f"{dist_info}/entry_points.txt"] = b"[console_scripts]\nsra = sra.cli:main\n"
+        files[f"{dist_info}/top_level.txt"] = b"sra\n"
+        files[f"{dist_info}/licenses/LICENSE"] = (project_root / "LICENSE").read_bytes()
+
+        record = io.StringIO(newline="")
+        writer = csv.writer(record, lineterminator="\n")
+        for filename, content in sorted(files.items()):
+            digest = base64.urlsafe_b64encode(
+                hashlib.sha256(content).digest()
+            ).decode("ascii").rstrip("=")
+            writer.writerow((filename, "sha256=" + digest, str(len(content))))
+        writer.writerow((f"{dist_info}/RECORD", "", ""))
+        files[f"{dist_info}/RECORD"] = record.getvalue().encode("utf-8")
+
+        malicious_wheel = project_root / "tests" / "_malicious-dependency-test.whl"
+        self.addCleanup(lambda: malicious_wheel.unlink(missing_ok=True))
+        with zipfile.ZipFile(malicious_wheel, "w") as archive:
+            for filename, content in files.items():
+                archive.writestr(filename, content)
+
+        with self.assertRaisesRegex(SystemExit, "Requires-Dist metadata differs"):
+            verifier._verify_wheel(
+                malicious_wheel,
+                project_root,
+                "scientific-reasoning-auditor",
+                "0.5.2",
+                expected_project=project,
+            )
+
+    def test_distribution_verifier_checks_nested_sdist_pkg_info_metadata(self):
+        import importlib.util
+        import io
+        import tarfile
+        import tomllib
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_nested_pkg_info_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+        project = tomllib.loads(
+            (project_root / "pyproject.toml").read_text(encoding="utf-8")
+        )["project"]
+        name = project["name"]
+        version = project["version"]
+        source_root = f"{name.replace('-', '_')}-{version}"
+        expected_files = verifier._expected_sdist_metadata_files(name, version)
+        archive_files = {f"{source_root}/{relative}" for relative in expected_files}
+        directories = verifier._expected_directories(archive_files, root=source_root)
+
+        fields = verifier._expected_metadata_fields(project)
+        lines = []
+        for field, values in fields.items():
+            if values is None:
+                continue
+            if isinstance(values, list):
+                lines.extend(f"{field}: {value}" for value in values)
+            else:
+                lines.append(f"{field}: {values}")
+        valid_metadata = (
+            "\n".join(lines)
+            + "\n\n"
+            + (project_root / "README.md").read_text(encoding="utf-8")
+        ).encode("utf-8")
+        invalid_nested_metadata = (
+            valid_metadata.split(b"\n\n", 1)[0]
+            + b"\nRequires-Dist: malicious-package>=99\n\n"
+            + valid_metadata.split(b"\n\n", 1)[1]
+        )
+
+        sdist = project_root / "tests" / "_nested-pkg-info-test.tar.gz"
+        self.addCleanup(lambda: sdist.unlink(missing_ok=True))
+        nested_pkg_info = f"src/{name.replace('-', '_')}.egg-info/PKG-INFO"
+        with tarfile.open(sdist, "w:gz") as archive:
+            for directory in sorted(directories):
+                info = tarfile.TarInfo(directory + "/")
+                info.type = tarfile.DIRTYPE
+                archive.addfile(info)
+            for relative in sorted(expected_files):
+                info = tarfile.TarInfo(f"{source_root}/{relative}")
+                payload = (
+                    valid_metadata if relative == "PKG-INFO"
+                    else invalid_nested_metadata if relative == nested_pkg_info
+                    else b""
+                )
+                info.size = len(payload)
+                archive.addfile(info, io.BytesIO(payload))
+
+        with self.assertRaisesRegex(SystemExit, "Requires-Dist metadata differs"):
+            verifier._verify_sdist(
+                sdist,
+                project_root,
+                [],
+                name,
+                version,
+                expected_project=project,
+            )
+
+    def test_distribution_verifier_preflights_zip_central_directory_limits(self):
+        import importlib.util
+        import zipfile
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_zip_preflight_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        zip_path = project_root / "tests" / "_too-many-zip-members-test.whl"
+        self.addCleanup(lambda: zip_path.unlink(missing_ok=True))
+        with zipfile.ZipFile(zip_path, "w") as archive:
+            for index in range(12):
+                archive.writestr(f"unexpected-{index}.txt", "x")
+        with self.assertRaisesRegex(SystemExit, "wheel contains too many archive members"):
+            verifier._preflight_zip_archive(zip_path, maximum_member_count=8)
+
+        import struct
+        forged_count_zip = project_root / "tests" / "_forged-eocd-count-test.whl"
+        self.addCleanup(lambda: forged_count_zip.unlink(missing_ok=True))
+        with zipfile.ZipFile(forged_count_zip, "w") as archive:
+            for index in range(12):
+                archive.writestr(f"member-{index}.txt", b"x")
+        forged = bytearray(forged_count_zip.read_bytes())
+        eocd = forged.rfind(b"PK\x05\x06")
+        struct.pack_into("<HH", forged, eocd + 8, 1, 1)
+        forged_count_zip.write_bytes(forged)
+        with self.assertRaisesRegex(SystemExit, "central-directory entry count mismatch"):
+            verifier._preflight_zip_archive(forged_count_zip, maximum_member_count=20)
+
+        oversized_directory = project_root / "tests" / "_oversized-central-directory-test.whl"
+        self.addCleanup(lambda: oversized_directory.unlink(missing_ok=True))
+        with zipfile.ZipFile(oversized_directory, "w") as archive:
+            for index in range(36):
+                info = zipfile.ZipInfo(f"entry-{index}.txt")
+                info.extra = struct.pack("<HH", 0xCAFE, 60000) + b"x" * 60000
+                archive.writestr(info, b"x")
+        with self.assertRaisesRegex(SystemExit, "central directory exceeds 2 MiB"):
+            verifier._preflight_zip_archive(oversized_directory, maximum_member_count=100)
+
+        malformed_zip = project_root / "tests" / "_malformed-eocd-test.whl"
+        self.addCleanup(lambda: malformed_zip.unlink(missing_ok=True))
+        malformed_zip.write_bytes(b"PK\x05\x06" + b"\x00" * 30)
+        with self.assertRaisesRegex(SystemExit, "invalid ZIP end-of-central-directory"):
+            verifier._preflight_zip_archive(malformed_zip, maximum_member_count=8)
+
+    def test_distribution_verifier_rejects_oversized_archive_containers(self):
+        import importlib.util
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_archive_size_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        oversized_sdist = project_root / "tests" / "_oversized-container-test.tar.gz"
+        oversized_wheel = project_root / "tests" / "_oversized-container-test.whl"
+        self.addCleanup(lambda: oversized_sdist.unlink(missing_ok=True))
+        self.addCleanup(lambda: oversized_wheel.unlink(missing_ok=True))
+        for path in (oversized_sdist, oversized_wheel):
+            with path.open("wb") as stream:
+                stream.truncate(verifier.MAX_ARCHIVE_BYTES + 1)
+
+        with self.assertRaisesRegex(SystemExit, "compressed source archive exceeds"):
+            verifier._verify_sdist(
+                oversized_sdist,
+                project_root,
+                [],
+                "scientific-reasoning-auditor",
+                "0.5.2",
+            )
+        with self.assertRaisesRegex(SystemExit, "wheel archive exceeds"):
+            verifier._preflight_zip_archive(oversized_wheel, maximum_member_count=8)
+
+    def test_distribution_verifier_limits_gzip_expansion_before_tar_parsing(self):
+        import gzip
+        import importlib.util
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_gzip_expansion_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        archive_path = project_root / "tests" / "_gzip-expansion-limit-test.tar.gz"
+        self.addCleanup(lambda: archive_path.unlink(missing_ok=True))
+        with gzip.open(archive_path, "wb") as stream:
+            remaining = verifier.MAX_ARCHIVE_UNCOMPRESSED_BYTES + 1
+            chunk = b"0" * verifier.ARCHIVE_READ_CHUNK_BYTES
+            while remaining:
+                current = min(remaining, len(chunk))
+                stream.write(chunk[:current])
+                remaining -= current
+        self.assertLess(archive_path.stat().st_size, verifier.MAX_ARCHIVE_BYTES)
+        with self.assertRaisesRegex(SystemExit, "expanded source archive exceeds"):
+            verifier._verify_sdist(
+                archive_path,
+                project_root,
+                [],
+                "scientific-reasoning-auditor",
+                "0.5.2",
+            )
+
+        invalid_gzip = project_root / "tests" / "_invalid-gzip-container-test.tar.gz"
+        self.addCleanup(lambda: invalid_gzip.unlink(missing_ok=True))
+        invalid_gzip.write_bytes(b"this is not a gzip archive")
+        with self.assertRaisesRegex(SystemExit, "invalid gzip source archive"):
+            verifier._check_gzip_archive_expansion(invalid_gzip)
+
+    def test_distribution_verifier_rejects_unrecognized_metadata_headers(self):
+        import importlib.util
+        import tomllib
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_metadata_header_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+        project = tomllib.loads(
+            (project_root / "pyproject.toml").read_text(encoding="utf-8")
+        )["project"]
+        fields = verifier._expected_metadata_fields(project)
+        lines = []
+        for field, values in fields.items():
+            if values is None:
+                continue
+            if isinstance(values, list):
+                lines.extend(f"{field}: {value}" for value in values)
+            else:
+                lines.append(f"{field}: {values}")
+        lines.append("License: Proprietary")
+        payload = (
+            "\n".join(lines)
+            + "\n\n"
+            + (project_root / "README.md").read_text(encoding="utf-8")
+        ).encode("utf-8")
+        with self.assertRaisesRegex(SystemExit, "unrecognized metadata headers"):
+            verifier._verify_metadata(
+                payload,
+                project["name"],
+                project["version"],
+                "malicious.whl",
+                expected_project=project,
+                repository_root=project_root,
+            )
+
+    def test_distribution_archive_member_reads_are_size_bounded(self):
+        import importlib.util
+        import io
+        import tarfile
+        import zipfile
+
+        project_root = Path(__file__).resolve().parents[1]
+        verifier_path = project_root / "tools" / "verify_distributions.py"
+        spec = importlib.util.spec_from_file_location("sra_bounded_archive_verifier", verifier_path)
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+        oversized = verifier.MAX_ARCHIVE_METADATA_BYTES + 1
+
+        tar_path = project_root / "tests" / "_oversized-metadata-test.tar"
+        self.addCleanup(lambda: tar_path.unlink(missing_ok=True))
+        with tarfile.open(tar_path, "w") as archive:
+            info = tarfile.TarInfo("oversized-metadata")
+            info.size = oversized
+            archive.addfile(info, io.BytesIO(b"x" * oversized))
+        with tarfile.open(tar_path, "r:") as archive:
+            member = archive.getmembers()[0]
+            with self.assertRaisesRegex(SystemExit, "archive metadata member exceeds"):
+                verifier._read_tar_member_bounded(archive, member, tar_path.name)
+
+        zip_path = project_root / "tests" / "_oversized-metadata-test.zip"
+        self.addCleanup(lambda: zip_path.unlink(missing_ok=True))
+        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr("oversized-metadata", b"0" * oversized)
+        with zipfile.ZipFile(zip_path, "r") as archive:
+            info = archive.infolist()[0]
+            with self.assertRaisesRegex(SystemExit, "wheel metadata member exceeds"):
+                verifier._read_zip_member_bounded(archive, info, zip_path.name)
+
+    def test_source_tree_hash_covers_tests_and_workflow_inputs(self):
+        from sra.provenance import _source_tree_sha256
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "src/sra").mkdir(parents=True)
+            (root / "tests").mkdir()
+            (root / ".github/workflows").mkdir(parents=True)
+            (root / "src/sra/module.py").write_text("VALUE = 1\n", encoding="utf-8")
+            (root / "tests/test_module.py").write_text("assert True\n", encoding="utf-8")
+            (root / ".github/workflows/tests.yml").write_text("name: tests\n", encoding="utf-8")
+            first_hash, scope, files = _source_tree_sha256(root)
+            self.assertIn("Python tests", scope)
+            self.assertIn("GitHub Actions workflows", scope)
+            self.assertEqual(
+                files,
+                [".github/workflows/tests.yml", "src/sra/module.py", "tests/test_module.py"],
+            )
+            (root / "tests/test_module.py").write_text("assert False\n", encoding="utf-8")
+            second_hash, _, second_files = _source_tree_sha256(root)
+            self.assertNotEqual(first_hash, second_hash)
+            self.assertEqual(files, second_files)
 
     def test_synthetic_logic_demo_emits_the_expected_review_signals(self):
         example = Path(__file__).resolve().parents[1] / "examples" / "logic_review_demo.md"
@@ -214,6 +880,12 @@ class AuditTests(unittest.TestCase):
         self.assertIn("lexical_candidate_basis", relations)
         self.assertIn("yields_claim", relations)
         self.assertIn("method_document_context", relations)
+        self.assertIn("heuristic_only", graph["edge_statuses"])
+        self.assertIn("not_semantically_verified", graph["node_statuses"])
+        self.assertEqual(
+            graph["edge_endpoint_types"]["lexical_candidate_basis"],
+            {"source": ["evidence"], "target": ["inference"]},
+        )
         self.assertEqual(graph["validation"]["status"], "PASS")
         self.assertTrue(any(edge["status"] == "document_context_only" for edge in graph["edges"]))
         self.assertEqual(len(graph["graph_fingerprint"]), 64)
@@ -309,57 +981,269 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(assumption_nodes), 1)
 
     def test_graph_integrity_validator_detects_dangling_edges_and_cycles(self):
+        from sra.graph import _edge_id
+
         nodes = [
-            {"node_id": "a", "node_type": "evidence"},
-            {"node_id": "b", "node_type": "inference"},
+            {"node_id": "a", "node_type": "evidence", "status": "extracted_heuristically"},
+            {"node_id": "b", "node_type": "inference", "status": "not_semantically_verified"},
         ]
         edges = [
-            {"edge_id": "ab", "source": "a", "target": "b", "relation": "uses"},
-            {"edge_id": "ba", "source": "b", "target": "a", "relation": "back"},
-            {"edge_id": "dangling", "source": "missing", "target": "b", "relation": "bad"},
+            {"edge_id": _edge_id("a", "b", "lexical_candidate_basis"),
+             "source": "a", "target": "b", "relation": "lexical_candidate_basis",
+             "status": "heuristic_only"},
+            {"edge_id": _edge_id("b", "a", "yields_claim"),
+             "source": "b", "target": "a", "relation": "yields_claim",
+             "status": "structural_extraction_only"},
+            {"edge_id": _edge_id("missing", "b", "lexical_candidate_basis"),
+             "source": "missing", "target": "b", "relation": "lexical_candidate_basis",
+             "status": "heuristic_only"},
         ]
         result = validate_reasoning_graph(nodes, edges)
         self.assertEqual(result["status"], "FAIL")
         self.assertTrue(result["dependency_cycle_detected"])
-        self.assertIn("dangling", result["dangling_edges"])
+        dangling_id = _edge_id("missing", "b", "lexical_candidate_basis")
+        self.assertIn(dangling_id, result["dangling_edges"])
         duplicates = validate_reasoning_graph(
-            [{"node_id": "same", "node_type": "claim"}, {"node_id": "same", "node_type": "evidence"}],
+            [
+                {"node_id": "same", "node_type": "claim", "status": "extracted_heuristically"},
+                {"node_id": "same", "node_type": "evidence", "status": "extracted_heuristically"},
+            ],
             [],
         )
         self.assertEqual(duplicates["status"], "FAIL")
         self.assertIn("same", duplicates["duplicate_node_ids"])
         duplicate_edges = validate_reasoning_graph(
-            [{"node_id": "x", "node_type": "claim"}, {"node_id": "y", "node_type": "evidence"}],
             [
-                {"edge_id": "same-edge", "source": "x", "target": "y"},
-                {"edge_id": "same-edge", "source": "x", "target": "y"},
+                {"node_id": "x", "node_type": "claim", "status": "extracted_heuristically"},
+                {"node_id": "y", "node_type": "evidence", "status": "extracted_heuristically"},
+            ],
+            [
+                {"edge_id": _edge_id("x", "y", "qualifies_claim_candidate"),
+                 "source": "x", "target": "y", "relation": "qualifies_claim_candidate",
+                 "status": "heuristic_only"},
+                {"edge_id": _edge_id("x", "y", "qualifies_claim_candidate"),
+                 "source": "x", "target": "y", "relation": "qualifies_claim_candidate",
+                 "status": "heuristic_only"},
             ],
         )
         self.assertEqual(duplicate_edges["status"], "FAIL")
-        self.assertIn("same-edge", duplicate_edges["duplicate_edge_ids"])
+        duplicate_edge_id = _edge_id("x", "y", "qualifies_claim_candidate")
+        self.assertIn(duplicate_edge_id, duplicate_edges["duplicate_edge_ids"])
 
-        malformed_node = validate_reasoning_graph([{"node_id": [], "node_type": "claim"}], [])
+        malformed_node = validate_reasoning_graph(
+            [{"node_id": [], "node_type": "claim", "status": "extracted_heuristically"}], []
+        )
         self.assertEqual(malformed_node["status"], "FAIL")
         self.assertIn(0, malformed_node["invalid_node_entries"])
         malformed_edge = validate_reasoning_graph(
-            [{"node_id": "claim-1", "node_type": "claim"}],
-            [{"edge_id": "edge-1", "source": [], "target": "claim-1"}],
+            [{"node_id": "claim-1", "node_type": "claim", "status": "extracted_heuristically"}],
+            [{"edge_id": "edge-1", "source": [], "target": "claim-1",
+              "relation": "yields_claim", "status": "structural_extraction_only"}],
         )
         self.assertEqual(malformed_edge["status"], "FAIL")
         self.assertIn(0, malformed_edge["invalid_edge_entries"])
         malformed_shapes = validate_reasoning_graph([None], [None])
         self.assertEqual(malformed_shapes["status"], "FAIL")
 
+    def test_graph_fingerprint_covers_and_validator_checks_schema_contract_metadata(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph
+
+        report = self.audit_text(
+            "# Methods\nThe protocol was prespecified.\n"
+            "# Results\nThe signal increased.\n"
+            "# Conclusion\nThe signal increased."
+        )
+        graph = report.reasoning_graph
+        original_fingerprint = graph_fingerprint(graph)
+        mutated = deepcopy(graph)
+        mutated["edge_endpoint_types"]["lexical_candidate_basis"]["source"] = ["claim"]
+        self.assertNotEqual(original_fingerprint, graph_fingerprint(mutated))
+
+        metadata = {
+            key: mutated[key]
+            for key in (
+                "node_types", "node_statuses", "edge_relations",
+                "edge_statuses", "edge_endpoint_types",
+            )
+        }
+        validation = validate_reasoning_graph(
+            mutated["nodes"], mutated["edges"], metadata=metadata
+        )
+        self.assertEqual(validation["status"], "FAIL")
+        self.assertIn("edge_endpoint_types", validation["invalid_schema_metadata"])
+
+    def test_graph_object_validator_requires_supported_schema_and_canonical_metadata(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+
+        graph = self.audit_text(
+            "# Methods\nProtocol prespecified.\n"
+            "# Results\nSignal increased.\n"
+            "# Conclusion\nSignal increased."
+        ).reasoning_graph
+        valid = validate_reasoning_graph_object(graph)
+        self.assertEqual(valid["status"], "PASS")
+        self.assertEqual(valid["invalid_schema_version"], [])
+        self.assertEqual(valid["invalid_graph_fingerprint"], [])
+        self.assertEqual(valid["invalid_graph_validation"], [])
+
+        tampered_validation = deepcopy(graph)
+        tampered_validation["validation"]["dependency_cycle_detected"] = True
+        invalid_validation = validate_reasoning_graph_object(tampered_validation)
+        self.assertEqual(invalid_validation["status"], "FAIL")
+        self.assertEqual(invalid_validation["invalid_graph_validation"], ["validation"])
+
+        corrupted_fingerprint = deepcopy(graph)
+        corrupted_fingerprint["graph_fingerprint"] = "0" * 64
+        invalid_fingerprint = validate_reasoning_graph_object(corrupted_fingerprint)
+        self.assertEqual(invalid_fingerprint["status"], "FAIL")
+        self.assertEqual(invalid_fingerprint["invalid_graph_fingerprint"], ["0" * 64])
+
+        unsupported_algorithm = deepcopy(graph)
+        unsupported_algorithm["fingerprint_algorithm"] = "unknown"
+        invalid_algorithm = validate_reasoning_graph_object(unsupported_algorithm)
+        self.assertEqual(invalid_algorithm["status"], "FAIL")
+        self.assertIn("fingerprint_algorithm", invalid_algorithm["invalid_schema_metadata"])
+
+        unsupported_version = deepcopy(graph)
+        unsupported_version["schema_version"] = "999"
+        invalid_version = validate_reasoning_graph_object(unsupported_version)
+        self.assertEqual(invalid_version["status"], "FAIL")
+        self.assertEqual(invalid_version["invalid_schema_version"], ["999"])
+
+        malformed_source_hash = deepcopy(graph)
+        malformed_source_hash["source_sha256"] = "not-a-sha256"
+        malformed_source_hash["graph_fingerprint"] = graph_fingerprint(malformed_source_hash)
+        invalid_source_hash = validate_reasoning_graph_object(malformed_source_hash)
+        self.assertEqual(invalid_source_hash["status"], "FAIL")
+        self.assertEqual(invalid_source_hash["invalid_source_sha256"], ["not-a-sha256"])
+
+        incomplete_metadata = deepcopy(graph)
+        incomplete_metadata.pop("edge_endpoint_types")
+        invalid_metadata = validate_reasoning_graph_object(incomplete_metadata)
+        self.assertEqual(invalid_metadata["status"], "FAIL")
+        self.assertIn("edge_endpoint_types", invalid_metadata["invalid_schema_metadata"])
+
+    def test_graph_object_validator_checks_complete_node_and_edge_schemas(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+
+        graph = self.audit_text(
+            "# Methods\nProtocol prespecified.\n"
+            "# Results\nSignal increased.\n"
+            "# Conclusion\nSignal increased."
+        ).reasoning_graph
+
+        missing_node_text = deepcopy(graph)
+        del missing_node_text["nodes"][0]["text"]
+        missing_node_text["graph_fingerprint"] = graph_fingerprint(missing_node_text)
+        result_node = validate_reasoning_graph_object(missing_node_text)
+        self.assertEqual(result_node["status"], "FAIL")
+        self.assertIn(0, result_node["invalid_node_schema"])
+
+        extra_node_field = deepcopy(graph)
+        extra_node_field["nodes"][0]["unrecognized"] = True
+        extra_node_field["graph_fingerprint"] = graph_fingerprint(extra_node_field)
+        result_extra_node = validate_reasoning_graph_object(extra_node_field)
+        self.assertEqual(result_extra_node["status"], "FAIL")
+        self.assertIn(0, result_extra_node["invalid_node_schema"])
+
+        missing_edge_metadata = deepcopy(graph)
+        del missing_edge_metadata["edges"][0]["metadata"]
+        missing_edge_metadata["graph_fingerprint"] = graph_fingerprint(missing_edge_metadata)
+        result_edge = validate_reasoning_graph_object(missing_edge_metadata)
+        self.assertEqual(result_edge["status"], "FAIL")
+        self.assertIn(0, result_edge["invalid_edge_schema"])
+
+    def test_graph_object_validator_rejects_unknown_top_level_fields(self):
+        from copy import deepcopy
+        from sra.graph import validate_reasoning_graph_object
+
+        graph = self.audit_text(
+            "# Methods\nProtocol prespecified.\n"
+            "# Results\nSignal increased.\n"
+            "# Conclusion\nSignal increased."
+        ).reasoning_graph
+        extended = deepcopy(graph)
+        extended["unrecognized_extension"] = {"meaning": "not covered by fingerprint"}
+        self.assertEqual(extended["graph_fingerprint"], graph["graph_fingerprint"])
+
+        result = validate_reasoning_graph_object(extended)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertEqual(result["invalid_graph_fields"], ["unrecognized_extension"])
+
+    def test_graph_validator_rejects_unknown_schema_values_and_wrong_endpoint_types(self):
+        from sra.graph import _edge_id
+
+        nodes = [
+            {"node_id": "claim-1", "node_type": "claim", "status": "extracted_heuristically"},
+            {"node_id": "evidence-1", "node_type": "evidence", "status": "extracted_heuristically"},
+        ]
+        unknown_relation = {
+            "edge_id": _edge_id("evidence-1", "claim-1", "not_a_relation"),
+            "source": "evidence-1", "target": "claim-1",
+            "relation": "not_a_relation", "status": "heuristic_only",
+        }
+        wrong_endpoint = {
+            "edge_id": _edge_id("claim-1", "evidence-1", "lexical_candidate_basis"),
+            "source": "claim-1", "target": "evidence-1",
+            "relation": "lexical_candidate_basis", "status": "heuristic_only",
+        }
+        invalid_status = {
+            "edge_id": _edge_id("evidence-1", "claim-1", "possible_contradiction_candidate"),
+            "source": "evidence-1", "target": "claim-1",
+            "relation": "possible_contradiction_candidate", "status": "invented_status",
+        }
+        mismatched_edge_id = {
+            "edge_id": "edge:wrong",
+            "source": "evidence-1", "target": "claim-1",
+            "relation": "possible_contradiction_candidate", "status": "heuristic_review_required",
+        }
+        result = validate_reasoning_graph(
+            nodes, [unknown_relation, wrong_endpoint, invalid_status, mismatched_edge_id]
+        )
+        self.assertEqual(result["status"], "FAIL")
+        self.assertEqual(result["invalid_edge_relations"], [0])
+        self.assertEqual(result["invalid_edge_endpoint_types"], [1])
+        self.assertEqual(result["invalid_edge_statuses"], [2])
+        self.assertEqual(result["invalid_edge_ids"], [3])
+
+        bad_node = validate_reasoning_graph(
+            [{"node_id": "x", "node_type": "invented_type", "status": "invented_status"}], []
+        )
+        self.assertEqual(bad_node["status"], "FAIL")
+        self.assertEqual(bad_node["invalid_node_types"], [0])
+        self.assertEqual(bad_node["invalid_node_statuses"], [0])
+
+    def test_semantic_review_loader_rejects_nonstandard_json_constants(self):
+        from sra.semantic_review import load_semantic_review
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "review.json"
+            for constant in ("NaN", "Infinity", "-Infinity"):
+                with self.subTest(constant=constant):
+                    path.write_text('{"confidence": ' + constant + '}', encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "Non-standard JSON numeric constant"):
+                        load_semantic_review(path)
+
     def test_semantic_review_json_schema_documents_the_review_contract(self):
         schema_path = Path(__file__).resolve().parents[1] / "schemas" / "semantic-review.schema.json"
         schema = json.loads(schema_path.read_text(encoding="utf-8"))
         self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
-        self.assertEqual(schema["properties"]["schema_version"]["const"], "1.3")
+        self.assertEqual(schema["properties"]["schema_version"]["const"], "1.4")
         self.assertIn("review_mode", schema["required"])
+        self.assertIn("graph_schema_version", schema["required"])
+        self.assertIn("graph_fingerprint_algorithm", schema["required"])
         self.assertIn("evidence_catalog", schema["required"])
         self.assertIn("reviewer_selected_evidence_node_ids",
                         schema["properties"]["assessments"]["items"]["required"])
         self.assertIn("source_sha256", schema["properties"])
+        self.assertEqual(schema["properties"]["graph_schema_version"]["const"], "1.4")
+        self.assertEqual(
+            schema["properties"]["graph_fingerprint_algorithm"]["const"],
+            "sha256-canonical-json-graph-contract-v2",
+        )
         self.assertIn("graph_fingerprint", schema["properties"])
         self.assertIn("assessments", schema["required"])
         self.assertIn("partially_supported", schema["properties"]["assessments"]["items"]["properties"]["relation"]["enum"])
@@ -370,14 +1254,14 @@ class AuditTests(unittest.TestCase):
             "# Results\nThe intervention increased the measured score.\n"
             "# Conclusion\nThe intervention increased the measured score."
         ).to_dict()
-        single = build_semantic_review_template(report)
-        parallel = build_semantic_review_template(report, review_mode="parallel")
+        single = self.build_template(report)
+        parallel = self.build_template(report, review_mode="parallel")
         self.assertEqual(single["review_mode"], "single")
         self.assertEqual(parallel["review_mode"], "parallel")
         self.assertIn("one model", single["instructions"][0])
         self.assertIn("parallel agents", parallel["instructions"][0])
         with self.assertRaises(ValueError):
-            build_semantic_review_template(report, review_mode="automatic")
+            self.build_template(report, review_mode="automatic")
 
     def test_semantic_review_rejects_unlinked_evidence_and_one_word_quotes(self):
         text = (
@@ -388,7 +1272,7 @@ class AuditTests(unittest.TestCase):
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         assessment = template["assessments"][0]
         evidence_nodes = [
             node for node in report["reasoning_graph"]["nodes"]
@@ -438,7 +1322,7 @@ class AuditTests(unittest.TestCase):
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         evidence_id = template["assessments"][0]["evidence_node_ids"][0]
         evidence = next(
             node for node in report["reasoning_graph"]["nodes"]
@@ -488,7 +1372,7 @@ class AuditTests(unittest.TestCase):
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        legacy = build_semantic_review_template(report)
+        legacy = self.build_template(report)
         evidence_id = legacy["assessments"][0]["evidence_node_ids"][0]
         evidence = next(
             node for node in report["reasoning_graph"]["nodes"]
@@ -506,12 +1390,67 @@ class AuditTests(unittest.TestCase):
             "reviewed_at_utc": "2026-11-02T00:00:00Z",
         }
         legacy["schema_version"] = "1.0"
+        legacy.pop("graph_schema_version")
+        legacy.pop("graph_fingerprint_algorithm")
         legacy.pop("review_mode")
         legacy.pop("evidence_catalog")
         legacy["assessments"][0].pop("reviewer_selected_evidence_node_ids")
         result = validate_semantic_review(legacy, report, text)
         self.assertEqual(result["status"], "ACCEPTED_FOR_REVIEW")
         self.assertEqual(result["review_mode"], "single")
+
+    def test_legacy_v11_graph_fingerprint_matches_public_v051_output(self):
+        from sra.graph import legacy_graph_fingerprint_v1_1
+
+        example = Path(__file__).resolve().parents[1] / "examples" / "logic_review_demo.md"
+        graph = audit_file(example).to_dict()["reasoning_graph"]
+        self.assertEqual(
+            legacy_graph_fingerprint_v1_1(graph),
+            "15ff8d43448068ca588ba6fb03d705ac5937427c1a4c483e46a48261216fdcd9",
+        )
+
+    def test_legacy_semantic_review_v13_accepts_published_v051_graph_fingerprint(self):
+        from sra.graph import legacy_graph_fingerprint_v1_1
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        graph = report["reasoning_graph"]
+        legacy = self.build_template(report)
+        evidence_id = legacy["assessments"][0]["evidence_node_ids"][0]
+        evidence = next(node for node in graph["nodes"] if node["node_id"] == evidence_id)
+        legacy["assessments"][0].update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "The results passage reports the same measured direction as the conclusion.",
+            "source_quotes": [evidence["text"]],
+        })
+        legacy["reviewer"] = {
+            "name": "Legacy reviewer",
+            "model_or_agent": "v0.5.1",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+        legacy["schema_version"] = "1.3"
+        legacy.pop("graph_schema_version")
+        legacy.pop("graph_fingerprint_algorithm")
+        legacy["graph_fingerprint"] = legacy_graph_fingerprint_v1_1(graph)
+
+        accepted = validate_semantic_review(legacy, report, text)
+        self.assertEqual(accepted["status"], "ACCEPTED_FOR_REVIEW")
+        self.assertFalse(accepted["errors"])
+
+        changed_report = json.loads(json.dumps(report))
+        evidence_node = next(
+            node for node in changed_report["reasoning_graph"]["nodes"]
+            if node["node_type"] == "evidence"
+        )
+        evidence_node["text"] += " changed"
+        rejected = validate_semantic_review(legacy, changed_report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("Graph fingerprint" in error for error in rejected["errors"]))
 
     def test_semantic_review_template_is_bound_to_source_and_graph(self):
         text = (
@@ -520,7 +1459,7 @@ class AuditTests(unittest.TestCase):
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         self.assertEqual(template["source_sha256"], report["sha256"])
         self.assertEqual(template["graph_fingerprint"], report["reasoning_graph"]["graph_fingerprint"])
         self.assertEqual(
@@ -552,6 +1491,451 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(accepted["validated_assessments"][0]["validation_status"],
                          "structurally_validated_not_truth_verified")
 
+    def test_build_review_template_preserves_bom_source_hash_and_reconstructs_graph(self):
+        from sra.audit import build_review_template
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "paper.md"
+            source.write_bytes(b"\xef\xbb\xbf" + text.encode("utf-8"))
+            raw_hash = __import__("hashlib").sha256(source.read_bytes()).hexdigest()
+            template = build_review_template(str(source))
+            self.assertEqual(template["source_sha256"], raw_hash)
+            report = audit_file(source).to_dict()
+            self.assertEqual(template["graph_fingerprint"], report["reasoning_graph"]["graph_fingerprint"])
+
+    def test_semantic_review_template_requires_source_text_for_provenance(self):
+        report = self.audit_text(
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        ).to_dict()
+        with self.assertRaises(TypeError):
+            build_semantic_review_template(report)
+        with self.assertRaises(TypeError):
+            build_semantic_review_template(
+                report,
+                source_text=self._last_source_text,
+                source_sha256=report["sha256"],
+            )
+
+    def test_pdf_manifest_separates_raw_file_and_extracted_text_hashes(self):
+        import hashlib
+        import sys
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from sra.audit import build_review_template
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        raw_pdf_bytes = b"%PDF-FAKE-RAW-SOURCE-FOR-HASH-SEPARATION"
+        fake_reader = lambda _path: SimpleNamespace(
+            pages=[SimpleNamespace(extract_text=lambda: text)]
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "paper.pdf"
+            source.write_bytes(raw_pdf_bytes)
+            fake_pypdf = SimpleNamespace(PdfReader=fake_reader)
+            with patch.dict(sys.modules, {"pypdf": fake_pypdf}):
+                document = load_document(source)
+                report = audit_file(source).to_dict()
+                template = build_review_template(str(source))
+
+            raw_hash = hashlib.sha256(raw_pdf_bytes).hexdigest()
+            extracted_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+            self.assertEqual(document.sha256, raw_hash)
+            self.assertEqual(report["reproducibility_manifest"]["input"]["sha256"], raw_hash)
+            self.assertEqual(
+                report["reproducibility_manifest"]["input"]["extracted_text_sha256"],
+                extracted_hash,
+            )
+            self.assertNotEqual(raw_hash, extracted_hash)
+            self.assertEqual(template["source_sha256"], raw_hash)
+            self.assertEqual(
+                report["reasoning_graph"]["graph_fingerprint"],
+                template["graph_fingerprint"],
+            )
+
+    def test_graph_validator_rejects_empty_graph_and_missing_claim_links(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        graph = report["reasoning_graph"]
+
+        empty = deepcopy(graph)
+        empty["nodes"] = []
+        empty["edges"] = []
+        empty["graph_fingerprint"] = graph_fingerprint(empty)
+        empty["validation"] = validate_reasoning_graph_object(
+            empty, allow_unset_validation=True
+        )
+        invalid_empty = validate_reasoning_graph_object(empty)
+        self.assertEqual(invalid_empty["status"], "FAIL")
+        self.assertEqual(invalid_empty["invalid_graph_content"], ["empty_nodes", "empty_edges"])
+        with self.assertRaisesRegex(ValueError, "invalid reasoning graph"):
+            self.build_template({
+                "sha256": report["sha256"],
+                "reasoning_graph": empty,
+            })
+
+        method_only_text = "# Methods\nA protocol was prespecified."
+        method_only_report = self.audit_text(method_only_text).to_dict()
+        method_only_graph = method_only_report["reasoning_graph"]
+        self.assertTrue(method_only_graph["nodes"])
+        method_only_graph["edges"] = []
+        method_only_graph["graph_fingerprint"] = graph_fingerprint(method_only_graph)
+        method_only_graph["validation"] = validate_reasoning_graph_object(
+            method_only_graph, allow_unset_validation=True
+        )
+        method_only_validation = validate_reasoning_graph_object(method_only_graph)
+        self.assertEqual(method_only_validation["status"], "FAIL")
+        self.assertIn("empty_edges", method_only_validation["invalid_graph_content"])
+
+        missing_claim_link = deepcopy(graph)
+        missing_claim_link["edges"] = [
+            edge for edge in missing_claim_link["edges"]
+            if edge["relation"] != "yields_claim"
+        ]
+        missing_claim_link["graph_fingerprint"] = graph_fingerprint(missing_claim_link)
+        missing_claim_link["validation"] = validate_reasoning_graph_object(
+            missing_claim_link, allow_unset_validation=True
+        )
+        invalid_links = validate_reasoning_graph_object(missing_claim_link)
+        self.assertEqual(invalid_links["status"], "FAIL")
+        self.assertTrue(invalid_links["invalid_claim_inference_links"])
+        with self.assertRaisesRegex(ValueError, "invalid reasoning graph"):
+            self.build_template({
+                "sha256": report["sha256"],
+                "reasoning_graph": missing_claim_link,
+            })
+
+    def test_semantic_review_rejects_missing_or_malformed_manifest_text_digest(self):
+        from copy import deepcopy
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        review = self.build_template(report)
+        mutations = ("missing", "malformed")
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                malformed_report = deepcopy(report)
+                input_record = malformed_report["reproducibility_manifest"]["input"]
+                if mutation == "missing":
+                    input_record.pop("extracted_text_sha256")
+                else:
+                    input_record["extracted_text_sha256"] = "not-a-sha256"
+                result = validate_semantic_review(review, malformed_report, text)
+                self.assertEqual(result["status"], "REJECTED")
+                self.assertTrue(any(
+                    "extracted-text digest" in error for error in result["errors"]
+                ))
+
+    def test_semantic_review_rejects_source_text_change_outside_graph_extraction(self):
+        original = (
+            "# Introduction\nOriginal background context.\n"
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(original).to_dict()
+        review = self.build_template(report)
+        changed = original.replace("Original background context", "Different background context")
+        self.assertNotEqual(changed, original)
+        with self.assertRaisesRegex(ValueError, "extracted-text digest"):
+            self.build_template(report, source_text=changed)
+
+        rejected = validate_semantic_review(review, report, changed)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any(
+            "extracted-text digest" in error for error in rejected["errors"]
+        ))
+
+    def test_semantic_review_rejects_malformed_graph_without_raising(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        review = self.build_template(report)
+        malformed = deepcopy(report)
+        evidence = next(
+            node for node in malformed["reasoning_graph"]["nodes"]
+            if node["node_type"] == "evidence"
+        )
+        evidence.pop("node_id")
+        malformed["reasoning_graph"]["graph_fingerprint"] = graph_fingerprint(
+            malformed["reasoning_graph"]
+        )
+        malformed["reasoning_graph"]["validation"] = validate_reasoning_graph_object(
+            malformed["reasoning_graph"], allow_unset_validation=True
+        )
+
+        rejected = validate_semantic_review(review, malformed, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any("graph integrity validation failed" in error.lower() for error in rejected["errors"]))
+
+    def test_semantic_review_rejects_unhashable_schema_fingerprint_and_mode(self):
+        from copy import deepcopy
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = self.build_template(report)
+        for field in ("schema_version", "graph_fingerprint", "review_mode"):
+            for value in ([], {}):
+                with self.subTest(field=field, value_type=type(value).__name__):
+                    malformed = deepcopy(template)
+                    malformed[field] = value
+                    result = validate_semantic_review(malformed, report, text)
+                    self.assertEqual(result["status"], "REJECTED")
+                    self.assertTrue(result["errors"])
+
+    def test_semantic_review_rejects_unhashable_graph_node_type_without_raising(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        review = self.build_template(report)
+        for invalid_node_type in ([], {}):
+            with self.subTest(node_type=type(invalid_node_type).__name__):
+                malformed = deepcopy(report)
+                inference = next(
+                    node for node in malformed["reasoning_graph"]["nodes"]
+                    if node["node_type"] == "inference"
+                )
+                inference["node_type"] = invalid_node_type
+                malformed["reasoning_graph"]["graph_fingerprint"] = graph_fingerprint(
+                    malformed["reasoning_graph"]
+                )
+                malformed["reasoning_graph"]["validation"] = validate_reasoning_graph_object(
+                    malformed["reasoning_graph"], allow_unset_validation=True
+                )
+
+                rejected = validate_semantic_review(review, malformed, text)
+                self.assertEqual(rejected["status"], "REJECTED")
+                self.assertTrue(any(
+                    "graph integrity validation failed" in error.lower()
+                    for error in rejected["errors"]
+                ))
+
+    def test_semantic_review_rejects_retargeted_evidence_after_fingerprint_rebuild(self):
+        from copy import deepcopy
+        from sra.graph import (
+            _edge_id,
+            _stable_id,
+            graph_fingerprint,
+            validate_reasoning_graph_object,
+        )
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "The unrelated biomarker concentration decreased after storage.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        tampered = deepcopy(report)
+        graph = tampered["reasoning_graph"]
+        evidence_nodes = [
+            node for node in graph["nodes"] if node["node_type"] == "evidence"
+        ]
+        self.assertGreaterEqual(len(evidence_nodes), 2)
+        target = evidence_nodes[0]
+        replacement = evidence_nodes[1]
+        old_id = target["node_id"]
+        node_index = graph["nodes"].index(target)
+        ordinal = sum(
+            1 for node in graph["nodes"][: node_index + 1]
+            if node["node_type"] == "evidence"
+        )
+        target["text"] = replacement["text"]
+        target["source_location"] = deepcopy(replacement["source_location"])
+        target["node_id"] = _stable_id(
+            graph["source_sha256"],
+            "evidence",
+            target["source_location"]["line"],
+            target["text"],
+            ordinal,
+        )
+        new_id = target["node_id"]
+        self.assertNotEqual(old_id, new_id)
+
+        for edge in graph["edges"]:
+            if edge["source"] == old_id:
+                edge["source"] = new_id
+            if edge["target"] == old_id:
+                edge["target"] = new_id
+            edge["edge_id"] = _edge_id(edge["source"], edge["target"], edge["relation"])
+
+        graph["graph_fingerprint"] = graph_fingerprint(graph)
+        graph["validation"] = validate_reasoning_graph_object(
+            graph, allow_unset_validation=True
+        )
+        self.assertEqual(validate_reasoning_graph_object(graph)["status"], "PASS")
+
+        with self.assertRaisesRegex(ValueError, "do not match the supplied manuscript source"):
+            self.build_template(tampered)
+        tampered_review = self.build_template(report)
+        assessment = tampered_review["assessments"][0]
+        assessment.update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "The linked source passage is asserted to support the claim.",
+            "source_quotes": [target["text"]],
+        })
+        tampered_review["reviewer"] = {
+            "name": "Adversarial reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+
+        rejected = validate_semantic_review(tampered_review, tampered, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any(
+            "reconstructed from the audited manuscript source" in error
+            for error in rejected["errors"]
+        ))
+
+    def test_legacy_semantic_reviews_v11_and_v12_remain_importable(self):
+        from copy import deepcopy
+        from sra.graph import legacy_graph_fingerprint_v1_1
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = self.build_template(report)
+        evidence_id = template["assessments"][0]["evidence_node_ids"][0]
+        evidence = next(
+            node for node in report["reasoning_graph"]["nodes"]
+            if node["node_id"] == evidence_id
+        )
+
+        for version in ("1.1", "1.2"):
+            with self.subTest(version=version):
+                legacy = deepcopy(template)
+                legacy["schema_version"] = version
+                legacy.pop("graph_schema_version")
+                legacy.pop("graph_fingerprint_algorithm")
+                legacy.pop("evidence_catalog")
+                legacy["graph_fingerprint"] = legacy_graph_fingerprint_v1_1(
+                    report["reasoning_graph"]
+                )
+                legacy["reviewer"] = {
+                    "name": "Legacy reviewer",
+                    "model_or_agent": f"legacy-{version}",
+                    "reviewed_at_utc": "2026-11-02T00:00:00Z",
+                }
+                legacy["assessments"][0].pop("reviewer_selected_evidence_node_ids")
+                legacy["assessments"][0].update({
+                    "relation": "entailed",
+                    "confidence": 0.9,
+                    "rationale": "The result passage matches the conclusion claim.",
+                    "source_quotes": [evidence["text"]],
+                })
+                accepted = validate_semantic_review(legacy, report, text)
+                self.assertEqual(accepted["status"], "ACCEPTED_FOR_REVIEW", accepted["errors"])
+
+    def test_semantic_review_rejects_graph_bound_to_different_manuscript_hash(self):
+        from copy import deepcopy
+        from sra.graph import graph_fingerprint, validate_reasoning_graph_object
+        from sra.semantic_review import build_semantic_review_template
+
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        review = self.build_template(report)
+
+        mismatched_report = deepcopy(report)
+        mismatched_report["reasoning_graph"]["source_sha256"] = "f" * 64
+        mismatched_report["reasoning_graph"]["graph_fingerprint"] = graph_fingerprint(
+            mismatched_report["reasoning_graph"]
+        )
+        mismatched_report["reasoning_graph"]["validation"] = validate_reasoning_graph_object(
+            mismatched_report["reasoning_graph"], allow_unset_validation=True
+        )
+
+        with self.assertRaisesRegex(ValueError, "source SHA-256"):
+            self.build_template(mismatched_report)
+
+        rejected = validate_semantic_review(review, mismatched_report, text)
+        self.assertEqual(rejected["status"], "REJECTED")
+        self.assertTrue(any(
+            "graph source SHA-256" in error
+            for error in rejected["errors"]
+        ))
+
+    def test_semantic_review_rejects_graph_schema_or_algorithm_mismatch(self):
+        text = (
+            "# Methods\nA randomized study was conducted.\n"
+            "# Results\nThe intervention increased the measured score.\n"
+            "# Conclusion\nThe intervention increased the measured score."
+        )
+        report = self.audit_text(text).to_dict()
+        template = self.build_template(report)
+        evidence_id = template["assessments"][0]["evidence_node_ids"][0]
+        evidence = next(
+            node for node in report["reasoning_graph"]["nodes"]
+            if node["node_id"] == evidence_id
+        )
+        template["assessments"][0].update({
+            "relation": "entailed",
+            "confidence": 0.9,
+            "rationale": "The result passage directly supports the direction of the stated conclusion.",
+            "source_quotes": [evidence["text"]],
+        })
+        template["reviewer"] = {
+            "name": "Schema reviewer",
+            "model_or_agent": "unit-test",
+            "reviewed_at_utc": "2026-11-02T00:00:00Z",
+        }
+
+        wrong_graph_version = json.loads(json.dumps(template))
+        wrong_graph_version["graph_schema_version"] = "999"
+        result_version = validate_semantic_review(wrong_graph_version, report, text)
+        self.assertEqual(result_version["status"], "REJECTED")
+        self.assertTrue(any("graph_schema_version" in error for error in result_version["errors"]))
+
+        wrong_algorithm = json.loads(json.dumps(template))
+        wrong_algorithm["graph_fingerprint_algorithm"] = "legacy-unversioned"
+        result_algorithm = validate_semantic_review(wrong_algorithm, report, text)
+        self.assertEqual(result_algorithm["status"], "REJECTED")
+        self.assertTrue(any("graph_fingerprint_algorithm" in error for error in result_algorithm["errors"]))
+
     def test_semantic_review_rejects_wrong_claim_link_and_missing_reviewer(self):
         text = (
             "# Methods\nA randomized study was conducted.\n"
@@ -560,7 +1944,7 @@ class AuditTests(unittest.TestCase):
             "The intervention decreased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         assessment = template["assessments"][0]
         assessment.update({
             "relation": "entailed",
@@ -586,7 +1970,7 @@ class AuditTests(unittest.TestCase):
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         assessment = template["assessments"][0]
         method_node = next(
             node for node in report["reasoning_graph"]["nodes"]
@@ -616,7 +2000,7 @@ The intervention increased the measured score.
 The intervention increased the measured score.
 """
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         template["reviewer"] = {
             "name": "Test reviewer",
             "model_or_agent": "unit-test",
@@ -639,7 +2023,7 @@ The intervention increased the measured score.
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         template["assessments"][0]["evidence_node_ids"] = [{"not": "an id"}]
         rejected = validate_semantic_review(template, report, text)
         self.assertEqual(rejected["status"], "REJECTED")
@@ -659,7 +2043,8 @@ The intervention increased the measured score.
         review_path = Path(tmp.name) / "review.json"
         source.write_text(text, encoding="utf-8")
         report = audit_file(source)
-        template = build_semantic_review_template(report.to_dict())
+        self._last_source_text = text
+        template = self.build_template(report.to_dict())
         template["reviewer"] = {"name": "", "model_or_agent": "", "reviewed_at_utc": ""}
         assessment = template["assessments"][0]
         assessment.update({
@@ -681,7 +2066,7 @@ The intervention increased the measured score.
             "# Conclusion\nThe intervention increased the measured score."
         )
         report = self.audit_text(text).to_dict()
-        template = build_semantic_review_template(report)
+        template = self.build_template(report)
         assessment = template["assessments"][0]
         assessment.update({
             "relation": "partially_supported",
@@ -859,6 +2244,51 @@ class StatisticalVerificationTests(unittest.TestCase):
         self.assertEqual(reported["below_float_range"], "1E-400")
         json.dumps(result, allow_nan=False)
 
+    def test_welch_output_discloses_pooled_effect_size_variance_assumption(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 1.0, "sd": 1.0, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 10.0, "n": 100},
+        }
+        result = verify_welch_t_test(spec)
+        self.assertIn("Pooled-SD Cohen's d", result["effect_size_method"])
+        self.assertTrue(any("common within-group variance" in item
+                            for item in result["effect_size_assumptions"]))
+        self.assertTrue(any("normally distributed" in item
+                            for item in result["effect_size_assumptions"]))
+        self.assertTrue(any("not heteroskedasticity-adjusted" in item
+                            for item in result["limitations"]))
+
+    def test_pooled_hedges_effect_size_matches_independent_reference_with_unequal_variances(self):
+        spec = {
+            "test": "welch_t",
+            "group_a": {"mean": 2.0, "sd": 1.0, "n": 10},
+            "group_b": {"mean": 0.0, "sd": 10.0, "n": 100},
+        }
+        result = verify_welch_t_test(spec)
+        calculated = result["calculated"]
+
+        degrees = 10 + 100 - 2
+        reference_pooled_sd = math.sqrt(
+            ((10 - 1) * (1.0 ** 2) + (100 - 1) * (10.0 ** 2)) / degrees
+        )
+        reference_cohen_d = (2.0 - 0.0) / reference_pooled_sd
+        # Independent direct gamma-ratio expression for this moderate df;
+        # deliberately does not call the implementation's _hedges_correction.
+        reference_j = (
+            math.gamma(degrees / 2)
+            / (math.sqrt(degrees / 2) * math.gamma((degrees - 1) / 2))
+        )
+        reference_hedges_g = reference_cohen_d * reference_j
+
+        self.assertAlmostEqual(calculated["cohen_d_pooled"], reference_cohen_d, places=14)
+        self.assertAlmostEqual(calculated["hedges_g"], reference_hedges_g, places=14)
+        self.assertNotAlmostEqual(
+            calculated["cohen_d_pooled"],
+            (2.0 / math.sqrt((1.0 ** 2 + 10.0 ** 2) / 2)),
+            places=3,
+        )
+
     def test_welch_rejects_zero_reported_p_value(self):
         spec = {
             "test": "welch_t",
@@ -1004,14 +2434,80 @@ class StatisticalVerificationTests(unittest.TestCase):
             verify_welch_t_test(spec)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class ModelClientTests(unittest.TestCase):
     def test_extracts_json_from_model_fenced_response(self):
         from sra.model_client import _extract_json_object
         self.assertEqual(_extract_json_object(chr(96)*3 + 'json\n{"ok": true}\n' + chr(96)*3), {"ok": True})
+
+    def test_model_api_response_body_reads_are_bounded(self):
+        import io
+        from sra.model_client import _read_bounded_response
+
+        class FakeResponse:
+            def __init__(self, payload, headers=None):
+                self.stream = io.BytesIO(payload)
+                self.headers = headers or {}
+                self.read_sizes = []
+
+            def read(self, size=-1):
+                self.read_sizes.append(size)
+                return self.stream.read(size)
+
+        allowed = FakeResponse(b"1234")
+        self.assertEqual(_read_bounded_response(allowed, maximum=4), b"1234")
+        self.assertEqual(allowed.read_sizes, [5])
+
+        oversized = FakeResponse(b"12345")
+        with self.assertRaisesRegex(ValueError, "4-byte response size limit"):
+            _read_bounded_response(oversized, maximum=4)
+        self.assertEqual(oversized.read_sizes, [5])
+
+        declared_oversized = FakeResponse(b"", {"Content-Length": "5"})
+        with self.assertRaisesRegex(ValueError, "4-byte response size limit"):
+            _read_bounded_response(declared_oversized, maximum=4)
+        self.assertEqual(declared_oversized.read_sizes, [])
+
+    def test_model_api_rejects_non_ascii_or_non_decimal_content_length(self):
+        import io
+        from sra.model_client import _read_bounded_response
+
+        class FakeResponse:
+            def __init__(self, content_length):
+                self.headers = {"Content-Length": content_length}
+                self.stream = io.BytesIO(b"x")
+                self.read_called = False
+
+            def read(self, size=-1):
+                self.read_called = True
+                return self.stream.read(size)
+
+        for content_length in ("+1", "1_0", "٥", "", "-1", "abc", " 1"):
+            with self.subTest(content_length=content_length):
+                response = FakeResponse(content_length)
+                with self.assertRaisesRegex(ValueError, "ASCII digits only"):
+                    _read_bounded_response(response, maximum=4)
+                self.assertFalse(response.read_called)
+
+    def test_model_api_http_error_body_also_uses_bounded_reader(self):
+        import io
+        from urllib.error import HTTPError
+        from unittest.mock import patch
+        from sra.model_client import MAX_MODEL_API_RESPONSE_BYTES, request_single_model_review
+
+        error_body = io.BytesIO(b"")
+        error = HTTPError(
+            "https://example.test/v1/chat/completions", 503, "Unavailable",
+            {"Content-Length": str(MAX_MODEL_API_RESPONSE_BYTES + 1)},
+            error_body,
+        )
+        with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
+            with patch("sra.model_client._open_api_request", side_effect=error):
+                with self.assertRaisesRegex(RuntimeError, "response size limit"):
+                    request_single_model_review(
+                        {"review_mode": "single"}, "paper", model="m",
+                        base_url="https://example.test/v1", api_key_env="SRA_TEST_KEY"
+                    )
+        self.assertTrue(error_body.closed)
 
     def test_model_response_parser_rejects_nonstandard_json_constants(self):
         from sra.model_client import _extract_json_object
@@ -1089,7 +2585,7 @@ class ModelClientTests(unittest.TestCase):
         class FakeResponse:
             def __enter__(self): return self
             def __exit__(self, *args): return False
-            def read(self):
+            def read(self, size=-1):
                 return json.dumps({"choices": [{"message": {"content": '{"ok": true}'}}]}).encode()
 
         with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
@@ -1217,7 +2713,7 @@ class ModelClientTests(unittest.TestCase):
         class FakeResponse:
             def __enter__(self): return self
             def __exit__(self, *args): return False
-            def read(self):
+            def read(self, size=-1):
                 return b'{"choices":[{"message":{"content":"{}"}}],"usage":{"total_tokens":NaN}}'
 
         with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
@@ -1267,7 +2763,7 @@ class ModelClientTests(unittest.TestCase):
         class FakeResponse:
             def __enter__(self): return self
             def __exit__(self, *args): return False
-            def read(self):
+            def read(self, size=-1):
                 return json.dumps({"choices": [{"message": {"content": '{"ok": true}'}}]}).encode()
 
         with patch.dict("os.environ", {"SRA_TEST_KEY": "test-key"}):
@@ -1320,9 +2816,9 @@ class ModelClientTests(unittest.TestCase):
                     "--base-url", "https://example.test/v1", "--api-key-env", "SRA_TEST_KEY",
                     "--out", str(output),
                 ]),
-                patch("sra.cli.audit_file", return_value=fake_report),
+                patch("sra.cli.audit_parsed_document", return_value=fake_report),
                 patch("sra.cli.load_document", return_value=fake_document),
-                patch("sra.cli.build_review_template", return_value={"review_mode": "single"}),
+                patch("sra.cli.build_semantic_review_template", return_value={"review_mode": "single"}),
                 patch("sra.cli.request_single_model_review", return_value={"confidence": math.nan}),
                 patch("sra.cli.validate_semantic_review", return_value={"status": "REJECTED", "errors": ["confidence must be finite"]}),
                 contextlib.redirect_stderr(stderr),
@@ -1343,7 +2839,7 @@ class ModelClientTests(unittest.TestCase):
                 return self
             def __exit__(self, *args):
                 return False
-            def read(self):
+            def read(self, size=-1):
                 return json.dumps({"choices":[{"message":{"content":'{"review_mode":"single"}'}}]}).encode()
 
         template = {"review_mode":"single", "assessments":[]}
@@ -1372,3 +2868,7 @@ class ModelClientTests(unittest.TestCase):
             local_mock.call_args.args[0].full_url,
             "http://127.0.0.1:8000/v1/chat/completions",
         )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -4,6 +4,7 @@ import math
 from decimal import Decimal, DecimalException
 from pathlib import Path
 from typing import Any
+from sra.json_utils import reject_duplicate_keys
 
 
 def _finite_number(value: Any, field: str) -> float:
@@ -344,6 +345,14 @@ def verify_welch_t_test(spec: dict[str, Any], input_sha256: str | None = None) -
             "hedges_g": hedges_g,
         },
         "reported_checks": checks,
+        "effect_size_method": (
+            "Pooled-SD Cohen's d with the classical small-sample Hedges' J(df) correction, "
+            "using pooled degrees of freedom n_a + n_b - 2."
+        ),
+        "effect_size_assumptions": [
+            "Pooled-SD standardization uses a common within-group variance reference and is not heteroskedasticity-adjusted.",
+            "The classical Hedges' J small-sample correction is derived for a normally distributed, two-independent-group model with a common variance.",
+        ],
         "assumptions": [
             "The two groups are independent.",
             "Summary means and sample standard deviations are correctly reported.",
@@ -351,6 +360,7 @@ def verify_welch_t_test(spec: dict[str, Any], input_sha256: str | None = None) -
         ],
         "limitations": [
             "This verifies arithmetic conditional on supplied summary statistics; it does not validate raw data, sampling, measurement, study design, or the choice of statistical test.",
+            "The pooled-SD Cohen's d and classical Hedges' g are not heteroskedasticity-adjusted; interpret them cautiously when group variances differ substantially, even though the Welch test allows unequal variances.",
             "A PASS means reported values agree within the configured tolerances, not that the scientific conclusion is true.",
             "Rounded reported values may require tolerances appropriate to the manuscript's displayed precision.",
         ],

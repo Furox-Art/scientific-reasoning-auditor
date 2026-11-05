@@ -1,11 +1,23 @@
+import hashlib
 import json
 import math
+import os
+import stat
 import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from sra.graph import graph_fingerprint
+from sra.checks import build_findings
+from sra.document import parse_document_text
+from sra.json_utils import reject_duplicate_keys
+from sra.graph import (
+    GRAPH_FINGERPRINT_ALGORITHM,
+    build_reasoning_graph,
+    graph_fingerprint,
+    legacy_graph_fingerprint_v1_1,
+    validate_reasoning_graph_object,
+)
 
 
 ALLOWED_RELATIONS = {
@@ -18,7 +30,8 @@ ALLOWED_RELATIONS = {
 REVIEWER_FIELDS = {"name", "model_or_agent", "reviewed_at_utc"}
 TOP_LEVEL_FIELDS = {
     "schema_version", "review_type", "review_mode", "source_sha256",
-    "graph_fingerprint", "evidence_catalog", "reviewer", "instructions", "relation_labels", "assessments",
+    "graph_schema_version", "graph_fingerprint_algorithm", "graph_fingerprint",
+    "evidence_catalog", "reviewer", "instructions", "relation_labels", "assessments",
 }
 ASSESSMENT_FIELDS = {
     "inference_node_id", "claim_node_id", "evidence_node_ids", "relation",
@@ -28,13 +41,104 @@ ASSESSMENT_FIELDS = {
 MIN_QUOTE_CHARACTERS = 20
 
 
+def _source_text_sha256(source_text: str) -> str:
+    """Hash the exact normalized text supplied to the document parser."""
+    return hashlib.sha256(source_text.encode("utf-8")).hexdigest()
+
+
+def _source_text_matches_audit(
+    audit_report: dict[str, Any],
+    source_text: str,
+) -> bool:
+    manifest = audit_report.get("reproducibility_manifest")
+    input_record = manifest.get("input") if isinstance(manifest, dict) else None
+    manifest_version = (
+        manifest.get("manifest_schema_version")
+        if isinstance(manifest, dict)
+        else None
+    )
+    has_extracted_digest = (
+        isinstance(input_record, dict)
+        and "extracted_text_sha256" in input_record
+    )
+    expected = (
+        input_record.get("extracted_text_sha256")
+        if isinstance(input_record, dict)
+        else None
+    )
+    actual = _source_text_sha256(source_text)
+    if manifest_version == "1.4" or has_extracted_digest:
+        if not isinstance(expected, str) or not re.fullmatch(r"[a-f0-9]{64}", expected):
+            return False
+        return actual == expected
+
+    # Compatibility for older text/Markdown reports containing only raw-file SHA.
+    # A PDF's raw-byte SHA cannot authenticate extracted text and is rejected.
+    legacy_candidates = {
+        actual,
+        hashlib.sha256(b"\xef\xbb\xbf" + source_text.encode("utf-8")).hexdigest(),
+    }
+    return audit_report.get("sha256") in legacy_candidates
+
+
+def _rebuild_graph_from_source(
+    audit_report: dict[str, Any],
+    source_text: str,
+) -> dict[str, Any]:
+    graph = audit_report.get("reasoning_graph")
+    source_hash = graph.get("source_sha256") if isinstance(graph, dict) else None
+    document = parse_document_text(
+        source_text,
+        sha256=source_hash,
+        source=str(audit_report.get("source") or "provided-manuscript"),
+    )
+    _, candidates, reasoning_map = build_findings(document)
+    return build_reasoning_graph(document, candidates, reasoning_map)
+
+
+def _rejected_semantic_review(
+    errors: list[str],
+    review_mode: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "schema_version": "1.4",
+        "status": "REJECTED",
+        "structural_validation_only": True,
+        "review_mode": review_mode,
+        "assessment_count": 0,
+        "validated_assessments": [],
+        "errors": errors,
+        "limitations": [
+            "Structural rejection does not prove scientific incorrectness; it means this review input could not be safely validated."
+        ],
+    }
+
+
 def build_semantic_review_template(
     audit_report: dict[str, Any],
     review_mode: str = "single",
+    *,
+    source_text: str,
 ) -> dict[str, Any]:
     if review_mode not in {"single", "parallel"}:
         raise ValueError("review_mode must be 'single' or 'parallel'.")
-    graph = audit_report["reasoning_graph"]
+    graph = audit_report.get("reasoning_graph")
+    if not isinstance(graph, dict):
+        raise ValueError("Audit report does not contain a valid reasoning graph object.")
+    if graph.get("source_sha256") != audit_report.get("sha256"):
+        raise ValueError("Reasoning graph source SHA-256 does not match the audited manuscript.")
+    graph_validation = validate_reasoning_graph_object(graph)
+    if graph_validation["status"] != "PASS":
+        raise ValueError("Cannot create a semantic review from an invalid reasoning graph.")
+    if not isinstance(source_text, str):
+        raise ValueError("Manuscript source text must be supplied as a string.")
+    if not _source_text_matches_audit(audit_report, source_text):
+        raise ValueError(
+            "Supplied manuscript source text SHA-256 does not match the extracted-text digest in the audit manifest."
+        )
+    rebuilt_graph = _rebuild_graph_from_source(audit_report, source_text)
+    if graph.get("nodes") != rebuilt_graph.get("nodes") or graph.get("edges") != rebuilt_graph.get("edges"):
+        raise ValueError("Reasoning graph nodes or edges do not match the supplied manuscript source.")
     assessments = []
     for inference in (n for n in graph["nodes"] if n["node_type"] == "inference"):
         claim_id = next(
@@ -67,10 +171,12 @@ def build_semantic_review_template(
         if node["node_type"] == "evidence"
     ]
     return {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "review_type": "external_semantic_reasoning_review",
         "review_mode": review_mode,
         "source_sha256": audit_report["sha256"],
+        "graph_schema_version": graph.get("schema_version"),
+        "graph_fingerprint_algorithm": GRAPH_FINGERPRINT_ALGORITHM,
         "graph_fingerprint": graph_fingerprint(graph),
         "evidence_catalog": evidence_catalog,
         "reviewer": {
@@ -110,7 +216,7 @@ def validate_semantic_review(
     errors: list[str] = []
     if not isinstance(review, dict):
         return {
-            "schema_version": "1.3",
+            "schema_version": "1.4",
             "status": "REJECTED",
             "structural_validation_only": True,
             "review_mode": None,
@@ -122,19 +228,78 @@ def validate_semantic_review(
             ],
         }
 
-    graph = audit_report["reasoning_graph"]
+    if not isinstance(audit_report, dict):
+        return _rejected_semantic_review(["Audit report root must be a JSON object."])
+    graph = audit_report.get("reasoning_graph")
+    if not isinstance(graph, dict):
+        return _rejected_semantic_review(["Audit report does not contain a reasoning graph object."])
+    if graph.get("source_sha256") != audit_report.get("sha256"):
+        errors.append("Reasoning graph source SHA-256 does not match the audited manuscript.")
+        return _rejected_semantic_review(errors)
+    try:
+        graph_validation = validate_reasoning_graph_object(graph)
+    except (TypeError, ValueError, KeyError, AttributeError) as exc:
+        return _rejected_semantic_review([
+            f"Reasoning graph validation could not safely process the graph: {exc}"
+        ])
+    if graph_validation["status"] != "PASS":
+        invalid_fields = [
+            key for key, value in graph_validation.items()
+            if key.startswith("invalid_") and value
+        ]
+        message = "Graph fingerprint or graph integrity validation failed for the current reasoning graph"
+        if "invalid_graph_fingerprint" in invalid_fields:
+            message += " (graph fingerprint mismatch)"
+        errors.append(message + (": " + ", ".join(invalid_fields) if invalid_fields else "") + ".")
+        return _rejected_semantic_review(errors)
+    if not isinstance(source_text, str):
+        return _rejected_semantic_review(["Manuscript source text must be supplied as a string."])
+    if not _source_text_matches_audit(audit_report, source_text):
+        return _rejected_semantic_review([
+            "Supplied manuscript source text SHA-256 does not match the extracted-text digest in the audit manifest."
+        ])
+    try:
+        rebuilt_graph = _rebuild_graph_from_source(audit_report, source_text)
+    except (TypeError, ValueError, KeyError) as exc:
+        return _rejected_semantic_review([f"Could not reconstruct the reasoning graph from source text: {exc}"])
+    if graph.get("nodes") != rebuilt_graph.get("nodes") or graph.get("edges") != rebuilt_graph.get("edges"):
+        return _rejected_semantic_review([
+            "Reasoning graph nodes or edges do not match the graph reconstructed from the audited manuscript source."
+        ])
     expected_fingerprint = graph_fingerprint(graph)
+    legacy_fingerprint = legacy_graph_fingerprint_v1_1(graph)
     input_schema_version = review.get("schema_version")
+    if not isinstance(input_schema_version, str):
+        return _rejected_semantic_review([
+            "Semantic review schema_version must be a string."
+        ])
+    review_mode_value = review.get("review_mode")
+    if review_mode_value is not None and not isinstance(review_mode_value, str):
+        return _rejected_semantic_review([
+            "Semantic review review_mode must be a string or null."
+        ])
+    review_fingerprint = review.get("graph_fingerprint")
+    if not isinstance(review_fingerprint, str):
+        return _rejected_semantic_review([
+            "Semantic review graph_fingerprint must be a string."
+        ])
     legacy_schema = input_schema_version == "1.0"
-    current_schema = input_schema_version == "1.3"
-    strict_quotes = input_schema_version in {"1.2", "1.3"}
+    current_schema = input_schema_version == "1.4"
+    catalog_schema = input_schema_version in {"1.3", "1.4"}
+    assessment_schema = input_schema_version in {"1.3", "1.4"}
+    strict_quotes = input_schema_version in {"1.2", "1.3", "1.4"}
     effective_review_mode = "single" if legacy_schema else review.get("review_mode")
 
-    required_top_fields = (
-        TOP_LEVEL_FIELDS
-        if current_schema
-        else TOP_LEVEL_FIELDS - {"evidence_catalog"}
-    )
+    if current_schema:
+        required_top_fields = TOP_LEVEL_FIELDS
+    elif catalog_schema:
+        required_top_fields = TOP_LEVEL_FIELDS - {
+            "graph_schema_version", "graph_fingerprint_algorithm"
+        }
+    else:
+        required_top_fields = TOP_LEVEL_FIELDS - {
+            "evidence_catalog", "graph_schema_version", "graph_fingerprint_algorithm"
+        }
     allowed_top_fields = required_top_fields if not legacy_schema else required_top_fields - {"review_mode"}
     missing_top_fields = (required_top_fields - ({"review_mode"} if legacy_schema else set())) - set(review)
     unexpected_top_fields = set(review) - allowed_top_fields
@@ -152,6 +317,15 @@ def validate_semantic_review(
         for value in relation_labels
     ):
         errors.append("relation_labels must be an array of supported relation labels.")
+    # Require exact source-bound non-editable fields for current-schema reviews.
+    if current_schema and effective_review_mode in {"single", "parallel"}:
+        expected_template = build_semantic_review_template(
+            audit_report, review_mode=effective_review_mode, source_text=source_text
+        )
+        if instructions != expected_template["instructions"]:
+            errors.append("Semantic review instructions differ from the source-bound template.")
+        if relation_labels != expected_template["relation_labels"]:
+            errors.append("Semantic review relation_labels differ from the source-bound template.")
 
     reviewer = review.get("reviewer")
     if not isinstance(reviewer, dict):
@@ -169,31 +343,48 @@ def validate_semantic_review(
             parsed_time = datetime.fromisoformat(reviewed_at.replace("Z", "+00:00"))
             if parsed_time.tzinfo is None:
                 errors.append("reviewer.reviewed_at_utc must include a timezone.")
-            elif current_schema and parsed_time.utcoffset() != timedelta(0):
+            elif catalog_schema and parsed_time.utcoffset() != timedelta(0):
                 errors.append("reviewer.reviewed_at_utc must use UTC (Z or +00:00).")
+            elif current_schema and not re.fullmatch(
+                r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|\+00:00)",
+                reviewed_at,
+            ):
+                errors.append("reviewer.reviewed_at_utc must end with Z or +00:00.")
         except ValueError:
             errors.append("reviewer.reviewed_at_utc must be ISO-8601.")
 
-    if input_schema_version not in {"1.0", "1.1", "1.2", "1.3"}:
+    if input_schema_version not in {"1.0", "1.1", "1.2", "1.3", "1.4"}:
         errors.append("Unsupported semantic review schema_version.")
     if legacy_schema:
-        if review.get("review_mode") not in {None, "single"}:
+        if review_mode_value not in {None, "single"}:
             errors.append("Legacy semantic review schema 1.0 supports single-model mode only.")
         effective_review_mode = "single"
-    elif effective_review_mode not in {"single", "parallel"}:
+    elif review_mode_value not in {"single", "parallel"}:
         errors.append("review_mode must be 'single' or 'parallel'.")
     if review.get("review_type") != "external_semantic_reasoning_review":
         errors.append("Unsupported semantic review review_type.")
     if review.get("source_sha256") != audit_report.get("sha256"):
         errors.append("Source SHA-256 does not match the audited manuscript.")
-    if review.get("graph_fingerprint") != expected_fingerprint:
-        errors.append("Graph fingerprint does not match the current reasoning graph.")
+    accepted_fingerprints = (
+        {expected_fingerprint}
+        if current_schema
+        else {expected_fingerprint, legacy_fingerprint}
+    )
+    if review_fingerprint not in accepted_fingerprints:
+        errors.append(
+            "Graph fingerprint does not match the current reasoning graph or a supported legacy v1.1 graph."
+        )
+    if current_schema:
+        if review.get("graph_schema_version") != graph.get("schema_version"):
+            errors.append("graph_schema_version does not match the current reasoning graph.")
+        if review.get("graph_fingerprint_algorithm") != GRAPH_FINGERPRINT_ALGORITHM:
+            errors.append("Unsupported graph_fingerprint_algorithm.")
 
     evidence_nodes_by_id = {
         node["node_id"]: node for node in graph["nodes"]
         if node.get("node_type") == "evidence"
     }
-    if current_schema:
+    if catalog_schema:
         catalog = review.get("evidence_catalog")
         if not isinstance(catalog, list):
             errors.append("evidence_catalog must be an array.")
@@ -243,10 +434,12 @@ def validate_semantic_review(
             errors.append(f"Assessment {index} must be an object.")
             continue
         required_assessment_fields = (
-            ASSESSMENT_FIELDS if current_schema
+            ASSESSMENT_FIELDS if assessment_schema
             else ASSESSMENT_FIELDS - {"reviewer_selected_evidence_node_ids"}
         )
-        allowed_assessment_fields = ASSESSMENT_FIELDS if current_schema else required_assessment_fields
+        allowed_assessment_fields = (
+            ASSESSMENT_FIELDS if assessment_schema else required_assessment_fields
+        )
         missing_assessment_fields = required_assessment_fields - set(item)
         unexpected_assessment_fields = set(item) - allowed_assessment_fields
         if missing_assessment_fields:
@@ -285,6 +478,8 @@ def validate_semantic_review(
             errors.append(
                 f"Assessment {index} selects evidence not linked to its inference node by the reasoning graph."
             )
+        if current_schema and set(evidence_ids) != linked_evidence_by_inference.get(inference_id, set()):
+            errors.append(f"Assessment {index} must preserve the template's graph-linked evidence_node_ids.")
 
         relation = item.get("relation")
         if not isinstance(relation, str) or relation not in ALLOWED_RELATIONS:
@@ -361,19 +556,26 @@ def validate_semantic_review(
             if evidence_id in node_map
         ]
         for quote in quotes:
-            normalized_quote = _normalize_quote(quote)
             if not quote.strip() or (strict_quotes and len(quote) < MIN_QUOTE_CHARACTERS):
                 errors.append(
                     f"Assessment {index} contains an excerpt too short to be a meaningful evidence quotation."
                 )
                 break
-            if normalized_quote not in normalized_source:
+            # v1.4 exact quotes preserve case/spacing; legacy v1.0-v1.3 remain compatible.
+            found_in_source = (
+                quote in source_text if current_schema
+                else _normalize_quote(quote) in normalized_source
+            )
+            found_in_node = any(
+                (quote in text if current_schema
+                 else _normalize_quote(quote) in _normalize_quote(text))
+                for text in cited_texts
+            )
+            if not found_in_source:
                 errors.append(f"Assessment {index} contains a quote that is not found in the source.")
                 break
-            if not any(normalized_quote in _normalize_quote(text) for text in cited_texts):
-                errors.append(
-                    f"Assessment {index} quote is not contained in its selected evidence/counter-evidence node(s)."
-                )
+            if not found_in_node:
+                errors.append(f"Assessment {index} quote is not contained in its selected evidence/counter-evidence node(s).")
                 break
         if relation in {"entailed", "partially_supported", "contradicted"} and not quotes:
             errors.append(f"Assessment {index} requires at least one evidence quotation.")
@@ -397,7 +599,7 @@ def validate_semantic_review(
         errors.append(f"Missing semantic assessments for {len(missing)} inference node(s).")
 
     return {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "status": "ACCEPTED_FOR_REVIEW" if not errors else "REJECTED",
         "structural_validation_only": True,
         "review_mode": effective_review_mode,
@@ -413,9 +615,27 @@ def validate_semantic_review(
     }
 
 
+def _reject_nonstandard_json_constant(token: str) -> None:
+    raise ValueError(f"Non-standard JSON numeric constant {token!r} is not permitted.")
+
+
 def load_semantic_review(path: str | Path) -> dict:
     file_path = Path(path).expanduser().resolve()
-    result = json.loads(file_path.read_text(encoding="utf-8-sig"))
+    # Bound reads on the opened file descriptor, not a racy stat() followed
+    # by an unbounded read_text(). O_NONBLOCK avoids hanging on a named pipe.
+    flags = os.O_RDONLY | getattr(os, "O_NONBLOCK", 0)
+    fd = os.open(file_path, flags)
+    with os.fdopen(fd, "rb") as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            raise ValueError("Semantic review input must be a regular JSON file.")
+        raw = stream.read(10 * 1024 * 1024 + 1)
+    if len(raw) > 10 * 1024 * 1024:
+        raise ValueError("Semantic review JSON exceeds the 10 MiB input limit.")
+    result = json.loads(
+        raw.decode("utf-8-sig"),
+        parse_constant=_reject_nonstandard_json_constant,
+        object_pairs_hook=reject_duplicate_keys,
+    )
     if not isinstance(result, dict):
         raise ValueError("Semantic review JSON root must be an object.")
     return result

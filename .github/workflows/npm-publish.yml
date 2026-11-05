@@ -17,10 +17,21 @@ jobs:
       id-token: write
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Require tagged commit to be reachable from main
+        shell: bash
+        run: |
+          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" refs/remotes/origin/main; then
+            echo "Release refused: tag target is not an ancestor of origin/main." >&2
+            exit 1
+          fi
 
       - name: Set up Node.js and npm registry
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
@@ -47,6 +58,23 @@ jobs:
           }
           console.log("Node.js " + process.versions.node + "; npm " + npmVersion + "; publishing " + pkg.name + "@" + pkg.version);
           NODE
+
+      - name: Set up Python required by the npm adapter tests
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.12"
+
+      - name: Install Python engine and statistics dependencies
+        run: python -m pip install ".[statistics,dev]"
+
+      - name: Run Python regression tests before npm publication
+        run: python -m coverage run --source=src/sra -m unittest discover -s tests -v
+
+      - name: Check minimum code coverage
+        run: python -m coverage report --fail-under=100
+
+      - name: Run synthetic review-signal regression benchmark
+        run: PYTHONPATH=src python tools/evaluate_heuristics.py --require-perfect-on-synthetic
 
       - name: Run Node.js tests
         run: npm test

@@ -1,15 +1,44 @@
 """OpenAI-compatible chat-completions client for single-model semantic review."""
 from __future__ import annotations
 import ipaddress
+import hashlib
 import json
 import math
 import os
 import re
 from decimal import Decimal
 from typing import Any
+from sra.json_utils import reject_duplicate_keys
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
+
+
+MAX_MODEL_API_RESPONSE_BYTES = 10 * 1024 * 1024
+
+
+def _read_bounded_response(response, maximum: int = MAX_MODEL_API_RESPONSE_BYTES) -> bytes:
+    """Read a response body without allowing an endpoint to exhaust process memory."""
+    if maximum <= 0:
+        raise ValueError("The model API response size limit must be positive.")
+    headers = getattr(response, "headers", None)
+    content_length = headers.get("Content-Length") if headers is not None else None
+    if content_length is not None:
+        if not isinstance(content_length, str) or re.fullmatch(r"[0-9]+", content_length) is None:
+            raise ValueError(
+                "Model API response has an invalid Content-Length header; expected ASCII digits only."
+            )
+        declared_length = int(content_length)
+        if declared_length > maximum:
+            raise ValueError(
+                f"Model API response exceeds the {maximum}-byte response size limit."
+            )
+    body = response.read(maximum + 1)
+    if len(body) > maximum:
+        raise ValueError(
+            f"Model API response exceeds the {maximum}-byte response size limit."
+        )
+    return body
 
 
 class _NoRedirectHandler(HTTPRedirectHandler):
@@ -64,6 +93,7 @@ def _extract_json_object(content: str) -> dict[str, Any]:
             text,
             parse_float=_parse_finite_json_float,
             parse_constant=_reject_nonstandard_json_constant,
+            object_pairs_hook=reject_duplicate_keys,
         )
     except json.JSONDecodeError as exc:
         raise ValueError(f"Model response is not valid JSON: {exc}") from exc
@@ -74,13 +104,15 @@ def _extract_json_object(content: str) -> dict[str, Any]:
 
 def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         model: str, base_url: str, api_key_env: str = "OPENAI_API_KEY",
-        timeout: int = 120) -> dict[str, Any]:
+        timeout: int = 120, provenance: dict[str, Any] | None = None) -> dict[str, Any]:
     if template.get("review_mode") != "single":
         raise ValueError("Single-model API mode requires review_mode='single'.")
     if not model.strip():
         raise ValueError("A model name is required.")
     if not isinstance(base_url, str) or not base_url or base_url != base_url.strip():
         raise ValueError("base_url must be a non-empty URL without surrounding whitespace.")
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in base_url):
+        raise ValueError("base_url contains prohibited control characters.")
     try:
         parsed_base_url = urlsplit(base_url)
         hostname = parsed_base_url.hostname
@@ -137,21 +169,47 @@ def request_single_model_review(template: dict[str, Any], manuscript: str, *,
     try:
         with _open_api_request(request, timeout=timeout) as response:
             body = json.loads(
-                response.read().decode("utf-8"),
+                _read_bounded_response(response).decode("utf-8"),
                 parse_float=_parse_finite_json_float,
                 parse_constant=_reject_nonstandard_json_constant,
+                object_pairs_hook=reject_duplicate_keys,
             )
     except HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")[:2000]
-        raise RuntimeError(f"Model API returned HTTP {exc.code}: {detail}") from exc
+        try:
+            _read_bounded_response(exc)
+        except ValueError as limit_error:
+            # Keep the bounded-reader error but never expose provider body text.
+            raise RuntimeError(f"Model API HTTP {exc.code}: {limit_error}") from None
+        finally:
+            exc.close()
+        raise RuntimeError(f"Model API returned HTTP {exc.code}; response body withheld.") from None
     except URLError as exc:
-        raise RuntimeError(f"Could not reach model API: {exc.reason}") from exc
+        raise RuntimeError("Could not reach model API.") from None
     except (TimeoutError, OSError) as exc:
-        raise RuntimeError(f"Model API request failed: {exc}") from exc
+        raise RuntimeError("Model API request failed.") from None
     try:
         content = body["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError) as exc:
         raise ValueError("Model API response lacks choices[0].message.content.") from exc
     if not isinstance(content, str):
         raise ValueError("Model API message content must be a string.")
-    return _extract_json_object(content)
+    review = _extract_json_object(content)
+    if provenance is not None:
+        provenance.update({
+            "schema_version": "1.0",
+            "requested_model": model,
+            "endpoint_base_url": f"{parsed_base_url.scheme}://{parsed_base_url.netloc}",
+            "endpoint_path_sha256": hashlib.sha256(
+                parsed_base_url.path.encode("utf-8")
+            ).hexdigest(),
+            "response_model": body.get("model") if isinstance(body.get("model"), str) else None,
+            "provider_system_fingerprint": (
+                body.get("system_fingerprint")
+                if isinstance(body.get("system_fingerprint"), str) else None
+            ),
+            "temperature": 0,
+            "request_body_sha256": hashlib.sha256(request.data).hexdigest(),
+            "response_content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+            "note": "Hashes document this model interaction; temperature=0 does not guarantee deterministic repeatability.",
+        })
+    return review

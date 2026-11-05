@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "semantic-recovery-2025",
+      "kind": "semantic_ci",
+      "claim_type": "not_significant",
+      "effect_measure": "rate_ratio",
+      "confidence_level": 0.95,
+      "estimate": 0.87,
+      "ci_lower": 0.64,
+      "ci_upper": 1.18,
+      "claim_text": "Reported 28-day mortality rate ratio (Cox time-to-event analysis) was not statistically significant; the free-text claim itself is NOT verified."
+    },
+    {
+      "id": "si-newton-second-law-numeric",
+      "kind": "dimension_equation",
+      "left": "force",
+      "right": "mass * acceleration",
+      "dimensions": {
+        "force": {
+          "kg": 1,
+          "m": 1,
+          "s": -2
+        },
+        "mass": {
+          "kg": 1
+        },
+        "acceleration": {
+          "m": 1,
+          "s": -2
+        }
+      },
+      "values": {
+        "force": 10,
+        "mass": 2,
+        "acceleration": 5
+      },
+      "absolute_tolerance": 1e-09
+    },
+    {
+      "id": "scipy-reference-crude-risk-ratio",
+      "kind": "unadjusted_risk_ratio",
+      "confidence_level": 0.95,
+      "exposed": {
+        "events": 10,
+        "total": 75
+      },
+      "control": {
+        "events": 12,
+        "total": 225
+      },
+      "reported": {
+        "risk_ratio": 2.5,
+        "ci_lower": 1.1261564003469628,
+        "ci_upper": 5.549850800541033
+      }
+    },
+    {
+      "id": "recovery-2025-crude-from-counts-not-published-adjusted",
+      "kind": "unadjusted_risk_ratio",
+      "confidence_level": 0.95,
+      "exposed": {
+        "events": 86,
+        "total": 246
+      },
+      "control": {
+        "events": 86,
+        "total": 231
+      }
+    }
+  ]
+}

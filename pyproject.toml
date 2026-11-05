@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scientific-reasoning-auditor"
-version = "0.5.1"
+version = "0.5.2"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -33,6 +33,7 @@ Issues = "https://github.com/Furox-Art/scientific-reasoning-auditor/issues"
 [project.optional-dependencies]
 pdf = ["pypdf>=5.0"]
 statistics = ["scipy>=1.11"]
+dev = ["coverage<9,>=7", "jsonschema<5,>=4.20", "build<2,>=1.2", "twine<8,>=6"]
 
 [project.scripts]
 sra = "sra.cli:main"
