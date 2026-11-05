@@ -10,9 +10,7 @@ The software exposes reviewable reasoning risks with evidence locations and repr
 
 The v0.5.2 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.5.2; the Node.js adapter is version 0.1.0 and is versioned independently.
 
-The published PyPI release remains **v0.5.1**. This v0.5.2 work is a draft release candidate, not yet merged into main or released. Do not treat draft branch features as installed from PyPI.
-
-This candidate limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
+This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 
 ### Implemented
 
@@ -232,7 +230,7 @@ Official references:
 - STROBE: https://www.strobe-statement.org/
 - PRISMA 2020: https://www.prisma-statement.org/prisma-2020
 
-### Expanded academic grammar and field review (unreleased main branch)
+### Expanded academic grammar and field review
 
 The offline writing checker now includes additional, conservative
 English/Turkish grammar and academic phrasing patterns. Suggestions do
