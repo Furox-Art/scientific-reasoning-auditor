@@ -70,3 +70,19 @@ export interface DomainReviewOptions extends RunOptions {
 export function domainReview(input: string, options: DomainReviewOptions): Promise<CommandResult>;
 export function domainTemplate(input: string, options: DomainReviewOptions): Promise<CommandResult>;
 export function domainValidate(input: string, assessments: string, options: DomainReviewOptions): Promise<CommandResult>;
+
+
+/** Evaluate human-annotated scientific revision intents against the offline rules.
+ * Outputs conditional sentence-revision agreement, NOT all-manuscript grammar accuracy.
+ */
+export interface LanguageBenchmarkOptions extends RunOptions {
+  expectedSha256: string;
+  out?: string;
+  maxRows?: number;
+}
+export function languageBenchmark(input: string, options: LanguageBenchmarkOptions): Promise<CommandResult>;
+
+/** Aggregate >=2 completed blinded reviews from independent domain experts.
+ * Software only checks file structure; it cannot verify reviewer credentials.
+ */
+export function domainAggregate(reports: string[], options?: OutputOptions): Promise<CommandResult>;

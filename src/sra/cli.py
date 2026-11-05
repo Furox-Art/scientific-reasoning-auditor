@@ -15,6 +15,8 @@ from sra.discipline import CHECKLISTS
 from sra.validation import evaluate_blinded_labels
 from sra.domain_evidence import PROFILES, audit_domain_file
 from sra.domain_adjudication import make_domain_template, validate_domain_adjudication
+from sra.academic_benchmark import evaluate_arxiv_edit_pairs
+from sra.domain_cohort import aggregate_domain_reports
 
 
 def main() -> int:
@@ -114,7 +116,65 @@ def main() -> int:
     evaluate.add_argument("labels", help="External blinded expert-label JSON file.")
     evaluate.add_argument("--out", default="expert-validation-report.json")
 
+    language_benchmark = sub.add_parser(
+        "benchmark-language",
+        help="Quantify offline language-rule agreement with frozen human-edited science sentences.",
+    )
+    language_benchmark.add_argument("input", help="Human-annotated arXivEdits CSV (not bundled).")
+    language_benchmark.add_argument(
+        "--expected-sha256", required=True,
+        help="Pin the exact bytes of the externally sourced CSV.",
+    )
+    language_benchmark.add_argument("--out", default="language-benchmark.json")
+    language_benchmark.add_argument("--max-rows", type=int, default=2000)
+
+    cohort = sub.add_parser(
+        "domain-aggregate",
+        help="Aggregate >=2 externally adjudicated, blinded domain review reports.",
+    )
+    cohort.add_argument("reports", nargs="+", help="JSON reports from domain-validate.")
+    cohort.add_argument("--out", default="domain-cohort.json")
+
     args = parser.parse_args()
+    if args.command == "benchmark-language":
+        try:
+            result = evaluate_arxiv_edit_pairs(
+                args.input, expected_sha256=args.expected_sha256,
+                max_rows=args.max_rows,
+            )
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, TypeError, UnicodeError, SyntaxError, RecursionError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        if out.resolve() == Path(args.input).expanduser().resolve():
+            parser.error("Output must not overwrite the annotated corpus.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        rates = result["conditional_detection"]
+        print(f"Evaluated {result['rows_evaluated']} real scientific revision pairs "
+              f"from {result['unique_papers']} papers.")
+        print(f"Human language-edit detection recall: "
+              f"{rates['positive_recall']:.2%}")
+        print("Not general grammar correctness or full-manuscript scientific validation.")
+        print(f"Report: {out.resolve()}")
+        return 0
+
+    if args.command == "domain-aggregate":
+        try:
+            result = aggregate_domain_reports(args.reports)
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+            parser.error(str(exc))
+        out = Path(args.out)
+        if out.resolve() in {Path(p).expanduser().resolve() for p in args.reports}:
+            parser.error("Output must not overwrite an input review.")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(serialized, encoding="utf-8")
+        print(f"Aggregated {result['manuscripts']} externally supplied domain reviews.")
+        print("Reviewer identity/independence NOT independently verified.")
+        print(f"Report: {out.resolve()}")
+        return 0
+
     if args.command == "writing-audit":
         try:
             result = audit_academic_writing(

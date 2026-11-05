@@ -273,6 +273,37 @@ function domainValidate(input, assessments, options = {}) {
     '--out', options.out || 'domain-adjudication.json'], options);
 }
 
+function languageBenchmark(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty CSV file path'));
+  }
+  if (typeof options.expectedSha256 !== 'string' ||
+      !/^[0-9a-f]{64}$/.test(options.expectedSha256)) {
+    return Promise.reject(new TypeError('expectedSha256 must be a lowercase SHA-256 hash'));
+  }
+  const args = [
+    'benchmark-language', input, '--expected-sha256', options.expectedSha256,
+    '--out', options.out || 'language-benchmark.json',
+  ];
+  if (options.maxRows !== undefined) {
+    if (!Number.isSafeInteger(options.maxRows) ||
+        options.maxRows < 1 || options.maxRows > 100000) {
+      return Promise.reject(new TypeError('maxRows must be an integer from 1 to 100000'));
+    }
+    args.push('--max-rows', String(options.maxRows));
+  }
+  return run(args, options);
+}
+
+function domainAggregate(reports, options = {}) {
+  if (!Array.isArray(reports) || reports.length < 2 ||
+      reports.some((r) => typeof r !== 'string' || !r.length)) {
+    return Promise.reject(new TypeError('reports must be an array of at least two JSON file paths'));
+  }
+  return run(['domain-aggregate', ...reports, '--out',
+    options.out || 'domain-cohort.json'], options);
+}
+
 module.exports = {
   run,
   audit,
@@ -286,4 +317,6 @@ module.exports = {
   domainReview,
   domainTemplate,
   domainValidate,
+  languageBenchmark,
+  domainAggregate,
 };

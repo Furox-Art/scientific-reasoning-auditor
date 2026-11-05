@@ -311,6 +311,52 @@ No external expert labels are bundled or fabricated. Thus no sensitivity,
 specificity or independent scientific performance score is available yet.
 See [independent validation protocol](benchmarks/VALIDATION_PROTOCOL.md).
 
+## Measured academic-language limitations and blinded expert review (main only)
+
+**Real human-annotated evidence:** we evaluated all 200 examples in the
+arXivEdits 2022 human-annotated scientific revision **test split** (69 papers),
+with the original file and its SHA-256 frozen. On this edit-enriched dataset
+the current *offline English language rules* detected **4 of 136**
+human-labelled language-edit revision pairs (**2.94%** conditional recall).
+The system flagged only six pairs in total. This reveals a real and serious
+coverage limitation; it is **not** a reliable estimate of full-manuscript
+grammatical correctness. The 64 comparison sentences were revised for
+other stated reasons, not independently certified as error-free.
+
+Download the version-pinned dataset separately and reproduce with:
+
+    sra benchmark-language /tmp/arxivedits-human-test.csv --expected-sha256 6541dce4c7f82019e8f24dc0259a1a04e20dd853d87b465adeb1febc2cbf0220 --max-rows 200 --out reports/language-test.json
+
+The repository distributes **only aggregate statistics**, not third-party
+scientific writing and copyright-encumbered annotations. See the
+[observed benchmark report](benchmarks/arxivedits_style_test_20261105.json)
+and [full methodology and caveats](docs/ACADEMIC_LANGUAGE_BENCHMARK.md).
+The optional LanguageTool service was **not benchmarked** here.
+
+**Specialist review strengthened:** the domain expert template is now
+**blinded by default** (it contains questions, but no prior automatic
+predictions or extracted candidate paragraphs). Review validation requires
+the *same two declared reviewer IDs* across all items. Outputs provide
+item-level comparison against adjudicated judgments, raw reviewer
+agreement and Cohen's kappa (null when undefined). None confirms reviewer
+identity, genuine independence, scientifically correct judgments or
+guideline compliance.
+
+    sra domain-template examples/physics_domain_demo.md --discipline physics --out reports/blind-template.json
+    sra domain-validate examples/physics_domain_demo.md reports/real-reviewed.json --discipline physics --out reports/verified-review.json
+
+When two or more **genuinely reviewed manuscripts** are available, their
+structured outputs can be aggregated by discipline and fixed ruleset:
+
+    sra domain-aggregate reports/review-1.json reports/review-2.json --out reports/domain-cohort.json
+
+The aggregator checks for duplicate paper hashes, mismatched rule sets and
+inconsistent confusion matrices. It reports conditional retrieval
+statistics and simple Wilson intervals; these intervals do not account for
+clustering or selection bias. No real external domain experts were recruited
+for this change, and no domain-wide scientific accuracy numbers can be
+claimed yet. Refer to [the expert protocol](docs/DOMAIN_EXPERT_PROTOCOL.md).
+
 ## Scientific validation roadmap
 
 The project is split into separate assurance layers. A rule-based text scan must not be presented as full scientific validation.

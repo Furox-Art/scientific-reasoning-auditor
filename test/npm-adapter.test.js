@@ -20,6 +20,8 @@ test('exports the documented Node API', () => {
   assert.equal(typeof sra.domainReview, 'function');
   assert.equal(typeof sra.domainTemplate, 'function');
   assert.equal(typeof sra.domainValidate, 'function');
+  assert.equal(typeof sra.languageBenchmark, 'function');
+  assert.equal(typeof sra.domainAggregate, 'function');
 });
 
 test('rejects invalid arguments before starting Python', async () => {
@@ -46,6 +48,10 @@ test('rejects invalid arguments before starting Python', async () => {
   await assert.rejects(sra.domainReview('file.md', { discipline: 'wrong' }), /discipline/);
   await assert.rejects(sra.domainTemplate('', { discipline: 'clinical' }), /non-empty file path/);
   await assert.rejects(sra.domainValidate('file.md', '', { discipline: 'physics' }), /non-empty file paths/);
+  await assert.rejects(sra.languageBenchmark('', { expectedSha256: '0'.repeat(64) }), /non-empty CSV/);
+  await assert.rejects(sra.languageBenchmark('file.csv', {}), /expectedSha256/);
+  await assert.rejects(sra.languageBenchmark('file.csv', { expectedSha256: '0'.repeat(64), maxRows: 0 }), /maxRows/);
+  await assert.rejects(sra.domainAggregate(['one.json']), /at least two/);
 });
 
 test('runs the existing Python CLI without installing dependencies', async () => {
@@ -144,4 +150,28 @@ test('runs grounded domain review and exports expert template via Node', async (
   const draft = JSON.parse(fs.readFileSync(template, 'utf8'));
   assert.equal(draft.kind, 'manual_domain_expert_assessment_template');
   assert.equal(draft.assessments.length, result.items.length);
+});
+
+
+test('runs human-annotation benchmark from Node without downloading raw texts', async (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sra-human-benchmark-js-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const csv = path.join(dir, 'edits.csv');
+  const fields = 'id,sentence-1,sentence-2,arxiv-id,edits-combination-0,edits-combination-1,edits-combination-2';
+  const rows = [
+    '1,"This is a analysis.","This is an analysis.",1901.00001,"{\'0\': {\'intention\': \'Improve-grammar-Typo\'}}",{},{}',
+    '2,"A dataset was used.","A large dataset was used.",1901.00002,"{\'0\': {\'intention\': \'Content\'}}",{},{}',
+  ];
+  fs.writeFileSync(csv, fields + '\n' + rows.join('\n') + '\n');
+  const sha = require('node:crypto').createHash('sha256').update(fs.readFileSync(csv)).digest('hex');
+  const out = path.join(dir, 'benchmark.json');
+  const runResult = await sra.languageBenchmark(csv, {
+    expectedSha256: sha, out, stdio: 'pipe',
+  });
+  assert.equal(runResult.code, 0, runResult.stderr);
+  const report = JSON.parse(fs.readFileSync(out, 'utf8'));
+  assert.equal(report.rows_evaluated, 2);
+  assert.equal(report.split, 'unverified');
+  assert.equal(report.confusion_matrix_against_revision_intents.tp, 1);
+  assert.equal(report.confusion_matrix_against_revision_intents.tn_proxy, 1);
 });

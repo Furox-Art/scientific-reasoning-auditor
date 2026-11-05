@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "kind": "observed_human_revision_intent_detection",
+  "corpus": "arXivEdits annotated scientific revision test split",
+  "corpus_url": "https://huggingface.co/datasets/miwytt/arXivEdits_edits",
+  "paper": "https://aclanthology.org/2022.emnlp-main.641/",
+  "verified_dataset_revision": "3fdba9ce77468272ed4c32bcf3f9f38983ed57be",
+  "split": "test",
+  "pinned_source_url": "https://huggingface.co/datasets/miwytt/arXivEdits_edits/resolve/3fdba9ce77468272ed4c32bcf3f9f38983ed57be/edits/test.csv",
+  "source_csv_sha256": "6541dce4c7f82019e8f24dc0259a1a04e20dd853d87b465adeb1febc2cbf0220",
+  "rows_evaluated": 200,
+  "unique_papers": 69,
+  "source_edits_by_intent": {
+    "Content": 125,
+    "Format": 94,
+    "Improve-grammar-Typo": 103,
+    "Lang-accurate-spefific": 48,
+    "Lang-improve-readability-Simplify": 27,
+    "Lang-other": 2,
+    "Lang-professional-Improve-style": 40
+  },
+  "annotation_label_rule": "Positive if at least one annotated edit intention begins 'Lang-' or 'Improve-grammar'; negative proxy otherwise.",
+  "detector": "SRA offline style_review(language=en), default patterns",
+  "confusion_matrix_against_revision_intents": {
+    "tp": 4,
+    "fp_proxy": 2,
+    "fn": 132,
+    "tn_proxy": 62
+  },
+  "conditional_detection": {
+    "positive_recall": 0.029411764705882353,
+    "positive_recall_ci95_wilson": [
+      0.011495862973155337,
+      0.07318187795256928
+    ],
+    "precision_proxy": 0.6666666666666666,
+    "precision_proxy_ci95_wilson": [
+      0.299993315138392,
+      0.9032285888942195
+    ],
+    "nonlanguage_revision_specificity_proxy": 0.96875,
+    "nonlanguage_revision_specificity_ci95_wilson": [
+      0.8930270822904169,
+      0.9913878616538281
+    ]
+  },
+  "suggested_replacements": {
+    "machine_string_substitution_candidates": 6,
+    "exact_normalized_matches_in_human_target": 1,
+    "exact_target_agreement_fraction": 0.16666666666666666,
+    "exact_target_agreement_ci95_wilson": [
+      0.030053369748306635,
+      0.5635028221864702
+    ],
+    "note": "Literal phrase agreement only; different but acceptable human rewrites are marked as nonmatches. This is NOT correction correctness."
+  },
+  "rule_trigger_counts": {
+    "concision": 5,
+    "repeated_word": 1
+  },
+  "inspection_cases_without_text": [
+    {
+      "sample_id": "27",
+      "arxiv_id": "astro-ph-0004412",
+      "rule": "concision",
+      "reason": "Replacement not present as an exact normalized string in target."
+    },
+    {
+      "sample_id": "64",
+      "arxiv_id": "1710.01496",
+      "rule": "concision",
+      "reason": "Replacement not present as an exact normalized string in target."
+    },
+    {
+      "sample_id": "89",
+      "arxiv_id": "0909.3835",
+      "rule": "concision",
+      "reason": "Replacement not present as an exact normalized string in target."
+    },
+    {
+      "sample_id": "98",
+      "arxiv_id": "1403.5022",
+      "rule": "concision",
+      "reason": "Replacement not present as an exact normalized string in target."
+    },
+    {
+      "sample_id": "159",
+      "arxiv_id": "1107.0260",
+      "rule": "concision",
+      "reason": "Replacement not present as an exact normalized string in target."
+    }
+  ],
+  "limitations": [
+    "The dataset includes edited scientific sentences, not a random sample of all manuscript sentences.",
+    "Only annotations attached to these human revisions are observed. A no-language-edit tag is NOT a verified grammar-correct negative.",
+    "Scientific revisions and language edits may coexist in a single example; original editors can disagree and edits can be subjective.",
+    "The figures are conditional revision-intent agreement; they are not full real-manuscript grammar accuracy, error-free precision or peer-reviewed validation.",
+    "The selected mirror and its SHA-256 are recorded; no copyrighted source/target sentences or human edits are redistributed in the report.",
+    "Confidence intervals use sentence-level Wilson bounds and do not adjust for clustering within papers.",
+    "The optional local LanguageTool integration is not evaluated here; only the built-in offline rules are evaluated."
+  ]
+}

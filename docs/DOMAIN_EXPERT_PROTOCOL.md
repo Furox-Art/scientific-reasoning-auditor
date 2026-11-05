@@ -65,3 +65,38 @@ For performance estimation on independently adjudicated real papers, follow
 The domain tool is offline and never alters the source manuscript.
 The optional local LanguageTool interface sends non-reference prose only
 to a user-run `127.0.0.1` server and never to a public grammar API.
+
+
+## Blinded review and inter-reviewer comparison (new)
+
+The current `domain-template` emits `blinded: true` and deliberately **omits
+automated statuses and source excerpts**. Reviewers should not view a
+previously generated `domain-review` report until their independent verdicts
+have been recorded and reconciled. Reviewer IDs must form the same distinct
+pair for all questions within one manuscript. A template marked blinded
+does not establish that actual blinding took place.
+
+After two independent human assessments, `domain-validate` checks exact
+quotes, source and ruleset fingerprints, completeness, admissible verdicts
+and adjudication rationales. The validated report includes:
+
+- `reviewer_agreement.raw_exact_agreement` and `cohen_kappa` (null if
+  undefined due to zero variation);
+- `comparison_against_adjudicated_verdicts.confusion_matrix` and per-rule
+  outcomes; and
+- conditional candidate precision, recall and specificity against
+  adjudicated *reporting* labels, not truth of scientific claims.
+
+Uncertain and not-applicable outcomes are excluded from the binary
+retrieval comparisons, rather than mislabelled as negative.
+
+For a **genuine** multi-manuscript expert cohort, run
+`sra domain-aggregate reviewed-1.json reviewed-2.json --out report.json`.
+It checks unique source hashes, identical discipline/ruleset and agreement
+between per-rule outcomes and each report's confusion matrix. Results
+are conditional on the assessed corpus, and agreement is not accuracy.
+Never use the synthetic, intentionally fabricated **unit-test doubles**
+as actual expert assessments; no real external experts were collected.
+
+For grammar performance, see the separate, empirically measured
+[arXivEdits language benchmark](ACADEMIC_LANGUAGE_BENCHMARK.md).
