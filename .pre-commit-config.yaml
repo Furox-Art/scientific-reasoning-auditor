@@ -1,0 +1,23 @@
+# Pre-commit hooks for scientific-reasoning-auditor
+#
+# Install once after cloning:
+#   python -m pip install pre-commit
+#   pre-commit install
+#
+# Run on demand:
+#   pre-commit run --all-files
+#
+# Only generic file-hygiene hooks are configured. This repository has no ruff,
+# flake8, black, isort or mypy configuration, so no formatter or linter hook is
+# enabled here. Add one only together with its configuration.
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict

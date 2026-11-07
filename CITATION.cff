@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "scientific-reasoning-auditor"
+# Keep `version` in lockstep with pyproject.toml [project].version and
+# src/sra/__init__.py __version__.
+version: 0.5.2
+authors:
+  - name: "Furox-Art"
+    email: "furkanarkn1451@gmail.com"
+abstract: >-
+  Evidence-traceable screening and reasoning review for scientific manuscripts.
+  Audits the chain from hypothesis through assumptions, methods, data, analysis
+  and inference to conclusion, and reports reviewable reasoning risks with
+  evidence locations and reproducibility metadata. Includes academic-writing and
+  citation checks, discipline evidence adjudication, DOI and PMC validation,
+  arithmetic verification of reported Welch t-tests and two-proportion z-tests,
+  a reasoning graph with strict validation, source-bound semantic-review
+  templates for external models, and reproducibility provenance. Emits review
+  signals rather than verdicts and does not declare a manuscript scientifically
+  true or false.
+license: MIT
+repository-code: "https://github.com/Furox-Art/scientific-reasoning-auditor"
+url: "https://github.com/Furox-Art/scientific-reasoning-auditor"
+date-released: "2026-11-05"
+keywords:
+  - "scientific reasoning"
+  - "manuscript review"
+  - "research software"
+  - "reproducibility"
+  - "evidence traceability"
+  - "statistics verification"
+  - "academic writing"
+  - "reasoning graph"
+preferred-citation:
+  type: software
+  title: "scientific-reasoning-auditor"
+  authors:
+    - name: "Furox-Art"
+  year: 2026
+  version: 0.5.2
+  url: "https://github.com/Furox-Art/scientific-reasoning-auditor"
