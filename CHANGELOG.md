@@ -23,6 +23,11 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Changed
 
+- npm adapter released as 0.1.2: it refuses to drive a Python engine older than
+  0.5.2, naming the version it found, the floor and the upgrade command instead
+  of failing later on a CLI command that version lacks. An importable `sra`
+  without distribution metadata keeps the old behaviour. It remains versioned
+  independently of the Python package (`1e37267`, `16d9f8d`).
 - npm adapter released as 0.1.1; it is versioned independently of the Python
   package (`1e37267`).
 

@@ -8,7 +8,7 @@ The software exposes reviewable reasoning risks with evidence locations and repr
 
 ## Current status: v0.5.2
 
-The v0.5.2 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.5.2; the Node.js adapter is version 0.1.1 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
+The v0.5.2 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.5.2; the Node.js adapter is version 0.1.2 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 
@@ -103,7 +103,7 @@ The functions return `{ code, signal, stdout, stderr }`. By default command outp
 
 After the initial npm release has created the package, configure a GitHub Actions Trusted Publisher in npm package settings with owner Furox-Art, repository scientific-reasoning-auditor, workflow filename npm-publish.yml, and no environment. Allow direct npm publish. The workflow uses GitHub-hosted runners, Node.js 24+, npm 11.5.1+, and the id-token: write permission; it stores no npm publish token.
 
-To publish a subsequent npm version, update package.json, commit the change, and push a matching tag such as npm-v0.1.1. The workflow runs Node tests and npm pack --dry-run before publishing via OIDC. npm currently requires a package to exist before its Trusted Publisher can be configured, so the first package publication must be completed once using npm account verification.
+To publish a subsequent npm version, update package.json, commit the change, and push a matching tag such as npm-v0.1.2. The workflow runs Node tests and npm pack --dry-run before publishing via OIDC. npm currently requires a package to exist before its Trusted Publisher can be configured, so the first package publication must be completed once using npm account verification.
 
 ## Run manuscript audit
 
