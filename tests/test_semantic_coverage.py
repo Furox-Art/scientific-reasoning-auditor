@@ -29,7 +29,10 @@ QUOTE = "The intervention increased recovery by five units."
 def fixture():
     folder = tempfile.TemporaryDirectory()
     path = Path(folder.name) / "paper.md"
-    path.write_text(TEXT, encoding="utf-8")
+    # newline="" keeps the bytes on disk identical to TEXT.encode() on every
+    # platform: the report records the digest of the file's bytes, so a Windows
+    # CRLF translation would make that digest disagree with the fixture text.
+    path.write_text(TEXT, encoding="utf-8", newline="")
     audited = audit_file(path).to_dict()
     review = build_semantic_review_template(audited, source_text=TEXT)
     review["reviewer"] = {

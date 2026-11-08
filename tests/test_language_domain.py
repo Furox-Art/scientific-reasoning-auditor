@@ -245,7 +245,7 @@ class EvidenceBasedDomainReviewTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "paper.md"
-            path.write_text(doc)
+            path.write_text(doc, encoding="utf-8")
             report = audit_academic_writing(path, discipline="physics")
         self.assertIn("discipline_review", report)
         self.assertEqual(report["discipline_review"]["summary"]["textual_candidates"], 2)
@@ -260,7 +260,7 @@ class EvidenceBasedDomainReviewTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "paper.md"
-            path.write_text(doc)
+            path.write_text(doc, encoding="utf-8")
             report = audit_academic_writing(path, discipline="physics")
         markdown = writing_report_markdown(report)
         self.assertIn("&lt;script&gt;", markdown)

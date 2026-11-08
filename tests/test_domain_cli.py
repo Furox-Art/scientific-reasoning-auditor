@@ -75,7 +75,7 @@ class DomainEndToEndTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             base = Path(root)
             manuscript = base / "paper.md"
-            manuscript.write_text(self.SOURCE)
+            manuscript.write_text(self.SOURCE, encoding="utf-8")
             out = base / "results" / "domain.json"
             completed = self.cli(
                 "domain-review", manuscript, "--discipline", "physics", "--out", out,
@@ -91,7 +91,7 @@ class DomainEndToEndTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             base = Path(root)
             manuscript = base / "paper.md"
-            manuscript.write_text(self.SOURCE)
+            manuscript.write_text(self.SOURCE, encoding="utf-8")
             before = manuscript.read_bytes()
             result = self.cli(
                 "domain-review", manuscript, "--discipline", "physics",
@@ -105,7 +105,7 @@ class DomainEndToEndTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             base = Path(root)
             manuscript = base / "paper.md"
-            manuscript.write_text(self.SOURCE)
+            manuscript.write_text(self.SOURCE, encoding="utf-8")
             template_path = base / "template.json"
             out = base / "result.json"
             self.assertEqual(self.cli(

@@ -38,7 +38,11 @@ class CLISafetyTests(unittest.TestCase):
             source=Path(tmp)/"paper.md"
             source.write_text("# Methods\nA method.")
             alias=Path(tmp)/"output.md"
-            alias.symlink_to(source)
+            try:
+                alias.symlink_to(source)
+            except (OSError, NotImplementedError) as error:
+                # Windows needs Developer Mode or elevation to create symlinks.
+                self.skipTest(f"this platform cannot create symlinks: {error}")
             before=source.read_bytes()
             self._run(["review-template",str(source),"--out",str(alias)])
             self.assertEqual(source.read_bytes(),before)

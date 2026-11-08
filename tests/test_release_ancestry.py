@@ -1,6 +1,7 @@
 """Release tag origin guard: real Git DAG positive/negative controls."""
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -26,13 +27,21 @@ class ReleaseLineageTests(unittest.TestCase):
                 self.assertIn("git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main", source)
                 self.assertIn("exit 1", source)
 
+    @unittest.skipIf(
+        sys.platform == "win32",
+        "the guard is a POSIX bash script and MSYS rewrites the local remote URL, "
+        "so this DAG cannot be replayed faithfully here; Linux CI runs it",
+    )
     def test_real_git_dag_allows_main_and_blocks_unmerged_feature(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             remote, work = root / "remote.git", root / "work"
             subprocess.run(["git", "init", "--bare", "--initial-branch=main", str(remote)],
                            check=True, capture_output=True)
-            subprocess.run(["git", "clone", str(remote), str(work)],
+            # Forward slashes keep the path a path on Windows: a backslash form
+            # such as C:\Temp\remote.git is read by git as an ssh host and the
+            # guard then dies with "Could not resolve hostname c:".
+            subprocess.run(["git", "clone", remote.as_posix(), str(work)],
                            check=True, capture_output=True)
             self.git(work, "config", "user.name", "Fixture Author")
             self.git(work, "config", "user.email", "fixture@example.invalid")

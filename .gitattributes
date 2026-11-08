@@ -1,0 +1,16 @@
+# Keep one line ending in the repository and in every checkout.
+#
+# The release provenance hash, the distribution verifier and several tests hash
+# file *bytes*: a manuscript checked out with CRLF on Windows therefore carried a
+# different source digest than the same commit on Linux, and
+# `test_legacy_v11_graph_fingerprint_matches_public_v051_output` failed on a file
+# nobody had edited. Text is stored and checked out as LF so one commit means one
+# set of bytes.
+* text=auto eol=lf
+
+# Fixtures that must keep exactly the bytes they were recorded with.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.whl binary
+*.gz binary

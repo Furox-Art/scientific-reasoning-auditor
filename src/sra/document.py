@@ -171,6 +171,15 @@ def load_document(path: str | Path) -> ParsedDocument:
         parser_backend = "pypdf"
     elif suffix in {".md", ".markdown", ".txt"}:
         text = raw.decode("utf-8-sig")
+        # Normalise line endings once, here. Every consumer of the extracted text
+        # (the reasoning graph, the semantic-review template, the CLI's own
+        # review paths) has to hash the same characters, and those paths read the
+        # file through text mode, which already collapses CRLF to LF. Without
+        # this, a manuscript saved with Windows line endings produced an
+        # extracted-text digest that no other reader of the same file could
+        # match: audit then review-template on one file disagreed on Windows.
+        # The exact bytes are still covered by ``sha256`` below.
+        text = text.replace("\r\n", "\n").replace("\r", "\n")
         parser_backend = "python-utf8"
     else:
         raise ValueError("Supported formats: .md, .markdown, .txt, .pdf")
