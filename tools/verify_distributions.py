@@ -567,6 +567,13 @@ def _verify_wheel(
         for path in (root / "src" / "sra").rglob("*.py")
         if path.is_file()
     )
+    # py.typed is package data rather than a module, but it ships in the wheel
+    # and belongs in the inventory exactly like the modules do: without it the
+    # complete-file check called a published PEP 561 marker "unexpected".
+    py_typed = root / "src" / "sra" / "py.typed"
+    if py_typed.is_file():
+        expected_sources.append(py_typed.relative_to(root / "src").as_posix())
+        expected_sources.sort()
     dist_info_root = (
         f"{expected_name.replace('-', '_')}-{expected_version}.dist-info"
     )
