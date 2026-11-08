@@ -10,6 +10,23 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.5.3] - 2026-11-08
+
+### Fixed
+
+- Release pipeline unblocked: the repository provenance inventory is sorted by the
+  recorded posix name instead of by `Path` (whose comparison is case-insensitive,
+  so `bin/sra.js` sorted before `LICENSE` and the distribution verifier rejected
+  the order), and `src/sra/py.typed` is part of the provenance, wheel and
+  installed-package inventories, which previously disagreed with the artifact by
+  exactly that file (`c8fdd4b`, `65617a5`, `fa28693`). The verifier fixtures now
+  ship the same marker instead of failing before their own assertions
+  (`a4a9211`).
+- `test_run_pmc_sleeps_between_multiple_articles` patched the shared `time`
+  module, so any unrelated sleep in the audit path counted as the benchmark's
+  pause; it now replaces `sra.benchmark.time` and pins the exact 0.38 s pause
+  (`c8fdd4b`).
+
 ### Added
 
 - Verify two-sided two-proportion z-tests from 2x2 event counts, comparing the
@@ -51,5 +68,6 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.5.2...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.5.3...HEAD
+[0.5.3]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.3
 [0.5.2]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.2
