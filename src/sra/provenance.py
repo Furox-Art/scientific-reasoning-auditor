@@ -122,7 +122,16 @@ def _source_tree_sha256(
         scope = "; ".join(category for category, _ in files_by_category)
     else:
         package_root = Path(__file__).resolve().parent
-        files = sorted(path for path in package_root.rglob("*.py") if path.is_file())
+        # The installed wheel carries py.typed next to the modules, and the
+        # inventory recorded in that wheel lists it: the installed side has to
+        # list it too, or the two file lists cannot match. It is found through
+        # the same walk so an unreadable package still yields "no files".
+        files = sorted(
+            path
+            for pattern in ("*.py", "py.typed")
+            for path in package_root.rglob(pattern)
+            if path.is_file()
+        )
         if not files:
             return None, INSTALLED_PACKAGE_HASH_SCOPE, []
         hash_root = package_root.parent
