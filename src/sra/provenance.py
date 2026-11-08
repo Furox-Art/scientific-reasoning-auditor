@@ -63,7 +63,10 @@ def _source_revision() -> tuple[str | None, bool | None]:
 
 
 REPOSITORY_HASH_GROUPS = (
-    ("Python runtime source", ("src/sra/**/*.py",)),
+    # py.typed ships inside the package and is part of what a distribution
+    # claims to be: without it here the sdist inventory disagreed with the
+    # distribution verifier, which saw one member it did not expect.
+    ("Python runtime source", ("src/sra/**/*.py", "src/sra/py.typed")),
     ("JSON schemas", ("schemas/**/*.json",)),
     ("Python tests", ("tests/**/*.py",)),
     ("Node adapter sources and tests", ("test/**/*.js", "bin/**/*.js")),
@@ -124,6 +127,13 @@ def _source_tree_sha256(
             return None, INSTALLED_PACKAGE_HASH_SCOPE, []
         hash_root = package_root.parent
         scope = INSTALLED_PACKAGE_HASH_SCOPE
+
+    # Sort by the recorded name, not by Path. ``Path`` comparison is
+    # case-insensitive, so a tree containing both ``LICENSE`` and ``bin/sra.js``
+    # produced an order that is not plain string order -- and the distribution
+    # verifier, which checks the inventory against ``sorted()``, rejected it.
+    # The inventory is the record that matters, so the order is the record's.
+    files.sort(key=lambda path: path.relative_to(hash_root).as_posix())
 
     included_files = [path.relative_to(hash_root).as_posix() for path in files]
     digest = hashlib.sha256()

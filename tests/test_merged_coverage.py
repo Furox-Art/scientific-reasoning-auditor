@@ -256,10 +256,15 @@ class _BenchmarkCoverageTests(unittest.TestCase):
                 "# Results\nThe value increased.\n# Conclusion\nThe value increased.\n"
             )
             with patch("sra.benchmark._get_article", return_value=(text, {"pmcid": "PMC1234567"})):
-                with patch("sra.benchmark.time.sleep") as sleep:
+                # Replace the module reference rather than ``time.sleep`` on the
+                # shared module: that patch is global, so any unrelated sleep in
+                # the audit path was counted as the benchmark's pause and the
+                # assertion read "called 2 times" on a busy runner.
+                clock = Mock()
+                with patch("sra.benchmark.time", clock):
                     result = run_pmc_benchmark(manifest, online=True, limit=2)
         self.assertEqual(result["processed"], 2)
-        sleep.assert_called_once()
+        clock.sleep.assert_called_once_with(0.38)
 
 
 class _DoiCoverageTests(unittest.TestCase):
