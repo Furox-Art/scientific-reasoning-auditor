@@ -26,6 +26,8 @@ This release limits model API response memory use, validates reasoning-graph nod
 - Flag causal conclusion language when Methods text describes an observational or non-randomized design.
 - Avoid attributing observational designs of reviewed papers to the authors of an explicitly identified methodological / meta-research review, unless the review itself explicitly reports its own observational design.
 - Flag selected absolute/conclusive wording.
+- Flag a manuscript that reports three or more p-values and never mentions a multiplicity adjustment: no statement of a correction, a test family, or a procedure that corrects by itself. The signal is text-only and says so; it cannot tell a pre-specified single test from exploratory tests, so it asks for adjudication.
+- Flag an independent-samples test quoted for a design described as paired, matched, repeated-measures or before/after, unless the manuscript also names a paired test. The check points at both sentences rather than deciding which analysis was run.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
 - Recalculate a two-sided two-proportion z-test from a 2x2 event-count table; compare reported proportions, difference, z statistic and p-value within explicit tolerances, and report a pooled normal approximation with an unpooled Wald 95% confidence interval.
 - Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
@@ -44,6 +46,7 @@ This release limits model API response memory use, validates reasoning-graph nod
 - A possible direction conflict may be caused by subgroup definitions, recoding, different endpoints or sentence-extraction errors.
 - A repeated rate ratio with a differing CI may still refer to different endpoints, populations or statistical models; the check requires explicit `rate ratio …; 95% CI …; p = …` formatting, and misses other estimate types or layouts. Human adjudication remains necessary.
 - Observational wording does not by itself invalidate a causal inference; causal identification may be justified by design and assumptions not detected by these rules.
+- Multiplicity and design/test signals are wording checks: a correction stated in prose, or a paired test named anywhere, clears them, and a correction applied but never mentioned is invisible to them.
 - Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test. Pooled-SD Cohen's d uses a common within-group variance reference and is not heteroskedasticity-adjusted; the classical Hedges' J correction is derived under a normally distributed, two-independent-group model with a common variance.
 - No finding does not mean that the paper is logically valid.
 

@@ -10,6 +10,17 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+### Added
+
+- `statistics.multiplicity_unaddressed`: three or more reported p-values with no
+  mention of a correction, a test family or a procedure that corrects by itself.
+- `statistics.design_test_mismatch`: an independent-samples test quoted for a
+  design described as paired, matched, repeated-measures or before/after, unless
+  a paired test is also named.
+
+Both are wording checks that point at the sentences and ask for adjudication;
+neither decides which analysis was run.
+
 ## [0.5.4] - 2026-11-08
 
 ### Fixed

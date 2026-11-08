@@ -4,6 +4,10 @@ from decimal import Decimal
 
 from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
+from sra.statistics_review import (
+    design_test_mismatch_finding,
+    multiplicity_finding,
+)
 
 METHODS = ("method", "methods", "methodology", "materials and methods", "methods and materials",
            "yöntem", "materyal ve metot", "gereç ve yöntem")
@@ -602,4 +606,8 @@ def build_findings(
             "status": "no_claims_extracted",
             "note": "No conclusion sentences matched the current claim-marker lexicon.",
         })
+    for statistics_signal in (multiplicity_finding(document.text),
+                              design_test_mismatch_finding(document.text)):
+        if statistics_signal is not None:
+            findings.append(statistics_signal)
     return findings, candidates, reasoning_map
