@@ -2,10 +2,37 @@
 
 const { spawn, spawnSync } = require('node:child_process');
 
+/**
+ * Oldest Python engine this adapter can drive.
+ *
+ * The npm package and the Python package are versioned independently, so an
+ * npm install can sit next to a years-old `sra` from PyPI. The probe below used
+ * to check only "is `sra` importable", which let an outdated engine answer
+ * successfully and then fail at runtime on a command it does not have.
+ */
+const MINIMUM_PYTHON_PACKAGE = '0.5.2';
+
+// Exit codes: 0 = usable, 1 = no Python 3.11+/no `sra`, 2 = `sra` present but
+// older than the floor. On 2 the probe prints the version it found so the error
+// can name it.
 const PYTHON_PROBE = [
   '-I',
   '-c',
-  "import importlib.util,sys; sys.exit(0 if sys.version_info >= (3,11) and importlib.util.find_spec('sra') else 1)",
+  [
+    'import importlib.metadata, importlib.util, sys',
+    'if sys.version_info < (3, 11) or importlib.util.find_spec("sra") is None: sys.exit(1)',
+    'try:',
+    '    version = importlib.metadata.version("scientific-reasoning-auditor")',
+    'except importlib.metadata.PackageNotFoundError:',
+    // `sra` is importable but carries no distribution metadata (a vendored or
+    // zipapp layout). There is no version to compare, so keep the previous
+    // behaviour instead of refusing a setup that works today.
+    '    sys.exit(0)',
+    'floor = tuple(int(part) for part in "' + MINIMUM_PYTHON_PACKAGE + '".split("."))',
+    'installed = tuple(int(part) if part.isdigit() else 0 for part in version.split(".")[:len(floor)])',
+    'print(version)',
+    'sys.exit(0 if installed >= floor else 2)',
+  ].join('\n'),
 ];
 
 function pythonCandidates(env = process.env) {
@@ -25,6 +52,7 @@ function pythonCandidates(env = process.env) {
 
 function resolvePython(env = process.env, cwd = process.cwd()) {
   let pythonFound = false;
+  let outdatedVersion = null;
 
   for (const candidate of pythonCandidates(env)) {
     const probe = spawnSync(candidate.command, [...candidate.prefix, ...PYTHON_PROBE], {
@@ -39,6 +67,18 @@ function resolvePython(env = process.env, cwd = process.cwd()) {
     if (probe.error) continue;
     pythonFound = true;
     if (probe.status === 0) return candidate;
+    if (probe.status === 2) {
+      outdatedVersion = (probe.stdout || '').trim() || outdatedVersion;
+    }
+  }
+
+  if (outdatedVersion !== null) {
+    const upgradeCommand = process.platform === 'win32'
+      ? 'py -3 -m pip install --upgrade scientific-reasoning-auditor'
+      : 'python3 -m pip install --upgrade scientific-reasoning-auditor';
+    throw new Error(
+      `The installed Python package "scientific-reasoning-auditor" is ${outdatedVersion || 'older than ' + MINIMUM_PYTHON_PACKAGE}, but this npm adapter requires at least ${MINIMUM_PYTHON_PACKAGE}. The npm package drives the Python engine's CLI, and older releases do not have every command this version calls. Upgrade it with: ${upgradeCommand}. If the right interpreter lives in another environment, set SRA_PYTHON to it.`
+    );
   }
 
   if (!pythonFound) {
