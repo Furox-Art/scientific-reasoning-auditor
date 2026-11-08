@@ -435,6 +435,12 @@ class AuditTests(unittest.TestCase):
             for path in sorted((project_root / "src" / "sra").rglob("*.py"))
             if path.is_file()
         }
+        # The published wheel carries the PEP 561 marker, so the fixture must
+        # carry it too; otherwise the inventory check fires before the metadata
+        # check this test is about.
+        py_typed = project_root / "src" / "sra" / "py.typed"
+        if py_typed.is_file():
+            sources["sra/py.typed"] = py_typed.read_bytes()
 
         def make_wheel(
             path: Path,
@@ -536,6 +542,10 @@ class AuditTests(unittest.TestCase):
             for path in sorted((project_root / "src" / "sra").rglob("*.py"))
             if path.is_file()
         }
+        # Same reason as the entry-point fixture: mirror the published wheel.
+        py_typed = project_root / "src" / "sra" / "py.typed"
+        if py_typed.is_file():
+            files["sra/py.typed"] = py_typed.read_bytes()
         expected_fields = verifier._expected_metadata_fields(project)
         expected_fields["Requires-Dist"] = [
             *expected_fields["Requires-Dist"],
