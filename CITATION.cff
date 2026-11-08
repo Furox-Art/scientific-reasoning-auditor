@@ -4,7 +4,7 @@ type: software
 title: "scientific-reasoning-auditor"
 # Keep `version` in lockstep with pyproject.toml [project].version and
 # src/sra/__init__.py __version__.
-version: 0.5.3
+version: 0.5.4
 authors:
   - name: "Furox-Art"
     email: "furkanarkn1451@gmail.com"
@@ -38,5 +38,5 @@ preferred-citation:
   authors:
     - name: "Furox-Art"
   year: 2026
-  version: 0.5.3
+  version: 0.5.4
   url: "https://github.com/Furox-Art/scientific-reasoning-auditor"

@@ -10,6 +10,24 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.5.4] - 2026-11-08
+
+### Fixed
+
+- One commit now means one set of bytes, and one file means one extracted text.
+  `load_document` normalises line endings once, so a manuscript saved with
+  Windows CRLF produces the same extracted-text digest as the same manuscript
+  with LF; before this, `sra audit paper.md` followed by
+  `sra review-template paper.md` rejected its own audit on Windows. The exact
+  bytes remain covered by `input.sha256`.
+- `.gitattributes` pins `* text=auto eol=lf`. A checkout with
+  `core.autocrlf=true` used to give the tracked files CRLF, which changed raw
+  source digests and failed a published-fingerprint test on files nobody had
+  edited.
+- Test fixtures write UTF-8 explicitly and keep the bytes they hash; the symlink
+  and POSIX bash-guard cases skip where the platform cannot run them. Windows
+  now runs the suite clean (499 tests, 3 skipped) instead of 50 failures.
+
 ## [0.5.3] - 2026-11-08
 
 ### Fixed
@@ -68,6 +86,7 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.5.3...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.5.4...HEAD
+[0.5.4]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.4
 [0.5.3]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.3
 [0.5.2]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.2

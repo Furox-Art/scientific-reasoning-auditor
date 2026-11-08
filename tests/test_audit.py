@@ -203,8 +203,8 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
         self.assertEqual(manifest["ruleset_version"], "0.5.2")
-        self.assertEqual(manifest["auditor_version"], "0.5.3")
-        self.assertEqual(manifest["installed_package_version"], "0.5.3")
+        self.assertEqual(manifest["auditor_version"], "0.5.4")
+        self.assertEqual(manifest["installed_package_version"], "0.5.4")
         self.assertIn("source_code_revision", manifest)
         self.assertEqual(len(manifest["source_code_sha256"]), 64)
         self.assertIn("Python tests", manifest["source_code_hash_scope"])
@@ -237,8 +237,8 @@ class AuditTests(unittest.TestCase):
             temporary = Path(directory)
 
             for drive_path in (
-                "C:/scientific_reasoning_auditor-0.5.3/PKG-INFO",
-                "C:relative/scientific_reasoning_auditor-0.5.3/PKG-INFO",
+                "C:/scientific_reasoning_auditor-0.5.4/PKG-INFO",
+                "C:relative/scientific_reasoning_auditor-0.5.4/PKG-INFO",
             ):
                 with self.subTest(drive_path=drive_path):
                     with self.assertRaisesRegex(SystemExit, "drive-prefixed"):
@@ -249,19 +249,19 @@ class AuditTests(unittest.TestCase):
                 root_entry = tarfile.TarInfo("unexpected-project-root/")
                 root_entry.type = tarfile.DIRTYPE
                 archive.addfile(root_entry)
-                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.3\n"
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.4\n"
                 info = tarfile.TarInfo("unexpected-project-root/PKG-INFO")
                 info.size = len(payload)
                 archive.addfile(info, io.BytesIO(payload))
             with self.assertRaisesRegex(SystemExit, "does not match canonical project root"):
                 verifier._verify_sdist(
                     renamed_root_sdist, project_root, [],
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             duplicate_sdist = temporary / "duplicate.tar.gz"
             with tarfile.open(duplicate_sdist, "w:gz") as archive:
-                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.3\n"
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.4\n"
                 for _ in range(2):
                     info = tarfile.TarInfo("source/PKG-INFO")
                     info.size = len(payload)
@@ -269,13 +269,13 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "duplicate archive member path"):
                 verifier._verify_sdist(
                     duplicate_sdist, project_root, [],
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
-            canonical_root = "scientific_reasoning_auditor-0.5.3"
+            canonical_root = "scientific_reasoning_auditor-0.5.4"
             unexpected_sdist = temporary / "unexpected.tar.gz"
             with tarfile.open(unexpected_sdist, "w:gz") as archive:
-                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.3\n"
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.4\n"
                 info = tarfile.TarInfo(f"{canonical_root}/PKG-INFO")
                 info.size = len(payload)
                 archive.addfile(info, io.BytesIO(payload))
@@ -286,7 +286,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "complete source archive file inventory differs"):
                 verifier._verify_sdist(
                     unexpected_sdist, project_root, [],
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             setup_payload_sdist = temporary / "setup-payload.tar.gz"
@@ -294,7 +294,7 @@ class AuditTests(unittest.TestCase):
                 root_entry = tarfile.TarInfo(f"{canonical_root}/")
                 root_entry.type = tarfile.DIRTYPE
                 archive.addfile(root_entry)
-                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.3\n"
+                payload = b"Name: scientific-reasoning-auditor\nVersion: 0.5.4\n"
                 info = tarfile.TarInfo(f"{canonical_root}/PKG-INFO")
                 info.size = len(payload)
                 archive.addfile(info, io.BytesIO(payload))
@@ -305,7 +305,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "complete source archive file inventory differs"):
                 verifier._verify_sdist(
                     setup_payload_sdist, project_root, [],
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             for member_type, label in (
@@ -325,7 +325,7 @@ class AuditTests(unittest.TestCase):
                     with self.assertRaisesRegex(SystemExit, "non-regular archive member is forbidden"):
                         verifier._verify_sdist(
                             non_regular_sdist, project_root, [],
-                            "scientific-reasoning-auditor", "0.5.3",
+                            "scientific-reasoning-auditor", "0.5.4",
                         )
 
             payload_directory_sdist = temporary / "directory-payload.tar.gz"
@@ -340,7 +340,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "directory member must be a zero-size directory"):
                 verifier._verify_sdist(
                     payload_directory_sdist, project_root, [],
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             duplicate_wheel = temporary / "duplicate.whl"
@@ -352,7 +352,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "duplicate wheel member path"):
                 verifier._verify_wheel(
                     duplicate_wheel, project_root,
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             disguised_directory_symlink = temporary / "directory-symlink.whl"
@@ -364,7 +364,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "non-directory ZIP type has a directory path"):
                 verifier._verify_wheel(
                     disguised_directory_symlink, project_root,
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             pth_wheel = temporary / "unexpected-root-pth.whl"
@@ -386,7 +386,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "non-regular wheel member is forbidden"):
                 verifier._verify_wheel(
                     symlink_wheel, symlink_root,
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             pth_root = temporary / "pth-root"
@@ -397,7 +397,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "complete wheel file inventory differs"):
                 verifier._verify_wheel(
                     pth_wheel, pth_root,
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
             wheel_root = temporary / "wheel-root"
@@ -412,7 +412,7 @@ class AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "complete wheel file inventory differs"):
                 verifier._verify_wheel(
                     unexpected_wheel, wheel_root,
-                    "scientific-reasoning-auditor", "0.5.3",
+                    "scientific-reasoning-auditor", "0.5.4",
                 )
 
     def test_distribution_verifier_rejects_tampered_wheel_entrypoint_and_record(self):
@@ -429,7 +429,7 @@ class AuditTests(unittest.TestCase):
         verifier = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(verifier)
 
-        dist_info = "scientific_reasoning_auditor-0.5.3.dist-info"
+        dist_info = "scientific_reasoning_auditor-0.5.4.dist-info"
         sources = {
             path.relative_to(project_root / "src").as_posix(): path.read_bytes()
             for path in sorted((project_root / "src" / "sra").rglob("*.py"))
@@ -453,7 +453,7 @@ class AuditTests(unittest.TestCase):
             files[f"{dist_info}/METADATA"] = (
                 b"Metadata-Version: 2.1\n"
                 b"Name: scientific-reasoning-auditor\n"
-                b"Version: 0.5.3\n"
+                b"Version: 0.5.4\n"
             )
             files[f"{dist_info}/WHEEL"] = (
                 b"Wheel-Version: 1.0\n"
@@ -502,21 +502,21 @@ class AuditTests(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "unexpected console entry-point metadata"):
             verifier._verify_wheel(
                 bad_entrypoint_wheel, project_root,
-                "scientific-reasoning-auditor", "0.5.3",
+                "scientific-reasoning-auditor", "0.5.4",
             )
 
         make_wheel(bad_record_wheel, bad_record=True)
         with self.assertRaisesRegex(SystemExit, "wheel RECORD hash/size mismatch"):
             verifier._verify_wheel(
                 bad_record_wheel, project_root,
-                "scientific-reasoning-auditor", "0.5.3",
+                "scientific-reasoning-auditor", "0.5.4",
             )
 
         make_wheel(bad_tag_wheel, extra_wheel_tag=True)
         with self.assertRaisesRegex(SystemExit, "duplicate WHEEL metadata headers"):
             verifier._verify_wheel(
                 bad_tag_wheel, project_root,
-                "scientific-reasoning-auditor", "0.5.3",
+                "scientific-reasoning-auditor", "0.5.4",
             )
 
     def test_distribution_verifier_rejects_wheel_dependency_metadata_mismatch(self):
@@ -536,7 +536,7 @@ class AuditTests(unittest.TestCase):
         project = tomllib.loads(
             (project_root / "pyproject.toml").read_text(encoding="utf-8")
         )["project"]
-        dist_info = "scientific_reasoning_auditor-0.5.3.dist-info"
+        dist_info = "scientific_reasoning_auditor-0.5.4.dist-info"
         files = {
             path.relative_to(project_root / "src").as_posix(): path.read_bytes()
             for path in sorted((project_root / "src" / "sra").rglob("*.py"))
@@ -593,7 +593,7 @@ class AuditTests(unittest.TestCase):
                 malicious_wheel,
                 project_root,
                 "scientific-reasoning-auditor",
-                "0.5.3",
+                "0.5.4",
                 expected_project=project,
             )
 
@@ -736,7 +736,7 @@ class AuditTests(unittest.TestCase):
                 project_root,
                 [],
                 "scientific-reasoning-auditor",
-                "0.5.3",
+                "0.5.4",
             )
         with self.assertRaisesRegex(SystemExit, "wheel archive exceeds"):
             verifier._preflight_zip_archive(oversized_wheel, maximum_member_count=8)
@@ -767,7 +767,7 @@ class AuditTests(unittest.TestCase):
                 project_root,
                 [],
                 "scientific-reasoning-auditor",
-                "0.5.3",
+                "0.5.4",
             )
 
         invalid_gzip = project_root / "tests" / "_invalid-gzip-container-test.tar.gz"
