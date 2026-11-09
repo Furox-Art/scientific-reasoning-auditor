@@ -617,6 +617,8 @@ def build_findings(
                               design_test_mismatch_finding(document.text)):
         if statistics_signal is not None:
             findings.append(statistics_signal)
+    from sra.tabular_values import table_findings
+    findings.extend(table_findings(document.text))
     for signal in (confidence_interval_p_conflict(document.text)
                    + mean_outside_interval(document.text)
                    + impossible_p_value(document.text)

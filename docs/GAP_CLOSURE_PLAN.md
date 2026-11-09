@@ -35,7 +35,15 @@ What closes it:
 
 Same narrowness as item 1: one sentence, both numbers present, quote the sentence.
 
-## 3. PDF tables — `open`
+## 3. PDF tables — `closed`
+
+Extraction turned out not to be the blocker: pypdf already returns a table row on
+one line. The gap was that the rules read prose. PDF text is now read in layout
+mode, and a row whose header names n, mean, SD, SE or p becomes the statements
+the plausibility rules understand, with the row and column recorded as evidence.
+Closed when: a PDF table with an impossible dispersion and p-value is audited and
+both are reported, and the limits (merged cells, sub-headers, figure text) are in
+the README.
 
 Today only `page.extract_text()`. Numbers printed in a table are invisible, which
 is where most reported statistics live. Closing it needs a table-aware reader

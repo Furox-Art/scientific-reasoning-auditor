@@ -14,6 +14,7 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 - `statistics.impossible_p_value`: a printed p-value that cannot be a probability (`p = 0.000`, `p = 1.4`, `p > 1`, negative p). Values are parsed and judged numerically, so `p = 0.03` and `p < 0.001` stay silent.
 - `statistics.impossible_dispersion`: a negative standard deviation or standard error, or a sample size of zero.
+- Table values: PDF text is read in layout mode, and a row whose header names n, mean, SD, SE or p is turned into the statements the plausibility rules read, with the table row and column recorded as evidence.
 - `statistics.group_count_test_mismatch`: three or more groups compared with pairwise tests only, with no omnibus test and no adjusted contrast named.
 - `statistics.confidence_interval_p_conflict`: a sentence whose 95% CI contains the null while p < 0.05, or excludes it while p >= 0.05 (ratios use 1 as the null).
 - `statistics.mean_outside_confidence_interval`: a reported mean that lies outside its own 95% CI.

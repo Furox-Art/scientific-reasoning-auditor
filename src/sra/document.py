@@ -167,8 +167,22 @@ def load_document(path: str | Path) -> ParsedDocument:
                 "PDF support is optional. Install it with: pip install -e '.[pdf]'"
             ) from exc
         reader = PdfReader(str(file_path))
-        text = "\n\n".join(page.extract_text() or "" for page in reader.pages)
-        parser_backend = "pypdf"
+        # Layout-aware extraction keeps table rows on one line with the columns
+        # still separated by runs of spaces. Plain extraction collapses that, and
+        # a table cell then cannot be told apart from the next word, which is how
+        # reported statistics ended up invisible to the audit.
+        pages: list[str] = []
+        layout_used = False
+        for page in reader.pages:
+            try:
+                pages.append(page.extract_text(extraction_mode="layout") or "")
+                layout_used = True
+            except (TypeError, ValueError):
+                # Older pypdf releases have no layout mode; the manifest records
+                # which one produced the text so a reader can tell them apart.
+                pages.append(page.extract_text() or "")
+        text = "\n\n".join(pages)
+        parser_backend = "pypdf-layout" if layout_used else "pypdf"
     elif suffix in {".md", ".markdown", ".txt"}:
         text = raw.decode("utf-8-sig")
         # Normalise line endings once, here. Every consumer of the extracted text
