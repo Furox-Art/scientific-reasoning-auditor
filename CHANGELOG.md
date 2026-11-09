@@ -14,6 +14,7 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Synthetic rule ablation: `benchmarks/rule_ablation/` plants one condition per case and `docs/RULE_ABLATION.md` records which rules fired, which stayed silent and which fired where nothing was planted (20/21 exercised, 1 unexercisable, 2 firing off-target).
 - `docs/CHECK_INVENTORY.md`: every finding code with what it detects, what it cannot detect and where its false positives come from, enforced by a test that derives the rule ids from the syntax tree and compares the two directions.
 - An end-to-end test of the expert-validation pipeline: two synthetic reviewers, one adjudicator, inter-reviewer agreement and Cohen's kappa, then per-code and micro-average precision/recall/specificity with Wilson intervals. It protects the machinery, not the accuracy: synthetic labels are not evidence.
 - `statistics.impossible_p_value`: a printed p-value that cannot be a probability (`p = 0.000`, `p = 1.4`, `p > 1`, negative p). Values are parsed and judged numerically, so `p = 0.03` and `p < 0.001` stay silent.

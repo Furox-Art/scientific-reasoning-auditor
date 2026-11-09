@@ -1,0 +1,351 @@
+{
+  "kind": "rule_ablation_synthetic",
+  "note": "Synthetic corpus: these numbers describe rule wiring and firing breadth, not accuracy on real manuscripts. Precision and recall on real papers require independent expert labels.",
+  "cases": 16,
+  "per_rule": {
+    "language.absolute_claim": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "reasoning.association_and_causal_claims": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "reasoning.causal_claim_observational_design": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "reasoning.conclusion_without_lexical_candidate": {
+      "tp": 1,
+      "fp": 5,
+      "fn": 0,
+      "cases_fired": 6
+    },
+    "reasoning.correlation_causation_review": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "reasoning.directional_conflicts_truncated": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 0
+    },
+    "reasoning.directional_contradiction": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "reasoning.mixed_design_causal_review": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "statistics.confidence_interval_p_conflict": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "cases_fired": 2
+    },
+    "statistics.design_test_mismatch": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "statistics.group_count_test_mismatch": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "statistics.impossible_dispersion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 2
+    },
+    "statistics.impossible_p_value": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 2
+    },
+    "statistics.mean_outside_confidence_interval": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "statistics.multiplicity_unaddressed": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "statistics.repeated_rate_ratio_ci_conflict": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "structure.conclusion_missing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "structure.limitations_missing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "structure.methods_missing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "structure.references_missing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    },
+    "structure.results_missing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 1
+    }
+  },
+  "summary": {
+    "rules": 21,
+    "exercised": 20,
+    "with_false_positive": [
+      "reasoning.conclusion_without_lexical_candidate",
+      "statistics.confidence_interval_p_conflict"
+    ],
+    "never_fired": [
+      "reasoning.directional_conflicts_truncated"
+    ],
+    "missed_planted": []
+  },
+  "case_results": [
+    {
+      "document": "clean.md",
+      "expected": [],
+      "observed": [],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "structure_missing.md",
+      "expected": [
+        "structure.limitations_missing",
+        "structure.methods_missing",
+        "structure.references_missing"
+      ],
+      "observed": [
+        "structure.limitations_missing",
+        "structure.methods_missing",
+        "structure.references_missing"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "missing_results.md",
+      "expected": [
+        "structure.results_missing"
+      ],
+      "observed": [
+        "structure.results_missing"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "missing_conclusion.md",
+      "expected": [
+        "structure.conclusion_missing"
+      ],
+      "observed": [
+        "structure.conclusion_missing"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "absolute_claim.md",
+      "expected": [
+        "language.absolute_claim"
+      ],
+      "observed": [
+        "language.absolute_claim"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "observational_causal.md",
+      "expected": [
+        "reasoning.causal_claim_observational_design"
+      ],
+      "observed": [
+        "reasoning.causal_claim_observational_design",
+        "reasoning.conclusion_without_lexical_candidate"
+      ],
+      "missing": [],
+      "extra": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "association_and_causal.md",
+      "expected": [
+        "reasoning.association_and_causal_claims",
+        "reasoning.correlation_causation_review"
+      ],
+      "observed": [
+        "reasoning.association_and_causal_claims",
+        "reasoning.correlation_causation_review"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "mixed_design.md",
+      "expected": [
+        "reasoning.mixed_design_causal_review"
+      ],
+      "observed": [
+        "reasoning.conclusion_without_lexical_candidate",
+        "reasoning.mixed_design_causal_review"
+      ],
+      "missing": [],
+      "extra": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "directional.md",
+      "expected": [
+        "reasoning.directional_contradiction"
+      ],
+      "observed": [
+        "reasoning.directional_contradiction"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "conclusion_without_evidence.md",
+      "expected": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ],
+      "observed": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "multiplicity.md",
+      "expected": [
+        "statistics.multiplicity_unaddressed"
+      ],
+      "observed": [
+        "statistics.multiplicity_unaddressed"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "design_mismatch.md",
+      "expected": [
+        "statistics.design_test_mismatch"
+      ],
+      "observed": [
+        "statistics.design_test_mismatch"
+      ],
+      "missing": [],
+      "extra": []
+    },
+    {
+      "document": "impossible_values.md",
+      "expected": [
+        "statistics.group_count_test_mismatch",
+        "statistics.impossible_dispersion",
+        "statistics.impossible_p_value"
+      ],
+      "observed": [
+        "reasoning.conclusion_without_lexical_candidate",
+        "statistics.group_count_test_mismatch",
+        "statistics.impossible_dispersion",
+        "statistics.impossible_p_value"
+      ],
+      "missing": [],
+      "extra": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "interval_conflict.md",
+      "expected": [
+        "statistics.confidence_interval_p_conflict",
+        "statistics.mean_outside_confidence_interval"
+      ],
+      "observed": [
+        "reasoning.conclusion_without_lexical_candidate",
+        "statistics.confidence_interval_p_conflict",
+        "statistics.mean_outside_confidence_interval"
+      ],
+      "missing": [],
+      "extra": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "table_values.md",
+      "expected": [
+        "statistics.impossible_dispersion",
+        "statistics.impossible_p_value"
+      ],
+      "observed": [
+        "reasoning.conclusion_without_lexical_candidate",
+        "statistics.impossible_dispersion",
+        "statistics.impossible_p_value"
+      ],
+      "missing": [],
+      "extra": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "rate_ratio_repeat.md",
+      "expected": [
+        "statistics.repeated_rate_ratio_ci_conflict"
+      ],
+      "observed": [
+        "statistics.confidence_interval_p_conflict",
+        "statistics.repeated_rate_ratio_ci_conflict"
+      ],
+      "missing": [],
+      "extra": [
+        "statistics.confidence_interval_p_conflict"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "kind": "synthetic_rule_ablation_corpus",
+  "cases": [
+    {
+      "document": "clean.md",
+      "expected": []
+    },
+    {
+      "document": "structure_missing.md",
+      "expected": [
+        "structure.methods_missing",
+        "structure.limitations_missing",
+        "structure.references_missing"
+      ]
+    },
+    {
+      "document": "missing_results.md",
+      "expected": [
+        "structure.results_missing"
+      ]
+    },
+    {
+      "document": "missing_conclusion.md",
+      "expected": [
+        "structure.conclusion_missing"
+      ]
+    },
+    {
+      "document": "absolute_claim.md",
+      "expected": [
+        "language.absolute_claim"
+      ]
+    },
+    {
+      "document": "observational_causal.md",
+      "expected": [
+        "reasoning.causal_claim_observational_design"
+      ]
+    },
+    {
+      "document": "association_and_causal.md",
+      "expected": [
+        "reasoning.association_and_causal_claims",
+        "reasoning.correlation_causation_review"
+      ]
+    },
+    {
+      "document": "mixed_design.md",
+      "expected": [
+        "reasoning.mixed_design_causal_review"
+      ]
+    },
+    {
+      "document": "directional.md",
+      "expected": [
+        "reasoning.directional_contradiction"
+      ]
+    },
+    {
+      "document": "conclusion_without_evidence.md",
+      "expected": [
+        "reasoning.conclusion_without_lexical_candidate"
+      ]
+    },
+    {
+      "document": "multiplicity.md",
+      "expected": [
+        "statistics.multiplicity_unaddressed"
+      ]
+    },
+    {
+      "document": "design_mismatch.md",
+      "expected": [
+        "statistics.design_test_mismatch"
+      ]
+    },
+    {
+      "document": "impossible_values.md",
+      "expected": [
+        "statistics.impossible_p_value",
+        "statistics.impossible_dispersion",
+        "statistics.group_count_test_mismatch"
+      ]
+    },
+    {
+      "document": "interval_conflict.md",
+      "expected": [
+        "statistics.confidence_interval_p_conflict",
+        "statistics.mean_outside_confidence_interval"
+      ]
+    },
+    {
+      "document": "table_values.md",
+      "expected": [
+        "statistics.impossible_p_value",
+        "statistics.impossible_dispersion"
+      ]
+    },
+    {
+      "document": "rate_ratio_repeat.md",
+      "expected": [
+        "statistics.repeated_rate_ratio_ci_conflict"
+      ]
+    }
+  ]
+}
