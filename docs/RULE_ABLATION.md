@@ -21,18 +21,20 @@ corpus cannot plant changes.
 
 ## Result
 
-- cases: 16
+- cases: 17
 - rules: 21
-- exercised by the corpus: 20
+- exercised by the corpus: 21
 - planted but missed: none
-- never fired: reasoning.directional_conflicts_truncated
+- never fired: none
 - fired where nothing was planted: reasoning.conclusion_without_lexical_candidate, statistics.confidence_interval_p_conflict
 
 ## What it says
 
-1. `reasoning.directional_conflicts_truncated` is not exercised: it needs an
-   extraction that was truncated, which this corpus cannot produce. It is the one
-   rule with no measured behaviour here.
+1. `reasoning.directional_conflicts_truncated` is exercised by a case with six
+   independent topics whose results and conclusions point in opposite
+   directions: the audit finds more conflicts than it prints and says so. The
+   rule was previously the one code with no measured behaviour; rewriting the
+   corpus fixed that, so nothing is retired.
 2. `reasoning.conclusion_without_lexical_candidate` fires on several fixtures that
    plant nothing. The rule matches words, and a conclusion that paraphrases its
    results has no shared vocabulary: this is the false-positive class its

@@ -94,12 +94,12 @@ class CommittedCorpusTests(unittest.TestCase):
         summary = report["summary"]
         self.assertEqual(summary["missed_planted"], [], "a planted rule stopped firing")
         self.assertGreaterEqual(
-            summary["exercised"], 20, "the corpus stopped exercising the rules it used to"
+            summary["exercised"], 21, "the corpus stopped exercising the rules it used to"
         )
         self.assertEqual(
             summary["never_fired"],
-            ["reasoning.directional_conflicts_truncated"],
-            "the set of rules this corpus cannot plant has changed",
+            [],
+            "a rule stopped firing on the case that plants it",
         )
 
     def test_the_committed_report_matches_a_fresh_run(self):

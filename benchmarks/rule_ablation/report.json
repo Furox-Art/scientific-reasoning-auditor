@@ -1,7 +1,7 @@
 {
   "kind": "rule_ablation_synthetic",
   "note": "Synthetic corpus: these numbers describe rule wiring and firing breadth, not accuracy on real manuscripts. Precision and recall on real papers require independent expert labels.",
-  "cases": 16,
+  "cases": 17,
   "per_rule": {
     "language.absolute_claim": {
       "tp": 1,
@@ -34,16 +34,16 @@
       "cases_fired": 1
     },
     "reasoning.directional_conflicts_truncated": {
-      "tp": 0,
-      "fp": 0,
-      "fn": 0,
-      "cases_fired": 0
-    },
-    "reasoning.directional_contradiction": {
       "tp": 1,
       "fp": 0,
       "fn": 0,
       "cases_fired": 1
+    },
+    "reasoning.directional_contradiction": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "cases_fired": 2
     },
     "reasoning.mixed_design_causal_review": {
       "tp": 1,
@@ -132,14 +132,12 @@
   },
   "summary": {
     "rules": 21,
-    "exercised": 20,
+    "exercised": 21,
     "with_false_positive": [
       "reasoning.conclusion_without_lexical_candidate",
       "statistics.confidence_interval_p_conflict"
     ],
-    "never_fired": [
-      "reasoning.directional_conflicts_truncated"
-    ],
+    "never_fired": [],
     "missed_planted": []
   },
   "case_results": [
@@ -332,6 +330,19 @@
       "extra": [
         "reasoning.conclusion_without_lexical_candidate"
       ]
+    },
+    {
+      "document": "directional_truncated.md",
+      "expected": [
+        "reasoning.directional_conflicts_truncated",
+        "reasoning.directional_contradiction"
+      ],
+      "observed": [
+        "reasoning.directional_conflicts_truncated",
+        "reasoning.directional_contradiction"
+      ],
+      "missing": [],
+      "extra": []
     },
     {
       "document": "rate_ratio_repeat.md",

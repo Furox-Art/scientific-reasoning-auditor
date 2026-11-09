@@ -97,6 +97,13 @@
       ]
     },
     {
+      "document": "directional_truncated.md",
+      "expected": [
+        "reasoning.directional_contradiction",
+        "reasoning.directional_conflicts_truncated"
+      ]
+    },
+    {
       "document": "rate_ratio_repeat.md",
       "expected": [
         "statistics.repeated_rate_ratio_ci_conflict"

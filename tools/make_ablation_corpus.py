@@ -11,6 +11,10 @@ ROOT = Path(__file__).resolve().parents[1] / "benchmarks" / "rule_ablation"
 
 TAIL = "# Limitations\nThe sample was small.\n# References\n1. Example et al. 2020.\n"
 
+#: Six independent topics, so the report holds more direction conflicts than it
+#: prints: that is the truncation the audit reports instead of hiding.
+TOPICS = ("ferritin", "albumin", "creatinine", "lactate", "glucose", "bilirubin")
+
 CASES = {
     "clean.md": (
         "# Methods\nWe randomized 40 participants and measured the endpoint.\n"
@@ -118,6 +122,19 @@ CASES = {
         "C                 10           -0.4            -1.2             0.000\n"
         "# Conclusion\nThe groups increased.\n" + TAIL,
         ["statistics.impossible_p_value", "statistics.impossible_dispersion"],
+    ),
+    "directional_truncated.md": (
+        "# Methods\nWe infused the compound and measured serum markers.\n"
+        "# Results\n"
+        + "".join(f"The serum {topic} level increased after the infusion. " for topic in TOPICS)
+        + "\n# Conclusion\n"
+        + "".join(f"The serum {topic} level decreased after the infusion. " for topic in TOPICS)
+        + "\n"
+        + TAIL,
+        [
+            "reasoning.directional_contradiction",
+            "reasoning.directional_conflicts_truncated",
+        ],
     ),
     "rate_ratio_repeat.md": (
         "# Methods\nRates were compared across two periods.\n"
