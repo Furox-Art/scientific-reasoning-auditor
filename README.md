@@ -6,9 +6,9 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: v0.5.4
+## Current status: v0.6.0
 
-The v0.5.4 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.5.4; the Node.js adapter is version 0.1.2 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
+The v0.6.0 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.6.0; the Node.js adapter is version 0.1.2 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 

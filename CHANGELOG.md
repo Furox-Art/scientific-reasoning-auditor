@@ -10,6 +10,8 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-08
+
 ### Added
 
 - `statistics.multiplicity_unaddressed`: three or more reported p-values with no
@@ -97,7 +99,8 @@ neither decides which analysis was run.
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.5.4...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.6.0
 [0.5.4]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.4
 [0.5.3]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.3
 [0.5.2]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.2
