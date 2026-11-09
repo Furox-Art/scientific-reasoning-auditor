@@ -20,6 +20,7 @@ import re
 
 from sra.document import without_fenced_code
 from sra.models import Finding
+from sra import multilingual as _multi
 
 #: A reported p-value: ``p = 0.03``, ``p < .001``, ``p ≤ 0.05``, ``P-value 0.04``.
 P_VALUE = re.compile(
@@ -65,6 +66,25 @@ PAIRED_TEST = re.compile(
 )
 
 #: Below this many reported p-values, an unmentioned correction is unremarkable.
+_PHRASE_REVIEW = lambda terms: "|".join(re.escape(term) for term in terms)  # noqa: E731
+CORRECTION_VOCABULARY = re.compile(
+    CORRECTION_VOCABULARY.pattern
+    + "|"
+    + _PHRASE_REVIEW(_multi.CORRECTION)
+    + "|"
+    + _PHRASE_REVIEW(_multi.CORRECTION_PROPER_NOUNS),
+    re.IGNORECASE,
+)
+PAIRED_DESIGN = re.compile(
+    PAIRED_DESIGN.pattern + "|" + _PHRASE_REVIEW(_multi.PAIRED_DESIGN), re.IGNORECASE
+)
+INDEPENDENT_TEST = re.compile(
+    INDEPENDENT_TEST.pattern + "|" + _PHRASE_REVIEW(_multi.INDEPENDENT_TEST), re.IGNORECASE
+)
+PAIRED_TEST = re.compile(
+    PAIRED_TEST.pattern + "|" + _PHRASE_REVIEW(_multi.PAIRED_TEST), re.IGNORECASE
+)
+
 MINIMUM_UNCORRECTED_P_VALUES = 3
 
 

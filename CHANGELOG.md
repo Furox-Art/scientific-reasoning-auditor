@@ -10,6 +10,10 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+### Added
+
+- Multilingual vocabulary: section headings, direction wording, absolute claims, association and causal verbs, multiplicity corrections, group counts, rate measures, paired designs and test names for es, pt, fr, de, it, nl, ru, pl, id, ar, hi, zh, ja and ko, with a test per term that the rule actually receives it.
+
 ## [0.7.1] - 2026-11-08
 
 ### Added

@@ -81,3 +81,17 @@ are thinner than a real explanation fails as well.
 
 Closed when: the inventory parses, all three tests pass on CI, and the README
 points at it.
+
+## 6. Multilingual coverage — `closed` (translations unreviewed)
+
+English and Turkish were the only recognised languages, so a Spanish or Japanese
+manuscript returned a clean report because no rule could read it. The lexicons
+behind the existing rules (headings, direction, absolute claims, association,
+causal verbs, corrections, group counts, rate measures, paired designs, test
+names) now list 14 languages. `tests/test_multilingual.py` walks every term and
+asserts the matching rule receives it, then builds a manuscript out of one
+language's own listing to prove the pipeline runs.
+
+Closed when: the term-by-term test passes, which it does locally; CI runs the same suite. Not closed: no
+native speaker has reviewed the translations, and the README says so; a term that
+is missing from a language still fails silently there.

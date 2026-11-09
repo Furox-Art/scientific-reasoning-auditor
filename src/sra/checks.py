@@ -4,6 +4,8 @@ from decimal import Decimal
 
 from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
+from sra.multilingual import SECTIONS, direction_patterns
+from sra import multilingual as _multi
 from sra.statistical_consistency import (
     confidence_interval_p_conflict,
     group_count_test_mismatch,
@@ -17,13 +19,18 @@ from sra.statistics_review import (
 )
 
 METHODS = ("method", "methods", "methodology", "materials and methods", "methods and materials",
-           "yöntem", "materyal ve metot", "gereç ve yöntem")
+           "yöntem", "materyal ve metot", "gereç ve yöntem", *SECTIONS["methods"])
+
 LIMITATIONS = ("limitation", "limitations", "study limitations", "sınırlılık",
-               "kısıtlılık", "çalışmanın sınırlılıkları")
-REFERENCES = ("references", "bibliography", "kaynakça", "literature cited")
-RESULTS = ("result", "results", "findings", "results and discussion", "bulgular", "sonuçlar")
+               "kısıtlılık", "çalışmanın sınırlılıkları", *SECTIONS["limitations"])
+
+REFERENCES = ("references", "bibliography", "kaynakça", "literature cited", *SECTIONS["references"])
+
+RESULTS = ("result", "results", "findings", "results and discussion", "bulgular", "sonuçlar", *SECTIONS["results"])
+
 CONCLUSION = ("conclusion", "conclusions", "discussion", "general discussion",
-              "sonuç", "sonuç ve tartışma", "tartışma")
+              "sonuç", "sonuç ve tartışma", "tartışma", *SECTIONS["conclusion"])
+
 OVERCLAIM = re.compile(
     r"\b(proves? conclusively|definitively proves?|undoubtedly proves?|"
     r"proves that|kanıtlamaktadır|kesin olarak kanıtlar|tartışmasız biçimde)\b",
@@ -85,6 +92,23 @@ INCREASE = re.compile(
 DECREASE = re.compile(
     r"\b(decreas\w*|lower|reduc\w*|declin\w*|worsen\w*|fell|fall|"
     r"azal\w*|düş\w*|gerile\w*|daha düşük)\b", re.IGNORECASE
+)
+
+# Every word-level lexicon gains the terms of the other publishing languages here,
+# in one place, instead of being rewritten above. Each one is additive: the English
+# and Turkish behaviour is unchanged, and ``tests/test_multilingual.py`` proves a
+# representative sentence per language still reaches the rule it should.
+_INCREASE_MULTI, _DECREASE_MULTI = direction_patterns()
+INCREASE = re.compile(INCREASE.pattern + "|" + _INCREASE_MULTI, re.IGNORECASE)
+DECREASE = re.compile(DECREASE.pattern + "|" + _DECREASE_MULTI, re.IGNORECASE)
+OVERCLAIM = re.compile(
+    OVERCLAIM.pattern + "|" + _multi.phrase_pattern(_multi.ABSOLUTE), re.IGNORECASE
+)
+CORRELATION = re.compile(
+    CORRELATION.pattern + "|" + _multi.phrase_pattern(_multi.ASSOCIATION), re.IGNORECASE
+)
+CAUSAL = re.compile(
+    CAUSAL.pattern + "|" + _multi.phrase_pattern(_multi.CAUSAL), re.IGNORECASE
 )
 WORD = re.compile(r"[a-zA-Z0-9ğüşöçıİĞÜŞÖÇ]+", re.UNICODE)
 # This narrow, conservative check does not infer an outcome or scientific error:

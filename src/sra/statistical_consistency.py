@@ -15,6 +15,7 @@ import re
 from decimal import Decimal
 
 from sra.document import without_fenced_code
+from sra import multilingual as _multi
 from sra.models import Finding
 
 #: ``95% CI 1.2 to 3.4``, ``95% CI [1.2, 3.4]``, ``95% confidence interval 0.1–0.9``.
@@ -29,6 +30,10 @@ CONFIDENCE_INTERVAL = re.compile(
 P_VALUE = re.compile(r"\bp\s*(?:-?\s*value\s*)?(?:=|==|<|>|≤|>=)\s*(?P<p>0?[.·]\d+|\d[.·]\d+)", re.IGNORECASE)
 
 #: ``mean 3.4``, ``M = 3.4``, ``average 3.4``.
+#: The same lexicons in the other publishing languages. A mean word, a contrast
+#: word, a ratio measure and a group count all have to be recognised whatever the
+#: manuscript's language, or the checks quietly do nothing.
+
 MEAN = re.compile(
     # "mean score was 4.1", "M = 4.1", "average of 4.1": at most a couple of words
     # may sit between the keyword and the value, and never a bracket or comma, so
@@ -37,6 +42,7 @@ MEAN = re.compile(
     r"(?P<mean>[−\-]?\d+(?:[.·]\d+)?)(?!\s*%)",
     re.IGNORECASE,
 )
+
 
 #: A statement whose null value is 1 rather than 0 (ratios, odds, hazards).
 RATIO_STATEMENT = re.compile(
@@ -150,6 +156,16 @@ GROUP_COUNT = re.compile(
     r"(?:groups?|arms?|cohorts?|conditions?|doses?|treatments?)\b",
     re.IGNORECASE,
 )
+_PHRASE = lambda terms: "|".join(re.escape(term) for term in terms)  # noqa: E731
+MEAN = re.compile(MEAN.pattern + "|" + _PHRASE(_multi.MEAN_WORD), re.IGNORECASE)
+CONTRAST_STATEMENT = re.compile(
+    CONTRAST_STATEMENT.pattern + "|" + _PHRASE(_multi.CONTRAST), re.IGNORECASE
+)
+RATIO_STATEMENT = re.compile(
+    RATIO_STATEMENT.pattern + "|" + _PHRASE(_multi.RATIO_STATEMENT), re.IGNORECASE
+)
+GROUP_COUNT_PHRASE = re.compile(_PHRASE(_multi.GROUP_COUNT), re.IGNORECASE)
+
 PAIRWISE_TEST = re.compile(
     r"\b(?:t[\s-]?tests?|independent[\s-]samples?\s+t|paired\s+t|mann[\s-]whitney|"
     r"wilcoxon\s+rank[\s-]sum|chi[\s-]square\s+test)\b",
@@ -183,6 +199,10 @@ def group_count_test_mismatch(text: str) -> list[Finding]:
     findings: list[Finding] = []
     for sentence, line_number in _sentences(without_fenced_code(text)):
         count = GROUP_COUNT.search(sentence)
+        if count is None:
+            # "tres grupos", "drei Gruppen", "三组": the phrase itself carries the
+            # count, so it needs no separately parsed number.
+            count = GROUP_COUNT_PHRASE.search(sentence)
         if count is None or PAIRWISE_TEST.search(sentence) is None:
             continue
         if OMNIBUS_TEST.search(sentence):
