@@ -26,7 +26,7 @@ mean with its own interval. Closed when: both rules exist, are wired into the
 audit, keep the suite green at 100% statement coverage, and the README states
 what they cannot see (numbers in other sentences, tables or figures).
 
-## 2. Test selection and impossible values — `in progress`
+## 2. Test selection and impossible values — `closed`
 
 What closes it:
 - a group count compared with pairwise t-tests only, with no omnibus test named;

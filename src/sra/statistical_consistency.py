@@ -93,6 +93,112 @@ def _finding(
     )
 
 
+#: ``p = 0.03`` (an equality claim) and ``p < .001`` (a bound), captured loosely
+#: and validated numerically: regexes that try to encode "a probability" in the
+P_EQUALS = re.compile(r"\bp\s*(?:-?\s*value\s*)?(?:==|=)\s*(?P<value>-?\s*\d+(?:\.\d+)?)", re.IGNORECASE)
+P_INEQUALITY = re.compile(r"\bp\s*(?P<op><=|>=|<|>)\s*(?P<value>-?\s*\d+(?:\.\d+)?)", re.IGNORECASE)
+
+
+def _ascii_math(text: str) -> str:
+    return (
+        text.replace(chr(0x2212), "-")
+        .replace(chr(0x00B7), ".")
+        .replace(chr(0x2264), "<=")
+        .replace(chr(0x2265), ">=")
+    )
+
+
+def _impossible_p(sentence: str) -> bool:
+    normalised = _ascii_math(sentence)
+    for match in P_EQUALS.finditer(normalised):
+        value = _number(match.group("value").replace(" ", ""))
+        if value <= 0 or value > 1:
+            return True
+    for match in P_INEQUALITY.finditer(normalised):
+        value = _number(match.group("value").replace(" ", ""))
+        if match.group("op") in {"<", "<="} and value < 0:
+            return True
+        if match.group("op") in {">", ">="} and value >= 1:
+            return True
+    return False
+
+
+def impossible_p_value(text: str) -> list[Finding]:
+    findings: list[Finding] = []
+    for sentence, line_number in _sentences(without_fenced_code(text)):
+        if not _impossible_p(sentence):
+            continue
+        findings.append(_finding(
+            "statistics.impossible_p_value",
+            "Reported p-value is not a usable probability",
+            "The p-value in this sentence is rounded to zero, above one, or negative. "
+            "Report the exact value (for example p < 0.001) so a reader can tell a very "
+            "small p from a transcription error.",
+            sentence, line_number, "impossible_p_value",
+        ))
+    return findings
+
+
+IMPOSSIBLE_DISPERSION = re.compile(
+    r"\b(?:SD|S\.D\.|standard\s+deviation|SE|S\.E\.|standard\s+error|SEM)\s*"
+    r"(?:=|was|of|:)\s*(?P<negative>-\s*\d+(?:\.\d+)?)"
+    r"|\b(?:n|N|sample\s+size)\s*(?:=|of|was|:)\s*(?P<zero>0)\b",
+    re.IGNORECASE,
+)
+GROUP_COUNT = re.compile(
+    r"\b(?P<count>three|four|five|six|seven|eight|3|4|5|6|7|8)\s+(?:study\s+)?"
+    r"(?:groups?|arms?|cohorts?|conditions?|doses?|treatments?)\b",
+    re.IGNORECASE,
+)
+PAIRWISE_TEST = re.compile(
+    r"\b(?:t[\s-]?tests?|independent[\s-]samples?\s+t|paired\s+t|mann[\s-]whitney|"
+    r"wilcoxon\s+rank[\s-]sum|chi[\s-]square\s+test)\b",
+    re.IGNORECASE,
+)
+OMNIBUS_TEST = re.compile(
+    r"\b(?:ANOVA|ANCOVA|MANOVA|Kruskal[\s-]Wallis|Friedman|mixed[\s-]effects?|"
+    r"linear\s+model|multilevel|hierarchical\s+model|Tukey|Dunnett|Bonferroni|"
+    r"Holm|Benjamini|false\s+discovery|FDR)\b",
+    re.IGNORECASE,
+)
+
+
+def impossible_dispersion(text: str) -> list[Finding]:
+    findings: list[Finding] = []
+    for sentence, line_number in _sentences(without_fenced_code(text)):
+        if IMPOSSIBLE_DISPERSION.search(_ascii_math(sentence)) is None:
+            continue
+        findings.append(_finding(
+            "statistics.impossible_dispersion",
+            "Reported dispersion or sample size cannot exist",
+            "The sentence reports a negative standard deviation or standard error, or a "
+            "sample size of zero. Neither can come from a real analysis, so the text "
+            "needs correcting before any inference is read from it.",
+            sentence, line_number, "impossible_dispersion",
+        ))
+    return findings
+
+
+def group_count_test_mismatch(text: str) -> list[Finding]:
+    findings: list[Finding] = []
+    for sentence, line_number in _sentences(without_fenced_code(text)):
+        count = GROUP_COUNT.search(sentence)
+        if count is None or PAIRWISE_TEST.search(sentence) is None:
+            continue
+        if OMNIBUS_TEST.search(sentence):
+            continue
+        findings.append(_finding(
+            "statistics.group_count_test_mismatch",
+            "Three or more groups compared with pairwise tests only",
+            "The sentence describes three or more groups and names only a pairwise test. "
+            "Repeated pairwise tests across many groups inflate the family-wise error "
+            "rate and cannot show that the groups differ overall; an omnibus test, or an "
+            "explicitly adjusted set of contrasts, is what the design calls for.",
+            sentence, line_number, "pairwise_only",
+        ))
+    return findings
+
+
 def confidence_interval_p_conflict(text: str) -> list[Finding]:
     """Flag a sentence whose 95% CI and p-value disagree about the null."""
     findings: list[Finding] = []

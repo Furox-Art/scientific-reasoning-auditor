@@ -6,6 +6,9 @@ from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
 from sra.statistical_consistency import (
     confidence_interval_p_conflict,
+    group_count_test_mismatch,
+    impossible_dispersion,
+    impossible_p_value,
     mean_outside_interval,
 )
 from sra.statistics_review import (
@@ -615,6 +618,9 @@ def build_findings(
         if statistics_signal is not None:
             findings.append(statistics_signal)
     for signal in (confidence_interval_p_conflict(document.text)
-                   + mean_outside_interval(document.text)):
+                   + mean_outside_interval(document.text)
+                   + impossible_p_value(document.text)
+                   + impossible_dispersion(document.text)
+                   + group_count_test_mismatch(document.text)):
         findings.append(signal)
     return findings, candidates, reasoning_map

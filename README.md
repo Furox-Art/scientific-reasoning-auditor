@@ -30,6 +30,9 @@ This release limits model API response memory use, validates reasoning-graph nod
 - Flag an independent-samples test quoted for a design described as paired, matched, repeated-measures or before/after, unless the manuscript also names a paired test. The check points at both sentences rather than deciding which analysis was run.
 - Flag a sentence whose 95% confidence interval and p-value disagree about the null: an interval that contains the null with p below 0.05, or an interval that excludes it with p at or above 0.05 (ratios use 1 as the null). Descriptive intervals, such as a mean age with a CI, are not compared with a p-value.
 - Flag a sentence whose reported mean falls outside its own 95% confidence interval.
+- Flag a p-value that cannot be a probability in the printed form: `p = 0.000` (rounded to zero), `p = 1.4`, `p > 1`, or a negative p.
+- Flag a dispersion or sample size that cannot exist: a negative standard deviation or standard error, or `n = 0`.
+- Flag three or more groups compared with pairwise tests only, when no omnibus test (ANOVA, Kruskal-Wallis, mixed model) and no adjusted contrast (Tukey, Dunnett, Bonferroni, FDR) is named.
 - Recalculate a two-independent-group Welch t-test from supplied group means, sample standard deviations and sample sizes; compare reported mean difference, t statistic, degrees of freedom and two-sided p-value within explicit tolerances.
 - Recalculate a two-sided two-proportion z-test from a 2x2 event-count table; compare reported proportions, difference, z statistic and p-value within explicit tolerances, and report a pooled normal approximation with an unpooled Wald 95% confidence interval.
 - Produce an explicit reasoning graph with claim, evidence, method, assumption, limitation, inference and grouped document-context nodes, source locations, relation edges and a graph fingerprint. Shared context nodes avoid method/limitation-to-inference Cartesian edge growth.
@@ -50,6 +53,7 @@ This release limits model API response memory use, validates reasoning-graph nod
 - Observational wording does not by itself invalidate a causal inference; causal identification may be justified by design and assumptions not detected by these rules.
 - Multiplicity and design/test signals are wording checks: a correction stated in prose, or a paired test named anywhere, clears them, and a correction applied but never mentioned is invisible to them.
 - The interval checks are sentence-scoped: numbers reported in separate sentences, in a table, or in a figure are not compared, and an interval that belongs to a different model than the p-value cannot be detected as such.
+- The plausibility checks read single sentences: `p = 0.000` may be a rounding style rather than an error, and a group count with an omnibus test named in a different sentence will be flagged because the sentence-scope rule cannot join them.
 - Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test. Pooled-SD Cohen's d uses a common within-group variance reference and is not heteroskedasticity-adjusted; the classical Hedges' J correction is derived under a normally distributed, two-independent-group model with a common variance.
 - No finding does not mean that the paper is logically valid.
 
