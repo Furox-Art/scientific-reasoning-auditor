@@ -56,6 +56,22 @@ class CLISafetyTests(unittest.TestCase):
             self._run(["review-template",str(source),"--out",str(alias)])
             self.assertEqual(source.read_bytes(),before)
 
+    def test_hard_link_alias_to_source_is_rejected(self):
+        """A hard link is a second name for the same file, on every platform.
+
+        The resolved-path preflight cannot see it, so this is the case that
+        exercises the file-identity guard: writing the "output" would have
+        truncated the manuscript.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            source=Path(tmp)/"paper.md"
+            source.write_text("# Methods\nA method.\n", encoding="utf-8", newline="")
+            alias=Path(tmp)/"output.md"
+            os.link(source, alias)
+            before=source.read_bytes()
+            self._run(["review-template",str(source),"--out",str(alias)])
+            self.assertEqual(source.read_bytes(),before)
+
     def test_audit_refuses_to_overwrite_imported_semantic_review(self):
         with tempfile.TemporaryDirectory() as tmp:
             paper=Path(tmp)/"paper.md"
