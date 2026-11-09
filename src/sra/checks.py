@@ -4,6 +4,10 @@ from decimal import Decimal
 
 from sra.document import ParsedDocument, without_fenced_code
 from sra.models import ClaimEvidenceCandidate, Finding
+from sra.statistical_consistency import (
+    confidence_interval_p_conflict,
+    mean_outside_interval,
+)
 from sra.statistics_review import (
     design_test_mismatch_finding,
     multiplicity_finding,
@@ -610,4 +614,7 @@ def build_findings(
                               design_test_mismatch_finding(document.text)):
         if statistics_signal is not None:
             findings.append(statistics_signal)
+    for signal in (confidence_interval_p_conflict(document.text)
+                   + mean_outside_interval(document.text)):
+        findings.append(signal)
     return findings, candidates, reasoning_map

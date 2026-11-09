@@ -10,6 +10,13 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+### Added
+
+- `statistics.confidence_interval_p_conflict`: a sentence whose 95% CI contains the null while p < 0.05, or excludes it while p >= 0.05 (ratios use 1 as the null).
+- `statistics.mean_outside_confidence_interval`: a reported mean that lies outside its own 95% CI.
+
+Both are sentence-scoped: a descriptive interval is never compared with a p-value, and numbers spread across sentences, tables or figures are not compared at all.
+
 ## [0.6.0] - 2026-11-08
 
 ### Added
