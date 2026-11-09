@@ -10,6 +10,8 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-08
+
 ### Added
 
 - Multilingual vocabulary: section headings, direction wording, absolute claims, association and causal verbs, multiplicity corrections, group counts, rate measures, paired designs and test names for es, pt, fr, de, it, nl, ru, pl, id, ar, hi, zh, ja and ko, with a test per term that the rule actually receives it.
@@ -124,7 +126,8 @@ neither decides which analysis was run.
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.7.1...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.8.0
 [0.7.1]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.1
 [0.7.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.0
 [0.6.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.6.0

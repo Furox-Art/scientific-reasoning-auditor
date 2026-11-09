@@ -12,7 +12,7 @@ from sra.document import ParsedDocument
 
 
 AUDITOR_VERSION = __version__
-RULESET_VERSION = "0.7.0"
+RULESET_VERSION = "0.8.0"
 RULE_CONFIGURATION = {
     "audit_report_schema_version": "1.5",
     "manifest_schema_version": "1.4",
