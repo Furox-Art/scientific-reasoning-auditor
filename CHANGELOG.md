@@ -10,6 +10,8 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-08
+
 ### Added
 
 - `docs/CHECK_INVENTORY.md`: every finding code with what it detects, what it cannot detect and where its false positives come from, enforced by a test that derives the rule ids from the syntax tree and compares the two directions.
@@ -112,7 +114,8 @@ neither decides which analysis was run.
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.0
 [0.6.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.6.0
 [0.5.4]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.4
 [0.5.3]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.5.3
