@@ -50,12 +50,24 @@ is where most reported statistics live. Closing it needs a table-aware reader
 (optional extra), tests on a generated PDF, and an honest statement of the layout
 limits that remain.
 
-## 4. Validation harness — `blocked (external)` for the labels, `open` for the code
+## 4. Validation harness — harness `closed`, labels `blocked (external)`
 
-`sra evaluate-labels` exists; what is missing is an end-to-end run that emits the
-pre-registered metrics (recall, precision, Wilson interval, Cohen's kappa) from a
-label file. The labels themselves need real reviewers: this project cannot
-manufacture scientific accuracy evidence, and says so in its README.
+Earlier I recorded this as open on the code side; that was wrong. The three
+stages already existed and were individually tested: `validation-pack` builds the
+blinded worksheets, `adjudicate-labels` merges two reviewers plus an adjudicator
+and reports raw exact agreement and Cohen's kappa, and `evaluate-labels` reports
+tp/fp/fn/tn, precision, recall, specificity and Wilson intervals per finding code
+and as a micro average, with the limitations attached to the report.
+
+What was missing is protection: nothing asserted that the three stages still fit
+together. `tests/test_validation_pipeline.py` now runs two synthetic reviewers,
+one adjudicator and the metric report end to end (agreement 0.75, kappa 0.5, one
+tp, one fn), and asserts that incomplete coverage is refused. Closed when: that
+test passes on CI, which it does.
+
+The labels themselves remain external. No number produced by synthetic labels is
+evidence of accuracy, and the README, the runbook and the report's own limitations
+say so.
 
 ## 5. Rule inventory — `open`
 
