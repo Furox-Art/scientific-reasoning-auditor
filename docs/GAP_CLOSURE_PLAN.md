@@ -69,8 +69,15 @@ The labels themselves remain external. No number produced by synthetic labels is
 evidence of accuracy, and the README, the runbook and the report's own limitations
 say so.
 
-## 5. Rule inventory — `open`
+## 5. Rule inventory — `closed`
 
-Every `check_id`, with what it catches, what it cannot catch, and where its false
-positives come from. A test should fail when a rule exists without an inventory
-row, so a new rule cannot ship undocumented.
+`docs/CHECK_INVENTORY.md` lists all 21 finding codes with three columns each:
+what the rule detects, what it cannot detect, and where its false positives come
+from. `tests/test_check_inventory.py` derives the code's rule ids from the syntax
+tree (both the `Finding(...)` and the local `_finding(...)` constructors) and
+compares them with the table in both directions, so a rule cannot ship
+undocumented and a documentation row cannot outlive its rule. A row whose cells
+are thinner than a real explanation fails as well.
+
+Closed when: the inventory parses, all three tests pass on CI, and the README
+points at it.

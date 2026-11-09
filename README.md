@@ -59,6 +59,8 @@ This release limits model API response memory use, validates reasoning-graph nod
 - Welch verification checks arithmetic conditional on supplied summary statistics. It does not validate the raw data, study design, assumptions or choice of statistical test. Pooled-SD Cohen's d uses a common within-group variance reference and is not heteroskedasticity-adjusted; the classical Hedges' J correction is derived under a normally distributed, two-independent-group model with a common variance.
 - No finding does not mean that the paper is logically valid.
 
+Every finding code is listed in [docs/CHECK_INVENTORY.md](docs/CHECK_INVENTORY.md) with what it detects, what it cannot detect and where its false positives come from; a test fails the build when a rule and its inventory row drift apart.
+
 ## Install
 
 Install the published release from PyPI:
