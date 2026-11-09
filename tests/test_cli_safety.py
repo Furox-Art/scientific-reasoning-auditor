@@ -1,6 +1,7 @@
 """CLI preflight must not overwrite any input when --out collides."""
 import contextlib
 import io
+import os
 import sys
 import tempfile
 import unittest
@@ -40,9 +41,17 @@ class CLISafetyTests(unittest.TestCase):
             alias=Path(tmp)/"output.md"
             try:
                 alias.symlink_to(source)
-            except (OSError, NotImplementedError) as error:
-                # Windows needs Developer Mode or elevation to create symlinks.
-                self.skipTest(f"this platform cannot create symlinks: {error}")
+            except (OSError, NotImplementedError):
+                # Windows needs Developer Mode or elevation for symlinks; a hard
+                # link is the other way to give one file a second name, and it is
+                # the stricter case because the paths do not even resolve together.
+                try:
+                    os.link(source, alias)
+                except OSError as error:
+                    self.fail(
+                        "this platform can create neither a symlink nor a hard link, so "
+                        f"the alias guard cannot be exercised: {error}"
+                    )
             before=source.read_bytes()
             self._run(["review-template",str(source),"--out",str(alias)])
             self.assertEqual(source.read_bytes(),before)

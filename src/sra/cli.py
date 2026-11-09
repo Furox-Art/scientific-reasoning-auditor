@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 from pathlib import Path
 
 from sra.audit import audit_file, audit_parsed_document, build_review_template
@@ -33,15 +34,37 @@ def _reject_input_overwrite(
     filesystem modifications by a hostile process.
     """
     try:
-        protected = {
-            Path(name).resolve(strict=False) for name in input_paths if name
-        }
-        if any(path.resolve(strict=False) in protected for path in output_paths):
-            parser.error(
-                "Output path would overwrite an input or imported review file; choose a different --out."
-            )
+        inputs = [Path(name).expanduser() for name in input_paths if name]
+        protected = {path.resolve(strict=False) for path in inputs}
+        for output in output_paths:
+            if output.resolve(strict=False) in protected:
+                parser.error(
+                    "Output path would overwrite an input or imported review file; choose a different --out."
+                )
+            # A hard link is a second name for the same inode and resolves to its
+            # own path, so the resolved-path set above cannot see it. Writing the
+            # "output" would still destroy the input, so compare identities.
+            if any(_same_document(output, path) for path in inputs):
+                parser.error(
+                    "Output path would overwrite an input or imported review file; choose a different --out."
+                )
     except (OSError, RuntimeError):
         parser.error("Could not safely resolve input/output paths.")
+
+
+def _same_document(left: Path, right: Path) -> bool:
+    """True when two paths reach the same file, through symlinks or hard links.
+
+    Comparing ``resolve()`` strings only catches symlinks: a hard link is a
+    second name for the same inode and resolves to a different path, so writing
+    the "output" would have overwritten the manuscript it was auditing.
+    ``samefile`` compares the file identity; it needs both paths to exist, which
+    is exactly the case that matters here.
+    """
+    try:
+        return os.path.samefile(left, right)
+    except OSError:
+        return left.resolve() == right.resolve()
 
 
 def main() -> int:
@@ -204,7 +227,7 @@ def main() -> int:
         except (OSError, ValueError, TypeError, UnicodeError, SyntaxError, RecursionError) as exc:
             parser.error(str(exc))
         out = Path(args.out)
-        if out.resolve() == Path(args.input).expanduser().resolve():
+        if _same_document(out, Path(args.input).expanduser()):
             parser.error("Output must not overwrite the annotated corpus.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")
@@ -224,7 +247,7 @@ def main() -> int:
         except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
             parser.error(str(exc))
         out = Path(args.out)
-        if out.resolve() in {Path(p).expanduser().resolve() for p in args.reports}:
+        if any(_same_document(out, Path(p).expanduser()) for p in args.reports):
             parser.error("Output must not overwrite an input review.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")
@@ -246,7 +269,7 @@ def main() -> int:
             prefix = Path(args.out)
             json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")
             source = Path(args.input).expanduser().resolve()
-            if source in (json_path.resolve(), md_path.resolve()):
+            if _same_document(source, json_path) or _same_document(source, md_path):
                 raise ValueError("Output paths must not overwrite the input manuscript.")
             serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
             markdown = writing_report_markdown(result)
@@ -284,7 +307,7 @@ def main() -> int:
         source_paths = [Path(args.input).expanduser().resolve()]
         if args.command == "domain-validate":
             source_paths.append(Path(args.assessments).expanduser().resolve())
-        if out.resolve() in source_paths:
+        if any(_same_document(out, path) for path in source_paths):
             parser.error("Output must not overwrite manuscript or assessments.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")
@@ -298,7 +321,7 @@ def main() -> int:
         except (OSError, ValueError, RuntimeError, TypeError) as exc:
             parser.error(str(exc))
         out = Path(args.out)
-        if out.resolve() == Path(args.input).expanduser().resolve():
+        if _same_document(out, Path(args.input).expanduser()):
             parser.error("Output must not overwrite the original document.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")
@@ -313,7 +336,7 @@ def main() -> int:
         except (OSError, ValueError, RuntimeError, TypeError) as exc:
             parser.error(str(exc))
         out = Path(args.out)
-        if out.resolve() == Path(args.manifest).expanduser().resolve():
+        if _same_document(out, Path(args.manifest).expanduser()):
             parser.error("Output must not overwrite the input manifest.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")
@@ -360,7 +383,7 @@ def main() -> int:
             parser.error(str(exc))
         out = Path(args.out)
         inputs = [args.benchmark, args.reviewer_a, args.reviewer_b, args.adjudications]
-        if out.resolve() in {Path(item).resolve() for item in inputs}:
+        if any(_same_document(out, Path(item)) for item in inputs):
             parser.error("Output must not overwrite the benchmark, worksheets or adjudications.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(serialized, encoding="utf-8")

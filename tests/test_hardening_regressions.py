@@ -466,16 +466,36 @@ class HardeningRegressionTests(unittest.TestCase):
         self.assertTrue(r.claim_evidence_candidates)
 
 
-    def test_semantic_review_fifo_is_rejected_without_blocking(self):
+    def test_semantic_review_non_regular_file_is_rejected_without_blocking(self):
+        """A non-regular input must be refused before any read.
+
+        On POSIX this uses a real FIFO: opening it without O_NONBLOCK would hang
+        until a writer appears, which is the denial of service the guard exists
+        for. Windows has no mkfifo, so the same guard is exercised there with the
+        file-status word of a FIFO; the code path is identical, only the plumbing
+        differs, and neither platform is skipped.
+        """
         import os
+        import stat
+        from unittest.mock import patch
+
         from sra.semantic_review import load_semantic_review
-        if not hasattr(os, "mkfifo"):
-            self.skipTest("mkfifo is unavailable on this platform")
+
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "malicious.fifo"
-            os.mkfifo(path)
-            with self.assertRaisesRegex(ValueError, "regular JSON file"):
-                load_semantic_review(path)
+            if hasattr(os, "mkfifo"):
+                os.mkfifo(path)
+                with self.assertRaisesRegex(ValueError, "regular JSON file"):
+                    load_semantic_review(path)
+                return
+            path.write_text("{}", encoding="utf-8")
+            fifo_mode = stat.S_IFIFO | 0o600
+            with patch(
+                "sra.semantic_review.os.fstat",
+                return_value=os.stat_result((fifo_mode, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
+            ):
+                with self.assertRaisesRegex(ValueError, "regular JSON file"):
+                    load_semantic_review(path)
 
     def test_model_http_error_body_cannot_leak_provider_secrets(self):
         import io

@@ -1,5 +1,6 @@
 """Release tag origin guard: real Git DAG positive/negative controls."""
 import os
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -27,11 +28,6 @@ class ReleaseLineageTests(unittest.TestCase):
                 self.assertIn("git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main", source)
                 self.assertIn("exit 1", source)
 
-    @unittest.skipIf(
-        sys.platform == "win32",
-        "the guard is a POSIX bash script and MSYS rewrites the local remote URL, "
-        "so this DAG cannot be replayed faithfully here; Linux CI runs it",
-    )
     def test_real_git_dag_allows_main_and_blocks_unmerged_feature(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -43,6 +39,11 @@ class ReleaseLineageTests(unittest.TestCase):
             # guard then dies with "Could not resolve hostname c:".
             subprocess.run(["git", "clone", remote.as_posix(), str(work)],
                            check=True, capture_output=True)
+            # The guard runs under bash, where an absolute Windows path is read as
+            # an ssh host and a file:///C:/... URL is rewritten by MSYS. A path
+            # relative to the worktree means the same thing to every git on every
+            # platform, so the DAG is replayed exactly here as on CI.
+            self.git(work, "config", "remote.origin.url", "../remote.git")
             self.git(work, "config", "user.name", "Fixture Author")
             self.git(work, "config", "user.email", "fixture@example.invalid")
             (work / "demo.txt").write_text("main\n")
@@ -56,10 +57,15 @@ class ReleaseLineageTests(unittest.TestCase):
             feature_sha = self.git(work, "rev-parse", "HEAD")
             for sha, accepted in ((main_sha, True), (feature_sha, False)):
                 with self.subTest(commit=sha, accepted=accepted):
-                    env = dict(os.environ, GITHUB_SHA=sha)
+                    # Git-for-Windows' MSYS bash, started from Python, loses shell
+                    # variables entirely: ``v=1; echo $v`` prints nothing, and neither
+                    # ``env=`` nor ``export`` reaches the next command. The commit is
+                    # therefore inlined into the guard text; every other byte of the
+                    # guard stays identical to the workflow's.
+                    script = GUARD.replace('"$GITHUB_SHA"', "'" + sha + "'")
                     completed = subprocess.run(
-                        ["bash", "-e", "-c", GUARD],
-                        cwd=work, env=env, capture_output=True, text=True,
+                        ["bash", "-e", "-c", script],
+                        cwd=work, capture_output=True, text=True,
                     )
                     self.assertEqual(completed.returncode == 0, accepted, completed.stderr)
 
