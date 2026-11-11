@@ -27,7 +27,7 @@ CONFIDENCE_INTERVAL = re.compile(
 )
 
 #: ``p = 0.03``, ``p < .001``, ``p ≤ 0.05``.
-P_VALUE = re.compile(r"\bp\s*(?:-?\s*value\s*)?(?:=|==|<|>|≤|>=)\s*(?P<p>0?[.·]\d+|\d[.·]\d+)", re.IGNORECASE)
+P_VALUE = re.compile(r"\bp\s*(?:-?\s*value\s*)?(?P<op>==|<=|>=|≤|≥|=|<|>)\s*(?P<p>0?[.·]\d+|\d[.·]\d+)", re.IGNORECASE)
 
 #: ``mean 3.4``, ``M = 3.4``, ``average 3.4``.
 #: The same lexicons in the other publishing languages. A mean word, a contrast
@@ -122,9 +122,10 @@ def _impossible_p(sentence: str) -> bool:
             return True
     for match in P_INEQUALITY.finditer(normalised):
         value = _number(match.group("value").replace(" ", ""))
-        if match.group("op") in {"<", "<="} and value < 0:
+        op = match.group("op")
+        if (op == "<" and value <= 0) or (op == "<=" and value < 0):
             return True
-        if match.group("op") in {">", ">="} and value >= 1:
+        if (op == ">" and value >= 1) or (op == ">=" and value > 1):
             return True
     return False
 
@@ -157,7 +158,11 @@ GROUP_COUNT = re.compile(
     re.IGNORECASE,
 )
 _PHRASE = lambda terms: "|".join(re.escape(term) for term in terms)  # noqa: E731
-MEAN = re.compile(MEAN.pattern + "|" + _PHRASE(_multi.MEAN_WORD), re.IGNORECASE)
+MEAN = re.compile(
+    r"(?:\b(?:mean|average|ortalamas?ı)\b|" + _PHRASE(_multi.MEAN_WORD)
+    + r")[^.;:()]{0,24}?(?P<mean>[−\-]?\d+(?:[.·]\d+)?)(?!\s*%)",
+    re.IGNORECASE,
+)
 CONTRAST_STATEMENT = re.compile(
     CONTRAST_STATEMENT.pattern + "|" + _PHRASE(_multi.CONTRAST), re.IGNORECASE
 )
@@ -230,6 +235,15 @@ def confidence_interval_p_conflict(text: str) -> list[Finding]:
         lower = _number(interval.group("lower"))
         upper = _number(interval.group("upper"))
         p = _number(p_value.group("p"))
+        op = p_value.group("op")
+        if op in {"≤", "≥"}:
+            op = "<=" if op == "≤" else ">="
+        alpha = Decimal("0.05")
+        below_alpha = ((op in {"=", "=="} and p < alpha)
+                       or (op == "<" and p <= alpha)
+                       or (op == "<=" and p < alpha))
+        at_or_above_alpha = ((op in {"=", "=="} and p >= alpha)
+                             or (op in {">", ">="} and p >= alpha))
         is_ratio = bool(RATIO_STATEMENT.search(sentence))
         if not is_ratio and not CONTRAST_STATEMENT.search(sentence):
             # "mean age 45 (95% CI 30-60, p = 0.2)" describes a distribution, not a
@@ -239,7 +253,7 @@ def confidence_interval_p_conflict(text: str) -> list[Finding]:
         null = Decimal("1") if is_ratio else Decimal("0")
         excludes_null = lower > null or upper < null
         includes_null = lower <= null <= upper
-        if p < Decimal("0.05") and includes_null:
+        if below_alpha and includes_null:
             findings.append(_finding(
                 "statistics.confidence_interval_p_conflict",
                 "95% CI includes the null value while p is below 0.05",
@@ -248,7 +262,7 @@ def confidence_interval_p_conflict(text: str) -> list[Finding]:
                 "test at the conventional threshold: confirm which numbers belong together.",
                 sentence, line_number, "interval_includes_null",
             ))
-        elif p >= Decimal("0.05") and excludes_null:
+        elif at_or_above_alpha and excludes_null:
             findings.append(_finding(
                 "statistics.confidence_interval_p_conflict",
                 "95% CI excludes the null value while p is at or above 0.05",

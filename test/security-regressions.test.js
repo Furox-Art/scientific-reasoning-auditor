@@ -15,8 +15,10 @@ test('Python adapter does not import a shadow sra package from a caller CWD', as
   fs.mkdirSync(fake);
   fs.writeFileSync(path.join(fake, '__init__.py'), '');
   fs.writeFileSync(path.join(fake, 'cli.py'), 'print("IMPOSTOR_MODULE_EXECUTED")\n');
-  const python = execFileSync('python3', ['-c', 'import sys;print(sys.executable)'],
-    { encoding: 'utf8' }).trim();
+  const python = process.env.SRA_PYTHON || execFileSync(
+    'python3', ['-c', 'import sys;print(sys.executable)'],
+    { encoding: 'utf8' }
+  ).trim();
   const out = await sra.run(['--help'], {
     cwd: folder, stdio: 'pipe', env: { SRA_PYTHON: python, PYTHONPATH: '' },
   });

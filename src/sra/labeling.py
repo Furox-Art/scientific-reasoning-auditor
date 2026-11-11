@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from sra.benchmark import _get_article
+from sra.benchmark import _get_article, _PMCPATTERN
 
 _WORKSHEET_KIND = "blinded_validation_worksheet"
 _PACK_KIND = "blinded_validation_pack"
@@ -34,7 +34,7 @@ def _load_benchmark(path: str | Path) -> tuple[bytes, list[dict[str, Any]]]:
         raise ValueError("Benchmark has duplicate processed PMCIDs.")
     for paper in papers:
         pmcid = paper.get("pmcid")
-        if not isinstance(pmcid, str) or not pmcid:
+        if not isinstance(pmcid, str) or _PMCPATTERN.fullmatch(pmcid) is None:
             raise ValueError("Every processed paper needs a PMCID.")
         source_hash = paper.get("response_sha256")
         if (not isinstance(source_hash, str) or len(source_hash) != 64
@@ -130,6 +130,8 @@ def build_validation_pack(
                 f"Frozen source hash changed for {pmcid}; rebuild the benchmark before labelling."
             )
         text_path = papers_dir / f"{pmcid}.md"
+        if not text_path.resolve().is_relative_to(papers_dir.resolve()):
+            raise ValueError("PMCID must stay within the blinded papers directory.")
         text_path.write_text(text, encoding="utf-8", newline="\n")
         paper_entries.append({
             "pmcid": pmcid,

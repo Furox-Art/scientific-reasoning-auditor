@@ -3,6 +3,10 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+MAX_DOCUMENT_BYTES = 32 * 1024 * 1024
+MAX_PDF_PAGES = 500
+MAX_EXTRACTED_TEXT_CHARS = 4_000_000
+
 
 @dataclass
 class ParsedDocument:
@@ -157,7 +161,12 @@ def load_document(path: str | Path) -> ParsedDocument:
     file_path = Path(path).expanduser().resolve()
     if not file_path.is_file():
         raise FileNotFoundError(f"Input file not found: {file_path}")
-    raw = file_path.read_bytes()
+    # Bounded read avoids loading a hostile or accidental multi-gigabyte file
+    # before the size check (stat-only preflights are vulnerable to file races).
+    with file_path.open("rb") as stream:
+        raw = stream.read(MAX_DOCUMENT_BYTES + 1)
+    if len(raw) > MAX_DOCUMENT_BYTES:
+        raise ValueError("Document exceeds the 32 MiB input limit.")
     suffix = file_path.suffix.lower()
     if suffix == ".pdf":
         try:
@@ -167,11 +176,14 @@ def load_document(path: str | Path) -> ParsedDocument:
                 "PDF support is optional. Install it with: pip install -e '.[pdf]'"
             ) from exc
         reader = PdfReader(str(file_path))
+        if len(reader.pages) > MAX_PDF_PAGES:
+            raise ValueError("PDF exceeds the 500-page processing limit.")
         # Layout-aware extraction keeps table rows on one line with the columns
         # still separated by runs of spaces. Plain extraction collapses that, and
         # a table cell then cannot be told apart from the next word, which is how
         # reported statistics ended up invisible to the audit.
         pages: list[str] = []
+        extracted_characters = 0
         layout_used = False
         for page in reader.pages:
             try:
@@ -181,6 +193,9 @@ def load_document(path: str | Path) -> ParsedDocument:
                 # Older pypdf releases have no layout mode; the manifest records
                 # which one produced the text so a reader can tell them apart.
                 pages.append(page.extract_text() or "")
+            extracted_characters += len(pages[-1])
+            if extracted_characters > MAX_EXTRACTED_TEXT_CHARS:
+                raise ValueError("PDF extracted text exceeds the 4,000,000-character limit.")
         text = "\n\n".join(pages)
         parser_backend = "pypdf-layout" if layout_used else "pypdf"
     elif suffix in {".md", ".markdown", ".txt"}:
@@ -197,6 +212,8 @@ def load_document(path: str | Path) -> ParsedDocument:
         parser_backend = "python-utf8"
     else:
         raise ValueError("Supported formats: .md, .markdown, .txt, .pdf")
+    if len(text) > MAX_EXTRACTED_TEXT_CHARS:
+        raise ValueError("Document extracted text exceeds the 4,000,000-character limit.")
     if not text.strip():
         raise ValueError("No extractable text found in the input document.")
     # Prefer explicit Markdown headings. If none exist, conservatively recognize

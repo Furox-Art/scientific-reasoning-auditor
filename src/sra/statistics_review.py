@@ -102,8 +102,12 @@ def multiplicity_finding(text: str) -> Finding | None:
     matches = list(P_VALUE.finditer(body))
     if len(matches) < MINIMUM_UNCORRECTED_P_VALUES:
         return None
-    if CORRECTION_VOCABULARY.search(body):
-        return None
+    # A denied correction does not establish that an adjustment was applied.
+    for sentence in re.split(r"(?<=[.!?])\s+|\n+", body):
+        if CORRECTION_VOCABULARY.search(sentence) and not re.search(
+            r"\b(?:no|not|never|without)\b", sentence, re.IGNORECASE
+        ):
+            return None
     return Finding(
         "statistics.multiplicity_unaddressed",
         f"{len(matches)} reported p-values and no multiplicity statement",

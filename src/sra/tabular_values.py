@@ -63,7 +63,7 @@ def table_statements(text: str) -> list[tuple[str, int, str, str]]:
             header = None
             header_keys = []
             continue
-        keys = [COLUMN_KEYS.get(cell.lower().strip(".:")) for cell in cells]
+        keys = [COLUMN_KEYS.get(cell.lower().strip().rstrip(":")) or COLUMN_KEYS.get(cell.lower().strip(".:")) for cell in cells]
         if sum(1 for key in keys if key) >= 2:
             header = list(cells)
             header_keys = keys

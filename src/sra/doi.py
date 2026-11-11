@@ -63,6 +63,8 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
             if len(raw) > 2_000_000:
                 return {"status": "UNVERIFIED", "reason": "Crossref response exceeds size limit."}
         data = json.loads(raw)
+        if not isinstance(data, dict):
+            raise ValueError("Crossref response must be an object.")
         message = data.get("message", {})
         if not isinstance(message, dict):
             raise ValueError("Invalid Crossref metadata shape.")
@@ -75,7 +77,12 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
         first_author = None
         if isinstance(authors, list) and authors and isinstance(authors[0], dict):
             first_author = authors[0].get("family")
-        years = message.get("published", {}).get("date-parts", [])
+        published = message.get("published", {})
+        if not isinstance(published, dict):
+            raise ValueError("Crossref published metadata must be an object.")
+        years = published.get("date-parts", [])
+        if not isinstance(years, list):
+            raise ValueError("Crossref date-parts must be a list.")
         year = years[0][0] if years and isinstance(years[0], list) and years[0] else None
         return {
             "status": "REGISTERED_IN_CROSSREF",
@@ -109,15 +116,27 @@ def _lookup_datacite(doi: str, *, timeout: float = 8.0) -> dict:
             if len(raw) > 2_000_000:
                 return {"status": "UNVERIFIED", "reason": "DataCite response exceeds size limit."}
         payload = json.loads(raw)
+        if not isinstance(payload, dict):
+            raise ValueError("DataCite response must be an object.")
         data = payload.get("data", {})
+        if not isinstance(data, dict):
+            raise ValueError("DataCite data must be an object.")
         attributes = data.get("attributes", {})
+        if not isinstance(attributes, dict):
+            raise ValueError("DataCite attributes must be an object.")
         registered = normalize_doi(attributes.get("doi", ""))
         if registered != doi:
             return {"status": "UNVERIFIED", "reason": "DataCite returned a different DOI."}
         titles = attributes.get("titles", [])
+        if not isinstance(titles, list):
+            raise ValueError("DataCite titles must be a list.")
         title = titles[0].get("title") if titles and isinstance(titles[0], dict) else None
         creators = attributes.get("creators", [])
+        if not isinstance(creators, list):
+            raise ValueError("DataCite creators must be a list.")
         first_author = creators[0].get("familyName") if creators and isinstance(creators[0], dict) else None
+        if attributes.get("types") is not None and not isinstance(attributes["types"], dict):
+            raise ValueError("DataCite types must be an object.")
         return {
             "status": "REGISTERED_IN_DATACITE", "registry": "DataCite",
             "doi": registered, "title": title, "first_author": first_author,
@@ -139,6 +158,41 @@ def _lookup_registry(doi: str, *, timeout: float) -> dict:
     if result["status"] == "NOT_FOUND_IN_CROSSREF":
         return _lookup_datacite(doi, timeout=timeout)
     return result
+
+
+_REFERENCE_HEADER = re.compile(
+    r"^\s*(?:#{1,6}\s+)?(?:references|bibliography|literature cited|works cited|kaynakça)\s*:?\s*$",
+    re.IGNORECASE,
+)
+
+
+def _reference_context(text: str, doi: str) -> tuple[int, str] | None:
+    """Prefer the bibliography occurrence of a DOI over its first in-text mention.
+
+    A DOI on the line after a citation title can use the previous two lines.
+    Stop at an earlier DOI to avoid merging two different references.
+    """
+    lines = text.splitlines()
+    heading_index: int | None = None
+    best: tuple[int, str] | None = None
+    for index, line in enumerate(lines):
+        if _REFERENCE_HEADER.fullmatch(line):
+            heading_index = index
+            continue
+        if line.lstrip().startswith("#") and heading_index is not None:
+            heading_index = None
+        if heading_index is None:
+            continue
+        if not any(normalize_doi(match.group()) == doi for match in _DOI_PATTERN.finditer(line)):
+            continue
+        start = max(heading_index + 1, index - 2)
+        for previous in range(start, index):
+            if _DOI_PATTERN.search(lines[previous]):
+                start = previous + 1
+        context = " ".join(segment.strip() for segment in lines[start:index + 1] if segment.strip())
+        best = (index + 1, context)
+        break
+    return best
 
 
 def _title_context_overlap(title: str | None, reference_line: str, doi: str) -> dict:
@@ -174,9 +228,12 @@ def verify_dois(path: str | Path, *, online: bool = False,
         item = {"doi": doi, "line": line}
         if online:
             item.update(_lookup_registry(doi, timeout=timeout))
-            line_text = document.text.splitlines()[line - 1]
-            item["title_comparison"] = _title_context_overlap(
-                item.get("title"), line_text, doi,
+            reference = _reference_context(document.text, doi)
+            item["reference_line"] = reference[0] if reference else None
+            item["title_comparison"] = (
+                _title_context_overlap(item.get("title"), reference[1], doi)
+                if reference else {"status": "NOT_EVALUATED",
+                                   "reason": "No explicit bibliography occurrence of this DOI."}
             )
         else:
             item["status"] = "NOT_CHECKED_OFFLINE"

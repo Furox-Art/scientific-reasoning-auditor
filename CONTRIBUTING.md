@@ -34,17 +34,17 @@ python -m coverage run --source=src/sra -m unittest discover -s tests -v
 python -m coverage report
 ```
 
-CI enforces full coverage of `src/sra` through the command-line flag, not through
-`pyproject.toml`:
+CI enforces 100% *statement* coverage for `src/sra` using both
+`[tool.coverage.report] fail_under = 100` in `pyproject.toml` and an explicit
+command-line threshold:
 
 ```bash
 python -m coverage report --fail-under=100
 ```
 
-`pyproject.toml` deliberately has no `[tool.coverage.*]` section and no
-`fail_under` setting, so a local `coverage report` without the flag prints the
-measured percentage and does not fail the run. Add tests until
-`--fail-under=100` passes; do not lower the flag.
+A local `coverage report` also applies the configured threshold. Branch coverage
+is not currently measured; 100% statement coverage is not proof that every
+decision or scientific edge case has been tested.
 
 Other checks that CI runs on every push and pull request
 (`.github/workflows/tests.yml`):

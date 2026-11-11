@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 
 
@@ -75,7 +76,12 @@ def evaluate_blinded_labels(benchmark_path: str | Path, labels_path: str | Path)
         paper = papers[key[0]]
         if not isinstance(paper.get("writing_finding_codes"), list):
             raise ValueError("Benchmark lacks frozen writing_finding_codes; rerun current benchmark.")
-        if case.get("source_sha256") != paper.get("response_sha256"):
+        label_hash = case.get("source_sha256")
+        paper_hash = paper.get("response_sha256")
+        if (not isinstance(label_hash, str) or re.fullmatch(r"[0-9a-f]{64}", label_hash) is None
+                or not isinstance(paper_hash, str) or re.fullmatch(r"[0-9a-f]{64}", paper_hash) is None):
+            raise ValueError("Expert label and benchmark require valid source SHA-256 hashes.")
+        if label_hash != paper_hash:
             raise ValueError("Expert label source hash differs from the retrieved paper source.")
         if type(case.get("expert_label")) is not bool:
             raise ValueError("expert_label must be boolean.")

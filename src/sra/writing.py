@@ -5,7 +5,6 @@ No external requests, rewriting, language models, or manuscript modification.
 """
 from __future__ import annotations
 
-import html
 import re
 from pathlib import Path
 from typing import Any
@@ -15,6 +14,7 @@ from sra.writing_style import style_review
 from sra.discipline import reporting_cues, CHECKLISTS
 from sra.domain_evidence import review_domain, PROFILES
 from sra.grammar_engine import check_local_languagetool
+from sra.report import _safe_md
 
 _WORD = re.compile(r"\b[\w]+(?:['’\-][\w]+)*\b", re.UNICODE)
 _NUMBERED_CITATION = re.compile(
@@ -297,7 +297,7 @@ def writing_report_markdown(result: dict[str, Any]) -> str:
     lines = [
         "# Academic writing review",
         "",
-        f"**Source:** {html.escape(result['source'])}",
+        f"**Source:** {_safe_md(result['source'])}",
         f"**SHA-256:** {result['source_sha256']}",
         f"**Status:** {result['status']}",
         f"**Genre:** {result['genre']}",
@@ -311,15 +311,15 @@ def writing_report_markdown(result: dict[str, Any]) -> str:
         lines.append("No automated flags in supported checks. This is not a quality certification.")
     for finding in result["findings"]:
         label = f"line {finding['line']}" if finding["line"] is not None else "document"
-        lines.append(f"- **{finding['code']} ({label}):** {html.escape(finding['message'])}")
+        lines.append(f"- **{finding['code']} ({label}):** {_safe_md(finding['message'])}")
     lines += ["", "## Academic language suggestions"]
     if not result.get("style_suggestions"):
         lines.append("No supported language patterns flagged.")
     for item in result.get("style_suggestions", []):
         lines.append(
             f"- **{item['code']} (line {item['line']}):** "
-            f"{html.escape(item['excerpt'])} — "
-            f"{html.escape(item['suggestion'])}"
+            f"{_safe_md(item['excerpt'])} — "
+            f"{_safe_md(item['suggestion'])}"
         )
     lines += ["", "## Local grammar suggestions"]
     local = result.get("grammar_suggestions") or []
@@ -327,35 +327,35 @@ def writing_report_markdown(result: dict[str, Any]) -> str:
         lines.append("No local grammar engine suggestions (engine may be disabled).")
     for item in local:
         lines.append(
-            f"- **{html.escape(item['rule_id'])} (line {item['line']}):** "
-            f"{html.escape(item['excerpt'])} — "
-            f"{html.escape(item['suggestion'])} "
+            f"- **{_safe_md(item['rule_id'])} (line {item['line']}):** "
+            f"{_safe_md(item['excerpt'])} — "
+            f"{_safe_md(item['suggestion'])} "
             "(review before editing)"
         )
     domain = result.get("discipline_review")
     if domain is not None:
         lines += ["", "## Discipline-specific evidence candidates"]
-        lines.append(f"Discipline: {html.escape(domain['discipline'])}")
+        lines.append(f"Discipline: {_safe_md(domain['discipline'])}")
         lines.append(f"Ruleset SHA-256: {domain['ruleset_sha256']}")
         for entry in domain["items"]:
             lines.append(
-                f"- **{html.escape(entry['rule_id'])}:** "
+                f"- **{_safe_md(entry['rule_id'])}:** "
                 f"{entry['status']}; expert assessment required"
             )
             for evidence in entry["evidence"]:
                 lines.append(
-                    f"  - {html.escape(evidence['section'])} "
-                    f"(line {evidence['line']}): {html.escape(evidence['excerpt'])}"
+                    f"  - {_safe_md(evidence['section'])} "
+                    f"(line {evidence['line']}): {_safe_md(evidence['excerpt'])}"
                 )
         lines.append("Text matches are NOT expert verification or guideline compliance.")
     checklist = result.get("reporting_checklist")
     if checklist is not None:
         lines += ["", "## Study-design reporting cues"]
-        lines.append(f"Advisory framework: {html.escape(checklist['guideline'])}")
+        lines.append(f"Advisory framework: {_safe_md(checklist['guideline'])}")
         for item in checklist["items"]:
             lines.append(f"- {item['item']}: {item['status']}"
                          + (f" (line {item['line']})" if item['line'] else ""))
         lines.append("Cue detection is not guideline compliance.")
     lines += ["", "## Limits"]
-    lines.extend(f"- {html.escape(item)}" for item in result["limitations"])
+    lines.extend(f"- {_safe_md(item)}" for item in result["limitations"])
     return "\n".join(lines) + "\n"
