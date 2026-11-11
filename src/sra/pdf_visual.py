@@ -6,8 +6,10 @@ figures or scientifically interpret diagrams.
 from __future__ import annotations
 
 import base64
+import os
 import re
 import shutil
+import signal
 import subprocess
 import tempfile
 from pathlib import Path
@@ -17,6 +19,51 @@ MAX_OCR_PAGE_CHARACTERS = 250_000
 MAX_OCR_PAGES = 100
 MAX_VISION_PAGES = 30
 SUPPORTED_OCR_MODES = ("off", "missing", "all")
+
+
+def _resource_limiter(max_file_bytes: int, max_memory_bytes: int, cpu_seconds: int):
+    """Install POSIX child limits before exec, including no core dumps."""
+    if os.name != "posix":
+        raise RuntimeError("Safe PDF OCR subprocess limits require a POSIX platform.")
+    import resource
+
+    def limit_child() -> None:
+        resource.setrlimit(resource.RLIMIT_AS, (max_memory_bytes, max_memory_bytes))
+        resource.setrlimit(resource.RLIMIT_CPU, (cpu_seconds, cpu_seconds))
+        resource.setrlimit(resource.RLIMIT_FSIZE, (max_file_bytes, max_file_bytes))
+        resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+
+    return limit_child
+
+
+def _run_limited(
+    command: list[str], *, stdout: object, timeout: float,
+    preexec_fn: object,
+) -> subprocess.CompletedProcess:
+    """Run a POSIX subprocess and kill its entire process group on exit.
+
+    A subprocess.run timeout only kills the direct child; a renderer could
+    leave forked helpers alive. With start_new_session, all inherited group
+    members are terminated even after a normal parent exit. This does not
+    include deliberately detached processes in a different session.
+    """
+    process = subprocess.Popen(
+        command, stdout=stdout, stderr=subprocess.DEVNULL,
+        start_new_session=True, preexec_fn=preexec_fn,
+    )
+    try:
+        process.wait(timeout=timeout)
+    finally:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        try:
+            process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+    return subprocess.CompletedProcess(command, process.returncode)
 
 
 def validate_ocr_settings(mode: str, languages: str) -> None:
@@ -51,9 +98,9 @@ def render_pdf_page(
             command.extend(["-gray", "-png"])
         command.extend([str(pdf_path), str(stem)])
         try:
-            result = subprocess.run(
-                command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                timeout=45, check=False,
+            result = _run_limited(
+                command, stdout=subprocess.DEVNULL, timeout=45,
+                preexec_fn=_resource_limiter(MAX_PAGE_IMAGE_BYTES, 1536 * 1024 * 1024, 40),
             )
         except subprocess.TimeoutExpired as exc:
             raise RuntimeError("PDF page rendering exceeded the 45-second limit.") from exc
@@ -82,20 +129,29 @@ def ocr_pdf_page(pdf_path: str | Path, page_number: int, *, languages: str) -> s
     with tempfile.TemporaryDirectory(prefix="sra-ocr-page-") as directory:
         picture = Path(directory) / "page.png"
         picture.write_bytes(image)
+        # Bound output in the child process and keep stderr out of unbounded pipes.
+        output_path = Path(directory) / "ocr-output.bin"
         try:
-            result = subprocess.run(
-                [exe, str(picture), "stdout", "-l", languages, "--psm", "3"],
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=65, check=False,
-            )
+            with output_path.open("w+b") as output:
+                result = _run_limited(
+                    [exe, str(picture), "stdout", "-l", languages, "--psm", "3"],
+                    stdout=output, timeout=65,
+                    preexec_fn=_resource_limiter(
+                        MAX_OCR_PAGE_CHARACTERS * 4, 1536 * 1024 * 1024, 60,
+                    ),
+                )
+                output.flush()
+                output.seek(0)
+                bounded_stdout = output.read(MAX_OCR_PAGE_CHARACTERS * 4 + 1)
         except subprocess.TimeoutExpired as exc:
             raise RuntimeError("PDF OCR exceeded the 65-second per-page limit.") from exc
     if result.returncode != 0:
         raise RuntimeError(
             "Tesseract OCR failed. Verify that the requested OCR languages are installed."
         )
-    if len(result.stdout) > MAX_OCR_PAGE_CHARACTERS * 4:
+    if len(bounded_stdout) > MAX_OCR_PAGE_CHARACTERS * 4:
         raise ValueError("PDF OCR output exceeded the allowed page-text size.")
-    text = result.stdout.decode("utf-8", errors="replace").replace(
+    text = bounded_stdout.decode("utf-8", errors="replace").replace(
         "\r\n", "\n"
     ).replace("\f", "").strip()
     if len(text) > MAX_OCR_PAGE_CHARACTERS:

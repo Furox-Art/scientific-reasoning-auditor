@@ -128,21 +128,35 @@ def _validated_chunk(value: Any, part: dict[str, Any]) -> dict[str, Any]:
             raise ValueError("Scientific critique requires a source quote of at least 20 characters.")
         if quote not in part["text"]:
             raise ValueError("Scientific critique contains a quote absent from its source chunk.")
-        absolute_offset = part["start_char"] + part["text"].index(quote)
-        source_page = next((
-            record["page"] for record in (part.get("page_records") or [])
-            if record["start_char"] <= absolute_offset < record["end_char"]
-        ), None)
+        occurrences = []
+        next_search = 0
+        while True:
+            local_start = part["text"].find(quote, next_search)
+            if local_start < 0:
+                break
+            occurrences.append(part["start_char"] + local_start)
+            next_search = local_start + 1
+        # Sum all physical pages covered by all occurrences of this exact quote.
+        source_pages = sorted({
+            rec["page"]
+            for start in occurrences
+            for rec in (part.get("page_records") or [])
+            if rec["start_char"] < start + len(quote) and rec["end_char"] > start
+        })
+        source_page = source_pages[0] if len(source_pages) == 1 and len(occurrences) == 1 else None
+        absolute_offset = occurrences[0]
         checked.append({
             "source_page": source_page,
-            "source_char_offset": absolute_offset,
-            "quote_ambiguity_count": part["text"].count(quote),
+            "source_pages": source_pages,
+            "source_char_offset": absolute_offset if len(occurrences) == 1 else None,
+            "source_end_char_offset": absolute_offset + len(quote) if len(occurrences) == 1 else None,
+            "quote_ambiguity_count": len(occurrences),
             "issue": _text(item.get("issue"), "issue", maximum=1500),
             "reason": _text(item.get("reason"), "reason"),
             "recommendation": _text(item.get("recommendation"), "recommendation"),
             "quote": quote,
             "severity": severity,
-            "line": part["start_line"] + part["text"].count("\n", 0, part["text"].index(quote)),
+            "line": (part["start_line"] + part["text"].count("\n", 0, part["text"].index(quote))) if len(occurrences) == 1 else None,
         })
     return {
         "chunk_id": part["chunk_id"],
@@ -371,9 +385,18 @@ def paper_review_markdown(report: dict[str, Any]) -> str:
         if item["main_points"]:
             lines.append("")
         for criticism in item["critiques"]:
-            location = f"page {criticism['source_page']}, " if criticism.get("source_page") else ""
+            pages = criticism.get("source_pages") or []
+            if len(pages) > 1:
+                location = "pages " + ", ".join(map(str, pages)) + ", "
+            elif criticism.get("source_page"):
+                location = f"page {criticism['source_page']}, "
+            elif criticism.get("quote_ambiguity_count", 1) > 1:
+                location = "repeated quote (location ambiguous), "
+            else:
+                location = ""
+            line_label = f"line {criticism['line']}" if isinstance(criticism.get("line"), int) else "line ambiguous"
             lines.extend([
-                f"- **{criticism['severity'].upper()} · {location}line {criticism['line']}:** "
+                f"- **{criticism['severity'].upper()} · {location}{line_label}:** "
                 f"{_safe_md(criticism['issue'])}",
                 f"    - Evidence: {_safe_md(criticism['quote'])}",
                 f"    - Reason: {_safe_md(criticism['reason'])}",

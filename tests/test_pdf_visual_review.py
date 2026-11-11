@@ -139,7 +139,7 @@ class OCRDocumentTests(unittest.TestCase):
 class ExternalPDFProcessTests(unittest.TestCase):
     def test_render_success_uses_bounded_command(self):
         with patch("sra.pdf_visual.shutil.which", return_value="/usr/bin/pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run:
             def call(argv, **kwargs):
                 self.assertNotIn("shell", kwargs)
@@ -153,7 +153,7 @@ class ExternalPDFProcessTests(unittest.TestCase):
 
     def test_color_render_uses_jpeg_and_max_scale(self):
         with patch("sra.pdf_visual.shutil.which", return_value="/usr/bin/pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run:
             def call(argv, **kwargs):
                 self.assertIn("-jpegopt", argv)
@@ -171,23 +171,23 @@ class ExternalPDFProcessTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "pdftoppm"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", return_value=SimpleNamespace(returncode=1)
+            "sra.pdf_visual._run_limited", return_value=SimpleNamespace(returncode=1)
         ):
             with self.assertRaisesRegex(RuntimeError, "rendering failed"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", return_value=SimpleNamespace(returncode=0)
+            "sra.pdf_visual._run_limited", return_value=SimpleNamespace(returncode=0)
         ):
             with self.assertRaisesRegex(RuntimeError, "did not produce"):
                 render_pdf_page("paper.pdf", 1)
         from subprocess import TimeoutExpired
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", side_effect=TimeoutExpired("pdftoppm", 45)
+            "sra.pdf_visual._run_limited", side_effect=TimeoutExpired("pdftoppm", 45)
         ):
             with self.assertRaisesRegex(RuntimeError, "45-second"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run, patch("sra.pdf_visual.MAX_PAGE_IMAGE_BYTES", 2):
             def large(argv, **kwargs):
                 Path(argv[-1] + ".png").write_bytes(b"ABCD")
@@ -199,12 +199,13 @@ class ExternalPDFProcessTests(unittest.TestCase):
     def test_ocr_command_success_fail_timeout_and_size(self):
         with patch("sra.pdf_visual.shutil.which", return_value="tesseract"), patch(
             "sra.pdf_visual.render_pdf_page", return_value=(b"IMG", "image/png")
-        ), patch("sra.pdf_visual.subprocess.run") as run:
+        ), patch("sra.pdf_visual._run_limited") as run:
             def call(argv, **kwargs):
                 self.assertEqual(kwargs["timeout"], 65)
                 self.assertEqual(argv[-4:], ["-l", "eng", "--psm", "3"])
                 self.assertTrue(Path(argv[1]).is_file())
-                return SimpleNamespace(returncode=0, stdout=b"Results: twenty cases.\f")
+                kwargs["stdout"].write(b"Results: twenty cases.\f")
+                return SimpleNamespace(returncode=0)
             run.side_effect = call
             self.assertEqual(ocr_pdf_page("source.pdf", 1, languages="eng"),
                              "Results: twenty cases.")
@@ -217,11 +218,15 @@ class ExternalPDFProcessTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "65-second"):
                 ocr_pdf_page("source.pdf", 1, languages="eng")
             run.side_effect = None
-            run.return_value = SimpleNamespace(returncode=0, stdout=b"A"*100)
+            run.side_effect = lambda argv, **kw: (
+                kw["stdout"].write(b"A"*100), SimpleNamespace(returncode=0)
+            )[1]
             with patch("sra.pdf_visual.MAX_OCR_PAGE_CHARACTERS", 10):
                 with self.assertRaisesRegex(ValueError, "page-text size"):
                     ocr_pdf_page("source.pdf", 1, languages="eng")
-            run.return_value = SimpleNamespace(returncode=0, stdout=b"A"*30)
+            run.side_effect = lambda argv, **kw: (
+                kw["stdout"].write(b"A"*30), SimpleNamespace(returncode=0)
+            )[1]
             with patch("sra.pdf_visual.MAX_OCR_PAGE_CHARACTERS", 10):
                 with self.assertRaisesRegex(ValueError, "OCR text exceeded"):
                     ocr_pdf_page("source.pdf", 1, languages="eng")
