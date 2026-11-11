@@ -107,6 +107,17 @@ A synthetic rule ablation ([docs/RULE_ABLATION.md](docs/RULE_ABLATION.md)) measu
 
 Every finding code is listed in [docs/CHECK_INVENTORY.md](docs/CHECK_INVENTORY.md) with what it detects, what it cannot detect and where its false positives come from; a test fails the build when a rule and its inventory row drift apart.
 
+## Optional MCP tools for ChatGPT and Codex
+
+A separate Model Context Protocol (MCP) adapter provides six bounded tools for
+scientific manuscript reasoning, academic writing, DOI checks, structured
+statistics, scientific validation, and opt-in external-model paper review.
+It supports local stdio and token-protected Streamable HTTP; it does not
+change the core SRA rules. Public-directory submission requires additional
+OAuth, deployment and OpenAI review steps.
+
+See [MCP setup, privacy, security and tests](mcp_server/README.md).
+
 ## Install
 
 Install the published release from PyPI:
