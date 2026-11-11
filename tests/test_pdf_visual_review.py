@@ -204,7 +204,8 @@ class ExternalPDFProcessTests(unittest.TestCase):
                 self.assertEqual(kwargs["timeout"], 65)
                 self.assertEqual(argv[-4:], ["-l", "eng", "--psm", "3"])
                 self.assertTrue(Path(argv[1]).is_file())
-                return SimpleNamespace(returncode=0, stdout=b"Results: twenty cases.\f")
+                kwargs["stdout"].write(b"Results: twenty cases.\f")
+                return SimpleNamespace(returncode=0)
             run.side_effect = call
             self.assertEqual(ocr_pdf_page("source.pdf", 1, languages="eng"),
                              "Results: twenty cases.")
@@ -217,11 +218,15 @@ class ExternalPDFProcessTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "65-second"):
                 ocr_pdf_page("source.pdf", 1, languages="eng")
             run.side_effect = None
-            run.return_value = SimpleNamespace(returncode=0, stdout=b"A"*100)
+            run.side_effect = lambda argv, **kw: (
+                kw["stdout"].write(b"A"*100), SimpleNamespace(returncode=0)
+            )[1]
             with patch("sra.pdf_visual.MAX_OCR_PAGE_CHARACTERS", 10):
                 with self.assertRaisesRegex(ValueError, "page-text size"):
                     ocr_pdf_page("source.pdf", 1, languages="eng")
-            run.return_value = SimpleNamespace(returncode=0, stdout=b"A"*30)
+            run.side_effect = lambda argv, **kw: (
+                kw["stdout"].write(b"A"*30), SimpleNamespace(returncode=0)
+            )[1]
             with patch("sra.pdf_visual.MAX_OCR_PAGE_CHARACTERS", 10):
                 with self.assertRaisesRegex(ValueError, "OCR text exceeded"):
                     ocr_pdf_page("source.pdf", 1, languages="eng")

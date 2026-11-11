@@ -215,16 +215,45 @@ def load_document(
                 text_for_page = native
                 ocr_chars = 0
                 method = "native"
-                if pdf_ocr_mode == "all" or (
-                    pdf_ocr_mode == "missing" and len("".join(native.split())) < 20
-                ):
+                # Pages can contain raster text even when a digital heading is available.
+                # Enumerate embedded images, and do not equate native text with full page coverage.
+                try:
+                    embedded_image_count = len(getattr(page, "images", ()))
+                except (AttributeError, TypeError, ValueError) as exc:
+                    if pdf_ocr_mode == "missing":
+                        raise ValueError("PDF page image inventory could not be inspected.") from exc
+                    embedded_image_count = 0
+                should_ocr = pdf_ocr_mode == "all" or (
+                    pdf_ocr_mode == "missing" and (
+                        len("".join(native.split())) < 20 or embedded_image_count > 0
+                    )
+                )
+                if should_ocr:
                     if len(ocr_pages) >= MAX_OCR_PAGES:
                         raise ValueError("PDF exceeds the 100-page OCR limit; no pages were silently skipped.")
                     scanned = ocr_pdf_page(snapshot, number, languages=ocr_languages)
                     ocr_pages.append(number)
                     ocr_chars = len(scanned)
                     if scanned:
-                        text_for_page, method = scanned, "tesseract"
+                        if native.strip() and embedded_image_count:
+                            # Keep the original digital text and add only OCR lines absent
+                            # from the native layer; this remains heuristic, not proof of
+                            # complete graphical semantics.
+                            def normalized(line: str) -> str:
+                                return "".join(ch.casefold() for ch in line if ch.isalnum())
+
+                            known = {normalized(line) for line in native.splitlines()}
+                            additional = [
+                                line for line in scanned.splitlines()
+                                if normalized(line) and normalized(line) not in known
+                            ]
+                            if additional:
+                                text_for_page = native + "\n\n[OCR image text]\n" + "\n".join(additional)
+                                method = "native+tesseract"
+                            else:
+                                method = "native+ocr_checked"
+                        else:
+                            text_for_page, method = scanned, "tesseract"
                 if not text_for_page.strip():
                     no_text_pages.append(number)
                     method = "no_text"
@@ -234,6 +263,7 @@ def load_document(
                     "method": method,
                     "native_characters": len(native),
                     "ocr_characters": ocr_chars,
+                    "embedded_image_count": embedded_image_count,
                     "ocr_attempted": number in ocr_pages,
                     "text_sha256": hashlib.sha256(text_for_page.encode("utf-8")).hexdigest(),
                     "needs_visual_review": True,
