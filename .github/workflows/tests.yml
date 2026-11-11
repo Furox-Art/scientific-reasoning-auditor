@@ -43,7 +43,9 @@ jobs:
         run: python -m twine check "$RUNNER_TEMP"/sra-dist/*
 
   real-pdf-ocr:
-    runs-on: ubuntu-latest
+    # Use a stable LTS package repository rather than the moving ubuntu-latest.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
@@ -51,8 +53,13 @@ jobs:
           python-version: "3.12"
       - name: Install independent local PDF OCR engines
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng poppler-utils fonts-dejavu-core
+          set -euo pipefail
+          # Fail quickly on DNS outages rather than hanging indefinitely on apt.
+          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng poppler-utils fonts-dejavu-core
+          command -v tesseract
+          command -v pdftoppm
+          tesseract --list-langs | grep -x eng
       - name: Install synthetic fixture generation dependencies
         run: python -m pip install -e ".[pdf]" Pillow reportlab
       - name: Verify actual scanned PDF recovery and page provenance
