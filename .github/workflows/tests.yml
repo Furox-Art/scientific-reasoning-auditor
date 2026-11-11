@@ -52,11 +52,23 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install independent local PDF OCR engines
+        timeout-minutes: 6
         run: |
           set -euo pipefail
-          # Fail quickly on DNS outages rather than hanging indefinitely on apt.
-          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
-          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng poppler-utils fonts-dejavu-core
+          # Bypass intermittent azure.archive.ubuntu.com / mirror+file stalls.
+          # Keep Ubuntu's signed APT sources and the official archive domain.
+          if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then
+            sudo sed -i \
+              -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu#g' \
+              -e 's#http://azure.archive.ubuntu.com/ubuntu#https://archive.ubuntu.com/ubuntu#g' \
+              /etc/apt/sources.list.d/ubuntu.sources
+          fi
+          getent ahostsv4 archive.ubuntu.com >/dev/null || {
+            echo 'Ubuntu archive DNS is unavailable on this runner; OCR installation cannot proceed.' >&2
+            exit 1
+          }
+          sudo timeout 180s apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 update
+          sudo timeout 180s apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng poppler-utils fonts-dejavu-core
           command -v tesseract
           command -v pdftoppm
           tesseract --list-langs | grep -x eng
