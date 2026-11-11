@@ -51,6 +51,12 @@ export function run(args: string[], options?: RunOptions): Promise<CommandResult
 export function audit(input: string, options?: AuditOptions): Promise<CommandResult>;
 export function createReviewTemplate(input: string, options?: ReviewTemplateOptions): Promise<CommandResult>;
 export function reviewModel(input: string, options: ModelReviewOptions): Promise<CommandResult>;
+
+/** Model-assisted analysis of every extracted-text chunk, not a factual certification. */
+export interface PaperReviewOptions extends ModelReviewOptions {
+  chunkChars?: number;
+}
+export function paperReview(input: string, options: PaperReviewOptions): Promise<CommandResult>;
 export function verifyStats(input: string, options?: OutputOptions): Promise<CommandResult>;
 export function writingAudit(input: string, options?: WritingAuditOptions): Promise<CommandResult>;
 

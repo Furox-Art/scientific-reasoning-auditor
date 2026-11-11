@@ -193,6 +193,26 @@ function reviewModel(input, options = {}) {
   return run(args, options);
 }
 
+function paperReview(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  if (typeof options.model !== 'string' || !options.model.trim()) {
+    return Promise.reject(new TypeError('options.model is required'));
+  }
+  if (options.chunkChars !== undefined &&
+      (!Number.isSafeInteger(options.chunkChars) || options.chunkChars < 2000 || options.chunkChars > 20000)) {
+    return Promise.reject(new TypeError('chunkChars must be an integer from 2000 to 20000'));
+  }
+  const args = ['paper-review', input, '--model', options.model];
+  if (options.baseUrl) args.push('--base-url', options.baseUrl);
+  if (options.apiKeyEnv) args.push('--api-key-env', options.apiKeyEnv);
+  if (options.timeout !== undefined) args.push('--timeout', String(options.timeout));
+  if (options.chunkChars !== undefined) args.push('--chunk-chars', String(options.chunkChars));
+  args.push('--out', options.out || 'paper-review');
+  return run(args, options);
+}
+
 function verifyStats(input, options = {}) {
   if (typeof input !== 'string' || input.length === 0) {
     return Promise.reject(new TypeError('input must be a non-empty file path'));
@@ -373,6 +393,7 @@ module.exports = {
   audit,
   createReviewTemplate,
   reviewModel,
+  paperReview,
   verifyStats,
   writingAudit,
   verifyDoi,

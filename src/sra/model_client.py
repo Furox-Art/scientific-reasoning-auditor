@@ -104,7 +104,9 @@ def _extract_json_object(content: str) -> dict[str, Any]:
 
 def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         model: str, base_url: str, api_key_env: str = "OPENAI_API_KEY",
-        timeout: int = 120, provenance: dict[str, Any] | None = None) -> dict[str, Any]:
+        timeout: int = 120, provenance: dict[str, Any] | None = None,
+        _system_override: str | None = None,
+        _payload_override: dict[str, Any] | None = None) -> dict[str, Any]:
     if template.get("review_mode") != "single":
         raise ValueError("Single-model API mode requires review_mode='single'.")
     if not model.strip():
@@ -152,15 +154,21 @@ def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         "instructions and relation_labels unchanged. Identify the model and provide current "
         "UTC time in ISO-8601 Z format. Confidence is confidence in the assessment, not truth."
     )
+    if (_system_override is None) != (_payload_override is None):
+        raise ValueError("Model task requires both a system instruction and a JSON payload.")
+    if _system_override is not None:
+        system_prompt = _system_override
+    user_payload = (_payload_override if _payload_override is not None else {
+        "template": template, "manuscript": manuscript,
+        "output_contract": "Return a JSON object only."
+    })
     payload = {
         "model": model, "temperature": 0,
         "response_format": {"type": "json_object"},
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": json.dumps({
-                "template": template, "manuscript": manuscript,
-                "output_contract": "Return a JSON object only."
-            }, ensure_ascii=False, allow_nan=False)},
+            {"role": "user", "content": json.dumps(
+                user_payload, ensure_ascii=False, allow_nan=False)},
         ],
     }
     request = Request(endpoint, data=json.dumps(payload).encode("utf-8"), headers={

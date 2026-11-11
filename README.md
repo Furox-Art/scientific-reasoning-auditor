@@ -12,6 +12,28 @@ The v0.8.0 release includes the academic-writing, discipline-review, DOI, PMC be
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 
+### Detailed full-paper reading, explanation, and scientific critique (repository main)
+
+The `paper-review` command sends **every extractable character** of a manuscript to an explicitly configured OpenAI-compatible model in ordered, non-overlapping chunks, checks that source quotations actually occur in the corresponding chunk, and produces a whole-paper synthesis plus a section-by-section scientific criticism. It also includes the project's independent rule-based warning signals. A failed chunk, invented quote, invalid model response, or context/size limit produces an error rather than a falsely "complete" review.
+
+```bash
+# Install the source checkout; this feature is not yet guaranteed in published PyPI/npm versions.
+python3 -m pip install -e ".[pdf,statistics]"
+
+# Explicit network/model use. The document text is sent to this configured API.
+export OPENAI_API_KEY="YOUR_KEY"
+sra paper-review manuscript.pdf --model YOUR_MODEL_ID --out reports/paper-review
+
+# For long manuscripts, increase chunk size (2,000–20,000 extracted characters).
+sra paper-review manuscript.md --model YOUR_MODEL_ID --chunk-chars 20000 --out reports/paper-review
+```
+
+Outputs: `reports/paper-review.json` and `reports/paper-review.md`. JSON contains the source SHA-256, extracted-text SHA-256, parser, per-chunk spans and hashes, detailed explanations, severity-ranked critiques with verified source quotations and line references, overall assessment, deterministic screening findings, and model interaction provenance. The model is invoked **once per chunk plus once for synthesis**; costs, token limits and API data policies depend on the selected provider.
+
+**Limitations:** The software can verify complete *text extraction coverage* and verbatim quote presence, not whether the model understood the entire manuscript or made scientifically correct interpretations. Image-only PDFs, formula images, figures, datasets, tables that do not extract as text, appendices and external references may be unavailable. The input is limited to 20 MiB, extracted text to 480,000 characters, and at most 40 chunks. Limits cause an explicit failure, not hidden truncation. Independent expert review, source retrieval and original-data reanalysis are still required for strong scientific judgments. Do not send unpublished or confidential papers without verifying provider permissions.
+
+Node.js adapter users can call `sra.paperReview('manuscript.md', { model: 'YOUR_MODEL_ID', out: 'reports/paper-review' })` with a Python engine installed from this source checkout.
+
 ### Implemented
 
 - Read Markdown and UTF-8 text manuscripts; optional PDF text extraction.

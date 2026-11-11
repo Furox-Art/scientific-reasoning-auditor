@@ -1,0 +1,24 @@
+'use strict';
+
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const sra = require('../index.js');
+
+test('paperReview is exposed by the npm adapter', () => {
+  assert.equal(typeof sra.paperReview, 'function');
+});
+
+test('paperReview requires a file and an explicit model', async () => {
+  await assert.rejects(sra.paperReview('', { model: 'mock' }), /non-empty file path/);
+  await assert.rejects(sra.paperReview('paper.md', {}), /model is required/);
+  await assert.rejects(sra.paperReview('paper.md', { model: ' ' }), /model is required/);
+});
+
+test('paperReview refuses invalid chunk sizes before starting Python', async () => {
+  for (const chunkChars of [0, 1999, 20001, 3.14, true]) {
+    await assert.rejects(
+      sra.paperReview('paper.md', { model: 'mock', chunkChars }),
+      /chunkChars must be an integer/,
+    );
+  }
+});

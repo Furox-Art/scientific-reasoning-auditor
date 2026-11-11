@@ -6,6 +6,7 @@ from pathlib import Path
 from sra.audit import audit_file, audit_parsed_document, build_review_template
 from sra.document import load_document
 from sra.model_client import request_single_model_review
+from sra.paper_review import review_paper, paper_review_markdown
 from sra.semantic_review import build_semantic_review_template, validate_semantic_review
 from sra.report import to_markdown
 from sra.stats import verify_stats_file
@@ -93,6 +94,15 @@ def main() -> int:
     model_review.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key.")
     model_review.add_argument("--timeout", type=int, default=120, help="Request timeout in seconds.")
     model_review.add_argument("--out", default="semantic-review-completed.json", help="Output JSON path.")
+
+    paper = sub.add_parser("paper-review", help="Read all extracted paper text, explain it in detail, and critique scientific claims using a model.")
+    paper.add_argument("input", help="Paper .md, .txt or optional .pdf file.")
+    paper.add_argument("--model", required=True, help="OpenAI-compatible model identifier.")
+    paper.add_argument("--base-url", default="https://api.openai.com/v1")
+    paper.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    paper.add_argument("--timeout", type=int, default=120)
+    paper.add_argument("--chunk-chars", type=int, default=12000)
+    paper.add_argument("--out", default="paper-review", help="JSON and Markdown output prefix.")
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
     stats.add_argument("input", help="JSON input for Welch, one-sample/paired t, two-proportion z, chi-square or Fisher exact.")
@@ -217,6 +227,31 @@ def main() -> int:
     science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
+    if args.command == "paper-review":
+        prefix = Path(args.out)
+        json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")
+        _reject_input_overwrite(parser, [args.input], [json_path, md_path])
+        if _same_document(json_path, md_path):
+            parser.error("Paper review JSON and Markdown outputs must be separate files.")
+        try:
+            result = review_paper(
+                args.input, model=args.model, base_url=args.base_url,
+                api_key_env=args.api_key_env, timeout=args.timeout,
+                chunk_chars=args.chunk_chars,
+            )
+            serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+            markdown = paper_review_markdown(result)
+        except (OSError, ValueError, RuntimeError, TypeError) as exc:
+            parser.error(str(exc))
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        json_path.write_text(serialized, encoding="utf-8")
+        md_path.write_text(markdown, encoding="utf-8")
+        print(f"Paper extracted text analyzed: {result['covered_characters']}/{result['extracted_characters']} characters in {result['chunks_reviewed']} chunks.")
+        print("Source quotes are checked; scientific interpretations remain advisory.")
+        print(f"JSON: {json_path.resolve()}")
+        print(f"Markdown: {md_path.resolve()}")
+        return 0
+
     if args.command == "benchmark-language":
         try:
             result = evaluate_arxiv_edit_pairs(
