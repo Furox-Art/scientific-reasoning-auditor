@@ -9,6 +9,7 @@ import base64
 import os
 import re
 import shutil
+import signal
 import subprocess
 import tempfile
 from pathlib import Path
@@ -33,6 +34,36 @@ def _resource_limiter(max_file_bytes: int, max_memory_bytes: int, cpu_seconds: i
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
 
     return limit_child
+
+
+def _run_limited(
+    command: list[str], *, stdout: object, timeout: float,
+    preexec_fn: object,
+) -> subprocess.CompletedProcess:
+    """Run a POSIX subprocess and kill its entire process group on exit.
+
+    A subprocess.run timeout only kills the direct child; a renderer could
+    leave forked helpers alive. With start_new_session, all inherited group
+    members are terminated even after a normal parent exit. This does not
+    include deliberately detached processes in a different session.
+    """
+    process = subprocess.Popen(
+        command, stdout=stdout, stderr=subprocess.DEVNULL,
+        start_new_session=True, preexec_fn=preexec_fn,
+    )
+    try:
+        process.wait(timeout=timeout)
+    finally:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        try:
+            process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+    return subprocess.CompletedProcess(command, process.returncode)
 
 
 def validate_ocr_settings(mode: str, languages: str) -> None:
@@ -67,9 +98,8 @@ def render_pdf_page(
             command.extend(["-gray", "-png"])
         command.extend([str(pdf_path), str(stem)])
         try:
-            result = subprocess.run(
-                command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                timeout=45, check=False, start_new_session=True,
+            result = _run_limited(
+                command, stdout=subprocess.DEVNULL, timeout=45,
                 preexec_fn=_resource_limiter(MAX_PAGE_IMAGE_BYTES, 1536 * 1024 * 1024, 40),
             )
         except subprocess.TimeoutExpired as exc:
@@ -103,10 +133,9 @@ def ocr_pdf_page(pdf_path: str | Path, page_number: int, *, languages: str) -> s
         output_path = Path(directory) / "ocr-output.bin"
         try:
             with output_path.open("w+b") as output:
-                result = subprocess.run(
+                result = _run_limited(
                     [exe, str(picture), "stdout", "-l", languages, "--psm", "3"],
-                    stdout=output, stderr=subprocess.DEVNULL, timeout=65, check=False,
-                    start_new_session=True,
+                    stdout=output, timeout=65,
                     preexec_fn=_resource_limiter(
                         MAX_OCR_PAGE_CHARACTERS * 4, 1536 * 1024 * 1024, 60,
                     ),

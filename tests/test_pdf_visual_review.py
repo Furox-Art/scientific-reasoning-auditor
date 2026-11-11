@@ -139,7 +139,7 @@ class OCRDocumentTests(unittest.TestCase):
 class ExternalPDFProcessTests(unittest.TestCase):
     def test_render_success_uses_bounded_command(self):
         with patch("sra.pdf_visual.shutil.which", return_value="/usr/bin/pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run:
             def call(argv, **kwargs):
                 self.assertNotIn("shell", kwargs)
@@ -153,7 +153,7 @@ class ExternalPDFProcessTests(unittest.TestCase):
 
     def test_color_render_uses_jpeg_and_max_scale(self):
         with patch("sra.pdf_visual.shutil.which", return_value="/usr/bin/pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run:
             def call(argv, **kwargs):
                 self.assertIn("-jpegopt", argv)
@@ -171,23 +171,23 @@ class ExternalPDFProcessTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "pdftoppm"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", return_value=SimpleNamespace(returncode=1)
+            "sra.pdf_visual._run_limited", return_value=SimpleNamespace(returncode=1)
         ):
             with self.assertRaisesRegex(RuntimeError, "rendering failed"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", return_value=SimpleNamespace(returncode=0)
+            "sra.pdf_visual._run_limited", return_value=SimpleNamespace(returncode=0)
         ):
             with self.assertRaisesRegex(RuntimeError, "did not produce"):
                 render_pdf_page("paper.pdf", 1)
         from subprocess import TimeoutExpired
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run", side_effect=TimeoutExpired("pdftoppm", 45)
+            "sra.pdf_visual._run_limited", side_effect=TimeoutExpired("pdftoppm", 45)
         ):
             with self.assertRaisesRegex(RuntimeError, "45-second"):
                 render_pdf_page("paper.pdf", 1)
         with patch("sra.pdf_visual.shutil.which", return_value="pdftoppm"), patch(
-            "sra.pdf_visual.subprocess.run"
+            "sra.pdf_visual._run_limited"
         ) as run, patch("sra.pdf_visual.MAX_PAGE_IMAGE_BYTES", 2):
             def large(argv, **kwargs):
                 Path(argv[-1] + ".png").write_bytes(b"ABCD")
@@ -199,7 +199,7 @@ class ExternalPDFProcessTests(unittest.TestCase):
     def test_ocr_command_success_fail_timeout_and_size(self):
         with patch("sra.pdf_visual.shutil.which", return_value="tesseract"), patch(
             "sra.pdf_visual.render_pdf_page", return_value=(b"IMG", "image/png")
-        ), patch("sra.pdf_visual.subprocess.run") as run:
+        ), patch("sra.pdf_visual._run_limited") as run:
             def call(argv, **kwargs):
                 self.assertEqual(kwargs["timeout"], 65)
                 self.assertEqual(argv[-4:], ["-l", "eng", "--psm", "3"])

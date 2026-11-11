@@ -156,7 +156,7 @@ def _validated_chunk(value: Any, part: dict[str, Any]) -> dict[str, Any]:
             "recommendation": _text(item.get("recommendation"), "recommendation"),
             "quote": quote,
             "severity": severity,
-            "line": part["start_line"] + part["text"].count("\n", 0, part["text"].index(quote)),
+            "line": (part["start_line"] + part["text"].count("\n", 0, part["text"].index(quote))) if len(occurrences) == 1 else None,
         })
     return {
         "chunk_id": part["chunk_id"],
@@ -394,8 +394,9 @@ def paper_review_markdown(report: dict[str, Any]) -> str:
                 location = "repeated quote (location ambiguous), "
             else:
                 location = ""
+            line_label = f"line {criticism['line']}" if isinstance(criticism.get("line"), int) else "line ambiguous"
             lines.extend([
-                f"- **{criticism['severity'].upper()} · {location}line {criticism['line']}:** "
+                f"- **{criticism['severity'].upper()} · {location}{line_label}:** "
                 f"{_safe_md(criticism['issue'])}",
                 f"    - Evidence: {_safe_md(criticism['quote'])}",
                 f"    - Reason: {_safe_md(criticism['reason'])}",

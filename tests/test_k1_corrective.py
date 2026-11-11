@@ -69,6 +69,27 @@ class MixedPageOCRTests(unittest.TestCase):
             "native+ocr_checked",
         )
 
+    def test_mathematical_symbol_differences_in_ocr_are_not_silently_dropped(self):
+        scientific_cases = [
+            ("p < 0.05", "p > 0.05"),
+            ("x = 0", "x ≠ 0"),
+            ("15 ± 3", "15 − 3"),
+            ("a × b", "a ÷ b"),
+            ("risk = 0.5", "risk = −0.5"),
+        ]
+        for native_value, ocr_value in scientific_cases:
+            with self.subTest(native=native_value, ocr=ocr_value):
+                self.native = "This synthetic scientific manuscript states " + native_value + " clearly."
+                visual = "This synthetic scientific manuscript states " + ocr_value + " clearly."
+                with patch.dict(sys.modules, {"pypdf": self.fake_reader()}), patch(
+                    "sra.pdf_visual.ocr_pdf_page", return_value=visual,
+                ):
+                    document = load_document(self.path, pdf_ocr_mode="missing")
+                self.assertIn(self.native, document.text)
+                self.assertIn(visual, document.text)
+                self.assertEqual(document.extraction_details["page_records"][0]["method"],
+                                 "native+tesseract")
+
     def test_no_images_and_good_native_text_avoids_ocr(self):
         with patch.dict(sys.modules, {"pypdf": self.fake_reader(image_count=0)}), patch(
             "sra.pdf_visual.ocr_pdf_page"
@@ -131,6 +152,16 @@ class PhysicalPageQuoteTests(unittest.TestCase):
         self.assertIsNone(evidence["source_page"])
         self.assertEqual(evidence["source_end_char_offset"], len(quote))
         self.assertIn("pages 1, 2", self.markdown(evidence))
+
+    def test_repeated_quote_does_not_claim_specific_line(self):
+        quote = "A repeated scientific observation was made."
+        part = _chunks(quote + "\n" + quote, 2000)[0]
+        critique = self.review(quote, part)
+        self.assertEqual(critique["quote_ambiguity_count"], 2)
+        self.assertIsNone(critique["line"])
+        markdown = self.markdown(critique)
+        self.assertIn("line ambiguous", markdown)
+        self.assertNotIn("line 1:", markdown)
 
     def test_repeated_quote_is_not_misidentified_as_unique(self):
         quote = "A repeated scientific observation was made."

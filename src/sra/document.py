@@ -240,7 +240,10 @@ def load_document(
                             # from the native layer; this remains heuristic, not proof of
                             # complete graphical semantics.
                             def normalized(line: str) -> str:
-                                return "".join(ch.casefold() for ch in line if ch.isalnum())
+                                # Preserve scientific operators, signs and units.
+                                # Deduplicate only changes in case and whitespace,
+                                # never differences such as p<0.05 vs p>0.05.
+                                return " ".join(line.casefold().split())
 
                             known = {normalized(line) for line in native.splitlines()}
                             additional = [
