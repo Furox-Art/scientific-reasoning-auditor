@@ -42,9 +42,7 @@ sra = "sra.cli:main"
 where = ["src"]
 
 [tool.coverage.report]
-# The suite covers every statement: `coverage run --source=src/sra -m unittest
-# discover -s tests` reports 3554 statements, 0 missed on this tree. The gate
-# turns that measurement into a contract. Branch coverage is deliberately not
-# enabled here: it was never measured, so turning it on could lower the number
-# for reasons unrelated to this change.
+# Enforce complete statement coverage across src/sra with every CI run.
+# The actual statement count is determined by the current source tree.
+# Branch coverage is not claimed or enforced by this configuration.
 fail_under = 100

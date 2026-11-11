@@ -55,6 +55,10 @@ export function reviewModel(input: string, options: ModelReviewOptions): Promise
 /** Model-assisted analysis of every extracted-text chunk, not a factual certification. */
 export interface PaperReviewOptions extends ModelReviewOptions {
   chunkChars?: number;
+  ocrMode?: 'off' | 'missing' | 'all';
+  ocrLanguages?: string;
+  /** Sends *every* PDF page image to a vision-capable model. */
+  visualPages?: boolean;
 }
 export function paperReview(input: string, options: PaperReviewOptions): Promise<CommandResult>;
 export function verifyStats(input: string, options?: OutputOptions): Promise<CommandResult>;

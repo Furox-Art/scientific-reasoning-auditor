@@ -209,6 +209,23 @@ function paperReview(input, options = {}) {
   if (options.apiKeyEnv) args.push('--api-key-env', options.apiKeyEnv);
   if (options.timeout !== undefined) args.push('--timeout', String(options.timeout));
   if (options.chunkChars !== undefined) args.push('--chunk-chars', String(options.chunkChars));
+  if (options.ocrMode !== undefined) {
+    if (!['off', 'missing', 'all'].includes(options.ocrMode)) {
+      return Promise.reject(new TypeError('ocrMode must be off, missing or all'));
+    }
+    args.push('--ocr-mode', options.ocrMode);
+  }
+  if (options.ocrLanguages !== undefined) {
+    if (typeof options.ocrLanguages !== 'string' ||
+        !/^[a-z]{3}(?:\+[a-z]{3}){0,3}$/.test(options.ocrLanguages)) {
+      return Promise.reject(new TypeError('ocrLanguages must contain Tesseract codes such as eng+tur'));
+    }
+    args.push('--ocr-languages', options.ocrLanguages);
+  }
+  if (options.visualPages !== undefined && typeof options.visualPages !== 'boolean') {
+    return Promise.reject(new TypeError('visualPages must be a boolean'));
+  }
+  if (options.visualPages) args.push('--visual-pages');
   args.push('--out', options.out || 'paper-review');
   return run(args, options);
 }

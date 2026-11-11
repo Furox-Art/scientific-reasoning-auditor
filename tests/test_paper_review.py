@@ -121,7 +121,9 @@ class PaperReviewTests(unittest.TestCase):
             {**good, "critiques": [{}] * 21},
             {**good, "critiques": ["not an object"]},
             {**good, "critiques": [{**good["critiques"][0], "severity": "critical"}]},
-            {**good, "critiques": [{**good["critiques"][0], "quote": "fabricated source"}]},
+            {**good, "critiques": [{**good["critiques"][0], "quote": "fabricated source that is not in manuscript"}]},
+            {**good, "critiques": [{**good["critiques"][0], "quote": "A"}]},
+            {**good, "critiques": [{**good["critiques"][0], "quote": "Short evidence"}]},
             {**good, "critiques": [{**good["critiques"][0], "reason": ""}]},
             {**good, "critiques": [{**good["critiques"][0], "issue": ""}]},
             {**good, "critiques": [{**good["critiques"][0], "recommendation": ""}]},
@@ -164,7 +166,7 @@ class PaperReviewTests(unittest.TestCase):
         def wrong_quote(template, manuscript, **kwargs):
             value = stub_model(template, manuscript, **kwargs)
             if kwargs["_payload_override"]["task"] != "whole_manuscript_synthesis":
-                value["critiques"][0]["quote"] = "UNSUPPORTED QUOTE"
+                value["critiques"][0]["quote"] = "UNSUPPORTED QUOTE THAT DOES NOT APPEAR IN TEXT"
             return value
         with patch("sra.paper_review.request_single_model_review", side_effect=wrong_quote):
             with self.assertRaisesRegex(ValueError, "absent"):

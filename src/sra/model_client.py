@@ -106,7 +106,10 @@ def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         model: str, base_url: str, api_key_env: str = "OPENAI_API_KEY",
         timeout: int = 120, provenance: dict[str, Any] | None = None,
         _system_override: str | None = None,
-        _payload_override: dict[str, Any] | None = None) -> dict[str, Any]:
+        _payload_override: dict[str, Any] | None = None,
+        _image_data_url: str | None = None,
+        _strict_completion: bool = False,
+        _max_output_tokens: int | None = None) -> dict[str, Any]:
     if template.get("review_mode") != "single":
         raise ValueError("Single-model API mode requires review_mode='single'.")
     if not model.strip():
@@ -162,15 +165,31 @@ def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         "template": template, "manuscript": manuscript,
         "output_contract": "Return a JSON object only."
     })
+    if _image_data_url is not None:
+        if (_payload_override is None or not isinstance(_image_data_url, str)
+                or not _image_data_url.startswith("data:image/jpeg;base64,")
+                or len(_image_data_url) > 8 * 1024 * 1024):
+            raise ValueError("Vision review requires a bounded JPEG data URL and model payload.")
+    if _max_output_tokens is not None and (
+        type(_max_output_tokens) is not int or not 128 <= _max_output_tokens <= 8192
+    ):
+        raise ValueError("Output token limit must be an integer from 128 to 8192.")
+    user_content = json.dumps(user_payload, ensure_ascii=False, allow_nan=False)
+    if _image_data_url is not None:
+        user_content = [
+            {"type": "text", "text": user_content},
+            {"type": "image_url", "image_url": {"url": _image_data_url, "detail": "high"}},
+        ]
     payload = {
         "model": model, "temperature": 0,
         "response_format": {"type": "json_object"},
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": json.dumps(
-                user_payload, ensure_ascii=False, allow_nan=False)},
+            {"role": "user", "content": user_content},
         ],
     }
+    if _max_output_tokens is not None:
+        payload["max_tokens"] = _max_output_tokens
     request = Request(endpoint, data=json.dumps(payload).encode("utf-8"), headers={
         "Authorization": f"Bearer {api_key}", "Content-Type": "application/json"
     }, method="POST")
@@ -201,6 +220,15 @@ def request_single_model_review(template: dict[str, Any], manuscript: str, *,
         raise ValueError("Model API response lacks choices[0].message.content.") from exc
     if not isinstance(content, str):
         raise ValueError("Model API message content must be a string.")
+    if _strict_completion:
+        choice = body["choices"][0]
+        if choice.get("finish_reason") != "stop":
+            raise ValueError("Model API did not confirm complete generation (finish_reason != stop).")
+        response_model = body.get("model")
+        if not isinstance(response_model, str) or not (
+            response_model == model or response_model.startswith(model + "-")
+        ):
+            raise ValueError("Model API response identity does not match the requested model.")
     review = _extract_json_object(content)
     if provenance is not None:
         provenance.update({

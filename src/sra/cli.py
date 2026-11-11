@@ -102,6 +102,9 @@ def main() -> int:
     paper.add_argument("--api-key-env", default="OPENAI_API_KEY")
     paper.add_argument("--timeout", type=int, default=120)
     paper.add_argument("--chunk-chars", type=int, default=12000)
+    paper.add_argument("--ocr-mode", choices=("off", "missing", "all"), default="missing")
+    paper.add_argument("--ocr-languages", default="eng", help="Installed Tesseract language codes, e.g. eng+tur.")
+    paper.add_argument("--visual-pages", action="store_true", help="Opt-in: send each PDF page image to the selected vision-capable model.")
     paper.add_argument("--out", default="paper-review", help="JSON and Markdown output prefix.")
 
     stats = sub.add_parser("verify-stats", help="Independently recalculate supported statistical summaries.")
@@ -237,7 +240,8 @@ def main() -> int:
             result = review_paper(
                 args.input, model=args.model, base_url=args.base_url,
                 api_key_env=args.api_key_env, timeout=args.timeout,
-                chunk_chars=args.chunk_chars,
+                chunk_chars=args.chunk_chars, pdf_ocr_mode=args.ocr_mode,
+                ocr_languages=args.ocr_languages, visual_pages=args.visual_pages,
             )
             serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
             markdown = paper_review_markdown(result)

@@ -1,6 +1,8 @@
 import hashlib
 import re
-from dataclasses import dataclass
+import tempfile
+from io import BytesIO
+from dataclasses import dataclass, field
 from pathlib import Path
 
 MAX_DOCUMENT_BYTES = 32 * 1024 * 1024
@@ -18,6 +20,7 @@ class ParsedDocument:
     input_format: str
     source_size_bytes: int
     parser_backend: str
+    extraction_details: dict = field(default_factory=dict)
 
 
 HEADING = re.compile(r"^\s{0,3}#{1,6}\s+(.+?)\s*$")
@@ -157,7 +160,13 @@ def _split_sections(text: str, allow_plain: bool = False) -> tuple[dict[str, str
     return sections, start_lines
 
 
-def load_document(path: str | Path) -> ParsedDocument:
+def load_document(
+    path: str | Path, *, pdf_ocr_mode: str = "off", ocr_languages: str = "eng",
+) -> ParsedDocument:
+    from sra.pdf_visual import validate_ocr_settings
+
+    validate_ocr_settings(pdf_ocr_mode, ocr_languages)
+    extraction_details: dict = {}
     file_path = Path(path).expanduser().resolve()
     if not file_path.is_file():
         raise FileNotFoundError(f"Input file not found: {file_path}")
@@ -173,31 +182,88 @@ def load_document(path: str | Path) -> ParsedDocument:
             from pypdf import PdfReader
         except ImportError as exc:
             raise RuntimeError(
-                "PDF support is optional. Install it with: pip install -e '.[pdf]'"
+                "PDF support is optional. Install it with: pip install -e '[pdf]'"
             ) from exc
-        reader = PdfReader(str(file_path))
-        if len(reader.pages) > MAX_PDF_PAGES:
+        from sra.pdf_visual import MAX_OCR_PAGES, ocr_pdf_page
+
+        # Use the exact bounded bytes whose digest is recorded. Do not open the
+        # user-controlled PDF path a second time when extracting the text layer.
+        reader = PdfReader(BytesIO(raw))
+        page_count = len(reader.pages)
+        if page_count > MAX_PDF_PAGES:
             raise ValueError("PDF exceeds the 500-page processing limit.")
-        # Layout-aware extraction keeps table rows on one line with the columns
-        # still separated by runs of spaces. Plain extraction collapses that, and
-        # a table cell then cannot be told apart from the next word, which is how
-        # reported statistics ended up invisible to the audit.
+        if pdf_ocr_mode == "all" and page_count > MAX_OCR_PAGES:
+            raise ValueError("PDF exceeds the 100-page OCR limit; no pages were silently skipped.")
         pages: list[str] = []
+        page_information: list[dict] = []
+        no_text_pages: list[int] = []
+        ocr_pages: list[int] = []
         extracted_characters = 0
         layout_used = False
-        for page in reader.pages:
-            try:
-                pages.append(page.extract_text(extraction_mode="layout") or "")
-                layout_used = True
-            except (TypeError, ValueError):
-                # Older pypdf releases have no layout mode; the manifest records
-                # which one produced the text so a reader can tell them apart.
-                pages.append(page.extract_text() or "")
-            extracted_characters += len(pages[-1])
-            if extracted_characters > MAX_EXTRACTED_TEXT_CHARS:
-                raise ValueError("PDF extracted text exceeds the 4,000,000-character limit.")
+        with tempfile.TemporaryDirectory(prefix="sra-pdf-snapshot-") as folder:
+            # OCR operates on a private, immutable-copy snapshot rather than the
+            # original path, whose bytes could change after the source hash.
+            snapshot = Path(folder) / "source.pdf"
+            if pdf_ocr_mode != "off":
+                snapshot.write_bytes(raw)
+            for number, page in enumerate(reader.pages, 1):
+                try:
+                    native = page.extract_text(extraction_mode="layout") or ""
+                    layout_used = True
+                except (TypeError, ValueError):
+                    native = page.extract_text() or ""
+                text_for_page = native
+                ocr_chars = 0
+                method = "native"
+                if pdf_ocr_mode == "all" or (
+                    pdf_ocr_mode == "missing" and len("".join(native.split())) < 20
+                ):
+                    if len(ocr_pages) >= MAX_OCR_PAGES:
+                        raise ValueError("PDF exceeds the 100-page OCR limit; no pages were silently skipped.")
+                    scanned = ocr_pdf_page(snapshot, number, languages=ocr_languages)
+                    ocr_pages.append(number)
+                    ocr_chars = len(scanned)
+                    if scanned:
+                        text_for_page, method = scanned, "tesseract"
+                if not text_for_page.strip():
+                    no_text_pages.append(number)
+                    method = "no_text"
+                pages.append(text_for_page)
+                page_information.append({
+                    "page": number,
+                    "method": method,
+                    "native_characters": len(native),
+                    "ocr_characters": ocr_chars,
+                    "ocr_attempted": number in ocr_pages,
+                    "text_sha256": hashlib.sha256(text_for_page.encode("utf-8")).hexdigest(),
+                    "needs_visual_review": True,
+                })
+                extracted_characters += len(text_for_page)
+                if extracted_characters > MAX_EXTRACTED_TEXT_CHARS:
+                    raise ValueError("PDF extracted text exceeds the 4,000,000-character limit.")
+        offset = 0
+        for index, page_text in enumerate(pages):
+            page_information[index]["start_char"] = offset
+            offset += len(page_text)
+            page_information[index]["end_char"] = offset
+            if index + 1 < len(pages):
+                offset += 2  # separator inserted by the join below
         text = "\n\n".join(pages)
         parser_backend = "pypdf-layout" if layout_used else "pypdf"
+        if ocr_pages:
+            parser_backend += "+tesseract"
+        extraction_details = {
+            "pdf_page_count": page_count,
+            "ocr_mode": pdf_ocr_mode,
+            "ocr_languages": ocr_languages if ocr_pages else None,
+            "ocr_pages": ocr_pages,
+            "pages_without_extractable_text": no_text_pages,
+            "physical_page_text_coverage": (
+                "all_pages_with_text" if not no_text_pages else "incomplete"
+            ),
+            "page_records": page_information,
+            "image_and_chart_semantics_verified": False,
+        }
     elif suffix in {".md", ".markdown", ".txt"}:
         text = raw.decode("utf-8-sig")
         # Normalise line endings once, here. Every consumer of the extracted text
@@ -228,6 +294,7 @@ def load_document(path: str | Path) -> ParsedDocument:
         input_format=suffix.lstrip("."),
         source_size_bytes=len(raw),
         parser_backend=parser_backend,
+        extraction_details=extraction_details,
     )
 
 

@@ -22,3 +22,13 @@ test('paperReview refuses invalid chunk sizes before starting Python', async () 
     );
   }
 });
+
+test('paperReview validates OCR languages and vision flags before Python starts', async () => {
+  for (const ocrMode of ['invalid', '', null]) {
+    await assert.rejects(sra.paperReview('paper.pdf', { model: 'mock', ocrMode }), /ocrMode/);
+  }
+  for (const ocrLanguages of ['eng;echo bad', 'EN', 'eng+badlanguage', '']) {
+    await assert.rejects(sra.paperReview('paper.pdf', { model: 'mock', ocrLanguages }), /ocrLanguages/);
+  }
+  await assert.rejects(sra.paperReview('paper.pdf', { model: 'mock', visualPages: 'true' }), /visualPages/);
+});
