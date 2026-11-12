@@ -147,3 +147,27 @@ Installed third-party distributions retain their own license notices.
 - [Python solver API](https://z3prover.github.io/api/html/classz3py_1_1_solver.html)
 - [Resource and solver parameter reference](https://microsoft.github.io/z3guide/programming/Parameters/)
 - [Official Python package](https://pypi.org/project/z3-solver/)
+
+## Implementation validation (2026-11-12)
+
+Final local validation passed 685 Python tests with 100% statement coverage
+(4,880 statements), 27 Node tests and 42 MCP tests, including actual stdio calls
+to the formal tool. Real Z3 is used for Boolean decisions, exact decimal/rational
+arithmetic, integer/real division, cross-process report equality and independent
+concurrent contexts. Test cases explicitly cover inconsistent premises, under-
+determination, solver-unknown results, source preservation, invalid AST/code input,
+allocation bounds and separate outputs. No live model or registry calls were used.
+
+A fresh read-only code review found repetitive-quote matching could repeatedly
+scan document prefixes and native solver exceptions could escape adapter error
+handling. Regression tests first reproduced both issues. Quote binding now builds
+a compact line index once, caches quote ambiguity and searches a requested start
+line directly, also accepting overlapping valid quotes. Backend exceptions become
+sanitized RuntimeErrors so unified review preserves its other modules and MCP
+returns a structured failure. No upstream Z3 correctness or scientific accuracy
+claim follows from these software tests.
+
+Distribution verification checked 138 declared source files and 43 installed
+Python module files against complete allowlists, installed the base wheel in a
+clean environment and ran its CLI/audit without requiring the optional solver.
+The optional solver itself was exercised through the source installation.

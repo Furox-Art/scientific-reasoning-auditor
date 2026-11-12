@@ -52,6 +52,13 @@ def _check(z3, context, expressions) -> str:
 
 def verify_prepared_logic(problem: LogicProblem) -> dict:
     z3 = _load_z3()
+    try:
+        return _verify_z3_problem(problem, z3)
+    except z3.Z3Exception as exc:
+        raise RuntimeError("Z3 could not complete formal verification; backend details withheld.") from exc
+
+
+def _verify_z3_problem(problem: LogicProblem, z3) -> dict:
     context = z3.Context()
     sorts = {"Bool": z3.Bool, "Int": z3.Int, "Real": z3.Real}
     symbols = {name: sorts[sort](name, ctx=context) for name, sort in problem.variables.items()}

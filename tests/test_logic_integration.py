@@ -95,6 +95,18 @@ class LogicIntegrationTests(unittest.TestCase):
         registry.assert_not_called()
         model.assert_not_called()
 
+    def test_native_solver_failure_preserves_other_modules_and_cli_reports_error(self):
+        import z3
+        with patch("sra.logic._check",side_effect=z3.Z3Exception("private backend data")):
+            report=review_manuscript(self.paper,logic_spec=self.problem)
+            self.assertEqual(report["modules"]["logic"]["status"],"failed")
+            self.assertEqual(report["modules"]["writing"]["status"],"completed")
+            self.assertNotIn("private backend data",json.dumps(report))
+            with self.assertRaises(SystemExit) as caught:
+                self.call("verify-logic",self.spec,"--out",self.root/"failed")
+            self.assertEqual(caught.exception.code,2)
+            self.assertFalse((self.root/"failed.json").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

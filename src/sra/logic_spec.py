@@ -6,6 +6,8 @@ import hashlib
 import json
 import keyword
 import re
+from array import array
+from bisect import bisect_right
 from dataclasses import dataclass
 from fractions import Fraction
 from typing import Any
@@ -160,6 +162,10 @@ def prepare_logic_spec(value: dict | str, document: ParsedDocument | None = None
     text_hash = hashlib.sha256(document.text.encode("utf-8")).hexdigest() if document else None
     if document and (spec.get("source_sha256") != document.sha256 or spec.get("extracted_text_sha256") != text_hash):
         raise SourceIdentityError("Logic specification does not match the manuscript source identities.")
+    line_starts = array("I", [0])
+    if document:
+        line_starts.extend(match.end() for match in re.finditer("\n", document.text))
+    quote_cache: dict[str, tuple[int, bool]] = {}
     seen, terms, groups, total_nodes = set(), {}, {}, 0
     for name, maximum in (("assumptions", 64), ("claims", 32)):
         items = spec.get(name)
@@ -188,13 +194,21 @@ def prepare_logic_spec(value: dict | str, document: ParsedDocument | None = None
                     raise ValueError("Source quotes require 12 to 2000 characters.")
                 source = {"status": "unbound", "quote": quote, "line": line}
                 if document:
-                    offsets = [match.start() for match in re.finditer(re.escape(quote), document.text)]
-                    positions = [(offset, document.text.count("\n", 0, offset) + 1) for offset in offsets]
-                    found = next((position for position in positions if line is None or position[1] == line), None)
-                    if found is None:
+                    if quote not in quote_cache:
+                        first = document.text.find(quote)
+                        quote_cache[quote] = (first, first >= 0 and document.text.find(quote, first + 1) >= 0)
+                    offset, ambiguous = quote_cache[quote]
+                    if line is not None:
+                        if line > len(line_starts):
+                            offset = -1
+                        else:
+                            start = line_starts[line - 1]
+                            stop = line_starts[line] if line < len(line_starts) else len(document.text)
+                            offset = document.text.find(quote, start, min(len(document.text), stop + len(quote) - 1))
+                    if offset < 0:
                         raise SourceIdentityError("Source quote or its line does not match the manuscript.")
                     source = {"status": "quote_present_semantics_unverified", "quote": quote,
-                              "line": found[1], "occurrences": len(positions)}
+                              "line": bisect_right(line_starts, offset), "ambiguous": ambiguous}
             elif line is not None:
                 raise ValueError("Source line requires a source_quote.")
             records.append({"id": identity, "expression": item["expression"].strip(), "source": source})

@@ -43,6 +43,13 @@ class MCPLogicTests(unittest.TestCase):
         self.assertFalse(tools["verify_logic"].annotations.openWorldHint)
         self.assertTrue(server.verify_logic(json.dumps(self.problem()))["ok"])
 
+    def test_native_backend_error_returns_structured_processing_failure(self):
+        import z3
+        with patch("sra.logic._check",side_effect=z3.Z3Exception("private backend data")):
+            response=bridge.verify_logic(json.dumps(self.problem()))
+        self.assertEqual(response["error"],"PROCESSING_FAILED")
+        self.assertNotIn("private backend data",json.dumps(response))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -77,6 +77,10 @@ class LogicTests(unittest.TestCase):
                 bad = {**problem, **change}
                 with self.assertRaises(ValueError):
                     api.verify_logic_spec(bad, document=doc)
+            problem["assumptions"][0]["line"] = 10000
+            with self.assertRaises(ValueError):
+                api.verify_logic_spec(problem, document=doc)
+            problem["assumptions"][0]["line"] = 2
             problem["assumptions"][0]["source_quote"] = "fabricated quotation that does not appear"
             with self.assertRaises(ValueError):
                 api.verify_logic_spec(problem, document=doc)
@@ -198,6 +202,43 @@ class LogicTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 parse_expression("1e1000000000 > 0", {})
             fraction.assert_not_called()
+
+    def test_repeated_quotes_do_not_recount_every_document_prefix(self):
+        api=self.api()
+        from sra.document import parse_document_text
+        class TrackedText(str):
+            prefix_scans=0
+            def count(self, sub, *args):
+                if sub == "\n" and args:
+                    self.prefix_scans += 1
+                return super().count(sub,*args)
+        text=TrackedText("A repeated quoted premise.\n"*1000)
+        doc=parse_document_text(text,sha256=hashlib.sha256(text.encode()).hexdigest())
+        problem=boolean_problem()
+        problem.update(source_sha256=doc.sha256,extracted_text_sha256=hashlib.sha256(text.encode()).hexdigest())
+        problem["assumptions"][0].update(source_quote="A repeated quoted premise.",line=999)
+        report=api.verify_logic_spec(problem,document=doc)
+        self.assertEqual(report["assumptions"][0]["source"]["line"],999)
+        self.assertLessEqual(text.prefix_scans,1)
+
+    def test_overlapping_source_quote_can_start_on_a_later_line(self):
+        api=self.api()
+        from sra.document import parse_document_text
+        text="abcdef\n"*3
+        doc=parse_document_text(text,sha256=hashlib.sha256(text.encode()).hexdigest())
+        problem=boolean_problem()
+        problem.update(source_sha256=doc.sha256,extracted_text_sha256=hashlib.sha256(text.encode()).hexdigest())
+        problem["assumptions"][0].update(source_quote="abcdef\nabcdef\n",line=2)
+        self.assertEqual(api.verify_logic_spec(problem,document=doc)["assumptions"][0]["source"]["line"],2)
+
+    def test_native_solver_exception_is_sanitized_and_chained(self):
+        api=self.api()
+        import z3
+        with patch("sra.logic._check",side_effect=z3.Z3Exception("private backend data")):
+            with self.assertRaises(RuntimeError) as caught:
+                api.verify_logic_spec(boolean_problem())
+        self.assertIsInstance(caught.exception.__cause__,z3.Z3Exception)
+        self.assertNotIn("private backend data",str(caught.exception))
 
 
 if __name__ == "__main__":
