@@ -107,9 +107,30 @@ A synthetic rule ablation ([docs/RULE_ABLATION.md](docs/RULE_ABLATION.md)) measu
 
 Every finding code is listed in [docs/CHECK_INVENTORY.md](docs/CHECK_INVENTORY.md) with what it detects, what it cannot detect and where its false positives come from; a test fails the build when a rule and its inventory row drift apart.
 
+## Unified cross-disciplinary review (source checkout)
+
+Use one source-bound report for reasoning, writing, selected discipline cues,
+DOI metadata, supplied quantitative checks and optional model interpretation:
+
+```bash
+sra capabilities
+sra review examples/unified_review/theoretical_math.md --study-type theoretical --out reports/theory
+sra review examples/unified_review/computational_physics.md --study-type computational --discipline computing --discipline physics --out reports/simulation
+```
+
+Common screening is usable with manuscripts from other fields; specialist cues
+remain limited to the six listed profiles. Theoretical/narrative papers do not
+inherit empirical Methods/Results-heading warnings without an explicit exclusion
+record. Reports distinguish completed, unrequested, unavailable and failed work;
+execution completion is never a scientific validity score. Network/model use is
+off by default. These commands and new Node/MCP entry points require the source
+checkout; published package versions are not guaranteed to include them.
+
+See [scope, examples, interfaces and limitations](docs/CROSS_DISCIPLINARY_REVIEW.md).
+
 ## Optional MCP tools for ChatGPT and Codex
 
-A separate Model Context Protocol (MCP) adapter provides six bounded tools for
+A separate Model Context Protocol (MCP) adapter provides eight bounded tools for
 scientific manuscript reasoning, academic writing, DOI checks, structured
 statistics, scientific validation, and opt-in external-model paper review.
 It supports local stdio and token-protected Streamable HTTP; it does not

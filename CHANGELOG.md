@@ -10,6 +10,22 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+### Added
+
+- Source-bound `sra review` and `sra capabilities` commands with multi-profile
+  composition, declared study-type applicability, explicit module execution
+  states, coverage gaps, JSON schema and Markdown reports.
+- Typed Node `reviewManuscript`/`capabilities` wrappers with feature-contract probes,
+  plus bounded MCP tools with existing caller/host network and model consent gates.
+- Six synthetic cross-field workflow controls; they are not scientific accuracy
+  or independent expert-validation evidence.
+
+### Fixed
+
+- Git provenance subprocesses now detach standard input, avoiding consumption of
+  or waits on MCP stdio protocol input on Windows.
+- MCP temporary-path scrubbing handles both native and forward-slash spellings.
+
 ## [0.8.0] - 2026-11-08
 
 ### Added

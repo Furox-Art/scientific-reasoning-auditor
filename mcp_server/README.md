@@ -13,6 +13,16 @@ It does **not** modify the SRA rules or make scientific truth judgments.
 | `verify_statistics` | structured `spec_json` | None |
 | `verify_scientific_claims` | structured `spec_json` | None |
 | `review_scientific_paper` | manuscript, `send_to_model` | Entire extractable text to configured model provider only after caller/host opt in |
+| `get_review_capabilities` | none | None; supported coverage and limitations only |
+| `review_manuscript` | manuscript, `study_type`, `disciplines`, optional structured JSON strings, consent flags | Offline by default; DOI/model calls require both caller and host opt-in |
+
+The unified tool composes checks against a single source snapshot. Inspect
+`result.execution_status` and each module even when the transport returns
+`ok=true`: a requested optional module can fail while the other results remain
+available. Supported profiles, study types and gaps are documented in
+[cross-disciplinary review](../docs/CROSS_DISCIPLINARY_REVIEW.md). These additive
+tools require the source checkout. PDF OCR and page vision remain unavailable
+through MCP.
 
 **Important:** These tools surface evidence-linked review signals. They cannot certify
 that a manuscript is scientifically correct. The model-review tool cannot prove that
