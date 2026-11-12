@@ -10,9 +10,10 @@ from fractions import Fraction
 
 from sra.document import SourceIdentityError
 from sra.json_utils import reject_duplicate_keys
+from sra.extended_inspection import EXTRA_KINDS
 
 KINDS = ("polynomial_identity", "derivative", "antiderivative", "unit_conversion",
-         "statistical_replay", "claim_candidates", "citation_match")
+         "statistical_replay", "claim_candidates", "citation_match") + EXTRA_KINDS
 _NAME = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 _HASH = re.compile(r"[0-9a-f]{64}\Z")
 _DECIMAL = re.compile(r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE]([+-]?[0-9]+))?\Z")
@@ -131,6 +132,11 @@ def unit_expression(expression):
 
 
 def _check(item, document):
+    if isinstance(item,dict) and item.get('kind') in EXTRA_KINDS:
+        if not isinstance(item.get('id'),str) or not _NAME.fullmatch(item['id']):
+            raise ValueError('Check ID must be a simple identifier.')
+        from sra.extended_inspection import prepare_extra
+        return prepare_extra(item,document)
     _fields(item,("id","kind"),set().union(*[
         {"variables","left","right","variable"}, {"value","from_unit","to_unit","reported","atol","rtol"},
         {"test","groups"}, {"text","language"}, {"claim","passages"}]))
@@ -222,6 +228,8 @@ def prepare_toolkit_spec(value, document=None):
     if document is not None and (spec.get("source_sha256") != document.sha256 or spec.get("extracted_text_sha256") != text_hash):
         raise SourceIdentityError("Toolkit specification does not match manuscript identities.")
     checks = [_check(item,document) for item in spec["checks"]]
+    if sum(item['kind'].startswith('symbolic_') for item in checks)>8:
+        raise ValueError('At most eight bounded symbolic checks per report.')
     if len({item["id"] for item in checks}) != len(checks):
         raise ValueError("Check identifiers must be unique.")
     canonical = json.dumps(spec,sort_keys=True,ensure_ascii=False,default=str,separators=(",",":"))

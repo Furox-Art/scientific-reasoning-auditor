@@ -17,6 +17,7 @@ export interface UnifiedReviewOptions extends RunOptions {
   scientificSpec?: string;
   logicSpec?: string;
   toolkitSpec?: string;
+  prepareInputs?: boolean;
   online?: boolean;
   sendToModel?: boolean;
   model?: string;
@@ -39,6 +40,8 @@ export interface LogicVerificationOptions extends OutputOptions {
 export function verifyLogic(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
 /** Local exact/numerical checks and explicitly non-verdict sentence/passage candidates. */
 export function verifyToolkit(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
+/** Prepare source-located candidates without executing inferred checks. */
+export function prepareInspection(input: string, options?: OutputOptions): Promise<CommandResult>;
 
 export interface CommandResult {
   code: number;

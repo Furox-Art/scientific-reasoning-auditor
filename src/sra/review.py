@@ -102,6 +102,7 @@ def review_document(
     scientific_spec: dict | str | None = None, send_to_model: bool = False,
     logic_spec: dict | str | None = None,
     toolkit_spec: dict | str | None = None,
+    prepare_inputs: bool = False,
     model: str | None = None, base_url: str = "https://api.openai.com/v1",
     api_key_env: str = "OPENAI_API_KEY", timeout: int = 120, chunk_chars: int = 12000,
     visual_pages: bool = False, visual_path: str | Path | None = None,
@@ -117,6 +118,8 @@ def review_document(
         _chunks(document.text, chunk_chars)
     visual_bytes = read_visual_source(document, visual_path) if visual_pages else None
     document = copy.deepcopy(document)
+    if type(prepare_inputs) is not bool:
+        raise ValueError('prepare_inputs must be boolean.')
     prepared_logic = prepare_logic_spec(logic_spec, document) if logic_spec is not None else None
     prepared_toolkit = prepare_toolkit_spec(toolkit_spec, document) if toolkit_spec is not None else None
     text_digest = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
@@ -169,6 +172,9 @@ def review_document(
         if modules["toolkit"]["result"] is not None and modules["toolkit"]["result"]["execution_status"] == "partial":
             modules["toolkit"]["status"] = "failed"
             modules["toolkit"]["reason"] = "Some requested toolkit checks were unavailable, failed or undetermined; inspect per-check results."
+    if prepare_inputs:
+        from sra.inspection import prepare_inspection
+        run('preparation',lambda:prepare_inspection(document))
     modules["extraction"] = entry("completed", {
         "backend": document.parser_backend, "input_format": document.input_format,
         "input_bytes": document.source_size_bytes, "extracted_characters": len(document.text),

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {"id":"trigonometry","kind":"symbolic_identity","variables":{"x":"real"},"left":"sin(x)**2+cos(x)**2","right":"1"},
+    {"id":"domain_required","kind":"symbolic_identity","variables":{"x":"real"},"left":"x/x","right":"1"},
+    {"id":"log_derivative","kind":"symbolic_derivative","variables":{"x":"positive"},"variable":"x","left":"log(x)","right":"1/x"},
+    {"id":"reported_t","kind":"statistic_consistency","test":"t","df":[12],"statistic":"2.400","reported_p":".03","relation":"="},
+    {"id":"regression","kind":"statistical_analysis","operation":"linear_regression","x":[1,2,3,4],"y":[2,4,5,8]},
+    {"id":"correction","kind":"statistical_analysis","operation":"multiple_testing","p_values":[".01",".04",".03"],"method":"holm"},
+    {"id":"table","kind":"table_compare","keys":["group"],"table_csv":"group,value\nA,1\nB,2\n","supplement_csv":"group,value\nB,2\nA,1\n"},
+    {"id":"figure","kind":"figure_svg","svg":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><title>Measurements</title><text x=\"1\" y=\"9\">Time (s)</text><polyline points=\"1,2 3,4\"/></svg>"}
+  ]
+}

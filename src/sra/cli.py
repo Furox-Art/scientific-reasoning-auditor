@@ -239,7 +239,7 @@ def main() -> int:
     args = parser.parse_args()
     if args.command == "verify-logic":
         return execute_logic_command(args, parser, _reject_input_overwrite, _same_document)
-    if args.command == "verify-toolkit":
+    if args.command in ("verify-toolkit",'prepare-inspection','benchmark-evidence'):
         return execute_toolkit_command(args, parser, _reject_input_overwrite, _same_document)
     if args.command in ("review", "capabilities"):
         return execute_review_command(args, parser, _reject_input_overwrite, _same_document, review_manuscript)

@@ -48,6 +48,9 @@ def review_markdown(report: dict) -> str:
             lines.append(logic_markdown(result))
         elif name == "toolkit":
             lines.append(toolkit_markdown(result))
+        elif name=='preparation':
+            from sra.inspection import inspection_markdown
+            lines.append(inspection_markdown(result))
         elif name.startswith("discipline:"):
             lines.append(_safe_md(result["guidance"]))
             for item in result["items"]:

@@ -12,6 +12,15 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Source-located inspection preparation across CLI, Python, Node and MCP; proposed
+  equations/statistic inputs require confirmation and never execute automatically.
+- Domain-aware bounded symbolic operations in isolated workers; regression,
+  missingness, multiple-testing and rounding-aware reported-statistic checks;
+  local citation context, keyed table/supplement comparisons and inert SVG review.
+- Frozen SciFact real-paper sentence-retrieval evaluation with released human
+  rationale labels, explicit overlap metrics and semantic abstentions. This does
+  not supply new multi-field expert-validated scientific-error accuracy estimates.
+
 - Optional local inspection toolkit: SymPy exact polynomial/calculus checks,
   Pint conversions, SciPy raw-data replay, spaCy sentence candidates and RapidFuzz
   passage ranking. Bounded non-executable specifications, per-check backend

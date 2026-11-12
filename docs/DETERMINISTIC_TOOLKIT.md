@@ -1,5 +1,9 @@
 # Local deterministic inspection toolkit
 
+Additional source preparation, mathematics/statistics, contextual citations,
+tables/figures and real-paper evaluation are specified in
+[inspection expansion](INSPECTION_EXPANSION.md). Old check inputs remain supported.
+
 The toolkit complements the Z3 logic adapter with working local checks. It
 never edits manuscripts. JSON and Markdown findings go to the user separately.
 It does not claim to certify every scientific field or turn arbitrary prose

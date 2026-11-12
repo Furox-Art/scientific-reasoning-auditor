@@ -20,6 +20,7 @@ def configure_review_commands(sub) -> None:
     command.add_argument("--scientific-spec", help="Explicit bounded scientific-check JSON.")
     command.add_argument("--logic-spec", help="Source-bound Boolean/linear formulas for optional Z3 verification.")
     command.add_argument("--toolkit-spec", help="Source-bound local mathematics, units, data replay and candidate checks.")
+    command.add_argument('--prepare-inputs',action='store_true',help='Include source-located candidates; no inferred checks are executed.')
     command.add_argument("--online", action="store_true", help="Send DOI identifiers to registries; not claim verification.")
     command.add_argument("--send-to-model", action="store_true", help="Explicitly transmit the extracted manuscript to the configured model.")
     command.add_argument("--model")
@@ -49,6 +50,7 @@ def execute_review_command(args, parser, protect, same_document, review=review_m
             scientific_spec=load_spec_file(args.scientific_spec) if args.scientific_spec else None,
             logic_spec=load_spec_file(args.logic_spec) if args.logic_spec else None,
             toolkit_spec=load_spec_file(args.toolkit_spec) if args.toolkit_spec else None,
+            prepare_inputs=args.prepare_inputs,
             send_to_model=args.send_to_model, model=args.model, base_url=args.base_url,
             api_key_env=args.api_key_env, timeout=args.timeout, chunk_chars=args.chunk_chars,
             pdf_ocr_mode=args.ocr_mode, ocr_languages=args.ocr_languages, visual_pages=args.visual_pages,

@@ -24,6 +24,7 @@ class ProtocolTests(unittest.TestCase):
             "review_manuscript", "get_review_capabilities",
             "verify_logic",
             "verify_toolkit",
+            'prepare_inspection',
         })
         for tool in tools:
             self.assertTrue(tool.annotations.readOnlyHint)
@@ -68,6 +69,9 @@ class ProtocolTests(unittest.TestCase):
                     })})
                     self.assertFalse(toolkit.isError, toolkit)
                     self.assertIn("VERIFIED", str(toolkit))
+                    prepared=await client.call_tool('prepare_inspection',{'content':'# Proof\n$x=x$'})
+                    self.assertFalse(prepared.isError,prepared)
+                    self.assertIn('inspection-preparation/1.0',str(prepared))
         async def bounded():
             await asyncio.wait_for(run(), timeout=45)
         asyncio.run(bounded())

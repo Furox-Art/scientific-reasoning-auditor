@@ -80,11 +80,12 @@ def review_manuscript(
     send_to_model: bool = False,
     logic_spec_json: str | None = None,
     toolkit_spec_json: str | None = None,
+    prepare_inputs: bool = False,
 ) -> dict[str, Any]:
     """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
     return bridge.review_manuscript(
         content, file_format, encoding, study_type, disciplines, style_language,
-        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,
+        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,
     )
 
 
@@ -100,6 +101,12 @@ def verify_toolkit(spec_json: str, content: str | None = None,
                    file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
     """Check supplied polynomials, unit conversions and raw-data calculations; extract sentence and local passage candidates. Candidates are not truth judgments. Optional manuscript requires matching hashes. No code execution, downloads or manuscript edits; returns separate findings."""
     return bridge.verify_toolkit(spec_json, content, file_format, encoding)
+
+
+@mcp.tool(title='Prepare manuscript inspection candidates',annotations=_LOCAL)
+def prepare_inspection(content: str,file_format: str='md',encoding: str='text') -> dict[str,Any]:
+    """Return source-located equation/statistic/table/figure/assumption candidates. Confirmation required before formal use. No checks inferred from prose are executed; manuscript is read-only."""
+    return bridge.prepare_inspection(content,file_format,encoding)
 
 
 def main() -> None:

@@ -20,3 +20,9 @@ class MCPToolkitTests(unittest.TestCase):
         tools={tool.name:tool for tool in asyncio.run(server.mcp.list_tools())}
         self.assertTrue(tools['verify_toolkit'].annotations.readOnlyHint)
         self.assertFalse(tools['verify_toolkit'].annotations.openWorldHint)
+        prepared=bridge.prepare_inspection('# Proof\n$x=x$')
+        self.assertTrue(prepared['ok'],prepared)
+        self.assertFalse(prepared['result']['checks_executed'])
+        self.assertTrue(server.prepare_inspection('# Proof\n$x=x$')['ok'])
+        unified=server.review_manuscript('# Proof\n$x=x$',prepare_inputs=True)
+        self.assertIn('preparation',unified['result']['modules'])

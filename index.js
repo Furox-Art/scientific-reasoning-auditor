@@ -421,6 +421,10 @@ async function runUnified(args, options) {
     throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
   }
   if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
+  if ((args[0] === 'prepare-inspection' || args.includes('--prepare-inputs')) &&
+      catalog?.input_preparation?.schema_version !== 'inspection-preparation/1.0') {
+    throw new Error('The selected Python engine lacks inspection preparation. Install the current source checkout.');
+  }
   if ((args[0] === 'verify-toolkit' || args.includes('--toolkit-spec')) &&
       catalog?.deterministic_toolkit?.schema_version !== 'deterministic-toolkit/1.0') {
     throw new Error('The selected Python engine lacks the inspection toolkit. Install this source checkout with the [toolkit] extra.');
@@ -442,7 +446,7 @@ function reviewManuscript(input, options = {}) {
       disciplines.some(key => !DISCIPLINES.includes(key))) {
     return Promise.reject(new TypeError('studyType and disciplines must be supported identifiers'));
   }
-  for (const key of ['online', 'sendToModel', 'visualPages']) {
+  for (const key of ['online', 'sendToModel', 'visualPages', 'prepareInputs']) {
     if (options[key] !== undefined && typeof options[key] !== 'boolean') {
       return Promise.reject(new TypeError(`${key} must be boolean`));
     }
@@ -468,7 +472,7 @@ function reviewManuscript(input, options = {}) {
     ['ocrMode', '--ocr-mode'], ['ocrLanguages', '--ocr-languages']]) {
     if (options[key] !== undefined) args.push(flag, String(options[key]));
   }
-  for (const [key, flag] of [['online', '--online'], ['sendToModel', '--send-to-model'], ['visualPages', '--visual-pages']]) {
+  for (const [key, flag] of [['online', '--online'], ['sendToModel', '--send-to-model'], ['visualPages', '--visual-pages'], ['prepareInputs', '--prepare-inputs']]) {
     if (options[key]) args.push(flag);
   }
   return runUnified(args, options);
@@ -484,6 +488,11 @@ function verifyLogic(input, options = {}) {
   return runUnified(args, options);
 }
 
+function prepareInspection(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['prepare-inspection', input, '--out', options.out || 'inspection-inputs'], options);
+}
+
 function verifyToolkit(input, options = {}) {
   if (typeof input !== 'string' || !input.length ||
       options.manuscript !== undefined && (typeof options.manuscript !== 'string' || !options.manuscript.length)) {
@@ -495,6 +504,7 @@ function verifyToolkit(input, options = {}) {
 }
 
 module.exports = {
+  prepareInspection,
   verifyToolkit,
   verifyLogic,
   capabilities,

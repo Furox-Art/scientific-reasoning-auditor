@@ -28,8 +28,14 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     writeFileSync(spec, JSON.stringify(bound));
     const standalone = await sra.verifyToolkit(spec, { manuscript: paper, stdio: 'pipe', out: join(dir, 'bound') });
     assert.equal(standalone.code, 0, standalone.stderr);
-    const unified = await sra.reviewManuscript(paper, { toolkitSpec: spec, stdio: 'pipe', out: join(dir, 'unified') });
+    const unified = await sra.reviewManuscript(paper, { toolkitSpec: spec, prepareInputs: true, stdio: 'pipe', out: join(dir, 'unified') });
     assert.equal(unified.code, 0, unified.stderr);
     assert.equal(JSON.parse(readFileSync(join(dir, 'unified.json'), 'utf8')).modules.toolkit.status, 'completed');
+    assert.equal(JSON.parse(readFileSync(join(dir, 'unified.json'), 'utf8')).modules.preparation.status, 'completed');
+    await assert.rejects(sra.prepareInspection(''), TypeError);
+    await assert.rejects(sra.reviewManuscript(paper, { prepareInputs: 1 }), TypeError);
+    const preparation = await sra.prepareInspection(paper, { stdio: 'pipe', out: join(dir, 'prepared') });
+    assert.equal(preparation.code, 0, preparation.stderr);
+    assert.equal(JSON.parse(readFileSync(join(dir, 'prepared.json'), 'utf8')).checks_executed, false);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

@@ -16,6 +16,7 @@ It does **not** modify the SRA rules or make scientific truth judgments.
 | `get_review_capabilities` | none | None; supported coverage and limitations only |
 | `verify_logic` | explicit formula JSON, optional manuscript content | None; local Z3 solver, separate findings only |
 | `verify_toolkit` | bounded math/units/data/candidate JSON, optional manuscript content | None; local SymPy/Pint/SciPy/spaCy/RapidFuzz, separate findings |
+| `prepare_inspection` | manuscript content, format, encoding | None; source-located candidates and bounded proposed specifications, never executed automatically |
 | `review_manuscript` | manuscript, `study_type`, `disciplines`, optional structured JSON strings, consent flags | Offline by default; DOI/model calls require both caller and host opt-in |
 
 `logic_spec_json` optionally supplies source-bound Z3 formulas to `review_manuscript`.
@@ -23,6 +24,12 @@ It does **not** modify the SRA rules or make scientific truth judgments.
 to unified review. Sentence and passage results are candidates requiring review;
 they never certify claims or semantic citation support. Install `.[toolkit]` for
 these backends; neither model keys nor network enable flags are required.
+`prepare_inputs=true` adds the same preparation to `review_manuscript`.
+New toolkit kinds cover symbolic domain checks, regression/diagnostics,
+rounding-aware reported statistics, citation source context, keyed CSV comparison
+and inert SVG inspection. See [inspection expansion](../docs/INSPECTION_EXPANSION.md)
+for precise limits. Source preparation requires confirmation; source retrieval
+and SVG output remain review candidates.
 Install the engine with `.[pdf,statistics,logic]` to enable formal verification;
 it needs no model key or network enable flag. The manuscript is never modified.
 
