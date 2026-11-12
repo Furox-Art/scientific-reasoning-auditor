@@ -12,6 +12,12 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Optional MIT-licensed Z3 formal-verification integration with a pinned `logic`
+  extra, restricted Boolean/linear-arithmetic input, consistency checks,
+  conditional VERIFIED/REFUTED/UNDETERMINED findings and stable report identities.
+- Read-only `sra verify-logic`, Node `verifyLogic`, MCP `verify_logic` and an optional
+  source-bound logic module in unified review. Findings go to separate reports.
+
 - Source-bound `sra review` and `sra capabilities` commands with multi-profile
   composition, declared study-type applicability, explicit module execution
   states, coverage gaps, JSON schema and Markdown reports.

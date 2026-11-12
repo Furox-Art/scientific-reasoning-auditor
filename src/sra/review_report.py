@@ -6,6 +6,7 @@ from sra.paper_review import paper_review_markdown
 from sra.models import AuditReport, ClaimEvidenceCandidate, Finding
 from sra.report import _safe_md, to_markdown
 from sra.writing import writing_report_markdown
+from sra.logic_report import logic_markdown
 
 
 def review_markdown(report: dict) -> str:
@@ -42,6 +43,8 @@ def review_markdown(report: dict) -> str:
             lines.append(writing_report_markdown(result))
         elif name == "model":
             lines.append(paper_review_markdown(result))
+        elif name == "logic":
+            lines.append(logic_markdown(result))
         elif name.startswith("discipline:"):
             lines.append(_safe_md(result["guidance"]))
             for item in result["items"]:

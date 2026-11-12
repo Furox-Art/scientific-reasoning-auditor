@@ -107,6 +107,24 @@ A synthetic rule ablation ([docs/RULE_ABLATION.md](docs/RULE_ABLATION.md)) measu
 
 Every finding code is listed in [docs/CHECK_INVENTORY.md](docs/CHECK_INVENTORY.md) with what it detects, what it cannot detect and where its false positives come from; a test fails the build when a rule and its inventory row drift apart.
 
+## Deterministic formal logic with Z3 (source checkout)
+
+The optional, MIT-licensed [Z3 engine](https://github.com/Z3Prover/z3) checks
+explicit Boolean and linear integer/real formulas. Findings go to a separate
+user report; the manuscript is read-only.
+
+```bash
+python -m pip install -e ".[logic]"
+sra verify-logic examples/logic_boolean.json --out reports/logic
+sra verify-logic examples/logic_arithmetic.json --out reports/arithmetic
+```
+
+Reports distinguish `VERIFIED`, `REFUTED` and `UNDETERMINED` conditional on the
+provided assumptions. Inconsistent premises never prove every claim. Fixed solver
+settings, resource budgets and a report fingerprint support repeatability within
+the same solver/adapter/platform. Z3 does not automatically interpret a paper's
+prose or establish empirical truth. See [input format, source binding and limits](docs/DETERMINISTIC_LOGIC.md).
+
 ## Unified cross-disciplinary review (source checkout)
 
 Use one source-bound report for reasoning, writing, selected discipline cues,
@@ -130,7 +148,7 @@ See [scope, examples, interfaces and limitations](docs/CROSS_DISCIPLINARY_REVIEW
 
 ## Optional MCP tools for ChatGPT and Codex
 
-A separate Model Context Protocol (MCP) adapter provides eight bounded tools for
+A separate Model Context Protocol (MCP) adapter provides nine bounded tools for
 scientific manuscript reasoning, academic writing, DOI checks, structured
 statistics, scientific validation, and opt-in external-model paper review.
 It supports local stdio and token-protected Streamable HTTP; it does not

@@ -21,6 +21,8 @@ from sra.scientific_validation import verify_scientific_spec
 from sra.stats import verify_welch_t_test
 from sra.stats_extended import verify_extended_stats
 from sra.writing import audit_academic_writing_document
+from sra.logic_spec import prepare_logic_spec
+from sra.logic import verify_prepared_logic
 
 MAX_SPEC_BYTES = 1024 * 1024
 
@@ -96,6 +98,7 @@ def review_document(
     disciplines: list[str] | tuple[str, ...] = (), style_language: str = "en",
     online: bool = False, statistics_spec: dict | str | None = None,
     scientific_spec: dict | str | None = None, send_to_model: bool = False,
+    logic_spec: dict | str | None = None,
     model: str | None = None, base_url: str = "https://api.openai.com/v1",
     api_key_env: str = "OPENAI_API_KEY", timeout: int = 120, chunk_chars: int = 12000,
     visual_pages: bool = False, visual_path: str | Path | None = None,
@@ -111,6 +114,7 @@ def review_document(
         _chunks(document.text, chunk_chars)
     visual_bytes = read_visual_source(document, visual_path) if visual_pages else None
     document = copy.deepcopy(document)
+    prepared_logic = prepare_logic_spec(logic_spec, document) if logic_spec is not None else None
     text_digest = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
     catalog = capabilities()
     modules: dict[str, dict] = {}
@@ -127,7 +131,7 @@ def review_document(
         except (ImportError, OSError, RuntimeError, ValueError) as exc:
             if required:
                 raise
-            status = "unavailable" if isinstance(exc, ImportError) else "failed"
+            status = "unavailable" if isinstance(exc, ImportError) or isinstance(exc.__cause__, ImportError) else "failed"
             modules[name] = entry(status, reason=f"{type(exc).__name__}: module did not complete; details withheld.")
             return
         bound = result.get("source_sha256", result.get("sha256", document.sha256))
@@ -151,6 +155,11 @@ def review_document(
             else:
                 modules[name] = entry("completed", prepared)
 
+    if prepared_logic is not None:
+        run("logic", lambda: verify_prepared_logic(prepared_logic))
+        if modules["logic"]["result"] is not None and modules["logic"]["result"]["execution_status"] == "partial":
+            modules["logic"]["status"] = "failed"
+            modules["logic"]["reason"] = "Formal verification reached a solver budget; no unknown result is a proof."
     modules["extraction"] = entry("completed", {
         "backend": document.parser_backend, "input_format": document.input_format,
         "input_bytes": document.source_size_bytes, "extracted_characters": len(document.text),
@@ -207,6 +216,7 @@ def review_document(
         gaps.append("specialist_profile_not_selected")
     if statistics_spec is not None or scientific_spec is not None:
         gaps.append("supplied_quantitative_values_not_independently_linked_to_manuscript")
+    gaps.append("formalization_semantics_not_verified" if prepared_logic is not None else "formal_logic_not_requested")
     if document.extraction_details.get("pages_without_extractable_text"):
         gaps.append("pdf_pages_without_extracted_text")
     return {

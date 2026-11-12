@@ -15,6 +15,7 @@ export interface UnifiedReviewOptions extends RunOptions {
   styleLanguage?: 'en' | 'tr' | 'none';
   statisticsSpec?: string;
   scientificSpec?: string;
+  logicSpec?: string;
   online?: boolean;
   sendToModel?: boolean;
   model?: string;
@@ -30,6 +31,11 @@ export interface UnifiedReviewOptions extends RunOptions {
 export function capabilities(options?: RunOptions): Promise<CommandResult>;
 /** Exit 0 means requested execution completed; exit 1 preserves a partial report. */
 export function reviewManuscript(input: string, options?: UnifiedReviewOptions): Promise<CommandResult>;
+export interface LogicVerificationOptions extends OutputOptions {
+  manuscript?: string;
+}
+/** Conditional Boolean/linear formal verification; writes a separate report. */
+export function verifyLogic(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
 
 export interface CommandResult {
   code: number;

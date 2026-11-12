@@ -78,12 +78,20 @@ def review_manuscript(
     style_language: str = "en", online: bool = False,
     statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
     send_to_model: bool = False,
+    logic_spec_json: str | None = None,
 ) -> dict[str, Any]:
     """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
     return bridge.review_manuscript(
         content, file_format, encoding, study_type, disciplines, style_language,
-        online, statistics_spec_json, scientific_spec_json, send_to_model,
+        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json,
     )
+
+
+@mcp.tool(title="Verify supplied formal logic with Z3", annotations=_LOCAL)
+def verify_logic(spec_json: str, content: str | None = None,
+                 file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Check explicit Boolean/linear formulas offline using optional Z3. Results concern the supplied assumptions, not scientific truth. Optional manuscript content requires matching source/text hashes and allows exact quotation checks. Findings are returned separately; the manuscript is never edited. No arbitrary Python or SMT-LIB commands."""
+    return bridge.verify_logic(spec_json, content, file_format, encoding)
 
 
 def main() -> None:

@@ -18,6 +18,7 @@ def configure_review_commands(sub) -> None:
     command.add_argument("--style-language", choices=("en", "tr", "none"), default="en")
     command.add_argument("--statistics-spec", help="Explicit bounded statistics JSON; never inferred from prose.")
     command.add_argument("--scientific-spec", help="Explicit bounded scientific-check JSON.")
+    command.add_argument("--logic-spec", help="Source-bound Boolean/linear formulas for optional Z3 verification.")
     command.add_argument("--online", action="store_true", help="Send DOI identifiers to registries; not claim verification.")
     command.add_argument("--send-to-model", action="store_true", help="Explicitly transmit the extracted manuscript to the configured model.")
     command.add_argument("--model")
@@ -36,7 +37,7 @@ def execute_review_command(args, parser, protect, same_document, review=review_m
         return 0
     prefix = Path(args.out)
     targets = [prefix.with_suffix(".json"), prefix.with_suffix(".md")]
-    protect(parser, [args.input, args.statistics_spec, args.scientific_spec], targets)
+    protect(parser, [args.input, args.statistics_spec, args.scientific_spec, args.logic_spec], targets)
     if same_document(*targets):
         parser.error("Review JSON and Markdown outputs must be separate files.")
     try:
@@ -45,6 +46,7 @@ def execute_review_command(args, parser, protect, same_document, review=review_m
             style_language=args.style_language, online=args.online,
             statistics_spec=load_spec_file(args.statistics_spec) if args.statistics_spec else None,
             scientific_spec=load_spec_file(args.scientific_spec) if args.scientific_spec else None,
+            logic_spec=load_spec_file(args.logic_spec) if args.logic_spec else None,
             send_to_model=args.send_to_model, model=args.model, base_url=args.base_url,
             api_key_env=args.api_key_env, timeout=args.timeout, chunk_chars=args.chunk_chars,
             pdf_ocr_mode=args.ocr_mode, ocr_languages=args.ocr_languages, visual_pages=args.visual_pages,

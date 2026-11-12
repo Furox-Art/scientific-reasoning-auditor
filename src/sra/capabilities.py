@@ -31,6 +31,10 @@ def capabilities() -> dict[str, Any]:
         },
         "statistics_tests": list(SUPPORTED_TESTS),
         "structured_science_checks": ["semantic_ci", "dimension_equation", "unadjusted_risk_ratio"],
+        "formal_logic": {"backend": "Z3", "extra": "logic", "package": "z3-solver==5.4.1.0",
+                         "language": "Boolean and quantifier-free linear integer/real arithmetic",
+                         "input": "explicit structured formulas; not automatic prose interpretation",
+                         "manuscript_access": "read_only", "findings_destination": "separate_user_report"},
         "module_statuses": ["completed", "not_requested", "not_applicable", "unavailable", "failed"],
         "excluded_empirical_structure": {
             key: list(EMPIRICAL_STRUCTURE) for key in ("theoretical", "narrative-review")

@@ -1,5 +1,6 @@
 """Test actual MCP tool registration and local stdio round-trip."""
 import asyncio
+import json
 import os
 import sys
 import unittest
@@ -21,6 +22,7 @@ class ProtocolTests(unittest.TestCase):
             "audit_manuscript", "audit_academic_writing", "check_citations",
             "verify_statistics", "verify_scientific_claims", "review_scientific_paper",
             "review_manuscript", "get_review_capabilities",
+            "verify_logic",
         })
         for tool in tools:
             self.assertTrue(tool.annotations.readOnlyHint)
@@ -53,6 +55,12 @@ class ProtocolTests(unittest.TestCase):
                     })
                     self.assertFalse(unified.isError, unified)
                     self.assertIn("cross-disciplinary-review/1.0", str(unified))
+                    formal = await client.call_tool("verify_logic", {"spec_json": json.dumps({
+                        "schema_version":"1.0", "variables":{"p":"Bool"}, "assumptions":[],
+                        "claims":[{"id":"tautology","expression":"p or not p"}]
+                    })})
+                    self.assertFalse(formal.isError, formal)
+                    self.assertIn("VERIFIED", str(formal))
         async def bounded():
             await asyncio.wait_for(run(), timeout=45)
         asyncio.run(bounded())

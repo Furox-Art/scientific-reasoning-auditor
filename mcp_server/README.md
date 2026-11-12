@@ -14,7 +14,12 @@ It does **not** modify the SRA rules or make scientific truth judgments.
 | `verify_scientific_claims` | structured `spec_json` | None |
 | `review_scientific_paper` | manuscript, `send_to_model` | Entire extractable text to configured model provider only after caller/host opt in |
 | `get_review_capabilities` | none | None; supported coverage and limitations only |
+| `verify_logic` | explicit formula JSON, optional manuscript content | None; local Z3 solver, separate findings only |
 | `review_manuscript` | manuscript, `study_type`, `disciplines`, optional structured JSON strings, consent flags | Offline by default; DOI/model calls require both caller and host opt-in |
+
+`logic_spec_json` optionally supplies source-bound Z3 formulas to `review_manuscript`.
+Install the engine with `.[pdf,statistics,logic]` to enable formal verification;
+it needs no model key or network enable flag. The manuscript is never modified.
 
 The unified tool composes checks against a single source snapshot. Inspect
 `result.execution_status` and each module even when the transport returns

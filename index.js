@@ -417,6 +417,9 @@ async function runUnified(args, options) {
   if (probe.code !== 0 || catalog?.schema_version !== 'cross-disciplinary-review/1.0') {
     throw new Error('The selected Python engine does not support unified review. Install a source checkout containing "sra capabilities" in the interpreter selected by SRA_PYTHON.');
   }
+  if ((args[0] === 'verify-logic' || args.includes('--logic-spec')) && catalog?.formal_logic?.backend !== 'Z3') {
+    throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
+  }
   if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
   return run(args, options);
 }
@@ -456,7 +459,7 @@ function reviewManuscript(input, options = {}) {
   const args = ['review', input, '--study-type', kind, '--out', options.out || 'review-report'];
   for (const key of disciplines) args.push('--discipline', key);
   for (const [key, flag] of [['styleLanguage', '--style-language'], ['statisticsSpec', '--statistics-spec'],
-    ['scientificSpec', '--scientific-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
+    ['scientificSpec', '--scientific-spec'], ['logicSpec', '--logic-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
     ['apiKeyEnv', '--api-key-env'], ['timeout', '--timeout'], ['chunkChars', '--chunk-chars'],
     ['ocrMode', '--ocr-mode'], ['ocrLanguages', '--ocr-languages']]) {
     if (options[key] !== undefined) args.push(flag, String(options[key]));
@@ -467,7 +470,18 @@ function reviewManuscript(input, options = {}) {
   return runUnified(args, options);
 }
 
+function verifyLogic(input, options = {}) {
+  if (typeof input !== 'string' || !input.length ||
+      options.manuscript !== undefined && (typeof options.manuscript !== 'string' || !options.manuscript.length)) {
+    return Promise.reject(new TypeError('input and optional manuscript must be non-empty file paths'));
+  }
+  const args = ['verify-logic', input, '--out', options.out || 'logic-review'];
+  if (options.manuscript) args.push('--manuscript', options.manuscript);
+  return runUnified(args, options);
+}
+
 module.exports = {
+  verifyLogic,
   capabilities,
   reviewManuscript,
   run,
