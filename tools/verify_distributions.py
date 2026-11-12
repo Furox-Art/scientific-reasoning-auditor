@@ -147,7 +147,10 @@ def _verify_metadata(
     if isinstance(readme, str) and repository_root is not None:
         expected_description = (repository_root / readme).read_bytes()
         actual_description = metadata.get_payload(decode=True)
-        if actual_description != expected_description:
+        # Core metadata is a text message; Windows builders may serialize its
+        # payload with RFC CRLF. Source README members are still compared byte-
+        # for-byte below, so only generated metadata line endings are normalized.
+        if actual_description.replace(b"\r\n", b"\n") != expected_description.replace(b"\r\n", b"\n"):
             raise SystemExit(f"{artifact_name}: distribution description differs from {readme}")
 
 
@@ -465,7 +468,7 @@ def _verify_sdist(
             ).items():
                 member = normalized_members[f"{source_root}/{relative}"]
                 actual_content = _read_tar_member_bounded(archive, member, archive_path.name)
-                if actual_content != expected_content:
+                if actual_content.replace(b"\r\n", b"\n") != expected_content.replace(b"\r\n", b"\n"):
                     raise SystemExit(
                         f"{archive_path.name}: source archive metadata sidecar content mismatch: {relative}"
                     )
