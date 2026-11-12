@@ -25,6 +25,12 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 - Git provenance subprocesses now detach standard input, avoiding consumption of
   or waits on MCP stdio protocol input on Windows.
 - MCP temporary-path scrubbing handles both native and forward-slash spellings.
+- Unified model findings follow declared study-type exclusions; PDF source
+  changes are hard errors, and optional vision uses prevalidated source bytes.
+- Extended statistical input validation precedes optional SciPy imports and
+  outbound requests. Failed DOI lookups preserve results and yield partial execution.
+- Distribution verification accepts generated metadata CRLF/LF differences while
+  retaining byte-exact source inventory checks and rejecting changed content.
 
 ## [0.8.0] - 2026-11-08
 

@@ -1,7 +1,7 @@
 # Cross-disciplinary scientific review: proposed design
 
 Date: 2026-11-12
-Status: proposal awaiting user approval
+Status: approved by the user in chat; first implementation milestone delivered
 Baseline: GitHub main, commit 61631f839e0ec5e64dd8fbe38529050df629c88d
 
 ## Intent and agreed direction
