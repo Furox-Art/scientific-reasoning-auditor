@@ -21,6 +21,8 @@ from sra.domain_adjudication import make_domain_template, validate_domain_adjudi
 from sra.academic_benchmark import evaluate_arxiv_edit_pairs
 from sra.domain_cohort import aggregate_domain_reports
 from sra.scientific_validation import verify_scientific_file
+from sra.review import review_manuscript
+from sra.unified_cli import configure_review_commands, execute_review_command
 
 
 def _reject_input_overwrite(
@@ -71,6 +73,7 @@ def _same_document(left: Path, right: Path) -> bool:
 def main() -> int:
     parser = argparse.ArgumentParser(prog="sra", description="Audit scientific manuscript reasoning.")
     sub = parser.add_subparsers(dest="command", required=True)
+    configure_review_commands(sub)
 
     audit = sub.add_parser("audit", help="Run a manuscript reasoning and evidence-graph audit.")
     audit.add_argument("input", help="Path to .md, .txt, or optional .pdf file.")
@@ -230,6 +233,8 @@ def main() -> int:
     science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
+    if args.command in ("review", "capabilities"):
+        return execute_review_command(args, parser, _reject_input_overwrite, _same_document, review_manuscript)
     if args.command == "paper-review":
         prefix = Path(args.out)
         json_path, md_path = prefix.with_suffix(".json"), prefix.with_suffix(".md")

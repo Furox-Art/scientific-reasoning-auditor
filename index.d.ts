@@ -5,6 +5,32 @@ export interface RunOptions {
   stdio?: 'inherit' | 'pipe' | 'ignore';
 }
 
+export type StudyType = 'unknown' | 'quantitative' | 'qualitative' | 'computational' |
+  'theoretical' | 'systematic-review' | 'narrative-review' | 'mixed';
+export type Discipline = 'clinical' | 'animal' | 'physics' | 'chemistry' | 'computing' | 'social-science';
+export interface UnifiedReviewOptions extends RunOptions {
+  out?: string;
+  studyType?: StudyType;
+  disciplines?: Discipline[];
+  styleLanguage?: 'en' | 'tr' | 'none';
+  statisticsSpec?: string;
+  scientificSpec?: string;
+  online?: boolean;
+  sendToModel?: boolean;
+  model?: string;
+  baseUrl?: string;
+  apiKeyEnv?: string;
+  timeout?: number;
+  chunkChars?: number;
+  ocrMode?: 'off' | 'missing' | 'all';
+  ocrLanguages?: string;
+  visualPages?: boolean;
+}
+/** JSON stdout describes actual capabilities, not scientific validation. */
+export function capabilities(options?: RunOptions): Promise<CommandResult>;
+/** Exit 0 means requested execution completed; exit 1 preserves a partial report. */
+export function reviewManuscript(input: string, options?: UnifiedReviewOptions): Promise<CommandResult>;
+
 export interface CommandResult {
   code: number;
   signal: string | null;
