@@ -101,6 +101,22 @@ def audit_academic_writing(
     grammar_port: int = 8081,
     grammar_timeout: float = 8.0,
 ) -> dict[str, Any]:
+    """Review a file through the source-bound parsed-document implementation."""
+    return audit_academic_writing_document(
+        load_document(path), genre=genre, abstract_min_words=abstract_min_words,
+        abstract_max_words=abstract_max_words, style_language=style_language,
+        design=design, discipline=discipline, grammar_engine=grammar_engine,
+        grammar_port=grammar_port, grammar_timeout=grammar_timeout,
+    )
+
+
+def audit_academic_writing_document(
+    document: ParsedDocument, *, genre: str = "general",
+    abstract_min_words: int | None = None, abstract_max_words: int | None = None,
+    style_language: str = "en", design: str | None = None,
+    discipline: str | None = None, grammar_engine: str = "rules",
+    grammar_port: int = 8081, grammar_timeout: float = 8.0,
+) -> dict[str, Any]:
     """Check section structure, placeholders, cautious phrasing and citation candidates.
 
     Numeric citations: [1], [2, 3] or [2-4], matched to [1]/1./1) references.
@@ -126,7 +142,6 @@ def audit_academic_writing(
         raise ValueError("grammar_engine must be rules or local-languagetool.")
     if grammar_engine == "local-languagetool" and style_language == "none":
         raise ValueError("A language en or tr must be selected for local grammar checking.")
-    document: ParsedDocument = load_document(path)
     sections = list(document.sections.items())
     groups: dict[str, list[str]] = {
         group: [name for name, _ in sections if _heading(name) in aliases]

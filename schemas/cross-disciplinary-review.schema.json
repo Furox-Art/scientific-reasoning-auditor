@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source-bound cross-disciplinary scientific review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","source","source_sha256","extracted_text_sha256","execution_status","execution_scope","configuration","capability_contract_sha256","applicability","modules","excluded_findings","coverage_gaps","reproducibility_manifest","limitations"],
+  "properties": {
+    "schema_version": {"const":"cross-disciplinary-review/1.0"},
+    "source": {"type":"string"},
+    "source_sha256": {"$ref":"#/$defs/digest"},
+    "extracted_text_sha256": {"$ref":"#/$defs/digest"},
+    "execution_status": {"enum":["complete","partial"]},
+    "execution_scope": {"type":"string"},
+    "configuration": {"type":"object"},
+    "capability_contract_sha256": {"$ref":"#/$defs/digest"},
+    "applicability": {"type":"object","required":["version","declared_study_type","review_required","note"],"properties":{"review_required":{"type":"boolean"}}},
+    "modules": {"type":"object","required":["extraction","reasoning","writing","citations","statistics","scientific","model"],"additionalProperties":{"$ref":"#/$defs/module"}},
+    "excluded_findings": {"type":"array","items":{"type":"object","required":["module","finding","reason"]}},
+    "coverage_gaps": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "reproducibility_manifest": {"type":"object"},
+    "limitations": {"type":"array","items":{"type":"string"}}
+  },
+  "$defs": {
+    "digest": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "module": {
+      "type":"object","additionalProperties":false,
+      "required":["status","reason","source_sha256","extracted_text_sha256","result"],
+      "properties": {
+        "status":{"enum":["completed","not_requested","not_applicable","unavailable","failed"]},
+        "reason":{"type":["string","null"]},
+        "source_sha256":{"$ref":"#/$defs/digest"},
+        "extracted_text_sha256":{"$ref":"#/$defs/digest"},
+        "result":{"type":["object","null"]}
+      },
+      "allOf":[{"if":{"properties":{"status":{"const":"completed"}}},"then":{"properties":{"result":{"type":"object"}}},"else":{"properties":{"result":{"type":"null"},"reason":{"type":"string"}}}}]
+    }
+  }
+}

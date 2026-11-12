@@ -44,6 +44,7 @@ def _source_revision() -> tuple[str | None, bool | None]:
         revision = subprocess.run(
             ["git", "rev-parse", "HEAD"],
             cwd=repository_root,
+            stdin=subprocess.DEVNULL,
             capture_output=True,
             text=True,
             check=True,
@@ -52,6 +53,7 @@ def _source_revision() -> tuple[str | None, bool | None]:
         dirty = bool(subprocess.run(
             ["git", "status", "--porcelain"],
             cwd=repository_root,
+            stdin=subprocess.DEVNULL,
             capture_output=True,
             text=True,
             check=True,

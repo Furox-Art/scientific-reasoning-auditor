@@ -8,7 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 
-from sra.document import load_document, without_fenced_code
+from sra.document import ParsedDocument, load_document, without_fenced_code
 
 _DOI_PATTERN = re.compile(r"10\.\d{4,9}/[^\s<>\"']+", re.IGNORECASE)
 _PREFIX = re.compile(r"^(?:https?://(?:dx\.)?doi\.org/|doi\s*:\s*)", re.IGNORECASE)
@@ -215,13 +215,18 @@ def _title_context_overlap(title: str | None, reference_line: str, doi: str) -> 
 
 def verify_dois(path: str | Path, *, online: bool = False,
                 timeout: float = 8.0, limit: int = 50) -> dict:
+    return verify_document_dois(load_document(path), online=online, timeout=timeout, limit=limit)
+
+
+def verify_document_dois(document: ParsedDocument, *, online: bool = False,
+                         timeout: float = 8.0, limit: int = 50) -> dict:
+    """Check DOI metadata against the same parsed snapshot as other modules."""
     if type(online) is not bool:
         raise ValueError("online must be a boolean.")
     if type(limit) is not int or not 1 <= limit <= 200:
         raise ValueError("limit must be an integer from 1 to 200.")
     if type(timeout) not in (int, float) or not 0.5 <= timeout <= 30:
         raise ValueError("timeout must be between 0.5 and 30 seconds.")
-    document = load_document(path)
     found = _extract_dois(document.text)
     records = []
     for doi, line in found[:limit]:
