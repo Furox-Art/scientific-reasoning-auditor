@@ -58,7 +58,7 @@ class ToolkitTests(unittest.TestCase):
 
     def test_raw_data_replay_and_degenerate_data(self):
         for test, groups in (("welch_t",[[1,2,3],[4,5,6]]), ("paired_t",[[1,3,6],[2,5,7]]),
-                             ("pearson",[[1,2,3],[2,4,6]]), ("one_way_anova",[[1,2,3],[4,5,6],[7,8,9]])):
+                             ("pearson",[[1,2,3],[2,4,7]]), ("one_way_anova",[[1,2,3],[4,5,6],[7,8,9]])):
             item={"id":"data", "kind":"statistical_replay","test":test,"groups":groups}
             result=self.check(item)
             self.assertEqual(result["status"], "CALCULATED")
