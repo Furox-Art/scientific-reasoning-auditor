@@ -79,7 +79,7 @@ def _scrub(value: Any, root: Path) -> Any:
     if isinstance(value, list):
         return [_scrub(item, root) for item in value]
     if isinstance(value, str):
-        return value.replace(str(root), "[ephemeral-upload]")
+        return value.replace(str(root), "[ephemeral-upload]").replace(root.as_posix(), "[ephemeral-upload]")
     return value
 
 
@@ -186,5 +186,52 @@ def review_scientific_paper(content: str, file_format: str = "md", encoding: str
                                   base_url=os.getenv("SRA_MCP_MODEL_BASE_URL", "https://api.openai.com/v1"),
                                   api_key_env="OPENAI_API_KEY", pdf_ocr_mode="off",
                                   visual_pages=False, timeout=60)
+            return _scrub(result, root)
+    return _invoke(task)
+
+
+def get_review_capabilities() -> dict[str, Any]:
+    """Discover actual coverage without accepting content or transmitting data."""
+    from sra.capabilities import capabilities
+    return _invoke(capabilities)
+
+
+def review_manuscript(
+    content: str, file_format: str = "md", encoding: str = "text",
+    study_type: str = "unknown", disciplines: list[str] | None = None,
+    style_language: str = "en", online: bool = False,
+    statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
+    send_to_model: bool = False,
+) -> dict[str, Any]:
+    """Compose one source-bound review; transport ok is separate from execution status."""
+    def task() -> dict[str, Any]:
+        from sra.document import load_document
+        from sra.review import review_document
+        if type(online) is not bool or type(send_to_model) is not bool:
+            raise ValueError("online and send_to_model must be booleans.")
+        if online and os.getenv("SRA_MCP_ENABLE_NETWORK") != "1":
+            raise ValueError("Online DOI lookup is disabled by server configuration.")
+        model = None
+        if send_to_model:
+            if os.getenv("SRA_MCP_ENABLE_MODEL_REVIEW") != "1":
+                raise ValueError("External model review is disabled by server configuration.")
+            model = os.getenv("SRA_MCP_MODEL", "").strip()
+            if not model or len(model) > 128 or not os.getenv("OPENAI_API_KEY"):
+                raise ValueError("Server-side model identifier and API key are required.")
+        for spec in (statistics_spec_json, scientific_spec_json):
+            if spec is not None:
+                _json_bytes(spec)
+        data = _document_bytes(content, file_format, encoding)
+        with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
+            document = load_document(path, pdf_ocr_mode="off")
+            document.source = "uploaded" + _EXTENSIONS[file_format]
+            result = review_document(
+                document, study_type=study_type, disciplines=[] if disciplines is None else disciplines,
+                style_language=style_language, online=online,
+                statistics_spec=statistics_spec_json, scientific_spec=scientific_spec_json,
+                send_to_model=send_to_model, model=model,
+                base_url=os.getenv("SRA_MCP_MODEL_BASE_URL", "https://api.openai.com/v1"),
+                api_key_env="OPENAI_API_KEY", timeout=60, visual_pages=False,
+            )
             return _scrub(result, root)
     return _invoke(task)

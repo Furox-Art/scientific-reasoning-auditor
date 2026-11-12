@@ -65,6 +65,27 @@ def review_scientific_paper(content: str, file_format: str = "md",
     return bridge.review_scientific_paper(content, file_format, encoding, send_to_model)
 
 
+@mcp.tool(title="Discover scientific review coverage", annotations=_LOCAL)
+def get_review_capabilities() -> dict[str, Any]:
+    """List available study types, specialist profiles, arithmetic checks and interface limits. Coverage is not scientific validation."""
+    return bridge.get_review_capabilities()
+
+
+@mcp.tool(title="Review a manuscript across scientific disciplines", annotations=_EXTERNAL)
+def review_manuscript(
+    content: str, file_format: str = "md", encoding: str = "text",
+    study_type: str = "unknown", disciplines: list[str] | None = None,
+    style_language: str = "en", online: bool = False,
+    statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
+    send_to_model: bool = False,
+) -> dict[str, Any]:
+    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
+    return bridge.review_manuscript(
+        content, file_format, encoding, study_type, disciplines, style_language,
+        online, statistics_spec_json, scientific_spec_json, send_to_model,
+    )
+
+
 def main() -> None:
     """Local desktop MCP transport; does not require a network auth token."""
     mcp.run(transport="stdio")
