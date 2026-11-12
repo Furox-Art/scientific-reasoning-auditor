@@ -203,6 +203,7 @@ def review_manuscript(
     statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
     send_to_model: bool = False,
     logic_spec_json: str | None = None,
+    toolkit_spec_json: str | None = None,
 ) -> dict[str, Any]:
     """Compose one source-bound review; transport ok is separate from execution status."""
     def task() -> dict[str, Any]:
@@ -219,7 +220,7 @@ def review_manuscript(
             model = os.getenv("SRA_MCP_MODEL", "").strip()
             if not model or len(model) > 128 or not os.getenv("OPENAI_API_KEY"):
                 raise ValueError("Server-side model identifier and API key are required.")
-        for spec in (statistics_spec_json, scientific_spec_json, logic_spec_json):
+        for spec in (statistics_spec_json, scientific_spec_json, logic_spec_json, toolkit_spec_json):
             if spec is not None:
                 _json_bytes(spec)
         data = _document_bytes(content, file_format, encoding)
@@ -231,6 +232,7 @@ def review_manuscript(
                 style_language=style_language, online=online,
                 statistics_spec=statistics_spec_json, scientific_spec=scientific_spec_json,
                 logic_spec=logic_spec_json,
+                toolkit_spec=toolkit_spec_json,
                 send_to_model=send_to_model, model=model,
                 base_url=os.getenv("SRA_MCP_MODEL_BASE_URL", "https://api.openai.com/v1"),
                 api_key_env="OPENAI_API_KEY", timeout=60, visual_pages=False,
@@ -251,4 +253,19 @@ def verify_logic(spec_json: str, content: str | None = None,
         data = _document_bytes(content, file_format, encoding)
         with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
             return _scrub(verify_logic_spec(spec_json, document=load_document(path)), root)
+    return _invoke(task)
+
+
+def verify_toolkit(spec_json: str, content: str | None = None,
+                   file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Run bounded local checks and return a separate report."""
+    def task() -> dict[str, Any]:
+        from sra.toolkit import verify_toolkit_spec
+        from sra.document import load_document
+        _json_bytes(spec_json)
+        if content is None:
+            return verify_toolkit_spec(spec_json)
+        data = _document_bytes(content, file_format, encoding)
+        with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
+            return _scrub(verify_toolkit_spec(spec_json, load_document(path)), root)
     return _invoke(task)

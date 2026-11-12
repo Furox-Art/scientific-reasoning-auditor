@@ -34,6 +34,11 @@ Issues = "https://github.com/Furox-Art/scientific-reasoning-auditor/issues"
 pdf = ["pypdf>=5.0"]
 statistics = ["scipy>=1.11"]
 logic = ["z3-solver==5.4.1.0"]
+mathematics = ["sympy==1.14.0"]
+units = ["pint==0.25.3"]
+language = ["spacy==3.8.18"]
+citations = ["rapidfuzz==3.14.6"]
+toolkit = ["sympy==1.14.0", "pint==0.25.3", "spacy==3.8.18", "rapidfuzz==3.14.6", "scipy>=1.11"]
 dev = ["coverage<9,>=7", "jsonschema<5,>=4.20", "build<2,>=1.2", "twine<8,>=6"]
 
 [project.scripts]

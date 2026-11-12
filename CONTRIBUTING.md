@@ -18,7 +18,7 @@ cd scientific-reasoning-auditor
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -e ".[pdf,statistics,dev]"
+python -m pip install -e ".[pdf,statistics,logic,toolkit,dev]"
 ```
 
 The editable install is required: the tests import the installed `sra` package,

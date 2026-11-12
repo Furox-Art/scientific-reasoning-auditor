@@ -15,9 +15,14 @@ It does **not** modify the SRA rules or make scientific truth judgments.
 | `review_scientific_paper` | manuscript, `send_to_model` | Entire extractable text to configured model provider only after caller/host opt in |
 | `get_review_capabilities` | none | None; supported coverage and limitations only |
 | `verify_logic` | explicit formula JSON, optional manuscript content | None; local Z3 solver, separate findings only |
+| `verify_toolkit` | bounded math/units/data/candidate JSON, optional manuscript content | None; local SymPy/Pint/SciPy/spaCy/RapidFuzz, separate findings |
 | `review_manuscript` | manuscript, `study_type`, `disciplines`, optional structured JSON strings, consent flags | Offline by default; DOI/model calls require both caller and host opt-in |
 
 `logic_spec_json` optionally supplies source-bound Z3 formulas to `review_manuscript`.
+`toolkit_spec_json` optionally supplies the [local inspection toolkit](../docs/DETERMINISTIC_TOOLKIT.md)
+to unified review. Sentence and passage results are candidates requiring review;
+they never certify claims or semantic citation support. Install `.[toolkit]` for
+these backends; neither model keys nor network enable flags are required.
 Install the engine with `.[pdf,statistics,logic]` to enable formal verification;
 it needs no model key or network enable flag. The manuscript is never modified.
 
@@ -40,7 +45,7 @@ Python 3.11+ is required. From the repository root:
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
-python -m pip install -e ".[pdf,statistics]" -r mcp_server/requirements.txt
+python -m pip install -e ".[pdf,statistics,logic,toolkit]" -r mcp_server/requirements.txt
 python -m unittest discover -s mcp_server/tests -v
 python -m mcp_server.server
 ```

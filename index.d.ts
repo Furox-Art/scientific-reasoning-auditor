@@ -16,6 +16,7 @@ export interface UnifiedReviewOptions extends RunOptions {
   statisticsSpec?: string;
   scientificSpec?: string;
   logicSpec?: string;
+  toolkitSpec?: string;
   online?: boolean;
   sendToModel?: boolean;
   model?: string;
@@ -36,6 +37,8 @@ export interface LogicVerificationOptions extends OutputOptions {
 }
 /** Conditional Boolean/linear formal verification; writes a separate report. */
 export function verifyLogic(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
+/** Local exact/numerical checks and explicitly non-verdict sentence/passage candidates. */
+export function verifyToolkit(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
 
 export interface CommandResult {
   code: number;

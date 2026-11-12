@@ -23,6 +23,8 @@ from sra.stats_extended import verify_extended_stats
 from sra.writing import audit_academic_writing_document
 from sra.logic_spec import prepare_logic_spec
 from sra.logic import verify_prepared_logic
+from sra.toolkit_spec import prepare_toolkit_spec
+from sra.toolkit import verify_prepared_toolkit
 
 MAX_SPEC_BYTES = 1024 * 1024
 
@@ -99,6 +101,7 @@ def review_document(
     online: bool = False, statistics_spec: dict | str | None = None,
     scientific_spec: dict | str | None = None, send_to_model: bool = False,
     logic_spec: dict | str | None = None,
+    toolkit_spec: dict | str | None = None,
     model: str | None = None, base_url: str = "https://api.openai.com/v1",
     api_key_env: str = "OPENAI_API_KEY", timeout: int = 120, chunk_chars: int = 12000,
     visual_pages: bool = False, visual_path: str | Path | None = None,
@@ -115,6 +118,7 @@ def review_document(
     visual_bytes = read_visual_source(document, visual_path) if visual_pages else None
     document = copy.deepcopy(document)
     prepared_logic = prepare_logic_spec(logic_spec, document) if logic_spec is not None else None
+    prepared_toolkit = prepare_toolkit_spec(toolkit_spec, document) if toolkit_spec is not None else None
     text_digest = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
     catalog = capabilities()
     modules: dict[str, dict] = {}
@@ -160,6 +164,11 @@ def review_document(
         if modules["logic"]["result"] is not None and modules["logic"]["result"]["execution_status"] == "partial":
             modules["logic"]["status"] = "failed"
             modules["logic"]["reason"] = "Formal verification reached a solver budget; no unknown result is a proof."
+    if prepared_toolkit is not None:
+        run("toolkit", lambda: verify_prepared_toolkit(prepared_toolkit))
+        if modules["toolkit"]["result"] is not None and modules["toolkit"]["result"]["execution_status"] == "partial":
+            modules["toolkit"]["status"] = "failed"
+            modules["toolkit"]["reason"] = "Some requested toolkit checks were unavailable, failed or undetermined; inspect per-check results."
     modules["extraction"] = entry("completed", {
         "backend": document.parser_backend, "input_format": document.input_format,
         "input_bytes": document.source_size_bytes, "extracted_characters": len(document.text),

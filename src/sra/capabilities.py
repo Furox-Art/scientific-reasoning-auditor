@@ -30,6 +30,12 @@ def capabilities() -> dict[str, Any]:
             for key, value in PROFILES.items()
         },
         "statistics_tests": list(SUPPORTED_TESTS),
+        "deterministic_toolkit": {"schema_version":"deterministic-toolkit/1.0", "extra":"toolkit",
+                                  "backends":["SymPy","Pint","SciPy","spaCy","RapidFuzz"],
+                                  "checks":["polynomial_identity","derivative","antiderivative","unit_conversion",
+                                            "statistical_replay","claim_candidates","citation_match"],
+                                  "candidate_results_are_proofs":False,"manuscript_access":"read_only",
+                                  "findings_destination":"separate_user_report"},
         "structured_science_checks": ["semantic_ci", "dimension_equation", "unadjusted_risk_ratio"],
         "formal_logic": {"backend": "Z3", "extra": "logic", "package": "z3-solver==5.4.1.0",
                          "language": "Boolean and quantifier-free linear integer/real arithmetic",

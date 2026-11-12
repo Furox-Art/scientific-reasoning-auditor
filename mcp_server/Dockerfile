@@ -6,7 +6,7 @@ WORKDIR /app
 COPY pyproject.toml README.md LICENSE MANIFEST.in ./
 COPY src/ ./src/
 COPY mcp_server/ ./mcp_server/
-RUN python -m pip install --no-cache-dir ".[pdf,statistics,logic]" -r mcp_server/requirements.txt \
+RUN python -m pip install --no-cache-dir ".[pdf,statistics,logic,toolkit]" -r mcp_server/requirements.txt \
     && useradd --system --uid 10001 --home-dir /nonexistent --shell /usr/sbin/nologin sra
 
 USER 10001

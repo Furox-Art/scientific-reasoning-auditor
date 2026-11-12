@@ -12,6 +12,14 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Optional local inspection toolkit: SymPy exact polynomial/calculus checks,
+  Pint conversions, SciPy raw-data replay, spaCy sentence candidates and RapidFuzz
+  passage ranking. Bounded non-executable specifications, per-check backend
+  versions, explicit partial execution and separate source-bound user reports.
+- `verify-toolkit` CLI, Python API, typed Node `verifyToolkit`, MCP `verify_toolkit`
+  and additive unified-review inputs. Base runtime remains dependency-free;
+  candidate retrieval never awards a truth or semantic citation-support verdict.
+
 - Optional MIT-licensed Z3 formal-verification integration with a pinned `logic`
   extra, restricted Boolean/linear-arithmetic input, consistency checks,
   conditional VERIFIED/REFUTED/UNDETERMINED findings and stable report identities.

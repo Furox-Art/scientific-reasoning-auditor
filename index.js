@@ -421,6 +421,10 @@ async function runUnified(args, options) {
     throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
   }
   if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
+  if ((args[0] === 'verify-toolkit' || args.includes('--toolkit-spec')) &&
+      catalog?.deterministic_toolkit?.schema_version !== 'deterministic-toolkit/1.0') {
+    throw new Error('The selected Python engine lacks the inspection toolkit. Install this source checkout with the [toolkit] extra.');
+  }
   return run(args, options);
 }
 
@@ -459,7 +463,7 @@ function reviewManuscript(input, options = {}) {
   const args = ['review', input, '--study-type', kind, '--out', options.out || 'review-report'];
   for (const key of disciplines) args.push('--discipline', key);
   for (const [key, flag] of [['styleLanguage', '--style-language'], ['statisticsSpec', '--statistics-spec'],
-    ['scientificSpec', '--scientific-spec'], ['logicSpec', '--logic-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
+    ['scientificSpec', '--scientific-spec'], ['logicSpec', '--logic-spec'], ['toolkitSpec', '--toolkit-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
     ['apiKeyEnv', '--api-key-env'], ['timeout', '--timeout'], ['chunkChars', '--chunk-chars'],
     ['ocrMode', '--ocr-mode'], ['ocrLanguages', '--ocr-languages']]) {
     if (options[key] !== undefined) args.push(flag, String(options[key]));
@@ -480,7 +484,18 @@ function verifyLogic(input, options = {}) {
   return runUnified(args, options);
 }
 
+function verifyToolkit(input, options = {}) {
+  if (typeof input !== 'string' || !input.length ||
+      options.manuscript !== undefined && (typeof options.manuscript !== 'string' || !options.manuscript.length)) {
+    return Promise.reject(new TypeError('input and optional manuscript must be non-empty file paths'));
+  }
+  const args = ['verify-toolkit', input, '--out', options.out || 'toolkit-review'];
+  if (options.manuscript) args.push('--manuscript', options.manuscript);
+  return runUnified(args, options);
+}
+
 module.exports = {
+  verifyToolkit,
   verifyLogic,
   capabilities,
   reviewManuscript,

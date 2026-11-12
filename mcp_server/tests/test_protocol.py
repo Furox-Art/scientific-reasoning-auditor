@@ -23,6 +23,7 @@ class ProtocolTests(unittest.TestCase):
             "verify_statistics", "verify_scientific_claims", "review_scientific_paper",
             "review_manuscript", "get_review_capabilities",
             "verify_logic",
+            "verify_toolkit",
         })
         for tool in tools:
             self.assertTrue(tool.annotations.readOnlyHint)
@@ -61,6 +62,12 @@ class ProtocolTests(unittest.TestCase):
                     })})
                     self.assertFalse(formal.isError, formal)
                     self.assertIn("VERIFIED", str(formal))
+                    toolkit = await client.call_tool("verify_toolkit", {"spec_json": json.dumps({
+                        "schema_version":"1.0", "checks":[{"id":"identity","kind":"polynomial_identity",
+                        "variables":["x"],"left":"x+x","right":"2*x"}]
+                    })})
+                    self.assertFalse(toolkit.isError, toolkit)
+                    self.assertIn("VERIFIED", str(toolkit))
         async def bounded():
             await asyncio.wait_for(run(), timeout=45)
         asyncio.run(bounded())
