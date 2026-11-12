@@ -4,17 +4,19 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import tempfile
+from contextlib import ExitStack
 from decimal import Decimal
 from pathlib import Path
 from typing import Any, Callable
 
 from sra.audit import audit_parsed_document
 from sra.capabilities import capabilities, STUDY_TYPES, REPORT_SCHEMA, EMPIRICAL_STRUCTURE
-from sra.document import ParsedDocument, load_document
+from sra.document import ParsedDocument, SourceIdentityError, load_document
 from sra.doi import verify_document_dois
 from sra.domain_evidence import PROFILES, review_domain
 from sra.json_utils import reject_duplicate_keys
-from sra.paper_review import review_parsed_paper, _chunks, MAX_INPUT_BYTES
+from sra.paper_review import review_parsed_paper, read_visual_source, _chunks, MAX_INPUT_BYTES
 from sra.scientific_validation import verify_scientific_spec
 from sra.stats import verify_welch_t_test
 from sra.stats_extended import verify_extended_stats
@@ -107,6 +109,7 @@ def review_document(
         if document.source_size_bytes > MAX_INPUT_BYTES:
             raise ValueError("Model review input exceeds the 20 MiB limit.")
         _chunks(document.text, chunk_chars)
+    visual_bytes = read_visual_source(document, visual_path) if visual_pages else None
     document = copy.deepcopy(document)
     text_digest = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
     catalog = capabilities()
@@ -119,6 +122,8 @@ def review_document(
     def run(name: str, operation: Callable[[], dict], *, required=False) -> None:
         try:
             result = operation()
+        except SourceIdentityError:
+            raise
         except (ImportError, OSError, RuntimeError, ValueError) as exc:
             if required:
                 raise
@@ -127,7 +132,7 @@ def review_document(
             return
         bound = result.get("source_sha256", result.get("sha256", document.sha256))
         if bound != document.sha256 or result.get("extracted_text_sha256", text_digest) != text_digest:
-            raise ValueError(f"Module {name} returned a mismatched source identity.")
+            raise SourceIdentityError(f"Module {name} returned a mismatched source identity.")
         modules[name] = entry("completed", result)
 
     # Validate structured inputs before any network; missing optional dependencies
@@ -168,11 +173,31 @@ def review_document(
     if not config["disciplines"]:
         modules["specialist"] = entry("not_requested", reason="No specialist profile selected; common checks remain available.")
     run("citations", lambda: verify_document_dois(document, online=online, timeout=6, limit=20))
+    citations = modules["citations"]
+    if online and citations["result"] is not None and any(
+        item["status"] == "UNVERIFIED" for item in citations["result"]["results"]
+    ):
+        citations["status"] = "failed"
+        citations["reason"] = "One or more requested DOI lookups did not complete verification; inspect the preserved DOI results."
     if send_to_model:
-        run("model", lambda: review_parsed_paper(
-            document, model=model, base_url=base_url, api_key_env=api_key_env,
-            timeout=timeout, chunk_chars=chunk_chars, visual_pages=visual_pages,
-            visual_path=visual_path))
+        with ExitStack() as stack:
+            model_path = visual_path
+            if visual_bytes is not None:
+                folder = stack.enter_context(tempfile.TemporaryDirectory(prefix="sra-unified-vision-"))
+                model_path = Path(folder) / "source.pdf"
+                model_path.write_bytes(visual_bytes)
+            run("model", lambda: review_parsed_paper(
+                document, model=model, base_url=base_url, api_key_env=api_key_env,
+                timeout=timeout, chunk_chars=chunk_chars, visual_pages=visual_pages,
+                visual_path=model_path))
+        if modules["model"]["status"] == "completed" and study_type in ("theoretical", "narrative-review"):
+            findings = modules["model"]["result"].get("rule_based_findings", [])
+            modules["model"]["result"]["rule_based_findings"] = [
+                item for item in findings if item["check_id"] not in EMPIRICAL_STRUCTURE
+            ]
+            excluded.extend({"module": "model", "finding": item,
+                             "reason": "Empirical section-heading expectation does not apply to the declared study type."}
+                            for item in findings if item["check_id"] in EMPIRICAL_STRUCTURE)
     else:
         modules["model"] = entry("not_requested", reason="External manuscript transmission was not requested.")
     gaps = ["raw_data_not_validated", "analysis_code_not_reexecuted", "mathematical_proofs_not_verified",

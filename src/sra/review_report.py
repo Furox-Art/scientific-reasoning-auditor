@@ -28,7 +28,7 @@ def review_markdown(report: dict) -> str:
     if not report["excluded_findings"]:
         lines.append("No findings were excluded by the declared study type.")
     for name, module in report["modules"].items():
-        if module["status"] != "completed":
+        if module["result"] is None:
             continue
         result = module["result"]
         lines.extend(["", f"## {_safe_md(name)} details", ""])

@@ -49,8 +49,11 @@ Each module has `status`, `reason`, `source_sha256`, `extracted_text_sha256`, an
 in the separate exclusion list rather than skipping a complete module.
 
 `execution_status=complete` means the requested module executions completed. It
-does not mean every possible scientific check was requested, that DOI metadata
-was found, or that model interpretations are true. `partial` means an optional
+does not mean every possible scientific check was requested, that a DOI was
+registered, or that model interpretations are true. A completed negative registry
+lookup is distinct from a failed request. Timeouts/unverifiable registry responses
+make the citations module failed and the execution partial, preserving each DOI
+result in both report formats. `partial` also means an optional
 requested calculation/module failed or was unavailable. Source mismatches,
 invalid configurations/specifications and required extraction/reasoning failures
 are hard errors. The CLI returns 0 for completed execution, 1 for a saved partial

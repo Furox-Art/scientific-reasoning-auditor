@@ -32,7 +32,7 @@
         "extracted_text_sha256":{"$ref":"#/$defs/digest"},
         "result":{"type":["object","null"]}
       },
-      "allOf":[{"if":{"properties":{"status":{"const":"completed"}}},"then":{"properties":{"result":{"type":"object"}}},"else":{"properties":{"result":{"type":"null"},"reason":{"type":"string"}}}}]
+      "allOf":[{"if":{"properties":{"status":{"const":"completed"}}},"then":{"properties":{"result":{"type":"object"}}},"else":{"properties":{"reason":{"type":"string"}}}},{"if":{"properties":{"status":{"enum":["not_requested","not_applicable","unavailable"]}}},"then":{"properties":{"result":{"type":"null"}}}}]
     }
   }
 }

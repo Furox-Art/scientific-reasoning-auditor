@@ -251,6 +251,101 @@ class UnifiedReviewTests(unittest.TestCase):
         self.assertIn("````json\n", text)
         self.assertIn("DOI metadata", text)
 
+    def test_model_duplicate_findings_follow_the_same_applicability_policy(self):
+        api = self.api()
+        from sra.document import load_document
+        digest = load_document(self.paper).sha256
+        for study_type in ("theoretical", "narrative-review"):
+            fake = {"source_sha256": digest, "rule_based_findings": [
+                {"check_id": "structure.methods_missing", "title": "Missing methods"},
+                {"check_id": "language.absolute_claim", "title": "Review wording"}]}
+            with self.subTest(study_type=study_type), patch("sra.review.review_parsed_paper", return_value=fake):
+                result = api.review_manuscript(self.paper, study_type=study_type, send_to_model=True, model="fake")
+            self.assertEqual([x["check_id"] for x in result["modules"]["model"]["result"]["rule_based_findings"]], ["language.absolute_claim"])
+            self.assertTrue(any(x["module"] == "model" for x in result["excluded_findings"]))
+
+    def test_invalid_extended_statistics_with_missing_scipy_cannot_trigger_outbound_requests(self):
+        api = self.api()
+        from sra.stats_extended import _scipy_stats
+        invalid = [{"test":"paired_t"}, {"test":"one_sample_t","sample":{"mean":1,"sd":0,"n":10}},
+                   {"test":"chi_square_2x2","table":[[0,0],[1,2]]},
+                   {"test":"fisher_exact_2x2","table":[[1000000,2],[3,4]]},
+                   {"test":"paired_t","differences":{"mean":1,"sd":2,"n":10},"reported":{"p_two_sided":0}},
+                   {"test":"two_proportion_z","table":[[4,5],[5,6]],"tolerances":{"default":-1}}]
+        # Real dependency helper already wraps ImportError in RuntimeError.
+        error = RuntimeError("SciPy unavailable")
+        error.__cause__ = ImportError("no scipy")
+        for spec in invalid:
+            with self.subTest(spec=spec), patch("sra.stats_extended._scipy_stats", side_effect=error), \
+                 patch("sra.review.verify_document_dois") as registry, patch("sra.review.review_parsed_paper") as model:
+                with self.assertRaises(ValueError):
+                    api.review_manuscript(self.paper, statistics_spec=spec, online=True,
+                                          send_to_model=True, model="fake")
+                registry.assert_not_called()
+                model.assert_not_called()
+
+    def test_registry_execution_failure_is_partial_while_absent_registration_is_complete(self):
+        api = self.api()
+        for status, expected in (("UNVERIFIED", "partial"),
+                                  ("NOT_FOUND_IN_CROSSREF_OR_DATACITE", "complete"),
+                                  ("REGISTERED_IN_CROSSREF", "complete")):
+            with self.subTest(status=status), patch("sra.doi._lookup_registry", return_value={"status": status, "reason":"synthetic"}):
+                result = api.review_manuscript(self.paper, online=True)
+            self.assertEqual(result["execution_status"], expected)
+            self.assertEqual(result["modules"]["citations"]["result"]["results"][0]["status"], status)
+            if status == "UNVERIFIED":
+                from sra.review_report import review_markdown
+                self.assertIn("UNVERIFIED", review_markdown(result))
+
+    def test_changed_visual_source_is_a_hard_error_before_external_requests(self):
+        api = self.api()
+        from sra.document import load_document
+        document = load_document(self.paper)
+        document.input_format = "pdf"
+        self.paper.write_bytes(b"%PDF-1.7 changed source")
+        with patch("sra.review.verify_document_dois") as registry, patch("sra.paper_review.request_single_model_review") as model:
+            with self.assertRaisesRegex(ValueError, "changed|source"):
+                api.review_document(document, visual_pages=True, visual_path=self.paper,
+                                    online=True, send_to_model=True, model="fake")
+            registry.assert_not_called()
+            model.assert_not_called()
+
+    def test_visual_source_exception_escapes_optional_failure_handler(self):
+        api = self.api()
+        from sra.document import SourceIdentityError
+        with patch("sra.review.review_parsed_paper", side_effect=SourceIdentityError("source changed")):
+            with self.assertRaises(SourceIdentityError):
+                api.review_manuscript(self.paper, send_to_model=True, model="fake")
+
+    def test_visual_review_uses_prevalidated_bytes_when_original_changes_later(self):
+        api = self.api()
+        from test_pdf_visual_review import fake_pdf_reader
+        from sra.paper_review import SYNTHESIS_FIELDS
+        pdf = Path(self.tmp.name) / "paper.pdf"
+        original = b"%PDF-synthetic-unified-vision-fixture"
+        pdf.write_bytes(original)
+        rendered_paths = []
+        def fake_model(template, manuscript, **kwargs):
+            task = kwargs["_payload_override"]["task"]
+            if task == "scientific_page_image_review":
+                return {"page_summary": "An illustrative page.", "visual_findings": []}
+            if task == "whole_manuscript_synthesis":
+                return {key: "An advisory interpretation." for key in SYNTHESIS_FIELDS}
+            pdf.write_bytes(b"%PDF-the-original-was-changed")
+            return {"explanation": "An identity is described.", "main_points": [], "critiques": []}
+        def render(path, page):
+            self.assertEqual(Path(path).read_bytes(), original)
+            rendered_paths.append(Path(path))
+            return "data:image/jpeg;base64,AA==", "a" * 64
+        with patch.dict("sys.modules", {"pypdf": fake_pdf_reader(["# Proof\nA synthetic identity follows from assumptions."])}), \
+             patch("sra.paper_review.request_single_model_review", side_effect=fake_model), \
+             patch("sra.paper_review.pdf_page_image_url", side_effect=render):
+            report = api.review_manuscript(pdf, model="fake", send_to_model=True, visual_pages=True)
+        self.assertEqual(report["execution_status"], "complete")
+        self.assertEqual(report["source_sha256"], hashlib.sha256(original).hexdigest())
+        self.assertTrue(rendered_paths)
+        self.assertFalse(rendered_paths[0].exists())
+
 
 if __name__ == "__main__":
     unittest.main()
