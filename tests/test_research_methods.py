@@ -142,7 +142,7 @@ class ResearchMethodTests(unittest.TestCase):
         with patch('statsmodels.stats.meta_analysis.combine_effects',return_value=SimpleNamespace(tau2=10000)):
             self.assertEqual(self.check(meta)['status'],'FAILED')
 
-    def test_more_meta_diagnostics_and_legacy_mcmc_interface(self):
+    def test_more_meta_diagnostics_and_both_mcmc_interfaces(self):
         studies=[{'id':f's{i}','effect':str(.2+.03*i+.02*(i%3)),'variance':str(.01+.003*i)} for i in range(10)]
         item={'id':'meta','kind':'meta_analysis','model':'random','effect_scale':'log_risk_ratio','tau_method':'dersimonian_laird','studies':studies,'asymmetry':True}
         result=self.check(item)
@@ -155,6 +155,23 @@ class ResearchMethodTests(unittest.TestCase):
         legacy=SimpleNamespace(__name__='arviz',rhat=lambda *a,**kw:1.0,ess=lambda *a,**kw:800.0)
         prepared=prepare_research({'id':'b','kind':'bayesian_diagnostics','chains':[[1]*20,[2]*20]},None)
         self.assertEqual(bayesian_diagnostics(prepared,legacy)[0],'CALCULATED')
+        # Exercise the modern adapter contract even on Python 3.11, where only
+        # legacy ArviZ is installable. Real selected-backend diagnostics above
+        # independently test numerical behavior on each CI runtime.
+        calls=[]
+        def statistic(value,**kwargs):
+            calls.append(kwargs)
+            return 1.0 if kwargs['method']=='rank' else 800.0
+        array_api=SimpleNamespace(rhat=statistic,ess=statistic)
+        modern=SimpleNamespace(__name__='arviz_stats')
+        with patch.dict('sys.modules',{'arviz_stats':modern,
+                'arviz_stats.base':SimpleNamespace(array_stats=array_api)}):
+            status,details=bayesian_diagnostics(prepared,modern)
+        self.assertEqual(status,'CALCULATED')
+        self.assertEqual(details['flags'],[])
+        self.assertEqual(calls,[{'method':'rank','chain_axis':0,'draw_axis':1},
+            {'method':'bulk','chain_axis':0,'draw_axis':1},
+            {'method':'tail','prob':(.05,.95),'chain_axis':0,'draw_axis':1}])
 
     def test_ml_missing_manifest_fields_and_descendant_adjustment_are_visible(self):
         item={'id':'ml','kind':'ml_validation','samples':[{'id':'a'},{'id':'b'}],'splits':{'train':['a'],'test':['b']},'group_exclusive':True,'temporal':True}
