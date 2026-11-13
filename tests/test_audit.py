@@ -2533,7 +2533,10 @@ class ModelClientTests(unittest.TestCase):
         invalid_numbers = (
             ("1e9999", "outside the supported floating-point range"),
             ("1e-9999", "too small for floating-point representation"),
-            ("1e-99999999999999999999999999", "outside the supported floating-point range"),
+            # Decimal exponent capacity differs between CPython builds. Both
+            # paths must reject this token: Decimal range or float underflow.
+            ("1e-99999999999999999999999999",
+             "outside the supported floating-point range|too small for floating-point representation"),
             ("1.000000000000000000001", "precision beyond floating-point representation"),
         )
         for number, message in invalid_numbers:
