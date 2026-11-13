@@ -10,7 +10,7 @@
       "selective_reporting":{"judgment":"unknown","source_quote":null}
     }},
     {"id":"power","kind":"power_analysis","design":"independent_t","mode":"sample_size","effect_size":".5","alpha":".05","target_power":".8"},
-    {"id":"meta","kind":"meta_analysis","effect_scale":"mean_difference","model":"random","studies":[
+    {"id":"meta","kind":"meta_analysis","effect_scale":"mean_difference","model":"random","ci_method":"modified_hksj","studies":[
       {"id":"a","effect":".1","variance":".02"},{"id":"b","effect":".5","variance":".02"},{"id":"c","effect":"1","variance":".03"}
     ]},
     {"id":"chains","kind":"bayesian_diagnostics","chains":[[1,3,2,5,4,9,6,7,8,2,1,5,7,4,3,9,2,8,6,5],[2,4,1,6,3,8,5,9,7,3,2,6,8,5,4,1,3,9,7,6]]},

@@ -2,6 +2,7 @@
 import itertools
 import math
 import warnings
+from fractions import Fraction
 from statistics import NormalDist
 
 
@@ -70,20 +71,29 @@ def power_analysis(item,backend):
         if independent:
             options['ratio']=ratio
         if item['mode']=='sample_size':
-            n=math.ceil(float(model.solve_power(power=float(item['target_power']),**options)))
+            minimum_options=dict(options)
+            if independent:
+                minimum_options['ratio']=max(2,math.ceil(2*Fraction(item['ratio'])))/2
+            minimum_power=float(model.power(**{'nobs1' if independent else 'nobs':2},**minimum_options))
+            n=2 if minimum_power>=float(item['target_power']) else max(2,math.ceil(float(model.solve_power(power=float(item['target_power']),**options))))
         else:
             n=item['nobs']
         if not 2<=n<=1000000:
             raise ArithmeticError('Required sample size is outside supported limits.')
         details={'meaning':'Prospective two-sided t-test power under explicitly supplied standardized effect and design assumptions; not observed post-hoc power or design certification.',
-                 'design':item['design'],'alpha':alpha,'effect_size':effect}
+                 'design':item['design'],'alpha':alpha,'effect_size':effect,
+                 'assumptions':{'variance_model':'equal_population_variances' if independent else 'paired_difference_variance',
+                                'effect_standardizer':'pooled_population_sd' if independent else 'sd_of_paired_differences',
+                                'sampling_assumptions_verified':False}}
         if independent:
-            n2=max(2,math.ceil(n*ratio))
+            # Fraction keeps decimal allocation exact, independent of both binary
+            # rounding and the caller's Decimal context (100 * .07 is exactly 7).
+            n2=max(2,math.ceil(n*Fraction(item['ratio'])))
             if n2>1000000:
                 raise ArithmeticError('Second group size exceeds supported bounds.')
             options['ratio']=n2/n
             power=float(model.power(nobs1=n,**options))
-            details.update(n_group1=n,n_group2=n2,requested_ratio=ratio,effective_ratio=n2/n)
+            details.update(n_group1=n,n_group2=n2,requested_ratio=ratio,requested_ratio_exact=item['ratio'],effective_ratio=n2/n)
         else:
             power=float(model.power(nobs=n,**options))
             details['n_pairs']=n
@@ -92,6 +102,8 @@ def power_analysis(item,backend):
             raise ArithmeticError('Rounded allocation did not achieve the target power.')
         return details
     status,details=_numeric(calculate)
+    if status=='CALCULATED' and not 0<details['power']<=1:
+        return 'UNDETERMINED',{'meaning':'Power probability is outside (0,1] or underflowed; no agreement verdict is issued.'}
     if status=='CALCULATED' and 'reported_power' in item:
         agrees=abs(details['power']-float(item['reported_power']))<=1e-6
         status='VERIFIED' if agrees else 'REFUTED'
@@ -105,7 +117,7 @@ def meta_analysis(item,backend):
         effects=np.array([float(s['effect']) for s in item['studies']])
         variances=np.array([float(s['variance']) for s in item['studies']])
         z=NormalDist().inv_cdf(1-float(item['alpha'])/2)
-        def pool(e,v):
+        def pool(e,v,interval=False):
             weights=1/v
             fixed=float(np.sum(weights*e)/np.sum(weights))
             q=float(np.sum(weights*(e-fixed)**2))
@@ -124,9 +136,24 @@ def meta_analysis(item,backend):
                 if (tau>0 and abs(residual_q-df)>1e-6*max(1,df)) or (tau==0 and residual_q>df+1e-6):
                     raise ArithmeticError('Between-study variance did not converge.')
             se=math.sqrt(float(1/np.sum(weights)))
-            return {'estimate':estimate,'standard_error':se,'confidence_interval':[estimate-z*se,estimate+z*se],
+            result={'estimate':estimate,'standard_error':se,'confidence_interval':[estimate-z*se,estimate+z*se],
                     'q':q,'tau_squared':tau,'i_squared':max(0.0,(q-df)/q) if q>0 else 0.0}
-        pooled=pool(effects,variances)
+            if interval:
+                critical=z
+                interval_se=se
+                if item['ci_method']=='modified_hksj':
+                    from scipy.stats import t
+                    scale=float(np.sum(weights*(e-estimate)**2))/df
+                    used=max(1.0,scale)
+                    interval_se=se*math.sqrt(used)
+                    critical=float(t.isf(float(item['alpha'])/2,df))
+                    result.update(hksj_scale_raw=scale,hksj_scale_used=used)
+                result.update(ci_method=item['ci_method'],interval_standard_error=interval_se,
+                              interval_degrees_of_freedom=df if item['ci_method']=='modified_hksj' else None,
+                              interval_critical_value=critical,
+                              confidence_interval=[estimate-critical*interval_se,estimate+critical*interval_se])
+            return result
+        pooled=pool(effects,variances,interval=True)
         leave=[{'omitted_study':study['id'],'estimate':pool(np.delete(effects,i),np.delete(variances,i))['estimate']} for i,study in enumerate(item['studies'])]
         asymmetry={'status':'not_requested'}
         if item.get('asymmetry',False):
@@ -148,7 +175,7 @@ def meta_analysis(item,backend):
                     else:
                         asymmetry={'status':'calculated','egger_intercept':float(fit.params[0]),'p_value':p_value,
                                    'interpretation':'Small-study asymmetry diagnostic, not proof of publication bias.'}
-        return {'meaning':'Pooling on the declared common effect scale with normal-approximation confidence intervals; independence, comparable estimands and study validity remain unverified.',
+        return {'meaning':'Pooling on the declared common effect scale using the explicitly reported confidence-interval method; independence, comparable estimands, nominal coverage and study validity remain unverified.',
                 **pooled,'effect_scale':item['effect_scale'],'model':item['model'],'tau_method':item['tau_method'],
                 'leave_one_out':leave,'asymmetry':asymmetry,'publication_bias_proven':False}
     status,details=_numeric(calculate)
@@ -208,15 +235,19 @@ def ml_validation(item,backend):
         unassessed.append('preprocessing_fit_not_supplied')
     if item.get('temporal',False):
         order=[name for name in ('train','validation','test') if name in splits]
-        for a,b in zip(order,order[1:]):
-            values=[[samples[s]['time'] for s in splits[name]] for name in (a,b)]
+        for a,b in itertools.combinations(order,2):
+            values=[[samples[s]['time'] for s in sorted(splits[name])] for name in (a,b)]
             if any(v is None for group in values for v in group):
                 unassessed.append('missing_timestamps')
-            else:
+            known=[[v for v in group if v is not None] for group in values]
+            if all(known):
                 from decimal import Decimal
-                if max(map(Decimal,values[0]))>=min(map(Decimal,values[1])):
+                earlier=max(map(Decimal,known[0]))
+                later=min(map(Decimal,known[1]))
+                if earlier>=later:
                     violations.append('temporal_order_violation')
+                    facts.append({'partitions':[a,b],'earlier_known_max':str(earlier),'later_known_min':str(later)})
     return 'CANDIDATES',{'meaning':'Mechanical review of declared inductive train/validation/test manifests; actual preprocessing code, measurement timing and generalization remain unverified.',
-        'protocol_status':'violations_found' if violations else 'no_violations_detected',
+        'protocol_status':'violations_found' if violations else 'incomplete' if unassessed else 'no_violations_detected',
         'violations':sorted(set(violations)),'unassessed_checks':sorted(set(unassessed)),
         'facts':facts,'pipeline_correctness_proven':False}

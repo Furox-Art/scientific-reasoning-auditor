@@ -30,3 +30,20 @@ class MCPToolkitTests(unittest.TestCase):
         response=server.verify_toolkit(json.dumps(research))
         self.assertTrue(response['ok'],response)
         self.assertEqual(response['result']['checks'][0]['status'],'CALCULATED')
+
+    def test_modified_hksj_and_incomplete_manifest_survive_source_bound_transport(self):
+        content='# Methods\nTwo independent study estimates and a partial ML manifest.\n'
+        digest=hashlib.sha256(content.encode()).hexdigest()
+        spec={'schema_version':'1.0','source_sha256':digest,'extracted_text_sha256':digest,'checks':[
+            {'id':'meta','kind':'meta_analysis','model':'random','ci_method':'modified_hksj',
+             'effect_scale':'mean_difference','studies':[{'id':'a','effect':0,'variance':1},{'id':'b','effect':0,'variance':1}]},
+            {'id':'ml','kind':'ml_validation','samples':[{'id':'a'},{'id':'b'}],
+             'splits':{'train':['a'],'test':['b']},'temporal':True}]}
+        response=server.verify_toolkit(json.dumps(spec),content)
+        self.assertTrue(response['ok'],response)
+        result=response['result']
+        self.assertEqual(result['source_binding']['status'],'source_matched')
+        self.assertEqual(result['checks'][0]['details']['ci_method'],'modified_hksj')
+        self.assertGreater(result['checks'][0]['details']['confidence_interval'][1],8.98)
+        self.assertEqual(result['checks'][1]['details']['protocol_status'],'incomplete')
+        self.assertEqual(result['manuscript_access'],'read_only')

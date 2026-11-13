@@ -55,13 +55,26 @@ standardized `effect_size` <10 and `alpha` in (0,.5). Independent samples may
 declare `ratio` in [.01,100]; paired analysis requires ratio 1. `nobs` represents
 group 1 observations or paired observations. Results use two-sided t-test power.
 For paired tests the effect must be standardized by the SD of paired differences.
+The independent design is a pooled-variance t test: equal population variances
+and standardization by their common SD are assumed. It is not a Welch power
+calculation. Normal sampling (or an adequate approximation) and independence of
+observations/pairs remain unverified. These design assumptions are included in
+the structured report.
 
 Statsmodels computes power/continuous sample size. Group sizes are rounded up
 and recomputed with the actual integer allocation (at least two/group), with a
-one-million/group ceiling. Target power must exceed alpha and be <.9999. Failure
+one-million/group ceiling. Group 2 is `max(2, ceil(n_group1 * ratio))`, evaluated
+with exact decimal allocation: `100 * .07` allocates 7, not 8. The original ratio
+is preserved as `requested_ratio_exact`. The minimum supported design is checked
+before invoking a continuous solver; reaching a target at two observations is
+valid. The result is a sufficient rounded allocation, not a proof of the minimum
+total integer sample size. Target power must exceed alpha and be <.9999. Failure
 to solve or achieve the target is explicit. Optional `reported_power` is checked
 with absolute tolerance 1e-6. This is prospective analysis on supplied design
 assumptions, not a post-hoc p-value restatement or study-design certification.
+Nonfinite or out-of-range power, including a returned exact zero, cannot earn
+an agreement verdict. Numerical backend failures may still abstain on otherwise
+valid mathematical designs.
 
 ## Meta-analysis
 
@@ -73,16 +86,33 @@ estimands and correct log scales are caller declarations, not inferred facts.
 
 Random effects use `tau_method`: `paule_mandel` (default, Statsmodels with
 convergence checks) or nonnegative-truncated `dersimonian_laird`. Results include
-pooled estimates, normal-approximation CIs (`alpha` .001.. .2, default .05), Q,
+pooled estimates, CIs (`alpha` .001.. .2, default .05), Q,
 I-squared, tau-squared and leave-one-out point estimates. One remaining study in
 a leave-one-out calculation has tau=0; no study-level validity follows.
+
+`ci_method` defaults to `normal`, preserving the previous intervals. Random
+effects also support `modified_hksj`, the modified Knapp-Hartung interval from
+[Röver, Knapp and Friede (2015), equations 9–11](https://pmc.ncbi.nlm.nih.gov/articles/PMC4647507/).
+With weights `w = 1/(variance + tau_squared)` and `k` studies, the residual scale
+is `sum(w * (effect - estimate)**2)/(k-1)`. Its maximum with 1 multiplies the
+conventional pooled variance; the interval uses Student t with `k-1` degrees of
+freedom. The report exposes raw/used scale, interval standard error, critical
+value and degrees of freedom. `standard_error` remains the unscaled pooled
+standard error. Leave-one-out outputs are point estimates only, so the
+single-study omission case does not request a zero-degree t interval.
+
+This safeguard prevents shrinking below the corresponding normal interval;
+very few studies can give very wide, conservative intervals. Normal-normal
+model assumptions and nominal coverage are not established by calculation.
+This is not unmodified HKSJ, a prediction interval or a general robust estimator.
+`modified_hksj` with a fixed model fails preflight before backend import.
 
 Optional `asymmetry: true` requests an Egger intercept diagnostic, available only
 with >=10 studies and differing precisions. Small-study asymmetry is not proof
 of publication bias. Designs with condition number >1e8 and zero/nonfinite tail
 probabilities abstain explicitly. An unavailable/unstable requested diagnostic
 marks the check UNDETERMINED while retaining valid pooled results.
-HKSJ/robust intervals, correlated/multilevel effects and
+Other robust intervals, prediction intervals, correlated/multilevel effects and
 automated study inclusion decisions are not provided. Numerical warnings or
 nonfinite results cannot be presented as successful numerical agreement.
 
@@ -112,6 +142,32 @@ group/time metadata stays unassessed. Reports are CANDIDATES with observed
 violations, never a proof that actual preprocessing code is leak-free or that
 generalization is valid. Feature/label content, transductive evaluation and
 arbitrary code execution are not inspected.
+All ordered partition pairs are checked, including train/test when validation
+timestamps are missing. Available timestamps can prove an ordering violation
+even when a partition has missing times; the missing-data assessment is retained
+alongside `earlier_known_max`/`later_known_min` evidence. `protocol_status` is
+`violations_found` when any violation is observed, `incomplete` when no violation
+is observed but checks remain unassessed (including absent preprocessing fit IDs),
+and `no_violations_detected` only when the requested manifest checks are complete.
+An explicit empty preprocessing fit list declares that no samples were used to
+fit preprocessing; it does not inspect or confirm the actual pipeline.
+
+## Prioritized remaining gaps
+
+1. **External error-detection evaluation:** SciFact retrieval overlap does not
+   measure scientific-error detection across fields. A source-permitted,
+   independently labeled benchmark with abstention/error analysis is still
+   needed before empirical accuracy claims.
+2. **Dependence and design complexity:** Correlated/multilevel study estimates,
+   cluster/unequal-variance power, attrition and repeated measures need explicit
+   design inputs and different estimators. Current simple formulas cannot stand
+   in for these designs.
+3. **Observation beyond manifests:** Actual ML feature/label timing, causal
+   assumptions, study comparability and data authenticity are not established
+   by structured declarations or provenance hashes.
+
+The implemented reliability changes and their regression checks are recorded in
+`docs/superpowers/plans/2026-11-13-research-reliability.md`.
 
 ## Publication update metadata
 
@@ -134,8 +190,10 @@ editorial observation, not a misconduct allegation or a scientific truth verdict
 
 ## Runtime and compatibility
 
-Python 3.11 or newer is required. The research-method suite was tested locally
-in a clean Python 3.15.2 environment; CI also covers Python 3.11 and 3.12.
+Python 3.11 or newer is required. The previous research-method baseline was
+tested locally in a clean Python 3.15.2 environment. The reliability extension
+(exact allocation, modified intervals and incomplete-manifest reporting) was
+tested locally on Linux with Python 3.12.14. CI covers Python 3.11, 3.12 and 3.15.
 On Windows, `py -3.15` explicitly selects the upgraded runtime when installed.
 
 Modern runtime backends: NetworkX 3.7, Statsmodels 0.15.0, ArviZ Stats 1.3.3.

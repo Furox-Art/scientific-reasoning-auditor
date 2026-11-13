@@ -89,9 +89,11 @@ def prepare_research(item,document):
         if 'reported_power' in item:
             result['reported_power']=numeric(item['reported_power'],0,1)
     elif kind=='meta_analysis':
-        _fields(item,base+('studies','effect_scale','model'),('tau_method','alpha','asymmetry'))
+        _fields(item,base+('studies','effect_scale','model'),('tau_method','alpha','asymmetry','ci_method'))
         if item['effect_scale'] not in ('mean_difference','standardized_mean_difference','log_risk_ratio','log_odds_ratio') or item['model'] not in ('fixed','random') or item.get('tau_method','paule_mandel') not in ('paule_mandel','dersimonian_laird'):
             raise ValueError('Declare a common supported effect scale, model and variance estimator.')
+        if item.get('ci_method','normal') not in ('normal','modified_hksj') or (item.get('ci_method')=='modified_hksj' and item['model']!='random'):
+            raise ValueError('ci_method must be normal, or modified_hksj with a random-effects model.')
         studies=item['studies']
         if not isinstance(studies,list) or not 2<=len(studies)<=50:
             raise ValueError('Meta-analysis requires 2..50 independent study estimates.')
@@ -106,7 +108,8 @@ def prepare_research(item,document):
             normalized.append({**row,'effect':numeric(row['effect'],-1e6,1e6),'variance':variance})
         if type(item.get('asymmetry',False)) is not bool:
             raise ValueError('asymmetry must be boolean.')
-        result.update(studies=normalized,tau_method=item.get('tau_method','paule_mandel'),alpha=numeric(item.get('alpha','.05'),.001,.2))
+        result.update(studies=normalized,tau_method=item.get('tau_method','paule_mandel'),alpha=numeric(item.get('alpha','.05'),.001,.2),
+                      ci_method=item.get('ci_method','normal'))
     elif kind=='bayesian_diagnostics':
         _fields(item,base+('chains',),('rhat_max','ess_min'))
         chains=item['chains']

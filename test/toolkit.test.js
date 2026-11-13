@@ -43,5 +43,17 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     const research = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'research') });
     assert.equal(research.code, 0, research.stderr);
     assert.equal(JSON.parse(readFileSync(join(dir, 'research.json'), 'utf8')).checks[0].status, 'CALCULATED');
+    bound.checks = [
+      { id: 'meta', kind: 'meta_analysis', model: 'random', ci_method: 'modified_hksj', effect_scale: 'mean_difference',
+        studies: [{ id: 'a', effect: '0', variance: '1' }, { id: 'b', effect: '0', variance: '1' }] }
+    ];
+    writeFileSync(spec, JSON.stringify(bound));
+    const interval = await sra.verifyToolkit(spec, { manuscript: paper, stdio: 'pipe', out: join(dir, 'interval') });
+    assert.equal(interval.code, 0, interval.stderr);
+    const intervalReport = JSON.parse(readFileSync(join(dir, 'interval.json'), 'utf8'));
+    assert.equal(intervalReport.checks[0].details.ci_method, 'modified_hksj');
+    assert.equal(intervalReport.checks[0].details.interval_degrees_of_freedom, 1);
+    assert.ok(intervalReport.checks[0].details.confidence_interval[1] > 8.98);
+    assert.equal(readFileSync(paper, 'utf8'), content);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
