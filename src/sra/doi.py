@@ -84,6 +84,8 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
         if not isinstance(years, list):
             raise ValueError("Crossref date-parts must be a list.")
         year = years[0][0] if years and isinstance(years[0], list) and years[0] else None
+        from sra.publication import summarize_publication
+        publication=summarize_publication(doi,message)
         return {
             "status": "REGISTERED_IN_CROSSREF",
             "registry": "Crossref",
@@ -91,6 +93,7 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
             "first_author": first_author, "publication_year": year,
             "type": message.get("type"),
             "metadata_url": url,
+            'publication_status':publication,
         }
     except HTTPError as exc:
         if exc.code == 404:
@@ -258,5 +261,6 @@ def verify_document_dois(document: ParsedDocument, *, online: bool = False,
             "Crossref and DataCite cover different DOI registrants; lack of public metadata is not proof of invalidity.",
             "This scan recognizes DOI patterns in document text; it does not determine which claim each DOI supports.",
             "Online mode sends extracted DOI identifiers to Crossref and, if necessary, DataCite; manuscript text is not uploaded.",
+            'Crossref update metadata may be incomplete; absent update links do not prove that a publication is unretracted or current.',
         ],
     }

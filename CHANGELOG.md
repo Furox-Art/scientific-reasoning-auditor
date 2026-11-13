@@ -12,6 +12,13 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Seven bounded research-method kinds: declared-DAG backdoor checks, caller bias
+  evidence, prospective power/sample size, meta-analysis/sensitivity, Bayesian
+  chain diagnostics, ML split manifests and offline Crossref update snapshots.
+- Directional Crossref updates in existing opt-in DOI requests, without extra
+  requests; numerical environment metadata; Python 3.15 CI with older-runtime
+  conditional optional dependencies. Reports remain separate and manuscripts read-only.
+
 - Source-located inspection preparation across CLI, Python, Node and MCP; proposed
   equations/statistic inputs require confirmation and never execute automatically.
 - Domain-aware bounded symbolic operations in isolated workers; regression,

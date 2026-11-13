@@ -23,6 +23,12 @@ context retrieval, keyed CSV/SVG inspection and a frozen real-paper retrieval
 benchmark. Run `sra prepare-inspection` or add `--prepare-inputs` to unified review.
 Proposed checks require confirmation; no inferred prose interpretation runs as proof.
 
+[Research-method checks](docs/RESEARCH_METHODS.md) additionally cover declared-DAG
+causal adjustment, evidence-linked bias worksheets, prospective power/sample size,
+meta-analysis, MCMC diagnostics, ML split manifests and directional publication
+updates. Install `.[toolkit,research]`; try `examples/research-methods.json`.
+Python 3.15 is included in CI alongside 3.11/3.12. All new reports are English.
+
 The v0.8.0 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.8.0; the Node.js adapter is version 0.1.2 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.

@@ -4,6 +4,7 @@ import importlib.metadata
 import json
 import math
 import platform
+import sys
 import warnings
 from bisect import bisect_right
 from decimal import Context, Decimal, localcontext
@@ -16,10 +17,24 @@ BACKENDS = dict.fromkeys(KINDS[:3],"sympy") | {"unit_conversion":"pint", "statis
 _STATISTICS_LOCK = Lock()
 BACKENDS.update(dict.fromkeys(('symbolic_identity','symbolic_derivative','symbolic_antiderivative'),'sympy'))
 BACKENDS.update(statistical_analysis='scipy.stats',statistic_consistency='scipy.stats',citation_context='rapidfuzz.fuzz',table_compare='csv',figure_svg='xml.etree.ElementTree')
+BACKENDS.update(causal_graph='networkx',bias_assessment='json',power_analysis='statsmodels.stats.power',
+                meta_analysis='statsmodels.stats.meta_analysis',
+                bayesian_diagnostics='arviz_stats' if sys.version_info>=(3,12) else 'arviz',
+                ml_validation='json',publication_status='json')
 
 
 def _backend(name):
     return importlib.import_module(name)
+
+
+def _numerical_environment():
+    versions={}
+    for name in ('numpy','scipy','statsmodels','networkx','arviz-stats','arviz'):
+        try:
+            versions[name]=importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            versions[name]=None
+    return {'python':platform.python_version(),'system':platform.system(),'machine':platform.machine(),'packages':versions}
 
 
 def _mathematics(item, sympy):
@@ -121,12 +136,17 @@ def verify_prepared_toolkit(prepared):
         row = {"id":item["id"],"kind":item["kind"],"backend":name,"backend_version":None}
         try:
             module = _backend(name)
-            row["backend_version"] = platform.python_version() if name in ('csv','xml.etree.ElementTree') else importlib.metadata.version(name.split(".")[0])
+            row["backend_version"] = platform.python_version() if name in ('csv','xml.etree.ElementTree','json') else importlib.metadata.version(name.split(".")[0])
             if item["kind"] in KINDS[:3]:
                 status,details = _mathematics(item,module)
             elif item['kind'] in ('symbolic_identity','symbolic_derivative','symbolic_antiderivative'):
                 from sra.symbolic import verify_symbolic
                 status,details=verify_symbolic(item,module)
+            elif item['kind'] in ('causal_graph','bias_assessment','power_analysis','meta_analysis','bayesian_diagnostics','ml_validation','publication_status'):
+                from sra import research_checks
+                from sra.publication import publication_status
+                operation=publication_status if item['kind']=='publication_status' else getattr(research_checks,item['kind'])
+                status,details=operation(item,module)
             else:
                 from sra.inspection_calculations import statistical_analysis,statistic_consistency,citation_context,table_compare,figure_svg
                 operation = {"unit_conversion":_units,"statistical_replay":_statistics,
@@ -135,13 +155,14 @@ def verify_prepared_toolkit(prepared):
                              'statistic_consistency':statistic_consistency,
                              'table_compare':table_compare,'figure_svg':figure_svg}[item["kind"]]
                 status,details = operation(item,module)
-        except (ImportError,OSError,ValueError,RuntimeError,ArithmeticError) as exc:
+        except (ImportError,OSError,ValueError,RuntimeError,ArithmeticError,TypeError) as exc:
             status = "UNAVAILABLE" if isinstance(exc,ImportError) else "FAILED"
             details = {"meaning":"Local backend did not complete; check optional dependencies and supported inputs. Details withheld."}
         row.update(status=status,details=details)
         results.append(row)
-    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-2",
+    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-3",
               "input_sha256":prepared["input_sha256"],"source_binding":prepared["source_binding"],
+              'numerical_environment':_numerical_environment(),
               "execution_status":"partial" if any(r["status"] in ("UNAVAILABLE","FAILED","UNDETERMINED") for r in results) else "complete",
               "checks":results,"manuscript_access":"read_only","findings_destination":"separate_user_report",
               "limitations":["Execution completion is not scientific validity; VERIFIED applies only to the supplied structured check.",

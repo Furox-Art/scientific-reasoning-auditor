@@ -37,5 +37,11 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     const preparation = await sra.prepareInspection(paper, { stdio: 'pipe', out: join(dir, 'prepared') });
     assert.equal(preparation.code, 0, preparation.stderr);
     assert.equal(JSON.parse(readFileSync(join(dir, 'prepared.json'), 'utf8')).checks_executed, false);
+    writeFileSync(spec, JSON.stringify({ schema_version: '1.0', checks: [
+      { id: 'power', kind: 'power_analysis', design: 'paired_t', mode: 'calculate', nobs: 34, effect_size: '.5', alpha: '.05' }
+    ] }));
+    const research = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'research') });
+    assert.equal(research.code, 0, research.stderr);
+    assert.equal(JSON.parse(readFileSync(join(dir, 'research.json'), 'utf8')).checks[0].status, 'CALCULATED');
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

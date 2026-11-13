@@ -67,6 +67,11 @@ def review_markdown(report: dict) -> str:
                           f"- External lookup requested: {result['online_lookup']}"])
             for item in result["results"]:
                 lines.append(f"- {_safe_md(item['doi'])}: {_safe_md(item['status'])}")
+                if item.get('publication_status'):
+                    publication=item['publication_status']
+                    lines.append(f"  - Registered publication update status: {_safe_md(publication['publication_status'])}")
+                    for update in publication['updates']:
+                        lines.append(f"  - {_safe_md(update['direction'])}: {_safe_md(update['type'])} ({_safe_md(update['doi'])})")
             lines.extend(f"- {_safe_md(limit)}" for limit in result["limitations"])
         else:
             # A fence longer than every run in the data keeps even malicious

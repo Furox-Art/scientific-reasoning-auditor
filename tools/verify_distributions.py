@@ -24,6 +24,8 @@ import venv
 import zipfile
 import zlib
 from pathlib import Path, PurePosixPath
+from packaging.markers import Marker
+from packaging.requirements import Requirement
 
 from sra.provenance import _source_tree_sha256
 
@@ -51,10 +53,11 @@ def _expected_metadata_fields(project: dict) -> dict[str, object]:
     optional_dependencies = project.get("optional-dependencies", {})
     requires_dist = list(project.get("dependencies", []))
     for extra, dependencies in optional_dependencies.items():
-        requires_dist.extend(
-            f'{dependency}; extra == "{extra}"'
-            for dependency in dependencies
-        )
+        for dependency in dependencies:
+            requirement=Requirement(dependency)
+            existing=f'({requirement.marker}) and ' if requirement.marker is not None else ''
+            requirement.marker=Marker(existing+f'extra == "{extra}"')
+            requires_dist.append(str(requirement))
     urls = project.get("urls", {})
     license_value = project.get("license")
     if isinstance(license_value, dict):
@@ -202,9 +205,18 @@ def _expected_sdist_sidecar_contents(root: Path, files: set[str], name: str, pro
     entry_points = "[console_scripts]\n" + "".join(
         f"{key} = {value}\n" for key, value in scripts.items()
     ) if scripts else ""
+    dependency_groups = {}
+    for extra, items in project.get("optional-dependencies", {}).items():
+        if items:
+            dependency_groups.setdefault(extra, [])
+        for item in items:
+            requirement = Requirement(item)
+            group = extra if requirement.marker is None else f"{extra}:{requirement.marker}"
+            requirement.marker = None
+            dependency_groups.setdefault(group, []).append(str(requirement))
     requires = "".join(
-        f"\n[{extra}]\n" + "\n".join(items) + "\n"
-        for extra, items in sorted(project.get("optional-dependencies", {}).items()) if items
+        f"\n[{group}]\n" + ("\n".join(items) + "\n" if items else "")
+        for group, items in sorted(dependency_groups.items())
     )
     packages = sorted(
         item.name for item in (root / "src").iterdir()

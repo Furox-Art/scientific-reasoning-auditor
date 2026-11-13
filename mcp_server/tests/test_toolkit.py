@@ -26,3 +26,7 @@ class MCPToolkitTests(unittest.TestCase):
         self.assertTrue(server.prepare_inspection('# Proof\n$x=x$')['ok'])
         unified=server.review_manuscript('# Proof\n$x=x$',prepare_inputs=True)
         self.assertIn('preparation',unified['result']['modules'])
+        research={'schema_version':'1.0','checks':[{'id':'p','kind':'power_analysis','design':'paired_t','mode':'calculate','nobs':34,'effect_size':'.5','alpha':'.05'}]}
+        response=server.verify_toolkit(json.dumps(research))
+        self.assertTrue(response['ok'],response)
+        self.assertEqual(response['result']['checks'][0]['status'],'CALCULATED')
