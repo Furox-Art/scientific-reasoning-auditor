@@ -36,6 +36,9 @@ class UnifiedCLITests(unittest.TestCase):
         self.assertEqual(code, 0)
         report = json.loads((self.root / "out/report.json").read_text(encoding="utf-8"))
         self.assertEqual(report["configuration"]["study_type"], "theoretical")
+        self.assertEqual(report['criteria_matrix']['declared_study_type'],'theoretical')
+        criteria={row['id']:row for row in report['criteria_matrix']['criteria']}
+        self.assertEqual(criteria['proof_completeness']['execution_status'],'human_review_required')
         self.assertIn("not scientific", output)
         self.assertTrue((self.root / "out/report.md").is_file())
 

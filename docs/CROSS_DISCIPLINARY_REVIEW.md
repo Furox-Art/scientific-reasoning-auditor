@@ -5,6 +5,11 @@ It accepts manuscripts from any field for common screening; specialist reporting
 cues exist only for the six profiles listed by `sra capabilities`. This is an
 extensible foundation, not a validated expert system for all scientific fields.
 
+Every unified review includes a source-bound [scientific criteria matrix](SCIENTIFIC_CRITERIA.md).
+It separates applicability, available procedures, execution evidence and human
+review requirements, including important unsupported criteria. A completed
+calculation or text screen never becomes a scientific adequacy verdict.
+
 These additive commands require a source checkout containing this feature.
 The published Python 0.8.0 and npm 0.1.2 releases are not guaranteed to include it.
 

@@ -24,6 +24,10 @@ class UnifiedMCPTests(unittest.TestCase):
         report = response["result"]
         self.assertEqual(report["source_sha256"], hashlib.sha256(DOC.encode()).hexdigest())
         self.assertEqual(report["modules"]["model"]["status"], "not_requested")
+        self.assertEqual(report['criteria_matrix']['source_sha256'],report['source_sha256'])
+        criteria={row['id']:row for row in report['criteria_matrix']['criteria']}
+        self.assertEqual(criteria['proof_completeness']['execution_status'],'human_review_required')
+        self.assertEqual(criteria['code_reexecution']['scientific_verdict'],'NOT_ASSESSED')
         self.assertEqual(report["source"], "uploaded.md")
         self.assertNotIn("sra-mcp-", json.dumps(report))
 

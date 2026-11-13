@@ -8,6 +8,7 @@ from sra.report import _safe_md, to_markdown
 from sra.writing import writing_report_markdown
 from sra.logic_report import logic_markdown
 from sra.toolkit_report import toolkit_markdown
+from sra.criteria import criteria_markdown
 
 
 def review_markdown(report: dict) -> str:
@@ -22,6 +23,8 @@ def review_markdown(report: dict) -> str:
     for name, module in report["modules"].items():
         lines.append(f"- **{_safe_md(name)}:** {module['status']}" +
                      (f" — {_safe_md(module['reason'])}" if module["reason"] else ""))
+    if 'criteria_matrix' in report:
+        lines.extend(['', criteria_markdown(report['criteria_matrix'])])
     lines.extend(["", "## Coverage gaps", ""])
     lines.extend(f"- {_safe_md(gap)}" for gap in report["coverage_gaps"])
     lines.extend(["", "## Excluded findings and applicability", ""])

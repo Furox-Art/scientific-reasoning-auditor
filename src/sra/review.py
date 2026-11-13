@@ -25,6 +25,7 @@ from sra.logic_spec import prepare_logic_spec
 from sra.logic import verify_prepared_logic
 from sra.toolkit_spec import prepare_toolkit_spec
 from sra.toolkit import verify_prepared_toolkit
+from sra.criteria import build_criteria_matrix
 
 MAX_SPEC_BYTES = 1024 * 1024
 
@@ -42,7 +43,7 @@ def load_spec_file(path: str | Path) -> str:
     return raw.decode("utf-8-sig")
 
 
-def _prepare_spec(value: dict | str, science: bool) -> dict:
+def _decode_spec(value: dict | str) -> tuple[dict, str]:
     try:
         raw = value if isinstance(value, str) else json.dumps(value, allow_nan=False, ensure_ascii=False)
         if len(raw) > MAX_SPEC_BYTES or len(raw.encode("utf-8")) > MAX_SPEC_BYTES:
@@ -54,6 +55,11 @@ def _prepare_spec(value: dict | str, science: bool) -> dict:
     if not isinstance(spec, dict):
         raise ValueError("Structured specification must be a JSON object.")
     digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+    return spec, digest
+
+
+def _prepare_spec(value: dict | str, science: bool) -> dict:
+    spec, digest = _decode_spec(value)
     # Complete local validation/calculation BEFORE either external service is called.
     if science:
         return verify_scientific_spec(spec, digest)
@@ -125,6 +131,7 @@ def review_document(
     text_digest = hashlib.sha256(document.text.encode("utf-8")).hexdigest()
     catalog = capabilities()
     modules: dict[str, dict] = {}
+    requested_scientific_kinds = ()
 
     def entry(status: str, result=None, reason: str | None = None) -> dict:
         return {"status": status, "reason": reason, "source_sha256": document.sha256,
@@ -153,6 +160,11 @@ def review_document(
         if value is None:
             modules[name] = entry("not_requested", reason="No explicit structured values supplied.")
         else:
+            if science:
+                requested, _ = _decode_spec(value)
+                checks = requested.get('checks', [])
+                requested_scientific_kinds = tuple(item.get('kind') for item in checks
+                    if isinstance(item, dict) and isinstance(item.get('kind'), str)) if isinstance(checks, list) else ()
             try:
                 prepared = _prepare_spec(value, science)
             except (ImportError, RuntimeError) as exc:
@@ -244,6 +256,9 @@ def review_document(
                           "review_required": study_type in ("unknown", "mixed"),
                           "note": "Study type and profile selection are caller declarations requiring human confirmation."},
         "modules": modules, "excluded_findings": excluded, "coverage_gaps": gaps,
+        'criteria_matrix': build_criteria_matrix(study_type, modules, document.sha256, text_digest,
+                                                prepared_toolkit['checks'] if prepared_toolkit is not None else (),
+                                                requested_scientific_kinds),
         "reproducibility_manifest": reasoning["reproducibility_manifest"],
         "limitations": catalog["limitations"],
     }

@@ -18,10 +18,72 @@
     "excluded_findings": {"type":"array","items":{"type":"object","required":["module","finding","reason"]}},
     "coverage_gaps": {"type":"array","items":{"type":"string"},"uniqueItems":true},
     "reproducibility_manifest": {"type":"object"},
-    "limitations": {"type":"array","items":{"type":"string"}}
+    "limitations": {"type":"array","items":{"type":"string"}},
+    "criteria_matrix": {"$ref":"#/$defs/criteria_matrix"}
   },
   "$defs": {
     "digest": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "criteria_matrix": {
+      "type":"object", "additionalProperties":false,
+      "required":["schema_version","catalog_sha256","matrix_sha256","source_sha256","extracted_text_sha256","declared_study_type","criteria","summary","limitations"],
+      "properties": {
+        "schema_version":{"const":"scientific-criteria-matrix/1.0"},
+        "catalog_sha256":{"$ref":"#/$defs/digest"},
+        "matrix_sha256":{"$ref":"#/$defs/digest"},
+        "source_sha256":{"$ref":"#/$defs/digest"},
+        "extracted_text_sha256":{"$ref":"#/$defs/digest"},
+        "declared_study_type":{"enum":["unknown","quantitative","qualitative","computational","theoretical","systematic-review","narrative-review","mixed"]},
+        "criteria":{"type":"array","items":{"$ref":"#/$defs/criterion"}},
+        "summary":{"type":"object","additionalProperties":false,"required":["criteria_total","applicability","support_level","execution_status"],"properties":{
+          "criteria_total":{"type":"integer","minimum":0},
+          "applicability":{"$ref":"#/$defs/counts"},
+          "support_level":{"$ref":"#/$defs/counts"},
+          "execution_status":{"$ref":"#/$defs/counts"}}},
+        "limitations":{"type":"array","items":{"type":"string"}}
+      }
+    },
+    "counts":{"type":"object","additionalProperties":{"type":"integer","minimum":0}},
+    "criterion": {
+      "type":"object", "additionalProperties":false,
+      "required":["id","title","required_evidence","procedure","limitation","support_level","study_types","conditional","toolkit_checks","modules","profile_rules","scientific_checks","applicability","applicability_reason","execution_status","evidence","scientific_verdict","human_review_required"],
+      "properties": {
+        "id":{"type":"string","pattern":"^[a-z][a-z0-9_]*$"},
+        "title":{"type":"string","minLength":1},
+        "required_evidence":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+        "procedure":{"type":"string","minLength":1},
+        "limitation":{"type":"string","minLength":1},
+        "support_level":{"enum":["structured_checks","screening_only","human_review_only","not_implemented"]},
+        "study_types":{"type":"array","uniqueItems":true,"items":{"enum":["unknown","quantitative","qualitative","computational","theoretical","systematic-review","narrative-review","mixed"]}},
+        "conditional":{"type":"boolean"},
+        "toolkit_checks":{"$ref":"#/$defs/string_list"},
+        "modules":{"$ref":"#/$defs/string_list"},
+        "profile_rules":{"$ref":"#/$defs/string_list"},
+        "scientific_checks":{"$ref":"#/$defs/string_list"},
+        "applicability":{"enum":["applicable","requires_review","not_applicable"]},
+        "applicability_reason":{"type":"string","minLength":1},
+        "execution_status":{"enum":["checks_completed","screening_completed","partial","failed","unavailable","not_requested","human_review_required","not_implemented","not_applicable"]},
+        "evidence":{"type":"array","items":{"$ref":"#/$defs/criterion_evidence"}},
+        "scientific_verdict":{"const":"NOT_ASSESSED"},
+        "human_review_required":{"type":"boolean"}
+      },
+      "allOf":[{"if":{"properties":{"applicability":{"const":"not_applicable"}}},"then":{"properties":{"human_review_required":{"const":false},"execution_status":{"const":"not_applicable"}}},"else":{"properties":{"human_review_required":{"const":true}}}}]
+    },
+    "string_list":{"type":"array","uniqueItems":true,"items":{"type":"string"}},
+    "criterion_evidence": {
+      "type":"object", "additionalProperties":false,
+      "required":["module","pointer","check_id","check_status","module_status","execution_status","assessment_scope","source_sha256","extracted_text_sha256"],
+      "properties":{
+        "module":{"type":"string"},
+        "pointer":{"type":"string","pattern":"^/modules/"},
+        "check_id":{"type":["string","null"]},
+        "check_status":{"type":["string","null"]},
+        "module_status":{"enum":["completed","not_requested","not_applicable","unavailable","failed"]},
+        "execution_status":{"enum":["completed","partial","failed","unavailable","not_requested","not_applicable"]},
+        "assessment_scope":{"type":"string","minLength":1},
+        "source_sha256":{"$ref":"#/$defs/digest"},
+        "extracted_text_sha256":{"$ref":"#/$defs/digest"}
+      }
+    },
     "module": {
       "type":"object","additionalProperties":false,
       "required":["status","reason","source_sha256","extracted_text_sha256","result"],

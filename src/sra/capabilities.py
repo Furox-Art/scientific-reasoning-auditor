@@ -7,11 +7,7 @@ from typing import Any
 
 from sra.domain_evidence import PROFILES
 from sra.stats_extended import SUPPORTED_TESTS
-
-STUDY_TYPES = (
-    "unknown", "quantitative", "qualitative", "computational", "theoretical",
-    "systematic-review", "narrative-review", "mixed",
-)
+from sra.criteria_catalog import STUDY_TYPES, criteria_catalog
 REPORT_SCHEMA = "cross-disciplinary-review/1.0"
 APPLICABILITY_VERSION = "explicit-study-type/1.0"
 EMPIRICAL_STRUCTURE = ("structure.methods_missing", "structure.results_missing")
@@ -30,6 +26,7 @@ def capabilities() -> dict[str, Any]:
             for key, value in PROFILES.items()
         },
         "statistics_tests": list(SUPPORTED_TESTS),
+        'criteria_catalog': criteria_catalog(),
         'input_preparation':{'schema_version':'inspection-preparation/1.0','requires_confirmation':True,'checks_executed':False},
         'research_methods':{'extra':'research','causality':'declared_DAG_backdoor_criterion_only',
                             'bias':'caller_judgments_not_expert_certification',

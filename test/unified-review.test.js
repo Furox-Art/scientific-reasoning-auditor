@@ -32,8 +32,14 @@ test('unified Node wrapper executes real Python engine and preserves module iden
     const report = JSON.parse(readFileSync(join(dir, 'report.json'), 'utf8'));
     assert.deepEqual(report.configuration.disciplines, ['physics', 'computing']);
     assert.equal(report.modules.model.status, 'not_requested');
+    assert.equal(report.criteria_matrix.schema_version, 'scientific-criteria-matrix/1.0');
+    assert.ok(report.criteria_matrix.criteria.length >= 35);
+    assert.ok(report.criteria_matrix.criteria.every(row => row.scientific_verdict === 'NOT_ASSESSED'));
+    const proof = report.criteria_matrix.criteria.find(row => row.id === 'proof_completeness');
+    assert.equal(proof.execution_status, 'human_review_required');
     const catalog = await sra.capabilities({ stdio: 'pipe' });
     assert.equal(catalog.code, 0, catalog.stderr);
     assert.equal(JSON.parse(catalog.stdout).schema_version, 'cross-disciplinary-review/1.0');
+    assert.equal(JSON.parse(catalog.stdout).criteria_catalog.catalog_sha256, report.criteria_matrix.catalog_sha256);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
