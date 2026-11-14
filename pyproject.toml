@@ -20,6 +20,7 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.15",
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Information Analysis",
 ]
@@ -33,6 +34,14 @@ Issues = "https://github.com/Furox-Art/scientific-reasoning-auditor/issues"
 [project.optional-dependencies]
 pdf = ["pypdf>=5.0"]
 statistics = ["scipy>=1.11"]
+logic = ["z3-solver==5.4.1.0"]
+mathematics = ["sympy==1.14.0"]
+units = ["pint==0.25.3"]
+language = ["spacy==3.8.18"]
+citations = ["rapidfuzz==3.14.6"]
+causality = ["networkx==3.7; python_version >= '3.12'", "networkx==3.6.1; python_version < '3.12'"]
+research = ["statsmodels==0.15.0", "networkx==3.7; python_version >= '3.12'", "networkx==3.6.1; python_version < '3.12'", "arviz-stats==1.3.3; python_version >= '3.12'", "arviz==0.22.0; python_version < '3.12'"]
+toolkit = ["sympy==1.14.0", "pint==0.25.3", "spacy==3.8.18", "rapidfuzz==3.14.6", "scipy>=1.11"]
 dev = ["coverage<9,>=7", "jsonschema<5,>=4.20", "build<2,>=1.2", "twine<8,>=6"]
 
 [project.scripts]

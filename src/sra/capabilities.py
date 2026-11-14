@@ -1,0 +1,76 @@
+"""Explicit review coverage. A supported interface is not scientific validation."""
+from __future__ import annotations
+
+import hashlib
+import json
+from typing import Any
+
+from sra.domain_evidence import PROFILES
+from sra.stats_extended import SUPPORTED_TESTS
+from sra.criteria_catalog import STUDY_TYPES, criteria_catalog
+REPORT_SCHEMA = "cross-disciplinary-review/1.0"
+APPLICABILITY_VERSION = "explicit-study-type/1.0"
+EMPIRICAL_STRUCTURE = ("structure.methods_missing", "structure.results_missing")
+
+
+def capabilities() -> dict[str, Any]:
+    """Return a fresh catalog; abbreviated field cues never imply expert coverage."""
+    catalog = {
+        "schema_version": REPORT_SCHEMA,
+        "applicability_version": APPLICABILITY_VERSION,
+        "study_types": list(STUDY_TYPES),
+        "disciplines": {
+            key: {"guidance": value["source"], "guidance_url": value["source_url"],
+                  "rule_ids": [rule.key for rule in value["rules"]],
+                  "assessment": "paragraph_cues_not_expert_validation"}
+            for key, value in PROFILES.items()
+        },
+        "statistics_tests": list(SUPPORTED_TESTS),
+        'criteria_catalog': criteria_catalog(),
+        'error_benchmark': {'schema_version': 'error-benchmark/1.0',
+                            'labels': 'separately_supplied_not_authenticated',
+                            'abstention_is_negative': False, 'automatic_truth_labels': False},
+        'input_preparation':{'schema_version':'inspection-preparation/1.0','requires_confirmation':True,'checks_executed':False},
+        'research_methods':{'extra':'research','causality':'declared_DAG_backdoor_criterion_only',
+                            'bias':'caller_judgments_not_expert_certification',
+                            'publication_updates':'directional_Crossref_metadata_not_completeness_proof'},
+        "deterministic_toolkit": {"schema_version":"deterministic-toolkit/1.0", "extra":"toolkit",
+                                  "backends":["SymPy","Pint","SciPy","spaCy","RapidFuzz"],
+                                  "checks":["polynomial_identity","derivative","antiderivative","unit_conversion",
+                                            "statistical_replay","claim_candidates","citation_match",
+                                            'symbolic_identity','symbolic_derivative','symbolic_antiderivative','statistical_analysis',
+                                            'statistic_consistency','citation_context','table_compare','figure_svg',
+                                            'causal_graph','bias_assessment','power_analysis','meta_analysis',
+                                            'bayesian_diagnostics','ml_validation','publication_status',
+                                            'source_overlap','protocol_consistency','checklist_evidence',
+                                            'cluster_robust_regression','correlated_meta_analysis','missing_binary_sensitivity'],
+                                  "candidate_results_are_proofs":False,"manuscript_access":"read_only",
+                                  "findings_destination":"separate_user_report"},
+        "structured_science_checks": ["semantic_ci", "dimension_equation", "unadjusted_risk_ratio"],
+        "formal_logic": {"backend": "Z3", "extra": "logic", "package": "z3-solver==5.4.1.0",
+                         "language": "Boolean and quantifier-free linear integer/real arithmetic",
+                         "input": "explicit structured formulas; not automatic prose interpretation",
+                         "manuscript_access": "read_only", "findings_destination": "separate_user_report"},
+        "module_statuses": ["completed", "not_requested", "not_applicable", "unavailable", "failed"],
+        "excluded_empirical_structure": {
+            key: list(EMPIRICAL_STRUCTURE) for key in ("theoretical", "narrative-review")
+        },
+        "interfaces": {
+            "cli": {"ocr": True, "page_vision": True},
+            "python": {"ocr": True, "page_vision": True},
+            "node": {"ocr": True, "page_vision": True},
+            "mcp": {"ocr": False, "page_vision": False, "decoded_document_limit_bytes": 20 * 1024 * 1024,
+                    "structured_spec_limit_bytes": 1024 * 1024, "response_limit_bytes": 2 * 1024 * 1024},
+        },
+        "limitations": [
+            "Study type is caller-declared, not independently classified.",
+            "Other scientific fields can use common checks; specialist coverage is limited to the listed profiles.",
+            "Profile cues, arithmetic agreement and model interpretations are not scientific certification.",
+            "Only English and Turkish editorial style rules are available; multilingual scientific terminology has uneven coverage.",
+            "No independent multi-field expert-labeled accuracy estimate has been established.",
+        ],
+    }
+    catalog["contract_sha256"] = hashlib.sha256(
+        json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+    return catalog

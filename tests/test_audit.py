@@ -2528,12 +2528,20 @@ class ModelClientTests(unittest.TestCase):
                     _extract_json_object(f'{{"confidence": {constant}}}')
 
     def test_model_response_parser_rejects_non_finite_or_lossy_json_numbers(self):
-        from sra.model_client import _extract_json_object
+        from sra.model_client import _extract_json_object, _parse_finite_json_float
+
+        # Exercise conversion failure independently of platform-specific
+        # Decimal exponent limits; the callback must expose a plain ValueError.
+        with self.assertRaisesRegex(ValueError, "outside the supported floating-point range"):
+            _parse_finite_json_float('invalid-number')
 
         invalid_numbers = (
             ("1e9999", "outside the supported floating-point range"),
             ("1e-9999", "too small for floating-point representation"),
-            ("1e-99999999999999999999999999", "outside the supported floating-point range"),
+            # Decimal exponent capacity differs between CPython builds. Both
+            # paths must reject this token: Decimal range or float underflow.
+            ("1e-99999999999999999999999999",
+             "outside the supported floating-point range|too small for floating-point representation"),
             ("1.000000000000000000001", "precision beyond floating-point representation"),
         )
         for number, message in invalid_numbers:

@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Explicit formal logic problem (Boolean and linear arithmetic)",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","variables","assumptions","claims"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "variables":{"type":"object","maxProperties":64,"propertyNames":{"pattern":"^[A-Za-z][A-Za-z0-9_]{0,63}$"},"additionalProperties":{"enum":["Bool","Int","Real"]}},
+    "assumptions":{"type":"array","maxItems":64,"items":{"$ref":"#/$defs/statement"}},
+    "claims":{"type":"array","minItems":1,"maxItems":32,"items":{"$ref":"#/$defs/statement"}},
+    "source_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "extracted_text_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}
+  },
+  "$defs":{"statement":{
+    "type":"object","additionalProperties":false,"required":["id","expression"],
+    "properties":{
+      "id":{"type":"string","pattern":"^[A-Za-z][A-Za-z0-9_]{0,63}$"},
+      "expression":{"type":"string","minLength":1,"maxLength":512},
+      "source_quote":{"type":"string","minLength":12,"maxLength":2000},
+      "line":{"type":"integer","minimum":1}
+    },
+    "dependentRequired":{"line":["source_quote"]}
+  }}
+}

@@ -10,6 +10,10 @@ MAX_PDF_PAGES = 500
 MAX_EXTRACTED_TEXT_CHARS = 4_000_000
 
 
+class SourceIdentityError(ValueError):
+    """Input bytes no longer match the immutable manuscript being reviewed."""
+
+
 @dataclass
 class ParsedDocument:
     source: str

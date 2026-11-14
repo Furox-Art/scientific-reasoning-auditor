@@ -10,6 +10,58 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+### Added
+
+- Seven bounded research-method kinds: declared-DAG backdoor checks, caller bias
+  evidence, prospective power/sample size, meta-analysis/sensitivity, Bayesian
+  chain diagnostics, ML split manifests and offline Crossref update snapshots.
+- Directional Crossref updates in existing opt-in DOI requests, without extra
+  requests; numerical environment metadata; Python 3.15 CI with older-runtime
+  conditional optional dependencies. Reports remain separate and manuscripts read-only.
+
+- Source-located inspection preparation across CLI, Python, Node and MCP; proposed
+  equations/statistic inputs require confirmation and never execute automatically.
+- Domain-aware bounded symbolic operations in isolated workers; regression,
+  missingness, multiple-testing and rounding-aware reported-statistic checks;
+  local citation context, keyed table/supplement comparisons and inert SVG review.
+- Frozen SciFact real-paper sentence-retrieval evaluation with released human
+  rationale labels, explicit overlap metrics and semantic abstentions. This does
+  not supply new multi-field expert-validated scientific-error accuracy estimates.
+
+- Optional local inspection toolkit: SymPy exact polynomial/calculus checks,
+  Pint conversions, SciPy raw-data replay, spaCy sentence candidates and RapidFuzz
+  passage ranking. Bounded non-executable specifications, per-check backend
+  versions, explicit partial execution and separate source-bound user reports.
+- `verify-toolkit` CLI, Python API, typed Node `verifyToolkit`, MCP `verify_toolkit`
+  and additive unified-review inputs. Base runtime remains dependency-free;
+  candidate retrieval never awards a truth or semantic citation-support verdict.
+
+- Optional MIT-licensed Z3 formal-verification integration with a pinned `logic`
+  extra, restricted Boolean/linear-arithmetic input, consistency checks,
+  conditional VERIFIED/REFUTED/UNDETERMINED findings and stable report identities.
+- Read-only `sra verify-logic`, Node `verifyLogic`, MCP `verify_logic` and an optional
+  source-bound logic module in unified review. Findings go to separate reports.
+
+- Source-bound `sra review` and `sra capabilities` commands with multi-profile
+  composition, declared study-type applicability, explicit module execution
+  states, coverage gaps, JSON schema and Markdown reports.
+- Typed Node `reviewManuscript`/`capabilities` wrappers with feature-contract probes,
+  plus bounded MCP tools with existing caller/host network and model consent gates.
+- Six synthetic cross-field workflow controls; they are not scientific accuracy
+  or independent expert-validation evidence.
+
+### Fixed
+
+- Git provenance subprocesses now detach standard input, avoiding consumption of
+  or waits on MCP stdio protocol input on Windows.
+- MCP temporary-path scrubbing handles both native and forward-slash spellings.
+- Unified model findings follow declared study-type exclusions; PDF source
+  changes are hard errors, and optional vision uses prevalidated source bytes.
+- Extended statistical input validation precedes optional SciPy imports and
+  outbound requests. Failed DOI lookups preserve results and yield partial execution.
+- Distribution verification accepts generated metadata CRLF/LF differences while
+  retaining byte-exact source inventory checks and rejecting changed content.
+
 ## [0.8.0] - 2026-11-08
 
 ### Added

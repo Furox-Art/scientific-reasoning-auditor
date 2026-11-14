@@ -405,7 +405,117 @@ function domainAggregate(reports, options = {}) {
     options.out || 'domain-cohort.json'], options);
 }
 
+const STUDY_TYPES = ['unknown', 'quantitative', 'qualitative', 'computational',
+  'theoretical', 'systematic-review', 'narrative-review', 'mixed'];
+
+async function runUnified(args, options) {
+  // A version alone cannot distinguish published 0.8.0 from a newer source
+  // checkout that exposes this additive interface. Probe the actual contract.
+  const probe = await run(['capabilities'], { ...options, stdio: 'pipe' });
+  let catalog;
+  try { catalog = JSON.parse(probe.stdout); } catch { catalog = null; }
+  if (probe.code !== 0 || catalog?.schema_version !== 'cross-disciplinary-review/1.0') {
+    throw new Error('The selected Python engine does not support unified review. Install a source checkout containing "sra capabilities" in the interpreter selected by SRA_PYTHON.');
+  }
+  if ((args[0] === 'verify-logic' || args.includes('--logic-spec')) && catalog?.formal_logic?.backend !== 'Z3') {
+    throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
+  }
+  if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
+  if (['benchmark-errors', 'error-label-template', 'evaluate-errors'].includes(args[0]) &&
+      catalog?.error_benchmark?.schema_version !== 'error-benchmark/1.0') {
+    throw new Error('The selected Python engine lacks structured-error evaluation. Install the current source checkout.');
+  }
+  if ((args[0] === 'prepare-inspection' || args.includes('--prepare-inputs')) &&
+      catalog?.input_preparation?.schema_version !== 'inspection-preparation/1.0') {
+    throw new Error('The selected Python engine lacks inspection preparation. Install the current source checkout.');
+  }
+  if ((args[0] === 'verify-toolkit' || args.includes('--toolkit-spec')) &&
+      catalog?.deterministic_toolkit?.schema_version !== 'deterministic-toolkit/1.0') {
+    throw new Error('The selected Python engine lacks the inspection toolkit. Install this source checkout with the [toolkit] extra.');
+  }
+  return run(args, options);
+}
+
+function capabilities(options = {}) {
+  return runUnified(['capabilities'], options);
+}
+
+function reviewManuscript(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) {
+    return Promise.reject(new TypeError('input must be a non-empty file path'));
+  }
+  const kind = options.studyType ?? 'unknown';
+  const disciplines = options.disciplines ?? [];
+  if (!STUDY_TYPES.includes(kind) || !Array.isArray(disciplines) ||
+      disciplines.some(key => !DISCIPLINES.includes(key))) {
+    return Promise.reject(new TypeError('studyType and disciplines must be supported identifiers'));
+  }
+  for (const key of ['online', 'sendToModel', 'visualPages', 'prepareInputs']) {
+    if (options[key] !== undefined && typeof options[key] !== 'boolean') {
+      return Promise.reject(new TypeError(`${key} must be boolean`));
+    }
+  }
+  if ((options.model !== undefined || options.visualPages) && !options.sendToModel ||
+      options.sendToModel && (typeof options.model !== 'string' || !options.model.trim() || options.model.length > 128)) {
+    return Promise.reject(new TypeError('model review requires explicit sendToModel and a model identifier'));
+  }
+  if (options.styleLanguage !== undefined && !['en', 'tr', 'none'].includes(options.styleLanguage) ||
+      options.ocrMode !== undefined && !['off', 'missing', 'all'].includes(options.ocrMode)) {
+    return Promise.reject(new TypeError('Unsupported language or OCR mode'));
+  }
+  for (const [key, low, high] of [['timeout', 1, 600], ['chunkChars', 2000, 20000]]) {
+    if (options[key] !== undefined && (!Number.isSafeInteger(options[key]) || options[key] < low || options[key] > high)) {
+      return Promise.reject(new TypeError(`${key} is outside its supported bounds`));
+    }
+  }
+  const args = ['review', input, '--study-type', kind, '--out', options.out || 'review-report'];
+  for (const key of disciplines) args.push('--discipline', key);
+  for (const [key, flag] of [['styleLanguage', '--style-language'], ['statisticsSpec', '--statistics-spec'],
+    ['scientificSpec', '--scientific-spec'], ['logicSpec', '--logic-spec'], ['toolkitSpec', '--toolkit-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
+    ['apiKeyEnv', '--api-key-env'], ['timeout', '--timeout'], ['chunkChars', '--chunk-chars'],
+    ['ocrMode', '--ocr-mode'], ['ocrLanguages', '--ocr-languages']]) {
+    if (options[key] !== undefined) args.push(flag, String(options[key]));
+  }
+  for (const [key, flag] of [['online', '--online'], ['sendToModel', '--send-to-model'], ['visualPages', '--visual-pages'], ['prepareInputs', '--prepare-inputs']]) {
+    if (options[key]) args.push(flag);
+  }
+  return runUnified(args, options);
+}
+
+function verifyLogic(input, options = {}) {
+  if (typeof input !== 'string' || !input.length ||
+      options.manuscript !== undefined && (typeof options.manuscript !== 'string' || !options.manuscript.length)) {
+    return Promise.reject(new TypeError('input and optional manuscript must be non-empty file paths'));
+  }
+  const args = ['verify-logic', input, '--out', options.out || 'logic-review'];
+  if (options.manuscript) args.push('--manuscript', options.manuscript);
+  return runUnified(args, options);
+}
+
+function prepareInspection(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['prepare-inspection', input, '--out', options.out || 'inspection-inputs'], options);
+}
+
+function verifyToolkit(input, options = {}) {
+  if (typeof input !== 'string' || !input.length ||
+      options.manuscript !== undefined && (typeof options.manuscript !== 'string' || !options.manuscript.length)) {
+    return Promise.reject(new TypeError('input and optional manuscript must be non-empty file paths'));
+  }
+  const args = ['verify-toolkit', input, '--out', options.out || 'toolkit-review'];
+  if (options.manuscript) args.push('--manuscript', options.manuscript);
+  return runUnified(args, options);
+}
+
 module.exports = {
+  benchmarkErrors,
+  errorLabelTemplate,
+  evaluateErrors,
+  prepareInspection,
+  verifyToolkit,
+  verifyLogic,
+  capabilities,
+  reviewManuscript,
   run,
   audit,
   createReviewTemplate,
@@ -422,3 +532,20 @@ module.exports = {
   languageBenchmark,
   domainAggregate,
 };
+
+function benchmarkErrors(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['benchmark-errors', input, '--out', options.out || 'error-benchmark'], options);
+}
+
+function errorLabelTemplate(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['error-label-template', input, '--out', options.out || 'error-labels.json'], options);
+}
+
+function evaluateErrors(input, predictions, labels, options = {}) {
+  if ([input, predictions, labels].some(path => typeof path !== 'string' || !path.length)) {
+    return Promise.reject(new TypeError('manifest, predictions and labels must be non-empty file paths'));
+  }
+  return runUnified(['evaluate-errors', input, predictions, labels, '--out', options.out || 'error-evaluation'], options);
+}

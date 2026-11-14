@@ -65,6 +65,68 @@ def review_scientific_paper(content: str, file_format: str = "md",
     return bridge.review_scientific_paper(content, file_format, encoding, send_to_model)
 
 
+@mcp.tool(title="Discover scientific review coverage", annotations=_LOCAL)
+def get_review_capabilities() -> dict[str, Any]:
+    """List available study types, specialist profiles, arithmetic checks and interface limits. Coverage is not scientific validation."""
+    return bridge.get_review_capabilities()
+
+
+@mcp.tool(title="Review a manuscript across scientific disciplines", annotations=_EXTERNAL)
+def review_manuscript(
+    content: str, file_format: str = "md", encoding: str = "text",
+    study_type: str = "unknown", disciplines: list[str] | None = None,
+    style_language: str = "en", online: bool = False,
+    statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
+    send_to_model: bool = False,
+    logic_spec_json: str | None = None,
+    toolkit_spec_json: str | None = None,
+    prepare_inputs: bool = False,
+) -> dict[str, Any]:
+    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
+    return bridge.review_manuscript(
+        content, file_format, encoding, study_type, disciplines, style_language,
+        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,
+    )
+
+
+@mcp.tool(title="Verify supplied formal logic with Z3", annotations=_LOCAL)
+def verify_logic(spec_json: str, content: str | None = None,
+                 file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Check explicit Boolean/linear formulas offline using optional Z3. Results concern the supplied assumptions, not scientific truth. Optional manuscript content requires matching source/text hashes and allows exact quotation checks. Findings are returned separately; the manuscript is never edited. No arbitrary Python or SMT-LIB commands."""
+    return bridge.verify_logic(spec_json, content, file_format, encoding)
+
+
+@mcp.tool(title="Run local deterministic inspection toolkit", annotations=_LOCAL)
+def verify_toolkit(spec_json: str, content: str | None = None,
+                   file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Check supplied polynomials, unit conversions and raw-data calculations; extract sentence and local passage candidates. Candidates are not truth judgments. Optional manuscript requires matching hashes. No code execution, downloads or manuscript edits; returns separate findings."""
+    return bridge.verify_toolkit(spec_json, content, file_format, encoding)
+
+
+@mcp.tool(title='Prepare manuscript inspection candidates',annotations=_LOCAL)
+def prepare_inspection(content: str,file_format: str='md',encoding: str='text') -> dict[str,Any]:
+    """Return source-located equation/statistic/table/figure/assumption candidates. Confirmation required before formal use. No checks inferred from prose are executed; manuscript is read-only."""
+    return bridge.prepare_inspection(content,file_format,encoding)
+
+
+@mcp.tool(title="Run frozen structured-error checks", annotations=_LOCAL)
+def benchmark_errors(manifest_json: str) -> dict[str, Any]:
+    """Run bounded checks on text snapshots inside a frozen manifest. No paths, network, automatic truth labels or scientific certification."""
+    return bridge.benchmark_errors(manifest_json)
+
+
+@mcp.tool(title="Create unfilled error-label template", annotations=_LOCAL)
+def error_label_template(manifest_json: str) -> dict[str, Any]:
+    """Create null reviewer decisions for separately obtained labels. Does not invent or authenticate expert assessments."""
+    return bridge.error_label_template(manifest_json)
+
+
+@mcp.tool(title="Evaluate frozen discrepancies and abstentions", annotations=_LOCAL)
+def evaluate_errors(manifest_json: str, predictions_json: str, labels_json: str) -> dict[str, Any]:
+    """Compare complete frozen runs with separately supplied labels; report exact denominators, exclusions and abstentions. Caller labels/mappings are unverified."""
+    return bridge.evaluate_errors(manifest_json, predictions_json, labels_json)
+
+
 def main() -> None:
     """Local desktop MCP transport; does not require a network auth token."""
     mcp.run(transport="stdio")

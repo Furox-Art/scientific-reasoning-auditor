@@ -7,7 +7,7 @@ must keep the interpretation rules in `README.md` accurate.
 
 ## Requirements
 
-- Python 3.11 or newer (CI runs 3.11 and 3.12).
+- Python 3.11 or newer (CI runs 3.11, 3.12 and 3.15).
 - Node.js 18, 22 or 24 for the npm adapter tests.
 
 ## Set up a development environment
@@ -18,7 +18,7 @@ cd scientific-reasoning-auditor
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -e ".[pdf,statistics,dev]"
+python -m pip install -e ".[pdf,statistics,logic,toolkit,research,dev]"
 ```
 
 The editable install is required: the tests import the installed `sra` package,

@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from sra.audit import audit_parsed_document
-from sra.document import load_document
+from sra.document import ParsedDocument, SourceIdentityError, load_document
 from sra.model_client import request_single_model_review
 from sra.report import _safe_md
 from sra.pdf_visual import MAX_VISION_PAGES, pdf_page_image_url
@@ -208,6 +208,31 @@ def review_paper(
     if visual_pages and path.suffix.lower() != ".pdf":
         raise ValueError("Visual page analysis is only available for PDFs.")
     document = load_document(path, pdf_ocr_mode=pdf_ocr_mode, ocr_languages=ocr_languages)
+    return review_parsed_paper(
+        document, model=model, base_url=base_url, api_key_env=api_key_env,
+        timeout=timeout, chunk_chars=chunk_chars, visual_pages=visual_pages,
+        visual_path=path,
+    )
+
+
+def read_visual_source(document: ParsedDocument, path: str | Path | None) -> bytes:
+    """Read a bounded PDF source only when its bytes match the extracted snapshot."""
+    if path is None:
+        raise ValueError("A source-matched PDF snapshot is required for page images.")
+    with Path(path).open("rb") as stream:
+        raw = stream.read(MAX_INPUT_BYTES + 1)
+    if len(raw) > MAX_INPUT_BYTES or hashlib.sha256(raw).hexdigest() != document.sha256:
+        raise SourceIdentityError("PDF changed since extraction; model vision was not started.")
+    return raw
+
+
+def review_parsed_paper(
+    document: ParsedDocument, *, model: str, base_url: str = "https://api.openai.com/v1",
+    api_key_env: str = "OPENAI_API_KEY", timeout: int = 120,
+    chunk_chars: int = 12000, visual_pages: bool = False,
+    visual_path: str | Path | None = None,
+) -> dict[str, Any]:
+    """Interpret one extracted snapshot; quotes and all chunk coverage are checked."""
     page_records = document.extraction_details.get("page_records", [])
     total_pages = document.extraction_details.get("pdf_page_count", 0)
     if visual_pages and total_pages > MAX_VISION_PAGES:
@@ -238,11 +263,7 @@ def review_paper(
     if visual_pages:
         # All rendered pages come from an immutable copy matched to the
         # manuscript digest, not a mutable file path reopened by Poppler.
-        with path.open("rb") as stream:
-            snapshot_bytes = stream.read(MAX_INPUT_BYTES + 1)
-        if (len(snapshot_bytes) > MAX_INPUT_BYTES
-                or hashlib.sha256(snapshot_bytes).hexdigest() != document.sha256):
-            raise ValueError("PDF changed since extraction; model vision was not started.")
+        snapshot_bytes = read_visual_source(document, visual_path)
         with tempfile.TemporaryDirectory(prefix="sra-vision-snapshot-") as folder:
             snapshot = Path(folder) / "source.pdf"
             snapshot.write_bytes(snapshot_bytes)

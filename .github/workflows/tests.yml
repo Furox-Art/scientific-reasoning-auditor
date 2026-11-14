@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.15"]
         node-version: ["18", "22", "24"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[pdf,statistics,dev]"
+      - run: python -m pip install -e ".[pdf,statistics,logic,toolkit,research,dev]"
       - run: python -m compileall -q src tests tools
       - run: python -m coverage run --source=src/sra -m unittest discover -s tests -v
       - run: python -m coverage report --fail-under=100

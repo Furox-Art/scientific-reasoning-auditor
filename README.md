@@ -1,5 +1,19 @@
 # Scientific Reasoning Auditor
 
+Dependent-data tools now include one-way CR1 regression, supplied-covariance
+common-effect meta-analysis and exact binary missing-outcome sensitivity.
+See [inputs, methods and limits](docs/DEPENDENT_DATA.md).
+
+Frozen structured-check evaluation now reports false alarms, missed errors,
+exclusions and abstentions against separately supplied labels through Python,
+CLI, Node and MCP. See [the evaluation contract](docs/ERROR_BENCHMARK.md).
+Synthetic controls do not establish real-paper accuracy.
+
+Bounded evidence checks now include supplied-source lexical overlap, quoted
+protocol field comparisons and caller-checklist evidence coverage. See
+[the operation contracts](docs/EVIDENCE_CHECKS.md); these do not certify
+originality, ethics approval or official guideline compliance.
+
 A research-software project for auditing the reasoning chain in scientific manuscripts:
 
 **Hypothesis → assumptions → methods → data → analysis → inference → conclusion**
@@ -7,6 +21,32 @@ A research-software project for auditing the reasoning chain in scientific manus
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
 ## Current status: v0.8.0
+
+**Unreleased source feature:** the [local inspection toolkit](docs/DETERMINISTIC_TOOLKIT.md)
+integrates SymPy polynomial/calculus checks, Pint unit conversions, SciPy raw-data
+replay, spaCy sentence candidates and RapidFuzz local passage ranking.
+Install `.[toolkit]`, then run `sra verify-toolkit examples/toolkit.json --out reports/toolkit`.
+Unified review accepts `--toolkit-spec`; Python, Node and MCP adapters expose the
+same checks. Manuscripts remain read-only and findings go to separate reports.
+Sentence/passage candidates do not establish truth or citation support.
+
+The [inspection expansion](docs/INSPECTION_EXPANSION.md) adds source-located input
+preparation, domain-aware rational/trigonometric/logarithmic checks, regression,
+rounding-aware reported-statistic checks, multiple-testing corrections, source
+context retrieval, keyed CSV/SVG inspection and a frozen real-paper retrieval
+benchmark. Run `sra prepare-inspection` or add `--prepare-inputs` to unified review.
+Proposed checks require confirmation; no inferred prose interpretation runs as proof.
+
+[Research-method checks](docs/RESEARCH_METHODS.md) additionally cover declared-DAG
+causal adjustment, evidence-linked bias worksheets, prospective power/sample size,
+meta-analysis, MCMC diagnostics, ML split manifests and directional publication
+updates. Install `.[toolkit,research]`; try `examples/research-methods.json`.
+Python 3.15 is included in CI alongside 3.11/3.12. All new reports are English.
+
+Unified reports also include a [scientific criteria matrix](docs/SCIENTIFIC_CRITERIA.md):
+study-type applicability, required evidence, available checks, source-bound
+execution references and explicit human/unsupported assessments. It covers broad
+review questions without claiming exhaustive coverage or scientific certification.
 
 The v0.8.0 release includes the academic-writing, discipline-review, DOI, PMC benchmark and expanded-statistics tooling that was previously available only from the main branch, together with the hardening work described below. The PyPI package is version 0.8.0; the Node.js adapter is version 0.1.2 and is versioned independently — but it is not independent of the Python engine's *interface*: it refuses to drive an engine older than 0.5.2 and says which upgrade command to run, instead of failing later on a command that version does not have.
 
@@ -107,9 +147,48 @@ A synthetic rule ablation ([docs/RULE_ABLATION.md](docs/RULE_ABLATION.md)) measu
 
 Every finding code is listed in [docs/CHECK_INVENTORY.md](docs/CHECK_INVENTORY.md) with what it detects, what it cannot detect and where its false positives come from; a test fails the build when a rule and its inventory row drift apart.
 
+## Deterministic formal logic with Z3 (source checkout)
+
+The optional, MIT-licensed [Z3 engine](https://github.com/Z3Prover/z3) checks
+explicit Boolean and linear integer/real formulas. Findings go to a separate
+user report; the manuscript is read-only.
+
+```bash
+python -m pip install -e ".[logic]"
+sra verify-logic examples/logic_boolean.json --out reports/logic
+sra verify-logic examples/logic_arithmetic.json --out reports/arithmetic
+```
+
+Reports distinguish `VERIFIED`, `REFUTED` and `UNDETERMINED` conditional on the
+provided assumptions. Inconsistent premises never prove every claim. Fixed solver
+settings, resource budgets and a report fingerprint support repeatability within
+the same solver/adapter/platform. Z3 does not automatically interpret a paper's
+prose or establish empirical truth. See [input format, source binding and limits](docs/DETERMINISTIC_LOGIC.md).
+
+## Unified cross-disciplinary review (source checkout)
+
+Use one source-bound report for reasoning, writing, selected discipline cues,
+DOI metadata, supplied quantitative checks and optional model interpretation:
+
+```bash
+sra capabilities
+sra review examples/unified_review/theoretical_math.md --study-type theoretical --out reports/theory
+sra review examples/unified_review/computational_physics.md --study-type computational --discipline computing --discipline physics --out reports/simulation
+```
+
+Common screening is usable with manuscripts from other fields; specialist cues
+remain limited to the six listed profiles. Theoretical/narrative papers do not
+inherit empirical Methods/Results-heading warnings without an explicit exclusion
+record. Reports distinguish completed, unrequested, unavailable and failed work;
+execution completion is never a scientific validity score. Network/model use is
+off by default. These commands and new Node/MCP entry points require the source
+checkout; published package versions are not guaranteed to include them.
+
+See [scope, examples, interfaces and limitations](docs/CROSS_DISCIPLINARY_REVIEW.md).
+
 ## Optional MCP tools for ChatGPT and Codex
 
-A separate Model Context Protocol (MCP) adapter provides six bounded tools for
+A separate Model Context Protocol (MCP) adapter provides nine bounded tools for
 scientific manuscript reasoning, academic writing, DOI checks, structured
 statistics, scientific validation, and opt-in external-model paper review.
 It supports local stdio and token-protected Streamable HTTP; it does not

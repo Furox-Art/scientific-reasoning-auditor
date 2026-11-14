@@ -5,6 +5,44 @@ export interface RunOptions {
   stdio?: 'inherit' | 'pipe' | 'ignore';
 }
 
+export type StudyType = 'unknown' | 'quantitative' | 'qualitative' | 'computational' |
+  'theoretical' | 'systematic-review' | 'narrative-review' | 'mixed';
+export type Discipline = 'clinical' | 'animal' | 'physics' | 'chemistry' | 'computing' | 'social-science';
+export interface UnifiedReviewOptions extends RunOptions {
+  out?: string;
+  studyType?: StudyType;
+  disciplines?: Discipline[];
+  styleLanguage?: 'en' | 'tr' | 'none';
+  statisticsSpec?: string;
+  scientificSpec?: string;
+  logicSpec?: string;
+  toolkitSpec?: string;
+  prepareInputs?: boolean;
+  online?: boolean;
+  sendToModel?: boolean;
+  model?: string;
+  baseUrl?: string;
+  apiKeyEnv?: string;
+  timeout?: number;
+  chunkChars?: number;
+  ocrMode?: 'off' | 'missing' | 'all';
+  ocrLanguages?: string;
+  visualPages?: boolean;
+}
+/** JSON stdout describes actual capabilities, not scientific validation. */
+export function capabilities(options?: RunOptions): Promise<CommandResult>;
+/** Exit 0 means requested execution completed; exit 1 preserves a partial report. */
+export function reviewManuscript(input: string, options?: UnifiedReviewOptions): Promise<CommandResult>;
+export interface LogicVerificationOptions extends OutputOptions {
+  manuscript?: string;
+}
+/** Conditional Boolean/linear formal verification; writes a separate report. */
+export function verifyLogic(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
+/** Local exact/numerical checks and explicitly non-verdict sentence/passage candidates. */
+export function verifyToolkit(input: string, options?: LogicVerificationOptions): Promise<CommandResult>;
+/** Prepare source-located candidates without executing inferred checks. */
+export function prepareInspection(input: string, options?: OutputOptions): Promise<CommandResult>;
+
 export interface CommandResult {
   code: number;
   signal: string | null;
@@ -72,6 +110,10 @@ export function verifyDoi(input: string, options?: OnlineCheckOptions): Promise<
 export function benchmarkPmc(manifest: string, options: OnlineCheckOptions): Promise<CommandResult>;
 
 export function evaluateLabels(benchmark: string, labels: string, options?: OutputOptions): Promise<CommandResult>;
+/** Conditional structured-check comparisons; source mappings and human labels are unverified. */
+export function benchmarkErrors(manifest: string, options?: OutputOptions): Promise<CommandResult>;
+export function errorLabelTemplate(manifest: string, options?: OutputOptions): Promise<CommandResult>;
+export function evaluateErrors(manifest: string, predictions: string, labels: string, options?: OutputOptions): Promise<CommandResult>;
 
 export interface DomainReviewOptions extends RunOptions {
   out?: string;

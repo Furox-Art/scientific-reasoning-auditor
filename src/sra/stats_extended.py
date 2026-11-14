@@ -6,7 +6,7 @@ They do not validate raw data, sampling, experimental design or assumptions.
 from __future__ import annotations
 
 import math
-from typing import Any
+from typing import Any, Collection
 
 from sra.stats import _compare_reported, _finite_number, _finite_result, _group, _display_precision_tolerance, _json_safe_report_value
 
@@ -14,7 +14,7 @@ from sra.stats import _compare_reported, _finite_number, _finite_result, _group,
 SUPPORTED_TESTS = ("welch_t", "one_sample_t", "paired_t", "chi_square_2x2", "fisher_exact_2x2", "two_proportion_z")
 
 
-def _settings(spec: dict[str, Any], calculated: dict[str, float]) -> tuple[list[dict], str]:
+def _validated_settings(spec: dict[str, Any], fields: Collection[str]) -> tuple[dict, dict]:
     raw = spec.get("tolerances", {})
     if not isinstance(raw, dict):
         raise ValueError("tolerances must be an object.")
@@ -25,7 +25,7 @@ def _settings(spec: dict[str, Any], calculated: dict[str, float]) -> tuple[list[
     if not isinstance(reported, dict):
         raise ValueError("reported must be an object.")
     for key, value in reported.items():
-        if key in calculated:
+        if key in fields:
             _finite_number(value, f"reported.{key}")
             if key in ("p_two_sided", "p_value") and not 0 < float(value) <= 1:
                 raise ValueError(f"reported.{key} must be > 0 and <= 1; do not encode p=0.")
@@ -33,6 +33,11 @@ def _settings(spec: dict[str, Any], calculated: dict[str, float]) -> tuple[list[
                 _display_precision_tolerance(value)
         else:
             _json_safe_report_value(value, f"reported.{key}")
+    return tolerances, reported
+
+
+def _settings(spec: dict[str, Any], calculated: dict[str, float]) -> tuple[list[dict], str]:
+    tolerances, reported = _validated_settings(spec, calculated)
     checks = _compare_reported(calculated, reported, tolerances)
     if any(item["status"] == "FAIL" for item in checks):
         status = "FAIL"
@@ -87,7 +92,6 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
     test = spec.get("test")
     if test not in SUPPORTED_TESTS[1:]:
         raise ValueError(f"Supported extended tests: {', '.join(SUPPORTED_TESTS[1:])}.")
-    stats = _scipy_stats()
     calculated: dict[str, float]
     extra: dict[str, Any] = {}
     warnings: list[str] = []
@@ -112,6 +116,8 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
         if mean_difference and t_stat == 0:
             raise ValueError("t statistic underflowed the supported floating-point range.")
         df = n - 1
+        _validated_settings(spec, ("mean_difference", "standard_error", "t", "df", "p_two_sided"))
+        stats = _scipy_stats()
         p = _valid_probability(2.0 * stats.t.sf(abs(t_stat), df))
         critical = _finite_result(float(stats.t.ppf(0.975, df)), "t critical")
         half_width = _finite_result(critical * standard_error, "confidence interval half-width")
@@ -156,6 +162,8 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
             "pooled standard error",
         )
         z_stat = _finite_result(difference / standard_error, "z statistic")
+        _validated_settings(spec, ("p_a", "p_b", "difference", "pooled_p", "standard_error", "z", "p_two_sided"))
+        stats = _scipy_stats()
         p = _valid_probability(2.0 * stats.norm.sf(abs(z_stat)))
         unpooled_variance = _finite_result(
             p_a * (1.0 - p_a) / n_a + p_b * (1.0 - p_b) / n_b,
@@ -218,6 +226,9 @@ def verify_extended_stats(spec: dict[str, Any], input_sha256: str | None = None)
         table = _table_2x2(spec)
         if test == "fisher_exact_2x2" and sum(map(sum, table)) > 1_000_000:
             raise ValueError("Fisher exact total count exceeds the supported limit of 1000000.")
+        fields = ("chi_square", "df", "p_value") if test == "chi_square_2x2" else ("p_two_sided", "odds_ratio")
+        _validated_settings(spec, fields)
+        stats = _scipy_stats()
         a, b = table[0]
         c, d = table[1]
         n = a + b + c + d
