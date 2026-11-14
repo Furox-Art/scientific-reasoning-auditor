@@ -64,5 +64,13 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     assert.equal(evidenceReport.checks[0].details.sources[0].matched_tokens, 5);
     assert.equal(evidenceReport.checks[1].details.differences, 1);
     assert.deepEqual(evidenceReport.checks[2].details.unassessed_checks, ['recruitment']);
+    writeFileSync(spec, readFileSync(join(__dirname, '../examples/dependent-data.json')));
+    const dependent = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'dependent') });
+    assert.equal(dependent.code, 0, dependent.stderr);
+    const dependentReport = JSON.parse(readFileSync(join(dir, 'dependent.json'), 'utf8'));
+    assert.deepEqual(dependentReport.checks.map(row => row.status), ['CALCULATED', 'CALCULATED', 'CALCULATED']);
+    assert.equal(dependentReport.checks[0].details.inference_df, 3);
+    assert.ok(Math.abs(dependentReport.checks[1].details.estimate - 2) < 1e-12);
+    assert.equal(dependentReport.checks[2].details.risk_difference_bounds.lower_exact, '-1/8');
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

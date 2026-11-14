@@ -8,6 +8,16 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_dependent_calculations_survive_real_transport(self):
+        path=Path(__file__).parents[2]/'examples/dependent-data.json'
+        response=server.verify_toolkit(path.read_text(encoding='utf-8'))
+        self.assertTrue(response['ok'],response)
+        rows=response['result']['checks']
+        self.assertEqual([row['status'] for row in rows],['CALCULATED']*3)
+        self.assertEqual(rows[0]['details']['inference_df'],3)
+        self.assertAlmostEqual(rows[1]['details']['estimate'],2)
+        self.assertEqual(rows[2]['details']['risk_difference_bounds']['lower_exact'],'-1/8')
+
     def test_evidence_operations_retain_differences_and_missing_records(self):
         path=Path(__file__).parents[2]/'examples/evidence-checks.json'
         response=server.verify_toolkit(path.read_text(encoding='utf-8'))

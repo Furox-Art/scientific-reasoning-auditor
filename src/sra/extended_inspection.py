@@ -4,9 +4,10 @@ import io
 import re
 from sra.research_spec import RESEARCH_KINDS
 from sra.evidence_spec import EVIDENCE_KINDS
+from sra.dependent_spec import DEPENDENT_KINDS
 
 EXTRA_KINDS=('symbolic_identity','symbolic_derivative','symbolic_antiderivative',
-             'statistical_analysis','citation_context','table_compare','figure_svg','statistic_consistency')+RESEARCH_KINDS+EVIDENCE_KINDS
+             'statistical_analysis','citation_context','table_compare','figure_svg','statistic_consistency')+RESEARCH_KINDS+EVIDENCE_KINDS+DEPENDENT_KINDS
 
 
 def csv_table(text,keys):
@@ -38,6 +39,9 @@ def prepare_extra(item,document):
     kind=item['kind']
     base=('id','kind')
     result=dict(item)
+    if kind in DEPENDENT_KINDS:
+        from sra.dependent_spec import prepare_dependent
+        return prepare_dependent(item)
     if kind in EVIDENCE_KINDS:
         from sra.evidence_spec import prepare_evidence
         return prepare_evidence(item,document)

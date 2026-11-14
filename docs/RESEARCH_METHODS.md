@@ -112,7 +112,7 @@ with >=10 studies and differing precisions. Small-study asymmetry is not proof
 of publication bias. Designs with condition number >1e8 and zero/nonfinite tail
 probabilities abstain explicitly. An unavailable/unstable requested diagnostic
 marks the check UNDETERMINED while retaining valid pooled results.
-Other robust intervals, prediction intervals, correlated/multilevel effects and
+Other robust intervals, prediction intervals, estimated multilevel effects and
 automated study inclusion decisions are not provided. Numerical warnings or
 nonfinite results cannot be presented as successful numerical agreement.
 
@@ -170,6 +170,10 @@ do not authenticate studies, ethics records, mappings or official compliance.
    cluster/unequal-variance power, attrition and repeated measures need explicit
    design inputs and different estimators. Current simple formulas cannot stand
    in for these designs.
+   `DEPENDENT_DATA.md` adds supplied-covariance common-effect GLS, one-way CR1
+   regression (including declared subject clusters) and exact binary dropout
+   sensitivity. Estimated multilevel/random-effects covariance, CR2/CR3,
+   small-cluster bootstrap and cluster/unequal-variance power remain open.
 3. **Observation beyond manifests:** Actual ML feature/label timing, causal
    assumptions, study comparability and data authenticity are not established
    by structured declarations or provenance hashes.

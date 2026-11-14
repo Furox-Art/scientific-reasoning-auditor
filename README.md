@@ -1,5 +1,9 @@
 # Scientific Reasoning Auditor
 
+Dependent-data tools now include one-way CR1 regression, supplied-covariance
+common-effect meta-analysis and exact binary missing-outcome sensitivity.
+See [inputs, methods and limits](docs/DEPENDENT_DATA.md).
+
 Frozen structured-check evaluation now reports false alarms, missed errors,
 exclusions and abstentions against separately supplied labels through Python,
 CLI, Node and MCP. See [the evaluation contract](docs/ERROR_BENCHMARK.md).

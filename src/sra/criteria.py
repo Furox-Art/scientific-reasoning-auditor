@@ -10,6 +10,8 @@ def _pointer(*parts):
 
 
 def _check_key(item):
+    if item['kind'] == 'cluster_robust_regression' and item.get('leave_one_cluster_out'):
+        return 'cluster_robust_regression:sensitivity'
     if item['kind'] == 'causal_graph' and 'sensitivity_edges' in item:
         return 'causal_graph:sensitivity'
     return (item['kind'] + ':' + item['operation'] if item['kind'] == 'statistical_analysis'
