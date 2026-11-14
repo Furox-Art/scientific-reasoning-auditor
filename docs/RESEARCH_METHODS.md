@@ -163,6 +163,9 @@ do not authenticate studies, ethics records, mappings or official compliance.
    measure scientific-error detection across fields. A source-permitted,
    independently labeled benchmark with abstention/error analysis is still
    needed before empirical accuracy claims.
+   `ERROR_BENCHMARK.md` now provides executable frozen structured-check cohorts,
+   separate label templates and abstention-aware evaluation; genuine real-paper
+   labels and representative sampling remain outstanding.
 2. **Dependence and design complexity:** Correlated/multilevel study estimates,
    cluster/unequal-variance power, attrition and repeated measures need explicit
    design inputs and different estimators. Current simple formulas cannot stand

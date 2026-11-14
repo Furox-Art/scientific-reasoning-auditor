@@ -1,5 +1,10 @@
 # Scientific Reasoning Auditor
 
+Frozen structured-check evaluation now reports false alarms, missed errors,
+exclusions and abstentions against separately supplied labels through Python,
+CLI, Node and MCP. See [the evaluation contract](docs/ERROR_BENCHMARK.md).
+Synthetic controls do not establish real-paper accuracy.
+
 Bounded evidence checks now include supplied-source lexical overlap, quoted
 protocol field comparisons and caller-checklist evidence coverage. See
 [the operation contracts](docs/EVIDENCE_CHECKS.md); these do not certify

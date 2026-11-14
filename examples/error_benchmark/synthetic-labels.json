@@ -1,0 +1,135 @@
+{
+  "schema_version": "error-labels/1.0",
+  "manifest_sha256": "4da049de6968cedb78d855e843ed22c5a96d6100f6964233f928b8bde2b05f73",
+  "label_origin": "synthetic_fixture",
+  "cases": [
+    {
+      "id": "m0",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "m1",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "m2",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "m3",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "c0",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "c1",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "no_error",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "c2",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "uncertain",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "uncertain",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    },
+    {
+      "id": "c3",
+      "reviewers": [
+        {
+          "reviewer_id": "fixture_a",
+          "label": "not_applicable",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        },
+        {
+          "reviewer_id": "fixture_b",
+          "label": "not_applicable",
+          "rationale": "Synthetic software test decision; no actual reviewer."
+        }
+      ],
+      "adjudication": null
+    }
+  ]
+}

@@ -109,6 +109,24 @@ def prepare_inspection(content: str,file_format: str='md',encoding: str='text') 
     return bridge.prepare_inspection(content,file_format,encoding)
 
 
+@mcp.tool(title="Run frozen structured-error checks", annotations=_LOCAL)
+def benchmark_errors(manifest_json: str) -> dict[str, Any]:
+    """Run bounded checks on text snapshots inside a frozen manifest. No paths, network, automatic truth labels or scientific certification."""
+    return bridge.benchmark_errors(manifest_json)
+
+
+@mcp.tool(title="Create unfilled error-label template", annotations=_LOCAL)
+def error_label_template(manifest_json: str) -> dict[str, Any]:
+    """Create null reviewer decisions for separately obtained labels. Does not invent or authenticate expert assessments."""
+    return bridge.error_label_template(manifest_json)
+
+
+@mcp.tool(title="Evaluate frozen discrepancies and abstentions", annotations=_LOCAL)
+def evaluate_errors(manifest_json: str, predictions_json: str, labels_json: str) -> dict[str, Any]:
+    """Compare complete frozen runs with separately supplied labels; report exact denominators, exclusions and abstentions. Caller labels/mappings are unverified."""
+    return bridge.evaluate_errors(manifest_json, predictions_json, labels_json)
+
+
 def main() -> None:
     """Local desktop MCP transport; does not require a network auth token."""
     mcp.run(transport="stdio")

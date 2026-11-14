@@ -104,6 +104,27 @@ def _invoke(task: Any) -> dict[str, Any]:
         _LIMITER.release()
 
 
+def benchmark_errors(manifest_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_benchmark import run_error_benchmark
+        return run_error_benchmark(_json_bytes(manifest_json).decode('utf-8'))
+    return _invoke(task)
+
+
+def error_label_template(manifest_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_benchmark import error_label_template as make_template
+        return make_template(_json_bytes(manifest_json).decode('utf-8'))
+    return _invoke(task)
+
+
+def evaluate_errors(manifest_json: str, predictions_json: str, labels_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_evaluation import evaluate_errors as evaluate
+        return evaluate(*(_json_bytes(value).decode('utf-8') for value in (manifest_json, predictions_json, labels_json)))
+    return _invoke(task)
+
+
 def audit_manuscript(content: str, file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
     """Source-located scientific reasoning screening; not scientific truth certification."""
     def task() -> dict[str, Any]:

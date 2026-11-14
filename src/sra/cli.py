@@ -25,6 +25,7 @@ from sra.review import review_manuscript
 from sra.unified_cli import configure_review_commands, execute_review_command
 from sra.logic_cli import configure_logic_commands, execute_logic_command
 from sra.toolkit_cli import configure_toolkit_commands, execute_toolkit_command
+from sra.error_benchmark_cli import COMMANDS as ERROR_COMMANDS, configure_error_commands, execute_error_command
 
 
 def _reject_input_overwrite(
@@ -78,6 +79,7 @@ def main() -> int:
     configure_review_commands(sub)
     configure_logic_commands(sub)
     configure_toolkit_commands(sub)
+    configure_error_commands(sub)
 
     audit = sub.add_parser("audit", help="Run a manuscript reasoning and evidence-graph audit.")
     audit.add_argument("input", help="Path to .md, .txt, or optional .pdf file.")
@@ -237,6 +239,8 @@ def main() -> int:
     science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
+    if args.command in ERROR_COMMANDS:
+        return execute_error_command(args, parser, _reject_input_overwrite, _same_document)
     if args.command == "verify-logic":
         return execute_logic_command(args, parser, _reject_input_overwrite, _same_document)
     if args.command in ("verify-toolkit",'prepare-inspection','benchmark-evidence'):

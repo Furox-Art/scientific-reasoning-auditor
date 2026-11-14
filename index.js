@@ -421,6 +421,10 @@ async function runUnified(args, options) {
     throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
   }
   if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
+  if (['benchmark-errors', 'error-label-template', 'evaluate-errors'].includes(args[0]) &&
+      catalog?.error_benchmark?.schema_version !== 'error-benchmark/1.0') {
+    throw new Error('The selected Python engine lacks structured-error evaluation. Install the current source checkout.');
+  }
   if ((args[0] === 'prepare-inspection' || args.includes('--prepare-inputs')) &&
       catalog?.input_preparation?.schema_version !== 'inspection-preparation/1.0') {
     throw new Error('The selected Python engine lacks inspection preparation. Install the current source checkout.');
@@ -504,6 +508,9 @@ function verifyToolkit(input, options = {}) {
 }
 
 module.exports = {
+  benchmarkErrors,
+  errorLabelTemplate,
+  evaluateErrors,
   prepareInspection,
   verifyToolkit,
   verifyLogic,
@@ -525,3 +532,20 @@ module.exports = {
   languageBenchmark,
   domainAggregate,
 };
+
+function benchmarkErrors(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['benchmark-errors', input, '--out', options.out || 'error-benchmark'], options);
+}
+
+function errorLabelTemplate(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty file path'));
+  return runUnified(['error-label-template', input, '--out', options.out || 'error-labels.json'], options);
+}
+
+function evaluateErrors(input, predictions, labels, options = {}) {
+  if ([input, predictions, labels].some(path => typeof path !== 'string' || !path.length)) {
+    return Promise.reject(new TypeError('manifest, predictions and labels must be non-empty file paths'));
+  }
+  return runUnified(['evaluate-errors', input, predictions, labels, '--out', options.out || 'error-evaluation'], options);
+}

@@ -110,6 +110,10 @@ export function verifyDoi(input: string, options?: OnlineCheckOptions): Promise<
 export function benchmarkPmc(manifest: string, options: OnlineCheckOptions): Promise<CommandResult>;
 
 export function evaluateLabels(benchmark: string, labels: string, options?: OutputOptions): Promise<CommandResult>;
+/** Conditional structured-check comparisons; source mappings and human labels are unverified. */
+export function benchmarkErrors(manifest: string, options?: OutputOptions): Promise<CommandResult>;
+export function errorLabelTemplate(manifest: string, options?: OutputOptions): Promise<CommandResult>;
+export function evaluateErrors(manifest: string, predictions: string, labels: string, options?: OutputOptions): Promise<CommandResult>;
 
 export interface DomainReviewOptions extends RunOptions {
   out?: string;

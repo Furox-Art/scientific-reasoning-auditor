@@ -25,6 +25,7 @@ class ProtocolTests(unittest.TestCase):
             "verify_logic",
             "verify_toolkit",
             'prepare_inspection',
+            'benchmark_errors', 'error_label_template', 'evaluate_errors',
         })
         for tool in tools:
             self.assertTrue(tool.annotations.readOnlyHint)

@@ -1,5 +1,10 @@
 # Scientific Reasoning Auditor — MCP adapter
 
+`benchmark_errors`, `error_label_template` and `evaluate_errors` accept frozen
+JSON cohorts containing text snapshots, unfilled reviewer decisions or separate
+labels. They retain abstentions and exact denominators without authenticating
+reviewers or certifying science. See [the contract](../docs/ERROR_BENCHMARK.md).
+
 A separate, optional MCP tool server for the Python engine in this repository.
 It does **not** modify the SRA rules or make scientific truth judgments.
 
