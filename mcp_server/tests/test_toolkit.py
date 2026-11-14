@@ -3,10 +3,21 @@ import asyncio
 import hashlib
 import json
 import unittest
+from pathlib import Path
 from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_evidence_operations_retain_differences_and_missing_records(self):
+        path=Path(__file__).parents[2]/'examples/evidence-checks.json'
+        response=server.verify_toolkit(path.read_text(encoding='utf-8'))
+        self.assertTrue(response['ok'],response)
+        rows=response['result']['checks']
+        self.assertEqual([row['status'] for row in rows],['CANDIDATES','REFUTED','UNDETERMINED'])
+        self.assertEqual(rows[0]['details']['sources'][0]['matched_tokens'],5)
+        self.assertEqual(rows[1]['details']['differences'],1)
+        self.assertEqual(rows[2]['details']['unassessed_checks'],['recruitment'])
+
     def test_standalone_and_source_bound_unified_toolkit(self):
         spec={'schema_version':'1.0','checks':[{'id':'math','kind':'polynomial_identity','variables':['x'],'left':'x+x','right':'2*x'}]}
         self.assertEqual(bridge.verify_toolkit(json.dumps(spec))['result']['checks'][0]['status'],'VERIFIED')

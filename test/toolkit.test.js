@@ -55,5 +55,14 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     assert.equal(intervalReport.checks[0].details.interval_degrees_of_freedom, 1);
     assert.ok(intervalReport.checks[0].details.confidence_interval[1] > 8.98);
     assert.equal(readFileSync(paper, 'utf8'), content);
+    const evidence = JSON.parse(readFileSync(join(__dirname, '../examples/evidence-checks.json'), 'utf8'));
+    writeFileSync(spec, JSON.stringify(evidence));
+    const evidenceResult = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'evidence') });
+    assert.equal(evidenceResult.code, 1, evidenceResult.stderr);
+    const evidenceReport = JSON.parse(readFileSync(join(dir, 'evidence.json'), 'utf8'));
+    assert.deepEqual(evidenceReport.checks.map(row => row.status), ['CANDIDATES', 'REFUTED', 'UNDETERMINED']);
+    assert.equal(evidenceReport.checks[0].details.sources[0].matched_tokens, 5);
+    assert.equal(evidenceReport.checks[1].details.differences, 1);
+    assert.deepEqual(evidenceReport.checks[2].details.unassessed_checks, ['recruitment']);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

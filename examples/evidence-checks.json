@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "overlap",
+      "kind": "source_overlap",
+      "text": "Alpha beta gamma delta epsilon zeta. Planned sample size is 120.",
+      "min_tokens": 5,
+      "sources": [
+        {
+          "id": "prior",
+          "text": "ALPHA beta gamma delta epsilon theta.",
+          "sha256": "3801b931d25ed9429a28ffb751925f317282d8965d159df1e2b816f8f4bad4a2"
+        }
+      ]
+    },
+    {
+      "id": "protocol",
+      "kind": "protocol_consistency",
+      "text": "Alpha beta gamma delta epsilon zeta. Planned sample size is 120.",
+      "protocol": {
+        "text": "Planned sample size is 100.",
+        "sha256": "c77b7e914b3afdee547bdbdf1847dc2dc02a9c6555c8cc9569a2b211b3757efb"
+      },
+      "fields": [
+        {
+          "id": "sample_size",
+          "protocol": {
+            "value": "100",
+            "quote": "sample size is 100"
+          },
+          "manuscript": {
+            "value": "120",
+            "quote": "sample size is 120"
+          }
+        }
+      ]
+    },
+    {
+      "id": "checklist",
+      "kind": "checklist_evidence",
+      "text": "Alpha beta gamma delta epsilon zeta. Planned sample size is 120.",
+      "checklist": {
+        "name": "Synthetic requirements",
+        "version": "1",
+        "items": [
+          {
+            "id": "sample",
+            "requirement": "Report planned sample size."
+          },
+          {
+            "id": "recruitment",
+            "requirement": "Describe recruitment."
+          }
+        ]
+      },
+      "assessments": [
+        {
+          "id": "sample",
+          "status": "reported",
+          "quote": "sample size is 120"
+        }
+      ]
+    }
+  ]
+}

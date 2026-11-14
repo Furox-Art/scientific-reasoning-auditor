@@ -154,6 +154,11 @@ fit preprocessing; it does not inspect or confirm the actual pipeline.
 
 ## Prioritized remaining gaps
 
+Three additional offline evidence operations now compare supplied-source lexical
+overlap, caller-mapped protocol fields and supplied-checklist evidence records.
+See `EVIDENCE_CHECKS.md` for exact inputs, bounds and abstention behavior. These
+do not authenticate studies, ethics records, mappings or official compliance.
+
 1. **External error-detection evaluation:** SciFact retrieval overlap does not
    measure scientific-error detection across fields. A source-permitted,
    independently labeled benchmark with abstention/error analysis is still

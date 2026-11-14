@@ -81,6 +81,8 @@ def _evidence(row, modules, requested, scientific_kinds):
                                'ml_validation': 'declared_manifest_only',
                                'citation_context': 'lexical_retrieval_only',
                                'citation_match': 'lexical_retrieval_only',
+                               'source_overlap': 'lexical_overlap_only',
+                               'checklist_evidence': 'caller_checklist_records_only',
                                'figure_svg': 'svg_inventory_only',
                                'publication_status': 'registry_update_snapshot_only'}.get(item['kind'], 'supplied_structured_inputs_only'))
     science = modules.get('scientific')

@@ -51,9 +51,9 @@ class CriteriaMatrixTests(unittest.TestCase):
         self.assertTrue(expected<=set(rows))
         self.assertGreaterEqual(len(rows),35)
         self.assertTrue(all(row['scientific_verdict']=='NOT_ASSESSED' for row in rows.values()))
-        self.assertEqual(rows['novelty_and_literature']['execution_status'],'human_review_required')
+        self.assertEqual(rows['novelty_and_literature']['execution_status'],'not_requested')
         self.assertEqual(rows['code_reexecution']['execution_status'],'not_implemented')
-        self.assertEqual(rows['research_integrity']['execution_status'],'not_implemented')
+        self.assertEqual(rows['research_integrity']['execution_status'],'not_requested')
         self.assertNotIn('scientific_score',report['criteria_matrix'])
         self.assertEqual(report['execution_status'],'complete')
 

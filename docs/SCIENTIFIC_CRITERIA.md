@@ -40,11 +40,12 @@ theoretical definitions/proof completeness.
 
 Each row states `required_evidence`, the available `procedure` and its
 `limitation`. These are review requirements, not claims that the evidence was
-supplied. Full code reexecution, comprehensive plagiarism/data authenticity
-checks and full reporting-guideline assessments remain `not_implemented`.
-Qualitative credibility, novelty, protocol comparison and complete proof
-adequacy remain human review questions. New catalog entries alone do not
-implement scientific validation.
+supplied. Code reexecution remains `not_implemented`. Supplied-source lexical
+overlap and caller-checklist record coverage provide screening, while literal
+caller-mapped protocol fields have bounded structured comparisons. See
+`EVIDENCE_CHECKS.md`. Comprehensive originality/data authenticity, official
+guideline adequacy, qualitative credibility and complete proof adequacy remain
+human review questions. New catalog entries alone do not implement validation.
 
 ## Source-bound execution references
 

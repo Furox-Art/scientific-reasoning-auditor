@@ -1,5 +1,10 @@
 # Scientific Reasoning Auditor
 
+Bounded evidence checks now include supplied-source lexical overlap, quoted
+protocol field comparisons and caller-checklist evidence coverage. See
+[the operation contracts](docs/EVIDENCE_CHECKS.md); these do not certify
+originality, ethics approval or official guideline compliance.
+
 A research-software project for auditing the reasoning chain in scientific manuscripts:
 
 **Hypothesis → assumptions → methods → data → analysis → inference → conclusion**

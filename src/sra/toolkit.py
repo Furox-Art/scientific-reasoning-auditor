@@ -11,6 +11,7 @@ from decimal import Context, Decimal, localcontext
 from threading import Lock
 
 from sra.toolkit_spec import KINDS, digest, prepare_toolkit_spec
+from sra.evidence_spec import EVIDENCE_KINDS
 
 BACKENDS = dict.fromkeys(KINDS[:3],"sympy") | {"unit_conversion":"pint", "statistical_replay":"scipy.stats",
             "claim_candidates":"spacy", "citation_match":"rapidfuzz.fuzz"}
@@ -21,6 +22,7 @@ BACKENDS.update(causal_graph='networkx',bias_assessment='json',power_analysis='s
                 meta_analysis='statsmodels.stats.meta_analysis',
                 bayesian_diagnostics='arviz_stats' if sys.version_info>=(3,12) else 'arviz',
                 ml_validation='json',publication_status='json')
+BACKENDS.update(dict.fromkeys(EVIDENCE_KINDS, 'json'))
 
 
 def _backend(name):
@@ -142,6 +144,9 @@ def verify_prepared_toolkit(prepared):
             elif item['kind'] in ('symbolic_identity','symbolic_derivative','symbolic_antiderivative'):
                 from sra.symbolic import verify_symbolic
                 status,details=verify_symbolic(item,module)
+            elif item['kind'] in EVIDENCE_KINDS:
+                from sra import evidence_checks
+                status,details=getattr(evidence_checks,item['kind'])(item,module)
             elif item['kind'] in ('causal_graph','bias_assessment','power_analysis','meta_analysis','bayesian_diagnostics','ml_validation','publication_status'):
                 from sra import research_checks
                 from sra.publication import publication_status
