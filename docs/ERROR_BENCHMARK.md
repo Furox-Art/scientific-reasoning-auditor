@@ -125,3 +125,13 @@ evaluation machinery. A licensed representative real-paper cohort, genuine
 independent labels, verified prose-to-check mapping and a preregistered
 sampling/cluster uncertainty analysis are still needed for scientific accuracy
 claims. Existing SciFact retrieval numbers are not substituted for this task.
+
+An offline, prediction-free collection packet is now defined in
+[`benchmarks/pilots/20261115-README.md`](../benchmarks/pilots/20261115-README.md).
+The exact-source recipe includes two licensed full papers and four manually
+mapped reported-statistic cases, with explicit exclusions for two other screened
+papers. `tools/error_review_pack.py` builds separate blank reviewer archives and
+merges genuine returned sheets through the evaluator's existing label rules.
+It is a source-checkout tool, not a new Node/MCP operation. This convenience
+development pilot has no actual labels, predictions or performance estimates;
+it does not resolve the representative-corpus or independent-validation gaps.

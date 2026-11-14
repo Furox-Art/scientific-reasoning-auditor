@@ -73,6 +73,7 @@ REPOSITORY_HASH_GROUPS = (
     ("Python tests", ("tests/**/*.py",)),
     ("Node adapter sources and tests", ("test/**/*.js", "bin/**/*.js")),
     ("Build verification tools", ("tools/**/*.py",)),
+    ("Offline pilot recipes and instructions", ("benchmarks/pilots/**/*.json", "benchmarks/pilots/**/*.md")),
     ("GitHub Actions workflows", (".github/workflows/**/*.yml",)),
     ("examples", ("examples/**/*.md", "examples/**/*.json")),
 )

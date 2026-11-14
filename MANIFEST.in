@@ -6,3 +6,4 @@ recursive-include bin *.js
 recursive-include .github/workflows *.yml
 include index.js index.d.ts package.json
 recursive-include tools *.py
+recursive-include benchmarks/pilots *.json *.md

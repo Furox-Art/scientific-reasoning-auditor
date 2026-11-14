@@ -12,6 +12,9 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Offline real-paper feasibility packet recipe: two licensed full papers, four
+  manually mapped statistic cases, separate blank reviewer sheets and strict
+  returned-sheet/adjudication merging. No human labels or accuracy estimates.
 - Seven bounded research-method kinds: declared-DAG backdoor checks, caller bias
   evidence, prospective power/sample size, meta-analysis/sensitivity, Bayesian
   chain diagnostics, ML split manifests and offline Crossref update snapshots.
