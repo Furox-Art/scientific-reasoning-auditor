@@ -1,5 +1,9 @@
 # Deterministic scientific-error evaluation
 
+See [ERROR_COLLECTION.md](ERROR_COLLECTION.md) for generic offline reviewer
+packets, pre-adjudication dispute inspection, agreement statistics and the
+additional paper/group/leave-one-group-out descriptive evaluation fields.
+
 This tool evaluates bounded structured-check discrepancies on caller-supplied
 text snapshots. It does not establish that a manuscript is scientifically
 correct. A real-paper performance estimate still needs genuine, separately

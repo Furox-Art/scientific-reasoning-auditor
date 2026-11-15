@@ -17,6 +17,13 @@ exclusions and abstentions against separately supplied labels through Python,
 CLI, Node and MCP. See [the evaluation contract](docs/ERROR_BENCHMARK.md).
 Synthetic controls do not establish real-paper accuracy.
 
+Offline [human-review collection](docs/ERROR_COLLECTION.md) now packages any
+bounded frozen cohort into separate blank reviewer archives, inspects returned
+disagreements before adjudication and exports a separate blank adjudicator packet.
+Evaluation adds four-label agreement, paper/group counts and descriptive group
+omission sensitivity. Genuine human labels and representative validation remain
+required; no human decisions are generated.
+
 Bounded evidence checks now include supplied-source lexical overlap, quoted
 protocol field comparisons and caller-checklist evidence coverage. See
 [the operation contracts](docs/EVIDENCE_CHECKS.md); these do not certify

@@ -12,6 +12,12 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Generic offline frozen-cohort reviewer packets and pre-adjudication inspection,
+  with distinct blank adjudicator packets and no generated human decisions.
+  Error evaluation adds four-label Cohen kappa for fixed declared reviewer pairs,
+  paper/group strata and descriptive leave-one-group-out sensitivity. These are
+  collection/diagnostic tools, not representative scientific-error validation.
+
 - Bounded one-group-intercept REML meta-analysis, exhaustive null-imposed wild
   cluster bootstrap-t and balanced equal-size cluster-mean power/planning.
   Complete sign enumeration is not finite-sample exact inference; fitted-variance

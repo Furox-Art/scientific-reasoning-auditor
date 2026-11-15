@@ -2,6 +2,7 @@
 from sra.error_benchmark import (LABELS, bounded_json, decision,
                                  fingerprint, prepare_manifest, records)
 from sra.toolkit_spec import _fields, _text, _NAME, _HASH
+from sra.error_reliability import reviewer_reliability, agreement_markdown
 
 
 def _reviewer(value):
@@ -131,7 +132,7 @@ def evaluate_errors(manifest, predictions, labels):
     for ident, case in cohort['cases'].items():
         paper = cohort['papers'][case['paper_id']]
         rows.append(dict(id=ident, paper_id=case['paper_id'], target_id=case['target_id'],
-                         discipline=paper['discipline'], split=paper['split'],
+                         discipline=paper['discipline'], split=paper['split'], group_id=paper['group_id'].strip(),
                          source_sha256=paper['sha256'], gold=gold[ident],
                          prediction=predicted[ident]['prediction'], check_status=predicted[ident]['check_result']['status']))
     report = dict(schema_version='error-evaluation/1.0', execution_status='complete',
@@ -139,6 +140,7 @@ def evaluate_errors(manifest, predictions, labels):
                   manifest_sha256=cohort['manifest_sha256'], predictions_sha256=run['report_sha256'],
                   labels_sha256=fingerprint(label_file), label_origin=label_file['label_origin'],
                   reviewer_identity_verified=False, reviewer_agreement=_ratio(agreements, len(rows)),
+                  reviewer_reliability=reviewer_reliability(label_file['cases']),
                   paper_count=len(cohort['papers']), group_count=len({p['group_id'].strip() for p in cohort['papers'].values()}),
                   summary=_summary(rows), cases=rows, uncertainty_intervals=None,
                   limitations=['Synthetic controls do not estimate real-paper scientific-error accuracy.',
@@ -146,8 +148,16 @@ def evaluate_errors(manifest, predictions, labels):
                     'Results concern predeclared structured discrepancies; prose mapping and overall scientific adequacy are unverified.',
                     'Case-level counts can be correlated within papers/groups; no sampling/cluster-adjusted uncertainty interval is estimated.',
                     'Pooled counts are descriptive; development/test strata must not be mistaken for independent held-out validation.'])
-    for name, key in (('target', 'target_id'), ('discipline', 'discipline'), ('split', 'split')):
+    for name, key in (('target', 'target_id'), ('discipline', 'discipline'), ('split', 'split'),
+                      ('paper', 'paper_id'), ('group', 'group_id')):
         report['by_'+name] = {value:_summary([row for row in rows if row[key] == value]) for value in sorted({row[key] for row in rows})}
+    groups = sorted(report['by_group'])
+    report['group_sensitivity'] = dict(status='descriptive' if len(groups) >= 2 else 'not_assessed',
+        reason='Leave-one-group-out counts are sensitivity diagnostics, not confidence intervals.' if len(groups) >= 2 else
+               'At least two declared groups are required for omission sensitivity.',
+        omissions=[dict(omitted_group_id=group, remaining_group_count=len(groups)-1,
+                        summary=_summary([row for row in rows if row['group_id'] != group]))
+                   for group in groups] if len(groups) >= 2 else [])
     report['report_sha256'] = fingerprint(report)
     bounded_json(report, 4*1024*1024)
     return report
@@ -161,9 +171,12 @@ def error_benchmark_markdown(report):
              'Execution: '+report['execution_status'], 'Manifest SHA-256: '+report['manifest_sha256'],
              'Report SHA-256: '+report['report_sha256'], '']
     if report['schema_version'] == 'error-evaluation/1.0':
+        lines.extend(agreement_markdown(report['reviewer_reliability']))
         sections = [('Pooled descriptive counts', report['summary'])]
-        for category in ('split', 'target', 'discipline'):
+        for category in ('split', 'target', 'discipline', 'paper', 'group'):
             sections.extend((category+': '+key, value) for key, value in report['by_'+category].items())
+        sensitivity = report['group_sensitivity']
+        sections.extend(('Leave-one-group-out: '+row['omitted_group_id'], row['summary']) for row in sensitivity['omissions'])
         for title, summary in sections:
             lines.extend(['## '+_safe_md(title), '',
                           'Confusion: '+_safe_md(json_text(summary['confusion'])),
@@ -174,6 +187,7 @@ def error_benchmark_markdown(report):
                 value = 'undefined' if metric['value'] is None else f"{metric['value']:.6g}"
                 lines.append(f"| {_safe_md(name)} | {metric['numerator']} | {metric['denominator']} | {value} |")
             lines.append('')
+        lines.extend(['## Group sensitivity limits', '', _safe_md(sensitivity['reason']), ''])
     else:
         lines.extend(['| Case | Check status | Decision |', '| --- | --- | --- |'])
         for row in report['cases']:

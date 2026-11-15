@@ -25,6 +25,11 @@ test('error benchmark transport retains abstentions and honest denominators', as
     const report = JSON.parse(readFileSync(join(dir, 'evaluated.json')));
     assert.equal(report.summary.metrics.end_to_end_recall.value, 1 / 3);
     assert.deepEqual(report.summary.abstentions, { error: 1, no_error: 1 });
+    assert.equal(report.reviewer_reliability.raw_agreement.value, 1);
+    assert.equal(Object.keys(report.by_paper).length, 2);
+    assert.equal(Object.keys(report.by_group).length, 2);
+    assert.equal(report.group_sensitivity.omissions.length, 2);
+    assert.equal(report.group_sensitivity.omissions[0].remaining_group_count, 1);
     const exact = await sra.benchmarkErrors(join(__dirname, '../examples/error_benchmark/numeric-boundary.json'),
       { stdio: 'pipe', out: join(dir, 'numeric') });
     assert.equal(exact.code, 0, exact.stderr);

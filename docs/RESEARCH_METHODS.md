@@ -166,6 +166,10 @@ do not authenticate studies, ethics records, mappings or official compliance.
    `ERROR_BENCHMARK.md` now provides executable frozen structured-check cohorts,
    separate label templates and abstention-aware evaluation; genuine real-paper
    labels and representative sampling remain outstanding.
+   `ERROR_COLLECTION.md` adds arbitrary-cohort, prediction-free review packets,
+   pre-adjudication agreement/dispute inspection and separate blank adjudicator
+   packets. Evaluation adds paper/group strata and descriptive group-omission
+   sensitivity. These support collection; no genuine human labels are generated.
 2. **Dependence and design complexity:** Correlated/multilevel study estimates,
    cluster/unequal-variance power, attrition and repeated measures need explicit
    design inputs and different estimators. Current simple formulas cannot stand
