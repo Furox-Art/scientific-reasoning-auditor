@@ -10,6 +10,85 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-15
+
+Python engine 0.9.0 and independently versioned Node adapter 0.2.0.
+The GitHub source release also includes the MCP adapter and offline collection
+and replay tools. No independent scientific expert validation is claimed.
+
+### Added
+
+- Generic offline frozen-cohort reviewer packets and pre-adjudication inspection,
+  with distinct blank adjudicator packets and no generated human decisions.
+  Error evaluation adds four-label Cohen kappa for fixed declared reviewer pairs,
+  paper/group strata and descriptive leave-one-group-out sensitivity. These are
+  collection/diagnostic tools, not representative scientific-error validation.
+
+- Bounded one-group-intercept REML meta-analysis, exhaustive null-imposed wild
+  cluster bootstrap-t and balanced equal-size cluster-mean power/planning.
+  Complete sign enumeration is not finite-sample exact inference; fitted-variance
+  uncertainty and unsupported cluster designs remain explicit limits.
+- Optional identity-working-model CR2 and unscaled CR3 cluster covariance, with
+  explicit t(G-1), numerical leverage guards and unchanged CR1 defaults.
+- Explicit source-checkout Docker analysis replay with exact frozen inputs,
+  pinned local images, two-run numeric comparison, bounded output/resources and
+  verified container cleanup. It never executes automatically during review.
+- Offline real-paper feasibility packet recipe: two licensed full papers, four
+  manually mapped statistic cases, separate blank reviewer sheets and strict
+  returned-sheet/adjudication merging. No human labels or accuracy estimates.
+- Seven bounded research-method kinds: declared-DAG backdoor checks, caller bias
+  evidence, prospective power/sample size, meta-analysis/sensitivity, Bayesian
+  chain diagnostics, ML split manifests and offline Crossref update snapshots.
+- Directional Crossref updates in existing opt-in DOI requests, without extra
+  requests; numerical environment metadata; Python 3.15 CI with older-runtime
+  conditional optional dependencies. Reports remain separate and manuscripts read-only.
+
+- Source-located inspection preparation across CLI, Python, Node and MCP; proposed
+  equations/statistic inputs require confirmation and never execute automatically.
+- Domain-aware bounded symbolic operations in isolated workers; regression,
+  missingness, multiple-testing and rounding-aware reported-statistic checks;
+  local citation context, keyed table/supplement comparisons and inert SVG review.
+- Frozen SciFact real-paper sentence-retrieval evaluation with released human
+  rationale labels, explicit overlap metrics and semantic abstentions. This does
+  not supply new multi-field expert-validated scientific-error accuracy estimates.
+
+- Optional local inspection toolkit: SymPy exact polynomial/calculus checks,
+  Pint conversions, SciPy raw-data replay, spaCy sentence candidates and RapidFuzz
+  passage ranking. Bounded non-executable specifications, per-check backend
+  versions, explicit partial execution and separate source-bound user reports.
+- `verify-toolkit` CLI, Python API, typed Node `verifyToolkit`, MCP `verify_toolkit`
+  and additive unified-review inputs. Base runtime remains dependency-free;
+  candidate retrieval never awards a truth or semantic citation-support verdict.
+
+- Optional MIT-licensed Z3 formal-verification integration with a pinned `logic`
+  extra, restricted Boolean/linear-arithmetic input, consistency checks,
+  conditional VERIFIED/REFUTED/UNDETERMINED findings and stable report identities.
+- Read-only `sra verify-logic`, Node `verifyLogic`, MCP `verify_logic` and an optional
+  source-bound logic module in unified review. Findings go to separate reports.
+
+- Source-bound `sra review` and `sra capabilities` commands with multi-profile
+  composition, declared study-type applicability, explicit module execution
+  states, coverage gaps, JSON schema and Markdown reports.
+- Typed Node `reviewManuscript`/`capabilities` wrappers with feature-contract probes,
+  plus bounded MCP tools with existing caller/host network and model consent gates.
+- Six synthetic cross-field workflow controls; they are not scientific accuracy
+  or independent expert-validation evidence.
+
+### Fixed
+
+- Both registry release workflows install all optional method/test backends and
+  run the MCP regression suite before publishing the exact tagged source.
+
+- Git provenance subprocesses now detach standard input, avoiding consumption of
+  or waits on MCP stdio protocol input on Windows.
+- MCP temporary-path scrubbing handles both native and forward-slash spellings.
+- Unified model findings follow declared study-type exclusions; PDF source
+  changes are hard errors, and optional vision uses prevalidated source bytes.
+- Extended statistical input validation precedes optional SciPy imports and
+  outbound requests. Failed DOI lookups preserve results and yield partial execution.
+- Distribution verification accepts generated metadata CRLF/LF differences while
+  retaining byte-exact source inventory checks and rejecting changed content.
+
 ## [0.8.0] - 2026-11-08
 
 ### Added
@@ -126,7 +205,8 @@ neither decides which analysis was run.
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.9.0
 [0.8.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.8.0
 [0.7.1]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.1
 [0.7.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.0

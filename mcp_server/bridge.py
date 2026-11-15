@@ -79,7 +79,7 @@ def _scrub(value: Any, root: Path) -> Any:
     if isinstance(value, list):
         return [_scrub(item, root) for item in value]
     if isinstance(value, str):
-        return value.replace(str(root), "[ephemeral-upload]")
+        return value.replace(str(root), "[ephemeral-upload]").replace(root.as_posix(), "[ephemeral-upload]")
     return value
 
 
@@ -102,6 +102,27 @@ def _invoke(task: Any) -> dict[str, Any]:
                 "message": f"Analysis unavailable ({type(exc).__name__})."}
     finally:
         _LIMITER.release()
+
+
+def benchmark_errors(manifest_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_benchmark import run_error_benchmark
+        return run_error_benchmark(_json_bytes(manifest_json).decode('utf-8'))
+    return _invoke(task)
+
+
+def error_label_template(manifest_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_benchmark import error_label_template as make_template
+        return make_template(_json_bytes(manifest_json).decode('utf-8'))
+    return _invoke(task)
+
+
+def evaluate_errors(manifest_json: str, predictions_json: str, labels_json: str) -> dict[str, Any]:
+    def task():
+        from sra.error_evaluation import evaluate_errors as evaluate
+        return evaluate(*(_json_bytes(value).decode('utf-8') for value in (manifest_json, predictions_json, labels_json)))
+    return _invoke(task)
 
 
 def audit_manuscript(content: str, file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
@@ -187,4 +208,97 @@ def review_scientific_paper(content: str, file_format: str = "md", encoding: str
                                   api_key_env="OPENAI_API_KEY", pdf_ocr_mode="off",
                                   visual_pages=False, timeout=60)
             return _scrub(result, root)
+    return _invoke(task)
+
+
+def get_review_capabilities() -> dict[str, Any]:
+    """Discover actual coverage without accepting content or transmitting data."""
+    from sra.capabilities import capabilities
+    return _invoke(capabilities)
+
+
+def review_manuscript(
+    content: str, file_format: str = "md", encoding: str = "text",
+    study_type: str = "unknown", disciplines: list[str] | None = None,
+    style_language: str = "en", online: bool = False,
+    statistics_spec_json: str | None = None, scientific_spec_json: str | None = None,
+    send_to_model: bool = False,
+    logic_spec_json: str | None = None,
+    toolkit_spec_json: str | None = None,
+    prepare_inputs: bool = False,
+) -> dict[str, Any]:
+    """Compose one source-bound review; transport ok is separate from execution status."""
+    def task() -> dict[str, Any]:
+        from sra.document import load_document
+        from sra.review import review_document
+        if type(online) is not bool or type(send_to_model) is not bool:
+            raise ValueError("online and send_to_model must be booleans.")
+        if online and os.getenv("SRA_MCP_ENABLE_NETWORK") != "1":
+            raise ValueError("Online DOI lookup is disabled by server configuration.")
+        model = None
+        if send_to_model:
+            if os.getenv("SRA_MCP_ENABLE_MODEL_REVIEW") != "1":
+                raise ValueError("External model review is disabled by server configuration.")
+            model = os.getenv("SRA_MCP_MODEL", "").strip()
+            if not model or len(model) > 128 or not os.getenv("OPENAI_API_KEY"):
+                raise ValueError("Server-side model identifier and API key are required.")
+        for spec in (statistics_spec_json, scientific_spec_json, logic_spec_json, toolkit_spec_json):
+            if spec is not None:
+                _json_bytes(spec)
+        data = _document_bytes(content, file_format, encoding)
+        with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
+            document = load_document(path, pdf_ocr_mode="off")
+            document.source = "uploaded" + _EXTENSIONS[file_format]
+            result = review_document(
+                document, study_type=study_type, disciplines=[] if disciplines is None else disciplines,
+                style_language=style_language, online=online,
+                statistics_spec=statistics_spec_json, scientific_spec=scientific_spec_json,
+                logic_spec=logic_spec_json,
+                toolkit_spec=toolkit_spec_json,
+                prepare_inputs=prepare_inputs,
+                send_to_model=send_to_model, model=model,
+                base_url=os.getenv("SRA_MCP_MODEL_BASE_URL", "https://api.openai.com/v1"),
+                api_key_env="OPENAI_API_KEY", timeout=60, visual_pages=False,
+            )
+            return _scrub(result, root)
+    return _invoke(task)
+
+
+def verify_logic(spec_json: str, content: str | None = None,
+                 file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Offline formal verification; optional manuscript is source data, never edited."""
+    def task() -> dict[str, Any]:
+        from sra.logic import verify_logic_spec
+        from sra.document import load_document
+        _json_bytes(spec_json)
+        if content is None:
+            return verify_logic_spec(spec_json)
+        data = _document_bytes(content, file_format, encoding)
+        with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
+            return _scrub(verify_logic_spec(spec_json, document=load_document(path)), root)
+    return _invoke(task)
+
+
+def verify_toolkit(spec_json: str, content: str | None = None,
+                   file_format: str = "md", encoding: str = "text") -> dict[str, Any]:
+    """Run bounded local checks and return a separate report."""
+    def task() -> dict[str, Any]:
+        from sra.toolkit import verify_toolkit_spec
+        from sra.document import load_document
+        _json_bytes(spec_json)
+        if content is None:
+            return verify_toolkit_spec(spec_json)
+        data = _document_bytes(content, file_format, encoding)
+        with _uploaded(data, _EXTENSIONS[file_format]) as (path, root):
+            return _scrub(verify_toolkit_spec(spec_json, load_document(path)), root)
+    return _invoke(task)
+
+
+def prepare_inspection(content: str,file_format: str='md',encoding: str='text') -> dict[str,Any]:
+    def task():
+        from sra.document import load_document
+        from sra.inspection import prepare_inspection as prepare
+        data=_document_bytes(content,file_format,encoding)
+        with _uploaded(data,_EXTENSIONS[file_format]) as (path,root):
+            return _scrub(prepare(load_document(path)),root)
     return _invoke(task)

@@ -1,0 +1,173 @@
+{
+  "schema_version": "error-benchmark/1.0",
+  "dataset_id": "synthetic_controls",
+  "dataset_kind": "synthetic",
+  "papers": [
+    {
+      "id": "p0",
+      "group_id": "g0",
+      "split": "development",
+      "discipline": "physics",
+      "source_uri": "synthetic:p0",
+      "license_note": "Synthetic test fixture, project MIT license.",
+      "text": "# Synthetic paper 0\nEquations require explicit checking.\nSource passage number 0 contains five common words.\nSource passage number 1 contains five common words.\nSource passage number 2 contains five common words.\nSource passage number 3 contains five common words.",
+      "sha256": "f76b4142c7fd6b12438aad1633138540f499dc306dd2f06d7f110fb3daf8bc3b"
+    },
+    {
+      "id": "p1",
+      "group_id": "g1",
+      "split": "test",
+      "discipline": "computing",
+      "source_uri": "synthetic:p1",
+      "license_note": "Synthetic test fixture, project MIT license.",
+      "text": "# Synthetic paper 1\nEquations require explicit checking.\nSource passage number 0 contains five common words.\nSource passage number 1 contains five common words.\nSource passage number 2 contains five common words.\nSource passage number 3 contains five common words.",
+      "sha256": "0c4b62d5b800443c78465bc40024ce0bae05938371da9e39698a09f91aafb45d"
+    }
+  ],
+  "targets": [
+    {
+      "id": "algebra",
+      "kind": "polynomial_identity",
+      "definition": "Declared polynomial sides disagree."
+    },
+    {
+      "id": "context",
+      "kind": "source_overlap",
+      "definition": "Semantic adequacy requires separate human review."
+    }
+  ],
+  "cases": [
+    {
+      "id": "m0",
+      "paper_id": "p0",
+      "target_id": "algebra",
+      "source_quote": "Equations require explicit checking.",
+      "check": {
+        "id": "m0",
+        "kind": "polynomial_identity",
+        "variables": [
+          "x"
+        ],
+        "left": "x+x",
+        "right": "2*x"
+      }
+    },
+    {
+      "id": "m1",
+      "paper_id": "p0",
+      "target_id": "algebra",
+      "source_quote": "Equations require explicit checking.",
+      "check": {
+        "id": "m1",
+        "kind": "polynomial_identity",
+        "variables": [
+          "x"
+        ],
+        "left": "x+x",
+        "right": "3*x"
+      }
+    },
+    {
+      "id": "m2",
+      "paper_id": "p1",
+      "target_id": "algebra",
+      "source_quote": "Equations require explicit checking.",
+      "check": {
+        "id": "m2",
+        "kind": "polynomial_identity",
+        "variables": [
+          "x"
+        ],
+        "left": "x+x",
+        "right": "4*x"
+      }
+    },
+    {
+      "id": "m3",
+      "paper_id": "p1",
+      "target_id": "algebra",
+      "source_quote": "Equations require explicit checking.",
+      "check": {
+        "id": "m3",
+        "kind": "polynomial_identity",
+        "variables": [
+          "x"
+        ],
+        "left": "x+x",
+        "right": "2*x"
+      }
+    },
+    {
+      "id": "c0",
+      "paper_id": "p1",
+      "target_id": "context",
+      "source_quote": "Source passage number 0 contains five common words.",
+      "check": {
+        "id": "c0",
+        "kind": "source_overlap",
+        "min_tokens": 5,
+        "sources": [
+          {
+            "id": "source",
+            "text": "five common words used in scientific writing",
+            "sha256": "f6ea5109870a8e44928fad2b7bf505ce90bdc395f9d0dc10ada43990319e08a4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c1",
+      "paper_id": "p1",
+      "target_id": "context",
+      "source_quote": "Source passage number 1 contains five common words.",
+      "check": {
+        "id": "c1",
+        "kind": "source_overlap",
+        "min_tokens": 5,
+        "sources": [
+          {
+            "id": "source",
+            "text": "five common words used in scientific writing",
+            "sha256": "f6ea5109870a8e44928fad2b7bf505ce90bdc395f9d0dc10ada43990319e08a4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "paper_id": "p1",
+      "target_id": "context",
+      "source_quote": "Source passage number 2 contains five common words.",
+      "check": {
+        "id": "c2",
+        "kind": "source_overlap",
+        "min_tokens": 5,
+        "sources": [
+          {
+            "id": "source",
+            "text": "five common words used in scientific writing",
+            "sha256": "f6ea5109870a8e44928fad2b7bf505ce90bdc395f9d0dc10ada43990319e08a4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "paper_id": "p1",
+      "target_id": "context",
+      "source_quote": "Source passage number 3 contains five common words.",
+      "check": {
+        "id": "c3",
+        "kind": "source_overlap",
+        "min_tokens": 5,
+        "sources": [
+          {
+            "id": "source",
+            "text": "five common words used in scientific writing",
+            "sha256": "f6ea5109870a8e44928fad2b7bf505ce90bdc395f9d0dc10ada43990319e08a4"
+          }
+        ]
+      }
+    }
+  ]
+}

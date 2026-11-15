@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "identity",
+      "kind": "polynomial_identity",
+      "variables": [
+        "x"
+      ],
+      "left": "(x+1)**2",
+      "right": "x**2+2*x+1"
+    },
+    {
+      "id": "wrong_identity",
+      "kind": "polynomial_identity",
+      "variables": [
+        "x"
+      ],
+      "left": "(x+1)**2",
+      "right": "x**2+1"
+    },
+    {
+      "id": "derivative",
+      "kind": "derivative",
+      "variables": [
+        "x"
+      ],
+      "variable": "x",
+      "left": "x**3/3",
+      "right": "x**2"
+    },
+    {
+      "id": "antiderivative",
+      "kind": "antiderivative",
+      "variables": [
+        "x"
+      ],
+      "variable": "x",
+      "left": "2*x",
+      "right": "x**2+7"
+    },
+    {
+      "id": "temperature",
+      "kind": "unit_conversion",
+      "value": "0",
+      "from_unit": "degC",
+      "to_unit": "kelvin",
+      "reported": "273.15"
+    },
+    {
+      "id": "replay",
+      "kind": "statistical_replay",
+      "test": "welch_t",
+      "groups": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "sentences",
+      "kind": "claim_candidates",
+      "language": "xx",
+      "text": "A polynomial identity is proposed. It requires review."
+    },
+    {
+      "id": "passages",
+      "kind": "citation_match",
+      "claim": "Results increased.",
+      "passages": [
+        {
+          "id": "source",
+          "text": "Results increased.",
+          "sha256": "bdb9098e53a496c969a73454555a810d6b68b1b69f5a327c51443c16b0e30227"
+        }
+      ]
+    }
+  ]
+}

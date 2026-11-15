@@ -12,7 +12,7 @@ from sra.document import ParsedDocument
 
 
 AUDITOR_VERSION = __version__
-RULESET_VERSION = "0.8.0"
+RULESET_VERSION = "0.9.0"
 RULE_CONFIGURATION = {
     "audit_report_schema_version": "1.5",
     "manifest_schema_version": "1.4",
@@ -44,6 +44,7 @@ def _source_revision() -> tuple[str | None, bool | None]:
         revision = subprocess.run(
             ["git", "rev-parse", "HEAD"],
             cwd=repository_root,
+            stdin=subprocess.DEVNULL,
             capture_output=True,
             text=True,
             check=True,
@@ -52,6 +53,7 @@ def _source_revision() -> tuple[str | None, bool | None]:
         dirty = bool(subprocess.run(
             ["git", "status", "--porcelain"],
             cwd=repository_root,
+            stdin=subprocess.DEVNULL,
             capture_output=True,
             text=True,
             check=True,
@@ -71,6 +73,7 @@ REPOSITORY_HASH_GROUPS = (
     ("Python tests", ("tests/**/*.py",)),
     ("Node adapter sources and tests", ("test/**/*.js", "bin/**/*.js")),
     ("Build verification tools", ("tools/**/*.py",)),
+    ("Offline pilot recipes and instructions", ("benchmarks/pilots/**/*.json", "benchmarks/pilots/**/*.md")),
     ("GitHub Actions workflows", (".github/workflows/**/*.yml",)),
     ("examples", ("examples/**/*.md", "examples/**/*.json")),
 )

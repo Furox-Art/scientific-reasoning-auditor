@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "variables": {"hypothesis": "Bool", "prediction": "Bool", "alternative": "Bool"},
+  "assumptions": [
+    {"id": "A1", "expression": "hypothesis"},
+    {"id": "A2", "expression": "implies(hypothesis, prediction)"}
+  ],
+  "claims": [
+    {"id": "entailed", "expression": "prediction"},
+    {"id": "contradicted", "expression": "not prediction"},
+    {"id": "underdetermined", "expression": "alternative"}
+  ]
+}

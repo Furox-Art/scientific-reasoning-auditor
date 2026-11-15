@@ -8,7 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 
-from sra.document import load_document, without_fenced_code
+from sra.document import ParsedDocument, load_document, without_fenced_code
 
 _DOI_PATTERN = re.compile(r"10\.\d{4,9}/[^\s<>\"']+", re.IGNORECASE)
 _PREFIX = re.compile(r"^(?:https?://(?:dx\.)?doi\.org/|doi\s*:\s*)", re.IGNORECASE)
@@ -84,6 +84,8 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
         if not isinstance(years, list):
             raise ValueError("Crossref date-parts must be a list.")
         year = years[0][0] if years and isinstance(years[0], list) and years[0] else None
+        from sra.publication import summarize_publication
+        publication=summarize_publication(doi,message)
         return {
             "status": "REGISTERED_IN_CROSSREF",
             "registry": "Crossref",
@@ -91,6 +93,7 @@ def _lookup_crossref(doi: str, *, timeout: float = 8.0) -> dict:
             "first_author": first_author, "publication_year": year,
             "type": message.get("type"),
             "metadata_url": url,
+            'publication_status':publication,
         }
     except HTTPError as exc:
         if exc.code == 404:
@@ -215,13 +218,18 @@ def _title_context_overlap(title: str | None, reference_line: str, doi: str) -> 
 
 def verify_dois(path: str | Path, *, online: bool = False,
                 timeout: float = 8.0, limit: int = 50) -> dict:
+    return verify_document_dois(load_document(path), online=online, timeout=timeout, limit=limit)
+
+
+def verify_document_dois(document: ParsedDocument, *, online: bool = False,
+                         timeout: float = 8.0, limit: int = 50) -> dict:
+    """Check DOI metadata against the same parsed snapshot as other modules."""
     if type(online) is not bool:
         raise ValueError("online must be a boolean.")
     if type(limit) is not int or not 1 <= limit <= 200:
         raise ValueError("limit must be an integer from 1 to 200.")
     if type(timeout) not in (int, float) or not 0.5 <= timeout <= 30:
         raise ValueError("timeout must be between 0.5 and 30 seconds.")
-    document = load_document(path)
     found = _extract_dois(document.text)
     records = []
     for doi, line in found[:limit]:
@@ -253,5 +261,6 @@ def verify_dois(path: str | Path, *, online: bool = False,
             "Crossref and DataCite cover different DOI registrants; lack of public metadata is not proof of invalidity.",
             "This scan recognizes DOI patterns in document text; it does not determine which claim each DOI supports.",
             "Online mode sends extracted DOI identifiers to Crossref and, if necessary, DataCite; manuscript text is not uploaded.",
+            'Crossref update metadata may be incomplete; absent update links do not prove that a publication is unretracted or current.',
         ],
     }

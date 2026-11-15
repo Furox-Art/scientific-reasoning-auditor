@@ -1,0 +1,17 @@
+# Deterministic inspection toolkit
+
+User request: select and integrate tools for remaining inspection areas. Manuscripts are read-only; all findings go to a separate user report. Existing Z3 and summary-statistics APIs remain compatible.
+
+1. Add dependency-independent bounded specification validation, then exact polynomial identity/derivative/antiderivative checks using SymPy, unit conversion with Pint, declarative raw-data replay with existing SciPy, sentence candidates using spaCy's untrained sentencizer, and local passage ranking using RapidFuzz. Test meaningful positive, negative, adversarial and missing-dependency cases.
+2. Expose one toolkit report through Python, standalone CLI, unified review, Node and MCP. Validate the entire specification before external work; preserve source hashes and output alias protection. Missing tools produce explicit partial reports.
+3. Document supported operations and excluded semantics, add executable examples and optional pinned dependencies compatible with Python 3.11/3.12. Run full Python/Node/MCP checks, packaging checks and one fresh whole-change review. Fix material findings, push the authorized branch and update draft PR 8.
+
+Rulings: polynomial-only exact mathematics avoids undefined-domain cancellation and unsafe SymPy string parsers. Pint 0.25.3 preserves Python 3.11 support (0.26.2 requires 3.12). Raw data are bounded inline numeric arrays, not executable scripts or arbitrary file references. Citation matches and sentence candidates never receive truth labels. These limits are explicit in every report.
+
+Progress: implementation in progress. Shared interface: strict schema 1.0 -> prepared checks -> deterministic-toolkit/1.0 report -> all adapters. No public schema changes to existing reports; additive toolkit module only when requested.
+
+Tasks 1 and 2 complete: dependency-independent preflight, five real backends, separate Markdown/JSON, CLI/Python/Node/MCP and unified integration. Watched initial import/unknown-interface failures turn green. Added hostile input, resource, offset/logarithmic ambiguity, numerical degeneracy, concurrency, offline and source alias controls. First full run: 698 tests, 100% statements; Node 28 and MCP 43 passed. One new regression subsequently distinguishes unsupported Pint calculations from dimension mismatches (RED then GREEN). Final whole-change review is running; final suite/build verification follows its fix pass.
+
+Environment ruling: local system chardet 6.0.0.post1 has very large import-time language tables that made coverage on spaCy imports take minutes. Installed chardet 5.2.0 only in task venv; did not alter global Python or repository dependency constraints. Fresh CI environments normally use Requests' charset-normalizer dependency.
+
+Final review complete: no remaining material findings after the coherent numerical fix pass. A finite-but-incorrect Welch p-value on large input first reproduced as VERIFIED; recording numerical warnings made it UNDETERMINED. A related concurrent-warning test first reproduced warning loss; serial warning capture fixed it. Final validation: 701 Python tests, 5234 statements at 100%; Node 28; MCP 43 including actual stdio toolkit invocation; 10/10 synthetic heuristic cases; compileall and diff whitespace clean. Isolated sdist/wheel inventories checked 146 source files and 47 runtime modules, clean wheel install/CLI/audit and twine passed. Independent repeat wheel/sdist builds were byte-identical. Implementation and validation complete; authorized push/PR update follows.

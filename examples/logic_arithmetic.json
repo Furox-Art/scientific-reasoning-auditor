@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "variables": {"measurement": "Real", "replicates": "Int"},
+  "assumptions": [
+    {"id": "measurement_value", "expression": "measurement == 0.1 + 0.2"},
+    {"id": "replicate_count", "expression": "replicates == 3"}
+  ],
+  "claims": [
+    {"id": "decimal_identity", "expression": "measurement == 0.3"},
+    {"id": "rational_division", "expression": "replicates / 2 == 1.5"},
+    {"id": "contradiction", "expression": "measurement < 0"}
+  ]
+}

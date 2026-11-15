@@ -202,9 +202,9 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(report.schema_version, "1.5")
         self.assertEqual(len(manifest["configuration_sha256"]), 64)
         self.assertEqual(len(manifest["environment_fingerprint"]), 64)
-        self.assertEqual(manifest["ruleset_version"], "0.8.0")
-        self.assertEqual(manifest["auditor_version"], "0.8.0")
-        self.assertEqual(manifest["installed_package_version"], "0.8.0")
+        self.assertEqual(manifest["ruleset_version"], "0.9.0")
+        self.assertEqual(manifest["auditor_version"], "0.9.0")
+        self.assertEqual(manifest["installed_package_version"], "0.9.0")
         self.assertIn("source_code_revision", manifest)
         self.assertEqual(len(manifest["source_code_sha256"]), 64)
         self.assertIn("Python tests", manifest["source_code_hash_scope"])
@@ -536,7 +536,7 @@ class AuditTests(unittest.TestCase):
         project = tomllib.loads(
             (project_root / "pyproject.toml").read_text(encoding="utf-8")
         )["project"]
-        dist_info = "scientific_reasoning_auditor-0.8.0.dist-info"
+        dist_info = f"scientific_reasoning_auditor-{project['version']}.dist-info"
         files = {
             path.relative_to(project_root / "src").as_posix(): path.read_bytes()
             for path in sorted((project_root / "src" / "sra").rglob("*.py"))
@@ -593,7 +593,7 @@ class AuditTests(unittest.TestCase):
                 malicious_wheel,
                 project_root,
                 "scientific-reasoning-auditor",
-                "0.8.0",
+                project["version"],
                 expected_project=project,
             )
 
@@ -2528,12 +2528,20 @@ class ModelClientTests(unittest.TestCase):
                     _extract_json_object(f'{{"confidence": {constant}}}')
 
     def test_model_response_parser_rejects_non_finite_or_lossy_json_numbers(self):
-        from sra.model_client import _extract_json_object
+        from sra.model_client import _extract_json_object, _parse_finite_json_float
+
+        # Exercise conversion failure independently of platform-specific
+        # Decimal exponent limits; the callback must expose a plain ValueError.
+        with self.assertRaisesRegex(ValueError, "outside the supported floating-point range"):
+            _parse_finite_json_float('invalid-number')
 
         invalid_numbers = (
             ("1e9999", "outside the supported floating-point range"),
             ("1e-9999", "too small for floating-point representation"),
-            ("1e-99999999999999999999999999", "outside the supported floating-point range"),
+            # Decimal exponent capacity differs between CPython builds. Both
+            # paths must reject this token: Decimal range or float underflow.
+            ("1e-99999999999999999999999999",
+             "outside the supported floating-point range|too small for floating-point representation"),
             ("1.000000000000000000001", "precision beyond floating-point representation"),
         )
         for number, message in invalid_numbers:

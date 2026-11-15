@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "cluster",
+      "kind": "cluster_robust_regression",
+      "x": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          0
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ],
+        [
+          1
+        ],
+        [
+          3
+        ],
+        [
+          5
+        ],
+        [
+          0
+        ],
+        [
+          4
+        ],
+        [
+          6
+        ]
+      ],
+      "y": [
+        1,
+        2,
+        4,
+        2,
+        4,
+        5,
+        2,
+        5,
+        8,
+        0,
+        6,
+        7
+      ],
+      "clusters": [
+        "a",
+        "a",
+        "a",
+        "b",
+        "b",
+        "b",
+        "c",
+        "c",
+        "c",
+        "d",
+        "d",
+        "d"
+      ],
+      "terms": [
+        "exposure"
+      ],
+      "leave_one_cluster_out": true
+    },
+    {
+      "id": "correlated",
+      "kind": "correlated_meta_analysis",
+      "effect_scale": "mean_difference",
+      "studies": [
+        {
+          "id": "a",
+          "effect": 1
+        },
+        {
+          "id": "b",
+          "effect": 3
+        }
+      ],
+      "covariance": [
+        [
+          1,
+          ".5"
+        ],
+        [
+          ".5",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "missing",
+      "kind": "missing_binary_sensitivity",
+      "treatment": {
+        "events": 3,
+        "observed": 5,
+        "missing": 3
+      },
+      "control": {
+        "events": 1,
+        "observed": 5,
+        "missing": 3
+      },
+      "threshold": "0"
+    }
+  ]
+}

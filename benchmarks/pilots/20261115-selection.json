@@ -1,0 +1,171 @@
+{
+  "schema_version": "pilot-selection/1.0",
+  "pilot_id": "reported-statistics-feasibility-20261115",
+  "created_local_date": "2026-11-15",
+  "timezone": "Europe/Istanbul",
+  "status": "packaging_plan_not_registered_independent_validation",
+  "selection": "Convenience feasibility sample informed by source availability and reported-statistic search results; not representative or outcome-blinded sampling.",
+  "source": "Europe PMC fullTextXML; article-specific CC BY or CC0 evidence required before distribution",
+  "papers": [
+    {
+      "pmcid": "PMC4404251",
+      "discipline": "psychology"
+    },
+    {
+      "pmcid": "PMC4016290",
+      "discipline": "animal-behaviour"
+    },
+    {
+      "pmcid": "PMC12794140",
+      "discipline": "ecology"
+    },
+    {
+      "pmcid": "PMC4427493",
+      "discipline": "clinical"
+    }
+  ],
+  "case_selection": "First two eligible explicitly reported t, F, z or chi-square statistics in main-body order, with degrees of freedom when required and an explicit p-value/relation. No selection based on auditor outputs. Eligibility/mapping exclusions and any deviation must be recorded.",
+  "scope": "Conditional reported-statistic/p-value consistency, not substantive scientific validity, test appropriateness or data authenticity.",
+  "split": "development",
+  "labels": "All reviewer identities, decisions and adjudications remain unfilled. No expert labels or performance estimates will be generated.",
+  "legacy_pilot": "Existing 2026-11-06 preregistration and frozen inputs remain unchanged.",
+  "case_selection_clarification": "Main-body narrative paragraphs, excluding table cells, figure captions, abstract and references. This operational clarification was made during manual eligibility inspection, before any auditor run; it was not registered in advance.",
+  "screening": [
+    {
+      "pmcid": "PMC4016290",
+      "decision": "excluded",
+      "reason": "Reported F values use PERMANOVA/permutation reference distributions with one displayed degree of freedom. Later chi-square p-prime values are explicitly multiplicity-corrected. Neither is eligible for the unadjusted parametric tail target; no missing denominator degrees of freedom were invented."
+    },
+    {
+      "pmcid": "PMC12794140",
+      "decision": "excluded",
+      "reason": "No eligible explicit statistic, required degrees of freedom and p-value triplet was found in the main-body narrative. Supplement-only results were outside the declared case-selection scope."
+    }
+  ],
+  "included": [
+    {
+      "pmcid": "PMC4404251",
+      "discipline": "psychology",
+      "doi": "10.1371/journal.pone.0125124",
+      "title": "Prospective Memory Function in Late Adulthood: Affect at Encoding and Resource Allocation Costs",
+      "authors": [
+        "Julie D Henry",
+        "Sebastian Joeffry",
+        "Gill Terrett",
+        "Nicola Ballhausen",
+        "Matthias Kliegel",
+        "Peter G Rendell"
+      ],
+      "copyright": "© 2015 Henry et al",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "Article-specific publisher copyright paragraph links to CC BY 4.0; archived JATS permissions also declare Creative Commons Attribution.",
+      "publisher_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0125124",
+      "xml_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4404251/fullTextXML",
+      "pdf_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0125124&type=printable",
+      "retrieved_utc_date": "2026-11-15",
+      "files": {
+        "xml": {
+          "sha256": "8fd72ebdabed8959b4c8c578da00a8ce3213329ae8762a83571b6ebe2daa914e",
+          "bytes": 78176
+        },
+        "pdf": {
+          "sha256": "4a759991c786c406273d792c8f59f59175e618784db035c2fe73d9c2410237e1",
+          "bytes": 181041
+        }
+      },
+      "cases": [
+        {
+          "id": "pm_accuracy_group",
+          "paragraph_index": 21,
+          "pdf_page": 7,
+          "quote": "F(2, 105) = 5.43, p = .006",
+          "test": "F",
+          "statistic": "5.43",
+          "df": [
+            2,
+            105
+          ],
+          "reported_p": ".006",
+          "relation": "=",
+          "mapping_note": "Upper-tail F using the printed degrees of freedom. Methods state Greenhouse-Geisser corrections when needed; verify that this printed triplet is usable before labeling."
+        },
+        {
+          "id": "pm_accuracy_valence",
+          "paragraph_index": 21,
+          "pdf_page": 7,
+          "quote": "F(2, 210) = 0.37, p = .689",
+          "test": "F",
+          "statistic": "0.37",
+          "df": [
+            2,
+            210
+          ],
+          "reported_p": ".689",
+          "relation": "=",
+          "mapping_note": "Upper-tail F using the printed degrees of freedom. This within-subject contrast may require sphericity context; use uncertain/not_applicable if the mapping is not justified."
+        }
+      ]
+    },
+    {
+      "pmcid": "PMC4427493",
+      "discipline": "clinical",
+      "doi": "10.1371/journal.pone.0126497",
+      "title": "The Impact of Hypnotic Suggestions on Reaction Times in Continuous Performance Test in Adults with ADHD and Healthy Controls",
+      "authors": [
+        "Maarit Virta",
+        "Seppo Hiltunen",
+        "Markus Mattsson",
+        "Sakari Kallio"
+      ],
+      "copyright": "© 2015 Virta et al",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "Article-specific publisher copyright paragraph links to CC BY 4.0; archived JATS permissions also declare Creative Commons Attribution.",
+      "publisher_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126497",
+      "xml_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4427493/fullTextXML",
+      "pdf_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0126497&type=printable",
+      "retrieved_utc_date": "2026-11-15",
+      "files": {
+        "xml": {
+          "sha256": "909db84e052b98759d10acc7ba91627dee97bdabf8287f5ca7429f959128750e",
+          "bytes": 113804
+        },
+        "pdf": {
+          "sha256": "16082c4125293bc6b2d0d22ccadb22ef6e440dcba3cc4730ca2fe2a86d478078",
+          "bytes": 256753
+        }
+      },
+      "cases": [
+        {
+          "id": "adhd_gender",
+          "paragraph_index": 9,
+          "pdf_page": 3,
+          "quote": "χ 2 (1) = 1.47, p = 0.25",
+          "test": "chi2",
+          "statistic": "1.47",
+          "df": [
+            1
+          ],
+          "reported_p": "0.25",
+          "relation": "=",
+          "mapping_note": "Demographic gender comparison is described as chi-square. The paragraph also mentions Fisher exact tests for other comparisons; assess whether the displayed p belongs to this chi-square reference, rather than assuming any mismatch is an error."
+        },
+        {
+          "id": "adhd_age",
+          "paragraph_index": 9,
+          "pdf_page": 3,
+          "quote": "t(56) = -4.32, p < 0.001",
+          "test": "t",
+          "statistic": "-4.32",
+          "df": [
+            56
+          ],
+          "reported_p": "0.001",
+          "relation": "<",
+          "mapping_note": "Two-sided t is the conditional target convention, not an explicitly verified statement of author sidedness. Reject or mark uncertain if this interpretation is unsupported. Bonferroni-corrected within-group contrasts elsewhere are outside this selected demographic comparison."
+        }
+      ]
+    }
+  ]
+}

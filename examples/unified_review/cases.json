@@ -1,0 +1,11 @@
+{
+  "note": "Synthetic behavior controls only; no scientific accuracy or expert labels.",
+  "cases": [
+    {"file":"theoretical_math.md","study_type":"theoretical","disciplines":[]},
+    {"file":"computational_physics.md","study_type":"computational","disciplines":["computing","physics"]},
+    {"file":"clinical_quantitative.md","study_type":"quantitative","disciplines":["clinical"]},
+    {"file":"qualitative_social.md","study_type":"qualitative","disciplines":["social-science"]},
+    {"file":"systematic_review.md","study_type":"systematic-review","disciplines":[]},
+    {"file":"unknown_field.md","study_type":"unknown","disciplines":[]}
+  ]
+}
