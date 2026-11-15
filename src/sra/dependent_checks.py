@@ -3,6 +3,7 @@ import math
 from fractions import Fraction
 
 from sra.research_checks import _numeric
+from sra.advanced_checks import multilevel_meta_analysis, wild_cluster_bootstrap, cluster_power_analysis
 
 
 def _unknown(reason):

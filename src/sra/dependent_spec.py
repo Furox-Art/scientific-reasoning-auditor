@@ -1,7 +1,8 @@
 """Strict dependency-independent inputs for dependent-data and exact sensitivity checks."""
 from fractions import Fraction
+from sra.advanced_spec import ADVANCED_KINDS
 
-DEPENDENT_KINDS = ('cluster_robust_regression', 'correlated_meta_analysis', 'missing_binary_sensitivity')
+DEPENDENT_KINDS = ('cluster_robust_regression', 'correlated_meta_analysis', 'missing_binary_sensitivity')+ADVANCED_KINDS
 
 
 def _numeric(value, low, high):
@@ -36,6 +37,9 @@ def _covariance(value, size):
 def prepare_dependent(item):
     from sra.toolkit_spec import _fields, _text
     kind, base = item['kind'], ('id', 'kind')
+    if kind in ADVANCED_KINDS:
+        from sra.advanced_spec import prepare_advanced
+        return prepare_advanced(item)
     result = dict(item)
     if kind == 'cluster_robust_regression':
         _fields(item, base+('x', 'y', 'clusters'), ('terms', 'alpha', 'leave_one_cluster_out', 'covariance_method'))

@@ -8,6 +8,16 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_grouped_methods_survive_real_transport(self):
+        path=Path(__file__).parents[2]/'examples/grouped-methods.json'
+        response=server.verify_toolkit(path.read_text(encoding='utf-8'))
+        self.assertTrue(response['ok'],response)
+        rows=response['result']['checks']
+        self.assertEqual([r['status'] for r in rows],['CALCULATED']*3)
+        self.assertAlmostEqual(rows[0]['details']['tau_squared'],3.5,places=5)
+        self.assertEqual(rows[1]['details']['p_denominator'],16)
+        self.assertEqual(rows[2]['details']['inference_df'],22)
+
     def test_cr2_cr3_options_survive_real_transport(self):
         path=Path(__file__).parents[2]/'examples/dependent-data.json'
         spec=json.loads(path.read_text(encoding='utf-8'))

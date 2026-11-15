@@ -12,6 +12,10 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Bounded one-group-intercept REML meta-analysis, exhaustive null-imposed wild
+  cluster bootstrap-t and balanced equal-size cluster-mean power/planning.
+  Complete sign enumeration is not finite-sample exact inference; fitted-variance
+  uncertainty and unsupported cluster designs remain explicit limits.
 - Optional identity-working-model CR2 and unscaled CR3 cluster covariance, with
   explicit t(G-1), numerical leverage guards and unchanged CR1 defaults.
 - Explicit source-checkout Docker analysis replay with exact frozen inputs,

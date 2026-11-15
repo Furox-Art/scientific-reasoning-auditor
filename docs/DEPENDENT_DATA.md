@@ -12,6 +12,11 @@ sra verify-toolkit examples/dependent-data.json --out reports/dependent
 
 ## Cluster-robust linear regression
 
+Additional grouped random-intercept REML, exhaustive wild cluster bootstrap and
+balanced cluster-mean power operations are specified in
+[`GROUPED_METHODS.md`](GROUPED_METHODS.md); their model assumptions and inference
+limits are explicit.
+
 `cluster_robust_regression` requires `x` (6..5000 rows, 1..8 numeric columns),
 `y` and `clusters` of the same row count. Numeric magnitudes are at most 1e12;
 missing/nonfinite values are rejected. Cluster IDs are nonempty strings <=64

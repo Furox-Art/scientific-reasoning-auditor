@@ -173,9 +173,11 @@ do not authenticate studies, ethics records, mappings or official compliance.
    `DEPENDENT_DATA.md` adds supplied-covariance common-effect GLS, one-way CR1
    regression (including declared subject clusters) and exact binary dropout
    sensitivity. It also supports identity-working-model CR2 and unscaled CR3
-   covariance with explicit t(G-1), not Satterthwaite inference. Estimated
-   multilevel/random-effects covariance, Satterthwaite corrections, small-cluster
-   bootstrap and cluster/unequal-variance power remain open.
+   covariance with explicit t(G-1), not Satterthwaite inference.
+   `GROUPED_METHODS.md` adds a single group-intercept REML variance, exhaustive
+   null-imposed Rademacher bootstrap and balanced equal-size cluster-mean power.
+   General multilevel/random-slope models, Satterthwaite corrections, bootstrap
+   variants/interval inversion and unequal-size/variance cluster power remain open.
 3. **Observation beyond manifests:** Actual ML feature/label timing, causal
    assumptions, study comparability and data authenticity are not established
    by structured declarations or provenance hashes.

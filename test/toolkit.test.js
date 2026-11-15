@@ -81,5 +81,13 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     const adjustedReport = JSON.parse(readFileSync(join(dir, 'adjusted.json'), 'utf8'));
     assert.deepEqual(adjustedReport.checks.map(row => row.details.covariance_method), ['CR2', 'CR3']);
     assert.ok(adjustedReport.checks.every(row => row.status === 'CALCULATED' && row.details.inference_df === 3));
+    writeFileSync(spec, readFileSync(join(__dirname, '../examples/grouped-methods.json')));
+    const grouped = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'grouped') });
+    assert.equal(grouped.code, 0, grouped.stderr);
+    const groupedReport = JSON.parse(readFileSync(join(dir, 'grouped.json'), 'utf8'));
+    assert.deepEqual(groupedReport.checks.map(row => row.status), ['CALCULATED', 'CALCULATED', 'CALCULATED']);
+    assert.ok(Math.abs(groupedReport.checks[0].details.tau_squared - 3.5) < 1e-5);
+    assert.equal(groupedReport.checks[1].details.p_denominator, 16);
+    assert.equal(groupedReport.checks[2].details.inference_df, 22);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
