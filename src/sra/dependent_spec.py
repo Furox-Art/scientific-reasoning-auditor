@@ -38,7 +38,10 @@ def prepare_dependent(item):
     kind, base = item['kind'], ('id', 'kind')
     result = dict(item)
     if kind == 'cluster_robust_regression':
-        _fields(item, base+('x', 'y', 'clusters'), ('terms', 'alpha', 'leave_one_cluster_out'))
+        _fields(item, base+('x', 'y', 'clusters'), ('terms', 'alpha', 'leave_one_cluster_out', 'covariance_method'))
+        method = item.get('covariance_method', 'CR1')
+        if method not in ('CR1', 'CR2', 'CR3'):
+            raise ValueError('Cluster covariance_method must be CR1, CR2 or CR3.')
         x, y, clusters = item['x'], item['y'], item['clusters']
         if (not isinstance(x, list) or not 6 <= len(x) <= 5000 or not isinstance(x[0], list) or
                 not 1 <= len(x[0]) <= 8 or any(not isinstance(row, list) or len(row) != len(x[0]) for row in x) or
@@ -61,7 +64,8 @@ def prepare_dependent(item):
             _identifier(name, seen)
         result.update(x=[[_numeric(v, -1e12, 1e12) for v in row] for row in x],
                       y=[_numeric(v, -1e12, 1e12) for v in y], terms=terms,
-                      leave_one_cluster_out=leave, alpha=_numeric(item.get('alpha', '.05'), '.001', '.2'))
+                      covariance_method=method, leave_one_cluster_out=leave,
+                      alpha=_numeric(item.get('alpha', '.05'), '.001', '.2'))
     elif kind == 'correlated_meta_analysis':
         _fields(item, base+('studies', 'covariance', 'effect_scale'), ('alpha', 'covariance_scenarios'))
         studies = item['studies']

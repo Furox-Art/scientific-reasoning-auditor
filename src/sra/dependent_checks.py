@@ -44,9 +44,31 @@ def _linear_fit(x, y, np):
     transform[0, 0] = 1
     transform[0, 1:] = -means/scales
     transform[1:, 1:] = np.diag(1/scales)
-    return dict(z=z, r=r, residuals=residuals, transform=transform,
+    return dict(z=z, q=q, r=r, residuals=residuals, transform=transform,
                 beta=transform@beta_z, condition=condition,
                 residual_norm=residual_norm, residual_resolution=resolution)
+
+
+def _cluster_score(fit, mask, method, np):
+    z, residuals = fit['z'][mask], fit['residuals'][mask]
+    adjustment_error, amplification, leverage = 0., 1., None
+    if method != 'CR1':
+        # H_gg = Q_g Q_g'. Its nonzero eigenvectors come from this thin SVD;
+        # never construct an N_g by N_g adjustment or hat matrix.
+        u, singular, _ = np.linalg.svd(fit['q'][mask], full_matrices=False)
+        leverage = float(np.max(singular**2))
+        gap = 1-singular**2
+        if float(np.min(gap)) <= 1e-8:
+            return None
+        power = .5 if method == 'CR2' else 1.
+        amplification = float(np.min(gap))**(-power)
+        adjustment_error = (64*np.finfo(float).eps*max(z.shape)*
+                            float(np.linalg.norm(residuals))/float(np.min(gap))**(power+1))
+        residuals = residuals+u@((gap**(-power)-1)*(u.T@residuals))
+    score = z.T@residuals
+    error = 32*np.finfo(float).eps*max(z.shape)*(np.abs(z).T@np.abs(residuals))
+    error += np.linalg.norm(z, axis=0)*(amplification*fit['residual_resolution']+adjustment_error)
+    return score, error, leverage
 
 
 def cluster_robust_regression(item, scipy_stats):
@@ -62,29 +84,35 @@ def cluster_robust_regression(item, scipy_stats):
         clusters = sorted(set(item['clusters']))
         indices = np.asarray(item['clusters'])
         n, k, g = len(y), fit['z'].shape[1], len(clusters)
-        correction = g/(g-1)*(n-1)/(n-k)
+        method = item['covariance_method']
+        correction = g/(g-1)*(n-1)/(n-k) if method == 'CR1' else 1.
         covariance = None
         resolved = fit['residual_norm'] > fit['residual_resolution']
+        unknown = [] if resolved else ['residuals_below_numeric_resolution']
+        maximum_leverage = None
         se_resolution = np.zeros(k)
         if resolved:
             r_inv = np.linalg.solve(fit['r'], np.eye(k))
             influences, errors = [], []
             for cluster in clusters:
                 mask = indices == cluster
-                score = fit['z'][mask].T@fit['residuals'][mask]
+                result = _cluster_score(fit, mask, method, np)
+                if result is None:
+                    resolved = False
+                    maximum_leverage = None
+                    unknown.append('unresolved_cluster_leverage')
+                    break
+                score, score_error, leverage = result
+                if leverage is not None:
+                    maximum_leverage = max(maximum_leverage or 0., leverage)
                 influences.append(fit['transform']@(r_inv@(r_inv.T@score)))
-                score_error = (32*np.finfo(float).eps*max(fit['z'][mask].shape)*
-                               (np.abs(fit['z'][mask]).T@np.abs(fit['residuals'][mask])))
-                # QR/prediction rounding enters the scores through residuals as
-                # well as through the final dot product. Propagate its L2 guard
-                # by Cauchy-Schwarz for each normalized predictor column.
-                score_error += np.linalg.norm(fit['z'][mask], axis=0)*fit['residual_resolution']
                 errors.append(np.abs(fit['transform'])@(np.abs(r_inv)@(np.abs(r_inv.T)@score_error)))
-            influences = np.asarray(influences)
-            covariance = correction*influences.T@influences
-            se_resolution = math.sqrt(correction)*np.linalg.norm(np.asarray(errors), axis=0)
+            if resolved:
+                influences = np.asarray(influences)
+                covariance = correction*influences.T@influences
+                se_resolution = math.sqrt(correction)*np.linalg.norm(np.asarray(errors), axis=0)
         critical = float(scipy_stats.t.isf(float(item['alpha'])/2, g-1))
-        coefficients, unknown = [], [] if resolved else ['residuals_below_numeric_resolution']
+        coefficients = []
         for i, name in enumerate(['intercept']+item['terms']):
             estimate = float(fit['beta'][i])
             se = math.sqrt(float(covariance[i, i])) if resolved else None
@@ -122,10 +150,13 @@ def cluster_robust_regression(item, scipy_stats):
                     omissions.append(dict(cluster=cluster, status='CALCULATED',
                         coefficients=[float(v) for v in omitted['beta']],
                         changes=[float(v) for v in omitted['beta']-fit['beta']]))
-        return dict(meaning='OLS mean model with one-way CR1 cluster covariance and t(G-1) inference; independence between clusters, mean specification and small-cluster reliability are not verified. Omissions refit coefficients only, not cluster inference.',
+        return dict(meaning='OLS mean model with selected one-way CR1/CR2/CR3 covariance and t(G-1) inference, not Satterthwaite. Independence between clusters, mean specification and small-cluster reliability are not verified. Omissions refit coefficients only, not cluster inference.',
                     nobs=n, coefficient_count=k, cluster_count=g, inference_df=g-1,
                     correction_factor=correction, design_condition_number=fit['condition'],
-                    covariance_method='CR1', covariance=covariance.tolist() if resolved and all(c['standard_error'] is not None for c in coefficients) else None, coefficients=coefficients,
+                    covariance_method=method, working_covariance='identity' if method == 'CR2' else None,
+                    correction_convention='G/(G-1)*(N-1)/(N-K)' if method == 'CR1' else 'unscaled_cluster_adjustment',
+                    inference_df_policy='clusters_minus_one_not_satterthwaite', maximum_cluster_leverage=maximum_leverage,
+                    covariance=covariance.tolist() if resolved and all(c['standard_error'] is not None for c in coefficients) else None, coefficients=coefficients,
                     residual_l2_norm=fit['residual_norm'], residual_resolution_bound=fit['residual_resolution'],
                     alpha=float(item['alpha']), leave_one_cluster_out=omissions, unassessed_checks=unknown,
                     assumptions_verified=False, small_cluster_inference_certified=False)

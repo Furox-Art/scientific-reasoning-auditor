@@ -20,11 +20,12 @@ coefficients. An intercept is always included. Optional `terms` gives distinct
 simple names for predictors (default x1, x2, ...); `intercept` is reserved.
 `alpha` is in [.001,.2], default .05. `leave_one_cluster_out` is boolean,
 default false, permitted only with at most 50 clusters.
+`covariance_method` is `CR1` (default), `CR2` or `CR3`.
 
 Rows can represent repeated measurements when `clusters` identifies subjects.
-The model is a caller-specified marginal linear mean model with one-way CR1
+The model is a caller-specified marginal linear mean model with selected one-way
 cluster-robust covariance. It is not a fitted random-effects model, repeated
-measures ANOVA, GEE, two-way cluster procedure, CR2/CR3 estimator or wild-cluster
+measures ANOVA, GEE, two-way cluster procedure or wild-cluster
 bootstrap. Between-cluster independence and a correctly specified mean model
 remain assumptions. More observations inside a cluster do not establish more
 independent clusters. Small-cluster inference can be unreliable even when the
@@ -37,12 +38,30 @@ coefficients and G clusters, the CR1 factor is
 `factor * (X'X)^-1 sum(s_g s_g') (X'X)^-1`. Individual coefficient tests and CIs
 use Student t with G-1 degrees of freedom. No joint hypothesis test is produced.
 
+CR2 uses identity working covariance: for `H_gg = X_g (X'X)^-1 X_g'`,
+replace the residuals in each score with `(I-H_gg)^(-1/2) u_g` and use factor 1.
+CR3 uses `(I-H_gg)^(-1) u_g`, also with factor 1. This is the **unscaled**
+cluster-HC3 convention: its covariance equals the sum of outer products of
+delete-cluster coefficient differences from the full fit. It does not apply
+the `(G-1)/G` CV3 multiplier or center differences at their jackknife mean.
+The default CR1 factor corresponds to the CR1S terminology in clubSandwich;
+names/conventions differ across packages, so the report exposes the factor.
+
+All three choices retain t(G-1) individual inference. **CR2 here does not include
+Satterthwaite degrees of freedom** or certify accurate small-cluster testing.
+CR2's identity working model is not an estimated within-cluster correlation
+model. The selected method, working covariance and inference policy are explicit
+in the report. Thin SVD of the normalized QR cluster blocks applies adjustments
+without dense observation-by-observation matrices. A leverage residual eigenvalue
+`1-lambda <= 1e-8` abstains, retaining coefficients but withholding covariance
+and inference. No pseudoinverse silently discards an unidentified direction.
+
 Rank-deficient/ill-conditioned normalized designs (condition number >1e8),
 distinct decimal values collapsing in float64, zero coefficient uncertainty or
 unusable tail probabilities abstain explicitly. Valid coefficients/other
 inferences are retained where possible. Optional cluster omissions refit the
 mean model and return coefficient changes; an unidentified omission remains
-unknown rather than being silently dropped. They do not refit CR1 inference.
+unknown rather than being silently dropped. They do not refit cluster inference.
 Residual L2 norms at or below `32 * eps64 * max(N,K) *
 (norm(centered_y) + norm(fitted_centered_y))` cannot resolve uncertainty;
 coefficients remain available but covariance, SEs, intervals and p-values are
@@ -58,6 +77,10 @@ unresolved entries is not reported. These are numerical guard policies, not
 confidence bounds or additional statistical estimators.
 Intervals that cannot be represented with a distinct lower/upper endpoint
 around their estimate in float64 remain null, with explicit unknown markers.
+For CR2/CR3, upstream residual resolution is amplified by the adjustment norm;
+an additional conservative SVD-adjustment arithmetic bound is propagated into
+score/SE resolution guards. These remain numerical guard policies, not sampling
+confidence bounds.
 
 ## Correlated common-effect meta-analysis
 
@@ -126,6 +149,8 @@ The exact count calculation uses the standard library and needs no backend extra
 ## Methods and limits
 
 - [Statsmodels CR1 covariance](https://www.statsmodels.org/stable/generated/statsmodels.stats.sandwich_covariance.cov_cluster.html)
+- [clubSandwich covariance conventions](https://jepusto.github.io/clubSandwich/reference/vcovCR.html)
+- [Pustejovsky and Tipton: CR2 working-model adjustment](https://jepusto.com/posts/pusto-tipton-2018-theorem-2/)
 - [Cameron: clustered inference, correction and G-1 reference distribution](https://faculty.econ.ucdavis.edu/faculty/cameron/research/slidesrobustsurvey.pdf)
 - [metafor: GLS with correlated sampling covariance](https://www.metafor-project.org/doku.php/tips:weights_in_rma.mv_models)
 - [Cochrane missing-data methods discussion](https://training.cochrane.org/sites/training.cochrane.org/files/public/uploads/resources/downloadable_resources/Missing%20data%20SMG%20Webinar.pdf)

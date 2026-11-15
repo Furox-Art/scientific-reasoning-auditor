@@ -40,7 +40,10 @@ theoretical definitions/proof completeness.
 
 Each row states `required_evidence`, the available `procedure` and its
 `limitation`. These are review requirements, not claims that the evidence was
-supplied. Code reexecution remains `not_implemented`. Supplied-source lexical
+supplied. Automatic code reexecution/receipt import in this unified matrix remains
+`not_implemented`; the explicit standalone source-checkout adapter is documented
+in [`ANALYSIS_REPLAY.md`](ANALYSIS_REPLAY.md). Its results must be inspected
+separately and do not automatically populate this matrix. Supplied-source lexical
 overlap and caller-checklist record coverage provide screening, while literal
 caller-mapped protocol fields have bounded structured comparisons. See
 `EVIDENCE_CHECKS.md`. Comprehensive originality/data authenticity, official

@@ -72,5 +72,14 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     assert.equal(dependentReport.checks[0].details.inference_df, 3);
     assert.ok(Math.abs(dependentReport.checks[1].details.estimate - 2) < 1e-12);
     assert.equal(dependentReport.checks[2].details.risk_difference_bounds.lower_exact, '-1/8');
+    const adjustedSpec = JSON.parse(readFileSync(join(__dirname, '../examples/dependent-data.json')));
+    const cluster = adjustedSpec.checks[0];
+    adjustedSpec.checks = ['CR2', 'CR3'].map(method => ({ ...cluster, id: method.toLowerCase(), covariance_method: method }));
+    writeFileSync(spec, JSON.stringify(adjustedSpec));
+    const adjusted = await sra.verifyToolkit(spec, { stdio: 'pipe', out: join(dir, 'adjusted') });
+    assert.equal(adjusted.code, 0, adjusted.stderr);
+    const adjustedReport = JSON.parse(readFileSync(join(dir, 'adjusted.json'), 'utf8'));
+    assert.deepEqual(adjustedReport.checks.map(row => row.details.covariance_method), ['CR2', 'CR3']);
+    assert.ok(adjustedReport.checks.every(row => row.status === 'CALCULATED' && row.details.inference_df === 3));
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

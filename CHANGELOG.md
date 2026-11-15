@@ -12,6 +12,11 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ### Added
 
+- Optional identity-working-model CR2 and unscaled CR3 cluster covariance, with
+  explicit t(G-1), numerical leverage guards and unchanged CR1 defaults.
+- Explicit source-checkout Docker analysis replay with exact frozen inputs,
+  pinned local images, two-run numeric comparison, bounded output/resources and
+  verified container cleanup. It never executes automatically during review.
 - Offline real-paper feasibility packet recipe: two licensed full papers, four
   manually mapped statistic cases, separate blank reviewer sheets and strict
   returned-sheet/adjudication merging. No human labels or accuracy estimates.

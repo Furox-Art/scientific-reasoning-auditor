@@ -1,8 +1,12 @@
 # Scientific Reasoning Auditor
 
-Dependent-data tools now include one-way CR1 regression, supplied-covariance
+Dependent-data tools now include one-way CR1/CR2/CR3 regression, supplied-covariance
 common-effect meta-analysis and exact binary missing-outcome sensitivity.
 See [inputs, methods and limits](docs/DEPENDENT_DATA.md).
+
+An explicit offline [analysis replay adapter](docs/ANALYSIS_REPLAY.md) compares
+two runs in a pinned local Docker image, with read-only staged sources and
+bounded execution. It never executes automatically during manuscript review.
 
 Frozen structured-check evaluation now reports false alarms, missed errors,
 exclusions and abstentions against separately supplied labels through Python,

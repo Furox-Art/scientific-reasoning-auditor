@@ -8,6 +8,18 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_cr2_cr3_options_survive_real_transport(self):
+        path=Path(__file__).parents[2]/'examples/dependent-data.json'
+        spec=json.loads(path.read_text(encoding='utf-8'))
+        base=spec['checks'][0]
+        spec['checks']=[dict(base,id='cr2',covariance_method='CR2'),dict(base,id='cr3',covariance_method='CR3')]
+        response=server.verify_toolkit(json.dumps(spec))
+        self.assertTrue(response['ok'],response)
+        rows=response['result']['checks']
+        self.assertEqual([r['status'] for r in rows],['CALCULATED']*2)
+        self.assertEqual([r['details']['covariance_method'] for r in rows],['CR2','CR3'])
+        self.assertTrue(all(not r['details']['small_cluster_inference_certified'] for r in rows))
+
     def test_dependent_calculations_survive_real_transport(self):
         path=Path(__file__).parents[2]/'examples/dependent-data.json'
         response=server.verify_toolkit(path.read_text(encoding='utf-8'))
