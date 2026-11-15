@@ -33,6 +33,12 @@ supplied by statcheck; their availability is not an SRA extraction measurement.
 Historical contextual corrections or one-tailed tests may explain disagreement;
 the original articles and row joins have not been independently re-adjudicated.
 
+The separate `posthoc-source-notes.json` preserves existing historical notes for
+the 20 reference-relative false alarms: nine mention one-tailed tests and eleven
+mention Huynh-Feldt corrections. These are source notes about earlier comparison
+discrepancies, not newly confirmed causes for SRA. They were inspected only after
+the first result and never used as prediction inputs or to change any counts.
+
 `first-run.json` and `first-run.md` preserve the first completed run without edits.
 JSON retains every case, numeric check result, group stratum and whole-group
 omission diagnostic. No inferential confidence intervals are claimed.
