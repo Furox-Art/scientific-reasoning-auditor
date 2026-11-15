@@ -17,6 +17,13 @@ exclusions and abstentions against separately supplied labels through Python,
 CLI, Node and MCP. See [the evaluation contract](docs/ERROR_BENCHMARK.md).
 Synthetic controls do not establish real-paper accuracy.
 
+A [frozen published-reference comparison](benchmarks/pilots/published-reference-20261116/README.md)
+now measures the unchanged published 0.9.0 engine against historical manual
+labels for 1120 selected psychology results: 60% decision coverage, 34/49
+reference errors flagged and 34/54 flags agreeing with the reference. This is
+retrospective conditional agreement, not whole-paper or multi-field validation;
+the third-party input strings do not test SRA text extraction.
+
 Offline [human-review collection](docs/ERROR_COLLECTION.md) now packages any
 bounded frozen cohort into separate blank reviewer archives, inspects returned
 disagreements before adjudication and exports a separate blank adjudicator packet.
@@ -67,8 +74,8 @@ Python 0.9.0 and Node adapter 0.2.0 include the source-bound review, determinist
 toolkit, research/grouped methods and discrepancy-evaluation interfaces described
 above. Install the required optional Python extras for the requested backends.
 The GitHub source archive includes the MCP adapter, examples and offline reviewer
-collection/replay tools. Genuine human labels and representative scientific-error
-validation remain outstanding. Package versions are independent; the Node adapter
+collection/replay tools. New blinded human reviews and representative multi-field
+scientific-error validation remain outstanding. Package versions are independent; the Node adapter
 checks the Python engine's baseline version and probes newer feature contracts.
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.

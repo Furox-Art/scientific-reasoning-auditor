@@ -4,6 +4,12 @@ See [ERROR_COLLECTION.md](ERROR_COLLECTION.md) for generic offline reviewer
 packets, pre-adjudication dispute inspection, agreement statistics and the
 additional paper/group/leave-one-group-out descriptive evaluation fields.
 
+The separate [published-reference comparator](../benchmarks/pilots/published-reference-20261116/README.md)
+uses historical manual labels without inventing two new reviewer identities.
+Its pinned engine/data, source-format clarification and first completed result
+are retained. It measures supplied-string reference agreement, not this
+two-reviewer collection workflow or whole-paper scientific accuracy.
+
 This tool evaluates bounded structured-check discrepancies on caller-supplied
 text snapshots. It does not establish that a manuscript is scientifically
 correct. A real-paper performance estimate still needs genuine, separately
