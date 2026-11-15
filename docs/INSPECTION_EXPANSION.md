@@ -1,9 +1,9 @@
 # Inspection expansion: areas 1–6
 
-These unreleased source features extend the existing toolkit and unified review.
+These Python 0.9.0 features extend the existing toolkit and unified review.
 All reports and examples are in English. Manuscripts remain read-only; findings
-and proposed inputs are separate JSON/Markdown reports. No new graphical UI,
-package publication or main-branch merge is included.
+and proposed inputs are separate JSON/Markdown reports. No new graphical UI
+is included.
 
 ## 1. Prepare inspection inputs from a manuscript
 

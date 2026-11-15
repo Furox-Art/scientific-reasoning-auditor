@@ -65,7 +65,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python engine and statistics dependencies
-        run: python -m pip install -e ".[statistics,dev]"
+        run: python -m pip install -e ".[pdf,statistics,logic,toolkit,research,dev]" -r mcp_server/requirements.txt
 
       - name: Run Python regression tests before npm publication
         run: python -m coverage run --source=src/sra -m unittest discover -s tests -v
@@ -78,6 +78,9 @@ jobs:
 
       - name: Run Node.js tests
         run: npm test
+
+      - name: Run MCP adapter tests
+        run: python -m unittest discover -s mcp_server/tests -v
 
       - name: Validate npm package contents
         run: npm pack --dry-run

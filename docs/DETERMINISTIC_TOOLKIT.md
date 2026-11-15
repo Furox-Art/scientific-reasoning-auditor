@@ -7,7 +7,7 @@ tables/figures and real-paper evaluation are specified in
 The toolkit complements the Z3 logic adapter with working local checks. It
 never edits manuscripts. JSON and Markdown findings go to the user separately.
 It does not claim to certify every scientific field or turn arbitrary prose
-into verified formal statements. These additions are unreleased source features.
+into verified formal statements. These additions are included in Python 0.9.0.
 
 | Area | Selected tool | Implemented operation | Interpretation |
 | --- | --- | --- | --- |

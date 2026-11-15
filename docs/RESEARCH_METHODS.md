@@ -2,8 +2,8 @@
 
 Seven additional structured checks run through the existing Python, CLI, Node
 and MCP toolkit interfaces. Reports remain English and separate from read-only
-manuscripts. These are unreleased source features; no UI, merge or package
-publication is included.
+manuscripts. These features are included in Python 0.9.0 and Node adapter 0.2.0;
+the MCP server is distributed through the GitHub source release.
 
 ```bash
 py -3.15 -m venv .venv

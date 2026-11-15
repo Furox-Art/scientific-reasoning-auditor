@@ -10,6 +10,12 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-15
+
+Python engine 0.9.0 and independently versioned Node adapter 0.2.0.
+The GitHub source release also includes the MCP adapter and offline collection
+and replay tools. No independent scientific expert validation is claimed.
+
 ### Added
 
 - Generic offline frozen-cohort reviewer packets and pre-adjudication inspection,
@@ -69,6 +75,9 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
   or independent expert-validation evidence.
 
 ### Fixed
+
+- Both registry release workflows install all optional method/test backends and
+  run the MCP regression suite before publishing the exact tagged source.
 
 - Git provenance subprocesses now detach standard input, avoiding consumption of
   or waits on MCP stdio protocol input on Windows.
@@ -196,7 +205,8 @@ neither decides which analysis was run.
 
 - Release tests install the package in editable mode (`dc835a5`).
 
-[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/Furox-Art/scientific-reasoning-auditor/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.9.0
 [0.8.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.8.0
 [0.7.1]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.1
 [0.7.0]: https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/v0.7.0
