@@ -170,6 +170,11 @@ do not authenticate studies, ethics records, mappings or official compliance.
    pre-adjudication agreement/dispute inspection and separate blank adjudicator
    packets. Evaluation adds paper/group strata and descriptive group-omission
    sensitivity. These support collection; no genuine human labels are generated.
+   A pinned source-checkout comparison now evaluates the published 0.9.0 engine
+   against historical manual labels for selected psychology statistics; see
+   `benchmarks/pilots/published-reference-20261116/README.md`. Its 60% decision
+   coverage and 34/49 reference-frame error recall do not establish whole-paper
+   correctness, SRA extraction performance or representative multi-field accuracy.
 2. **Dependence and design complexity:** Correlated/multilevel study estimates,
    cluster/unequal-variance power, attrition and repeated measures need explicit
    design inputs and different estimators. Current simple formulas cannot stand

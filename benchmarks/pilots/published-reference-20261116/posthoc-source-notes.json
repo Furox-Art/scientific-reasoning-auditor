@@ -1,0 +1,105 @@
+{
+  "scope": "Historical source notes only; not new adjudication or prediction inputs.",
+  "cases": [
+    {
+      "id": "row_262",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_263",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_266",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_394",
+      "historical_manual_note": "huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_395",
+      "historical_manual_note": "huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_396",
+      "historical_manual_note": "huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_397",
+      "historical_manual_note": "reported as p=.033 because of huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_398",
+      "historical_manual_note": "reported as p=.011 because of huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_399",
+      "historical_manual_note": "reported as p=.035 because of huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_400",
+      "historical_manual_note": "reported as p=.023 because of huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_409",
+      "historical_manual_note": "=.005 huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_418",
+      "historical_manual_note": "p=0.047 huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_436",
+      "historical_manual_note": "=.008 huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_437",
+      "historical_manual_note": "0.01 huyn-feldt",
+      "historical_other_tool_discrepancy_note": "huyn-feldt correction"
+    },
+    {
+      "id": "row_548",
+      "historical_manual_note": "coded as 1-tailed t-test is correct",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_703",
+      "historical_manual_note": "Rounding OK",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_711",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_712",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_713",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    },
+    {
+      "id": "row_714",
+      "historical_manual_note": "",
+      "historical_other_tool_discrepancy_note": "one-tailed"
+    }
+  ]
+}

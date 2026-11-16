@@ -10,6 +10,12 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+- Source-checkout comparison of unchanged published SRA 0.9.0 with pinned,
+  source-declared historical manual labels: 1120 retained psychology results,
+  60% decision coverage and 34/49 reference errors flagged. Preserves the first
+  completed result, source/wheel/specification hashes, exclusions and abstentions.
+  This is not new blinded human review or whole-paper/multi-field validation.
+
 ## [0.9.0] - 2026-11-15
 
 Python engine 0.9.0 and independently versioned Node adapter 0.2.0.
