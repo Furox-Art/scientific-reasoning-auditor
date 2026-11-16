@@ -14,8 +14,11 @@ _REPORTED=re.compile(
     r'(?:\(\s*(?P<inline_df>'+_DFS+r')\s*\)\s*)?=\s*'
     r'(?P<value>'+_NUM+r')(?![\w.])\s*[,;]\s*'
     r'(?:df\s*=\s*(?P<suffix_df>'+_DFS+r')\s*[,;]\s*)?'
-    r'p\s*(?P<relation>[=<>])\s*(?P<p>'+_NUM+r')(?!\w|\.\w|,\s*\d)', re.I)
-_STAT_CUE=re.compile(r'\b(?:t|F|r|z|chi2)\s*(?:\([^\n]{0,30}\))?\s*=\s*[+−-]?(?:\d|\.)|\bp\s*[=<>≤≥]\s*\.?\d', re.I)
+    r'p\s*(?P<relation>[=<>])\s*(?P<p>'+_NUM+r')(?!\w|\.\w|,\s*[+−-]?[.\d])', re.I)
+_STAT_CUE=re.compile(r'\b(?:t|F|r|z|chi2)\s*(?:\([^\n]{0,30}\)\s*)?=\s*[+−-]?(?:\d|\.)|\bp\s*[=<>≤≥]\s*\.?\d', re.I)
+_P_SUFFIX=re.compile(r'\s*(?:[%‰‱±∓+−–—/*×÷·⋅∗⁄∕^=<>≤≥~≈-]|\.{2,}|…|'
+                     r'(?:to|through)(?=\s|[.\d+−-]|$)|(?:x|times)(?=\s*[.\d(])|e\s*[+−-]?\s*\d|'
+                     r'(?:percent|percentage|per\s+cent)\b|[\[(]\s*[+−\d.-])', re.I)
 
 
 def _reported_draft(match, identifier):
@@ -75,6 +78,10 @@ def prepare_inspection(document):
             add('assumption',start,start+len(line.rstrip('\r\n')))
         remainder=list(line)
         for match in _REPORTED.finditer(line):
+            if _P_SUFFIX.match(line,match.end()):
+                # A numeric prefix of a percentage/range/uncertainty/expression
+                # is not a recovered scalar p-value. Keep the full cue below.
+                continue
             suggestion=_reported_draft(match,f'statistic_{len(candidates)+1}')
             add('statistic',start+match.start(),start+match.end(),suggested_check=suggestion)
             remainder[match.start():match.end()]=' '*(match.end()-match.start())

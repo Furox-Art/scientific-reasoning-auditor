@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 import sra
-from sra.document import load_document
+from sra.document import parse_document_text
 from sra.inspection import prepare_inspection
 from sra.toolkit import verify_toolkit_spec, _numerical_environment
 
@@ -38,8 +38,9 @@ def evaluate():
     pinned(FOLDER / 'protocol.md', PINS['protocol.md'])
     inventory = json.loads(pinned(COHORT / 'sources.json', INVENTORY_SHA))
     source = FOLDER / packet['source']
-    pinned(source, packet['source_sha256'])
-    document = load_document(source)
+    raw = pinned(source, packet['source_sha256'])
+    document = parse_document_text(raw.decode('utf-8'), source=str(source),
+        sha256=sha(raw), input_format='md')
     prepared = prepare_inspection(document)
     cases = []
     for case in packet['cases']:
@@ -72,7 +73,7 @@ def evaluate():
                 lower = (-(value + half) / 2).exp()
                 upper = (-(value - half) / 2).exp()
             actual = result['details'].get('computed_p_interval')
-            reference_matches = (actual is not None and
+            reference_matches = (isinstance(actual, list) and len(actual) == 2 and
                 all(abs(Decimal.from_float(a) - b) < Decimal('1e-14')
                     for a, b in zip(actual, (lower, upper))))
             row.update(conditional_result=result,
@@ -86,8 +87,10 @@ def evaluate():
         row = dict(doi=entry['doi'], stratum=entry['stratum'], source_status=entry['status'])
         if entry['status'] == 'available':
             path = COHORT / entry['text']
-            pinned(path, entry['text_sha256'])
-            result = prepare_inspection(load_document(path))
+            raw = pinned(path, entry['text_sha256'])
+            document = parse_document_text(raw.decode('utf-8'), source=str(path),
+                sha256=sha(raw), input_format='md')
+            result = prepare_inspection(document)
             row.update(source_sha256=entry['text_sha256'], checks_executed=result['checks_executed'],
                 candidates_by_kind=dict(Counter(c['kind'] for c in result['candidates'])),
                 suggested_checks=sum(c.get('suggested_check') is not None for c in result['candidates']))

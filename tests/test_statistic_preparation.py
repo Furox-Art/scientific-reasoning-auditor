@@ -1,5 +1,7 @@
 """Source notation recovery controls, never scientific error gold labels."""
 import hashlib
+import subprocess
+import sys
 import unittest
 
 from sra.document import parse_document_text
@@ -87,6 +89,31 @@ class LiteralStatisticTests(unittest.TestCase):
         self.assertFalse(self.drafts(prepare('t' + ' ' * 10000 + '!')))
         for suffix in ('.4', '.abc', 'e100', ',03'):
             self.assertFalse(self.drafts(prepare('t(12) = 2.40, P = .03' + suffix)))
+
+    def test_percentage_ranges_uncertainty_and_expressions_keep_full_cue(self):
+        for suffix in ('%', ' %%', ' percent', '‰', '–0.05', ' to 0.05', ' to0.05', ' ± 0.01',
+                       '+0.01', '/2', '*', ' ×10^−3', ', .05', '^(2)', ' = .04', '(.01)', '[.01,.04]', '...', ' x10^-3', ' x 10^-3', ' ·10^-3', ' ⋅10^-3', '⁄100', '∕100', ', +.05', ', −.05', ' times10^-3', ' E −3'):
+            text = 't(12) = 2.40, P = .03' + suffix
+            with self.subTest(suffix=suffix):
+                report = prepare(text)
+                self.assertFalse(self.drafts(report))
+                self.assertTrue(any(row['source_quote'] == text for row in report['candidates']))
+
+    def test_malformed_whitespace_cannot_exhaust_preparation_budget(self):
+        code = ('from sra.document import parse_document_text; '
+                'from sra.inspection import prepare_inspection; '
+                '\nfor prefix,end in (("t","!"),("I",":"),("1.",":")):\n'
+                ' text=prefix+" "*190000+end\n'
+                ' result=prepare_inspection(parse_document_text(text,source="test.md",sha256="a"*64))\n'
+                ' assert result["candidates"]==[]')
+        completed = subprocess.run([sys.executable, '-I', '-c', code], capture_output=True, timeout=5)
+        self.assertEqual(completed.returncode, 0, completed.stderr.decode(errors='replace'))
+
+    def test_plain_heading_labels_preserve_numbering_and_terminal_punctuation(self):
+        for title, expected in (('Methods', 'Methods'), ('1. Methods:', 'Methods'),
+                                ('II Results.', 'Results'), ('1.2 Materials and methods :', 'Materials and methods')):
+            document = parse_document_text(title + '\nContent.', sha256='a' * 64)
+            self.assertIn(expected, document.sections)
 
 
 if __name__ == '__main__':
