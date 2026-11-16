@@ -207,6 +207,14 @@ Primary mathematical/statistical references:
 
 ## Software validation
 
+Current 0.10.0 source validation passed 896 Python, 30 Node and 50 MCP tests,
+with 100% runtime statement coverage. Native Windows also passed all 896 Python
+and 50 MCP tests. The software review found and fixed a df-conversion false
+refutation; see the separate precision clarification and recorded numerical
+controls. These results do not supply new independent human or paper accuracy.
+
+Earlier inspection-expansion checkpoint (historical record):
+
 719 Python tests passed with 5838 runtime statements covered (100% statement
 coverage); 28 Node and 43 MCP tests passed, including real stdio preparation.
 One fresh whole-change review led to RED/GREEN regressions for gold-candidate
