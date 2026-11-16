@@ -39,7 +39,9 @@ PLAIN_HEADING_ALIASES = {
     "sonuç", "sonuç ve tartışma", "sınırlılıklar", "çalışmanın sınırlılıkları",
     "kaynakça",
 }
-PLAIN_PREFIX = re.compile(r"^(?:(?:\d+(?:\.\d+)*|[IVXLC]+)[.)]?\s+)?(.+?)\s*[:.]?$", re.I)
+# End the greedy label at a non-whitespace, non-terminator character. A lazy
+# label followed by optional whitespace can rescan a long paragraph quadratically.
+PLAIN_PREFIX = re.compile(r"^(?:(?:\d+(?:\.\d+)*|[IVXLC]+)[.)]?\s+(?=\S))?(.+[^\s:.]|[^\s:.])\s*[:.]?$", re.I)
 
 
 def without_fenced_code(text: str) -> str:

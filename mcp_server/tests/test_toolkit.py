@@ -8,6 +8,22 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_literal_source_preparation_keeps_unknown_assumptions(self):
+        content = 'X^(2) = 7.66, df = 2, P = 0.02; X²(2) = 11.54, P < .01'
+        response = server.prepare_inspection(content)
+        self.assertTrue(response['ok'], response)
+        prepared = response['result']
+        rows = [row for row in prepared['candidates'] if row.get('suggested_check')]
+        self.assertEqual([row['suggested_check']['statistic'] for row in rows], ['7.66', '11.54'])
+        self.assertFalse(prepared['checks_executed'])
+        for row in rows:
+            self.assertEqual(content[row['start']:row['end']], row['source_quote'])
+            self.assertEqual(row['suggested_check']['alternative'], 'unknown')
+            self.assertEqual(row['suggested_check']['df_precision'], 'unknown')
+        result = server.verify_toolkit(json.dumps(prepared['proposed_toolkit_specs'][0]))
+        self.assertTrue(result['ok'], result)
+        self.assertEqual([row['status'] for row in result['result']['checks']], ['UNDETERMINED'] * 2)
+
     def test_declared_statistical_context_survives_real_transport(self):
         base=dict(kind='statistic_consistency',test='t',df=[1],
                   statistic='2.000000000000',reported_p='.147584')

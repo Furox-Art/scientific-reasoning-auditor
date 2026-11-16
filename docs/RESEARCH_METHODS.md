@@ -252,3 +252,13 @@ recorded environment; numeric warnings/limits remain explicit partial results.
 - [ArviZ Stats array interface](https://python.arviz.org/projects/stats/en/latest/array_stats_only.html)
 - [Scikit-learn leakage pitfalls](https://scikit-learn.org/stable/common_pitfalls)
 - [Crossref versioning and updates](https://www.crossref.org/documentation/principles-practices/best-practices/versioning/)
+
+## Source-statistic preparation follow-up (2026-11-17)
+
+Python 0.10.1 recovers three literal statistic/df/p triplets from one of the
+twelve original frozen papers, including separate df and X^(2)/uppercase P.
+All drafts retain unknown assumptions; explicit unconfirmed execution abstains.
+The separate conditional numerical replay is not a confirmed paper-error label.
+This post-hoc development reuse does not resolve representative scientific-error
+accuracy or independent human labeling; see
+[the complete follow-up](../benchmarks/pilots/statistic-preparation-20261116/README.md).
