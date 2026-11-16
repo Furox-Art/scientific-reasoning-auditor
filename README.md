@@ -42,7 +42,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: Python v0.9.0 / Node v0.2.0
+## Current status: Python v0.9.1 / Node v0.2.1
 
 The [local inspection toolkit](docs/DETERMINISTIC_TOOLKIT.md)
 integrates SymPy polynomial/calculus checks, Pint unit conversions, SciPy raw-data
@@ -70,13 +70,23 @@ study-type applicability, required evidence, available checks, source-bound
 execution references and explicit human/unsupported assessments. It covers broad
 review questions without claiming exhaustive coverage or scientific certification.
 
-Python 0.9.0 and Node adapter 0.2.0 include the source-bound review, deterministic
+Python 0.9.1 and Node adapter 0.2.1 include the source-bound review, deterministic
 toolkit, research/grouped methods and discrepancy-evaluation interfaces described
 above. Install the required optional Python extras for the requested backends.
 The GitHub source archive includes the MCP adapter, examples and offline reviewer
 collection/replay tools. New blinded human reviews and representative multi-field
 scientific-error validation remain outstanding. Package versions are independent; the Node adapter
 checks the Python engine's baseline version and probes newer feature contracts.
+
+The Python 0.9.1 source distribution (`.tar.gz`) and npm 0.2.1 archive include
+`tools/evaluate_published_reference.py` and the frozen historical-reference
+protocol, first reports and source notes. The Python wheel installs the engine;
+the comparator remains an explicit offline script rather than a Node/MCP operation.
+Use a separate environment with the pinned published **0.9.0** engine to reproduce
+that historical measurement, following the bundled benchmark README. The original
+source files and wheel are also preserved in the
+[reference-validation release](https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/reference-validation-20261116).
+The patch release does not change numerical decision rules or historical scores.
 
 This release limits model API response memory use, validates reasoning-graph node/edge schema and endpoint types, rejects non-standard JSON constants in imported semantic reviews, and expands the reproducibility source hash to selected runtime, test, workflow, schema, adapter and build inputs. Statistical reports now state that pooled-SD Cohen's d and classical Hedges' g assume a common within-group variance model and are not heteroskedasticity-adjusted. CI covers Python 3.11 and 3.12, uses Node.js 24-compatible GitHub Actions, and pins each external action to a verified full commit SHA.
 
@@ -283,7 +293,7 @@ The functions return `{ code, signal, stdout, stderr }`. By default command outp
 After the initial npm release has created the package, configure a GitHub Actions Trusted Publisher in npm package settings with owner Furox-Art, repository scientific-reasoning-auditor, workflow filename npm-publish.yml, and no environment. Allow direct npm publish. The workflow uses GitHub-hosted runners, Node.js 24+, npm 11.5.1+, and the id-token: write permission; it stores no npm publish token.
 
 To publish a subsequent npm version, update package.json, commit the change, and
-push a matching tag such as npm-v0.2.0. The workflow runs Python, Node and MCP
+push a matching tag such as npm-v0.2.1. The workflow runs Python, Node and MCP
 tests and npm pack --dry-run before publishing via OIDC. The package already
 exists and uses the configured GitHub Trusted Publisher.
 

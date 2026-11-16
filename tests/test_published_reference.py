@@ -167,7 +167,7 @@ class PublishedReferenceTests(unittest.TestCase):
                 z.writestr('sra/__init__.py',(package/'__init__.py').read_bytes())
                 z.writestr('sra/py.typed',b'')
             sha=hashlib.sha256(wheel.read_bytes()).hexdigest()
-            with patch.object(ref,'WHEEL_SHA',sha),patch.object(ref.sra,'__file__',str(package/'__init__.py')):
+            with patch.object(ref,'WHEEL_SHA',sha),patch.object(ref.sra,'__file__',str(package/'__init__.py')),patch.object(ref.sra,'__version__','0.9.0'):
                 self.assertEqual(ref.verify_engine(wheel)['source_files_verified'],2)
                 (package/'__init__.py').write_bytes(b'changed synthetic source\n')
                 with self.assertRaises(ValueError):ref.verify_engine(wheel)
