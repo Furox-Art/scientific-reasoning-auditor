@@ -10,6 +10,16 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.9.1] - 2026-11-16
+
+Python engine 0.9.1 and independently versioned Node adapter 0.2.1.
+
+- Publish the historical-reference comparator, protocol, frozen first reports
+  and posthoc source notes in the Python source distribution and npm archive.
+  The Python wheel remains the engine distribution; the historical comparison
+  still requires a separate pinned 0.9.0 engine environment.
+- Update current installation/release documentation and citation metadata.
+  Numerical decision rules and historical result bytes remain unchanged.
 - Source-checkout comparison of unchanged published SRA 0.9.0 with pinned,
   source-declared historical manual labels: 1120 retained psychology results,
   60% decision coverage and 34/49 reference errors flagged. Preserves the first

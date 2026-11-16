@@ -81,9 +81,10 @@ original statistical conclusions are correct follows from these records.
 
 ## Reproduce from a source checkout
 
-The comparator is a source-checkout tool, not a new Node/MCP operation. It
-evaluates the already-published 0.9.0 engine; Python/Node registry versions are
-unchanged. Download is explicit; `run` is offline. Existing input/output files
+The comparator is an explicit offline script, not a new Node/MCP operation. It
+always evaluates the pinned published 0.9.0 engine, including when distributed
+with later packaging releases. Use a separate 0.9.0 environment to preserve
+this historical baseline. Download is explicit; `run` is offline. Existing input/output files
 are not overwritten, and changed source/wheel hashes stop execution.
 
 PowerShell example for the measured environment:
