@@ -14,3 +14,7 @@
 *.pdf binary
 *.whl binary
 *.gz binary
+
+# Preserve exact licensed publisher snapshots and raw metadata response bytes.
+benchmarks/pilots/multifield-20261116/sources/*.xml -text
+benchmarks/pilots/multifield-20261116/frame/*.json -text

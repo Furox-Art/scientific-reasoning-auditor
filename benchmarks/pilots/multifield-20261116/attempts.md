@@ -32,3 +32,9 @@ that an in-repository output is rejected before auditing.
 Pending execution at the time this correction was committed. Its actual summary
 will be archived as `recorded-run/`; this entry is not a predicted success.
 The original first run must remain available alongside the corrected result.
+
+Actual result: all 12 selected originals available; all 12 requested module
+executions complete; all 12 within-environment semantic repeat comparisons
+agree. The engine remains 0.10.0. No new human labels or scientific-error
+accuracy estimate were produced. Full outputs are copied unmodified from the
+external execution directory into recorded-run/.

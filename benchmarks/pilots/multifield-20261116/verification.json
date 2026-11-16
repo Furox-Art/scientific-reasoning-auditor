@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-16",
+  "python_tests": 907,
+  "node_tests": 30,
+  "mcp_tests": 50,
+  "python_runtime_statement_coverage_percent": 100,
+  "python_runtime_statements": 7485,
+  "tool_statement_coverage_claimed": false,
+  "checks": [
+    {
+      "check": "compile",
+      "exit_code": 0,
+      "seconds": 0.3
+    },
+    {
+      "check": "python",
+      "exit_code": 0,
+      "seconds": 163.6
+    },
+    {
+      "check": "coverage",
+      "exit_code": 0,
+      "seconds": 0.7
+    },
+    {
+      "check": "node",
+      "exit_code": 0,
+      "seconds": 19.3
+    },
+    {
+      "check": "mcp",
+      "exit_code": 0,
+      "seconds": 12.8
+    }
+  ],
+  "source_originals_byte_exact_in_git": 12,
+  "raw_frame_pages_hash_verified": 2,
+  "engine_and_adapters_unchanged_from": "73717b13af0cde3b18c8840c60e2d02ec439a8bb",
+  "visual_qa": {
+    "report_readme_rendered": true,
+    "pages_inspected": 3,
+    "clipping_found": false
+  },
+  "agent_code_review": {
+    "performed": true,
+    "scientific_expert_review": false,
+    "fixed_findings": [
+      "graph source endpoint removal",
+      "wall-clock metadata in repeat comparison",
+      "adjacent XML table cell concatenation",
+      "output self-inclusion in repository provenance"
+    ]
+  },
+  "human_reference_labels": 0,
+  "scientific_accuracy": null
+}
