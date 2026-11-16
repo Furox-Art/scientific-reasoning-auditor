@@ -10,6 +10,24 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-11-16
+
+Python engine/ruleset 0.10.0 and Node adapter 0.3.0.
+
+- Declared greater/less/two-sided t/z statistic consistency with signed rounding
+  intervals; unknown test direction explicitly abstains. F/chi-square remain
+  upper-tail only. Defaults for existing structured inputs remain documented.
+- Positive decimal df with explicit precision: fractional df require an exact
+  caller declaration; unknown/rounded df abstain. No correction method is inferred.
+- Df conversion that loses exact decimal values abstains; statistic bounds are
+  rounded outward. This closes a software-review counterexample without claiming
+  general arbitrary-precision inference or a formal backend error bound.
+- Source-prepared statistic candidates require direction/df confirmation and
+  recognize fractional df without executing inferred assumptions.
+- Frozen NIST-derived numerical controls and separately marked synthetic guards,
+  complete separate reports and source/fixture/runtime hashes. Original 0.9.0
+  historical results are preserved; no new human or multi-field paper validation.
+
 ## [0.9.1] - 2026-11-16
 
 Python engine 0.9.1 and independently versioned Node adapter 0.2.1.

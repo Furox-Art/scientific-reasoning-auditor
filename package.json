@@ -1,6 +1,6 @@
 {
   "name": "scientific-reasoning-auditor",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Node.js adapter for the Scientific Reasoning Auditor Python engine.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -15,9 +15,14 @@
     "LICENSE",
     "CITATION.cff",
     "tools/evaluate_published_reference.py",
+    "tools/evaluate_statistical_context.py",
     "benchmarks/pilots/published-reference-20261116/",
+    "benchmarks/pilots/statistical-context-20261116/",
     "docs/ERROR_BENCHMARK.md",
-    "docs/releases/0.9.1.md"
+    "docs/releases/0.9.1.md",
+    "docs/releases/0.10.0.md",
+    "docs/INSPECTION_EXPANSION.md",
+    "examples/statistical-context.json"
   ],
   "scripts": {
     "test": "node --test"

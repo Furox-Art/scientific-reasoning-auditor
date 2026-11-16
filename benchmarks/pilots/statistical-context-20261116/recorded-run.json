@@ -1,0 +1,1283 @@
+{
+  "schema_version": "1.0",
+  "scope": "Distribution-table and synthetic software controls; no whole-paper or human-review validation.",
+  "comparison_status": "MATCHED",
+  "case_count": 32,
+  "expectations_met": 32,
+  "actual_status_counts": {
+    "REFUTED": 2,
+    "UNDETERMINED": 6,
+    "VERIFIED": 24
+  },
+  "engine_execution_status": "partial",
+  "cases": [
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_1_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "1"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04999417027487877,
+            0.05000195927418931
+          ],
+          "statistic_interval": [
+            "6.3135",
+            "6.3145"
+          ],
+          "backend_statistic_interval": [
+            6.3134999999999994,
+            6.314500000000001
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_1_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [
+            "1"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04999417027487877,
+            0.05000195927418931
+          ],
+          "statistic_interval": [
+            "-6.3145",
+            "-6.3135"
+          ],
+          "backend_statistic_interval": [
+            -6.314500000000001,
+            -6.3134999999999994
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_1_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [
+            "1"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.09998834054975754,
+            0.10000391854837862
+          ],
+          "statistic_interval": [
+            "6.3135",
+            "6.3145"
+          ],
+          "backend_statistic_interval": [
+            6.3134999999999994,
+            6.314500000000001
+          ],
+          "reported_p_interval": [
+            0.0995,
+            0.1005
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_2_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04999682852392341,
+            0.05007846416601809
+          ],
+          "statistic_interval": [
+            "1.8115",
+            "1.8125"
+          ],
+          "backend_statistic_interval": [
+            1.8114999999999999,
+            1.8125
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_2_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04999682852392341,
+            0.05007846416601809
+          ],
+          "statistic_interval": [
+            "-1.8125",
+            "-1.8115"
+          ],
+          "backend_statistic_interval": [
+            -1.8125,
+            -1.8114999999999999
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_2_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.09999365704784682,
+            0.10015692833203618
+          ],
+          "statistic_interval": [
+            "1.8115",
+            "1.8125"
+          ],
+          "backend_statistic_interval": [
+            1.8114999999999999,
+            1.8125
+          ],
+          "reported_p_interval": [
+            0.0995,
+            0.1005
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_3_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "20"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04992822243744277,
+            0.05002005392468198
+          ],
+          "statistic_interval": [
+            "1.7245",
+            "1.7255"
+          ],
+          "backend_statistic_interval": [
+            1.7245,
+            1.7255
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_3_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [
+            "20"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04992822243744277,
+            0.05002005392468198
+          ],
+          "statistic_interval": [
+            "-1.7255",
+            "-1.7245"
+          ],
+          "backend_statistic_interval": [
+            -1.7255,
+            -1.7245
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "t_3_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [
+            "20"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.09985644487488554,
+            0.10004010784936396
+          ],
+          "statistic_interval": [
+            "1.7245",
+            "1.7255"
+          ],
+          "backend_statistic_interval": [
+            1.7245,
+            1.7255
+          ],
+          "reported_p_interval": [
+            0.0995,
+            0.1005
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_1_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04993337133207097,
+            0.05003648215049257
+          ],
+          "statistic_interval": [
+            "1.6445",
+            "1.6455"
+          ],
+          "backend_statistic_interval": [
+            1.6444999999999999,
+            1.6455000000000002
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_1_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04993337133207097,
+            0.05003648215049257
+          ],
+          "statistic_interval": [
+            "-1.6455",
+            "-1.6445"
+          ],
+          "backend_statistic_interval": [
+            -1.6455000000000002,
+            -1.6444999999999999
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_1_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.09986674266414194,
+            0.10007296430098514
+          ],
+          "statistic_interval": [
+            "1.6445",
+            "1.6455"
+          ],
+          "backend_statistic_interval": [
+            1.6444999999999999,
+            1.6455000000000002
+          ],
+          "reported_p_interval": [
+            0.0995,
+            0.1005
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_2_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.024968688990625616,
+            0.025027129941878487
+          ],
+          "statistic_interval": [
+            "1.9595",
+            "1.9605"
+          ],
+          "backend_statistic_interval": [
+            1.9594999999999998,
+            1.9605000000000001
+          ],
+          "reported_p_interval": [
+            0.0245,
+            0.0255
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_2_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.024968688990625616,
+            0.025027129941878487
+          ],
+          "statistic_interval": [
+            "-1.9605",
+            "-1.9595"
+          ],
+          "backend_statistic_interval": [
+            -1.9605000000000001,
+            -1.9594999999999998
+          ],
+          "reported_p_interval": [
+            0.0245,
+            0.0255
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_2_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04993737798125123,
+            0.050054259883756974
+          ],
+          "statistic_interval": [
+            "1.9595",
+            "1.9605"
+          ],
+          "backend_statistic_interval": [
+            1.9594999999999998,
+            1.9605000000000001
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_3_greater",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.004990310274787372,
+            0.0050047636646642565
+          ],
+          "statistic_interval": [
+            "2.5755",
+            "2.5765"
+          ],
+          "backend_statistic_interval": [
+            2.5755,
+            2.5765000000000002
+          ],
+          "reported_p_interval": [
+            0.0045,
+            0.0055
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_3_less",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.004990310274787372,
+            0.0050047636646642565
+          ],
+          "statistic_interval": [
+            "-2.5765",
+            "-2.5755"
+          ],
+          "backend_statistic_interval": [
+            -2.5765000000000002,
+            -2.5755
+          ],
+          "reported_p_interval": [
+            0.0045,
+            0.0055
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "z_3_two_sided",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "two-sided",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.009980620549574744,
+            0.010009527329328513
+          ],
+          "statistic_interval": [
+            "2.5755",
+            "2.5765"
+          ],
+          "backend_statistic_interval": [
+            2.5755,
+            2.5765000000000002
+          ],
+          "reported_p_interval": [
+            0.0095,
+            0.0105
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "F_1",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "1",
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04998293544157892,
+            0.05000195449947055
+          ],
+          "statistic_interval": [
+            "4.9645",
+            "4.9655"
+          ],
+          "backend_statistic_interval": [
+            4.964499999999999,
+            4.9655000000000005
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "F_2",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "2",
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.04998135652241084,
+            0.050008817296717634
+          ],
+          "statistic_interval": [
+            "4.1025",
+            "4.1035"
+          ],
+          "backend_statistic_interval": [
+            4.102499999999999,
+            4.1035
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "F_3",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "5",
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.0499729996937759,
+            0.05001357950477836
+          ],
+          "statistic_interval": [
+            "3.3255",
+            "3.3265"
+          ],
+          "backend_statistic_interval": [
+            3.3255,
+            3.3265000000000002
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "chi2_1",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "1"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.049998772071222296,
+            0.05002860015591539
+          ],
+          "statistic_interval": [
+            "3.8405",
+            "3.8415"
+          ],
+          "backend_statistic_interval": [
+            3.8404999999999996,
+            3.8415000000000004
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "chi2_2",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "2"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.049999113685555166,
+            0.05002411949332895
+          ],
+          "statistic_interval": [
+            "5.9905",
+            "5.9915"
+          ],
+          "backend_statistic_interval": [
+            5.9905,
+            5.9915
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "expected_status": "VERIFIED",
+      "expectation_met": true,
+      "result": {
+        "id": "chi2_3",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "VERIFIED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.049992849243848225,
+            0.05000833002842484
+          ],
+          "statistic_interval": [
+            "18.3065",
+            "18.3075"
+          ],
+          "backend_statistic_interval": [
+            18.3065,
+            18.3075
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "unknown_t",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "unknown",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "unknown_z",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "unknown",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "unknown_F",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "unknown",
+          "alternative_source": "caller",
+          "df": [
+            "1",
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "unknown_chi2",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "unknown",
+          "alternative_source": "caller",
+          "df": [
+            "1"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unresolved df-precision control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "df_t",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "10.5"
+          ],
+          "df_precision": "unknown",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic unresolved df-precision control",
+      "expected_status": "UNDETERMINED",
+      "expectation_met": true,
+      "result": {
+        "id": "df_F",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "UNDETERMINED",
+        "details": {
+          "meaning": "Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.",
+          "alternative": "greater",
+          "alternative_source": "caller",
+          "df": [
+            "1.5",
+            "10.5"
+          ],
+          "df_precision": "rounded",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false
+        }
+      }
+    },
+    {
+      "origin": "Synthetic intentionally wrong direction/p pair",
+      "expected_status": "REFUTED",
+      "expectation_met": true,
+      "result": {
+        "id": "wrong_direction_t",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "REFUTED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [
+            "10"
+          ],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.9499215358339819,
+            0.9500031714760766
+          ],
+          "statistic_interval": [
+            "1.8115",
+            "1.8125"
+          ],
+          "backend_statistic_interval": [
+            1.8114999999999999,
+            1.8125
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    },
+    {
+      "origin": "Synthetic intentionally wrong direction/p pair",
+      "expected_status": "REFUTED",
+      "expectation_met": true,
+      "result": {
+        "id": "wrong_direction_z",
+        "kind": "statistic_consistency",
+        "backend": "scipy.stats",
+        "backend_version": "1.18.1",
+        "status": "REFUTED",
+        "details": {
+          "meaning": "Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.",
+          "alternative": "less",
+          "alternative_source": "caller",
+          "df": [],
+          "df_precision": "exact",
+          "distribution_assumptions_verified": false,
+          "correction_method_verified": false,
+          "backend_df_conversion_exact": true,
+          "computed_p_interval": [
+            0.9499635178495074,
+            0.950066628667929
+          ],
+          "statistic_interval": [
+            "1.6445",
+            "1.6455"
+          ],
+          "backend_statistic_interval": [
+            1.6444999999999999,
+            1.6455000000000002
+          ],
+          "reported_p_interval": [
+            0.0495,
+            0.0505
+          ]
+        }
+      }
+    }
+  ],
+  "new_human_reviews_collected": 0,
+  "papers_evaluated": 0,
+  "source_urls": [
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3671.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3673.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm"
+  ],
+  "cases_sha256": "8f33fe6b94df7cd1b57b82bc1655a5d88ae844b705711050d25b8d2da74907e6",
+  "protocol_sha256": "3a6d7bff9091872c162ff010a15a070782ad547af35e5fd1c1b509b27dd77096",
+  "precision_clarification_sha256": "2b7af9f801caf92bf9831e3894f6e17f8a9df0b97ecf49d50b8df3c2da486068",
+  "producer_sha256": "5385e34d30aac40af95ab95067a270bafcf10de6aa531888f07bb13864474303",
+  "engine_version": "0.10.0",
+  "numerical_environment": {
+    "python": "3.15.2",
+    "system": "Windows",
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "networkx": "3.7",
+      "arviz-stats": "1.3.3",
+      "arviz": null
+    }
+  },
+  "runtime_source_sha256": "8f474a0bc36091139bf85d7531e13ba58674a734c9512e769a73c50c5bb87b3b",
+  "runtime_source_files": {
+    "sra/__init__.py": "bf8ce62a3b0a38f65ba7a06b5a8cfb88ae124f4b1d65d521f5b41226696e679a",
+    "sra/academic_benchmark.py": "11d2e491cbe92cd97516f57fd801055e941cc535e0582486e1213874c7c3da5a",
+    "sra/advanced_checks.py": "8727a071bf1c2cf8ec31b58afa2d50f69087517a8f565f0bbe742b56c70fc1a2",
+    "sra/advanced_spec.py": "352e99f294380f18be2469cf7fa12ebb45e4d907323abed51ee50c8006822daa",
+    "sra/audit.py": "3e5b5829830977ca98afd59ea6a60877d8182f2637b58e03cada6f716cc76fb3",
+    "sra/benchmark.py": "110cdf05341f1b4db7583729191bc0062b12ca097f52126bed34a946e94dbf4f",
+    "sra/capabilities.py": "8c55eb70e412d6dbf30041aa8d59bed10db71c619decfed9fefbb97982d33d08",
+    "sra/checks.py": "c6e67533cd4fa934ab0333827409aa1fb342f70746aa3a6e2f7a4f36b4a6ca72",
+    "sra/cli.py": "bd34c7d76abde344adcb7f38c2756936f3f566f5ff02c5529f3ad1d8a7bb09ab",
+    "sra/criteria.py": "90ef04895fb9e8d031e94539b8df072d9cbb499f076f2d8bd53ae9be8ab5c7f9",
+    "sra/criteria_catalog.py": "a7d0a41546f3046b09014fa0104becc8195be730a03ca21a143239b70c2a4089",
+    "sra/dependent_checks.py": "83d04cf9bb2b1f371175af8964e949307a149ee4fc24a8878ab3c5f278c80613",
+    "sra/dependent_spec.py": "87fd06f61c86771bd4ce6f5f36fc5436a1234ef56b23e7f5e895fbca7c4ec450",
+    "sra/discipline.py": "866cf2bef2c0ee1f1c6e6b3c2a160472be2c8c43f3540dc51e8a95f5d35a2542",
+    "sra/document.py": "0fce823e2bea74dae51b0fea5268a461a0e080ed138f17f13762b222cf73eb2c",
+    "sra/doi.py": "c396eb3d04c70cb094c2fb147da52a5b8d9dedba3bd973c25db211cdd8c18133",
+    "sra/domain_adjudication.py": "185911db40da2ce016d0b8a2fa80b7f577d70c4f8912320994bbb0ad2f13f979",
+    "sra/domain_cohort.py": "7e86210ca972e4e61eb7dca94f8b69de93dfb71a3fc0defadeeb92e7a1b27a0e",
+    "sra/domain_evidence.py": "d131c1a5fd2bfff616013decd50988fd2a68593f36471ca105a26d05f5586fbe",
+    "sra/error_benchmark.py": "3222028b3ddb47cd64a7a77901fae684ce2d9e9fe6a7a751ae296e8c950193ad",
+    "sra/error_benchmark_cli.py": "2748553b07e3c875a64f958123b14daae60a6f19e04210b25289e583a2f40040",
+    "sra/error_evaluation.py": "0329f32b26e3986d69a4e045fc2b6ac92fea3ce41b7d57854dd8f727e83e4fbd",
+    "sra/error_reliability.py": "064144d4d9747c64b0a55c056c3820fdda84a4b476c1ba010b2262d70b04cf3e",
+    "sra/evidence_benchmark.py": "c98360a680f850201519aee14713a724ebbf33e992a106151cdb39c3f8079023",
+    "sra/evidence_checks.py": "a71b212f53fc6929d65cca312e8a3a0edb95d1c1d3074092c9e29f9f0a49b93b",
+    "sra/evidence_spec.py": "3737cef4faf4162c506ada94ae7659709a04fffce1536fe9fd748f96100927f8",
+    "sra/extended_inspection.py": "1dc1464be24c51a1490a309caa263a429be9cf7cbebf82f9f02bb03f389aaab9",
+    "sra/grammar_engine.py": "14ec900222be7b622797da0823e1c95907ebba54ebf3aef14d9944604032551c",
+    "sra/graph.py": "f96b07b522572b3d98b15140c3810083d90fcef8f7daefc25a40bc69ba9e90b9",
+    "sra/inspection.py": "5fa83e555b6bbde379a0ce075610aace101d56bf15a25fac8679d9525e3a947e",
+    "sra/inspection_calculations.py": "f49fe1ed1c1b22c40261f329c85ea92e894efb8437e8bbb261fcf1294523d700",
+    "sra/json_utils.py": "b0b2ed2e45fdb60fd5a280101dc4201bc9fea1f4ae6b6ec00131dbb17d62264e",
+    "sra/labeling.py": "cd2c2ea3c414a3471f618909c466d048c5ce3776328a93ecb135624dd7d0b857",
+    "sra/logic.py": "299d6e2e4e1683e420ef9f2cdcd93a7d72f27fa6c93cc9e1109488c79d34ac57",
+    "sra/logic_cli.py": "9cf9d5aa14ca5617647a12308ace19c48eadc87ed3b9050b8a2bc32ee056c8c6",
+    "sra/logic_report.py": "d2b9578bc57f2a88c939fd320d305402d10bfce59a4218ea8c6ea3562e21f901",
+    "sra/logic_spec.py": "4df8b45e3559272981ac9deec2a8b10d45ab44484576cb92ca1d0b6a45b06be5",
+    "sra/model_client.py": "d7a24b8d1519f3046b57f1e4e73d019fa6d0f40e57d1f1f50b59747263725701",
+    "sra/models.py": "e69049974ec3d8ba5e02e19e33112396a476f23500f0108c3394cd545c665336",
+    "sra/multilingual.py": "a23b094323772031f7f39324411a2624dfafac9cf6b4f70e3e31f3f3591ad3a8",
+    "sra/paper_review.py": "d182a28e9cbc5bacf6d64fe63ca4fdd329d4cab6d04798f2fdd14bb8d127e3b6",
+    "sra/pdf_visual.py": "765ad74e9cdd68477701f859c7ab48a9747daa6eb9b418dbd449508295744958",
+    "sra/provenance.py": "962cb116d67f08eed5321153254454fde61e348284e4fc8973bb1969e09ca7ed",
+    "sra/publication.py": "90b8baada53798c347c866011bdc65da204412738df8f9cd87620e4acdc9a370",
+    "sra/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sra/report.py": "75de846b6e2a2bfdccffb13f3ea5419505c70fb2e33193daa9d2c1162cad9ab3",
+    "sra/research_checks.py": "8e3f5fab8efc6bd8504cf93e251a4af3ce6c0305e57ab0bd69ae31cca9bb4224",
+    "sra/research_spec.py": "110e757f45e2029459dc08876b6fffe5a7dddad80ca139796705c9e6949fea91",
+    "sra/review.py": "12a8821481b4962de4264fcfe33c18dcc2a40ecb8c62ed284d34f23a3e555089",
+    "sra/review_report.py": "b97dfaf8e90c2e73d90e0854183fe05c8ee43f777578cdaed00dd6c75305906f",
+    "sra/rule_ablation.py": "6b483f05309177f68aa6702f42754c56e016d0c3b90cc64966aae073f46b3707",
+    "sra/scientific_validation.py": "5c5b93316b076504859b40b37d83a4bef1e6502de06b49b51b5ecbfe1aeead25",
+    "sra/semantic_review.py": "5e8f4159fd439156e8d87a37d1d485c7c92d245bc13c3cfa95cf3ec478e92c99",
+    "sra/statistical_consistency.py": "a06e99018738afedb9ee654ed7f73056d03c58636fd49f9009810417271d2890",
+    "sra/statistics_review.py": "e2333c331353be9746826a1e8120728632baf5539c9352e0782e5eaec8653c67",
+    "sra/stats.py": "b1ac6ee73c5e0ab3d112c3239ac36e70a34c4b670eb7a0ef36840028f49d9e09",
+    "sra/stats_extended.py": "42d483ae4b34b76b9b05ba29d28726d33abb76950cf425865f8c885a2bd44487",
+    "sra/symbolic.py": "ba834d3f2673682e2d13e31d505f55983d228397b35b6f4c5495a9ac86e07ddc",
+    "sra/tabular_values.py": "c1c095dd4b1af3ce913d9bc7a5ec25610641211a63665312eb2af7684c4a4bb2",
+    "sra/toolkit.py": "42c4322d1525af1d07531d91880ee5732c60dc6b3904a60651c5f124aaa6c6f5",
+    "sra/toolkit_cli.py": "820e69afd8c756eb030a6acc7b841a9c20363a5ac3a6573dec1582fd1c999334",
+    "sra/toolkit_report.py": "6f4c96fb06beff97e1897f88d6c23c6c64275b44a369e9a2f641997b4c4dcd64",
+    "sra/toolkit_spec.py": "5ee7664f4683e0a984efd3a108f9b48176ec829d1d003702f5d0d387f29c5f03",
+    "sra/unified_cli.py": "5531a9697354c1f0ea5e5d974157187c1e8752a8b911c657d7f1dae946139e65",
+    "sra/validation.py": "32d49c9023e2e67e0e1bdb77964170c65790314c85dfb07c2f0a0e81ad070644",
+    "sra/writing.py": "121f3966abd43b1e99a073350c6098d9353c2f529f1178e96b9d3177c4c8fcb9",
+    "sra/writing_style.py": "2662ef862c766f96900aa32be69a4c56bc86b07599741804129844cf7b347e5c"
+  },
+  "limits": [
+    "24 NIST-derived numerical cases and 8 separately marked synthetic controls.",
+    "Source selection was frozen before implementation; these are software controls, not a held-out paper cohort.",
+    "Expected abstentions are retained. Matched controls do not estimate scientific precision/recall.",
+    "Integer-df NIST tables do not validate all fractional-df calculations; independent analytic unit controls are separate.",
+    "Tail, exact df and correction suitability remain caller declarations.",
+    "Df not exactly representable by the float backend abstain; backend probability error bounds are not formally proven.",
+    "No new human labels, full-paper assessment or independent expert validation.",
+    "The published 0.9.0 historical first result is unchanged and not rescored."
+  ],
+  "report_sha256": "1120cd52e91c05721f0f0d3635fb09618418d97d34df296f63b7836927daaee8"
+}

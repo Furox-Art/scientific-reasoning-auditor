@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "one_sided_t",
+      "kind": "statistic_consistency",
+      "test": "t",
+      "df": [20],
+      "statistic": "3.000",
+      "reported_p": ".004",
+      "alternative": "greater"
+    },
+    {
+      "id": "unknown_direction",
+      "kind": "statistic_consistency",
+      "test": "t",
+      "df": [20],
+      "statistic": "3.000",
+      "reported_p": ".004",
+      "alternative": "unknown"
+    },
+    {
+      "id": "rounded_df",
+      "kind": "statistic_consistency",
+      "test": "F",
+      "df": ["1.50", "10.50"],
+      "statistic": "3.00",
+      "reported_p": ".1",
+      "df_precision": "rounded"
+    }
+  ]
+}
