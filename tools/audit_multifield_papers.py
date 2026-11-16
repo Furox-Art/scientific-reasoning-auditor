@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from collections import Counter
 import hashlib
 import json
@@ -134,7 +135,27 @@ def capture():
 
 
 def text(node):
-    return " ".join("".join(node.itertext()).split()) if node is not None else ""
+    """Separate block/cell content without breaking ordinary inline words."""
+    if node is None:
+        return ""
+    blocks = {"p", "sec", "title", "td", "th", "tr", "label", "list-item",
+              "ref", "table", "table-wrap", "caption", "abstract", "disp-formula",
+              "alternatives", "tex-math"}
+    def emit(element):
+        tag = element.tag.rsplit("}", 1)[-1]
+        value = element.text or ""
+        for child in element:
+            child_tag = child.tag.rsplit("}", 1)[-1]
+            inner = emit(child)
+            if child_tag == "sup":
+                inner = "^(" + inner + ")"
+            elif child_tag == "sub":
+                inner = "_(" + inner + ")"
+            elif child_tag in blocks:
+                inner = " " + inner + " "
+            value += inner + (child.tail or "")
+        return value
+    return " ".join(emit(node).split())
 
 
 def normalize(raw, doi):
@@ -209,8 +230,8 @@ def sources():
                       status="unavailable", human_full_reading=False, human_labels=None)
         try:
             raw = fetch(url)
-            # Keep captured bytes even when permission/normalization fails in a
-            # private acquisition area; publish only permission-accepted originals.
+            record.update(captured_sha256=sha(raw), captured_bytes=len(raw))
+            # Publish originals only after checking their article-specific grant.
             markdown, info = normalize(raw, doi)
             original = f"sources/{name}.xml"
             derived = f"texts/{name}.md"
@@ -229,20 +250,77 @@ def sources():
 
 
 def stable(report):
-    """Remove source display paths only; retain every finding and result."""
-    if isinstance(report, list):
-        return [stable(item) for item in report]
-    if isinstance(report, dict):
-        return {k: stable(v) for k, v in report.items() if k != "source"}
-    return report
+    """Semantic projection only; raw reports are always preserved unmodified.
+
+    Exclude timestamps and display paths at enumerated schema pointers.
+    Never drop graph edge 'source' endpoints or source identity hashes.
+    """
+    result = copy.deepcopy(report)
+    result["source"] = "<MANUSCRIPT_PATH>"
+    for name in ("reasoning", "writing"):
+        module = result.get("modules", {}).get(name, {}).get("result")
+        if isinstance(module, dict) and "source" in module:
+            module["source"] = "<MANUSCRIPT_PATH>"
+    manifests = [result.get("reproducibility_manifest")]
+    reasoning = result.get("modules", {}).get("reasoning", {}).get("result")
+    if isinstance(reasoning, dict):
+        manifests.append(reasoning.get("reproducibility_manifest"))
+    for manifest in manifests:
+        if isinstance(manifest, dict):
+            manifest.pop("generated_at_utc", None)
+            if isinstance(manifest.get("input"), dict):
+                manifest["input"]["filename"] = "<MANUSCRIPT_PATH>"
+    return result
+
+
+def execute_paper(row, out):
+    """Retain both raw runs and any failure; never drop later selected papers."""
+    from sra.document import load_document
+    from sra.review import review_document
+    from sra.review_report import review_markdown
+    from sra.domain_adjudication import make_domain_template
+
+    item = dict(doi=row["doi"], stratum=row["stratum"], source_status=row["status"],
+                scientific_accuracy=None, human_labels=None, human_full_reading=False)
+    if row["status"] != "available":
+        item["failure"] = row.get("failure")
+        return item
+    name = row["doi"].rsplit(".", 1)[1]
+    try:
+        document = load_document(FOLDER / row["text"])
+        options = dict(disciplines=[row["stratum"]], study_type="unknown",
+                       style_language="none", prepare_inputs=True, online=False)
+        report = review_document(document, **options)
+        save(out / "papers" / (name + ".json"), encoded(report))
+        save(out / "papers" / (name + ".md"), review_markdown(report).encode("utf-8"))
+        item.update(source_sha256=document.sha256, first_report_sha256=sha(encoded(report)))
+        repeated = review_document(document, **options)
+        save(out / "repeated" / (name + ".json"), encoded(repeated))
+        equal = stable(report) == stable(repeated)
+        item.update(repeat_equal=equal, repeat_report_sha256=sha(encoded(repeated)))
+        matrix = report["criteria_matrix"]
+        if any(c["scientific_verdict"] != "NOT_ASSESSED" for c in matrix["criteria"]):
+            raise ValueError("Unexpected scientific verdict in execution-only audit.")
+        profile = report["modules"]["discipline:" + row["stratum"]]
+        preparation = report["modules"].get("preparation", {}).get("result") or {}
+        item.update(execution_status=report["execution_status"] if equal else "repeat_mismatch",
+            criteria_summary=matrix["summary"],
+            profile_states=dict(Counter(c["status"] for c in (profile["result"] or {}).get("items", []))),
+            preparation_candidates=dict(Counter(c["kind"] for c in preparation.get("candidates", []))),
+            suggested_checks=sum(c.get("suggested_check") is not None for c in preparation.get("candidates", [])),
+            module_states={k: v["status"] for k, v in report["modules"].items()},
+            semantic_report_sha256=sha(encoded(stable(report))))
+        template = make_domain_template(document, row["stratum"])
+        save(out / "blank-review-forms" / (name + ".json"), encoded(template))
+        if not equal:
+            item["failure"] = "First and repeated semantic reports differ; both raw reports retained."
+    except (ImportError, OSError, ValueError, RuntimeError, TypeError) as exc:
+        item.update(execution_status="failed", failure_type=type(exc).__name__, failure=str(exc)[:500])
+    return item
 
 
 def run(out):
     import sra
-    from sra.document import load_document
-    from sra.review import review_document
-    from sra.review_report import review_markdown
-
     out = Path(out)
     if out.exists():
         raise FileExistsError("Choose a fresh output directory; first runs are immutable.")
@@ -274,33 +352,7 @@ def run(out):
             raise ValueError("Frozen source/text bytes changed.")
         if normalize(raw, row["doi"])[0] != md:
             raise ValueError("Normalized source is not a complete reproducible JATS derivation.")
-    results = []
-    for row in inventory["papers"]:
-        item = dict(doi=row["doi"], stratum=row["stratum"], source_status=row["status"],
-                    scientific_accuracy=None, human_labels=None, human_full_reading=False)
-        if row["status"] == "available":
-            document = load_document(FOLDER / row["text"])
-            options = dict(disciplines=[row["stratum"]], study_type="unknown",
-                           style_language="none", prepare_inputs=True, online=False)
-            report = review_document(document, **options)
-            repeated = review_document(document, **options)
-            if stable(report) != stable(repeated):
-                raise ValueError("Repeat-run disagreement; preserve as a separate failure investigation.")
-            matrix = report["criteria_matrix"]
-            if any(c["scientific_verdict"] != "NOT_ASSESSED" for c in matrix["criteria"]):
-                raise ValueError("Unexpected scientific verdict in execution-only audit.")
-            profile = report["modules"]["discipline:" + row["stratum"]]
-            item.update(execution_status=report["execution_status"], repeat_equal=True,
-                source_sha256=document.sha256, criteria_summary=matrix["summary"],
-                profile_states=dict(Counter(c["status"] for c in (profile["result"] or {}).get("items", []))),
-                module_states={k: v["status"] for k, v in report["modules"].items()},
-                report_sha256=sha(encoded(stable(report))))
-            name = row["doi"].rsplit(".", 1)[1]
-            save(out / "papers" / (name + ".json"), encoded(stable(report)))
-            save(out / "papers" / (name + ".md"), review_markdown(report).encode("utf-8"))
-        else:
-            item["failure"] = row.get("failure")
-        results.append(item)
+    results = [execute_paper(row, out) for row in inventory["papers"]]
     package = Path(sra.__file__).resolve().parent
     runtime = {p.relative_to(package).as_posix(): sha(p.read_bytes()) for p in sorted(package.rglob("*"))
                if p.is_file() and (p.suffix == ".py" or p.name == "py.typed")}
@@ -309,6 +361,8 @@ def run(out):
         protocol_sha256=selection["protocol_sha256"], selection_sha256=sha(selection_raw),
         inventory_sha256=sha((FOLDER / "sources.json").read_bytes()),
         producer_sha256=sha(Path(__file__).read_bytes()), runtime_source_files=runtime,
+        clarification_sha256=sha((FOLDER / "normalization-and-replay-clarification.md").read_bytes()),
+        semantic_comparison="Exact findings/results/hashes; only enumerated timestamps/display paths excluded. Raw reports retained.",
         frame_size=selection["frame_size"], unmatched=selection["unmatched"], strata=selection["strata"],
         selected=len(results), available=sum(r["source_status"] == "available" for r in results),
         completed=sum(r.get("execution_status") == "complete" for r in results),

@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0288477</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-22-35736</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Coyotes</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Coyotes</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Wildlife</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Wildlife</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Raccoons</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Raccoons</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Ecology</subject><subj-group><subject>Community ecology</subject><subj-group><subject>Trophic interactions</subject><subj-group><subject>Predation</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Ecology and environmental sciences</subject><subj-group><subject>Ecology</subject><subj-group><subject>Community ecology</subject><subj-group><subject>Trophic interactions</subject><subj-group><subject>Predation</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Psychology</subject><subj-group><subject>Behavior</subject><subj-group><subject>Animal behavior</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Social sciences</subject><subj-group><subject>Psychology</subject><subj-group><subject>Behavior</subject><subj-group><subject>Animal behavior</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animal behavior</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Marsupials</subject><subj-group><subject>Opossums</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Vertebrates</subject><subj-group><subject>Amniotes</subject><subj-group><subject>Mammals</subject><subj-group><subject>Marsupials</subject><subj-group><subject>Opossums</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Species interactions</subject></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>People and places</subject><subj-group><subject>Geographical locations</subject><subj-group><subject>North America</subject><subj-group><subject>United States</subject><subj-group><subject>Virginia</subject></subj-group></subj-group></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>Does daily activity overlap of seven mesocarnivores vary based on human development?</article-title>
+<alt-title alt-title-type="running-head">Urban-rural mesocarnivore activity</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" corresp="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0003-2905-0688</contrib-id>
+<name name-style="western">
+<surname>McTigue</surname>
+<given-names>Leah E.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Lassiter</surname>
+<given-names>Ellery V.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Shaw</surname>
+<given-names>Mike</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Johansson</surname>
+<given-names>Emily</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Wilson</surname>
+<given-names>Ken</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>DeGregorio</surname>
+<given-names>Brett A.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Department of Biological Sciences, University of Arkansas, Fayetteville, AR, United States of America</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>U.S. Geological Survey, Arkansas Cooperative Fish and Wildlife Research Unit, Fayetteville, AR, United States of America</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Rouco</surname>
+<given-names>Carlos</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>University of Seville Faculty of Biology: Universidad de Sevilla Facultad de Biologia, SPAIN</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The authors have declared that no competing interests exist.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">lmctigue@uark.edu</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>11</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0288477</elocation-id>
+<history>
+<date date-type="received">
+<day>31</day>
+<month>12</month>
+<year>2022</year>
+</date>
+<date date-type="accepted">
+<day>27</day>
+<month>6</month>
+<year>2023</year>
+</date>
+</history>
+<permissions>
+<license xlink:href="https://creativecommons.org/publicdomain/zero/1.0/" xlink:type="simple">
+<license-p>This is an open access article, free of all copyright, and may be freely reproduced, distributed, transmitted, modified, built upon, or otherwise used by anyone for any lawful purpose. The work is made available under the <ext-link ext-link-type="uri" xlink:href="https://creativecommons.org/publicdomain/zero/1.0/" xlink:type="simple">Creative Commons CC0</ext-link> public domain dedication.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0288477"/>
+<abstract>
+<p>Many species of wildlife alter their daily activity patterns in response to co-occurring species as well as the surrounding environment. Often smaller or subordinate species alter their activity patterns to avoid being active at the same time as larger, dominant species to avoid agonistic interactions. Human development can complicate interspecies interactions, as not all wildlife respond to human activity in the same manner. While some species may change the timing of their activity to avoid being active when humans are, others may be unaffected or may benefit from being active at the same time as humans to reduce predation risk or competition. To further explore these patterns, we used data from a coordinated national camera-trapping program (Snapshot USA) to explore how the activity patterns and temporal activity overlap of a suite of seven widely co-occurring mammalian mesocarnivores varied along a gradient of human development. Our focal species ranged in size from the large and often dominant coyote (<italic>Canis latrans</italic>) to the much smaller and subordinate Virginia opossum (<italic>Didelphis virginiana</italic>). Some species changed their activity based on surrounding human development. Coyotes were most active at night in areas of high and medium human development. Red fox (<italic>Vulpes vulpes</italic>) were more active at dusk in areas of high development relative to areas of low or medium development. However, because most species were primarily nocturnal regardless of human development, temporal activity overlap was high between all species. Only opossum and raccoon (<italic>Procyon lotor</italic>) showed changes in activity overlap with high overlap in areas of low development compared to areas of moderate development. Although we found that coyotes and red fox altered their activity patterns in response to human development, our results showed that competitive and predatory pressures between these seven widespread generalist species were insufficient to cause them to substantially alter their activity patterns.</p>
+</abstract>
+<funding-group>
+<funding-statement>The authors received no specific funding for this work.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="3"/>
+<table-count count="2"/>
+<page-count count="12"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>All Data is publicly available through Snapshot USA. Publications of data used are as follows: Cove MV, Kays R, Bontrager H, Bresnan C, Lasky M, Frerichs T, Klann R, Lee Jr TE, Crockett SC, Crupi AP, Weiss KC. SNAPSHOT USA 2019: a coordinated national camera trap survey of the United States. 2021 Apr 01; 102(6):e03353 Kays R, Cove MV, Diaz J, Todd K, Bresnan C, Snider M, Lee Jr TE, Jasper JG, Douglas B, Crupi AP, Weiss KC. SNAPSHOT USA 2020: A second coordinated national camera trap survey of the United States during the COVID‐19 pandemic. Ecology. 2022 Jun 05; 103(10):e3775.</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec001" sec-type="intro">
+<title>Introduction</title>
+<p>Interspecific interactions are key drivers of the structure of wildlife communities with both competition and predation influencing the distribution, behavior, activity patterns, and resource use of co-occurring species [<xref ref-type="bibr" rid="pone.0288477.ref001">1</xref>–<xref ref-type="bibr" rid="pone.0288477.ref003">3</xref>]. Because many species of mammal are capable of being active during the day or night [<xref ref-type="bibr" rid="pone.0288477.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0288477.ref005">5</xref>], they may shift their behavior to maximize access to resources and avoid competitors or predators [<xref ref-type="bibr" rid="pone.0288477.ref006">6</xref>]. Both competition or the threat of predation can cause shifts in behavior such that subordinate or smaller species may choose to be active when dominant species are least active [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref008">8</xref>]. Conversely, dominant species should seek to align their activity patterns with those of their prey to optimize energy gain or be active when conditions are optimal without the fear of competitors [<xref ref-type="bibr" rid="pone.0288477.ref009">9</xref>]. From a competitive standpoint, smaller-bodied or subordinate species may be active during times when larger or more dominant species are least active to avoid agonistic interactions [<xref ref-type="bibr" rid="pone.0288477.ref006">6</xref>]. Explorations of activity overlap have provided important insights into how wildlife species behaviorally respond to their environment, competitors, and predators [<xref ref-type="bibr" rid="pone.0288477.ref006">6</xref>, <xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref010">10</xref>, <xref ref-type="bibr" rid="pone.0288477.ref011">11</xref>]. However, the activity patterns of wildlife are driven not only by co-occurring species but may be strongly influenced by anthropogenic disturbances and human activity [<xref ref-type="bibr" rid="pone.0288477.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref012">12</xref>].</p>
+<p>Many species of wildlife have adapted to co-occur with humans in developed areas (i.e. urban adapted species) [<xref ref-type="bibr" rid="pone.0288477.ref013">13</xref>] and in these areas their temporal activity patterns may differ from counterparts in more natural settings [<xref ref-type="bibr" rid="pone.0288477.ref012">12</xref>, <xref ref-type="bibr" rid="pone.0288477.ref014">14</xref>–<xref ref-type="bibr" rid="pone.0288477.ref016">16</xref>] When co-occurring with humans, many species respond by becoming active when humans are least active, typically at night [<xref ref-type="bibr" rid="pone.0288477.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0288477.ref017">17</xref>–<xref ref-type="bibr" rid="pone.0288477.ref021">21</xref>]. This may be particularly true for large mammalian species that are often disturbed by humans [<xref ref-type="bibr" rid="pone.0288477.ref017">17</xref>, <xref ref-type="bibr" rid="pone.0288477.ref021">21</xref>–<xref ref-type="bibr" rid="pone.0288477.ref023">23</xref>] and thus sensitive to human activity and development. If co-occurring species respond similarly to humans by shifting to a more nocturnal existence, then the activity overlap between species may necessarily be higher in developed areas than in undeveloped areas [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref020">20</xref>]. However, not all urban-adapted wildlife species respond to human presence in the same manner even within taxa groups such as mesocarnivores (medium-sized mammalian predators [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref024">24</xref>]). Thus, species that are more tolerant of human activity may not switch to a nocturnal existence to avoid humans; thereby reducing interactions with competitors or predators that do so [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref025">25</xref>]. Furthermore, changes in activity patterns may vary based on the intensity of human development such that changes in activity patterns may vary along a gradient of development [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref014">14</xref>, <xref ref-type="bibr" rid="pone.0288477.ref015">15</xref>].</p>
+<p>In human-dominated landscapes where larger-bodied mesocarnivore activity may be constrained temporally by an avoidance of humans, subordinate species may alter their activity patterns to avoid overlap, a phenomenon referred to as “development-mediated temporal avoidance” [<xref ref-type="bibr" rid="pone.0288477.ref020">20</xref>, <xref ref-type="bibr" rid="pone.0288477.ref026">26</xref>, <xref ref-type="bibr" rid="pone.0288477.ref027">27</xref>]. In situations where the overlap in activity of dominant and subordinate competitors are reduced or altered due to the presence of humans or development, subordinate species may be shielded by development [<xref ref-type="bibr" rid="pone.0288477.ref020">20</xref>, <xref ref-type="bibr" rid="pone.0288477.ref028">28</xref>]. In some cases, interference competition by larger bodied or dominator competitor species may be reduced in human developed areas [<xref ref-type="bibr" rid="pone.0288477.ref029">29</xref>, <xref ref-type="bibr" rid="pone.0288477.ref030">30</xref>].</p>
+<p>Mesocarnivore communities offer an excellent opportunity to study these interactions, because they have adapted to co-occur in human dominated landscapes and are generally well-studied [<xref ref-type="bibr" rid="pone.0288477.ref031">31</xref>–<xref ref-type="bibr" rid="pone.0288477.ref033">33</xref>]. In North America, the coyote (<italic>Canis latrans</italic>) is the largest mesocarnivore occurring regularly in both natural and human developed ecosystems [<xref ref-type="bibr" rid="pone.0288477.ref034">34</xref>] and is considered dominant over many co-occurring, smaller-bodied mesocarnivore species that also regularly occur across natural and developed areas, such as northern raccoons (hereafter raccoon: <italic>Procyon lotor</italic>), striped skunk (hereafter skunk, <italic>Mephitis mephitis</italic>), red fox (<italic>Vulpes vulpes</italic>), gray fox (<italic>Urocyon cinereoargenteus</italic>), bobcat (<italic>Lynx rufus</italic>), and Virginia opossum (hereafter, opossum: <italic>Didelphis virginiana</italic> [<xref ref-type="bibr" rid="pone.0288477.ref035">35</xref>, <xref ref-type="bibr" rid="pone.0288477.ref036">36</xref>]). Each of these species overlap widely in geographic range across much of North America and occupy habitats along a gradient of human development [<xref ref-type="bibr" rid="pone.0288477.ref037">37</xref>, <xref ref-type="bibr" rid="pone.0288477.ref038">38</xref>]. Many of these mesocarnivores hunt and compete for the same prey [<xref ref-type="bibr" rid="pone.0288477.ref039">39</xref>]. Additionally, raccoons, skunks, gray fox, and opossums not only compete with larger mesocarnivores like the coyote and bobcat but are also vulnerable to predation or killing [<xref ref-type="bibr" rid="pone.0288477.ref035">35</xref>, <xref ref-type="bibr" rid="pone.0288477.ref040">40</xref>, <xref ref-type="bibr" rid="pone.0288477.ref041">41</xref>].</p>
+<p>Here, our overall objectives were to evaluate whether human development causes changes in the activity patterns and activity overlap of a suite of co-occurring mesocarnivores. Using camera trap data from a nationwide collaborative effort (Snapshot USA 11, 38]) our specific objectives were to 1) characterize the activity patterns of mesocarnivore species at differing levels of human development, 2) evaluate the degree of temporal activity overlap between species pairs, and 3) determine if the degree of surrounding human development correlates with changes in activity overlap between species pairs. We predicted that all of the focal mesocarnivore species would primarily be nocturnal and thus temporal activity overlap between species pairs would generally be high. However, we predicted that in areas of human development the largest mesocarnivore species would be most sensitive to human activity and thus become almost exclusively nocturnal which would result in lower levels of overlap with small-bodied mesocarnivores that would not be as human-intolerant.</p>
+</sec>
+<sec id="sec002" sec-type="materials|methods">
+<title>Methods</title>
+<sec id="sec003">
+<title>Data selection</title>
+<p>We used camera trap data from Snapshot USA [<xref ref-type="bibr" rid="pone.0288477.ref042">42</xref>, <xref ref-type="bibr" rid="pone.0288477.ref043">43</xref>]. Snapshot USA is a nationwide coordinated camera trapping project in which contributors deploy motion-triggered infrared cameras annually in a standardized manner between September 1<sup>st</sup> and October 31<sup>st</sup>. At each study site, each contributor deploys at least 8 cameras in a single type of habitat (forest, grassland, desert, anthropogenic, etc, <xref ref-type="supplementary-material" rid="pone.0288477.s001">S1 Table</xref>) and aims to collect a minimum of 400 trap nights. Cameras are placed at least 200m apart, but no more than 5km apart. If sites were sampled both years, they were treated as individual sites for analysis.</p>
+<p>To characterize how human development surrounding each Snapshot USA site, we created 500m buffers around each camera using ArcGIS (ArcGIS Pro; Esri Inc, Redlands, CA). We chose 500m buffers because this spatial scale has been shown to be relevant to the occurrence and behavior of common North American mesocarnivores [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref033">33</xref>, <xref ref-type="bibr" rid="pone.0288477.ref044">44</xref>]. Within the 500m buffer we calculated the amount of landcover categorized as human development, (the combination of low, medium, and high-intensity development as measured by the 2019 National Land Cover Database [<xref ref-type="bibr" rid="pone.0288477.ref045">45</xref>]). We then averaged this development value for all cameras at a given site. We then binned each site into one of three development categories: undeveloped sites (0–1% development), moderately developed (1–10% development), or heavily developed (10–100% development).</p>
+</sec>
+<sec id="sec004">
+<title>Focal species selection</title>
+<p>To select focal study species, we explored the complete Snapshot USA 2019 and 2020 datasets [<xref ref-type="bibr" rid="pone.0288477.ref042">42</xref>, <xref ref-type="bibr" rid="pone.0288477.ref043">43</xref>]. We isolated all species of carnivores and mesocarnivores detected (N = 29). We then filtered this list based on several criteria that we deemed essential for inclusion in this investigation. First, we only included species that occurred within each of the three development categories (highly developed, moderately developed, or low human development) because this allowed us to explore changes in activity patterns across the human development gradient. Next, we needed to include criteria pertaining to sample sizes to ensure we had both statistical power to make comparisons between development categories as well as enough detections of a species to quantify its activity pattern (see below in <italic>Activity Patterns and Overlap</italic>). Therefore, we only used species that occurred at a minimum of 5 study sites within each development category as this allowed us to create overlap means for use in analyses. Finally, at each site that a species was detected, there needed to be a minimum of 2 detections at that site in order for us to calculate activity kernels. Based on these criteria, we narrowed our focus to seven species of mesocarnivore including Northern raccoon, striped skunk, red fox, gray fox, bobcat, coyote, and Virginia opossum. Collectively, these species occurred at 210 Snapshot USA sites sampled in either 2019 or 2020 (<xref ref-type="fig" rid="pone.0288477.g001">Fig 1</xref>). Of these 210 sites, 44 were categorized as high development, 47 were medium development, and 119 were low development.</p>
+<fig id="pone.0288477.g001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0288477.g001</object-id>
+<label>Fig 1</label>
+<caption>
+<title>Snapshot USA sites: 2019 and 2020.</title>
+<p>Camera trap sites from Snapshot USA 2019 and 2020 (USGS National Boundary Dataset (NBD)). The 210 sites used were determined though selection of 7 species of mesocarnivores where 1) each species occurred in at least 5 sites of each development category (High (44), Medium (47), Low (119)); and 2) had at least 2 detections at each site.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.g001" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec005">
+<title>Activity patterns and overlap</title>
+<p>For each detection of a focal species, we extracted the date and time of the detection. We then determined if the detection occurred during the day, night, around dusk, or around dawn by calculating location and date-specific sunset and sunrise times using the R package sunCalc [<xref ref-type="bibr" rid="pone.0288477.ref046">46</xref>]. Detections occurring within an hour of sunset were categorized as dusk, and detections occurring within an hour of sunrise were categorized as dawn. Nocturnal events (classified as night) occurred after dusk and before dawn. Diurnal events (classified as day) occurred after dawn and before dusk. At each site, we calculated the proportion of events occurring during each of the four daily activity periods (dawn, dusk, day, or night). We compared the proportion of events occurring during each of the four time periods across three development groups (high development, medium development, and low development) using a Kruskal-Wallis test. We then used Dunn tests with Bonferroni corrections to make pair-wise comparisons between the development categories. We used non-parametric tests due to non-normality in the data.</p>
+<p>To calculate the activity overlap for each of the possible pair-wise comparisons of our seven focal species, we used the R package overlap [<xref ref-type="bibr" rid="pone.0288477.ref047">47</xref>]. We first converted the time of each detection to radians to account for the circular nature of time. We then calculated a site and species-specific non-parametric kernel around the detection times to quantify when each species was most active during the diel period [<xref ref-type="bibr" rid="pone.0288477.ref048">48</xref>]. For each site, we calculated the area under the kernel curve that overlapped between each of the species pairs, which was quantified using a 0–1 index with 0 indicating no overlap and 1 indicating complete temporal overlap [<xref ref-type="bibr" rid="pone.0288477.ref049">49</xref>]. We used Δ<sub>1</sub> for small sample sizes because most sites had fewer than 75 detections per species [<xref ref-type="bibr" rid="pone.0288477.ref048">48</xref>, <xref ref-type="bibr" rid="pone.0288477.ref049">49</xref>]. We excluded sites where detections were too few to generate kernel density estimates. This approach generated an overlap coefficient for each species pair for each study site. We then compared the mean overlap coefficients between each species pair across the three development groups using Kruskal-Wallis and Dunn tests.</p>
+</sec>
+</sec>
+<sec id="sec006" sec-type="results">
+<title>Results</title>
+<p>We included data from a total of 210 Snapshot USA sites spanning the 2019 and 2020 seasons. Sites that were sampled in both years were considered separate sites for our analyses because camera locations varied between years. Collectively, these 210 study sites accumulated 106,467 total trap nights and 38,076 detections of the seven focal species. Each species had at least 800 overall detections and was detected at a minimum of 47 sites (<xref ref-type="table" rid="pone.0288477.t001">Table 1</xref>).</p>
+<table-wrap id="pone.0288477.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0288477.t001</object-id>
+<label>Table 1</label> <caption><title>Detection summary for seven mesocarnivores from Snapshot USA.</title></caption>
+<alternatives>
+<graphic id="pone.0288477.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Species</th>
+<th align="center">No. Sites with Detections</th>
+<th align="center">No. Overall Detections</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><bold>Bobcat</bold></td>
+<td align="center">85</td>
+<td align="center">877</td>
+</tr>
+<tr>
+<td align="left"><bold>Coyote</bold></td>
+<td align="center">184</td>
+<td align="center">5708</td>
+</tr>
+<tr>
+<td align="left"><bold>Gray Fox</bold></td>
+<td align="center">47</td>
+<td align="center">854</td>
+</tr>
+<tr>
+<td align="left"><bold>Red Fox</bold></td>
+<td align="center">73</td>
+<td align="center">3264</td>
+</tr>
+<tr>
+<td align="left"><bold>Raccoon</bold></td>
+<td align="center">163</td>
+<td align="center">20801</td>
+</tr>
+<tr>
+<td align="left"><bold>Skunk</bold></td>
+<td align="center">63</td>
+<td align="center">804</td>
+</tr>
+<tr>
+<td align="left"><bold>Opossum</bold></td>
+<td align="center">128</td>
+<td align="center">5768</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t001fn001"><p>Total number of detections of seven focal mesocarnivore species from a nationwide camera trapping study Snapshot USA 2019 and 2020 that were used to explore changes in activity patterns and activity overlap in relation to human development.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+<p>We found that all seven species that were predominantly nocturnal were occasionally active during day, dawn, and/or dusk (<xref ref-type="fig" rid="pone.0288477.g002">Fig 2</xref>). Opossum were the most strongly nocturnal species (<italic>ẋ</italic> ± <italic>SE</italic>: 96.64 ± 0.77) followed by striped skunk (92.12 ± 2.87), raccoon (88.32 ± 1.828), gray fox (85.92 ± 5.92), red fox (80.58 ± 4.92), coyote (69.5 ± 2.78), and bobcat (60.05 ± 5.66).</p>
+<fig id="pone.0288477.g002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0288477.g002</object-id>
+<label>Fig 2</label>
+<caption>
+<title>Daily Activity Patterns for seven mesocarnivores along an urban to rural gradient.</title>
+<p>The proportion of activity of seven common mesocarnivores during different diel periods based on surrounding levels of development as measured by the 2019 National Land Cover Database (NLCD). Derived from data collected across 210 study sites across the United States as part of Snapshot USA 2019 and 2020 [<xref ref-type="bibr" rid="pone.0288477.ref042">42</xref>, <xref ref-type="bibr" rid="pone.0288477.ref043">43</xref>]. Values are means ± SE.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.g002" xlink:type="simple"/>
+</fig>
+<p>We found that both coyote and red fox activity changed in response to human development (<xref ref-type="fig" rid="pone.0288477.g002">Fig 2</xref>). The proportion of nocturnal coyote detections increased at sites with medium human development compared to areas of low development (<italic>X</italic><sup><italic>2</italic></sup> = 7.66, <italic>df</italic> = 2, <italic>P</italic> = 0.02), though there was no difference between medium and high development. The proportion of red fox detections occurring around dusk was greatest in areas with high development (<italic>X</italic><sup><italic>2</italic></sup> = 11.54, <italic>df</italic> = 2, <italic>P</italic> &lt; 0.01).</p>
+<p>In general, temporal overlap between each species pair was high with most species’ pairs having temporal overlap values of over 0.70 (<xref ref-type="table" rid="pone.0288477.t002">Table 2</xref>). Variation in overlap based on development was only observed between opossum and raccoon (<xref ref-type="fig" rid="pone.0288477.g003">Fig 3</xref>). In areas of high development, overlap was 0.81 ± 0.09 (mean± 1 SD). Overlap was lowest in areas with medium development (0.76 ± 0.01, but highest in low development (0.82 ± 0.08), indicating the two species shift the timing of their activity as urbanization increases from low to medium, but were unaffected between medium and high development (<italic>X</italic><sup><italic>2</italic></sup> = 4.72, <italic>df</italic> = 2, <italic>P</italic> = 0.10; <xref ref-type="fig" rid="pone.0288477.g003">Fig 3</xref>). We found no significant differences in overlap between the other species pairs based on development (<xref ref-type="table" rid="pone.0288477.t002">Table 2</xref>). Red fox and gray fox only overlapped in areas of high and low development.</p>
+<fig id="pone.0288477.g003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0288477.g003</object-id>
+<label>Fig 3</label>
+<caption>
+<title>Temporal overlap patterns between Virginia opossum (<italic>Didelphis virginiana</italic>) and northern raccoon (<italic>Procyon lotor</italic>) along an urban to rural gradient.</title>
+<p>Daily activity overlap between Virginia opossum and northern raccoon (ON). We compare mean overlap coefficient and standard deviation values at three levels of development as measured by the 2019 National Land Cover Database (NLCD).</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.g003" xlink:type="simple"/>
+</fig>
+<table-wrap id="pone.0288477.t002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0288477.t002</object-id>
+<label>Table 2</label> <caption><title>Temporal overlap coefficients for seven mesocarnivores across the United States.</title></caption>
+<alternatives>
+<graphic id="pone.0288477.t002g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.t002" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Species Pair</th>
+<th align="center">Species Pair Code</th>
+<th align="center">No. Overlapping Sites</th>
+<th align="center">No. Development Categories</th>
+<th align="center" colspan="2">High</th>
+<th align="center" colspan="2">Medium</th>
+<th align="center" colspan="2">Low</th>
+</tr>
+<tr>
+<th align="left"/>
+<th align="center"/>
+<th align="center"/>
+<th align="center"/>
+<th align="center">Δ<sub>1</sub></th>
+<th align="center">SD</th>
+<th align="center">Δ<sub>1</sub></th>
+<th align="center">SD</th>
+<th align="center">Δ<sub>1</sub></th>
+<th align="center">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Coyote/Bobcat</td>
+<td align="center">CB</td>
+<td align="center">107</td>
+<td align="center">3</td>
+<td align="center">0.81</td>
+<td align="center">0.10</td>
+<td align="center">0.77</td>
+<td align="center">0.09</td>
+<td align="center">0.74</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Coyote/Gray Fox</td>
+<td align="center">CG</td>
+<td align="center">56</td>
+<td align="center">3</td>
+<td align="center">0.72</td>
+<td align="center">0.16</td>
+<td align="center">0.71</td>
+<td align="center">0.14</td>
+<td align="center">0.74</td>
+<td align="center">0.08</td>
+</tr>
+<tr>
+<td align="left">Coyote/Raccoon</td>
+<td align="center">CN</td>
+<td align="center">158</td>
+<td align="center">3</td>
+<td align="center">0.76</td>
+<td align="center">0.08</td>
+<td align="center">0.74</td>
+<td align="center">0.12</td>
+<td align="center">0.76</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Coyote/Opossum</td>
+<td align="center">CO</td>
+<td align="center">124</td>
+<td align="center">3</td>
+<td align="center">0.73</td>
+<td align="center">0.14</td>
+<td align="center">0.73</td>
+<td align="center">0.11</td>
+<td align="center">0.76</td>
+<td align="center">0.10</td>
+</tr>
+<tr>
+<td align="left">Coyote/Red Fox</td>
+<td align="center">CR</td>
+<td align="center">75</td>
+<td align="center">3</td>
+<td align="center">0.71</td>
+<td align="center">0.16</td>
+<td align="center">0.71</td>
+<td align="center">0.08</td>
+<td align="center">0.78</td>
+<td align="center">0.10</td>
+</tr>
+<tr>
+<td align="left">Coyote/Skunk</td>
+<td align="center">CS</td>
+<td align="center">84</td>
+<td align="center">3</td>
+<td align="center">0.64</td>
+<td align="center">0.19</td>
+<td align="center">0.74</td>
+<td align="center">0.08</td>
+<td align="center">0.75</td>
+<td align="center">0.06</td>
+</tr>
+<tr>
+<td align="left">Gray Fox/Bobcat</td>
+<td align="center">GB</td>
+<td align="center">37</td>
+<td align="center">3</td>
+<td align="center">0.63</td>
+<td align="center">0.08</td>
+<td align="center">0.71</td>
+<td align="center">0.13</td>
+<td align="center">0.76</td>
+<td align="center">0.09</td>
+</tr>
+<tr>
+<td align="left">Gray Fox/Red Fox</td>
+<td align="center">GR</td>
+<td align="center">24</td>
+<td align="center">2</td>
+<td align="center">0.74</td>
+<td align="center">0.14</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">0.82</td>
+<td align="center">0.09</td>
+</tr>
+<tr>
+<td align="left">Gray Fox/Skunk</td>
+<td align="center">GS</td>
+<td align="center">30</td>
+<td align="center">3</td>
+<td align="center">0.50</td>
+<td align="center">0.14</td>
+<td align="center">0.75</td>
+<td align="center">0.19</td>
+<td align="center">0.77</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Raccoon/Bobcat</td>
+<td align="center">NB</td>
+<td align="center">97</td>
+<td align="center">3</td>
+<td align="center">0.69</td>
+<td align="center">0.14</td>
+<td align="center">0.71</td>
+<td align="center">0.10</td>
+<td align="center">0.73</td>
+<td align="center">0.13</td>
+</tr>
+<tr>
+<td align="left">Raccoon/Gray Fox</td>
+<td align="center">NG</td>
+<td align="center">52</td>
+<td align="center">3</td>
+<td align="center">0.71</td>
+<td align="center">0.10</td>
+<td align="center">0.76</td>
+<td align="center">0.16</td>
+<td align="center">0.79</td>
+<td align="center">0.10</td>
+</tr>
+<tr>
+<td align="left">Raccoon/Red Fox</td>
+<td align="center">NR</td>
+<td align="center">82</td>
+<td align="center">3</td>
+<td align="center">0.70</td>
+<td align="center">0.13</td>
+<td align="center">0.72</td>
+<td align="center">0.10</td>
+<td align="center">0.77</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Raccoon/Skunk</td>
+<td align="center">NS</td>
+<td align="center">71</td>
+<td align="center">3</td>
+<td align="center">0.75</td>
+<td align="center">0.10</td>
+<td align="center">0.72</td>
+<td align="center">0.11</td>
+<td align="center">0.78</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Opossum/Bobcat</td>
+<td align="center">OB</td>
+<td align="center">75</td>
+<td align="center">3</td>
+<td align="center">0.65</td>
+<td align="center">0.14</td>
+<td align="center">0.69</td>
+<td align="center">0.11</td>
+<td align="center">0.72</td>
+<td align="center">0.15</td>
+</tr>
+<tr>
+<td align="left">Opossum/Gray Fox</td>
+<td align="center">OG</td>
+<td align="center">42</td>
+<td align="center">3</td>
+<td align="center">0.77</td>
+<td align="center">0.09</td>
+<td align="center">0.68</td>
+<td align="center">0.15</td>
+<td align="center">0.77</td>
+<td align="center">0.07</td>
+</tr>
+<tr>
+<td align="left">Opossum/Raccoon</td>
+<td align="center">ON</td>
+<td align="center">134</td>
+<td align="center">3</td>
+<td align="center">0.81</td>
+<td align="center">0.09</td>
+<td align="center">0.76</td>
+<td align="center">0.10</td>
+<td align="center">0.82</td>
+<td align="center">0.08</td>
+</tr>
+<tr>
+<td align="left">Opossum/Red Fox</td>
+<td align="center">OR</td>
+<td align="center">63</td>
+<td align="center">3</td>
+<td align="center">0.74</td>
+<td align="center">0.12</td>
+<td align="center">0.73</td>
+<td align="center">0.14</td>
+<td align="center">0.78</td>
+<td align="center">0.09</td>
+</tr>
+<tr>
+<td align="left">Opossum/Skunk</td>
+<td align="center">OS</td>
+<td align="center">55</td>
+<td align="center">3</td>
+<td align="center">0.81</td>
+<td align="center">0.10</td>
+<td align="center">0.79</td>
+<td align="center">0.08</td>
+<td align="center">0.74</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Red Fox/Bobcat</td>
+<td align="center">RB</td>
+<td align="center">39</td>
+<td align="center">3</td>
+<td align="center">0.62</td>
+<td align="center">0.17</td>
+<td align="center">0.60</td>
+<td align="center">0.13</td>
+<td align="center">0.74</td>
+<td align="center">0.11</td>
+</tr>
+<tr>
+<td align="left">Red Fox/ Skunk</td>
+<td align="center">RS</td>
+<td align="center">40</td>
+<td align="center">3</td>
+<td align="center">0.80</td>
+<td align="center">0.04</td>
+<td align="center">0.73</td>
+<td align="center">0.14</td>
+<td align="center">0.73</td>
+<td align="center">0.09</td>
+</tr>
+<tr>
+<td align="left">Skunk/Bobcat</td>
+<td align="center">SB</td>
+<td align="center">54</td>
+<td align="center">3</td>
+<td align="center">0.61</td>
+<td align="center">0.27</td>
+<td align="center">0.69</td>
+<td align="center">0.13</td>
+<td align="center">0.72</td>
+<td align="center">0.11</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t002fn001"><p>Temporal overlap coefficients (Δ<sub>1</sub>) for seven commonly occurring mesocarnivore species: bobcat (<italic>Lynx rufus</italic>), raccoon (<italic>Procyon lotor</italic>), Virginia opossum (<italic>Didelphis virginiana</italic>), striped skunk (<italic>Mephitis mephitis</italic>), gray fox (<italic>Urocyon cinereoargenteus</italic>), red fox (<italic>Vulpes vulpes</italic>), and coyote (<italic>Canis latrans</italic>). Development categories refer to how many categories of development (low, medium, high) each species pair was detected in and were included in analyses. Gray and red fox only overlapped in two of the three development categories. Overlapping sites indicate the total number of Snapshot USA sites where both species in the pair were detected. Overlap coefficients and standard deviation range from 0–1 with 0 indicating no temporal overlap between the activity of the two species and 1 indicating complete temporal overlap.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec007" sec-type="conclusions">
+<title>Discussion</title>
+<p>There is extensive evidence that many species of wildlife alter their activity patterns when in the presence of humans or human development [<xref ref-type="bibr" rid="pone.0288477.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref050">50</xref>]. However, there has been less attention paid to how these changes alter interspecies interactions [<xref ref-type="bibr" rid="pone.0288477.ref025">25</xref>]. We predicted that human development could either increase overlap in the timing of mesocarnivore activity by constraining activity to periods when animals avoided interactions with humans or it could reduce overlap between some species as those that are more tolerant of humans would be able to be active during daytime whereas others were more sensitive and would only be active at night [<xref ref-type="bibr" rid="pone.0288477.ref025">25</xref>]. However, we found relatively little support for these predictions. The seven species we studied were primarily nocturnal regardless of surrounding human development and thus, overlap between the species pairs was consistently high (<xref ref-type="table" rid="pone.0288477.t002">Table 2</xref>). Overall, we saw little to no change in overlap between species on an urban to rural gradient. The only significant change in overlap occurred between raccoon and opossum, which had a higher overlap coefficient in sites of low development than those with medium development. We had predicted that larger mesocarnivores that are at risk of disturbance from humans would be most nocturnal in developed areas, which was the case for coyotes. Similarly, red fox were more active at dusk when in proximity to human development.</p>
+<p>The mesocarnivore species studied here were primarily nocturnal in their activity patterns as has been reported in the literature [<xref ref-type="bibr" rid="pone.0288477.ref005">5</xref>, <xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref051">51</xref>–<xref ref-type="bibr" rid="pone.0288477.ref054">54</xref>]. However, each species was plastic in their activity and did show the ability to be active during each of the diel activity periods (<xref ref-type="fig" rid="pone.0288477.g002">Fig 2</xref>). We expected that some of the species studied here would substantially change the timing of their activity based on human development as has been reported elsewhere [<xref ref-type="bibr" rid="pone.0288477.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref054">54</xref>, <xref ref-type="bibr" rid="pone.0288477.ref055">55</xref>]. For example, both raccoons and opossums shifted activity to crepuscular hours when in proximity to humans [<xref ref-type="bibr" rid="pone.0288477.ref054">54</xref>]. Coyotes have been found to avoid being active during the day and to shift to nocturnal activity in the presence of human activity [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref016">16</xref>, <xref ref-type="bibr" rid="pone.0288477.ref023">23</xref>, <xref ref-type="bibr" rid="pone.0288477.ref025">25</xref>, <xref ref-type="bibr" rid="pone.0288477.ref032">32</xref>]. Other species, like striped skunk and bobcat have shown to be less flexible in their activity patterns in regard to development or to respond to environmental factors such as temperature rather than humans [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0288477.ref024">24</xref>, <xref ref-type="bibr" rid="pone.0288477.ref025">25</xref>]. We found only minor changes in the activity patterns of our focal species across the development categories. For instance, we found that coyotes became more nocturnal in areas of human development which aligns with other reports and that red fox became more crepuscular in areas of human development (<xref ref-type="fig" rid="pone.0288477.g002">Fig 2</xref>).</p>
+<p>We may have detected less change in activity patterns than anticipated because our activity categories (day, night, dawn, dusk) were too broad, and the species we focused on respond to human activity by shifting the times they are active within those categories rather than across them. For instance some mammal species constrain their activity to fewer hours of the night in urban areas rather than shifting when they are active across broad categories [<xref ref-type="bibr" rid="pone.0288477.ref054">54</xref>] (e.g., crepuscular to nocturnal). Alternatively, our categorization of human development may not perfectly capture the aspects of human impact that wildlife respond to. We relied upon a measure of impervious surface [<xref ref-type="bibr" rid="pone.0288477.ref045">45</xref>] within the vicinity of each site to categorize human development. The use of impervious surface is a common measure of human development in studies of wildlife response to humans [<xref ref-type="bibr" rid="pone.0288477.ref007">7</xref>]. However, wildlife may be responding to other aspects of human presence such as anthropogenic noise, human activity, traffic, domestic dogs, or light that may not correlate with impervious surface [<xref ref-type="bibr" rid="pone.0288477.ref023">23</xref>, <xref ref-type="bibr" rid="pone.0288477.ref056">56</xref>].</p>
+<p>We found that overlap between most species’ pairs was high (overlap coefficient &gt; 0.70), likely because all seven of the species we studied were mostly nocturnal (<xref ref-type="table" rid="pone.0288477.t002">Table 2</xref>). Furthermore, we found that contrary to our predictions, overlap remained consistently high regardless of the amount of human development surrounding sites. This consistent temporal overlap between species pairs indicate either that 1) competition / predation pressure between these species pairs is not strong enough to induce substantial shifts in activity to avoid one another or 2) that these species use different mechanisms to reduce competition and predation risk. We expected that pressure from larger mesocarnivores such as coyote and bobcat would be enough for smaller mesocarnivores like opossum and skunk to change their activity patterns because these species have been documented killing and depredating these species (up to 76% mortality of opossum due to coyote [<xref ref-type="bibr" rid="pone.0288477.ref035">35</xref>, <xref ref-type="bibr" rid="pone.0288477.ref057">57</xref>]. Therefore, we expected that these mesocarnivores should benefit by avoiding when coyotes or bobcat were most active [<xref ref-type="bibr" rid="pone.0288477.ref021">21</xref>, <xref ref-type="bibr" rid="pone.0288477.ref024">24</xref>]. Furthermore, interspecific aggression and killing has been documented between the larger mesocarnivores, including coyote, bobcat, gray fox, and red fox [<xref ref-type="bibr" rid="pone.0288477.ref058">58</xref>, <xref ref-type="bibr" rid="pone.0288477.ref059">59</xref>]. In addition to antagonistic encounters, these four species undoubtedly compete for similar prey resources [<xref ref-type="bibr" rid="pone.0288477.ref060">60</xref>]. Despite evidence of competition, predation, and antagonistic behavior, we found no evidence that these species alter their activity patterns to reduce temporal overlap. Rather, it is more likely that they reduce contact through some combination of spatial or spatio-temporal partitioning as has been reported in other systems [<xref ref-type="bibr" rid="pone.0288477.ref020">20</xref>].</p>
+<p>Due to the scale and scope of Snapshot USA, there was wide variation in the type and intensity of human development at study sites, and this may have contributed to our relative lack of evidence for consistent shifts in behavior. The way in which wildlife respond to human development are often context dependent [<xref ref-type="bibr" rid="pone.0288477.ref061">61</xref>, <xref ref-type="bibr" rid="pone.0288477.ref062">62</xref>] and wildlife responses to development may vary regionally or in response to the characteristics of that specific development as well as the predominant landcover. While the majority of Snapshot USA sites were in forested areas (<xref ref-type="supplementary-material" rid="pone.0288477.s001">S1 Table</xref>) other sites were located in desert, grassland, or wetland areas. Our broad approach likely missed much of the nuance that would have contributed to a better understanding of how wildlife respond to their environment, and we lacked the statistical power to evaluate the effects of habitat on activity. Due to the modest shifts in the activity of our focal species, we failed to detect changes in overlap between the species based on the surrounding human development. Future research could benefit from including focal species with even more plasticity in the timing of their activity (e.g., nine-banded armadillos (<italic>Dasypus novemcinctus</italic>), [<xref ref-type="bibr" rid="pone.0288477.ref056">56</xref>]) as opposed to species that are consistently nocturnal or by focusing on more specialized predator–prey models rather than the generalist species we focused on.</p>
+</sec>
+<sec id="sec008" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0288477.s001" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.s001" xlink:type="simple">
+<label>S1 Table</label>
+<caption>
+<title>Habitat at each of the Snapshot USA camera sites used in analyses.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0288477.s002" mimetype="application/zip" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.s002" xlink:type="simple">
+<label>S1 File</label>
+<caption>
+<title/>
+<p>(ZIP)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ack>
+<p>Thank you to Roland Kays and the Snapshot USA team for access to data and assistance in refining our research question. Thanks to the University of Arkansas Dept of Biological Sciences for student support. Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government. Data are available the Smithsonian’s eMammal data repository <ext-link ext-link-type="uri" xlink:href="https://emammal.si.edu/analysis/data-download" xlink:type="simple">https://emammal.si.edu/analysis/data-download</ext-link>.</p>
+</ack>
+<ref-list>
+<title>References</title>
+<ref id="pone.0288477.ref001"><label>1</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Allen</surname> <given-names>M.L.</given-names></name>, <name name-style="western"><surname>Green</surname> <given-names>A.M.</given-names></name> and <name name-style="western"><surname>Moll</surname> <given-names>R.J.</given-names></name> <year>2022</year>. <article-title>Modelling the distribution and intraguild associations of an understudied mesocarnivore across the contiguous United States</article-title>. <source>Diversity and Distributions</source>, <volume>28</volume>(<issue>5</issue>), pp.<fpage>1022</fpage>–<lpage>1033</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Fischer</surname> <given-names>J.D.</given-names></name>, <name name-style="western"><surname>Cleeton</surname> <given-names>S.H.</given-names></name>, <name name-style="western"><surname>Lyons</surname> <given-names>T.P.</given-names></name>, <name name-style="western"><surname>Miller</surname> <given-names>J.R.</given-names></name> <year>2012</year>. <article-title>Urbanization and the predation paradox: the role of trophic dynamics in structuring vertebrate communities</article-title>. <source>Bioscience</source> <volume>62</volume>(<issue>9</issue>):<fpage>809</fpage>–<lpage>818</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/2041-210X.13117" xlink:type="simple">https://doi.org/10.1111/2041-210X.13117</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Monterroso</surname> <given-names>P.</given-names></name>, <name name-style="western"><surname>Alves</surname> <given-names>P.C.</given-names></name>, <name name-style="western"><surname>Ferreras</surname> <given-names>P.</given-names></name> <year>2014</year>. <article-title>Plasticity in circadian activity patterns of mesocarnivores in Southwestern Europe: implications for species coexistence</article-title>. <source>Behavioral Ecology and Sociobiology</source> <volume>68</volume>(<issue>9</issue>):<fpage>1403</fpage>–<lpage>1417</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00265-014-1748-1" xlink:type="simple">https://doi.org/10.1007/s00265-014-1748-1</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gaynor</surname> <given-names>K.M.</given-names></name>, <name name-style="western"><surname>Hojnowski</surname> <given-names>C.E.</given-names></name>, <name name-style="western"><surname>Carter</surname> <given-names>N.H.</given-names></name>, <name name-style="western"><surname>Brashares</surname> <given-names>J.S.</given-names></name> <year>2018</year>. <article-title>The influence of human disturbance on wildlife nocturnality</article-title>. <source>Science</source> <volume>360</volume>(<issue>6394</issue>):<fpage>1232</fpage>–<lpage>1235</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1126/science.aar7121" xlink:type="simple">10.1126/science.aar7121</ext-link></comment> <object-id pub-id-type="pmid">29903973</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Grinder</surname> <given-names>M. I.</given-names></name>, <name name-style="western"><surname>Krausman</surname> <given-names>P. R.</given-names></name> <year>2001</year>. <article-title>Home range, habitat use, and nocturnal activity of Coyotes in an urban environment</article-title>. <source>The Journal of Wildlife Management</source> <volume>65</volume>(<issue>4</issue>): <fpage>887</fpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2307/3803038" xlink:type="simple">https://doi.org/10.2307/3803038</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref006"><label>6</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Arias-Del Razo</surname> <given-names>I.</given-names></name>, <name name-style="western"><surname>Hernández</surname> <given-names>L.</given-names></name>, <name name-style="western"><surname>Laundré</surname> <given-names>J. W.</given-names></name>, <name name-style="western"><surname>Myers</surname> <given-names>O.</given-names></name> <year>2011</year>. <article-title>Do predator and prey foraging activity patterns match? A study of coyotes (<italic>Canis latrans</italic>), and lagomorphs (<italic>Lepus californicus</italic> and <italic>sylvilagus audobonii</italic>).</article-title> <source>Journal of Arid Environments</source> <volume>75</volume>(<issue>2</issue>): <fpage>112</fpage>–<lpage>118</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jaridenv.2010.09.008" xlink:type="simple">https://doi.org/10.1016/j.jaridenv.2010.09.008</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gallo</surname> <given-names>T.</given-names></name>, <name name-style="western"><surname>Fidino</surname> <given-names>M.</given-names></name>, <name name-style="western"><surname>Gerber</surname> <given-names>B.</given-names></name>, <name name-style="western"><surname>Ahlers</surname> <given-names>A.A.</given-names></name>, <name name-style="western"><surname>Angstmann</surname> <given-names>J.L.</given-names></name>, <name name-style="western"><surname>Amaya</surname> <given-names>M.</given-names></name>, <etal>et al</etal>. <year>2022</year>. <article-title>Mammals adjust diel activity across gradients of urbanization</article-title>. <source>Elife</source>, <volume>11</volume>, p.<fpage>e74756</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.7554/eLife.74756" xlink:type="simple">10.7554/eLife.74756</ext-link></comment> <object-id pub-id-type="pmid">35357308</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wang</surname> <given-names>Y.</given-names></name>, <name name-style="western"><surname>Allen</surname> <given-names>M. L.</given-names></name>, <name name-style="western"><surname>Wilmers</surname> <given-names>C. C.</given-names></name> <year>2015</year>. <article-title>Mesopredator spatial and temporal responses to large predators and human development in the Santa Cruz Mountains of California</article-title>. <source>Biological Conservation</source> <volume>190</volume>: <fpage>23</fpage>–<lpage>33</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.biocon.2015.05.007" xlink:type="simple">https://doi.org/10.1016/j.biocon.2015.05.007</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lang</surname> <given-names>S. D.</given-names></name>, <name name-style="western"><surname>Mann</surname> <given-names>R. P.</given-names></name>, <name name-style="western"><surname>Farine</surname> <given-names>D. R.</given-names></name> <year>2019</year>. <article-title>Temporal activity patterns of predators and prey across broad geographic scales</article-title>. <source>Behavioral Ecology</source> <volume>30</volume>(<issue>1</issue>): <fpage>172</fpage>–<lpage>180</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/beheco/ary133" xlink:type="simple">https://doi.org/10.1093/beheco/ary133</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Carver</surname> <given-names>B. D.</given-names></name>, <name name-style="western"><surname>Kennedy</surname> <given-names>M. L.</given-names></name>, <name name-style="western"><surname>Houston</surname> <given-names>A. E.</given-names></name>, <name name-style="western"><surname>Franklin</surname> <given-names>S. B.</given-names></name> <year>2011</year>. <article-title>Assessment of temporal partitioning in foraging patterns of syntopic Virginia opossums and Raccoons</article-title>. <source>Journal of Mammalogy</source> <volume>92</volume>(<issue>1</issue>): <fpage>134</fpage>–<lpage>139</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1644/10-mamm-a-066.1" xlink:type="simple">https://doi.org/10.1644/10-mamm-a-066.1</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gehring</surname> <given-names>T.M.</given-names></name>, <name name-style="western"><surname>Swihart</surname> <given-names>R.K.</given-names></name> <year>2003</year>. <article-title>Body size, niche breadth, and ecologically scaled responses to habitat fragmentation: mammalian predators in an agricultural landscape</article-title>. <source>Biological Conservation</source> <volume>109</volume>(<issue>2</issue>):<fpage>283</fpage>–<lpage>295</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/S0006-3207(02)00156-8" xlink:type="simple">https://doi.org/10.1016/S0006-3207(02)00156-8</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Frid</surname> <given-names>A.</given-names></name>, <name name-style="western"><surname>Dill</surname> <given-names>L.</given-names></name> <year>2002</year>. <article-title>Human-caused disturbance stimuli as a form of predation risk</article-title>. <source>Conservation Ecology</source> <volume>6</volume>(<issue>1</issue>): <fpage>11</fpage>. <ext-link ext-link-type="uri" xlink:href="http://www.jstor.org/stable/26271862" xlink:type="simple">http://www.jstor.org/stable/26271862</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gallo</surname> <given-names>T.</given-names></name>, <name name-style="western"><surname>Fidino</surname> <given-names>M.</given-names></name>, <name name-style="western"><surname>Lehrer</surname> <given-names>E. W.</given-names></name>, <name name-style="western"><surname>Magle</surname> <given-names>S. B.</given-names></name> <year>2017</year>. <article-title>Mammal diversity and metacommunity dynamics in urban green spaces: Implications for urban wildlife conservation</article-title>. <source>Ecological Applications</source> <volume>27</volume>(<issue>8</issue>): <fpage>2330</fpage>–<lpage>2341</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/eap.1611" xlink:type="simple">10.1002/eap.1611</ext-link></comment> <object-id pub-id-type="pmid">28833978</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Cove</surname> <given-names>M. V.</given-names></name>, <name name-style="western"><surname>Gardner</surname> <given-names>B.</given-names></name>, <name name-style="western"><surname>Simons</surname> <given-names>T. R.</given-names></name>, <name name-style="western"><surname>Kays</surname> <given-names>R.</given-names></name>, <name name-style="western"><surname>O’Connell</surname> <given-names>A. F.</given-names></name> <year>2017</year>. <article-title>Free-ranging domestic cats (<italic>Felis catus</italic>) on public lands: Estimating density, activity, and diet in the Florida Keys.</article-title> <source>Biological Invasions</source> <volume>20</volume>(<issue>2</issue>): <fpage>333</fpage>–<lpage>344</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s10530-017-1534-x" xlink:type="simple">https://doi.org/10.1007/s10530-017-1534-x</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gese</surname> <given-names>E.M.</given-names></name>, <name name-style="western"><surname>Morey</surname> <given-names>P.S.</given-names></name>, <name name-style="western"><surname>Gehrt</surname> <given-names>S.D.</given-names></name>, <year>2012</year>. <article-title>Influence of the urban matrix on space use of coyotes in the Chicago metropolitan area</article-title>. <source>Journal of Ethology</source> <volume>30</volume>(<issue>3</issue>): <fpage>413</fpage>–<lpage>425</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s10164-012-0339-8" xlink:type="simple">https://doi.org/10.1007/s10164-012-0339-8</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lowry</surname> <given-names>H.</given-names></name>, <name name-style="western"><surname>Lill</surname> <given-names>A.</given-names></name>, <name name-style="western"><surname>Wong</surname> <given-names>B. B.</given-names></name> <year>2012</year>. <article-title>Behavioural responses of wildlife to urban environments</article-title>. <source>Biological Reviews</source> <volume>88</volume>(<issue>3</issue>):<fpage>537</fpage>–<lpage>549</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/brv.12012" xlink:type="simple">10.1111/brv.12012</ext-link></comment> <object-id pub-id-type="pmid">23279382</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Frey</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Fisher</surname> <given-names>J.T.</given-names></name>, <name name-style="western"><surname>Burton</surname> <given-names>A.C.</given-names></name>, <name name-style="western"><surname>Volpe</surname> <given-names>J.P.</given-names></name>, <name name-style="western"><surname>Rowcliffe</surname> <given-names>M.</given-names></name> <year>2017</year>. <article-title>Investigating animal activity patterns and temporal niche partitioning using camera-trap data: challenges and opportunities</article-title>. <source>Remote Sensing in Ecology and Conservation</source> <volume>3</volume>:<fpage>123</fpage>–<lpage>132</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/rse2.60" xlink:type="simple">https://doi.org/10.1002/rse2.60</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gehrt</surname> <given-names>S. D.</given-names></name>, <name name-style="western"><surname>Prange</surname> <given-names>S.</given-names></name> <year>2007</year>. <article-title>Interference competition between coyotes and raccoons: a test of the mesopredator release hypothesis</article-title>. <source>Behavioral Ecology</source> <volume>18</volume>(<issue>1</issue>): <fpage>204</fpage>–<lpage>214</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/beheco/arl075" xlink:type="simple">https://doi.org/10.1093/beheco/arl075</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gehrt</surname> <given-names>S.D.</given-names></name>, <name name-style="western"><surname>Anchor</surname> <given-names>C.</given-names></name>, <name name-style="western"><surname>White</surname> <given-names>L.A.</given-names></name>, <year>2009</year>. <article-title>Home Range and Landscape Use of Coyotes in a Metropolitan Landscape: Conflict or Coexistence?</article-title> <source>Journal of Mammalogy</source> <volume>90</volume>:<fpage>1045</fpage>–<lpage>1057</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1644/08-MAMM-A-277.1" xlink:type="simple">https://doi.org/10.1644/08-MAMM-A-277.1</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Moll</surname> <given-names>R.J.</given-names></name>, <name name-style="western"><surname>Cepek</surname> <given-names>J.D.</given-names></name>, <name name-style="western"><surname>Lorch</surname> <given-names>P.D.</given-names></name>, <name name-style="western"><surname>Dennis</surname> <given-names>P.M.</given-names></name>, <name name-style="western"><surname>Robison</surname> <given-names>T.</given-names></name>, <name name-style="western"><surname>Millspaugh</surname> <given-names>J.J.</given-names></name>, <etal>et al</etal>. <year>2018</year>. <article-title>Humans and urban development mediate the sympatry of competing carnivores</article-title>. <source>Urban Ecosystems</source> <volume>21</volume>: <fpage>765</fpage>–<lpage>778</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s11252-018-0758-6" xlink:type="simple">https://doi.org/10.1007/s11252-018-0758-6</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zapata-Ríos</surname> <given-names>G.</given-names></name>, and <name name-style="western"><surname>Branch</surname> <given-names>L.C.</given-names></name> <year>2016</year>. <article-title>Altered activity patterns and reduced abundance of native mammals in sites with feral dogs in the high Andes</article-title>. <source>Biological Conservation</source> <volume>193</volume>:<fpage>9</fpage>–<lpage>16</lpage></mixed-citation></ref>
+<ref id="pone.0288477.ref022"><label>22</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Prange</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Gehrt</surname> <given-names>S.D.</given-names></name> <year>2004</year>. <article-title>Changes in mesopredator-community structure in response to urbanization</article-title>. <source>Canadian Journal of Zoology</source> <volume>82</volume>(<issue>11</issue>):<fpage>1804</fpage>–<lpage>1817</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1139/z04-179" xlink:type="simple">https://doi.org/10.1139/z04-179</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref023"><label>23</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Thieurmel</surname> <given-names>B.</given-names></name>, <name name-style="western"><surname>Elmarhraoui</surname> <given-names>A.</given-names></name>, <name name-style="western"><surname>Thieurmel</surname> <given-names>M.B.</given-names></name> <year>2019</year>. <article-title>Package ‘suncalc’.</article-title> <ext-link ext-link-type="uri" xlink:href="https://cran" xlink:type="simple">https://cran</ext-link>. R-project. Org/web/packages/suncalc/suncalc.pdf</mixed-citation></ref>
+<ref id="pone.0288477.ref024"><label>24</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hubbard</surname> <given-names>T.</given-names></name>, <name name-style="western"><surname>Cove</surname> <given-names>M.V.</given-names></name>, <name name-style="western"><surname>Green</surname> <given-names>A.M.</given-names></name>, <name name-style="western"><surname>Iannarilli</surname> <given-names>F.</given-names></name>, <name name-style="western"><surname>Allen</surname> <given-names>M.L.</given-names></name>, <name name-style="western"><surname>LaRose</surname> <given-names>S.H.</given-names></name>, <etal>et al</etal>. <year>2022</year>. <article-title>Human presence drives bobcat interactions among the US carnivore guild</article-title>. <source>Biodiversity and Conservation</source>, <volume>31</volume>(<issue>11</issue>): <fpage>2607</fpage>–<lpage>2624</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref025"><label>25</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Green</surname> <given-names>A.M.</given-names></name>, <name name-style="western"><surname>Barnick</surname> <given-names>K.A.</given-names></name>, <name name-style="western"><surname>Pendergast</surname> <given-names>M.E.</given-names></name> and <name name-style="western"><surname>Şekercioğlu</surname> <given-names>Ç.H.</given-names></name>, <year>2022</year>. <article-title>Species differences in temporal response to urbanization alters predator-prey and human overlap in northern Utah</article-title>. <source>Global Ecology and Conservation</source>, <volume>36</volume>: p.<fpage>e02127</fpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.gecco.2022.e02127" xlink:type="simple">https://doi.org/10.1016/j.gecco.2022.e02127</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref026"><label>26</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Atickem</surname> <given-names>A.</given-names></name>, <name name-style="western"><surname>Loe</surname> <given-names>L. E.</given-names></name>, <name name-style="western"><surname>Stenseth</surname> <given-names>N. C.</given-names></name> <year>2014</year>. <article-title>Individual heterogeneity in use of human shields by mountain nyala</article-title>. <source>Ethology</source> <volume>120</volume>(<issue>7</issue>): <fpage>715</fpage>–<lpage>725</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/eth.12242" xlink:type="simple">https://doi.org/10.1111/eth.12242</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref027"><label>27</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Breck</surname> <given-names>S. W.</given-names></name>, <name name-style="western"><surname>Poessel</surname> <given-names>S. A.</given-names></name>, <name name-style="western"><surname>Mahoney</surname> <given-names>P.</given-names></name>, <name name-style="western"><surname>Young</surname> <given-names>J. K.</given-names></name> <year>2019</year>. <article-title>The intrepid urban coyote: A comparison of bold and exploratory behavior in coyotes from urban and rural environments</article-title>. <source>Scientific Reports</source> <volume>9</volume>(<issue>1</issue>):<fpage>1</fpage>–<lpage>11</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/s41598-019-38543-5" xlink:type="simple">https://doi.org/10.1038/s41598-019-38543-5</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref028"><label>28</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gámez</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Harris</surname> <given-names>N. C.</given-names></name> <year>2021</year>. <article-title>Living in the concrete jungle: carnivore spatial ecology in urban parks</article-title>. <source>Ecological Applications</source> <volume>31</volume>: <fpage>e02393</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/eap.2393" xlink:type="simple">10.1002/eap.2393</ext-link></comment> <object-id pub-id-type="pmid">34164878</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref029"><label>29</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Dorresteijn</surname> <given-names>I.</given-names></name>, <name name-style="western"><surname>Schultner</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Nimmo</surname> <given-names>D. G.</given-names></name>, <name name-style="western"><surname>Fischer</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Hanspach</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Kuemmerle</surname> <given-names>T.</given-names></name>, <etal>et al</etal>. <year>2015</year>. <article-title>Incorporating anthropogenic effects into trophic ecology: predator–prey interactions in a human-dominated landscape</article-title>. <source>Proceedings of the Royal Society B: Biological Sciences</source>, <volume>282</volume>(<issue>1814</issue>): <fpage>20151602</fpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rspb.2015.1602" xlink:type="simple">https://doi.org/10.1098/rspb.2015.1602</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref030"><label>30</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Smith</surname> <given-names>J. A.</given-names></name>, <name name-style="western"><surname>Thomas</surname> <given-names>A. C.</given-names></name>, <name name-style="western"><surname>Levi</surname> <given-names>T.</given-names></name>, <name name-style="western"><surname>Wang</surname> <given-names>Y.</given-names></name>, <name name-style="western"><surname>Wilmers</surname> <given-names>C.C.</given-names></name> <year>2018</year>. <article-title>Human activity reduces niche partitioning among three widespread mesocarnivores</article-title>. <source>Oikos</source> <volume>127</volume>(<issue>6</issue>): <fpage>890</fpage>–<lpage>901</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/oik.04592" xlink:type="simple">https://doi.org/10.1111/oik.04592</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref031"><label>31</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bozek</surname> <given-names>C. K.</given-names></name>, <name name-style="western"><surname>Prange</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Gehrt</surname> <given-names>S. D.</given-names></name> <year>2007</year>. <article-title>The influence of anthropogenic resources on multi-scale habitat selection by raccoons</article-title>. <source>Urban Ecosystems</source> <volume>10</volume>:<fpage>413</fpage>–<lpage>425</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s11252-007-0033-8" xlink:type="simple">https://doi.org/10.1007/s11252-007-0033-8</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref032"><label>32</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Greenspan</surname> <given-names>E.</given-names></name>, <name name-style="western"><surname>Nielsen</surname> <given-names>C. K.</given-names></name>, <name name-style="western"><surname>Cassel</surname> <given-names>K. W.</given-names></name> <year>2018</year>. <article-title>Potential distribution of coyotes (<italic>Canis latrans</italic>), Virginia opossums (<italic>Didelphis virginiana</italic>), striped skunks (<italic>Mephitis mephitis</italic>), and raccoons (<italic>Procyon lotor</italic>) in the Chicago Metropolitan Area.</article-title> <source>Urban Ecosystems</source> <volume>21</volume>(<issue>5</issue>): <fpage>983</fpage>–<lpage>997</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s11252-018-0778-2" xlink:type="simple">https://doi.org/10.1007/s11252-018-0778-2</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref033"><label>33</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Magle</surname> <given-names>S. B.</given-names></name>, <name name-style="western"><surname>Lehrer</surname> <given-names>E. W.</given-names></name>, <name name-style="western"><surname>Fidino</surname> <given-names>M.</given-names></name> <year>2016</year>. <article-title>Urban mesopredator distribution: examining the relative effects of landscape and socioeconomic factors</article-title>. <source>Animal Conservation</source>, <volume>19</volume>, <fpage>163</fpage>–<lpage>175</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/acv.12231" xlink:type="simple">https://doi.org/10.1111/acv.12231</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref034"><label>34</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ordeñana</surname> <given-names>M. A.</given-names></name>, <name name-style="western"><surname>Crooks</surname> <given-names>K. R.</given-names></name>, <name name-style="western"><surname>Boydston</surname> <given-names>E. E.</given-names></name>, <name name-style="western"><surname>Fisher</surname> <given-names>R. N.</given-names></name>, <name name-style="western"><surname>Lyren</surname> <given-names>L. M.</given-names></name>, <name name-style="western"><surname>Siudyla</surname> <given-names>S.</given-names></name>, <etal>et al</etal>. <year>2010</year>. <article-title>Effects of urbanization on carnivore species distribution and richness</article-title>. <source>Journal of Mammalogy</source> <volume>91</volume>(<issue>6</issue>):<fpage>1322</fpage>–<lpage>1331</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1644/09-MAMM-A-312.1" xlink:type="simple">https://doi.org/10.1644/09-MAMM-A-312.1</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref035"><label>35</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gipson</surname> <given-names>P. S.</given-names></name>, <name name-style="western"><surname>Kamler</surname> <given-names>J. F.</given-names></name> <year>2001</year>. <article-title>Survival and home ranges of opossums in northeastern Kansas</article-title>. <source>The Southwestern Naturalist</source> <volume>46</volume>(<issue>2</issue>):<fpage>178</fpage>–<lpage>182</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2307/3672526" xlink:type="simple">https://doi.org/10.2307/3672526</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref036"><label>36</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Witczuk</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Pagacz</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Gliwicz</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Mills</surname> <given-names>L. S.</given-names></name> <year>2015</year>. <article-title>Niche overlap between sympatric coyotes and bobcats in highland zones of Olympic Mountains, Washington</article-title>. <source>Journal of Zoology</source>. <volume>297</volume>:<fpage>176</fpage>–<lpage>183</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref037"><label>37</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Prevedello</surname> <given-names>J. A.</given-names></name>, <name name-style="western"><surname>Dickman</surname> <given-names>C. R.</given-names></name>, <name name-style="western"><surname>Vieira</surname> <given-names>M. V.</given-names></name>, <name name-style="western"><surname>Vieira</surname> <given-names>E. M.</given-names></name> <year>2013</year>. <article-title>Population responses of small mammals to food supply and predators: A global meta-analysis</article-title>. <source>Journal of Animal Ecology</source>, <volume>82</volume>(<issue>5</issue>):<fpage>927</fpage>–<lpage>936</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/1365-2656.12072" xlink:type="simple">10.1111/1365-2656.12072</ext-link></comment> <object-id pub-id-type="pmid">23560951</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref038"><label>38</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sanders</surname> <given-names>D.</given-names></name>, <name name-style="western"><surname>Frago</surname> <given-names>E.</given-names></name>, <name name-style="western"><surname>Kehoe</surname> <given-names>R.</given-names></name>, <name name-style="western"><surname>Patterson</surname> <given-names>C.</given-names></name>, <name name-style="western"><surname>Gaston</surname> <given-names>K.J.</given-names></name>, <year>2021</year>. <article-title>A meta-analysis of biological impacts of artificial light at night</article-title>. <source>Nature Ecology &amp; Evolution</source>, <volume>5</volume>(<issue>1</issue>): <fpage>74</fpage>–<lpage>81</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/s41559-020-01322-x" xlink:type="simple">10.1038/s41559-020-01322-x</ext-link></comment> <object-id pub-id-type="pmid">33139919</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref039"><label>39</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Fedriani</surname> <given-names>J. M.</given-names></name>, <name name-style="western"><surname>Fuller</surname> <given-names>T. K.</given-names></name>, <name name-style="western"><surname>Sauvajot</surname> <given-names>R. M.</given-names></name>, <name name-style="western"><surname>York</surname> <given-names>E. C.</given-names></name> <year>2000</year>. <article-title>Competition and intraguild predation among three sympatric carnivores</article-title>. <source>Oecologia</source> <volume>125</volume>: <fpage>258</fpage>–<lpage>270</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s004420000448" xlink:type="simple">10.1007/s004420000448</ext-link></comment> <object-id pub-id-type="pmid">24595837</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref040"><label>40</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gehrt</surname> <given-names>S. D.</given-names></name>, <name name-style="western"><surname>Clark</surname> <given-names>W. R.</given-names></name> <year>2003</year>. <article-title>Raccoons, coyotes, and reflections on the mesopredator release hypothesis.</article-title> <source>Wildlife Society Bulletin (1973–2006)</source> <volume>31</volume>(<issue>3</issue>):<fpage>836</fpage>–<lpage>842</lpage>. <ext-link ext-link-type="uri" xlink:href="https://www.jstor.org/stable/3784607" xlink:type="simple">https://www.jstor.org/stable/3784607</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref041"><label>41</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Shores</surname> <given-names>C.R.</given-names></name>, <name name-style="western"><surname>Dellinger</surname> <given-names>J. A.</given-names></name>, <name name-style="western"><surname>Newkirk</surname> <given-names>E. S.</given-names></name>, <name name-style="western"><surname>Kachel</surname> <given-names>S. M.</given-names></name>, and <name name-style="western"><surname>Wirsing</surname> <given-names>A. J.</given-names></name> (<year>2019</year>). <article-title>Mesopredators change temporal activity in response to a recolonizing apex predator</article-title>. <source>Behavioral Ecology</source>, <volume>30</volume>(<issue>5</issue>), <fpage>1324</fpage>–<lpage>1335</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/beheco/arz080" xlink:type="simple">https://doi.org/10.1093/beheco/arz080</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref042"><label>42</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Cove</surname> <given-names>M.V.</given-names></name>, <name name-style="western"><surname>Kays</surname> <given-names>R.</given-names></name>, <name name-style="western"><surname>Bontrager</surname> <given-names>H.</given-names></name>, <name name-style="western"><surname>Bresnan</surname> <given-names>C.</given-names></name>, <name name-style="western"><surname>Lasky</surname> <given-names>M.</given-names></name>, <name name-style="western"><surname>Frerichs</surname> <given-names>T.</given-names></name>, <etal>et al</etal>. <year>2021</year>. <source>SNAPSHOT USA 2019: a coordinated national camera trap survey of the United States</source>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/ecy.3353" xlink:type="simple">https://doi.org/10.1002/ecy.3353</ext-link>.</mixed-citation></ref>
+<ref id="pone.0288477.ref043"><label>43</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kays</surname> <given-names>R.</given-names></name>, <name name-style="western"><surname>Cove</surname> <given-names>M.V.</given-names></name>, <name name-style="western"><surname>Diaz</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Todd</surname> <given-names>K.</given-names></name>, <name name-style="western"><surname>Bresnan</surname> <given-names>C.</given-names></name>, <name name-style="western"><surname>Snider</surname> <given-names>M.</given-names></name>, <etal>et al</etal>. <year>2022</year>. <article-title>SNAPSHOT USA 2020: A second coordinated national camera trap survey of the United States during the COVID‐19 pandemic</article-title>. <source>Ecology</source> <volume>103</volume>(<issue>10</issue>): <fpage>e3775</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/ecy.3775" xlink:type="simple">10.1002/ecy.3775</ext-link></comment> <object-id pub-id-type="pmid">35661139</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref044"><label>44</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Fidino</surname> <given-names>M. A.</given-names></name>, <name name-style="western"><surname>Lehrer</surname> <given-names>E. W.</given-names></name>, <name name-style="western"><surname>Magle</surname> <given-names>S. B.</given-names></name> <year>2016</year>. <article-title>Habitat dynamics of the Virginia opossum in a highly urban landscape</article-title>. <source>The American Midland Naturalist</source> <volume>175</volume>:<fpage>155</fpage>–<lpage>167</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1674/0003-0031-175.2.155" xlink:type="simple">https://doi.org/10.1674/0003-0031-175.2.155</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref045"><label>45</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Dewitz</surname> <given-names>J.</given-names></name>, and <name name-style="western"><surname>Geological Survey</surname> <given-names>U.S.</given-names></name>, <year>2021</year>, <article-title>National Land Cover Database (NLCD) 2019 Products</article-title>. <source>2021: U.S. Geological Survey data release</source>, <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5066/P9KZCM54" xlink:type="simple">10.5066/P9KZCM54</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0288477.ref046"><label>46</label><mixed-citation publication-type="journal" xlink:type="simple"><collab>U.S. Geological Survey</collab>, <article-title>National Geospatial Technical Operations Center, 20230531</article-title>, <source>USGS National Boundary Dataset (NBD) (published 20230531) FileGDB: U.S. Geological Survey</source>.</mixed-citation></ref>
+<ref id="pone.0288477.ref047"><label>47</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Meredith</surname> <given-names>M.</given-names></name>, <name name-style="western"><surname>Ridout</surname> <given-names>M. S.</given-names></name> <year>2014</year>. <source>The overlap package. Central R Archive Network Online. KAR id:41474</source></mixed-citation></ref>
+<ref id="pone.0288477.ref048"><label>48</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rodriguez</surname> <given-names>J.T.</given-names></name>, <name name-style="western"><surname>Lesmeister</surname> <given-names>D.B.</given-names></name>, <name name-style="western"><surname>Levi</surname> <given-names>T.</given-names></name> <year>2021</year>. <article-title>Mesocarnivore landscape use along a gradient of urban, rural, and forest cover</article-title>. <source>PeerJ</source>, <volume>9</volume>:<fpage>e11083</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.7717/peerj.11083" xlink:type="simple">10.7717/peerj.11083</ext-link></comment> <object-id pub-id-type="pmid">33868809</object-id></mixed-citation></ref>
+<ref id="pone.0288477.ref049"><label>49</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Shedden</surname> <given-names>J. M.</given-names></name>, <name name-style="western"><surname>Bucklin</surname> <given-names>D. M.</given-names></name>, <name name-style="western"><surname>Quinn</surname> <given-names>N. M.</given-names></name>, <name name-style="western"><surname>Stapp</surname> <given-names>P.</given-names></name> <year>2020</year>. <article-title>Do coyotes eat Mesocarnivores in Southern California? A molecular genetic analysis</article-title>. <source>Proceedings of the Vertebrate Pest Conference</source> <volume>29</volume>(<issue>29</issue>):<fpage>64</fpage>–<lpage>69</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref050"><label>50</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lewis</surname> <given-names>J. S.</given-names></name>, <name name-style="western"><surname>Spaulding</surname> <given-names>S.</given-names></name>, <name name-style="western"><surname>Swanson</surname> <given-names>H.</given-names></name>, <name name-style="western"><surname>Keeley</surname> <given-names>W.</given-names></name>, <name name-style="western"><surname>Gramza</surname> <given-names>A. R.</given-names></name>, <name name-style="western"><surname>VandeWoude</surname> <given-names>S.</given-names></name>, <etal>et al</etal>. <year>2021</year>. <article-title>Human activity influences wildlife populations and activity patterns: implications for spatial and temporal refuges</article-title>. <source>Ecosphere</source>, <volume>12</volume>(<issue>5</issue>): <fpage>e03487</fpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/ecs2.3487" xlink:type="simple">https://doi.org/10.1002/ecs2.3487</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref051"><label>51</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Andelt</surname> <given-names>W.F.</given-names></name> <year>1985</year>. <article-title>Behavioral Ecology of Coyotes in South Texas.</article-title> <source>Wildlife Monographs</source> <volume>94</volume>:<fpage>3</fpage>–<lpage>45</lpage>. <ext-link ext-link-type="uri" xlink:href="http://www.jstor.org/stable/3830638" xlink:type="simple">http://www.jstor.org/stable/3830638</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref052"><label>52</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Chitwood</surname> <given-names>M.C.</given-names></name>, <name name-style="western"><surname>Lashley</surname> <given-names>M.A.</given-names></name>, <name name-style="western"><surname>Higdon</surname> <given-names>S.D.</given-names></name>, <name name-style="western"><surname>DePerno</surname> <given-names>C.S.</given-names></name>, <name name-style="western"><surname>Moorman</surname> <given-names>C.E.</given-names></name> <year>2020</year>. <article-title>Raccoon vigilance and activity patterns when sympatric with coyotes</article-title>. <source>Diversity</source> <volume>12</volume>(<issue>9</issue>):<fpage>341</fpage> <ext-link ext-link-type="uri" xlink:href="https://www.mdpi.com/1424-2818/12/9/341" xlink:type="simple">https://www.mdpi.com/1424-2818/12/9/341</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref053"><label>53</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gehrt</surname> <given-names>S. D.</given-names></name>, <name name-style="western"><surname>Brown</surname> <given-names>J. L.</given-names></name>, <name name-style="western"><surname>Anchor</surname> <given-names>C.</given-names></name> <year>2011</year>. <article-title>Is the urban coyote a misanthropic synanthrope? The case from Chicago</article-title>. <source>Cities and the Environment</source> <volume>4</volume>(<issue>1</issue>):<fpage>3</fpage>. <ext-link ext-link-type="uri" xlink:href="https://digitalcommons.lmu.edu/cate/vol4/iss1/3" xlink:type="simple">https://digitalcommons.lmu.edu/cate/vol4/iss1/3</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref054"><label>54</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Mims</surname> <given-names>D.M.</given-names></name>, <name name-style="western"><surname>Yasuda</surname> <given-names>S.A.</given-names></name>, <name name-style="western"><surname>Jordan</surname> <given-names>M.J.</given-names></name>, <year>2022</year>. <article-title>Contrasting activity times between raccoons (Procyon lotor) and Virginia oposums (Didelphis virginiana) in urban green spaces.</article-title> <source>Northwestern Naturalist</source> <volume>103</volume>(<issue>1</issue>): <fpage>63</fpage>–<lpage>75</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1898/1051-1733-103.1.63" xlink:type="simple">https://doi.org/10.1898/1051-1733-103.1.63</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref055"><label>55</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sargeant</surname> <given-names>A. B.</given-names></name>, <name name-style="western"><surname>Allen</surname> <given-names>S. H.</given-names></name> <year>1989</year>. <article-title>Observed interactions between coyotes and red foxes</article-title>. <source>Journal of Mammalogy</source>, <volume>70</volume>(<issue>3</issue>):<fpage>631</fpage>–<lpage>633</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref056"><label>56</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>DeGregorio</surname> <given-names>B. A.</given-names></name>, <name name-style="western"><surname>Gale</surname> <given-names>C.</given-names></name>, <name name-style="western"><surname>Lassiter</surname> <given-names>E.V.</given-names></name>, <name name-style="western"><surname>Massey</surname> <given-names>A.</given-names></name>, <name name-style="western"><surname>Roberts</surname> <given-names>C. P.</given-names></name>, <name name-style="western"><surname>Veon</surname> <given-names>J.T.</given-names></name> <year>2021</year>. <article-title>Nine‐banded armadillo (<italic>Dasypus novemcinctus</italic>) activity patterns are influenced by human activity.</article-title> <source>Ecology and Evolution</source> <volume>11</volume>(<issue>22</issue>): <fpage>15874</fpage>–<lpage>15881</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/ece3.8257" xlink:type="simple">https://doi.org/10.1002/ece3.8257</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref057"><label>57</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kamler</surname> <given-names>J. F.</given-names></name>, <name name-style="western"><surname>Gipson</surname> <given-names>P. S.</given-names></name> <year>2004</year>. <article-title>Survival and cause-specific mortality among furbearers in a protected area</article-title>. <source>The American Midland Naturalist</source> <volume>151</volume>(<issue>1</issue>): <fpage>27</fpage>–<lpage>34</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1674/0003-0031(2004)151[0027:SACMAF]2.0.CO;2" xlink:type="simple">https://doi.org/10.1674/0003-0031(2004)151[0027:SACMAF]2.0.CO;2</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref058"><label>58</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gese</surname> <given-names>E. M.</given-names></name>, <name name-style="western"><surname>Stotts</surname> <given-names>T. E.</given-names></name>, <name name-style="western"><surname>Grothe</surname> <given-names>S.</given-names></name> <year>1996</year>. <article-title>Interactions between coyotes and red foxes in Yellowstone National Park, Wyoming</article-title>. <source>Journal of Mammalogy</source>, <volume>77</volume>(<issue>2</issue>):<fpage>377</fpage>–<lpage>382</lpage>.</mixed-citation></ref>
+<ref id="pone.0288477.ref059"><label>59</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Schmid</surname> <given-names>F.</given-names></name>, <name name-style="western"><surname>Schmidt</surname> <given-names>A.</given-names></name> <year>2006</year>. <article-title>Nonparametric estimation of the coefficient of overlapping—theory and empirical application</article-title>. <source>Computational Statistics and Data Analysis</source> <volume>50</volume>(<issue>6</issue>): <fpage>1583</fpage>–<lpage>1596</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.csda.2005.01.014" xlink:type="simple">https://doi.org/10.1016/j.csda.2005.01.014</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref060"><label>60</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kasparian</surname> <given-names>M. A.</given-names></name>, <name name-style="western"><surname>Hellgren</surname> <given-names>E. C.</given-names></name>, <name name-style="western"><surname>Ginger</surname> <given-names>S. M.</given-names></name>, <name name-style="western"><surname>Levesqu</surname> <given-names>L. P.</given-names></name>, <name name-style="western"><surname>Clark</surname> <given-names>J. E.</given-names></name>, <name name-style="western"><surname>Winkelman</surname> <given-names>D. L.</given-names></name>, <etal>et al</etal>. <year>2004</year>. <article-title>Population characteristics of Virginia opossum in the cross timbers during raccoon reduction</article-title>. <source>The American Midland Naturalist</source> <volume>151</volume>(<issue>1</issue>):<fpage>154</fpage>–<lpage>163</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1674/0003-0031(2004)151[0154:PCOVOI]2.0.CO;2" xlink:type="simple">https://doi.org/10.1674/0003-0031(2004)151[0154:PCOVOI]2.0.CO;2</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref061"><label>61</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Coppes</surname> <given-names>J.</given-names></name>, <name name-style="western"><surname>Nopp-Mayr</surname> <given-names>U.</given-names></name>, <name name-style="western"><surname>Grünschachner-Berger</surname> <given-names>V.</given-names></name>, <name name-style="western"><surname>Storch</surname> <given-names>I.</given-names></name>, <name name-style="western"><surname>Suchant</surname> <given-names>R.</given-names></name>, <name name-style="western"><surname>Braunisch</surname> <given-names>V.</given-names></name> <year>2018</year>. <article-title>Habitat suitability modulates the response of wildlife to human recreation</article-title>. <source>Biological Conservation</source> <volume>227</volume>:<fpage>56</fpage>–<lpage>64</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.biocon.2018.08.018" xlink:type="simple">https://doi.org/10.1016/j.biocon.2018.08.018</ext-link></mixed-citation></ref>
+<ref id="pone.0288477.ref062"><label>62</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ridout</surname> <given-names>M.S.</given-names></name>, <name name-style="western"><surname>Linki</surname> <given-names>M.</given-names></name> <year>2009</year>. <article-title>Estimating overlap of daily activity patterns from camera trap data</article-title>. <source>Journal of Agricultural, Biological, and Environmental Statistics</source> <volume>14</volume>(<issue>3</issue>): <fpage>322</fpage>–<lpage>337</lpage>. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1198/jabes.2009.08038" xlink:type="simple">https://doi.org/10.1198/jabes.2009.08038</ext-link></mixed-citation></ref>
+</ref-list>
+</back>
+<sub-article article-type="aggregated-review-documents" id="pone.0288477.r001" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0288477.r001</article-id>
+<title-group>
+<article-title>Decision Letter 0</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Rouco</surname>
+<given-names>Carlos</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Carlos Rouco</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0288477" document-id-type="doi" document-type="article" id="rel-obj001" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>0</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">24 Feb 2023</named-content>
+</p>
+<p>PONE-D-22-35736</p>
+<p>Does daily activity overlap of three mesocarnivores vary based on human development?</p>
+<p>PLOS ONE</p>
+<p>Dear Dr. unit,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Apr 10 2023 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:</p>
+<p><list list-type="bullet"> <list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item> <list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item> <list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list></p>
+<p>If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Carlos Rouco, PhD</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>When submitting your revision, we need you to address these additional requirements.</p>
+<p>1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at</p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf</ext-link> and</p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf</ext-link></p>
+<p>2. Thank you for stating the following in the Acknowledgments Section of your manuscript:</p>
+<p>“Thanks to the University of Arkansas Dept of Biological Sciences for student support and to Arkansas Game and Fish Commission for funding this project under cooperative agreement No. 1434-04HQRU1567.”</p>
+<p>We note that you have provided additional information within the Acknowledgements Section that is not currently declared in your Funding Statement. Please note that funding information should not appear in the Acknowledgments section or other areas of your manuscript. We will only publish funding information present in the Funding Statement section of the online submission form.</p>
+<p>Please remove any funding-related text from the manuscript and let us know how you would like to update your Funding Statement. Currently, your Funding Statement reads as follows:</p>
+<p>“The authors received no specific funding for this work.”</p>
+<p>Please include your amended statements within your cover letter; we will change the online submission form on your behalf.</p>
+<p>3. Please note that in order to use the direct billing option the corresponding author must be affiliated with the chosen institute. Please either amend your manuscript to change the affiliation or corresponding author, or email us at <email xlink:type="simple">plosone@plos.org</email> with a request to remove this option.</p>
+<p>4. In your Data Availability statement, you have not specified where the minimal data set underlying the results described in your manuscript can be found. PLOS defines a study's minimal data set as the underlying data used to reach the conclusions drawn in the manuscript and any additional data required to replicate the reported study findings in their entirety. All PLOS journals require that the minimal data set be made fully available. For more information about our data policy, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability</ext-link>.</p>
+<p>Upon re-submitting your revised manuscript, please upload your study’s minimal underlying data set as either Supporting Information files or to a stable, public repository and include the relevant URLs, DOIs, or accession numbers within your revised cover letter. For a list of acceptable repositories, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories</ext-link>. Any potentially identifying patient information must be fully anonymized.</p>
+<p>Important: If there are ethical or legal restrictions to sharing your data publicly, please explain these restrictions in detail. Please see our guidelines for more information on what we consider unacceptable restrictions to publicly sharing data: <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions</ext-link>. Note that it is not acceptable for the authors to be the sole named individuals responsible for ensuring data access.</p>
+<p>We will update your Data Availability statement to reflect the information you provide in your cover letter.</p>
+<p>Additional Editor Comments:</p>
+<p>Dear Authors,</p>
+<p>I agree with the two reviewers that the MS can be improved. To ensure the Editor and Reviewers will be able to recommend that your revised manuscript is accepted, please pay careful attention to each of the comments that have been pasted underneath this email, and in particular those ised by Reviwer 1. This way we can avoid future rounds of clarifications and revisions, moving swiftly to a decision.</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Partly</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: PLoS ONE Review:</p>
+<p>I thank the editor and authors for the opportunity to review this manuscript. I hope the authors find my review both helpful and constructive. I’ve organized this review by section, where I first give my general comments followed by more-specific line comments.</p>
+<p>In this study, the authors investigate whether the temporal overlap of three mesocarnivores (coyote, Virginal opossum, and northern raccoon) varies in relation to human development by utilizing the large Snapshot USA datasets from 2019 and 2020. In general, they find that although species-specific responses to development occur, the majority of activity for all three species remains relatively nocturnal and the resultant overlap between species pairs does not significantly change across development levels. The authors conclude that competitive or predatory pressures between the three species are insufficient in eliciting a behavioral response across a gradient of human development.</p>
+<p>In general, I very much enjoyed this manuscript, and the merit for such a study is obvious. The methods and questions were succinct and well-developed, and the paper had a nice flow throughout. However, especially with a dataset as large as Snapshot USA, I feel like the authors could go further, and I urge them to do so in order to publish this work in a higher-impact journal such as this. Specifically, I’m curious why the authors selected only three mesocarnivores from the Snapshot USA dataset. I think more should be included (e.g., bobcat, red fox, grey fox, striped skunk), especially since recent work has shown connections between the species mentioned above and coyotes, in particular (citations provided below). Furthermore, the Snapshot USA dataset includes a decent amount of data on larger apex predators (e.g., wolf, puma, black bear), and I would be extremely curious to include these species in this study as well. Taking a look at how different species assemblages may affect the overlap between species pairs, and whether or not coyote elicit the same behavioral response as something like puma or black bear across human development, while utilizing more of the data that Snapshot has to offer (only 82 of the nearly 4,000 sites across the total dataset were included), would make this publication more relevant to the general readership of PLoS ONE.</p>
+<p>ABSTRACT</p>
+<p>General Comments</p>
+<p>The last sentence speaks to there being insufficient evidence that competitive or predatory pressures produced a behavioral response in the three species’ activity patterns. However, it says nothing about the relation to human development. As the change in activity in relation to human development was a central theme throughout the manuscript, it seems remiss to exclude any reference to it in the concluding marks of the abstract. As the information is currently presented, the relation to human development seems like an afterthought.</p>
+<p>INTRODUCTION</p>
+<p>General Comments</p>
+<p>There is quite a bit of information in this introduction about predator-prey interactions. This seems completely unnecessary, as this is never studied herein and only alluded to once throughout. Furthermore, much of these references allude to the presence of apex predators on prey species, another point that is not hit on in this particular study. I either recommend: a) removing references to predator-prey interactions when unnecessary and replacing it with background information on co-occurrence between sympatric predators, or b) revamping the study like mentioned above to include apex predators and rewording the sections to discuss the impact they have on more subordinate carnivores.</p>
+<p>Minor Comments</p>
+<p>Lines 64-68: These statements need a references. Recent work (see Green et al., 2022 in Global Ecology and Conservation; Hubbard et al., 2022 in Biodiversity and Conservation; and Allen et al., 2022 in Global Ecology and Conservation) may better place them in the context of current work.</p>
+<p>METHODS</p>
+<p>General Comments</p>
+<p>As discussed above, I feel like the authors should go deeper than they do, especially when utilizing a dataset as rich as the Snapshot USA one (incorporating data from less than 5% of sites seems like a disservice). There are many other mesocarnivores in the U.S. that occupy urban environments and have relationships with coyote and other mesocarnivores (e.g., see Allen et al., 2022 in Diversity in Distributions, which uses the entire Snapshot dataset). For example, it would be interesting to investigate the link between coyote and red fox, especially in relation to urban development, or the relationship between species such as skunk, raccoon, and red fox, as these species seemingly share very similar ecological niches. Furthermore, by looking at different assemblages of mesopredators across the U.S., the authors can leverage the full power of the Snapshot dataset.</p>
+<p>Lastly, descriptive statistics of the sites included in analysis, organized by strata, would be extremely beneficial. How many sites were there in each category? What was the spatial distribution of each category? What climates were included? What was the average precipitation and temperature across sites? Etc.</p>
+<p>Minor Comments</p>
+<p>Lines 149-154: So Overlap coefficients were calculated on a site-by-site basis? In that case, was the error in site-specific estimates incorporated into the second stage of the analysis? It says that the site-specific confidence intervals were calculated, but I don’t see any reference as to how they were used or propagated though the second stage of modeling. I’m guessing the mean or median estimate from each site was used during the Kruskal-Wallis and Dunn tests. This information should be explicitly specified. Furthermore, if the inherent bias included in using an estimate from one model as an explanatory variable in another model (i.e., doing statistics on statistics) was not explicitly accounted for, than this needs to be mentioned as a caveat in the discussion or later in the methods.</p>
+<p>RESULTS</p>
+<p>General Comments</p>
+<p>All four figures need some work. Specifically, both the x and y axes and the legend are too small, and there is a lot of unnecessary white space. It’s also pretty difficult to discern if any of the plotted differences are statistically significant. If possible, plotting the points as either different colors based on statical differences, or, more appropriately, using a letter designation above each comparison would help clarify this.</p>
+<p>There needs to be a map of the study area provided, including sites that were included in analysis. With the current presentation, the reader has no idea where these data were gathered, other than it was across the U.S. A map would help contextualize the extent of these species’ ranges included in analysis, as well as the spatial configuration of sites.</p>
+<p>Minor Comments</p>
+<p>157-158: Does this mean 82 sites per year or 82 sites across years?</p>
+<p>157-159: What was the total sampling effort (i.e., total camera days across the 82 sites)?</p>
+<p>DISCUSSION</p>
+<p>General Comments</p>
+<p>Typically, the first paragraph of the discussion section summarizes the main findings of the study and presents overarching takeaways that are then expanded on in further detail in the ensuing paragraphs. I particularly like this format, as I believe it is the easiest for readers to follow. Although it is not necessary, and is simply a matter of personal opinion, I urge the authors to consider reworking their first paragraph, at least.</p>
+<p>Minor Comments</p>
+<p>Lines 239-242: This line really reiterates the need for expanding this current study to incorporate the entirety of the Snapshot USA dataset. This is an extremely intriguing question, and identifying where and why species interactions occur or don’t occur would add great value to this work.</p>
+<p>Lines 250-252: Again, this seems to signal rationale for this study to expand on this work and look large-scale with the intent of identifying why these differences occur.</p>
+<p>Lines 252-255: Can we really say range wide here? Seems like quite a stretch.</p>
+<p>Lines 258-260: This variation explained and summarized, either in a supplemental table or in the results section.</p>
+<p>Lines 258- 269: I see no reason why this study cannot be the answer to the future research the authors call for.</p>
+<p>Reviewer #2: I found this paper interesting, and I think it will make a good contribution to the Plos One journal. I do however have some comments (mostly minor) which I would like addressed. The majority of comments are attached in the document, but the main points I will highlight here;</p>
+<p>�<!--  --> There is a lack of information in this paper regarding the specific habitats and areas that camera data was collected. I think this is important to summarize, even if only into broad categories. Was the majority of data collected near towns? Agricultural areas? Forests? The use of the housing unit density index alone does not provide any of this info.</p>
+<p>�<!--  --> I am not convinced that the housing unit density was the best metric to test for temporal differences between species. I would like to see more argument why this was used over other metrics of human development.</p>
+<p>�<!--  --> Again, following on from the lack of habitat classifications, how common were agricultural areas in this study? In theory these would have low housing density, however meso-carnivores can have particularly high levels of human persecution in these areas, which could impact temporal activity, but not align with the low development idea. I would like to see some clarification on this.</p>
+<p>�<!--  --> I think it would be good for the authors to create a simple study map of the sites used in the analysis from Snapshot USA. I am curious to see the distribution of this data.</p>
+<p>�<!--  --> The figures are blurry and need to be improved. I suggest also moving the axis titles further away from the axis.</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: No</p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+<supplementary-material id="pone.0288477.s003" mimetype="application/pdf" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.s003" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">PONE-D-22-35736.pdf</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0288477.r002">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0288477.r002</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 0</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0288477" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj002" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0288477.r001" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">12 Jun 2023</named-content>
+</p>
+<p>Thank you for your thorough and thoughtful review of our manuscript. Detailed responses to the specific reviewer comments can be found in the Reviewer Response Document. We appreciate the opportunity to resubmit our manuscript to PLOS ONE.</p>
+<supplementary-material id="pone.0288477.s004" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0288477.s004" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">Reviewer Response Document_McTigue et al..docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="aggregated-review-documents" id="pone.0288477.r003" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0288477.r003</article-id>
+<title-group>
+<article-title>Decision Letter 1</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Rouco</surname>
+<given-names>Carlos</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Carlos Rouco</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0288477" document-id-type="doi" document-type="article" id="rel-obj003" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">28 Jun 2023</named-content>
+</p>
+<p>Does daily activity overlap of seven mesocarnivores vary based on human development?</p>
+<p>PONE-D-22-35736R1</p>
+<p>Dear Dr. unit,</p>
+<p>We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.</p>
+<p>Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.</p>
+<p>An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at <ext-link ext-link-type="uri" xlink:href="http://www.editorialmanager.com/pone/" xlink:type="simple">http://www.editorialmanager.com/pone/</ext-link>, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at <email xlink:type="simple">authorbilling@plos.org</email>.</p>
+<p>If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>Kind regards,</p>
+<p>Carlos Rouco, PhD</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Additional Editor Comments (optional):</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.<!-- </font> --></p>
+<p>Reviewer #1: All comments have been addressed</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: I'd like to congratulate the authors on a very thorough revision, and I really appreciate the time and effort they spent on addressing my initial concerns. I now strongly feel that the manuscript is ready for publication. Great work!</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->7. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: No</p>
+<p>**********</p>
+</body>
+</sub-article>
+<sub-article article-type="editor-report" id="pone.0288477.r004" specific-use="acceptance-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0288477.r004</article-id>
+<title-group>
+<article-title>Acceptance letter</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Rouco</surname>
+<given-names>Carlos</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Carlos Rouco</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0288477" document-id-type="doi" document-type="article" id="rel-obj004" link-type="peer-reviewed-article"/>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">4 Jul 2023</named-content>
+</p>
+<p>PONE-D-22-35736R1 </p>
+<p>Does daily activity overlap of seven mesocarnivores vary based on human development? </p>
+<p>Dear Dr. unit:</p>
+<p>I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now with our production department. </p>
+<p>If your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>If we can help with anything else, please email us at <email xlink:type="simple">plosone@plos.org</email>. </p>
+<p>Thank you for submitting your work to PLOS ONE and supporting open access. </p>
+<p>Kind regards, </p>
+<p>PLOS ONE Editorial Office Staff</p>
+<p>on behalf of</p>
+<p>Dr. Carlos Rouco </p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+</body>
+</sub-article>
+</article>
