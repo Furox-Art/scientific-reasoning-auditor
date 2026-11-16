@@ -22,6 +22,14 @@ Candidates retain exact source character ranges, lines, quotes and raw/extracted
 source hashes. Recognized inline `$...$` or single-line `\[...\]` equations
 receive proposed symbolic checks when the restricted grammar is supported.
 Common t/F/z/chi2 statistic reports receive proposed rounding-aware checks.
+Python 0.10.1 also recovers uppercase P, Unicode minus signs and chi-square
+labels such as `χ²`, `χ^(2)` and `X^(2)`, including separately printed
+`df = ...`. Every supported triplet in a paragraph receives its own exact
+source span. Unresolved p mentions elsewhere in that paragraph remain visible.
+Comma decimal notation, conflicting duplicate df and unsupported relations do
+not receive a silently repaired numeric input. All proposed tails and df
+precision remain unknown; a chi-square-looking label does not identify the
+original statistical procedure or establish its reference/correction validity.
 Assumption sentences, Markdown tables and figure references/captions receive
 explicit review candidates. Fenced code is ignored without shifting offsets.
 

@@ -26,3 +26,24 @@ test('declared direction and fractional df survive the real Node transport', asy
     assert.deepEqual(fs.readFileSync(spec),before);
   } finally { fs.rmSync(root,{recursive:true,force:true}); }
 });
+
+test('source statistic preparation retains separate df and every literal result', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sra-preparation-'));
+  try {
+    const paper = path.join(root, 'paper.md');
+    const content = 'X^(2) = 7.66, df = 2, P = 0.02; X²(2) = 11.54, P < .01';
+    fs.writeFileSync(paper, content);
+    const response = await sra.prepareInspection(paper, {stdio:'pipe', out:path.join(root, 'prepared')});
+    assert.equal(response.code, 0, response.stderr);
+    const report = JSON.parse(fs.readFileSync(path.join(root, 'prepared.json'), 'utf8'));
+    const rows = report.candidates.filter(row => row.suggested_check);
+    assert.deepEqual(rows.map(row => row.suggested_check.statistic), ['7.66', '11.54']);
+    assert.equal(report.checks_executed, false);
+    for (const row of rows) {
+      assert.equal(content.slice(row.start, row.end), row.source_quote);
+      assert.equal(row.suggested_check.alternative, 'unknown');
+      assert.equal(row.suggested_check.df_precision, 'unknown');
+    }
+    assert.equal(fs.readFileSync(paper, 'utf8'), content);
+  } finally { fs.rmSync(root, {recursive:true, force:true}); }
+});

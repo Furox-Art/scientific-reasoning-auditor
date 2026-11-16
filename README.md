@@ -88,6 +88,12 @@ source files and wheel are also preserved in the
 [reference-validation release](https://github.com/Furox-Art/scientific-reasoning-auditor/releases/tag/reference-validation-20261116).
 The 0.9.1 packaging patch preserved the numerical rules and historical scores.
 
+Python 0.10.1 / npm 0.3.1 improve source-statistic input preparation: separately
+printed df, uppercase P, common chi-square notation and multiple triplets per
+paragraph retain exact source spans. Drafts keep unknown assumptions and never
+execute automatically. See [release notes](docs/releases/0.10.1.md); the original
+0.10.0 real-paper pilot and its scientific-validation limits remain unchanged.
+
 Python 0.10.0 adds declared one-sided t/z statistic consistency and positive
 fractional df. Unknown direction or unresolved df precision abstains.
 Declared exact df also abstain when binary-float conversion loses their value.

@@ -6,8 +6,38 @@ from bisect import bisect_right
 from sra.document import without_fenced_code
 from sra.toolkit_spec import digest,number
 
-_NUM=r'[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?'
-_REPORTED=re.compile(r'\b(t|F|z|chi2)\s*(?:\(\s*('+_NUM+r'(?:\s*,\s*'+_NUM+r')?)\s*\))?\s*=\s*('+_NUM+r')\s*[,;]\s*p\s*([=<>])\s*('+_NUM+r')')
+_NUM=r'[+−-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+−-]?\d+)?'
+_LABEL=r'(?:chi2|[χΧX](?:²|\^\(2\)|\^2|2)|[tFz])'
+_DFS=_NUM+r'(?:\s*,\s*'+_NUM+r')?'
+_REPORTED=re.compile(
+    r'(?<!\w)(?P<name>'+_LABEL+r')(?!\w)\s*'
+    r'(?:\(\s*(?P<inline_df>'+_DFS+r')\s*\)\s*)?=\s*'
+    r'(?P<value>'+_NUM+r')(?![\w.])\s*[,;]\s*'
+    r'(?:df\s*=\s*(?P<suffix_df>'+_DFS+r')\s*[,;]\s*)?'
+    r'p\s*(?P<relation>[=<>])\s*(?P<p>'+_NUM+r')(?!\w|\.\w|,\s*\d)', re.I)
+_STAT_CUE=re.compile(r'\b(?:t|F|r|z|chi2)\s*(?:\([^\n]{0,30}\))?\s*=\s*[+−-]?(?:\d|\.)|\bp\s*[=<>≤≥]\s*\.?\d', re.I)
+
+
+def _reported_draft(match, identifier):
+    """Recover literal quantities; never infer a tail, exact df or test validity."""
+    from sra.extended_inspection import prepare_extra
+    name=match['name'].casefold()
+    name={'t':'t','f':'F','z':'z'}.get(name,'chi2')
+    # Duplicate df declarations are ambiguous even if their printed values agree.
+    if match['inline_df'] is not None and match['suffix_df'] is not None:
+        return None
+    dfs=match['inline_df'] or match['suffix_df']
+    try:
+        values=[number(v.strip().replace('−','-')) for v in dfs.split(',')] if dfs else []
+        check={'id':identifier,'kind':'statistic_consistency','test':name,
+               'df':[int(v) if v==v.to_integral_value() else str(v) for v in values],
+               'statistic':match['value'].replace('−','-'),
+               'reported_p':match['p'].replace('−','-'),'relation':match['relation'],
+               'alternative':'unknown','df_precision':'unknown' if dfs else 'exact'}
+        prepare_extra(check,None)
+    except ValueError:
+        return None
+    return check
 
 
 def prepare_inspection(document):
@@ -43,21 +73,15 @@ def prepare_inspection(document):
             continue
         if re.search(r'\b(?:assume|assuming|assumption|provided that)\b',line,re.I):
             add('assumption',start,start+len(line.rstrip('\r\n')))
-        if re.search(r'\b(?:t|F|r|z|chi2)\s*(?:\([^\n]{0,30}\))?\s*=\s*[+-]?(?:\d|\.)|\bp\s*[=<>]\s*\.?\d',line):
-            match=_REPORTED.search(line)
-            suggestion=None
-            if match:
-                name,dfs,value,relation,p=match.groups()
-                from sra.extended_inspection import prepare_extra
-                try:
-                    suggestion={'id':f'statistic_{len(candidates)+1}','kind':'statistic_consistency','test':name,
-                                'df':[int(number(v.strip())) if number(v.strip())==number(v.strip()).to_integral_value() else v.strip() for v in dfs.split(',')] if dfs else [],
-                                'statistic':value,'reported_p':p,'relation':relation,'alternative':'unknown',
-                                'df_precision':'unknown' if dfs else 'exact'}
-                    prepare_extra(suggestion,None)
-                except ValueError:
-                    suggestion=None
-            add('statistic',start,start+len(line.rstrip('\r\n')),suggested_check=suggestion)
+        remainder=list(line)
+        for match in _REPORTED.finditer(line):
+            suggestion=_reported_draft(match,f'statistic_{len(candidates)+1}')
+            add('statistic',start+match.start(),start+match.end(),suggested_check=suggestion)
+            remainder[match.start():match.end()]=' '*(match.end()-match.start())
+        # Preserve unresolved mentions elsewhere in the paragraph; a recovered
+        # triplet must not hide another p-value whose inputs are incomplete.
+        if _STAT_CUE.search(''.join(remainder)):
+            add('statistic',start,start+len(line.rstrip('\r\n')),suggested_check=None)
         if re.search(r'\b(?:Fig(?:ure)?\.?\s+\d+)',line,re.I):
             add('figure',start,start+len(line.rstrip('\r\n')),visual_interpretation_verified=False)
         for match in re.finditer(r'\$([^$\n]{1,256})\$|\\\[([^\n]{1,256})\\\]',line):
@@ -95,6 +119,7 @@ def prepare_inspection(document):
             'extracted_text_sha256':digest(text),'checks_executed':False,'candidates':candidates,
             'proposed_toolkit_spec':specs[0] if len(specs)==1 else None,'proposed_toolkit_specs':specs,
             'limitations':['Candidates require confirmation before use as structured checks.',
+                           'Chi-square-looking notation does not establish the original test, reference distribution or p-value correction.',
                            'Inline math, line-based assumptions/statistics, Markdown tables and figure mentions are bounded syntax cues.',
                            'No automatic LaTeX/OCR equation semantics, raster figure interpretation or table-to-data mapping is certified.']}
 
