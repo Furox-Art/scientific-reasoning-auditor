@@ -1,0 +1,56 @@
+{
+  "schema_version": "source-statistic-development/1.0",
+  "source": "../multifield-20261116/texts-v2/0288477.md",
+  "source_sha256": "b1285f4f9856fcde30cab651d5f6ce1cf5c4b4be0704bdcae14f5c470a3acb58",
+  "doi": "10.1371/journal.pone.0288477",
+  "cases": [
+    {
+      "id": "real_literal_1",
+      "source_quote": "X^(2) = 7.66, df = 2, P = 0.02",
+      "start": 15426,
+      "end": 15456,
+      "expected": {
+        "test": "chi2",
+        "statistic": "7.66",
+        "df": [
+          2
+        ],
+        "reported_p": "0.02",
+        "relation": "="
+      },
+      "scientific_error_label": null
+    },
+    {
+      "id": "real_literal_2",
+      "source_quote": "X^(2) = 11.54, df = 2, P < 0.01",
+      "start": 15631,
+      "end": 15662,
+      "expected": {
+        "test": "chi2",
+        "statistic": "11.54",
+        "df": [
+          2
+        ],
+        "reported_p": "0.01",
+        "relation": "<"
+      },
+      "scientific_error_label": null
+    },
+    {
+      "id": "real_literal_3",
+      "source_quote": "X^(2) = 4.72, df = 2, P = 0.10",
+      "start": 16252,
+      "end": 16282,
+      "expected": {
+        "test": "chi2",
+        "statistic": "4.72",
+        "df": [
+          2
+        ],
+        "reported_p": "0.10",
+        "relation": "="
+      },
+      "scientific_error_label": null
+    }
+  ]
+}
