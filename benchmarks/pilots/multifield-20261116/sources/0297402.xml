@@ -1,0 +1,1178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-22-17380</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Diagnostic medicine</subject><subj-group><subject>Diagnostic radiology</subject><subj-group><subject>Magnetic resonance imaging</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Research and analysis methods</subject><subj-group><subject>Imaging techniques</subject><subj-group><subject>Diagnostic radiology</subject><subj-group><subject>Magnetic resonance imaging</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Radiology and imaging</subject><subj-group><subject>Diagnostic radiology</subject><subj-group><subject>Magnetic resonance imaging</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject><subj-group><subject>Myometrium</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject><subj-group><subject>Myometrium</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Research and analysis methods</subject><subj-group><subject>Research assessment</subject><subj-group><subject>Reproducibility</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject><subj-group><subject>Endometrium</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject><subj-group><subject>Endometrium</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Computer and information sciences</subject><subj-group><subject>Software engineering</subject><subj-group><subject>Computer software</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Engineering and technology</subject><subj-group><subject>Software engineering</subject><subj-group><subject>Computer software</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Research and analysis methods</subject><subj-group><subject>Research assessment</subject></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Radiology and imaging</subject></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Reproductive system</subject><subj-group><subject>Uterus</subject></subj-group></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>Inter- and intra-rater reproducibility of quantitative T1 measurement using semiautomatic region of interest placement in myometrium</article-title>
+<alt-title alt-title-type="running-head">Reproducibility of myometrial T1 value</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0003-2078-4888</contrib-id>
+<name name-style="western">
+<surname>Nakagawa</surname>
+<given-names>Sadahiro</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Uno</surname>
+<given-names>Takahiro</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Ishitoya</surname>
+<given-names>Shunta</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Takabayashi</surname>
+<given-names>Eriko</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Oya</surname>
+<given-names>Akiko</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Kubota</surname>
+<given-names>Wakako</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" corresp="yes" xlink:type="simple">
+<name name-style="western">
+<surname>Okizaki</surname>
+<given-names>Atsutaka</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Division of Radiology, Asahikawa Medical University Hospital, Asahikawa, Japan</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>Department of Radiology, Asahikawa Medical University, Asahikawa, Japan</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Faggioni</surname>
+<given-names>Lorenzo</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>University of Pisa, ITALY</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The other authors have no conflict of interest. This does not alter our adherence to PLOS ONE policies on sharing data and materials.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">okizaki@asahikawa-med.ac.jp</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>26</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0297402</elocation-id>
+<history>
+<date date-type="received">
+<day>17</day>
+<month>6</month>
+<year>2022</year>
+</date>
+<date date-type="accepted">
+<day>4</day>
+<month>1</month>
+<year>2024</year>
+</date>
+</history>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Nakagawa et al</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0297402"/>
+<abstract>
+<sec id="sec001">
+<title>Purpose</title>
+<p>This study aimed to investigate the inter- and intraobserver reproducibility of quantitative T1 (qT1) measurements using manual and semiautomatic region of interest (ROI) placements. We hypothesized the usefulness of the semiautomatic method, which utilizes a three-dimensional (3D) anatomical relationship between the myometrium and other tissues, for minimizing ROI placement variation, thereby improving qT1 reproducibility compared to the manual approach. The semiautomatic approach, which considered anatomical relationships, was expected to enhance reproducibility by reducing ROI placement variabilities.</p>
+</sec>
+<sec id="sec002">
+<title>Materials and methods</title>
+<p>This study recruited 23 healthy female volunteers. Data with variable flip angle (VFA) and inversion recovery were acquired using 3D-spoiled gradient echo and spin echo sequences, respectively. T1 maps were generated with VFA. Manual and semiautomatic ROI placements were independently conducted. Mean qT1 values were calculated from the T1 maps using the corresponding pixel values of the myometrial ROI. Inter- and intraobserver reproducibility of qT1 values was investigated. The inter- and intraobserver reproducibility of qT1 values was evaluated by calculating the coefficient of variation (CoV). Further, reproducibility was evaluated with inter- and intraobserver errors and intraclass correlation coefficients (ICCs). Bland–Altman analysis was utilized to compare the results, estimate bias, and determine the limits of agreement.</p>
+</sec>
+<sec id="sec003">
+<title>Results</title>
+<p>The mean inter- and intraobserver CoV of the qT1 values for semiautomatic ROI placement was significantly lower than those for manual ROI placement (<italic>p</italic> &lt; 0.05 and <italic>p</italic> &lt; 0.01, respectively). ICCs for semiautomatic ROI placement were greater than those for manual ROI placement. Further, the mean inter- and intraobserver errors for semiautomatic ROI placement were significantly lower than those for manual ROI placement (<italic>p</italic> &lt; 0.05 and <italic>p</italic> &lt; 0.01, respectively).</p>
+</sec>
+<sec id="sec004">
+<title>Conclusion</title>
+<p>Semiautomatic ROI placement demonstrated high reproducibility of qT1 measurements compared with manual methods. Semiautomatic ROI placement may be useful for evaluating uterine qT1 with high reproducibility.</p>
+</sec>
+</abstract>
+<funding-group>
+<award-group id="award001">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/100015377</institution-id>
+<institution>Nihon Medi-Physics</institution>
+</institution-wrap>
+</funding-source>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Okizaki</surname>
+<given-names>Atsutaka</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<award-group id="award002">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/501100019949</institution-id>
+<institution>FUJIFILM Toyama Chemical</institution>
+</institution-wrap>
+</funding-source>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Okizaki</surname>
+<given-names>Atsutaka</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<funding-statement>Atsutaka Okizaki received Research funding of Nihon Medi-physics Co. and FUJIFILM Toyama Chemical Co., Ltd. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="3"/>
+<table-count count="2"/>
+<page-count count="12"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>The minimal dataset underlying the results described in this study are within the manuscript and its supporting information files. The source code analysis of Microsoft Visual Studio 2010 image analysis code and MATLAB, along with an example image that supports the findings of this study, has been openly published on Zenodo at [<ext-link ext-link-type="uri" xlink:href="https://zenodo.org/deposit?page=1&amp;size=20" xlink:type="simple">https://zenodo.org/deposit?page=1&amp;size=20</ext-link>]. Additionally, any other data required to fully replicate the reported study findings can be obtained by contacting the corresponding author upon reasonable request.</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec005" sec-type="intro">
+<title>Introduction</title>
+<p>Magnetic resonance imaging (MRI) data quantitative image analysis may be useful for comparing subjects. Quantitative T1 (qT1), T2, and apparent diffusion coefficient values have been utilized to investigate various diseases [<xref ref-type="bibr" rid="pone.0297402.ref001">1</xref>–<xref ref-type="bibr" rid="pone.0297402.ref004">4</xref>]. Quantitative image analysis has the advantage of better tissue identification and classification compared with the visual assessment of traditional T1- and T2-weighted images [<xref ref-type="bibr" rid="pone.0297402.ref004">4</xref>–<xref ref-type="bibr" rid="pone.0297402.ref006">6</xref>]. QT1 values have been extensively used to study the central nervous system over the past several decades [<xref ref-type="bibr" rid="pone.0297402.ref007">7</xref>–<xref ref-type="bibr" rid="pone.0297402.ref010">10</xref>].</p>
+<p>Davenport et al. revealed qT1, using dynamic contrast-enhanced MRI with variable flip angle (VFA) in patients with uterine myoma, to be crucial for characterizing the lesion and monitoring drug effects [<xref ref-type="bibr" rid="pone.0297402.ref011">11</xref>]. Dominant leiomyoma qT1 measures were used to predict uterine and dominant leiomyoma size reductions after uterine artery embolization (UAE) [<xref ref-type="bibr" rid="pone.0297402.ref012">12</xref>].</p>
+<p>QT1 values vary based on various factors, including magnetic field strength, imaging sequence, and patient characteristics [<xref ref-type="bibr" rid="pone.0297402.ref013">13</xref>,<xref ref-type="bibr" rid="pone.0297402.ref014">14</xref>]. Therefore, each institution must define reference values for standardization. In principle, these reference values would require high reproducibility for quantitative measurements. QT1 values sometimes vary, based on the location, shape, and area of the region of interest (ROI) when the ROI is manually set. Heye et al. revealed that semiautomatic ROI placement enhanced the reproducibility of pharmacokinetic parameters; however, the method is only available using dynamic enhanced MRI [<xref ref-type="bibr" rid="pone.0297402.ref015">15</xref>]. Chapiro et al. emphasized the usefulness of semiautomated three-dimensional (3D) tumor segmentation but noted the necessity of acquiring contrast-enhanced T1-weighted images [<xref ref-type="bibr" rid="pone.0297402.ref016">16</xref>]. Highly reproducible ROI placement without the need for a contrast agent is preferable for quantitative MRI.</p>
+<p>Therefore, we developed a semiautomatic myometrial ROI placement method without a contrast agent. We hypothesized that a semiautomatic method, using a 3D anatomical relationship between the myometrium and endometrium, may be useful for minimizing variation by manual ROI placements and improving ROI placement reproducibility. This study aimed to investigate the inter- and intraobserver reproducibility of qT1 measurements using manual and semiautomatic ROI placements.</p>
+</sec>
+<sec id="sec006" sec-type="materials|methods">
+<title>Materials and methods</title>
+<sec id="sec007">
+<title>Subjects</title>
+<p>Our institutional research ethics committee at Asahikawa Medical University approved the study protocol following the principles of the Declaration of Helsinki. All subjects were informed regarding the content of the study and signed written informed consent. From May 2018 to April 2019, 56 subjects underwent pelvic MR imaging, incorporating VFA for qT1 measurements in our hospital.</p>
+<p>This study excluded subjects who met the following exclusion criteria: (a) subjects who presented with uterine mass lesions (n = 5), (b) subjects who had misregister between inversion recovery (IR) and each VFA image (n = 13), and (c) subjects who observed motion artifacts in the spoiled gradient recalled echo (SPGR) image acquired for qT1 with VFA (n = 15). Our study enrolled 23 healthy women volunteers (age range: 22–51 years; mean age ± standard deviation [SD]: 33 ± 11 years).</p>
+</sec>
+<sec id="sec008">
+<title>Pelvic MRI</title>
+<p>All pelvic MRI data were acquired using a 3-T scanner (Discovery MR750w; GE Healthcare, Waukesha, WI, USA). Two radiologists with 18 and 3 years of radiological experience, respectively, performed visual examinations to confirm that the subjects did not have mass lesions in the pelvic MRIs (T2-weighted image, T1-weighted image, and diffusion-weighted image). Any disagreements in interpretation were resolved by consensus following the discussion. Radiologists diagnosed all enrolled subjects as normal.</p>
+</sec>
+<sec id="sec009">
+<title>Magnetic resonance pulse sequences</title>
+<p><xref ref-type="table" rid="pone.0297402.t001">Table 1</xref> summarizes the MR pulse sequences used for the IR and VFA qT1 measurements.</p>
+<table-wrap id="pone.0297402.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0297402.t001</object-id>
+<label>Table 1</label> <caption><title>MR pulse sequences.</title></caption>
+<alternatives>
+<graphic id="pone.0297402.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="justify">Parameter</th>
+<th align="justify">IR<break/>TSE</th>
+<th align="justify">VFA for qT1 measurements<break/>3D-SPGR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Acquisition plane<break/>TR (ms)<break/>TE (ms)<break/>FA (°)<break/>FOV (cm)<break/>NEX<break/>Matrix (Frequency)<break/>Matrix (Phase)<break/>TI (ms)</td>
+<td align="left">Oblique<break/>7800<break/>10<break/>180<break/>25<break/>1<break/>256<break/>256<break/>200</td>
+<td align="left">Oblique<break/>5.0–5.6<break/>2.5<break/>4 and 18<break/>25<break/>1<break/>256<break/>256<break/><bold>-</bold></td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t001fn001"><p>MR: Magnetic resonance; IR: Inversion recovery; TSE: Turbo spin echo; VFA: Variable flip angle; qT1: Quantitative T1; 3D-SPGR: 3D-spoiled gradient recalled echo; TR: Repetition time; TE: Echo time; FA: Flip angle; FOV: Field of view; NEX: Number of excitations; TI: Inversion time.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+<p>For VFA, 3D-SPGR was conducted with B1 field inhomogeneity correction using the Bloch–Siegert method [<xref ref-type="bibr" rid="pone.0297402.ref017">17</xref>]. T1 maps were generated pixel by pixel using MATLAB (MathWorks, Natick, MA) with two flip angles (FAs) of 4° and 18° (<xref ref-type="supplementary-material" rid="pone.0297402.s001">S1 Appendix</xref>) [<xref ref-type="bibr" rid="pone.0297402.ref003">3</xref>]. The code used to develop the T1 map was made available through Zenodo, DOI: 10.5281/zenodo.7808462 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7808462" xlink:type="simple">https://doi.org/10.5281/zenodo.7808462</ext-link>). The Bloch—Siegert method was used to rapidly acquire a B1 map with an acquisition time of 14 s for B1 field inhomogeneity correction [<xref ref-type="bibr" rid="pone.0297402.ref018">18</xref>]. The scan parameters were as follows: repetition time: 6 ms; echo time: 4 ms; FA: 5°; FOV: 53 × 53 cm<sup>2</sup>; slice thickness: 10 mm; and matrix size: 64 × 64. We acquired oblique axial sections of approximately proximal one-third of the uterine body using spin echo sequences because the physiological movement of adjacent organs is less likely to affect this section [<xref ref-type="bibr" rid="pone.0297402.ref019">19</xref>], thereby minimizing motion artifact effects. We used an inversion time of 200 ms for visual assessment of the highest contrast image between the signal intensity of the myometrium and endometrium. IR was used to adjust the center of the MR image with SPGR.</p>
+</sec>
+<sec id="sec010">
+<title>ROI placement for the qT1 measurements</title>
+<p>Two expert MRI technicians (observers 1 and 2), with 6 and 14 years of experience in pelvic MRI, respectively, evaluated the MR images using IR images and two SPGRs to confirm image quality and image registration. Observers 1 and 2 independently performed manual and semiautomatic ROI placements without consultation.</p>
+</sec>
+<sec id="sec011">
+<title>Manual ROI placement</title>
+<p>Manual ROI placement was performed using MATLAB (<xref ref-type="supplementary-material" rid="pone.0297402.s002">S2 Appendix</xref>) using the following procedure. (1) The T1 map data was transferred to the MATLAB workspace. (2) The observer selected an IR image in the MATLAB application to place the ROI. (3) The provided code was executed to open the image segmentation application in MATLAB. (4) A whole uterine ROI was manually placed to trace the external contour of the myometrium. (5) An endometrial ROI was manually placed to trace the external contour of the endometrium. (6) The myometrial ROI was developed by subtracting the endometrial ROI from the whole uterine ROI. (7) The mean qT1 values were calculated from the corresponding pixel values of the T1 map within the myometrial ROI. The code for manual ROI placement was made available through Zenodo, DOI: DOI/<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7811343" xlink:type="simple">10.5281/zenodo.7811343</ext-link> (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7811343" xlink:type="simple">https://doi.org/10.5281/zenodo.7811343</ext-link>).</p>
+<p>The endometrial ROI was then drawn over the endometrium (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1B</xref>). The myometrial ROI was defined by subtracting the endometrial ROI from the whole uterine ROI (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1C</xref>). The myometrial region of interest included the junctional zone. The mean qT1 values were calculated from the corresponding pixel values of the T1 map within the myometrial ROI.</p>
+<fig id="pone.0297402.g001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0297402.g001</object-id>
+<label>Fig 1</label>
+<caption>
+<title/>
+<p>Examples of ROI definition with manual placement (a-c) and semiautomatic placement (d-f) in IR and VFA. (a) Whole uterine ROI (red area), (b) endometrial ROI (blue area), (c) myometrial ROI (purple area), (d) External contour of the myometrium (purple line), and (e) endometrial ROI (green area) in IR and (f) myometrial ROI (purple area) in VFA. Several pixels located inside the myometrium were not identified as myometrium with semiautomatic ROI placement (f). Those pixels with more than the mean of +1.96 SD of myometrial signal intensity, may be caused by blood vessel flow.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.g001" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec012">
+<title>Semiautomatic ROI placement</title>
+<p>We developed in-house software using Microsoft Visual Studio 2010 (Microsoft Corporation, Redmond, WA, USA) to read and display digital imaging and communications in medicine (DICOM) files on a personal computer with Windows 10, with a 64-bit operating system (Microsoft). We converted the DICOM images to Joint Photographic Experts Group (JPEG) format using MATLAB before analysis (<xref ref-type="supplementary-material" rid="pone.0297402.s003">S3 Appendix</xref>). The source code for the in-house software for reading and displaying DICOM files, as well as the MATLAB code for converting DICOM images to JPEG format, has been made available through Zenodo, DOI: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7807266" xlink:type="simple">10.5281/zenodo.7807266</ext-link> (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7807266" xlink:type="simple">https://doi.org/10.5281/zenodo.7807266</ext-link>).</p>
+<p>The following semiautomatic procedures were used to place myometrial ROI (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1D–1F</xref>, <xref ref-type="supplementary-material" rid="pone.0297402.s004">S4 Appendix</xref>). (1) The user determined the center of the endometrium. (2) The user traced the external contour of the myometrium (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1D</xref>). (3) The software automatically extracted the endometrial ROI using a signal intensity threshold (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1E</xref>), which was initially set within ±3% of the endometrial signal intensity determined by the user and was increased in increments of 1% to maximize the area of the endometrial ROI, while excluding the external contour of the myometrium. (4) Pixel values were sampled from the area between the endometrial ROI and the external contour of the myometrium. (5) The mean and SD of the sampled pixel values were calculated. (6) The myometrial ROI was automatically extracted based on pixels that were within ±1.96 SD of the mean signal intensity. (7) The myometrial ROI was placed on the SPGR image. (8) We calculated the mean pixel value of the myometrial ROI. (9) The sum of squared deviation was calculated with ROI location variation, and the vertical and horizontal coordinates were changed from −10 to +10 pixels. (10) The optimal combination of vertical and horizontal coordinates with a minimum sum of squared deviation was obtained, and experts visually confirmed the appropriateness of the ROI location. (11) The mean qT1 value was calculated from the corresponding pixel values of the T1 map within the optimally placed myometrial ROI (<xref ref-type="fig" rid="pone.0297402.g001">Fig 1F</xref>). Eventually, the required operations by the user were only two steps: (1) click the center of the endometrium and (2) roughly draw the shape of the myometrium manually. Our algorithm does not use any active contour model for ROI extraction. The Code for semiautomatic ROI placement was made available through Zenodo, DOI: DOI/<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7805680" xlink:type="simple">10.5281/zenodo.7805680</ext-link> (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7805680" xlink:type="simple">https://doi.org/10.5281/zenodo.7805680</ext-link>).</p>
+</sec>
+<sec id="sec013">
+<title>Reproducibility</title>
+<p>Observers 1 and 2 independently evaluated manual and semiautomatic ROI placements to assess interobserver reproducibility. Observer 1 repeated the measurement within 2 weeks of the first measurement to assess intraobserver reproducibility. The supporting information (<xref ref-type="supplementary-material" rid="pone.0297402.s005">S1</xref>–<xref ref-type="supplementary-material" rid="pone.0297402.s008">S4</xref> Files) included the datasets for the evaluation of inter- and intraobserver reproducibility in T1 values, conducted through both manual and semiautomatic ROI placement by two observers.</p>
+</sec>
+<sec id="sec014">
+<title>Statistical analysis</title>
+<p>The inter- and intraobserver reproducibility of qT1 values was assessed by calculating the coefficient of variation (CoV). Further, reproducibility was evaluated using inter- and intraobserver errors and intraclass correlation coefficients (ICCs).</p>
+<p>Inter- and intraobserver errors were calculated as follows:
+<disp-formula id="pone.0297402.e001">
+<alternatives>
+<graphic id="pone.0297402.e001g" mimetype="image" position="anchor" xlink:href="info:doi/10.1371/journal.pone.0297402.e001" xlink:type="simple"/>
+<mml:math display="block" id="M1">
+<mml:mo>(</mml:mo><mml:mrow><mml:mi mathvariant="normal">I</mml:mi><mml:mi mathvariant="normal">n</mml:mi><mml:mi mathvariant="normal">t</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mo>)</mml:mo><mml:mo>=</mml:mo><mml:mfrac><mml:mrow><mml:mo>|</mml:mo><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">y</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mn>1</mml:mn><mml:mo>−</mml:mo><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">y</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mn>2</mml:mn><mml:mo>|</mml:mo></mml:mrow><mml:mrow><mml:mo>(</mml:mo><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">y</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mn>1</mml:mn><mml:mo>+</mml:mo><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">y</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mn>2</mml:mn><mml:mo>)</mml:mo><mml:mo>/</mml:mo><mml:mn>2</mml:mn></mml:mrow></mml:mfrac><mml:mo>×</mml:mo><mml:mn>100</mml:mn><mml:mspace width="0.25em"/><mml:mo>(</mml:mo><mml:mrow><mml:mi>%</mml:mi></mml:mrow><mml:mo>)</mml:mo><mml:mo>,</mml:mo>
+</mml:math>
+</alternatives>
+</disp-formula>
+<disp-formula id="pone.0297402.e002">
+<alternatives>
+<graphic id="pone.0297402.e002g" mimetype="image" position="anchor" xlink:href="info:doi/10.1371/journal.pone.0297402.e002" xlink:type="simple"/>
+<mml:math display="block" id="M2">
+<mml:mo>(</mml:mo><mml:mrow><mml:mi mathvariant="normal">I</mml:mi><mml:mi mathvariant="normal">n</mml:mi><mml:mi mathvariant="normal">t</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">b</mml:mi><mml:mi mathvariant="normal">s</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">v</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mspace width="0.25em"/><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mo>)</mml:mo><mml:mo>=</mml:mo><mml:mfrac><mml:mrow><mml:mo>|</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn></mml:mrow><mml:mrow><mml:mn>1</mml:mn><mml:mi>s</mml:mi><mml:mi>t</mml:mi></mml:mrow></mml:msub><mml:mo>−</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn></mml:mrow><mml:mrow><mml:mn>2</mml:mn><mml:mi>n</mml:mi><mml:mi>d</mml:mi></mml:mrow></mml:msub><mml:mo>|</mml:mo></mml:mrow><mml:mrow><mml:mo>(</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn></mml:mrow><mml:mrow><mml:mn>1</mml:mn><mml:mi>s</mml:mi><mml:mi>t</mml:mi></mml:mrow></mml:msub><mml:mo>+</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">q</mml:mi><mml:mi mathvariant="normal">T</mml:mi><mml:mn>1</mml:mn></mml:mrow><mml:mrow><mml:mn>2</mml:mn><mml:mi>n</mml:mi><mml:mi>d</mml:mi></mml:mrow></mml:msub><mml:mo>)</mml:mo><mml:mo>/</mml:mo><mml:mn>2</mml:mn></mml:mrow></mml:mfrac><mml:mo>×</mml:mo><mml:mn>100</mml:mn><mml:mspace width="0.25em"/><mml:mo>(</mml:mo><mml:mrow><mml:mi mathvariant="normal">%</mml:mi></mml:mrow><mml:mo>)</mml:mo><mml:mo>,</mml:mo>
+</mml:math>
+</alternatives>
+</disp-formula>
+where qT1<sub>1st</sub> and qT1<sub>2nd</sub> are the first and second measurements of qT1 by observer 1, respectively. The Wilcoxon test and Bland–Altman analysis were used to compare the results, estimate bias, and determine the limits of agreement. A <italic>p</italic>-value of &lt;0.05 was considered statistically significant. Bland–Altman analysis was used to assess the proportional bias. All statistical analyses were performed using Statistical Package for the Social Sciences software version 19.0 (SPSS-IBM, Armonk, NY). G*power was used for analysis for calculating the sample size. Using the usual significance level of 0.05 and a power of 0.80 for statistics by Wilcoxon signed-rank test, a sample size of a minimum of 20 subjects would be required to identify the difference in the mean error between the two groups. We measured the qT1 evaluation time with manual and semiautomatic ROI placements, and a paired <italic>t</italic>-test or Wilcoxon signed-rank test was used to compare the two methods depending on whether or not the distribution was normal.</p>
+</sec>
+</sec>
+<sec id="sec015" sec-type="results">
+<title>Results</title>
+<p>The mean CoVs of qT1 values for semiautomatic ROI placement by observers 1 and 2 were significantly lower than those for manual ROI placement (<italic>p</italic> &lt; 0.05; <xref ref-type="fig" rid="pone.0297402.g002">Fig 2A</xref>).</p>
+<fig id="pone.0297402.g002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0297402.g002</object-id>
+<label>Fig 2</label>
+<caption>
+<title>Inter- and intraobserver reproducibility of qT1 values by calculating the coefficient of variation (CoV) and inter- and intraobserver errors.</title>
+<p>(a) CoV for interobserver reproducibility, (b) CoV for intraobserver reproducibility, (c) interobserver error, and (d) intraobserver error. Error bars show the mean ± standard error.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.g002" xlink:type="simple"/>
+</fig>
+<p>Furthermore, both the first and second measurements of semiautomatic ROI placements by observer 1 were significantly lower than those of manual ROI placements (<italic>p</italic> &lt; 0.01; <xref ref-type="fig" rid="pone.0297402.g002">Fig 2B</xref>).</p>
+<p>The mean inter- and intraobserver errors for semiautomatic ROI placement were significantly lower than those for manual ROI placement (<italic>p</italic> &lt; 0.05 and <italic>p</italic> &lt; 0.01, respectively; <xref ref-type="fig" rid="pone.0297402.g002">Fig 2C and 2D</xref>).</p>
+<p><xref ref-type="table" rid="pone.0297402.t002">Table 2</xref> summarizes the ICCs.</p>
+<table-wrap id="pone.0297402.t002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0297402.t002</object-id>
+<label>Table 2</label> <caption><title>Reproducibility (ICC).</title></caption>
+<alternatives>
+<graphic id="pone.0297402.t002g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.t002" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="justify">Average ICC (95% CI)</th>
+<th align="justify">Interobserver reproducibility</th>
+<th align="justify">Intraobserver reproducibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Manual ROI placement<break/>Semiautomatic ROI placement</td>
+<td align="left">0.807 (0.601–0.913) *<break/>0.982 (0.958–0.992) *</td>
+<td align="left">0.794 (0.578–0.906) *<break/>0.988 (0.971–0.985) *</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t002fn001"><p>ICC: Intraclass correlation coefficient; 95% CI: 95% confidence interval; ROI: Region of interest, * <italic>p</italic> &lt; 0.01.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+<p>The inter- and intraobserver reproducibility of semiautomatic ROI placement was excellent at &gt;0.98 (<xref ref-type="table" rid="pone.0297402.t002">Table 2</xref>; <italic>p</italic> &lt; 0.01). The 95% confidence intervals for the ICC did not overlap between manual and semiautomatic ROI placements in both interobserver and intraobserver reproducibility. The ICCs for semiautomatic ROI placement were higher than those for manual ROI placement.</p>
+<p><xref ref-type="fig" rid="pone.0297402.g003">Fig 3</xref> shows the Bland–Altman plots. Any combination demonstrated no fixed bias (<xref ref-type="fig" rid="pone.0297402.g003">Fig 3A–3D</xref>).</p>
+<fig id="pone.0297402.g003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0297402.g003</object-id>
+<label>Fig 3</label>
+<caption>
+<title>Bland–Altman analyses estimated the bias and limits of agreement.</title>
+<p>Bland–Altman analysis of qT1 measurement by observers 1 and 2 with manual (a) and semiautomatic ROI placements (b) Analysis of the first and second measurements with manual (c) and semiautomatic ROI placements (d) The solid and dotted red lines indicate the mean differences and 95% limits of agreement, respectively. Mean differences were −72 (a), 11 (b), −20 (c), and −17 ms (d), and the 95% limits of agreement were 370 and −518 ms (a), 122 and 99 ms (b), 556 and 596 ms (c), and 73 and 107 ms (d).</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.g003" xlink:type="simple"/>
+</fig>
+<p>Positive proportional bias emerged in the qT1 measurements between observers 1 and 2 using semiautomatic ROI placement (R = 0.461, <italic>p</italic> = 0.027; <xref ref-type="fig" rid="pone.0297402.g003">Fig 3B</xref>). A negative proportional bias was determined between the first and second qT1 measurements using manual ROI placement (R = 0.532, <italic>p</italic> = 0.009; <xref ref-type="fig" rid="pone.0297402.g003">Fig 3C</xref>). However, no proportional bias was observed in the measurements between observers 1 and 2 using manual ROI placement (R = 0.224, <italic>p</italic> = 0.304; <xref ref-type="fig" rid="pone.0297402.g003">Fig 3A</xref>). Similarly, no proportional bias was observed between the first and second measurements using semiautomatic ROI placement (R = 0.11, <italic>p</italic> = 0.959; <xref ref-type="fig" rid="pone.0297402.g003">Fig 3D</xref>). The means and SDs of time with manual and semiautomatic ROI placements were 55 ± 4 s and 44 ± 5 s, respectively. The times with semiautomatic ROI placement were significantly smaller than those with manual ROI placement (<italic>p</italic> &lt; 0.001).</p>
+</sec>
+<sec id="sec016" sec-type="conclusions">
+<title>Discussion</title>
+<p>This study revealed good reproducibility for both manual and semiautomatic ROI placements. Further, the CoV and inter- and intraobserver errors for semiautomatic ROI placement were significantly lower than those for manual ROI placement.</p>
+<p>Highly reproducible ROI placements are advantageous for quantitative image analysis. Heye et al. reported that semiautomatic lesion segmentation significantly reduced interobserver variability compared with the manual approach, but not intraobserver variability using the semiautomatic approach [<xref ref-type="bibr" rid="pone.0297402.ref015">15</xref>]. In contrast, our study revealed significant improvements using the semiautomatic algorithm for both inter- and intraobserver errors. Moreover, a contrast agent was not necessary for semiautomatic ROI placement.</p>
+<p>The Bland–Altman analysis detected a negative proportional bias of intraobserver variation for manual ROI placement. This bias may be associated with two data points, as shown in the lower right of <xref ref-type="fig" rid="pone.0297402.g003">Fig 3C</xref>. The qT1 values differed between the myometrium and areas around the myometrium, which were derived from structures outside the uterus, such as the bowel, vessels, and urine in the bladder. Therefore, the myometrial ROI may have included surrounding tissues when using manual ROI placement. Such errors are less likely to occur when using the algorithm for semiautomatic ROI placement.</p>
+<p>The algorithm for semiautomatic ROI placement demonstrated high reproducibility. In principle, the algorithm can be applied to other medical imaging modalities for delineating the uterus because it uses pixel values that correspond to anatomical structures. This software was specifically designed for uterine analysis, but its programmatic design also theoretically allows for its use in analyzing other organs. With further research, the use of this software may extend beyond its current scope. Therefore, we plan to continue investigating and developing this software to explore its potential applications. Absolute native T1 values vary depending on MRI field strength, acquisition method, and vendor. Thus, the results of this study cannot be directly compared with qT1 value evaluation from another institution [<xref ref-type="bibr" rid="pone.0297402.ref013">13</xref>]. However, after achieving standardization using a certain method, comparisons of absolute qT1 may be possible. The subjects in our study were healthy volunteers, but our approach may apply to abnormal myometrium cases. We plan to apply our method to patients with uterine tumors, such as endometrial cancer, cervical cancer, and fibroid.</p>
+<p>The degree of reproducibility for manual ROI placement in our study was not as high as that previously reported [<xref ref-type="bibr" rid="pone.0297402.ref011">11</xref>,<xref ref-type="bibr" rid="pone.0297402.ref012">12</xref>]. Therefore, our comparisons of reproducibility between manual and semiautomatic ROI placements are reliable.</p>
+<p>Several studies reported on the use of uterus T1 mapping for evaluating fibroid and healthy volunteers. Sipola et al. reported that qT1 in patients with leiomyoma predicted treatment effects after uterine artery embolization [<xref ref-type="bibr" rid="pone.0297402.ref012">12</xref>]. Suomi et al. revealed that heating efficacy in high-intensity focused ultrasound therapy was estimated using qT1 [<xref ref-type="bibr" rid="pone.0297402.ref020">20</xref>]. Takatsu et al. evaluated the qT1 of normal female reproductive organs in the luteal phase of the menstrual cycle [<xref ref-type="bibr" rid="pone.0297402.ref021">21</xref>].</p>
+<p>This study has several limitations. First, this is a single-center study. A multicenter randomized trial is required to confirm the use of our semiautomatic ROI placement algorithm. Second, we included a relatively small sample size (n = 23). We found statistically significant differences in CoV and inter- and intraobserver errors between manual and semiautomatic ROI placements but with no significant differences in ICCs. However, the ICCs for semiautomatic ROI placement may be greater than those for manual ROI placement in a larger sample. Third, our study included healthy volunteers. In principle, the algorithm should apply to uterine diseases because the average qT1 values for abnormal lesions differ in the myometrium and other organs. However, further studies are required to evaluate its application in patients with uterine diseases. Fourth, this study used a short repetition time (5.0–5.6 ms) because of the limited scan time in clinical practice; however, the CoV values of our data were equivalent to those in previous reports [<xref ref-type="bibr" rid="pone.0297402.ref011">11</xref>,<xref ref-type="bibr" rid="pone.0297402.ref012">12</xref>]. Fifth, the range of qT1 with VFA in the myometrium was quite wide, ranging approximately from 1200 ms to 2500 ms. This may be because the subjects were composed of postmenopausal menstrual women, and their menstrual cycle would have varied. Sixth, an analysis of the relationship between qT1 and the menstrual cycle was not investigated.</p>
+<p>In conclusion, the semiautomatic ROI placement algorithm demonstrated high reproducibility of qT1 measurements compared with manual methods. Semiautomatic ROI placement may be useful for evaluating uterine qT1 with high reproducibility.</p>
+</sec>
+<sec id="sec017" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0297402.s001" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s001" xlink:type="simple">
+<label>S1 Appendix</label>
+<caption>
+<title>User guide for T1 map analysis using MATLAB code from "Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium" Research Paper on Zenodo.</title>
+<p><ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7808462" xlink:type="simple">https://doi.org/10.5281/zenodo.7808462</ext-link>.</p>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s002" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s002" xlink:type="simple">
+<label>S2 Appendix</label>
+<caption>
+<title>User guide for manual ROI placement analysis using MATLAB code from “Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium” research paper on Zenodo.</title>
+<p><ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7811343" xlink:type="simple">https://doi.org/10.5281/zenodo.7811343</ext-link>.</p>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s003" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s003" xlink:type="simple">
+<label>S3 Appendix</label>
+<caption>
+<title>User guide for converting DICOM to JPEG using MATLAB from the research paper "Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium" is possible with the MATLAB procedure and test data provided in the corresponding repository on Zenodo.</title>
+<p><ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7807266" xlink:type="simple">https://doi.org/10.5281/zenodo.7807266</ext-link>.</p>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s004" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s004" xlink:type="simple">
+<label>S4 Appendix</label>
+<caption>
+<title>User guide for semiautomatic ROI placement analysis using Microsoft Visual Studio 2010 code from “Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium” research paper on Zenodo.</title>
+<p><ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7805680" xlink:type="simple">https://doi.org/10.5281/zenodo.7805680</ext-link>.</p>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s005" mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s005" xlink:type="simple">
+<label>S1 File</label>
+<caption>
+<title>T1 values for interobserver reproducibility assessment; Excel data with manual ROI placement by observer 1 and 2.</title>
+<p>(XLSX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s006" mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s006" xlink:type="simple">
+<label>S2 File</label>
+<caption>
+<title>T1 values for intraobserver reproducibility assessment; Excel data with manual ROI placement by observer 1.</title>
+<p>(XLSX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s007" mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s007" xlink:type="simple">
+<label>S3 File</label>
+<caption>
+<title>T1 values for interobserver reproducibility assessment; Excel data with semiautomatic ROI placement by observer 1 and 2.</title>
+<p>(XLSX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0297402.s008" mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s008" xlink:type="simple">
+<label>S4 File</label>
+<caption>
+<title>T1 values for intraobserver reproducibility assessment; Excel data with semiautomatic ROI placement by observer 1.</title>
+<p>(XLSX)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ack>
+<p>We thank Dr. Sasaki T. for the helpful software regarding image analysis using MATLAB.</p>
+</ack>
+<ref-list>
+<title>References</title>
+<ref id="pone.0297402.ref001"><label>1</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Galea</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Cantisani</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Taouli</surname> <given-names>B</given-names></name>. <article-title>Liver lesion detection and characterization: role of diffusion-weighted imaging</article-title>. <source>J Magn Reson Imaging</source>. <year>2013</year>;<volume>37</volume>(<issue>6</issue>):<fpage>1260</fpage>–<lpage>76</lpage>. Epub 2013/05/29. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/jmri.23947" xlink:type="simple">10.1002/jmri.23947</ext-link></comment> <object-id pub-id-type="pmid">23712841</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ferreira</surname> <given-names>VM</given-names></name>, <name name-style="western"><surname>Piechnik</surname> <given-names>SK</given-names></name>, <name name-style="western"><surname>Robson</surname> <given-names>MD</given-names></name>, <name name-style="western"><surname>Neubauer</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Karamitsos</surname> <given-names>TD</given-names></name>. <article-title>Myocardial tissue characterization by magnetic resonance imaging: novel applications of T1 and T2 mapping</article-title>. <source>J Thorac Imaging</source>. <year>2014</year>;<volume>29</volume>(<issue>3</issue>):<fpage>147</fpage>–<lpage>54</lpage>. Epub 2014/03/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1097/RTI.0000000000000077" xlink:type="simple">10.1097/RTI.0000000000000077</ext-link></comment> <object-id pub-id-type="pmid">24576837</object-id>; PubMed Central PMCID: PMC4252135 methods for shortened look-locker inversion recovery (ShMOLLI) cardiac gated mapping of T1. September 29, 2010. All rights sold exclusively to Siemens Medical Solutions. US patent pending 61/689,067: Stefan K. Piechnik and Matthew D. Robson. Color map design method for immediate assessment of the deviation from established normal population statistics and its application to cardiovascular T1 mapping images. The remaining authors declare no conflicts of interest.</mixed-citation></ref>
+<ref id="pone.0297402.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Li</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Sun</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Hu</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Huang</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Han</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Chen</surname> <given-names>L</given-names></name>, <etal>et al</etal>. <article-title>Assessment of liver fibrosis by variable flip angle T1 mapping at 3.0T</article-title>. <source>J Magn Reson Imaging</source>. <year>2016</year>;<volume>43</volume>(<issue>3</issue>):<fpage>698</fpage>–<lpage>703</lpage>. Epub 2015/08/13. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/jmri.25030" xlink:type="simple">10.1002/jmri.25030</ext-link></comment> <object-id pub-id-type="pmid">26267123</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Roux</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Hilbert</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Hussami</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Becce</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Kober</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Omoumi</surname> <given-names>P</given-names></name>. <article-title>MRI T2 Mapping of the Knee Providing Synthetic Morphologic Images: Comparison to Conventional Turbo Spin-Echo MRI</article-title>. <source>Radiology</source>. <year>2019</year>;<volume>293</volume>(<issue>3</issue>):<fpage>620</fpage>–<lpage>30</lpage>. Epub 2019/10/02. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1148/radiol.2019182843" xlink:type="simple">10.1148/radiol.2019182843</ext-link></comment> <object-id pub-id-type="pmid">31573393</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Vaithianathar</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Tench</surname> <given-names>CR</given-names></name>, <name name-style="western"><surname>Morgan</surname> <given-names>PS</given-names></name>, <name name-style="western"><surname>Wilson</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Blumhardt</surname> <given-names>LD</given-names></name>. <article-title>T1 relaxation time mapping of white matter tracts in multiple sclerosis defined by diffusion tensor imaging</article-title>. <source>J Neurol</source>. <year>2002</year>;<volume>249</volume>(<issue>9</issue>):<fpage>1272</fpage>–<lpage>8</lpage>. Epub 2002/09/21. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00415-002-0836-8" xlink:type="simple">10.1007/s00415-002-0836-8</ext-link></comment> <object-id pub-id-type="pmid">12242553</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref006"><label>6</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Deoni</surname> <given-names>SC</given-names></name>, <name name-style="western"><surname>Catani</surname> <given-names>M</given-names></name>. <article-title>Visualization of the deep cerebellar nuclei using quantitative T1 and rho magnetic resonance imaging at 3 Tesla</article-title>. <source>Neuroimage</source>. <year>2007</year>;<volume>37</volume>(<issue>4</issue>):<fpage>1260</fpage>–<lpage>6</lpage>. Epub 2007/08/19. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.neuroimage.2007.06.036" xlink:type="simple">10.1016/j.neuroimage.2007.06.036</ext-link></comment> <object-id pub-id-type="pmid">17702607</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Keshavarzi</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Vaezy</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Kaczkowski</surname> <given-names>PJ</given-names></name>, <name name-style="western"><surname>Keilman</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Martin</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Chi</surname> <given-names>EY</given-names></name>, <etal>et al</etal>. <article-title>Attenuation coefficient and sound speed in human myometrium and uterine fibroid tumors</article-title>. <source>J Ultrasound Med</source>. <year>2001</year>;<volume>20</volume>(<issue>5</issue>):<fpage>473</fpage>–<lpage>80</lpage>. Epub 2001/05/10. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.7863/jum.2001.20.5.473" xlink:type="simple">10.7863/jum.2001.20.5.473</ext-link></comment> <object-id pub-id-type="pmid">11345104</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hecht</surname> <given-names>EM</given-names></name>, <name name-style="western"><surname>Do</surname> <given-names>RK</given-names></name>, <name name-style="western"><surname>Kang</surname> <given-names>SK</given-names></name>, <name name-style="western"><surname>Bennett</surname> <given-names>GL</given-names></name>, <name name-style="western"><surname>Babb</surname> <given-names>JS</given-names></name>, <name name-style="western"><surname>Clark</surname> <given-names>TW</given-names></name>. <article-title>Diffusion-weighted imaging for prediction of volumetric response of leiomyomas following uterine artery embolization: a preliminary study</article-title>. <source>J Magn Reson Imaging</source>. <year>2011</year>;<volume>33</volume>(<issue>3</issue>):<fpage>641</fpage>–<lpage>6</lpage>. Epub 2011/05/13. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/jmri.22459" xlink:type="simple">10.1002/jmri.22459</ext-link></comment> <object-id pub-id-type="pmid">21563247</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sato</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Yuasa</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Fujita</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Fukushima</surname> <given-names>Y</given-names></name>. <article-title>Clinical application of diffusion-weighted imaging for preoperative differentiation between uterine leiomyoma and leiomyosarcoma</article-title>. <source>Am J Obstet Gynecol</source>. <year>2014</year>;<volume>210</volume>(<issue>4</issue>):<fpage>368.e1</fpage>–.<lpage>e8</lpage>. Epub 2013/12/26. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.ajog.2013.12.028" xlink:type="simple">10.1016/j.ajog.2013.12.028</ext-link></comment> <object-id pub-id-type="pmid">24368137</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Malek</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Rahmani</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Seyyed Ebrahimi</surname> <given-names>SM</given-names></name>, <name name-style="western"><surname>Tabibian</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Alidoosti</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Rahimifar</surname> <given-names>P</given-names></name>, <etal>et al</etal>. <article-title>Investigating the diagnostic value of quantitative parameters based on T2-weighted and contrast-enhanced MRI with psoas muscle and outer myometrium as internal references for differentiating uterine sarcomas from leiomyomas at 3T MRI</article-title>. <source>Cancer Imaging</source>. <year>2019</year>;<volume>19</volume>(<issue>1</issue>):<fpage>20</fpage>. Epub 2019/04/03. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/s40644-019-0206-8" xlink:type="simple">10.1186/s40644-019-0206-8</ext-link></comment> <object-id pub-id-type="pmid">30935419</object-id>; PubMed Central PMCID: PMC6444554.</mixed-citation></ref>
+<ref id="pone.0297402.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Davenport</surname> <given-names>MS</given-names></name>, <name name-style="western"><surname>Heye</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Dale</surname> <given-names>BM</given-names></name>, <name name-style="western"><surname>Horvath</surname> <given-names>JJ</given-names></name>, <name name-style="western"><surname>Breault</surname> <given-names>SR</given-names></name>, <name name-style="western"><surname>Feuerlein</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>Inter- and intra-rater reproducibility of quantitative dynamic contrast enhanced MRI using TWIST perfusion data in a uterine fibroid model</article-title>. <source>J Magn Reson Imaging</source>. <year>2013</year>;<volume>38</volume>(<issue>2</issue>):<fpage>329</fpage>–<lpage>35</lpage>. Epub 2012/12/15. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/jmri.23974" xlink:type="simple">10.1002/jmri.23974</ext-link></comment> <object-id pub-id-type="pmid">23239041</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sipola</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Ruuskanen</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Yawu</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Husso</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Vanninen</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Hippelainen</surname> <given-names>M</given-names></name>, <etal>et al</etal>. <article-title>Preinterventional quantitative magnetic resonance imaging predicts uterus and leiomyoma size reduction after uterine artery embolization</article-title>. <source>J Magn Reson Imaging</source>. <year>2010</year>;<volume>31</volume>(<issue>3</issue>):<fpage>617</fpage>–<lpage>24</lpage>. Epub 2010/02/27. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/jmri.22063" xlink:type="simple">10.1002/jmri.22063</ext-link></comment> <object-id pub-id-type="pmid">20187204</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hamlin</surname> <given-names>SA</given-names></name>, <name name-style="western"><surname>Henry</surname> <given-names>TS</given-names></name>, <name name-style="western"><surname>Little</surname> <given-names>BP</given-names></name>, <name name-style="western"><surname>Lerakis</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Stillman</surname> <given-names>AE</given-names></name>. <article-title>Mapping the future of cardiac MR imaging: case-based review of T1 and T2 mapping techniques</article-title>. <source>Radiographics</source>. <year>2014</year>;<volume>34</volume>(<issue>6</issue>):<fpage>1594</fpage>–<lpage>611</lpage>. Epub 2014/10/14. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1148/rg.346140030" xlink:type="simple">10.1148/rg.346140030</ext-link></comment> <object-id pub-id-type="pmid">25310419</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bojorquez</surname> <given-names>JZ</given-names></name>, <name name-style="western"><surname>Bricq</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Acquitter</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Brunotte</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Walker</surname> <given-names>PM</given-names></name>, <name name-style="western"><surname>Lalande</surname> <given-names>A</given-names></name>. <article-title>What are normal relaxation times of tissues at 3 T?</article-title> <source>Magn Reson Imaging</source>. <year>2017</year>;<volume>35</volume>:<fpage>69</fpage>–<lpage>80</lpage>. Epub 2016/10/28. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.mri.2016.08.021" xlink:type="simple">10.1016/j.mri.2016.08.021</ext-link></comment> <object-id pub-id-type="pmid">27594531</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Heye</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Merkle</surname> <given-names>EM</given-names></name>, <name name-style="western"><surname>Reiner</surname> <given-names>CS</given-names></name>, <name name-style="western"><surname>Davenport</surname> <given-names>MS</given-names></name>, <name name-style="western"><surname>Horvath</surname> <given-names>JJ</given-names></name>, <name name-style="western"><surname>Feuerlein</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>Reproducibility of dynamic contrast-enhanced MR imaging. Part II. Comparison of intra- and interobserver variability with manual region of interest placement versus semiautomatic lesion segmentation and histogram analysis</article-title>. <source>Radiology</source>. <year>2013</year>;<volume>266</volume>(<issue>3</issue>):<fpage>812</fpage>–<lpage>21</lpage>. Epub 2012/12/12. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1148/radiol.12120255" xlink:type="simple">10.1148/radiol.12120255</ext-link></comment> <object-id pub-id-type="pmid">23220891</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Chapiro</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Duran</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Werner</surname> <given-names>JD</given-names></name>, <name name-style="western"><surname>Wang</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Schernthaner</surname> <given-names>R</given-names></name>, <etal>et al</etal>. <article-title>Three-Dimensional Quantitative Assessment of Uterine Fibroid Response after Uterine Artery Embolization Using Contrast-Enhanced MR Imaging</article-title>. <source>J Vasc Interv Radiol</source>. <year>2015</year>;<volume>26</volume>(<issue>5</issue>):<fpage>670</fpage>–<lpage>8</lpage> e2. Epub 2015/02/02. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jvir.2014.11.020" xlink:type="simple">10.1016/j.jvir.2014.11.020</ext-link></comment> <object-id pub-id-type="pmid">25638750</object-id>; PubMed Central PMCID: PMC4414730.</mixed-citation></ref>
+<ref id="pone.0297402.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sacolick</surname> <given-names>LI</given-names></name>, <name name-style="western"><surname>Sun</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Vogel</surname> <given-names>MW</given-names></name>, <name name-style="western"><surname>Dixon</surname> <given-names>WT</given-names></name>, <name name-style="western"><surname>Hancu</surname> <given-names>I</given-names></name>. <article-title>Fast radiofrequency flip angle calibration by Bloch-Siegert shift</article-title>. <source>Magn Reson Med</source>. <year>2011</year>;<volume>66</volume>(<issue>5</issue>):<fpage>1333</fpage>–<lpage>8</lpage>. Epub 2011/06/21. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/mrm.22902" xlink:type="simple">10.1002/mrm.22902</ext-link></comment> <object-id pub-id-type="pmid">21688314</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Tsai</surname> <given-names>WC</given-names></name>, <name name-style="western"><surname>Kao</surname> <given-names>KJ</given-names></name>, <name name-style="western"><surname>Chang</surname> <given-names>KM</given-names></name>, <name name-style="western"><surname>Hung</surname> <given-names>CF</given-names></name>, <name name-style="western"><surname>Yang</surname> <given-names>Q</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>CE</given-names></name>, <etal>et al</etal>. <article-title>B(1) Field Correction of T1 Estimation Should Be Considered for Breast Dynamic Contrast-enhanced MR Imaging Even at 1.5 T</article-title>. <source>Radiology</source>. <year>2017</year>;<volume>282</volume>(<issue>1</issue>):<fpage>55</fpage>–<lpage>62</lpage>. Epub 2016/08/02. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1148/radiol.2016160062" xlink:type="simple">10.1148/radiol.2016160062</ext-link></comment> <object-id pub-id-type="pmid">27479805</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Buchali</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Koswig</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Dinges</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Rosenthal</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Salk</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Lackner</surname> <given-names>G</given-names></name>, <etal>et al</etal>. <article-title>Impact of the filling status of the bladder and rectum on their integral dose distribution and the movement of the uterus in the treatment planning of gynaecological cancer</article-title>. <source>Radiother Oncol</source>. <year>1999</year>;<volume>52</volume>(<issue>1</issue>):<fpage>29</fpage>–<lpage>34</lpage>. Epub 1999/11/30. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/s0167-8140%2899%2900068-7" xlink:type="simple">10.1016/s0167-8140(99)00068-7</ext-link></comment> <object-id pub-id-type="pmid">10577683</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Suomi</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Viitala</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Sainio</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Komar</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Sequeiros</surname> <given-names>RB</given-names></name>. <article-title>High-Intensity Focused Ultrasound Therapy in the Uterine Fibroid: A Clinical Case Study of Poor Heating Efficacy</article-title>. <source>Annu Int Conf IEEE Eng Med Biol Soc</source>. <year>2019</year>;<volume>2019</volume>:<fpage>2500</fpage>–<lpage>3</lpage>. Epub 2020/01/18. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1109/EMBC.2019.8857147" xlink:type="simple">10.1109/EMBC.2019.8857147</ext-link></comment> <object-id pub-id-type="pmid">31946405</object-id>.</mixed-citation></ref>
+<ref id="pone.0297402.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Takatsu</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Okada</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Miyati</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Koyama</surname> <given-names>T</given-names></name>. <article-title>Magnetic resonance imaging relaxation times of female reproductive organs</article-title>. <source>Acta Radiol</source>. <year>2015</year>;<volume>56</volume>(<issue>8</issue>):<fpage>997</fpage>–<lpage>1001</lpage>. Epub 2014/09/12. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1177/0284185114542367" xlink:type="simple">10.1177/0284185114542367</ext-link></comment> <object-id pub-id-type="pmid">25210077</object-id>.</mixed-citation></ref>
+</ref-list>
+</back>
+<sub-article article-type="aggregated-review-documents" id="pone.0297402.r001" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r001</article-id>
+<title-group>
+<article-title>Decision Letter 0</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Padmanabhan</surname>
+<given-names>Parasuraman</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Parasuraman Padmanabhan</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="article" id="rel-obj001" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>0</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">14 Mar 2023</named-content>
+</p>
+<p><!-- <div> -->PONE-D-22-17380<!-- </div> --><!-- <div> -->Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium<!-- </div> --><!-- <div> -->PLOS ONE</p>
+<p>Dear Dr. Nakagawa,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Apr 28 2023 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:<!-- </div> --><list list-type="bullet"> <list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item> <list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item> <list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list></p>
+<p>If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Parasuraman Padmanabhan, Ph.D</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>When submitting your revision, we need you to address these additional requirements.</p>
+<p>1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf</ext-link> and </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf</ext-link></p>
+<p>2. Please note that PLOS ONE has specific guidelines on code sharing for submissions in which author-generated code underpins the findings in the manuscript. In these cases, all author-generated code must be made available without restrictions upon publication of the work. </p>
+<p>Please review our guidelines at <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code" xlink:type="simple">https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code</ext-link> and ensure that your code is shared in a way that follows best practice and facilitates reproducibility and reuse.</p>
+<p>3. Thank you for stating the following financial disclosure: </p>
+<p>"Atsutaka Okizaki received Research funding of Nihon Medi-physics Co. and FUJIFILM Toyama Chemical Co., Ltd. The other authors have no conflict of interest."</p>
+<p>Please state what role the funders took in the study.  If the funders had no role, please state: "The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript." If this statement is not correct you must amend it as needed. </p>
+<p>Please include this amended Role of Funder statement in your cover letter; we will change the online submission form on your behalf.</p>
+<p>4. Thank you for stating the following in the Financial Disclosure section:  </p>
+<p>We note that you received funding from a commercial source: Nihon Medi-physics Co. and UJIFILM Toyama Chemical Co., Ltd.</p>
+<p>Please provide an amended Competing Interests Statement that explicitly states this commercial funder, along with any other relevant declarations relating to employment, consultancy, patents, products in development, marketed products, etc. </p>
+<p>Within this Competing Interests Statement, please confirm that this does not alter your adherence to all PLOS ONE policies on sharing data and materials by including the following statement: ""This does not alter our adherence to PLOS ONE policies on sharing data and materials.” (as detailed online in our guide for authors <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/competing-interests" xlink:type="simple">http://journals.plos.org/plosone/s/competing-interests</ext-link>).  </p>
+<p>If there are restrictions on sharing of data and/or materials, please state these. Please note that we cannot proceed with consideration of your article until this information has been declared. </p>
+<p>Please include your amended Competing Interests Statement within your cover letter. We will change the online submission form on your behalf.</p>
+<p>5. In your Data Availability statement, you have not specified where the minimal data set underlying the results described in your manuscript can be found. PLOS defines a study's minimal data set as the underlying data used to reach the conclusions drawn in the manuscript and any additional data required to replicate the reported study findings in their entirety. All PLOS journals require that the minimal data set be made fully available. For more information about our data policy, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability</ext-link>.</p>
+<p>Upon re-submitting your revised manuscript, please upload your study’s minimal underlying data set as either Supporting Information files or to a stable, public repository and include the relevant URLs, DOIs, or accession numbers within your revised cover letter. For a list of acceptable repositories, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories</ext-link>. Any potentially identifying patient information must be fully anonymized.</p>
+<p>Important: If there are ethical or legal restrictions to sharing your data publicly, please explain these restrictions in detail. Please see our guidelines for more information on what we consider unacceptable restrictions to publicly sharing data: <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions</ext-link>. Note that it is not acceptable for the authors to be the sole named individuals responsible for ensuring data access.</p>
+<p>We will update your Data Availability statement to reflect the information you provide in your cover letter.</p>
+<p>6. PLOS requires an ORCID iD for the corresponding author in Editorial Manager on papers submitted after December 6th, 2016. Please ensure that you have an ORCID iD and that it is validated in Editorial Manager. To do this, go to ‘Update my Information’ (in the upper left-hand corner of the main menu), and click on the Fetch/Validate link next to the ORCID field. This will take you to the ORCID site and allow you to create a new iD or authenticate a pre-existing iD in Editorial Manager. Please see the following video for instructions on linking an ORCID iD to your Editorial Manager account: <ext-link ext-link-type="uri" xlink:href="https://www.youtube.com/watch?v=_xcclfuvtxQ" xlink:type="simple">https://www.youtube.com/watch?v=_xcclfuvtxQ</ext-link></p>
+<p>7. Please upload a new copy of Figure 1 as the detail is not clear. Please follow the link for more information:</p>
+<p><ext-link ext-link-type="uri" xlink:href="https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/" xlink:type="simple">https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/</ext-link></p>
+<p><ext-link ext-link-type="uri" xlink:href="https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/" xlink:type="simple">https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/</ext-link></p>
+<p><bold>Additional Editor Comments:</bold></p>
+<p>This paper need more editing in terms of language and other MRI related data</p>
+<p>The image quality are very poor and high resolution image would be helpful</p>
+<p>discussion need to be elobarated with additional references.</p>
+<p>[Note: HTML markup is below. Please do not edit.]</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: 1. Manual ROI placement was performed using MATLAB: Please specify which method was used</p>
+<p>2. In-house software using Microsoft Visual Studio 2010: many semi automatic segmentation models are there, please specify which algorithm was employed in this research work, upon observation of outputs, seems to have developed an active contour model for ROI extraction, if so, please specify in detail about that.</p>
+<p>3. Any preprocessing was done prior to ROI placement</p>
+<p>4. Quantitative T1 (qT1) values with variable flip angles (VFA) are important for characterizing lesions in 24 patients with pelvic disease: whether this is applicable only for pelvic disease diagnosis</p>
+<p>5. Please improve the quality of figure 3</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: <bold>Yes: </bold>Dr S.N Kumar</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0297402.r002">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r002</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 0</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj002" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0297402.r001" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">23 Apr 2023</named-content>
+</p>
+<p>Replay to the reviewer and editor</p>
+<p>23/April/2023</p>
+<p>Dear Sir: Editor-In-Chief</p>
+<p>Manuscript reference No. PONE-D-22-17380</p>
+<p>Please find attached a revised version of our manuscript “Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium”, which we would like to resubmit for publication in PLOS ONE.</p>
+<p>Thank you much for your reviews. Your comments were highly insightful and enabled us greatly improve the quality of our manuscript. In the following pages are our point-by-point responses to each of the comments. Furthermore, we attached changed parts of our manuscript. We revised those parts according to the editor’s and reviewer’s comments as  'Response to Reviewers'.</p>
+<p>Revisions in the text are shown using yellow highlight for changes and green highlight for deletion. We hope that the revisions in the manuscript are suitable for publication in PLOS ONE.</p>
+<p>We shall look forward to hearing from you.</p>
+<p>Response to Reviewers</p>
+<p>Associate editor:</p>
+<p>If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your kind and informative comments on our manuscript. We greatly appreciate your evaluation of our work. As per your suggestion, we have revised our cover letter to include our updated financial disclosure statement.</p>
+<p>Thank you again for your time and consideration. We look forward to hearing from you.</p>
+<p>Associate editor:</p>
+<p>Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your message regarding resubmitting our figure files (Figure 1-3). We have carefully reviewed the reviewer's comments and have made the necessary revisions to our figures to meet the requirements for publication in your journal. We appreciate the guidelines provided at the end of the letter and have ensured that our revised figures meet the specified criteria. Thank you for your continued guidance and support throughout this process.</p>
+<p>Associate editor:</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your feedback regarding the depositing of our laboratory protocols to Protocols.io. After careful consideration, we have decided that depositing our protocols may not be the most effective way to enhance the reproducibility of our results. However, we understand the importance of reproducibility and have taken steps to ensure that our results can be reproduced.</p>
+<p>To enhance the reproducibility of our results, we have provided detailed information on the scan parameters used in our MRI study, as well as the program code for our semiautomatic ROI placement and the procedure for manual ROI placement. We believe that these measures will enable others to reproduce our results and further the field of research.</p>
+<p>Thank you for your valuable feedback, and please let us know if you have any further suggestions.</p>
+<p>Associate editor:</p>
+<p>1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf</ext-link> and </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf</ext-link></p>
+<p>Reply&gt;</p>
+<p>Thank you for your message regarding the style requirements for our manuscript. We have consulted the PLOS ONE style templates and made the necessary adjustments to ensure that our manuscript and Title page conform to PLOS ONE's guidelines for formatting and file naming. We appreciate your guidance and assistance in ensuring that our manuscript meets the required standards for publication in your journal.</p>
+<p>Associate editor:</p>
+<p>2. Please note that PLOS ONE has specific guidelines on code sharing for submissions in which author-generated code underpins the findings in the manuscript. In these cases, all author-generated codes must be made available without restrictions upon publication of the work. </p>
+<p>Please review our guidelines at <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code" xlink:type="simple">https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code</ext-link> and ensure that your code is shared in a way that follows best practices and facilitates reproducibility and reuse.</p>
+<p>Reply&gt;</p>
+<p>Thank you for bringing to our attention the specific guidelines on code sharing for submissions where author-generated code is fundamental to the manuscript's findings. We have carefully reviewed the guidelines at <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code" xlink:type="simple">https://journals.plos.org/plosone/s/materials-and-software-sharing#loc-sharing-code</ext-link> and have ensured that our code is shared in a manner that adheres to best practices, promoting reproducibility and facilitating reuse.</p>
+<p>To produce semi-automatic placement of regions of interest (ROIs), we utilized Microsoft Visual Studio 2010 to generate the code. We also developed MATLAB code to generate T1 maps from two SPRG images and created a procedure to convert DICOM files to JPEG format. Additionally, we developed MATLAB code that produces code for the manual placement of ROIs in DICOM format.</p>
+<p>In compliance with the guidelines, we have shared the generated code, a test dataset, and the procedure on Zenodo at <ext-link ext-link-type="uri" xlink:href="https://zenodo.org/deposit?page=1&amp;size=20" xlink:type="simple">https://zenodo.org/deposit?page=1&amp;size=20</ext-link>. These resources have been assigned Digital Object Identifiers (DOIs) through Zenodo.</p>
+<p>Furthermore, we have included the procedure for replicating our results using these resources in the supporting information (S1-4 Appendix). We have confirmed that these resources are publicly accessible and can be used to replicate the analysis conducted in our study. We hope that other researchers will find these resources valuable in investigating similar research questions.</p>
+<p>Thank you for your attention to this matter.</p>
+<p>&lt; Materials and Methods P7 line111&gt;</p>
+<p>T1 maps were generated pixel by pixel using MATLAB (MathWorks, Natick, MA) with two flip angles (FAs) of 4° and 18° [3]</p>
+<p>↓</p>
+<p>T1 maps were generated pixel by pixel using MATLAB (MathWorks, Natick, MA) with two flip angles (FAs) of 4° and 18° (S1 Appendix) [3]. The code used to create the T1 map was made available through Zenodo, DOI: 10.5281/zenodo.7808462 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7808462" xlink:type="simple">https://doi.org/10.5281/zenodo.7808462</ext-link>).</p>
+<p>&lt; Materials and Methods P8 line128&gt;</p>
+<p>Manual ROI placement was performed using MATLAB. First, a whole uterus ROI was manually placed to trace the external contour of the myometrium (Fig.1a).</p>
+<p>↓</p>
+<p>Manual ROI placement was performed using MATLAB. First, a whole uterus ROI was manually placed to trace the external contour of the myometrium (Fig.1a). (S2 Appendix) using the following procedure: (1) The T1 map data was transferred to the MATLAB workspace; (2) An IR image was selected by the observer in the MATLAB application to place the ROI; (3) The provided code was executed to open the image segmentation application in MATLAB; (4) A whole uterus ROI was manually placed to trace the external contour of the myometrium; (5) An endometrial ROI was manually placed to trace the external contour of the endometrium; (6) The myometrial ROI was created by subtracting the endometrial ROI from the whole uterus ROI; (7) Mean qT1 values were calculated from the corresponding pixel values of the T1 map within the myometrial ROI. The code for manual ROI placement was made available through Zenodo, DOI: DOI/10.5281/zenodo.7811343 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7811343" xlink:type="simple">https://doi.org/10.5281/zenodo.7811343</ext-link>).</p>
+<p>&lt; Materials and Methods P9 line144&gt;</p>
+<p>We developed an in-house software using Microsoft Visual Studio 2010 (Microsoft Corporation, Redmond, WA, USA) to read and display digital imaging and communications in medicine (DICOM) files on a personal computer with Windows 10, 64-bit operating system (Microsoft). The myometrial ROI was placed using the following semiautomatic procedure (Fig 1d-f): (1) the center of the endometrium was determined by the user; (2) the user traced the external contour of the myometrium (Fig 1d); (3) the endometrial ROI was automatically extracted by the software using a signal intensity threshold (Fig 1e), which was initially set at within ±3% of the endometrial signal intensity determined by the user and was increased in increments of 1% to maximize the area of the endometrial ROI, while excluding the external contour of the myometrium; (4) pixel values were sampled from the area between the endometrial ROI and external contour of the myometrium; (5) the mean and standard deviation of the sampled pixel values were calculated; (6) the myometrial ROI was extracted automatically based on pixels that were within ±1.96 standard deviations of the mean signal intensity; (7) the myometrial ROI was placed on the SPGR image; (8) we calculated the mean pixel value of the myometrial ROI; (9) the sum of squared deviation was calculated with variation of ROI locations, and the vertical and horizontal coordinates were changed from −10 to +10 pixels; (10) the optimal combination of vertical and horizontal coordinates with minimum sum of squared deviation was obtained, and the appropriateness of the ROI location was visually confirmed by experts; and (11) the mean qT1 value was calculated from the corresponding pixel values of the T1 map within the optimally placed myometrial ROI (Fig 1f). Eventually, the required operations by the user were only 2 steps: (1) click center of endometrium, (2) roughly draw the shape of myometrium manually.</p>
+<p>↓</p>
+<p>We developed an in-house software using Microsoft Visual Studio 2010 (Microsoft Corporation, Redmond, WA, USA) to read and display digital imaging and communications in medicine (DICOM) files on a personal computer with Windows 10, a 64-bit operating system (Microsoft). Prior to analysis, we converted the DICOM images to JPEG format using MATLAB (S3 Appendix). The source code for the in-house software used to read and display DICOM files, as well as the MATLAB code used to convert DICOM images to JPEG format, has been made available through Zenodo, DOI: 10.5281/zenodo.7807266 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7807266" xlink:type="simple">https://doi.org/10.5281/zenodo.7807266</ext-link>).</p>
+<p>The myometrial ROI was placed using the following semiautomatic procedure (Fig 1d-f, S4 Appendix): (1) the center of the endometrium was determined by the user; (2) the user traced the external contour of the myometrium (Fig 1d); (3) the endometrial ROI was automatically extracted by the software using a signal intensity threshold (Fig 1e), which was initially set at within ±3% of the endometrial signal intensity determined by the user and was increased in increments of 1% to maximize the area of the endometrial ROI, while excluding the external contour of the myometrium; (4) pixel values were sampled from the area between the endometrial ROI and external contour of the myometrium; (5) the mean and standard deviation of the sampled pixel values were calculated; (6) the myometrial ROI was extracted automatically based on pixels that were within ±1.96 standard deviations of the mean signal intensity; (7) the myometrial ROI was placed on the SPGR image; (8) we calculated the mean pixel value of the myometrial ROI; (9) the sum of squared deviation was calculated with variation of ROI locations, and the vertical and horizontal coordinates were changed from −10 to +10 pixels; (10) the optimal combination of vertical and horizontal coordinates with minimum sum of squared deviation was obtained, and the appropriateness of the ROI location was visually confirmed by experts; and (11) the mean qT1 value was calculated from the corresponding pixel values of the T1 map within the optimally placed myometrial ROI (Fig 1f). Eventually, the required operations by the user were only 2 steps: (1) click the center of the endometrium, (2) roughly draw the shape of the myometrium manually. Our algorithm did not use any active contour model for ROI extraction. The Code for semiautomatic ROI placement was made available through the Zenodo, DOI: DOI/10.5281/zenodo.7855051 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7855051" xlink:type="simple">https://doi.org/10.5281/zenodo.7855051</ext-link>).</p>
+<p>Associate editor:</p>
+<p>3. Thank you for stating the following financial disclosure: </p>
+<p>"Atsutaka Okizaki received Research funding of Nihon Medi-physics Co. and FUJIFILM Toyama Chemical Co., Ltd. The other authors have no conflict of interest."</p>
+<p>Please state what role the funders took in the study.  If the funders had no role, please state: "The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript." If this statement is not correct you must amend it as needed. </p>
+<p>Please include this amended Role of Funder statement in your cover letter; we will change the online submission form on your behalf.</p>
+<p>Replay&gt;</p>
+<p>Thank you very much for providing us with such detailed feedback. We truly appreciate it. We want to let you know that we have carefully considered your comments, and as the funders did not play a role in this study, we have revised our statement on competing interests accordingly. The updated statement now reads as follows: "The funders had no involvement in the study design, data collection and analysis, decision to publish, or preparation of the manuscript." We have made sure to include this revised statement in our cover letter.</p>
+<p>Associate editor:</p>
+<p>4. Thank you for stating the following in the Financial Disclosure section:  </p>
+<p>We note that you received funding from a commercial source: Nihon Medi-physics Co. and FUJIFILM Toyama Chemical Co., Ltd.</p>
+<p>Please provide an amended Competing Interests Statement that explicitly states this commercial funder, along with any other relevant declarations relating to employment, consultancy, patents, products in development, marketed products, etc. </p>
+<p>Within this Competing Interests Statement, please confirm that this does not alter your adherence to all PLOS ONE policies on sharing data and materials by including the following statement: “This does not alter our adherence to PLOS ONE policies on sharing data and materials.” (As detailed online in our guide for authors <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/competing-interests" xlink:type="simple">http://journals.plos.org/plosone/s/competing-interests</ext-link>).  </p>
+<p>If there are restrictions on sharing of data and/or materials, please state these. Please note that we cannot proceed with consideration of your article until this information has been declared. </p>
+<p>Please include your amended Competing Interests Statement within your cover letter. We will change the online submission form on your behalf.</p>
+<p>Replay&gt;</p>
+<p>Thank you very much for your valuable feedback. We would like to provide an amended Competing Interests Statement that explicitly states the commercial funders, Nihon Medi-physics Co. and FUJIFILM Toyama Chemical Co., Ltd.: “This does not alter our adherence to PLOS ONE policy on sharing data and materials”.</p>
+<p>We confirmed that this statement does not affect our adherence to all PLOS ONE policies on sharing data and materials. Please let us know if any further amendments are necessary.</p>
+<p>Associate editor:</p>
+<p>5. In your Data Availability statement, you have not specified where the minimal data set underlying the results described in your manuscript can be found. PLOS defines a study's minimal data set as the underlying data used to reach the conclusions drawn in the manuscript and any additional data required to replicate the reported study findings in their entirety. All PLOS journals require that the minimal data set be made fully available. For more information about our data policy, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability</ext-link>.</p>
+<p>Upon re-submitting your revised manuscript, please upload your study’s minimal underlying data set as either Supporting Information files or to a stable, public repository and include the relevant URLs, DOIs, or accession numbers within your revised cover letter. For a list of acceptable repositories, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories</ext-link>. Any potentially identifying patient information must be fully anonymized.</p>
+<p>Important: If there are ethical or legal restrictions to sharing your data publicly, please explain these restrictions in detail. Please see our guidelines for more information on what we consider unacceptable restrictions to publicly sharing data: <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions</ext-link>. Note that it is not acceptable for the authors to be the sole named individuals responsible for ensuring data access.</p>
+<p>We will update your Data Availability statement to reflect the information you provide in your cover letter.</p>
+<p>Replay&gt;</p>
+<p>Thank you very much for your helpful and informative feedback. The minimal dataset underlying the results described in this study, including the inter- and intra-observer reliability of qT1 evaluation times obtained by observers 1 and 2 using manual and semiautomatic ROI placements, is provided in the manuscript and its Supporting Information files (S5–8 Files). We have created a Data Availability Statement and included it in our cover letter, which reads as follows:</p>
+<p>Data Availability Statement:</p>
+<p>The minimal dataset underlying the results described in this study are within the manuscript and its Supporting Information files. The source code analysis of Microsoft Visual Studio 2010 image analysis code and MATLAB, along with an example image that supports the findings of this study, has been openly published on Zenodo at [<ext-link ext-link-type="uri" xlink:href="https://zenodo.org/deposit?page=1&amp;size=20" xlink:type="simple">https://zenodo.org/deposit?page=1&amp;size=20</ext-link>]. Additionally, any other data required to fully replicate the reported study findings can be obtained by contacting the corresponding author upon reasonable request.</p>
+<p>Thank you for your guidance in ensuring our manuscript meets PLOS data policy requirements. Please let us know if any further revisions or clarifications are needed.</p>
+<p>Associate editor:</p>
+<p>6. PLOS requires an ORCID iD for the corresponding author in Editorial Manager on papers submitted after December 6th, 2016. Please ensure that you have an ORCID iD and that it is validated in Editorial Manager. To do this, go to ‘Update my Information’ (in the upper left-hand corner of the main menu), and click on the Fetch/Validate link next to the ORCID field. This will take you to the ORCID site and allow you to create a new iD or authenticate a pre-existing iD in Editorial Manager. Please see the following video for instructions on linking an ORCID iD to your Editorial Manager account: <ext-link ext-link-type="uri" xlink:href="https://www.youtube.com/watch?v=_xcclfuvtxQ" xlink:type="simple">https://www.youtube.com/watch?v=_xcclfuvtxQ</ext-link></p>
+<p>Replay&gt;</p>
+<p>Thank you very much in advance for your kind support.</p>
+<p>We have provided the ORCID iD for the corresponding author, Atsutaka Okizaki, below:</p>
+<p>ORCID iD: [0000-0001-8203-827X]</p>
+<p>Associate editor:</p>
+<p>7. Please upload a new copy of Figure 1 as the detail is not clear. Please follow the link for more information:</p>
+<p><ext-link ext-link-type="uri" xlink:href="https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/" xlink:type="simple">https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/</ext-link></p>
+<p><ext-link ext-link-type="uri" xlink:href="https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/" xlink:type="simple">https://blogs.plos.org/plos/2019/06/looking-good-tips-for-creating-your-plos-figures-graphics/</ext-link></p>
+<p>Replay&gt;</p>
+<p>Thank you very much for your helpful and informative comment. We have corrected the resolution of Figure 1 based on your comment and have attached a clearer version of Figure 1 for your convenience.</p>
+<p>Reviewer #1: </p>
+<p>1. Manual ROI placement was performed using MATLAB: Please specify which method was used.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your kind and informative comments on our manuscript. We have developed MATLAB code that generates code for the manual placement of ROIs in DICOM format. To comply with the guidelines, we have shared the generated code, a test dataset, and the procedure on Zenodo at DOI: 10.5281/zenodo.7811343. The resource has been assigned DOI through Zenodo. Additionally, we have included the procedure for replicating our results using these resources in the supporting information (S2 Appendix).</p>
+<p>&lt; Materials and Methods P8 line128&gt;</p>
+<p>Manual ROI placement was performed using MATLAB. First, a whole uterus ROI was manually placed to trace the external contour of the myometrium (Fig.1a).</p>
+<p>↓</p>
+<p>Manual ROI placement was performed using MATLAB. First, a whole uterus ROI was manually placed to trace the external contour of the myometrium (Fig.1a). (S2 Appendix) using the following procedure: (1) The T1 map data was transferred to the MATLAB workspace; (2) An IR image was selected by the observer in the MATLAB application to place the ROI; (3) The provided code was executed to open the image segmentation application in MATLAB; (4) A whole uterus ROI was manually placed to trace the external contour of the myometrium; (5) An endometrial ROI was manually placed to trace the external contour of the endometrium; (6) The myometrial ROI was created by subtracting the endometrial ROI from the whole uterus ROI; (7) Mean qT1 values were calculated from the corresponding pixel values of the T1 map within the myometrial ROI. The code for manual ROI placement was made available through Zenodo, DOI: DOI/10.5281/zenodo.7811343 (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5281/zenodo.7811343" xlink:type="simple">https://doi.org/10.5281/zenodo.7811343</ext-link>).</p>
+<p>Reviewer #1: </p>
+<p>2. In-house software using Microsoft Visual Studio 2010: many semi automatic segmentation models are there, please specify which algorithm was employed in this research work, upon observation of outputs, seems to have developed an active contour model for ROI extraction, if so, please specify in detail about that.</p>
+<p>Replay&gt;</p>
+<p>Thank you for bringing this to our attention. Our algorithm does not utilize any active contour model for ROI extraction. Instead, we fully developed and programmed a semi-automatic ROI placement approach from scratch. The program code has been published on Zenodo: DOI: 10.5281/zenodo.78550551.</p>
+<p>&lt; Materials and Methods P9 line160&gt;</p>
+<p>Eventually, the required operations by the user were only 2 steps: (1) click center of endometrium, (2) roughly draw the shape of myometrium manually.</p>
+<p>↓</p>
+<p>Eventually, the required operations by the user were only 2 steps: (1) click center of endometrium, (2) roughly draw the shape of myometrium manually. Our algorithm did not use any active contour model for ROI extraction.</p>
+<p>Reviewer #1: </p>
+<p>3. Any preprocessing was done prior to ROI placement</p>
+<p>Replay&gt;</p>
+<p>Thank you for your message. I'm glad to have been able to assist you.</p>
+<p>To further clarify, prior to running the semiautomatic analysis, the authors developed a MATLAB code (available on Zenodo, DOI: 10.5281/zenodo.7808462) for generating T1 maps from two SPRG images. Additionally, MATLAB (available on Zenodo, DOI: 10.5281/zenodo.7807266) was used by the authors to convert the DICOM images into JPEG format, with automatic optimization of brightness during the conversion process.</p>
+<p>Reviewer #1: </p>
+<p>4. Quantitative T1 (qT1) values with variable flip angles (VFA) are important for characterizing lesions in 24 patients with pelvic disease: whether this is applicable only for pelvic disease diagnosis</p>
+<p>Replay&gt;</p>
+<p>Thank you for your inquiry regarding the applicability of our software beyond the uterus. While our software was originally designed for the analysis of the uterus, we believe that its programmatic design may potentially allow for its use in analyzing other organs as well, including the pelvic region. However, we acknowledge that further research is necessary to confirm this hypothesis. We are committed to continuing our investigation and development of this software to explore its potential for expanding its applications. </p>
+<p>&lt; Discussion P14 line234&gt;</p>
+<p>The algorithm for semiautomatic ROI placement provided high reproducibility. In principle, the algorithm can be applied to other medical imaging modalities for delineating the uterus because it uses pixel values that correspond with anatomical structures.</p>
+<p>↓</p>
+<p>The algorithm for semiautomatic ROI placement provided high reproducibility. In principle, the algorithm can be applied to other medical imaging modalities for delineating the uterus because it uses pixel values that correspond with anatomical structures. Although this software was specifically designed for the analysis of the uterus, we believe that its programmatic design theoretically allows for its use in analyzing other organs as well. With further research, it may be possible to extend the use of this software beyond its current scope. Therefore, we plan to continue investigating and developing this software to explore its potential for expanding applications.</p>
+<p>Reviewer #1: </p>
+<p>5. Please improve the quality of figure 3</p>
+<p>Replay&gt;</p>
+<p>Thank you for your message. We greatly appreciate your helpful and informative comment. As per your suggestion, we have corrected the resolution of Figure 3 and have also attached a clearer version of Figure 3 for your convenience.</p>
+<supplementary-material id="pone.0297402.s009" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s009" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">Response to Reviewers.docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="aggregated-review-documents" id="pone.0297402.r003" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r003</article-id>
+<title-group>
+<article-title>Decision Letter 1</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Faggioni</surname>
+<given-names>Lorenzo</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Lorenzo Faggioni</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="article" id="rel-obj003" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">27 Nov 2023</named-content>
+</p>
+<p><!-- <div> -->PONE-D-22-17380R1<!-- </div> --><!-- <div> -->Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium<!-- </div> --><!-- <div> -->PLOS ONE</p>
+<p>Dear Dr. Nakagawa,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Jan 11 2024 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:<!-- </div> --><list list-type="bullet"><list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item><list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item><list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list><!-- <div> -->If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Lorenzo Faggioni, M.D., Ph.D.</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>Please review your reference list to ensure that it is complete and correct. If you have cited papers that have been retracted, please include the rationale for doing so in the manuscript text, or remove these references and replace them with relevant current references. Any changes to the reference list should be mentioned in the rebuttal letter that accompanies your revised manuscript. If you need to cite a retracted article, indicate the article’s retracted status in the References list and also include a citation and full reference for the retraction notice.</p>
+<p>[Note: HTML markup is below. Please do not edit.]</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.<!-- </font> --></p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #2: Dear authors,</p>
+<p>It was a pleasure to peer-review this paper investigating the inter- and intra-rater reproducibility of manual and semi-automatic quantitative T1 measurement on myometrium in healthy volunteers.</p>
+<p>Some minor issues should be addressed:</p>
+<p>1. The abstract should be rewritten to provide essential information to the readers. The purpose heading is quite long, providing some unnecessary information, while the material and methods one is quite short, without any information regarding the statistics analysis. Be sure to define all abbreviations (e.g. IR). Purpose and conclusions should be aligned, in the conclusion heading manual segmentation is not mentioned at all.</p>
+<p>2. Introduction: The manuscript requires a careful proof-reading, preferably by an English native speaker, many errors and typos (Line 80, pervious) are present, especially in this heading.</p>
+<p>Some relevant references are missing (e.g. Line 70, Line 90).</p>
+<p>Please define all the abbreviations (e.g. UAE, IR).</p>
+<p>Lines 81-82 Please rephrase</p>
+<p>Line 105, What does “continuity” means in this setting?</p>
+<p>3. Provide a clear statement regarding study nature</p>
+<p>4. Line 148, “There were no adequate”. Maybe is it “inadequate”? Otherwise I’m not getting what this sentence mean.</p>
+<p>5. Results: Consider to add more results (and less cross-reference to tables or figures) and p-values in this sections.</p>
+<p>6. How many patients were excluded due to the presence of mass lesions? It is stated in the methods the presence of this exclusion criterion.</p>
+<p>7 Discussion, especially after the particularly long introduction, sounds a bit redundant. Consider to revise both these sections to avoid redundancy, trying to focus the discussion on drawing conclusions regarding the comparison between manual and semiautomatic segmentation.</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->7. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #2: <bold>Yes: </bold>Salvatore Claudio Fanni</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0297402.r004">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r004</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 1</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj004" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0297402.r003" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>2</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">1 Jan 2024</named-content>
+</p>
+<p>Replay to the reviewer and editor</p>
+<p>30/December/2023</p>
+<p>Dear Sir: Editor-In-Chief</p>
+<p>Manuscript reference No. PONE-D-22-17380R1</p>
+<p>We are pleased to resubmit our revised manuscript, “Inter- and intra-rater reproducibility of quantitative T1 measurement using semiautomatic region of interest placement in myometrium”, for your consideration in PLOS ONE.</p>
+<p>Thank you very much for your reviews. Your comments were highly insightful and enabled us to improve the quality of our manuscript greatly. In the following pages are our point-by-point responses to each of the comments. Furthermore, we attached changed parts of our manuscript. We revised those parts according to the editor’s and reviewer’s comments as ‘Response to Reviewers'.</p>
+<p>Revisions in the text are shown using yellow highlight for changes and green highlight for deletion. We hope that the revisions in the manuscript are suitable for publication in PLOS ONE.</p>
+<p>We shall look forward to hearing from you.</p>
+<p>Response to Reviewers</p>
+<p>Associate editor:</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your kind and informative comments on our manuscript. We greatly appreciate your evaluation of our work. As per your suggestion, we submitted our laboratory protocols for qT1 measurements to protocols.io, aiming to improve the reproducibility of our results. The uploaded files were S1-4 Appendix of program code for qT1 measurements. </p>
+<p>T1 maps were generated pixel by pixel using MATLAB (MathWorks, Natick, MA) with two flip angles (FAs) of 4° and 18° (S1 Appendix). Manual ROI placement was performed using MATLAB (S2 Appendix). Before analysis, we converted the DICOM images to JPEG format using MATLAB (S3 Appendix). The myometrial ROI was placed using the following semiautomatic procedure (S4 Appendix).</p>
+<p>Thank you again for your time and consideration. We look forward to hearing from you.</p>
+<p>Associate editor:</p>
+<p>Please review your reference list to ensure that it is complete and correct. If you have cited papers that have been retracted, please include the rationale for doing so in the manuscript text, or remove these references and replace them with relevant current references. Any changes to the reference list should be mentioned in the rebuttal letter that accompanies your revised manuscript. If you need to cite a retracted article, indicate the article’s retracted status in the References list and also include a citation and full reference for the retraction notice.</p>
+<p>Reply&gt;</p>
+<p>We have carefully reviewed the reviewer's comments and made the necessary revisions to our manuscript.  In response to your specific request, we have revised the reference list as follows:</p>
+<p>The deleted reference numbers are marked in green:</p>
+<p>7, 8, 15, 18, 21, 22</p>
+<p>The changed reference numbers are marked in yellow:</p>
+<p>9  →　7</p>
+<p>10 →　8</p>
+<p>11 →　9</p>
+<p>12→　10</p>
+<p>13 →　11</p>
+<p>14 →　12</p>
+<p>16→　13  </p>
+<p>17 →　14</p>
+<p>19 →　15</p>
+<p>20 →　16</p>
+<p>23 →　17</p>
+<p>24 →　18</p>
+<p>25 →　19</p>
+<p>26 →　20</p>
+<p>Associate editor:</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+<p>Reply&gt;</p>
+<p>We have resubmitted our figure files that were uploaded to the PACE digital diagnostic tool and downloaded from PACE.</p>
+<p>Reviewer #2: </p>
+<p>1. The abstract should be rewritten to provide essential information to the readers. The purpose heading is quite long, providing some unnecessary information, while the material and methods one is quite short, without any information regarding the statistics analysis. Be sure to define all abbreviations (e.g. IR). Purpose and conclusions should be aligned, in the conclusion heading manual segmentation is not mentioned at all.</p>
+<p>Reply&gt;</p>
+<p>Thank you for your message regarding resubmitting our abstract. In response to your specific comments, we have revised the purpose to eliminate unnecessary details, and we have expanded the material and methods section to include information about the statistical analysis. Furthermore, we have ensured that all abbreviations, including "IR," are explicitly defined within the abstract. Furthermore, we added the description for the manual ROI placement in the conclusion.</p>
+<p>&lt; Abstract P2 line45&gt;</p>
+<p>Purpose: Quantitative T1 (qT1) values with variable flip angles (VFA) are important for characterizing lesions in patients with pelvic disease. QT1 values vary depending on the location, shape, and area of the region of interest (ROI) when the ROI is set manually.</p>
+<p>The objective of this study was to investigate the inter- and intraobserver reproducibility of qT1 measurements using manual and semiautomatic ROI settings. We hypothesized that the semiautomatic method, which uses a 3D anatomical relationship between the myometrium and other tissues, may be useful for minimizing the variation in ROI settings and thus, improve qT1 reproducibility.</p>
+<p>↓</p>
+<p>Purpose: Quantitative T1 (qT1) values with variable flip angles (VFA) are important for characterizing lesions in patients with pelvic disease. QT1 values vary depending on the location, shape, and area of the region of interest (ROI) when the ROI is set manually.</p>
+<p>The objective of this This study was aimed to investigate the inter- and intraobserver reproducibility of quantitative T1 (qT1) measurements using manual and semiautomatic region of interest (ROI) settings placements. We hypothesized that the usefulness of the semiautomatic method, which uses utilizes a 3D three-dimensional (3D) anatomical relationship between the myometrium and other tissues, may be useful for minimizing the ROI placement variation, thereby improving in ROI settings and thus, improve qT1 reproducibility compared to the manual approach. The semiautomatic approach, which considered anatomical relationships, was expected to enhance reproducibility by reducing ROI placement variabilities.</p>
+<p>&lt; Abstract P2 line52&gt;</p>
+<p>Materials and methods: Twenty-three healthy female volunteers were investigated. The data with VFA and IR were acquired using 3D-spoiled gradient echo and spin echo sequences, respectively. T1 maps were generated with VFA. Manual and semiautomatic ROI placements were performed independently. Mean qT1 values were calculated from the T1 maps using the corresponding pixel values of the myometrial ROI. Inter- and intraobserver reproducibility of qT1 values were assessed.</p>
+<p>↓</p>
+<p>Materials and methods: Twenty-three This study recruited 23 healthy female volunteers were investigated. The data. Data with variable flip angle (VFA) and IR inversion recovery were acquired using 3D-spoiled gradient echo and spin echo sequences, respectively. T1 maps were generated with VFA. Manual and semiautomatic ROI placements were performed independently conducted. Mean qT1 values were calculated from the T1 maps using the corresponding pixel values of the myometrial ROI. Inter- and intraobserver reproducibility of qT1 values were assessed was investigated. The inter- and intraobserver reproducibility of qT1 values was evaluated by calculating the coefficient of variation (CoV). Further, reproducibility was evaluated with inter- and intraobserver errors and intraclass correlation coefficients (ICCs). Bland–Altman analysis was utilized to compare the results, estimate bias, and determine the limits of agreement.</p>
+<p>&lt; Abstract P2 line57&gt;</p>
+<p>The mean inter- and intraobserver error for semiautomatic ROI placement were also significantly lower than those for manual ROI placement (p &lt; 0.05 and p &lt; 0.01, respectively).</p>
+<p>↓</p>
+<p>The Further, the mean inter- and intraobserver error errors for semiautomatic ROI placement were also significantly lower than those for manual ROI placement (p &lt; 0.05 and p &lt; 0.01, respectively).</p>
+<p>&lt; Abstract P2 line62&gt;</p>
+<p>Conclusion: Semiautomatic ROI placement has high reproducibility of qT1 measurements.</p>
+<p>↓</p>
+<p>Conclusion: Semiautomatic ROI placement has demonstrated high reproducibility of qT1 measurements compared with manual methods. Semiautomatic ROI placement may be useful for evaluating uterine qT1 with high reproducibility.</p>
+<p>Reviewer #2: </p>
+<p>2. Introduction: The manuscript requires a careful proof-reading, preferably by an English native speaker, many errors and typos (Line 80, pervious) are present, especially in this heading.</p>
+<p>Replay&gt;</p>
+<p>Our revised manuscript was edited by a native English speaker through a new editing process.</p>
+<p>We have deleted this sentence concluding type error (Line 80, pervious).</p>
+<p>The manuscript has undergone additional English proofreading, and we sent a new editorial certificate. We have reviewed and revised the title through English proofreading.</p>
+<p>&lt; Introduction P4 line80&gt;</p>
+<p>Pervious paper showed peak of qT1 in the uterine fibroid was markedly decreased after the therapy, although that in the myometrium did not lead to a large change [15]</p>
+<p>↓</p>
+<p>deleted</p>
+<p>&lt; Title &gt;</p>
+<p>Inter- and Intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI placement in myometrium</p>
+<p>↓</p>
+<p>Inter- and Intra intra-rater reproducibility of quantitative T1 measurement using semiautomatic ROI region of interest placement in myometrium</p>
+<p>Reviewer #2: </p>
+<p>Some relevant references are missing (e.g. Line 70, Line 90).</p>
+<p>Replay&gt;</p>
+<p>Thank you for your message. We have added relevant references to the sentence in Line 70, which removed the text including the relevant references to the sentence in Line 90.</p>
+<p>&lt; Introduction P4 line69&gt;</p>
+<p>Quantitative image analysis has the advantage of better tissue identification and classification compared with visual assessment of traditional T1- and T2-weighted images.</p>
+<p>↓</p>
+<p>Quantitative image analysis has the advantage of better tissue identification and classification compared with the visual assessment of traditional T1- and T2-weighted images [4-6].</p>
+<p>&lt; Introduction P4 line89&gt;</p>
+<p>Of these pulse sequences, IR is most frequently used as the gold standard for qT1 evaluation.</p>
+<p>↓</p>
+<p>deleted</p>
+<p>Reviewer #2: </p>
+<p>Please define all the abbreviations (e.g. UAE, IR).</p>
+<p>Replay&gt;</p>
+<p>We have defined the abbreviations for the words that were pointed out. We have checked all the abbreviations.</p>
+<p>&lt;Introduction P5 line88&gt;</p>
+<p>Various pulse sequences, including IR [17], modified look-locker inversion recovery (MOLLI) [2], and VFA [18], have been used for measuring qT1.</p>
+<p>↓</p>
+<p>deleted</p>
+<p>We have added the below text in the ‘Subjects’ of the 'Materials and Methods' section.</p>
+<p>&lt; Materials and Methods P6 line114&gt;</p>
+<p>none</p>
+<p>↓</p>
+<p>This study excluded subjects who met the following exclusion criteria: (a) subjects who presented with uterine mass lesions (n = 5), (b) subjects who had misregister between inversion recovery (IR) and each VFA image (n = 13), and (c) subjects who observed motion artifacts in the spoiled gradient recalled echo (SPGR) image acquired for qT1 with VFA (n = 15). Our study enrolled 23 healthy women volunteers (age range: 22–51 years; mean age ± standard deviation [SD]: 33 ± 11 years).</p>
+<p>&lt;Introduction P4 line78&gt;</p>
+<p>Pervious paper showed peak of qT1 in the uterine fibroid was markedly decreased after the therapy, although that in the myometrium did not lead to a large change [15]. The assessment of myometrium may desire for the high intensity focused ultrasound treatment.</p>
+<p>↓</p>
+<p>Pervious paper showed peak of qT1 in the uterine fibroid was markedly decreased after the therapy, although that in the myometrium did not lead to a large change [15]. The assessment of myometrium may desire for the high intensity focused ultrasound treatment.</p>
+<p> Dominant leiomyoma qT1 measures were used to predict uterine and dominant leiomyoma size reductions after uterine artery embolization (UAE) [12].</p>
+<p>Reviewer #2: </p>
+<p>Lines 81-82 Please rephrase</p>
+<p>Replay&gt;</p>
+<p>We greatly appreciate your helpful and informative comment. As per your suggestion, we have deleted this text.</p>
+<p>&lt;Introduction P4 line79&gt;</p>
+<p>The assessment of myometrium may desire for the high intensity focused ultrasound treatment.</p>
+<p>↓</p>
+<p>deleted</p>
+<p>Reviewer #2: </p>
+<p>Line 105, What does “continuity” means in this setting?</p>
+<p>Replay&gt;</p>
+<p>As per your suggestion, we have corrected the text.</p>
+<p>&lt;Introduction P6 line103&gt;</p>
+<p>We hypothesized that a semiautomatic method that uses a 3D anatomical relationship between the myometrium and endometrium and continuity of MRI may be useful to minimize variation and improve the reproducibility of the ROI settings.</p>
+<p>↓</p>
+<p>We hypothesized that a semiautomatic method that uses, using a 3D anatomical relationship between the myometrium and endometrium and continuity of MRI, may be useful to minimize for minimizing variation and improve the by manual ROI placements and improving ROI placement reproducibility of the ROI settings.</p>
+<p>Reviewer #2: </p>
+<p>3. Provide a clear statement regarding study nature</p>
+<p>Replay&gt;</p>
+<p>We have extensively revised the introduction to provide a clear statement regarding the nature of our study. </p>
+<p>&lt;Introduction P6 line103&gt;</p>
+<p>A highly reproducible ROI placement without the need for a contrast agent is preferable for quantitative MRI. We hypothesized that a semiautomatic method that uses a 3D anatomical relationship between the myometrium and endometrium and continuity of MRI may be useful to minimize variation and improve the reproducibility of the ROI settings. We developed a semiautomatic myometrial ROI placement method that requires no contrast agent. The objective of this study is to investigate the inter- and intraobserver reproducibility of qT1 measurements using manual and semiautomatic ROI settings.</p>
+<p>↓</p>
+<p>A highly Highly reproducible ROI placement without the need for a contrast agent is preferable for quantitative MRI. </p>
+<p>Therefore, we developed a semiautomatic myometrial ROI placement method without a contrast agent. We hypothesized that a semiautomatic method that uses, using a 3D anatomical relationship between the myometrium and endometrium and continuity of MRI, may be useful to minimize for minimizing variation and improve the by manual ROI placements and improving ROI placement reproducibility of the ROI settings. We developed a semiautomatic myometrial ROI placement method that requires no contrast agent. The objective of this. This study is aimed to investigate the inter- and intraobserver reproducibility of qT1 measurements using manual and semiautomatic ROI settings placements.</p>
+<p>Reviewer #2: </p>
+<p>4. Line 148, “There were no adequate”. Maybe is it “inadequate”? Otherwise I’m not getting what this sentence mean.</p>
+<p>Replay&gt;</p>
+<p>As per your suggestion, we have removed the text including the sentence.</p>
+<p>&lt; Materials and Methods P4 line148&gt;</p>
+<p>There were no adequate image quality and image misregistration between IR image and 2 SPGRs on visual assessment.</p>
+<p>↓</p>
+<p>There were no adequate, evaluated the MR images using IR images and two SPGRs to confirm image quality and image misregistration between IR image registration.</p>
+<p>Reviewer #2: </p>
+<p>5. Results: Consider to add more results (and less cross-reference to tables or figures) and p-values in this sections.</p>
+<p>Replay&gt;</p>
+<p>As per your suggestion, we have added more results and p-values in this section.</p>
+<p>&lt; Materials and Methods P24 line252&gt;</p>
+<p>A negative proportional bias was observed between the first and second measurements of qT1 using manual ROI placement (Fig.3c). However, no proportional bias was observed using semiautomatic ROI placement (Fig.3d).</p>
+<p>The means and standard deviations of time with manual and semiautomatic ROI placements were 55±4 sec, 44±5 sec, respectively. The times with semiautomatic ROI placement were significant smaller than those with manual ROI placement (P &lt; 0.001).</p>
+<p>↓</p>
+<p>Positive proportional bias emerged in the qT1 measurements between observers 1 and 2 using semiautomatic ROI placement (R = 0.461, p = 0.027; Fig. 3b). A negative proportional bias was observed determined between the first and second qT1 measurements of qT1 using manual ROI placement (R = 0.532, p = 0.009; Fig. 3c). However, no proportional bias was observed using semiautomatic ROI placement (Fig.in the measurements between observers 1 and 2 using manual ROI placement (R = 0.224, p = 0.304; Fig. 3a). Similarly, no proportional bias was observed between the first and second measurements using semiautomatic ROI placement (R = 0.11, p = 0.959; Fig. 3d).</p>
+<p> The means and standard deviations SDs of time with manual and semiautomatic ROI placements were 55 ± 4 sec s and 44 ± 5 sec s, respectively. The times with semiautomatic ROI placement were significant significantly smaller than those with manual ROI placement (Pp &lt; 0.001).</p>
+<p>Reviewer #2: </p>
+<p>6. How many patients were excluded due to the presence of mass lesions? It is stated in the methods the presence of this exclusion criterion.</p>
+<p>Replay&gt;</p>
+<p>We have added the exclusion criteria in the ‘Subjects” section.</p>
+<p>&lt; Materials and Methods P6 line112&gt;</p>
+<p>Subjects</p>
+<p>The study protocol was approved by our institutional research ethics committee at Asahikawa Medical University in accordance with the principles of the Declaration of Helsinki. All subjects were informed regarding the content of the study and were provided written informed consent. Between May 2018 and April 2019, we enrolled 23 healthy women volunteers (age range, 22–51 years; mean age ± standard deviation, 33 ± 11 years) in our study.</p>
+<p>↓</p>
+<p>The study protocol was approved by our Our institutional research ethics committee at Asahikawa Medical University in accordance with approved the study protocol following the principles of the Declaration of Helsinki. All subjects were informed regarding the content of the study and were provided signed written informed consent. Between From May 2018 and to April 2019, we enrolled 23 healthy women volunteers (age range, 22–51 years; mean age ± standard deviation, 33 ± 11 years)56 subjects underwent pelvic MR imaging, incorporating VFA for qT1 measurements in our study. hospital.</p>
+<p>This study excluded subjects who met the following exclusion criteria: (a) subjects who presented with uterine mass lesions (n = 5), (b) subjects who had misregister between inversion recovery (IR) and each VFA image (n = 13), and (c) subjects who observed motion artifacts in the spoiled gradient recalled echo (SPGR) image acquired for qT1 with VFA (n = 15). Our study enrolled 23 healthy women volunteers (age range: 22–51 years; mean age ± standard deviation [SD]: 33 ± 11 years).</p>
+<p>Reviewer #2: </p>
+<p>7 Discussion, especially after the particularly long introduction, sounds a bit redundant. Consider to revise both these sections to avoid redundancy, trying to focus the discussion on drawing conclusions regarding the comparison between manual and semiautomatic segmentation.</p>
+<p>Replay&gt;</p>
+<p>As per your suggestion, we have extensively revised the introduction in response to the reviewer's comments. Furthermore, we have added a comparison of manual and semiautomatic ROI placement in the conclusion.</p>
+<p>&lt;Introduction P6 line103&gt;</p>
+<p>Quantitative image analysis of magnetic resonance imaging (MRI) data may be useful for comparing subjects. Quantitative T1 (qT1), T2, and apparent diffusion coefficient values have been used to investigate various diseases [1-4]. Quantitative image analysis has the advantage of better tissue identification and classification compared with visual assessment of traditional T1- and T2-weighted images. QT1 values have been used extensively to study the central nervous system over the past several decades [5-7]. Visualizing qT1 maps are more useful for identifying deep cerebellar nuclei than traditional T1-weighted images [6]. Recently, qT1 values have also been used in the diagnoses of heart disease, where the detection rates of acute myocardial edema with qT1 were higher than those with T2-weighted images[8]. Quantitative analyses are applicable for diagnoses not only in the central nervous system and myocardium but also in the pelvis [9-12].</p>
+<p>Davenport et al. reported that qT1 using dynamic contrast-enhanced MRI with variable flip angle (VFA) in patients with uterine myoma was important for characterizing the lesion and monitoring drug effects [13]. QT1 in myometrium was also available for investigating uterine pathology. The preinterventional qT1 of leiomyoma and uterus also could predict the ability of UAE to reduce the sizes of the leiomyoma and the histological change of uterus [14]. Pervious paper showed peak of qT1 in the uterine fibroid was markedly decreased after the therapy, although that in the myometrium did not lead to a large change [15]. The assessment of myometrium may desire for the high intensity focused ultrasound treatment.</p>
+<p>QT1 values vary depending on various factors, such as magnetic field strength, magnet manufacturer, imaging sequence, image acquisition policy, postprocessing algorithm, body size and age of patients, and measurement method of quantitative values [16, 17]. Therefore, quantitative values are not directly comparable between different institutions without the use of certain reference values, and each institution needs to define reference values for standardization. In principle, such reference values would require high reproducibility of measurements.</p>
+<p>Various pulse sequences, including IR[17], modified look-locker inversion recovery (MOLLI)[2], and VFA[18], have been used for measuring qT1. Of these pulse sequences, IR is most frequently used as the gold standard for qT1 evaluation. However, acquisition with IR requires considerable time (from 30 minutes to several hours). Acquisitions with MOLLI and VFA are shorter compared with IR, although MOLLI has the disadvantage of data of only one slice being obtained per acquisition, and thus, acquiring many slices is still time-consuming. By contrast, the VFA method requires a shorter acquisition time because multiple slices are acquired per acquisition.</p>
+<p>A robust, reproducible, and standardized method is desirable for quantitative measurements. QT1 values sometimes vary, which can depend on location, shape, and area of region of interest (ROI) when the ROI is set manually. Heye et al. reported that a semiautomatic ROI placement improved the reproducibility of pharmacokinetic parameters, but the method is only available using dynamic enhanced MRI [19]. Chapiro et al. highlighted the usefulness of semiautomated 3D tumor segmentation but noted the necessity of acquiring contrast-enhanced T1-weighted images [20].</p>
+<p>Gadolinium contrast agents are commonly used in clinical practice. However, they have been known to sometimes cause side effects, making them unsuitable for patients with severe kidney dysfunction due to avoid nephrogenic systemic fibrosis [21, 22]. Therefore, contrast agents should only be used if necessary.</p>
+<p>↓</p>
+<p>Quantitative image analysis of magnetic Magnetic resonance imaging (MRI) data quantitative image analysis may be useful for comparing subjects. Quantitative T1 (qT1), T2, and apparent diffusion coefficient values have been used utilized to investigate various diseases [1-4]. Quantitative image analysis has the advantage of better tissue identification and classification compared with the visual assessment of traditional T1- and T2-weighted images [4-6]. QT1 values have been used extensively used to study the central nervous system over the past several decades [5-7]. Visualizing qT1 maps are more useful for identifying deep cerebellar nuclei than traditional T1-weighted images [6]. Recently, qT1 values have also been used in the diagnoses of heart disease, where the detection rates of acute myocardial edema with qT1 were higher than those with T2-weighted images[8]. Quantitative analyses are applicable for diagnoses not only in the central nervous system and myocardium but also in the pelvis[9-12] [7-10].</p>
+<p>Davenport et al. reported that revealed qT1, using dynamic contrast-enhanced MRI with variable flip angle (VFA) in patients with uterine myoma was important, to be crucial for characterizing the lesion and monitoring drug effects [1311]. QT1 in myometrium was also available for investigating uterine pathology. The preinterventional qT1 of leiomyoma and uterus also could predict the ability of UAE to reduce the sizes of the leiomyoma and the histological change of uterus[14]. Pervious paper showed peak of qT1 in the uterine fibroid was markedly decreased after the therapy, although that in the myometrium did not lead to a large change[15]. The assessment of myometrium may desire for the high intensity focused ultrasound treatment.</p>
+<p>. Dominant leiomyoma qT1 measures were used to predict uterine and dominant leiomyoma size reductions after uterine artery embolization (UAE) [12].</p>
+<p>QT1 values vary depending based on various factors, such as including magnetic field strength, magnet manufacturer, imaging sequence, image acquisition policy, postprocessing algorithm, body size and age of patients, and measurement method of quantitative values and patient characteristics [16, 1713, 14]. Therefore, quantitative values are not directly comparable between different institutions without the use of certain reference values, and each institution needs to must define reference values for standardization. In principle, such these reference values would require high reproducibility of for quantitative measurements.</p>
+<p>Various pulse sequences, including IR[17], modified look-locker inversion recovery (MOLLI)[2], and VFA[18], have been used for measuring qT1. Of these pulse sequences, IR is most frequently used as the gold standard for qT1 evaluation. However, acquisition with IR requires considerable time (from 30 minutes to several hours). Acquisitions with MOLLI and VFA are shorter compared with IR, although MOLLI has the disadvantage of data of only one slice being obtained per acquisition, and thus, acquiring many slices is still time-consuming. By contrast, the VFA method requires a shorter acquisition time because multiple slices are acquired per acquisition.</p>
+<p>A robust, reproducible, and standardized method is desirable for quantitative measurements. QT1 values sometimes vary, which can depend based on the location, shape, and area of the region of interest (ROI) when the ROI is set manually set. Heye et al. reported revealed that a semiautomatic ROI placement improved enhanced the reproducibility of pharmacokinetic parameters, but; however, the method is only available using dynamic enhanced MRI [1915]. Chapiro et al. highlighted emphasized the usefulness of semiautomated three-dimensional (3D) tumor segmentation but noted the necessity of acquiring contrast-enhanced T1-weighted images [2016].</p>
+<p>Gadolinium contrast agents are commonly used in clinical practice. However, they have been known to sometimes cause side effects, making them unsuitable for patients with severe kidney dysfunction due to avoid nephrogenic systemic fibrosis[21, 22]. Therefore, contrast agents should only be used if necessary.</p>
+<p>A highly Highly reproducible ROI placement without the need for a contrast agent is preferable for quantitative MRI. </p>
+<p>Therefore, we developed a semiautomatic myometrial ROI placement method without a contrast agent. We hypothesized that a semiautomatic method that uses, using a 3D anatomical relationship between the myometrium and endometrium and continuity of MRI, may be useful to minimize for minimizing variation and improve the by manual ROI placements and improving ROI placement reproducibility of the ROI settings. We developed a semiautomatic myometrial ROI placement method that requires no contrast agent. The objective of this. This study is aimed to investigate the inter- and intraobserver reproducibility of qT1 measurements using manual and semiautomatic ROI settings placements.</p>
+<p>&lt;Discussion P17 line305&gt;</p>
+<p>In conclusion, the semiautomatic ROI placement algorithm had high reproducibility of qT1 measurements.</p>
+<p>↓</p>
+<p>In conclusion, the semiautomatic ROI placement algorithm had demonstrated high reproducibility of qT1 measurements compared with manual methods. Semiautomatic ROI placement may be useful for evaluating uterine qT1 with high reproducibility.</p>
+<supplementary-material id="pone.0297402.s010" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0297402.s010" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">Response to Reviewers.docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="aggregated-review-documents" id="pone.0297402.r005" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r005</article-id>
+<title-group>
+<article-title>Decision Letter 2</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Faggioni</surname>
+<given-names>Lorenzo</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Lorenzo Faggioni</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="article" id="rel-obj005" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>2</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">5 Jan 2024</named-content>
+</p>
+<p>Inter- and intra-rater reproducibility of quantitative T1 measurement using semiautomatic region of interest placement in myometrium</p>
+<p>PONE-D-22-17380R2</p>
+<p>Dear Dr. Nakagawa,</p>
+<p>We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.</p>
+<p>Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.</p>
+<p>An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at <ext-link ext-link-type="uri" xlink:href="http://www.editorialmanager.com/pone/" xlink:type="simple">http://www.editorialmanager.com/pone/</ext-link>, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at <email xlink:type="simple">authorbilling@plos.org</email>.</p>
+<p>If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>Kind regards,</p>
+<p>Lorenzo Faggioni, M.D., Ph.D.</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.<!-- </font> --></p>
+<p>Reviewer #2: All comments have been addressed</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->7. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+</body>
+</sub-article>
+<sub-article article-type="editor-report" id="pone.0297402.r006" specific-use="acceptance-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0297402.r006</article-id>
+<title-group>
+<article-title>Acceptance letter</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Faggioni</surname>
+<given-names>Lorenzo</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Lorenzo Faggioni</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0297402" document-id-type="doi" document-type="article" id="rel-obj006" link-type="peer-reviewed-article"/>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">18 Jan 2024</named-content>
+</p>
+<p>PONE-D-22-17380R2 </p>
+<p>PLOS ONE</p>
+<p>Dear Dr.  Nakagawa, </p>
+<p>I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now being handed over to our production team.</p>
+<p>At this stage, our production department will prepare your paper for publication. This includes ensuring the following:</p>
+<p>* All references, tables, and figures are properly cited</p>
+<p>* All relevant supporting information is included in the manuscript submission,</p>
+<p>* There are no issues that prevent the paper from being properly typeset</p>
+<p>If revisions are needed, the production department will contact you directly to resolve them. If no revisions are needed, you will receive an email when the publication date has been set. At this time, we do not offer pre-publication proofs to authors during production of the accepted work. Please keep in mind that we are working through a large volume of accepted articles, so please give us a few weeks to review your paper and let you know the next and final steps. </p>
+<p>Lastly, if your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>If we can help with anything else, please email us at <email xlink:type="simple">customercare@plos.org</email>.</p>
+<p>Thank you for submitting your work to PLOS ONE and supporting open access. </p>
+<p>Kind regards, </p>
+<p>PLOS ONE Editorial Office Staff</p>
+<p>on behalf of</p>
+<p>Dr. Lorenzo Faggioni </p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+</body>
+</sub-article>
+</article>

@@ -181,6 +181,14 @@ do not authenticate studies, ethics records, mappings or official compliance.
    `benchmarks/pilots/published-reference-20261116/README.md`. Its 60% decision
    coverage and 34/49 reference-frame error recall do not establish whole-paper
    correctness, SRA extraction performance or representative multi-field accuracy.
+   A prospective six-subject-tag execution pilot now processes 12 licensed real
+   papers selected from the complete 1,022-record PLOS ONE January 2024 frame.
+   All 12 paired executions agree after isolating outputs from repository
+   provenance. All 516 criterion verdicts remain NOT_ASSESSED; no executable
+   numerical checks or new human reference labels were available. Broad publisher
+   tags did not reliably establish profile applicability. This advances source/
+   execution evidence, not representative scientific-error accuracy; see
+   [the frozen pilot](../benchmarks/pilots/multifield-20261116/README.md).
 2. **Dependence and design complexity:** Correlated/multilevel study estimates,
    cluster/unequal-variance power, attrition and repeated measures need explicit
    design inputs and different estimators. Current simple formulas cannot stand

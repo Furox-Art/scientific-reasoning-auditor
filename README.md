@@ -598,6 +598,17 @@ clustering or selection bias. No real external domain experts were recruited
 for this change, and no domain-wide scientific accuracy numbers can be
 claimed yet. Refer to [the expert protocol](docs/DOMAIN_EXPERT_PROTOCOL.md).
 
+## Prospective real-paper execution evidence
+
+A frozen [six-subject-tag pilot](benchmarks/pilots/multifield-20261116/README.md)
+selects 12 real papers from a complete 1,022-record PLOS ONE January 2024 frame.
+All 12 original licensed JATS sources were processed, and all 12 same-environment
+repeat comparisons agree in the corrected run; the failed first attempt is
+preserved. The unchanged 0.10.0 engine retrieved text candidates but proposed
+zero executable checks. All 516 criterion/paper scientific verdicts remain
+NOT_ASSESSED. No new human labels or multi-field scientific-error accuracy
+estimate exist, and publisher subject tags do not establish profile applicability.
+
 ## Scientific validation roadmap
 
 The project is split into separate assurance layers. A rule-based text scan must not be presented as full scientific validation.

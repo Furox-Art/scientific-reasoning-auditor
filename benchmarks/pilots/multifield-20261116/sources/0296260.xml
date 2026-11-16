@@ -1,0 +1,1659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-23-31525</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Surgical and invasive medical procedures</subject></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Biochemistry</subject><subj-group><subject>Proteins</subject><subj-group><subject>Collagens</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Surgical and invasive medical procedures</subject><subj-group><subject>Pediatric surgery</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Body fluids</subject><subj-group><subject>Cerebrospinal fluid</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Body fluids</subject><subj-group><subject>Cerebrospinal fluid</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Physiology</subject><subj-group><subject>Body fluids</subject><subj-group><subject>Cerebrospinal fluid</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Nervous system</subject><subj-group><subject>Cerebrospinal fluid</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Nervous system</subject><subj-group><subject>Cerebrospinal fluid</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Oncology</subject><subj-group><subject>Cancer treatment</subject><subj-group><subject>Surgical oncology</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Clinical medicine</subject><subj-group><subject>Clinical oncology</subject><subj-group><subject>Surgical oncology</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Oncology</subject><subj-group><subject>Clinical oncology</subject><subj-group><subject>Surgical oncology</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>People and places</subject><subj-group><subject>Population groupings</subject><subj-group><subject>Age groups</subject><subj-group><subject>Children</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>People and places</subject><subj-group><subject>Population groupings</subject><subj-group><subject>Families</subject><subj-group><subject>Children</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Oncology</subject><subj-group><subject>Cancers and neoplasms</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Medical conditions</subject><subj-group><subject>Spinal cord diseases</subject><subj-group><subject>Syringomyelia and syringobulbia</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Neurology</subject><subj-group><subject>Spinal cord diseases</subject><subj-group><subject>Syringomyelia and syringobulbia</subject></subj-group></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>Morphological and ultrastructural investigation of the posterior atlanto-occipital membrane: Comparing children with Chiari malformation type I and controls</article-title>
+<alt-title alt-title-type="running-head">Morphological investigation of the PAOM in CM-I</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" corresp="yes" equal-contrib="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-4496-7622</contrib-id>
+<name name-style="western">
+<surname>Ravindra</surname>
+<given-names>Vijay M.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+<xref ref-type="aff" rid="aff004"><sup>4</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+<contrib contrib-type="author" equal-contrib="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0009-0005-1098-4909</contrib-id>
+<name name-style="western">
+<surname>Robinson</surname>
+<given-names>Lorraina</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<xref ref-type="aff" rid="aff005"><sup>5</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Jensen</surname>
+<given-names>Hailey</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff006"><sup>6</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Kurudza</surname>
+<given-names>Elena</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Joyce</surname>
+<given-names>Evan</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Ludwick</surname>
+<given-names>Allison</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Telford</surname>
+<given-names>Russell</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff006"><sup>6</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-9951-5324</contrib-id>
+<name name-style="western">
+<surname>Youssef</surname>
+<given-names>Osama</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<xref ref-type="aff" rid="aff007"><sup>7</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-5432-1817</contrib-id>
+<name name-style="western">
+<surname>Ryan</surname>
+<given-names>Justin</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+<xref ref-type="aff" rid="aff004"><sup>4</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Bollo</surname>
+<given-names>Robert J.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Iyer</surname>
+<given-names>Rajiv R.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Kestle</surname>
+<given-names>John R. W.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Cheshier</surname>
+<given-names>Samuel H.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+<xref ref-type="aff" rid="aff007"><sup>7</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Ikeda</surname>
+<given-names>Daniel S.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff008"><sup>8</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Mao</surname>
+<given-names>Qinwen</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<xref ref-type="aff" rid="aff005"><sup>5</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Brockmeyer</surname>
+<given-names>Douglas L.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Department of Neurosurgery, Clinical Neurosciences Center, University of Utah, Salt Lake City, Utah, United States of America</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>Division of Pediatric Neurosurgery, Primary Children’s Hospital, Salt Lake City, Utah, United States of America</addr-line></aff>
+<aff id="aff003"><label>3</label> <addr-line>Department of Neurosurgery, University of California San Diego, San Diego, California, United States of America</addr-line></aff>
+<aff id="aff004"><label>4</label> <addr-line>Division of Pediatric Neurosurgery, Rady Children’s Hospital, San Diego, California, United States of America</addr-line></aff>
+<aff id="aff005"><label>5</label> <addr-line>Department of Pathology, University of Utah, Salt Lake City, Utah, United States of America</addr-line></aff>
+<aff id="aff006"><label>6</label> <addr-line>Department of Pediatrics, University of Utah, Data Coordinating Center, Salt Lake City, Utah, United States of America</addr-line></aff>
+<aff id="aff007"><label>7</label> <addr-line>Huntsman Cancer Institute, Salt Lake City, Utah, United States of America</addr-line></aff>
+<aff id="aff008"><label>8</label> <addr-line>Walter Reed National Military Medical Center, Bethesda, Maryland, United States of America</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Panthi</surname>
+<given-names>Sagar</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>BP Koirala Institute of Health Sciences, NEPAL</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The authors have declared that no competing interests exist.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">vijay.ravindra@hsc.utah.edu</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>16</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0296260</elocation-id>
+<history>
+<date date-type="received">
+<day>28</day>
+<month>9</month>
+<year>2023</year>
+</date>
+<date date-type="accepted">
+<day>9</day>
+<month>12</month>
+<year>2023</year>
+</date>
+</history>
+<permissions>
+<license xlink:href="https://creativecommons.org/publicdomain/zero/1.0/" xlink:type="simple">
+<license-p>This is an open access article, free of all copyright, and may be freely reproduced, distributed, transmitted, modified, built upon, or otherwise used by anyone for any lawful purpose. The work is made available under the <ext-link ext-link-type="uri" xlink:href="https://creativecommons.org/publicdomain/zero/1.0/" xlink:type="simple">Creative Commons CC0</ext-link> public domain dedication.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0296260"/>
+<abstract>
+<sec id="sec001">
+<title>Introduction</title>
+<p>The fibrous posterior atlanto-occipital membrane (PAOM) at the craniocervical junction is typically removed during decompression surgery for Chiari malformation type I (CM-I); however, its importance and ultrastructural architecture have not been investigated in children. We hypothesized that there are structural differences in the PAOM of patients with CM-I and those without.</p>
+</sec>
+<sec id="sec002">
+<title>Methods</title>
+<p>In this prospective study, blinded pathological analysis was performed on PAOM specimens from children who had surgery for CM-I and children who had surgery for posterior fossa tumors (controls). Clinical and radiographic data were collected. Statistical analysis included comparisons between the CM-I and control cohorts and correlations with imaging measures.</p>
+</sec>
+<sec id="sec003">
+<title>Results</title>
+<p>A total of 35 children (mean age at surgery 10.7 years; 94.3% white) with viable specimens for evaluation were enrolled: 24 with CM-I and 11 controls. There were no statistical demographic differences between the two cohorts. Four children had a family history of CM-I and five had a syndromic condition. The cohorts had similar measurements of tonsillar descent, syringomyelia, basion to C2, and condylar-to-C2 vertical axis (all p&gt;0.05). The clival-axial angle was lower in patients with CM-I (138.1 vs. 149.3 degrees, p = 0.016). Morphologically, the PAOM demonstrated statistically higher proportions of disorganized architecture in patients with CM-I (75.0% vs. 36.4%, p = 0.012). There were no differences in PAOM fat, elastin, or collagen percentages overall and no differences in imaging or ultrastructural findings between male and female patients. Posterior fossa volume was lower in children with CM-I (163,234 mm<sup>3</sup> vs. 218,305 mm<sup>3</sup>, p&lt;0.001), a difference that persisted after normalizing for patient height (129.9 vs. 160.9, p = 0.028).</p>
+</sec>
+<sec id="sec004">
+<title>Conclusions</title>
+<p>In patients with CM-I, the PAOM demonstrates disorganized architecture compared with that of control patients. This likely represents an anatomic adaptation in the presence of CM-I rather than a pathologic contribution.</p>
+</sec>
+</abstract>
+<funding-group>
+<award-group id="award001">
+<funding-source>
+<institution>American Syringomyelia and Chiari Alliance Project Inc. (ASAP)</institution>
+</funding-source>
+<award-id>Timothy M. George Fellowship Award</award-id>
+<principal-award-recipient>
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-4496-7622</contrib-id>
+<name name-style="western">
+<surname>Ravindra</surname>
+<given-names>Vijay M.</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<funding-statement>The American Syringomyelia &amp; Chiari Alliance Project Inc. (ASAP) funded the project for a sum of $19,982.00 as part of the Timothy M. George Fellowship Award to Vijay Ravindra.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="8"/>
+<table-count count="5"/>
+<page-count count="18"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>All relevant data are within the paper and its <xref ref-type="sec" rid="sec025">Supporting information</xref> files.</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec005" sec-type="intro">
+<title>Introduction</title>
+<p>Chiari malformation type I (CM-I) is defined as the displacement of the cerebellar tonsils ≥5 mm below the foramen magnum [<xref ref-type="bibr" rid="pone.0296260.ref001">1</xref>]. Children with CM-I can be asymptomatic or can have severe symptoms that profoundly impact quality of life. Among these, CM-I can be associated with the development of a cavity within the spinal column (syringomyelia) [<xref ref-type="bibr" rid="pone.0296260.ref002">2</xref>, <xref ref-type="bibr" rid="pone.0296260.ref003">3</xref>], which can lead to severe neurological impairment. Surgical treatment for patients with CM-I with or without syringomyelia is undertaken to expand the posterior fossa to relieve cerebrospinal fluid (CSF) obstruction, equalize the craniospinal pressure gradient, and allow for normal physiologic CSF flow at the foramen magnum.</p>
+<p>The posterior atlanto-occipital membrane (PAOM), also referred to as the dural band or thickened dura mater, is a fibrous structure located dorsal to the dura at the posterior craniocervical junction (CCJ) that stretches between the bilateral occipital condyles and upper borders of the C1 lamina (<xref ref-type="fig" rid="pone.0296260.g001">Fig 1</xref>). It is encountered and removed along with the occipital bone during first-time surgical approaches to the CCJ and posterior cranial fossa for decompression of a Chiari malformation or removal of a posterior fossa tumor.</p>
+<fig id="pone.0296260.g001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g001</object-id>
+<label>Fig 1</label>
+<caption>
+<title>Intraoperative surgical view of low (top) and high (bottom) magnification following C1 laminectomy, suboccipital craniectomy in preparation for Chiari decompression surgery.</title>
+<p>C denotes cervical dura, PF indicates posterior fossa dura, * indicates the lateral aspects of the PAOM.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g001" xlink:type="simple"/>
+</fig>
+<p>Alabaster et al. [<xref ref-type="bibr" rid="pone.0296260.ref004">4</xref>] studied the histological characteristics of this membrane in adults using 10 cadaveric specimens and 39 patients—31 with CM-I and 8 with other posterior fossa pathologies. They found that the ligament in patients with CM-I was disorganized, with poorly arranged collagen bands, interspersed adipose tissue, hyaline nodules present, and altered fiber orientation, indicating pathological differences in the PAOM of adults with CM-I from those with other pathologies. A similar histological analysis has not been performed in children. The use of magnetic resonance imaging (MRI), of either the brain or the cervical spine, is common when evaluating children with CM-I but cannot be used to evaluate specific characteristics of the PAOM. Further evaluation and understanding of this structure and its potential contribution to the pathophysiology of CM-I is necessary to assess the success of bone-only decompression.</p>
+<p>In this study, we aimed to perform a detailed histological/morphological analysis of the PAOM in children with CM-I and control patients. We also aimed to determine whether there are differences in commonly used imaging parameters for the CCJ between patients with CM-I and those without the condition. We hypothesized that there are structural differences in the PAOM and the imaging measurements of these two pediatric cohorts.</p>
+</sec>
+<sec id="sec006" sec-type="materials|methods">
+<title>Materials and methods</title>
+<sec id="sec007">
+<title>Study population</title>
+<p>This was a prospective pathological and clinical study conducted at Primary Children’s Hospital under the joint University of Utah/Primary Children’s Hospital institutional review board approval (protocol #00144341) with written informed consent from the parents or guardians of the participants. Enrollment began on September 1, 2021, and ended June 30, 2023. Included children were all &lt;18 years of age. The experimental group comprised children undergoing surgical treatment of CM-I and the control group comprised children requiring surgical excision of a posterior fossa tumor. Exclusion criteria included revision or redo surgery or lack of consent for tissue analysis/collection. All patients were operated on by fellowship-trained pediatric neurosurgeons. For this study, the PAOM of each participating child was evaluated pathologically and radiologically.</p>
+</sec>
+<sec id="sec008">
+<title>Surgical technique</title>
+<p>The PAOM is removed during the routine surgical treatment of CM-I or posterior fossa brain tumor. Surgical excision is undertaken using a standard midline skin incision that extends from the external occipital protuberance to the C2 spinous process. The incision is carried through the nuchal ligament using Bovie electrocautery. The suboccipital muscles are then dissected and retracted with self-retaining retractors. Standard suboccipital craniectomy and C1 laminectomy are performed using a high-speed drill. The PAOM is identified and resected sharply in one piece several millimeters medial to the ligament’s origin at the occipital condyle and is detached from the underlying dura. The goal is to remove the specimen with 0.5–1 cm on both sides of the midline.</p>
+<p>After harvesting, each specimen was placed in 10% formalin and transported to the pathology lab for cutting and staining of the specimen.</p>
+</sec>
+<sec id="sec009">
+<title>Pathological analysis</title>
+<p>Standardized pathological evaluation for each specimen included cutting, sectioning longitudinally, and cross sectioning at the edges. Specimens were processed and placed into paraffin blocks. Tissue sections (4 μm thick) were cut from the paraffin blocks and applied to glass slides. Hematoxylin and eosin and Masson’s trichrome staining were performed. Each of the sections was evaluated for maximum thickness (mm), hyaline nodules, calcifications, ossification, adipose tissue content, and fibrous splitting of the collagen fibers.</p>
+<p>Blinded histological examination was performed using routine microscopy by a fellowship-trained, attending neuropathologist. Additional staining included immunohistochemistry studies: smooth muscle antigen staining for myofibroblasts, epithelial membrane antigen staining for meningothelial cells, and type IV collagen staining to determine overall connective tissue morphology.</p>
+<p>The resultant pathological characteristics used for comparison included percentage of collagen, percentage of elastin, and fat content. A disorganization scoring system was used to describe the organization of the membrane using four categories, 0 to 3, representing increasing levels of disorientation of collagen bands and more interspersed adipose tissue (<xref ref-type="fig" rid="pone.0296260.g002">Fig 2</xref>). Each specimen was independently reviewed by two fellowship-trained neuropathologists who tested the method and consistently arrived at consensus. Microscopic thickness of the membrane was also recorded (μm).</p>
+<fig id="pone.0296260.g002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g002</object-id>
+<label>Fig 2</label>
+<caption>
+<title>Hematoxylin and eosin stains demonstrating the disorganization score used for analysis of the PAOM.</title>
+<p>(A) Disorganization score of zero, with parallel collagen bands with no interspersed adipose tissue. (B) Disorganization score of one, demonstrating collagen bands with altered orientation focally with no interspersed adipose tissue. (C) Disorganization score of two, with collagen bands with altered orientation diffusely with small amount of interspersed adipose tissue. (D) Disorganization score of three, with poorly arranged collagen bands with significant amount of interspersed adipose tissue.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g002" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec010">
+<title>Clinical information</title>
+<p>Baseline demographic and clinical information collected for each patient enrolled included sex, age at surgery, race, height, weight, and body mass index (weight (kg)/height (m)<sup>2</sup>). Family history of CM-I and presence of syndromic conditions were also recorded. Presenting signs and symptoms were recorded, including posterior neck pain, sensory symptoms, ataxia, motor weakness, dizziness/lightheadedness, visual changes, cognitive deficits, and swallowing difficulty.</p>
+<p>Surgery-related complications, including CSF leak, surgical site infection, pseudomeningocele, and meningitis, as well as reoperation and readmission were also recorded.</p>
+</sec>
+<sec id="sec011">
+<title>Radiographic measurements</title>
+<p>Radiographic variables were recorded from MRI scans obtained before treatment. Imaging characteristics included the presence of syrinx, tonsillar descent (mm), condylar-to-C2 sagittal vertical axis (C-C2SVA) [<xref ref-type="bibr" rid="pone.0296260.ref005">5</xref>] measured in mm (<xref ref-type="fig" rid="pone.0296260.g003">Fig 3A</xref>), maximum perpendicular distance to the basion-inferior aspect of the C2 body (pBC2) measured in mm (<xref ref-type="fig" rid="pone.0296260.g003">Fig 3B</xref>), and the clival-axial angle (CXA) measured in degrees (<xref ref-type="fig" rid="pone.0296260.g003">Fig 3C</xref>). Additional measurements included radiographic thickness of the PAOM and the posterior atlantoaxial membrane (PAAM) measured in mm (<xref ref-type="fig" rid="pone.0296260.g003">Fig 3C</xref>).</p>
+<fig id="pone.0296260.g003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g003</object-id>
+<label>Fig 3</label>
+<caption>
+<title>Steps demonstrating the measurement of the C-C2SVA (A), pBC2 (B), and CXA (in light blue), PAOM (in red), and PAAM (in orange) (C).</title>
+<p>(Panel A reproduced with permission from Ravindra et al. [<xref ref-type="bibr" rid="pone.0296260.ref005">5</xref>]).</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g003" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec012">
+<title>Posterior fossa volume</title>
+<p>Three-dimensional reconstructions of the posterior fossa were performed in Mimics Innovation Suite (version 25, Leuven, Belgium) to calculate volume. T1-weighted MRI series were imported into the software where the brainstem, cerebellum, and surrounding fluid were reconstructed. The brainstem was truncated on the superior aspect by creating a line between the superior aspect of the tentorium and the superior aspect of the pons; segmentation elements above this line were removed from the 3D reconstruction. The region below the foramen magnum was truncated regardless of cerebellar tissue extension inferior to the foramen magnum to most accurately measure the compartment available for CSF, brain, and vascular contents. Fluid and other soft tissue described by the same boundaries within the cranium were included. The resulting segmentation defined the extent of the posterior fossa for this study. The medical image reconstruction software derived a volume from this segmented region. An example of the technique is illustrated in <xref ref-type="fig" rid="pone.0296260.g004">Fig 4</xref>.</p>
+<fig id="pone.0296260.g004" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g004</object-id>
+<label>Fig 4</label>
+<caption>
+<title>Demonstration of the calculation of the three-dimensional volume of the posterior fossa using sagittal high-resolution T1-weighted MRI (A, C) with three-dimensional volumetric reconstruction (B, D).</title>
+<p>Panels A and B show a patient with Chiari I malformation. Panels C and D show a patient with posterior fossa brain tumor.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g004" xlink:type="simple"/>
+</fig>
+<p>The posterior fossa volume calculations obtained were treated independently and indexed to patient height ((posterior fossa volume in mm<sup>3</sup>)/height in mm).</p>
+</sec>
+<sec id="sec013">
+<title>Statistical analysis</title>
+<p>Descriptive statistics of PAOM specimens were summarized as means and standard deviations for continuous variables, and counts and percentages for categorical variables. Demographic, clinical, and radiographic comparisons between PAOM specimens from CM-I patients and controls were made using Fisher’s exact tests and Wilcoxon rank-sum tests. Associations between imaging and pathology measurements in the PAOM specimens were also assessed. Male and female specimens were compared as well. The Pearson correlation coefficient was used to analyze the relationship between imaging and pathology measurements in PAOM specimens. All analyses were conducted using SAS 9.4 (SAS Institute, Cary, North Carolina, USA).</p>
+</sec>
+</sec>
+<sec id="sec014" sec-type="results">
+<title>Results</title>
+<sec id="sec015">
+<title>Demographics</title>
+<p>A total of 35 children were enrolled into the study (<xref ref-type="fig" rid="pone.0296260.g005">Fig 5</xref>). Specimens were obtained from 24 patients with CM-I and 11 control patients (<xref ref-type="supplementary-material" rid="pone.0296260.s001">S1 Data</xref>). The demographic characteristics of the two groups were similar (<xref ref-type="table" rid="pone.0296260.t001">Table 1</xref>). Most of the children were white (94.3%), and 15 participants were female (42.9%). The mean age at surgery was 128.3 months (10.7 years) and did not differ between patients with CM-I and controls (136.8 vs. 110.0 months, p = 0.195). No differences were seen in height, weight, or body mass index. Four children with CM-I had a confirmed family history of the condition. Overall, five children had concomitant syndromic conditions (14.3%).</p>
+<fig id="pone.0296260.g005" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g005</object-id>
+<label>Fig 5</label>
+<caption>
+<title>CONSORT diagram describing screening and enrollment in the study.</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g005" xlink:type="simple"/>
+</fig>
+<table-wrap id="pone.0296260.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.t001</object-id>
+<label>Table 1</label> <caption><title>Demographic information for Chiari I malformation and control cohorts.</title></caption>
+<alternatives>
+<graphic id="pone.0296260.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Chiari (n = 24)</th>
+<th align="left">Control (n = 11)</th>
+<th align="left">Overall (n = 35)</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><bold>Race</bold></td>
+<td align="left"/>
+<td align="left"/>
+<td align="left"/>
+<td align="char" char=".">0.092<xref ref-type="table-fn" rid="t001fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left"> <bold>White</bold></td>
+<td align="left">24 (100.0%)</td>
+<td align="left">9 (81.8%)</td>
+<td align="left">33 (94.3%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Other</bold></td>
+<td align="left">0 (0.0%)</td>
+<td align="left">2 (18.2%)</td>
+<td align="left">2 (5.7%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"><bold>Female sex</bold></td>
+<td align="left">12 (50%)</td>
+<td align="left">3 (27.3%)</td>
+<td align="left">15 (42.9%)</td>
+<td align="char" char=".">0.281<xref ref-type="table-fn" rid="t001fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Age at surgery (months)</bold></td>
+<td align="left">136.8 (64.80)</td>
+<td align="left">110.0 (52.92)</td>
+<td align="left">128.3 (61.83)</td>
+<td align="char" char="." rowspan="2">0.195<xref ref-type="table-fn" rid="t001fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">169.5 [73.5, 190.0]</td>
+<td align="left">84.0 [59.0, 171.0]</td>
+<td align="left">131.0 [71.0, 186.0]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Height (m)</bold></td>
+<td align="left">1.4 (0.28)</td>
+<td align="left">1.4 (0.30)</td>
+<td align="left">1.4 (0.28)</td>
+<td align="char" char="." rowspan="2">0.749<xref ref-type="table-fn" rid="t001fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">1.5 [1.2, 1.6]</td>
+<td align="left">1.3 [1.1, 1.7]</td>
+<td align="left">1.5 [1.1, 1.6]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Weight (kg)</bold></td>
+<td align="left">48.2 (30.46)</td>
+<td align="left">35.7 (19.17)</td>
+<td align="left">44.2 (27.75)</td>
+<td align="char" char="." rowspan="2">0.424<xref ref-type="table-fn" rid="t001fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">46.2 [22.6, 60.8]</td>
+<td align="left">24.9 [18.3, 59.0]</td>
+<td align="left">43.7 [19.2, 59.9]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>BMI</bold></td>
+<td align="left">22.0 (8.36)</td>
+<td align="left">17.7 (2.43)</td>
+<td align="left">20.6 (7.29)</td>
+<td align="char" char="." rowspan="2">0.207<xref ref-type="table-fn" rid="t001fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">18.7 [16.1, 24.5]</td>
+<td align="left">17.0 [15.2, 20.3]</td>
+<td align="left">17.8 [16.1, 21.8]</td>
+</tr>
+<tr>
+<td align="left"><bold>Family history of CM-I</bold></td>
+<td align="left"/>
+<td align="left"/>
+<td align="left"/>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Yes</bold></td>
+<td align="left">4 (16.7%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">4 (11.4%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Unknown</bold></td>
+<td align="left">9 (37.5%)</td>
+<td align="left">10 (90.9%)</td>
+<td align="left">19 (54.3%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"><bold>Syndromic conditions</bold></td>
+<td align="left">4 (16.7%)</td>
+<td align="left">1 (9.1%)</td>
+<td align="left">5 (14.3%)</td>
+<td align="char" char=".">1.000<xref ref-type="table-fn" rid="t001fn002"><sup>a</sup></xref></td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t001fn001"><p>BMI, body mass index; CM-I, Chiari malformation I</p></fn>
+<fn id="t001fn002"><p><sup>a</sup> Fisher’s exact test.</p></fn>
+<fn id="t001fn003"><p><sup>b</sup> Wilcoxon rank-sum test.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec016">
+<title>Clinical presentation</title>
+<p>Overall, most children presented with headaches (82.9%) (<xref ref-type="table" rid="pone.0296260.t002">Table 2</xref>). Four children with CM-I presented with posterior neck pain. Children with posterior fossa brain tumors more commonly presented with ataxia (45.5% vs. 8.3%, p = 0.011). Similar rates of motor weakness, dizziness/lightheadedness, visual changes, and cognitive deficits were seen among patients with CM-I and controls (<xref ref-type="table" rid="pone.0296260.t002">Table 2</xref>). Children with CM-I had a nonsignificantly higher rate of swallowing difficulty (25.0% vs. 9.1%, p = 0.282).</p>
+<table-wrap id="pone.0296260.t002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.t002</object-id>
+<label>Table 2</label> <caption><title>Clinical presentation of Chiari I malformation and control cohorts.</title></caption>
+<alternatives>
+<graphic id="pone.0296260.t002g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.t002" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Chiari (n = 24)</th>
+<th align="left">Control (n = 11)</th>
+<th align="left">Overall (n = 35)</th>
+<th align="left">p-value<xref ref-type="table-fn" rid="t002fn001"><sup>a</sup></xref></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><bold>Headache</bold></td>
+<td align="left">21 (87.5%)</td>
+<td align="left">8 (72.7%)</td>
+<td align="left">29 (82.9%)</td>
+<td align="char" char=".">0.249</td>
+</tr>
+<tr>
+<td align="left"><bold>Posterior neck pain</bold></td>
+<td align="left">4 (16.7%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">4 (11.4%)</td>
+<td align="char" char=".">0.183</td>
+</tr>
+<tr>
+<td align="left"><bold>Sensory symptoms</bold></td>
+<td align="left">8 (33.3%)</td>
+<td align="left">2 (18.2%)</td>
+<td align="left">10 (28.6%)</td>
+<td align="char" char=".">0.337</td>
+</tr>
+<tr>
+<td align="left"><bold>Ataxia</bold></td>
+<td align="left">2 (8.3%)</td>
+<td align="left">5 (45.5%)</td>
+<td align="left">7 (20.0%)</td>
+<td align="char" char=".">0.011</td>
+</tr>
+<tr>
+<td align="left"><bold>Motor weakness</bold></td>
+<td align="left">1 (4.2%)</td>
+<td align="left">1 (9.1%)</td>
+<td align="left">2 (5.7%)</td>
+<td align="char" char=".">0.314</td>
+</tr>
+<tr>
+<td align="left"><bold>Dizziness/lightheaded</bold></td>
+<td align="left">8 (33.3%)</td>
+<td align="left">3 (27.3%)</td>
+<td align="left">11 (31.4%)</td>
+<td align="char" char=".">0.855</td>
+</tr>
+<tr>
+<td align="left"><bold>Visual changes</bold></td>
+<td align="left">2 (8.3%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">2 (5.7%)</td>
+<td align="char" char=".">0.768</td>
+</tr>
+<tr>
+<td align="left"><bold>Cognitive deficit</bold></td>
+<td align="left">3 (12.5%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">3 (8.6%)</td>
+<td align="char" char=".">0.382</td>
+</tr>
+<tr>
+<td align="left"><bold>Swallowing difficulty</bold></td>
+<td align="left">6 (25.0%)</td>
+<td align="left">1 (9.1%)</td>
+<td align="left">7 (20.0%)</td>
+<td align="char" char=".">0.282</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t002fn001"><p><sup>a</sup>Fisher’s exact test with Lancaster’s mid-p correction</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec017">
+<title>Surgical complications</title>
+<p>No children experienced CSF leak after surgery. Two children in the CM-I cohort experienced surgical site infection and were treated with oral antibiotics after clinical evaluation. Two children in the CM-I cohort required readmission and reoperation for persistent symptoms/syringomyelia (<xref ref-type="table" rid="pone.0296260.t003">Table 3</xref>).</p>
+<table-wrap id="pone.0296260.t003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.t003</object-id>
+<label>Table 3</label> <caption><title>Surgical treatment complications in the Chiari I malformation and control cohorts.</title></caption>
+<alternatives>
+<graphic id="pone.0296260.t003g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.t003" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Chiari (n = 24)</th>
+<th align="left">Control (n = 11)</th>
+<th align="left">p-value<xref ref-type="table-fn" rid="t003fn002"><sup>a</sup></xref></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><bold>CSF leak</bold></td>
+<td align="left">0 (0%)</td>
+<td align="left">0 (0%)</td>
+<td align="left">N/A</td>
+</tr>
+<tr>
+<td align="left"><bold>Surgical site infection</bold></td>
+<td align="left">2 (8.3%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">0.768</td>
+</tr>
+<tr>
+<td align="left"><bold>Pseudomeningocele</bold></td>
+<td align="left">0 (0%)</td>
+<td align="left">0 (0%)</td>
+<td align="left">N/A</td>
+</tr>
+<tr>
+<td align="left"><bold>Meningitis</bold></td>
+<td align="left">0 (0%)</td>
+<td align="left">0 (0%)</td>
+<td align="left">N/A</td>
+</tr>
+<tr>
+<td align="left"><bold>Reoperation</bold></td>
+<td align="left">2 (8.3%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">0.768</td>
+</tr>
+<tr>
+<td align="left"><bold>Readmission</bold></td>
+<td align="left">2 (8.3%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">0.768</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t003fn001"><p>CSF, cerebrospinal fluid; N/A, not applicable</p></fn>
+<fn id="t003fn002"><p><sup>a</sup>Fisher’s exact test with Lancaster’s mid-p correction</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec018">
+<title>Imaging characteristics</title>
+<p>Similar rates of syringomyelia were seen (20.8% CM-I vs. 18.2% controls, p = 0.828) (<xref ref-type="table" rid="pone.0296260.t004">Table 4</xref>). The mean degree of tonsillar descent was not significantly different in the CM-I cohort (12.5 mm vs. 7.8 mm, p = 0.130). Although the mean C-C2SVA was 1.5 mm greater in the CM-I cohort (4.8 mm vs. 3.3 mm, p = 0.291) and the proportion of children with CM-I with a C-C2SVA ≥5 mm was higher (45.8% vs. 36.4%, p = 0.594), the differences were not statistically significant. The pBC2 was similar in the two groups (7.4 mm vs. 7.1 mm, p = 0.418), and a nonsignificantly higher proportion of children with CM-I had a pBC2 ≥9 mm (37.5% vs. 18.2%, p = 0.349). The mean CXA was significantly lower in patients with CM-I (138.1 vs. 149.3 degrees, p = 0.016); three children with CM-I had a CXA &lt;125 degrees. On preoperative MRI, the PAOM (2.7 mm vs. 2.8 mm, p = 0.740) and PAAM (2.6 mm vs. 3.4 mm, p = 0.376) had similar thicknesses in the CM-I and control cohorts (<xref ref-type="table" rid="pone.0296260.t004">Table 4</xref>).</p>
+<table-wrap id="pone.0296260.t004" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.t004</object-id>
+<label>Table 4</label> <caption><title>Imaging and pathological/morphological characteristics in Chiari I malformation and control cohorts.</title></caption>
+<alternatives>
+<graphic id="pone.0296260.t004g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.t004" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Chiari (n = 24)</th>
+<th align="left">Control (n = 11)</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" colspan="4"><bold>Imaging Characteristics</bold></td>
+</tr>
+<tr>
+<td align="left"><bold>Presence of syrinx</bold></td>
+<td align="left">5 (20.8%)</td>
+<td align="left">2 (18.2%)</td>
+<td align="char" char=".">0.828<xref ref-type="table-fn" rid="t004fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left"><bold>Length of tonsillar descent (mm)</bold></td>
+<td align="left">12.5 ± 6.12</td>
+<td align="left">7.8 ± 7.93</td>
+<td align="char" char=".">0.130<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left"><bold>C-C2SVA ≥5</bold></td>
+<td align="left">11 (45.8%)</td>
+<td align="left">4 (36.4%)</td>
+<td align="char" char=".">0.594<xref ref-type="table-fn" rid="t004fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Length of C-C2SVA (mm)</bold></td>
+<td align="left">4.8 (2.59)</td>
+<td align="left">3.3 (3.40)</td>
+<td align="char" char="." rowspan="2">0.291<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">4.0 [3.0, 6.0]</td>
+<td align="left">3.0 [0.0, 6.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>pBC-2 ≥9 mm</bold></td>
+<td align="left">9 (37.5%)</td>
+<td align="left">2 (18.2%)</td>
+<td align="char" char=".">0.349<xref ref-type="table-fn" rid="t004fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Length of pBC-2 (mm)</bold></td>
+<td align="left">7.4 (2.09)</td>
+<td align="left">7.1 (1.31)</td>
+<td align="char" char="." rowspan="2">0.418<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">7.0 [6.0, 9.0]</td>
+<td align="left">7.0 [6.0, 8.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>CXA &lt;125 degrees</bold></td>
+<td align="left">3 (12.5%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="char" char=".">0.382<xref ref-type="table-fn" rid="t004fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Size of CXA (degrees)</bold></td>
+<td align="left">138.1 (13.22)</td>
+<td align="left">149.3 (10.77)</td>
+<td align="char" char="." rowspan="2">0.016<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">138.0 [130.0, 144.0]</td>
+<td align="left">148.0 [141.0, 157.0]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Thickness of PAAM (mm)</bold></td>
+<td align="left">2.6 (0.84)</td>
+<td align="left">3.4 (1.99)</td>
+<td align="char" char="." rowspan="2">0.376<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2.6 [1.9, 3.2]</td>
+<td align="left">2.8 [2.0, 4.7]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Thickness of PAOM (mm)</bold></td>
+<td align="left">2.7 (0.90)</td>
+<td align="left">2.8 (0.72)</td>
+<td align="char" char="." rowspan="2">0.740<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2.4 [2.0, 3.4]</td>
+<td align="left">2.9 [2.4, 3.3]</td>
+</tr>
+<tr>
+<td align="left"><bold>Volume of posterior fossa (mm</bold><sup><bold>3</bold></sup><bold>)</bold><xref ref-type="table-fn" rid="t004fn005"><sup>d</sup></xref></td>
+<td align="left">163,234 ± 20,142</td>
+<td align="left">218,305 ± 26,953</td>
+<td align="char" char="."><bold>&lt;0.001</bold></td>
+</tr>
+<tr>
+<td align="left"><bold>Ratio posterior fossa volume/height</bold><sup><bold>§</bold></sup></td>
+<td align="left">129.9 ± 24.1</td>
+<td align="left">160.9 ± 28.22</td>
+<td align="char" char="."><bold>0.028</bold></td>
+</tr>
+<tr>
+<td align="left" colspan="4"><bold>Pathological Characteristics</bold></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Collagen (%)</bold></td>
+<td align="left">77.1 (18.65)</td>
+<td align="left">85.5 (9.86)</td>
+<td align="char" char="." rowspan="2">0.251<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">80.0 [65.0, 90.0]</td>
+<td align="left">90.0 [80.0, 95.0]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Fat (%)</bold></td>
+<td align="left">22.9 (18.65)</td>
+<td align="left">14.5 (9.86)</td>
+<td align="char" char="." rowspan="2">0.251<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">20.0 [10.0, 35.0]</td>
+<td align="left">10.0 [5.0, 20.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>Disorganization score</bold></td>
+<td align="left"/>
+<td align="left"/>
+<td align="char" char="."><bold>0.012</bold><xref ref-type="table-fn" rid="t004fn004"><sup>c</sup></xref></td>
+</tr>
+<tr>
+<td align="left"> <bold>None</bold></td>
+<td align="left">1 (4.2%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Mild</bold></td>
+<td align="left">5 (20.8%)</td>
+<td align="left">7 (63.6%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Moderate</bold></td>
+<td align="left">7 (29.2%)</td>
+<td align="left">4 (36.4%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Severe</bold></td>
+<td align="left">11 (45.8%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>PAOM thickness (μm)</bold></td>
+<td align="left">2031.3 (613.76)</td>
+<td align="left">2363.6 (205.05)</td>
+<td align="char" char="." rowspan="2">0.142<xref ref-type="table-fn" rid="t004fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2125.0 [1375.0, 2500.0]</td>
+<td align="left">2500.0 [2250.0, 2500.0]</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t004fn001"><p>C-C2SVA, condylar to C2 sagittal vertical axis; pBC-2, perpendicular basion-inferior C2 distance; CXA, clival-axial angle; PAAM, posterior atlantoaxial membrane; PAOM, posterior atlanto-occipital membrane</p></fn>
+<fn id="t004fn002"><p><sup>a</sup> Fisher’s exact test with Lancaster’s mid-p correction.</p></fn>
+<fn id="t004fn003"><p><sup>b</sup>Wilcoxon rank-sum test.</p></fn>
+<fn id="t004fn004"><p><sup>c</sup>Cochran-Armitage trend test.</p></fn>
+<fn id="t004fn005"><p><sup>d</sup>Volume calculations were performed on 13 Chiari patients and 10 control patients.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec019">
+<title>Pathological characteristics</title>
+<p>The overall collagen percentage was not significantly lower in the CM-I cohort (77.1% vs. 85.5%, p = 0.251) (<xref ref-type="table" rid="pone.0296260.t004">Table 4</xref>). There was limited presence of elastin in the samples from both cohorts, and the amount did not differ between them. There was a similar fat content in the PAOM samples (22.9% vs. 14.5%, p = 0.251). With respect to disorganization scoring, 75.0% of CM-I specimens demonstrated moderate/severe disorganization versus 36.4% of control patients (p = 0.012). Microscopically, the PAOM was thinner in the CM-I cohort, but this difference was not statistically significant (2031.3 μm vs. 2363.6 μm, p = 0.142). No fiber splitting or hyaline nodules were seen in any of the specimens.</p>
+<p>To understand any difference in tissue characteristics by sex, we compared male and female patients with CM-I (<xref ref-type="table" rid="pone.0296260.t005">Table 5</xref>). No differences in the imaging or histopathological characteristics were discovered, although the PAOM was nonsignificantly thinner in males than in females (1895.8 μm vs. 2166.7 μm, p = 0.214).</p>
+<table-wrap id="pone.0296260.t005" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.t005</object-id>
+<label>Table 5</label> <caption><title>Imaging and pathological/morphological characteristics comparison by sex in patients with Chiari I malformation.</title></caption>
+<alternatives>
+<graphic id="pone.0296260.t005g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.t005" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Female (n = 12)</th>
+<th align="left">Male (n = 12)</th>
+<th align="left">Overall (n = 24)</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" colspan="5"><bold><italic>Imaging Characteristics</italic></bold></td>
+</tr>
+<tr>
+<td align="left"><bold>Presence of syrinx</bold></td>
+<td align="left">2 (16.7%)</td>
+<td align="left">3 (25.0%)</td>
+<td align="left">5 (20.8%)</td>
+<td align="char" char=".">0.820<xref ref-type="table-fn" rid="t005fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Tonsillar descent (mm)</bold></td>
+<td align="left">12.6 (6.16)</td>
+<td align="left">12.4 (6.35)</td>
+<td align="left">12.5 (6.12)</td>
+<td align="char" char="." rowspan="2">0.862<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">12.0 [8.9, 18.0]</td>
+<td align="left">11.5 [7.0, 16.0]</td>
+<td align="left">11.5 [8.4, 16.5]</td>
+</tr>
+<tr>
+<td align="left"><bold>C-C2SVA ≥5 mm</bold></td>
+<td align="left">5 (41.7%)</td>
+<td align="left">6 (50.0%)</td>
+<td align="left">11 (45.8%)</td>
+<td align="char" char=".">0.707<xref ref-type="table-fn" rid="t005fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>C-C2SVA (mm)</bold></td>
+<td align="left">5.0 (2.94)</td>
+<td align="left">4.6 (2.31)</td>
+<td align="left">4.8 (2.59)</td>
+<td align="char" char="." rowspan="2">0.907<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">4.0 [3.0, 6.0]</td>
+<td align="left">4.5 [3.0, 5.5]</td>
+<td align="left">4.0 [3.0, 6.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>pBC-2 ≥9 mm</bold></td>
+<td align="left">6 (50.0%)</td>
+<td align="left">3 (25.0%)</td>
+<td align="left">9 (37.5%)</td>
+<td align="char" char=".">0.245<xref ref-type="table-fn" rid="t005fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>pBC-2 (mm)</bold></td>
+<td align="left">7.8 (2.20)</td>
+<td align="left">7.1 (2.02)</td>
+<td align="left">7.4 (2.09)</td>
+<td align="char" char="." rowspan="2">0.465<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">8.0 [6.0, 10.0]</td>
+<td align="left">7.0 [6.5, 8.5]</td>
+<td align="left">7.0 [6.0, 9.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>CXA &lt;125 degrees</bold></td>
+<td align="left">2 (16.7%)</td>
+<td align="left">1 (8.3%)</td>
+<td align="left">3 (12.5%)</td>
+<td align="char" char=".">0.609<xref ref-type="table-fn" rid="t005fn002"><sup>a</sup></xref></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>CXA (degrees)</bold></td>
+<td align="left">139.8 (15.20)</td>
+<td align="left">136.4 (11.33)</td>
+<td align="left">138.1 (13.22)</td>
+<td align="char" char="." rowspan="2">0.954<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">137.5 [132.5, 144.5]</td>
+<td align="left">139.0 [127.5, 144.0]</td>
+<td align="left">138.0 [130.0, 144.0]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>PAAM (mm)</bold></td>
+<td align="left">2.6 (0.59)</td>
+<td align="left">2.7 (1.05)</td>
+<td align="left">2.6 (0.84)</td>
+<td align="char" char="." rowspan="2">0.877<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2.4 [2.2, 3.2]</td>
+<td align="left">2.8 [1.9, 3.3]</td>
+<td align="left">2.6 [1.9, 3.2]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>PAOM (mm)</bold></td>
+<td align="left">2.6 (0.93)</td>
+<td align="left">2.7 (0.91)</td>
+<td align="left">2.7 (0.90)</td>
+<td align="char" char="." rowspan="2">0.600<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2.1 [1.9, 3.6]</td>
+<td align="left">2.7 [2.2, 3.4]</td>
+<td align="left">2.4 [2.0, 3.4]</td>
+</tr>
+<tr>
+<td align="left" colspan="5"><bold><italic>Pathological Characteristics</italic></bold></td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Collagen (%)</bold></td>
+<td align="left">76.3 (20.13)</td>
+<td align="left">77.9 (17.90)</td>
+<td align="left">77.1 (18.65)</td>
+<td align="char" char="." rowspan="2">0.836<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">85.0 [65.0, 90.0]</td>
+<td align="left">80.0 [65.0, 92.5]</td>
+<td align="left">80.0 [65.0, 90.0]</td>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>Fat (%)</bold></td>
+<td align="left">23.8 (20.13)</td>
+<td align="left">22.1 (17.90)</td>
+<td align="left">22.9 (18.65)</td>
+<td align="char" char="." rowspan="2">0.836<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">15.0 [10.0, 35.0]</td>
+<td align="left">20.0 [7.5, 35.0]</td>
+<td align="left">20.0 [10.0, 35.0]</td>
+</tr>
+<tr>
+<td align="left"><bold>Disorganization score</bold></td>
+<td align="left"/>
+<td align="left"/>
+<td align="left"/>
+<td align="char" char=".">0.363<xref ref-type="table-fn" rid="t005fn004"><sup>c</sup></xref></td>
+</tr>
+<tr>
+<td align="left"> <bold>None</bold></td>
+<td align="left">1 (8.3%)</td>
+<td align="left">0 (0.0%)</td>
+<td align="left">1 (4.2%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Mild</bold></td>
+<td align="left">3 (25.0%)</td>
+<td align="left">2 (16.7%)</td>
+<td align="left">5 (20.8%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Moderate</bold></td>
+<td align="left">3 (25.0%)</td>
+<td align="left">4 (33.3%)</td>
+<td align="left">7 (29.2%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left"> <bold>Severe</bold></td>
+<td align="left">5 (41.7%)</td>
+<td align="left">6 (50.0%)</td>
+<td align="left">11 (45.8%)</td>
+<td align="left"/>
+</tr>
+<tr>
+<td align="left" rowspan="2"><bold>PAOM thickness (μm)</bold></td>
+<td align="left">2166.7 (567.42)</td>
+<td align="left">1895.8 (652.43)</td>
+<td align="left">2031.3 (613.76)</td>
+<td align="char" char="." rowspan="2">0.214<xref ref-type="table-fn" rid="t005fn003"><sup>b</sup></xref></td>
+</tr>
+<tr>
+<td align="left">2500.0 [1750.0, 2500.0]</td>
+<td align="left">2000.0 [1250.0, 2375.0]</td>
+<td align="left">2125.0 [1375.0, 2500.0]</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t005fn001"><p>C-C2SVA, condylar to C2 sagittal vertical axis; pBC-2, perpendicular basion-inferior C2 distance; CXA, clival-axial angle; PAAM, posterior atlantoaxial membrane; PAOM, posterior atlanto-occipital membrane</p></fn>
+<fn id="t005fn002"><p><sup>a</sup>Fisher’s exact test with Lancaster’s mid-p correction.</p></fn>
+<fn id="t005fn003"><p><sup>b</sup>Wilcoxon rank-sum test.</p></fn>
+<fn id="t005fn004"><p><sup>c</sup>Cochran-Armitage trend test.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+<sec id="sec020">
+<title>Imaging and pathological correlations</title>
+<p>No significant correlations were found between C-C2SVA and the pathological results of disorganization score (r = 0.142), membrane thickness (r = 0.147), or imaging measures of PAOM thickness (r = 0.097) (<xref ref-type="fig" rid="pone.0296260.g006">Fig 6</xref>). Additionally, no significant correlations were found between CXA and the pathological results of disorganization score (r = 0.350), membrane thickness (r = -0.492), or imaging measures of PAOM thickness (r = 0.006) (<xref ref-type="fig" rid="pone.0296260.g007">Fig 7</xref>). Finally, no significant correlations were found between pBC2 and the pathological results of disorganization score (r = -0.355), membrane thickness (r = 0.285), or imaging measures of PAOM thickness (r = 0.287) (<xref ref-type="fig" rid="pone.0296260.g008">Fig 8</xref>).</p>
+<fig id="pone.0296260.g006" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g006</object-id>
+<label>Fig 6</label>
+<caption>
+<title>Correlation analysis between C-C2SVA and pathological results of disorganization score (A), membrane thickness (B), and imaging measures of PAOM thickness (C).</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g006" xlink:type="simple"/>
+</fig>
+<fig id="pone.0296260.g007" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g007</object-id>
+<label>Fig 7</label>
+<caption>
+<title>Correlation analysis between CXA and pathological results of disorganization score (A), membrane thickness (B), and imaging measures of PAOM thickness (C).</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g007" xlink:type="simple"/>
+</fig>
+<fig id="pone.0296260.g008" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0296260.g008</object-id>
+<label>Fig 8</label>
+<caption>
+<title>Correlation analysis between pBC2 and pathological results of disorganization score (A), membrane thickness (B), and imaging measures of PAOM thickness (C).</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.g008" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec021">
+<title>Posterior fossa volume measurements</title>
+<p>Posterior fossa volume calculations using a 3D segmentation technique were obtained in 24 children; 11 did not have volumetric imaging that could be analyzed. Values can be seen in <xref ref-type="table" rid="pone.0296260.t004">Table 4</xref>. Posterior fossa volume was lower in children with CM-I (163,234 mm<sup>3</sup> vs. 218,305 mm<sup>3</sup>, p&lt;0.001), a difference that persisted after normalizing for patient height (129.9 vs. 160.9, p = 0.028).</p>
+<p>Additional comparisons of PAOM disorganization, membrane thickness, and imaging measurements of PAOM thickness, as well as posterior fossa volume and volume/height ratio between groups did not reveal any significant correlations.</p>
+</sec>
+</sec>
+<sec id="sec022" sec-type="conclusions">
+<title>Discussion</title>
+<p>In this study, we analyzed the PAOM in children with and without CM-I and found that the membrane is more disorganized in patients with CM-I. This is the first anatomic study of this type in children and provides a frame of reference using control specimens.</p>
+<p>The PAOM is encountered during any posterior approach to the CCJ, but interestingly, there is no mention of this structure in <italic>Gray’s Anatomy</italic> [<xref ref-type="bibr" rid="pone.0296260.ref006">6</xref>]. Previously, it was unknown whether there were differences in size (height, width, thickness) or histological architecture in patients with differing posterior fossa pathologies. We found that the membrane was more disorganized in children with CM-I, which may represent an accommodation rather than a pathological contribution. We also examined whether there were histopathological differences between the sexes and found no significant differences. The role of the PAOM in the pathogenesis and severity of CM-I and association with syringomyelia size or extent was not understood previously.</p>
+<p>Our findings complement those of Alabaster et al. [<xref ref-type="bibr" rid="pone.0296260.ref004">4</xref>], whose investigation of the PAOM in adult patients with and without CM-I demonstrated that the ligamentous tissue is generally more disorganized—with poorly arranged collagen bands and interspersed adipose tissue—in patients with CM-I. We have now demonstrated that children with CM-I present with disorganized tissue similar to their adult counterparts. In adult CM-I specimens, Alabaster et al. [<xref ref-type="bibr" rid="pone.0296260.ref004">4</xref>] demonstrated more hyalinized fibrosis and directionally varied fibers with grade 1+ calcifications, whereas the specimens from patients without CM-I demonstrated uniformly horizontal fibers. Alabaster and colleagues did not observe hypertrophy of the suboccipital ligament in patients with CM-I, which contradicted previous reports. They hypothesized that the “appearance” of a hypertrophied ligament is based on the finding that patients with CM-I have a smaller posterior fossa [<xref ref-type="bibr" rid="pone.0296260.ref007">7</xref>–<xref ref-type="bibr" rid="pone.0296260.ref010">10</xref>]. Our set of specimens did not reveal any fiber splitting, fibrosis, or calcifications, indicating that these may occur more frequently in patients diagnosed with CM-I as adults than in patients diagnosed as children.</p>
+<p>Using a 3D segmentation technique, we demonstrated that children with CM-I who undergo surgery have significantly smaller posterior fossa volume and volume/height ratio than those with posterior fossa tumor undergoing surgery. Previous reports have demonstrated this characteristic [<xref ref-type="bibr" rid="pone.0296260.ref011">11</xref>], which suggests that it is a causative mechanism of symptoms in CM-I, and volume expansion is a marker for clinical improvement after decompression [<xref ref-type="bibr" rid="pone.0296260.ref012">12</xref>]. However, a more disorganized PAOM structure in the setting of smaller posterior fossa volume suggests an acquired disorganization or thinning of the membrane as a mechanism to improve flow of CSF near the CCJ. In patients with CM-I, the posterior fossa compartment is small [<xref ref-type="bibr" rid="pone.0296260.ref013">13</xref>], which is what clinicians posit leads to the clinical presentation—headaches, syringomyelia, bulbar symptoms, etc.—of children with the malformation. The small posterior fossa leads to crowding at the foramen magnum with associated hyperdynamic local CSF pulsation with nonlaminar flow at the foramen magnum [<xref ref-type="bibr" rid="pone.0296260.ref014">14</xref>–<xref ref-type="bibr" rid="pone.0296260.ref016">16</xref>]. The surgical treatment for symptomatic CM-I involves expansion of the space at the foramen magnum via opening of the bone (suboccipital bone, C1 lamina), dura, and posterior atlanto-occipital membrane. Based on the findings of this study, the thinning and disorganization of the PAOM suggests an acquired mechanism or adaptation that is a physiologic response attempting to compensate for the malformation with auto-expansion of the posterior compartment. As a result, we postulate that the membrane thins and becomes more disorganized with increased fat content (a chronic sign of tissue fatigue).</p>
+<p>This finding suggests an adaptation rather than a causative factor. Interestingly, there was a lack of statistical correlation between membrane characteristics and posterior fossa volume.</p>
+<p>Previous reports have hypothesized that the PAOM is hypertrophic in patients with CM-I and contributes to the ligament’s subsequent pathology [<xref ref-type="bibr" rid="pone.0296260.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0296260.ref008">8</xref>, <xref ref-type="bibr" rid="pone.0296260.ref017">17</xref>–<xref ref-type="bibr" rid="pone.0296260.ref032">32</xref>]. On the basis of its anatomic attachments to the occipital bone, C1 lamina, and bilateral condylar joints, the PAOM ligament may serve as a physiological “suspension system” for the cranial dural compartment by contributing to the rotational stability of the CCJ [<xref ref-type="bibr" rid="pone.0296260.ref004">4</xref>]. There are several reports of “immediate” enlargement of the CCJ stenosis in patients with CM-I after incision of the ligament [<xref ref-type="bibr" rid="pone.0296260.ref024">24</xref>, <xref ref-type="bibr" rid="pone.0296260.ref033">33</xref>–<xref ref-type="bibr" rid="pone.0296260.ref038">38</xref>].</p>
+<p>Nakamura et al. [<xref ref-type="bibr" rid="pone.0296260.ref039">39</xref>] examined material taken from the ’outer layer’ of thickened dura mater (i.e., dural band) at the craniovertebral junction of 8 patients with syringomyelia and CM-I and found that the dural band was thickened and there were more collagen fibers that showed fiber splitting, hyaline nodules, calcification, and/or ossification, which were not observed in 4 control patients. They suggested that the thickening of the dura mater might be a causative factor of syringomyelia with CM-I and that the histology of the thickened dura mater suggests the condition may be a consequence of birth injury in these patients. Although we did not study the dura mater here, the PAOM membrane findings suggest a relative disorganization and thinning of the membrane as a compensation for the turbulent hydrodynamics and biomechanics at the CCJ in patients with CM-I. We also found no evidence of hyaline nodules or calcification in pediatric specimens.</p>
+<sec id="sec023">
+<title>Limitations</title>
+<p>There are limitations to the current investigation. Although no specimens were excluded because of cautery artifact, there is inherent variability in the size of the specimen removed depending on the patient’s surgical anatomy. Although we used a group of children with posterior fossa tumors as control patients, this is not an entirely typical cohort of children. We recognize there are limitations in comparing these children, who can have tonsillar ectopia, syringomyelia, and obstructive hydrocephalus. The rationale for using this cohort for comparison is that their tissue was readily available and removed as part of the standard surgical treatment. An ideal substrate for control data would be children without disease at the CCJ, but ethical standards prevent their use.</p>
+<p>The measurement of anatomical compartmental volume in a patient with a posterior fossa neoplasm may represent an overestimation. Chiari malformation is a congenital anomaly except in cases where a secondary malformation develops from a tumor, CSF leak, etc. On the other hand, posterior fossa tumor/mass lesion growth that occurs after development of the compartments of the cranium is not congenital. Thus, we would expect the volumetric measurements of the posterior fossa to be a reasonable proxy for “normal,” despite not being ideal. For this study, the goal of calculating posterior fossa volume was to compare the histological measures to the volumetric measure to correlate the specimens to the imaging findings. A third population of non-pathological controls would not allow us to achieve this goal. Additionally, non-pathological controls with imaging in the setting of traumatic brain injury/concussion/epilepsy do not routinely have the three-dimensional, fine-cut, high-resolution sequences available that are necessary to calculate posterior fossa volume. Had we included non-pathological control patients, additional recruitment and imaging studies outside the scope of the current study would have been necessary.</p>
+<p>The outcome/variable of membrane disorganization was used to describe the structure of the PAOM in a clinically relevant manner. The ordinal disorganization index was derived by a senior, fellowship-trained neuropathologist and used with clear definitions and criteria. Each of the specimens was independently reviewed by two fellowship-trained neuropathologists who tested the method and consistently arrived at consensus. Validation of this method is needed moving forward.</p>
+<p>This investigation was limited by the low number of participants—specifically control patients. Additionally, although there were differences seen between the groups, many were not statistically significant, which could be the result of a low number of subjects/specimens. The patients were not matched so as to maximize the number of subjects/participants in the study. Although this was an exploratory study, there is no minimal clinically important difference known for the pathological variables investigated. Larger-scale study of the phenomena discovered is warranted. The population was racially homogeneous, which may limit the generalizability of these pathological findings across broader populations. Future study will investigate molecular features of the PAOM, bone, dura, and surrounding muscle tissue to further understand this anatomically unique and complex region. Although this study is not likely to impact clinical practice directly, the PAOM may represent a target for future therapies as a mechanism of improving CSF flow pulsation at the craniocervical junction. Despite these limitations, the information in this report is of interest in understanding the pathophysiologic mechanism of CM-I and potentially treating patients with CM-I.</p>
+</sec>
+</sec>
+<sec id="sec024" sec-type="conclusions">
+<title>Conclusions</title>
+<p>In patients with CM-I, the PAOM demonstrates a more disorganized architecture than in patients without CM-I but no significant difference in thickness. This likely represents an anatomic adaptation in the setting of CM-I rather than a pathologic contribution. Further study of the interplay between the PAOM, dura, and bone structures in this region will be necessary to fully understand their relationship in patients with CM-I.</p>
+</sec>
+<sec id="sec025" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0296260.s001" mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.s001" xlink:type="simple">
+<label>S1 Data</label>
+<caption>
+<title>Containing all demographic and medical information used to study Chiari I malformation and control cohorts.</title>
+<p>(XLSX)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ack>
+<p>We thank Kristin Kraus and Cortlynd Olsen for editorial assistance in preparing this paper.</p>
+</ack>
+<glossary>
+<title>Abbreviations</title>
+<def-list>
+<def-item><term>C-C2SVA</term>
+<def><p>condylar-C2 sagittal vertical alignment</p></def>
+</def-item>
+<def-item><term>CCJ</term>
+<def><p>craniocervical junction</p></def>
+</def-item>
+<def-item><term>CM-I</term>
+<def><p>Chiari I malformation</p></def>
+</def-item>
+<def-item><term>CSF</term>
+<def><p>cerebrospinal fluid</p></def>
+</def-item>
+<def-item><term>CXA</term>
+<def><p>clival-axial angle</p></def>
+</def-item>
+<def-item><term>MRI</term>
+<def><p>magnetic resonance imaging</p></def>
+</def-item>
+<def-item><term>PAAM</term>
+<def><p>posterior atlantoaxial membrane</p></def>
+</def-item>
+<def-item><term>PAOM</term>
+<def><p>posterior atlanto-occipital membrane</p></def>
+</def-item>
+<def-item><term>pBC2</term>
+<def><p>maximum perpendicular distance to the basion-inferior aspect of the C2 body</p></def>
+</def-item>
+</def-list>
+</glossary>
+<ref-list>
+<title>References</title>
+<ref id="pone.0296260.ref001"><label>1</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ladner</surname> <given-names>TR</given-names></name>, <name name-style="western"><surname>Westrick</surname> <given-names>AC</given-names></name>, <name name-style="western"><surname>Wellons</surname> <given-names>JC</given-names> <suffix>3rd</suffix></name>, <name name-style="western"><surname>Shannon</surname> <given-names>CN</given-names></name>. <article-title>Health-related quality of life in pediatric Chiari Type I malformation: the Chiari Health Index for Pediatrics</article-title>. <source>J Neurosurg Pediatr</source>. <year>2016</year>;<volume>17</volume>(<issue>1</issue>):<fpage>76</fpage>–<lpage>85</lpage>. Epub 2015/10/03. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2015.5.PEDS1513" xlink:type="simple">10.3171/2015.5.PEDS1513</ext-link></comment> <object-id pub-id-type="pmid">26431245</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Heiss</surname> <given-names>JD</given-names></name>, <name name-style="western"><surname>Patronas</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>DeVroom</surname> <given-names>HL</given-names></name>, <name name-style="western"><surname>Shawker</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Ennis</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Kammerer</surname> <given-names>W</given-names></name>, <etal>et al</etal>. <article-title>Elucidating the pathophysiology of syringomyelia</article-title>. <source>J Neurosurg</source>. <year>1999</year>;<volume>91</volume>(<issue>4</issue>):<fpage>553</fpage>–<lpage>62</lpage>. Epub 1999/10/03. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/jns.1999.91.4.0553" xlink:type="simple">10.3171/jns.1999.91.4.0553</ext-link></comment> <object-id pub-id-type="pmid">10507374</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sekula</surname> <given-names>RF</given-names> <suffix>Jr.</suffix></name>, <name name-style="western"><surname>Arnone</surname> <given-names>GD</given-names></name>, <name name-style="western"><surname>Crocker</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Aziz</surname> <given-names>KM</given-names></name>, <name name-style="western"><surname>Alperin</surname> <given-names>N</given-names></name>. <article-title>The pathogenesis of Chiari I malformation and syringomyelia</article-title>. <source>Neurol Res</source>. <year>2011</year>;<volume>33</volume>(<issue>3</issue>):<fpage>232</fpage>–<lpage>9</lpage>. Epub 2011/04/26. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1179/016164111X12962202723724" xlink:type="simple">10.1179/016164111X12962202723724</ext-link></comment> <object-id pub-id-type="pmid">21513643</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Alabaster</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Fred Bugg</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Splavski</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Boop</surname> <given-names>FA</given-names></name>, <name name-style="western"><surname>Arnautovic</surname> <given-names>KI</given-names></name>. <article-title>The suboccipital ligament</article-title>. <source>J Neurosurg</source>. <year>2018</year>;<volume>128</volume>(<issue>1</issue>):<fpage>165</fpage>–<lpage>73</lpage>. Epub 2017/04/15. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2016.10.JNS162161" xlink:type="simple">10.3171/2016.10.JNS162161</ext-link></comment> <object-id pub-id-type="pmid">28409726</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ravindra</surname> <given-names>VM</given-names></name>, <name name-style="western"><surname>Iyer</surname> <given-names>RR</given-names></name>, <name name-style="western"><surname>Awad</surname> <given-names>AW</given-names></name>, <name name-style="western"><surname>Bollo</surname> <given-names>RJ</given-names></name>, <name name-style="western"><surname>Zhu</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Brockmeyer</surname> <given-names>DL</given-names></name>. <article-title>Defining the role of the condylar-C2 sagittal vertical alignment in Chiari malformation type I</article-title>. <source>J Neurosurg Pediatr</source>. <year>2020</year>;<volume>26</volume>(<issue>4</issue>):<fpage>439</fpage>–<lpage>44</lpage>. Epub 2020/07/18. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2020.4.PEDS20113" xlink:type="simple">10.3171/2020.4.PEDS20113</ext-link></comment> <object-id pub-id-type="pmid">32679561</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref006"><label>6</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Gray</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Warwick</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Williams</surname> <given-names>P</given-names></name>. <source>Gray’s Anatomy</source>. <edition designator="36">36 ed</edition>. <publisher-loc>Philadelphia</publisher-loc>: <publisher-name>Saunders</publisher-name>; <year>1980</year>.</mixed-citation></ref>
+<ref id="pone.0296260.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Aydin</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Hanimoglu</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Tanriverdi</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Yentur</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Kaynar</surname> <given-names>MY</given-names></name>. <article-title>Chiari type I malformations in adults: a morphometric analysis of the posterior cranial fossa</article-title>. <source>Surg Neurol</source>. <year>2005</year>;<volume>64</volume>(<issue>3</issue>):<fpage>237</fpage>–<lpage>41</lpage>; discussion 41. Epub 2005/08/16. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.surneu.2005.02.021" xlink:type="simple">10.1016/j.surneu.2005.02.021</ext-link></comment> <object-id pub-id-type="pmid">16099255</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Badie</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Mendoza</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Batzdorf</surname> <given-names>U</given-names></name>. <article-title>Posterior fossa volume and response to suboccipital decompression in patients with Chiari I malformation</article-title>. <source>Neurosurgery</source>. <year>1995</year>;<volume>37</volume>(<issue>2</issue>):<fpage>214</fpage>–<lpage>8</lpage>. Epub 1995/08/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1227/00006123-199508000-00004" xlink:type="simple">10.1227/00006123-199508000-00004</ext-link></comment> <object-id pub-id-type="pmid">7477771</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Stovner</surname> <given-names>LJ</given-names></name>, <name name-style="western"><surname>Bergan</surname> <given-names>U</given-names></name>, <name name-style="western"><surname>Nilsen</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Sjaastad</surname> <given-names>O</given-names></name>. <article-title>Posterior cranial fossa dimensions in the Chiari I malformation: relation to pathogenesis and clinical presentation</article-title>. <source>Neuroradiology</source>. <year>1993</year>;<volume>35</volume>(<issue>2</issue>):<fpage>113</fpage>–<lpage>8</lpage>. Epub 1993/01/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/BF00593966" xlink:type="simple">10.1007/BF00593966</ext-link></comment> <object-id pub-id-type="pmid">8433785</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Vanaclocha</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Saiz-Sapena</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Garcia-Casasola</surname> <given-names>MC</given-names></name>. <article-title>Surgical technique for cranio-cervical decompression in syringomyelia associated with Chiari type I malformation</article-title>. <source>Acta Neurochir (Wien)</source>. <year>1997</year>;<volume>139</volume>(<issue>6</issue>):<fpage>529</fpage>–<lpage>39</lpage>; discussion 39–40. Epub 1997/01/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/BF02750996" xlink:type="simple">10.1007/BF02750996</ext-link></comment> <object-id pub-id-type="pmid">9248587</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Trigylidas</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Baronia</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Vassilyadi</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Ventureyra</surname> <given-names>EC</given-names></name>. <article-title>Posterior fossa dimension and volume estimates in pediatric patients with Chiari I malformations</article-title>. <source>Childs Nerv Syst</source>. <year>2008</year>;<volume>24</volume>(<issue>3</issue>):<fpage>329</fpage>–<lpage>36</lpage>. Epub 2007/07/28. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00381-007-0432-4" xlink:type="simple">10.1007/s00381-007-0432-4</ext-link></comment> <object-id pub-id-type="pmid">17657497</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Khalsa</surname> <given-names>SSS</given-names></name>, <name name-style="western"><surname>Siu</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>DeFreitas</surname> <given-names>TA</given-names></name>, <name name-style="western"><surname>Cappuzzo</surname> <given-names>JM</given-names></name>, <name name-style="western"><surname>Myseros</surname> <given-names>JS</given-names></name>, <name name-style="western"><surname>Magge</surname> <given-names>SN</given-names></name>, <etal>et al</etal>. <article-title>Comparison of posterior fossa volumes and clinical outcomes after decompression of Chiari malformation Type I</article-title>. <source>J Neurosurg Pediatr</source>. <year>2017</year>;<volume>19</volume>(<issue>5</issue>):<fpage>511</fpage>–<lpage>7</lpage>. Epub 2017/03/16. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2016.11.PEDS16263" xlink:type="simple">10.3171/2016.11.PEDS16263</ext-link></comment> <object-id pub-id-type="pmid">28291422</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Botelho</surname> <given-names>RV</given-names></name>, <name name-style="western"><surname>Heringer</surname> <given-names>LC</given-names></name>, <name name-style="western"><surname>Botelho</surname> <given-names>PB</given-names></name>, <name name-style="western"><surname>Lopes</surname> <given-names>RA</given-names></name>, <name name-style="western"><surname>Waisberg</surname> <given-names>J</given-names></name>. <article-title>Posterior Fossa Dimensions of Chiari Malformation Patients Compared with Normal Subjects: Systematic Review and Meta-Analysis</article-title>. <source>World Neurosurg</source>. <year>2020</year>;<volume>138</volume>:<fpage>521</fpage>–<lpage>9 e2</lpage>. Epub 20200307. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.wneu.2020.02.182" xlink:type="simple">10.1016/j.wneu.2020.02.182</ext-link></comment> <object-id pub-id-type="pmid">32156591</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Chiari</surname> <given-names>H.</given-names></name> <article-title>Ueber Veränderungen des Kleinhirns infolge von Hydrocephalie des Grosshirns1)</article-title>. <source>Dtsch Med Wochenschr</source>. <year>1891</year>;<volume>17</volume>(<issue>42</issue>):<fpage>1172</fpage>–<lpage>5</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1055/s-0029-1206803" xlink:type="simple">10.1055/s-0029-1206803</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0296260.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Heiss</surname> <given-names>JD</given-names></name>. <article-title>Cerebrospinal Fluid Hydrodynamics in Chiari I Malformation and Syringomyelia: Modeling Pathophysiology</article-title>. <source>Neurosurg Clin N Am</source>. <year>2023</year>;<volume>34</volume>(<issue>1</issue>):<fpage>81</fpage>–<lpage>90</lpage>. Epub 20221103. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.nec.2022.08.007" xlink:type="simple">10.1016/j.nec.2022.08.007</ext-link></comment> <object-id pub-id-type="pmid">36424067</object-id></mixed-citation></ref>
+<ref id="pone.0296260.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wilkins</surname> <given-names>RH</given-names></name>, <name name-style="western"><surname>Brody</surname> <given-names>IA</given-names></name>. <article-title>The Arnold-Chiari Malformation</article-title>. <source>Archives of Neurology</source>. <year>1971</year>;<volume>25</volume>(<issue>4</issue>):<fpage>376</fpage>–<lpage>7</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1001/archneur.1971.00490040102013" xlink:type="simple">10.1001/archneur.1971.00490040102013</ext-link></comment> <object-id pub-id-type="pmid">4938787</object-id></mixed-citation></ref>
+<ref id="pone.0296260.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Alden</surname> <given-names>TD</given-names></name>, <name name-style="western"><surname>Ojemann</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Park</surname> <given-names>TS</given-names></name>. <article-title>Surgical treatment of Chiari I malformation: indications and approaches</article-title>. <source>Neurosurg Focus</source>. <year>2001</year>;<volume>11</volume>(<issue>1</issue>):<fpage>E2</fpage>. Epub 2006/05/27. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/foc.2001.11.1.3" xlink:type="simple">10.3171/foc.2001.11.1.3</ext-link></comment> <object-id pub-id-type="pmid">16724812</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Anderson</surname> <given-names>RC</given-names></name>, <name name-style="western"><surname>Emerson</surname> <given-names>RG</given-names></name>, <name name-style="western"><surname>Dowling</surname> <given-names>KC</given-names></name>, <name name-style="western"><surname>Feldstein</surname> <given-names>NA</given-names></name>. <article-title>Improvement in brainstem auditory evoked potentials after suboccipital decompression in patients with chiari I malformations</article-title>. <source>J Neurosurg</source>. <year>2003</year>;<volume>98</volume>(<issue>3</issue>):<fpage>459</fpage>–<lpage>64</lpage>. Epub 2003/03/26. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/jns.2003.98.3.0459" xlink:type="simple">10.3171/jns.2003.98.3.0459</ext-link></comment> <object-id pub-id-type="pmid">12650414</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Arnautovic</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Splavski</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Boop</surname> <given-names>FA</given-names></name>, <name name-style="western"><surname>Arnautovic</surname> <given-names>KI</given-names></name>. <article-title>Pediatric and adult Chiari malformation Type I surgical series 1965–2013: a review of demographics, operative treatment, and outcomes</article-title>. <source>J Neurosurg Pediatr</source>. <year>2015</year>;<volume>15</volume>(<issue>2</issue>):<fpage>161</fpage>–<lpage>77</lpage>. Epub 2014/12/06. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2014.10.PEDS14295" xlink:type="simple">10.3171/2014.10.PEDS14295</ext-link></comment> <object-id pub-id-type="pmid">25479580</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Arnautovic</surname> <given-names>KI</given-names></name>, <name name-style="western"><surname>Muzevic</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Splavski</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Boop</surname> <given-names>FA</given-names></name>. <article-title>Association of increased body mass index with Chiari malformation Type I and syrinx formation in adults</article-title>. <source>J Neurosurg</source>. <year>2013</year>;<volume>119</volume>(<issue>4</issue>):<fpage>1058</fpage>–<lpage>67</lpage>. Epub 2013/05/15. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2013.4.JNS122011" xlink:type="simple">10.3171/2013.4.JNS122011</ext-link></comment> <object-id pub-id-type="pmid">23662826</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Arora</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Behari</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Banerji</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Chhabra</surname> <given-names>DK</given-names></name>, <name name-style="western"><surname>Jain</surname> <given-names>VK</given-names></name>. <article-title>Factors influencing the outcome in symptomatic Chiari I malformation</article-title>. <source>Neurol India</source>. <year>2004</year>;<volume>52</volume>(<issue>4</issue>):<fpage>470</fpage>–<lpage>4</lpage>. Epub 2005/01/01. <object-id pub-id-type="pmid">15626836</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref022"><label>22</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Banerji</surname> <given-names>NK</given-names></name>, <name name-style="western"><surname>Millar</surname> <given-names>JH</given-names></name>. <article-title>Chiari malformation presenting in adult life. Its relationship to syringomyelia</article-title>. <source>Brain</source>. <year>1974</year>;<volume>97</volume>(<issue>1</issue>):<fpage>157</fpage>–<lpage>68</lpage>. Epub 1974/03/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/brain/97.1.157" xlink:type="simple">10.1093/brain/97.1.157</ext-link></comment> <object-id pub-id-type="pmid">4547989</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref023"><label>23</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bell</surname> <given-names>WO</given-names></name>, <name name-style="western"><surname>Charney</surname> <given-names>EB</given-names></name>, <name name-style="western"><surname>Bruce</surname> <given-names>DA</given-names></name>, <name name-style="western"><surname>Sutton</surname> <given-names>LN</given-names></name>, <name name-style="western"><surname>Schut</surname> <given-names>L</given-names></name>. <article-title>Symptomatic Arnold-Chiari malformation: review of experience with 22 cases</article-title>. <source>J Neurosurg</source>. <year>1987</year>;<volume>66</volume>(<issue>6</issue>):<fpage>812</fpage>–<lpage>6</lpage>. Epub 1987/06/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/jns.1987.66.6.0812" xlink:type="simple">10.3171/jns.1987.66.6.0812</ext-link></comment> <object-id pub-id-type="pmid">3572510</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref024"><label>24</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Caldarelli</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Novegno</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Vassimi</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Romani</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Tamburrini</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Di Rocco</surname> <given-names>C</given-names></name>. <article-title>The role of limited posterior fossa craniectomy in the surgical treatment of Chiari malformation Type I: experience with a pediatric series</article-title>. <source>J Neurosurg</source>. <year>2007</year>;<volume>106</volume>(<issue>3 Suppl</issue>):<fpage>187</fpage>–<lpage>95</lpage>. Epub 2007/05/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/ped.2007.106.3.187" xlink:type="simple">10.3171/ped.2007.106.3.187</ext-link></comment> <object-id pub-id-type="pmid">17465383</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref025"><label>25</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Chauvet</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Carpentier</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>George</surname> <given-names>B</given-names></name>. <article-title>Dura splitting decompression in Chiari type 1 malformation: clinical experience and radiological findings</article-title>. <source>Neurosurg Rev</source>. <year>2009</year>;<volume>32</volume>(<issue>4</issue>):<fpage>465</fpage>–<lpage>70</lpage>. Epub 2009/08/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s10143-009-0214-4" xlink:type="simple">10.1007/s10143-009-0214-4</ext-link></comment> <object-id pub-id-type="pmid">19644715</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref026"><label>26</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Dean</surname> <given-names>NA</given-names></name>, <name name-style="western"><surname>Mitchell</surname> <given-names>BS</given-names></name>. <article-title>Anatomic relation between the nuchal ligament (ligamentum nuchae) and the spinal dura mater in the craniocervical region</article-title>. <source>Clin Anat</source>. <year>2002</year>;<volume>15</volume>(<issue>3</issue>):<fpage>182</fpage>–<lpage>5</lpage>. Epub 2002/04/12. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/ca.10001" xlink:type="simple">10.1002/ca.10001</ext-link></comment> <object-id pub-id-type="pmid">11948951</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref027"><label>27</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Di</surname> <given-names>X.</given-names></name> <article-title>Endoscopic suboccipital decompression on pediatric Chiari type I</article-title>. <source>Minim Invasive Neurosurg</source>. <year>2009</year>;<volume>52</volume>(<issue>3</issue>):<fpage>119</fpage>–<lpage>25</lpage>. Epub 2009/08/04. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1055/s-0029-1224170" xlink:type="simple">10.1055/s-0029-1224170</ext-link></comment> <object-id pub-id-type="pmid">19650014</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref028"><label>28</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Eicker</surname> <given-names>SO</given-names></name>, <name name-style="western"><surname>Mende</surname> <given-names>KC</given-names></name>, <name name-style="western"><surname>Duhrsen</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Schmidt</surname> <given-names>NO</given-names></name>. <article-title>Minimally invasive approach for small ventrally located intradural lesions of the craniovertebral junction</article-title>. <source>Neurosurg Focus</source>. <year>2015</year>;<volume>38</volume>(<issue>4</issue>):<fpage>E10</fpage>. Epub 2015/04/02. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/2015.2.FOCUS14799" xlink:type="simple">10.3171/2015.2.FOCUS14799</ext-link></comment> <object-id pub-id-type="pmid">25828486</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref029"><label>29</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Eisenstat</surname> <given-names>DD</given-names></name>, <name name-style="western"><surname>Bernstein</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Fleming</surname> <given-names>JF</given-names></name>, <name name-style="western"><surname>Vanderlinden</surname> <given-names>RG</given-names></name>, <name name-style="western"><surname>Schutz</surname> <given-names>H</given-names></name>. <article-title>Chiari malformation in adults: a review of 40 cases</article-title>. <source>Can J Neurol Sci</source>. <year>1986</year>;<volume>13</volume>(<issue>3</issue>):<fpage>221</fpage>–<lpage>8</lpage>. Epub 1986/08/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1017/s0317167100036313" xlink:type="simple">10.1017/s0317167100036313</ext-link></comment> <object-id pub-id-type="pmid">3742337</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref030"><label>30</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Erdogan</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Cansever</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Secer</surname> <given-names>HI</given-names></name>, <name name-style="western"><surname>Temiz</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Sirin</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Kabatas</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>The evaluation of surgical treatment options in the Chiari Malformation Type I</article-title>. <source>Turk Neurosurg</source>. <year>2010</year>;<volume>20</volume>(<issue>3</issue>):<fpage>303</fpage>–<lpage>13</lpage>. Epub 2010/07/30. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5137/1019-5149.JTN.2648-09.2" xlink:type="simple">10.5137/1019-5149.JTN.2648-09.2</ext-link></comment> <object-id pub-id-type="pmid">20669102</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref031"><label>31</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Godil</surname> <given-names>SS</given-names></name>, <name name-style="western"><surname>Parker</surname> <given-names>SL</given-names></name>, <name name-style="western"><surname>Zuckerman</surname> <given-names>SL</given-names></name>, <name name-style="western"><surname>Mendenhall</surname> <given-names>SK</given-names></name>, <name name-style="western"><surname>McGirt</surname> <given-names>MJ</given-names></name>. <article-title>Accurately measuring outcomes after surgery for adult Chiari I malformation: determining the most valid and responsive instruments</article-title>. <source>Neurosurgery</source>. <year>2013</year>;<volume>72</volume>(<issue>5</issue>):<fpage>820</fpage>–<lpage>7</lpage>; discussion 7. Epub 2013/02/06. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1227/NEU.0b013e3182897341" xlink:type="simple">10.1227/NEU.0b013e3182897341</ext-link></comment> <object-id pub-id-type="pmid">23381490</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref032"><label>32</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Goel</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Bhatjiwale</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Desai</surname> <given-names>K</given-names></name>. <article-title>Basilar invagination: a study based on 190 surgically treated patients</article-title>. <source>J Neurosurg</source>. <year>1998</year>;<volume>88</volume>(<issue>6</issue>):<fpage>962</fpage>–<lpage>8</lpage>. Epub 1998/06/03. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3171/jns.1998.88.6.0962" xlink:type="simple">10.3171/jns.1998.88.6.0962</ext-link></comment> <object-id pub-id-type="pmid">9609289</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref033"><label>33</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kotil</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Ton</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Tari</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Savas</surname> <given-names>Y</given-names></name>. <article-title>Delamination technique together with longitudinal incisions for treatment of Chiari I/syringomyelia complex: a prospective clinical study</article-title>. <source>Cerebrospinal Fluid Res</source>. <year>2009</year>;<volume>6</volume>:<fpage>7</fpage>. Epub 2009/06/24. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/1743-8454-6-7" xlink:type="simple">10.1186/1743-8454-6-7</ext-link></comment> <object-id pub-id-type="pmid">19545443</object-id></mixed-citation></ref>
+<ref id="pone.0296260.ref034"><label>34</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Litvack</surname> <given-names>ZN</given-names></name>, <name name-style="western"><surname>Lindsay</surname> <given-names>RA</given-names></name>, <name name-style="western"><surname>Selden</surname> <given-names>NR</given-names></name>. <article-title>Dura splitting decompression for Chiari I malformation in pediatric patients: clinical outcomes, healthcare costs, and resource utilization</article-title>. <source>Neurosurgery</source>. <year>2013</year>;<volume>72</volume>(<issue>6</issue>):<fpage>922</fpage>–<lpage>8</lpage>; discussion 8–9. Epub 2013/02/22. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1227/NEU.0b013e31828ca1ed" xlink:type="simple">10.1227/NEU.0b013e31828ca1ed</ext-link></comment> <object-id pub-id-type="pmid">23426152</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref035"><label>35</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Massimi</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Caldarelli</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Paternoster</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Novegno</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Tamburrini</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Di Rocco</surname> <given-names>C</given-names></name>. <article-title>Mini-invasive surgery for Chiari type I malformation</article-title>. <source>Neuroradiol J</source>. <year>2008</year>;<volume>21</volume>(<issue>1</issue>):<fpage>65</fpage>–<lpage>70</lpage>. Epub 2008/02/18. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1177/197140090802100108" xlink:type="simple">10.1177/197140090802100108</ext-link></comment> <object-id pub-id-type="pmid">24256751</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref036"><label>36</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Romero</surname> <given-names>FR</given-names></name>, <name name-style="western"><surname>Pereira</surname> <given-names>CA</given-names></name>. <article-title>Suboccipital craniectomy with or without duraplasty: what is the best choice in patients with Chiari type 1 malformation?</article-title> <source>Arq Neuropsiquiatr</source>. <year>2010</year>;<volume>68</volume>(<issue>4</issue>):<fpage>623</fpage>–<lpage>6</lpage>. Epub 2010/08/24. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1590/s0004-282x2010000400027" xlink:type="simple">10.1590/s0004-282x2010000400027</ext-link></comment> <object-id pub-id-type="pmid">20730321</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref037"><label>37</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhou</surname> <given-names>DB</given-names></name>, <name name-style="western"><surname>Zhao</surname> <given-names>JZ</given-names></name>, <name name-style="western"><surname>Zhang</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Zhao</surname> <given-names>YL</given-names></name>. <article-title>Suboccipital bony decompression combined with removal of the dural band as treatment for Chiari I malformation</article-title>. <source>Chin Med J (Engl)</source>. <year>2004</year>;<volume>117</volume>(<issue>8</issue>):<fpage>1274</fpage>–<lpage>7</lpage>. Epub 2004/09/14. <object-id pub-id-type="pmid">15361311</object-id>.</mixed-citation></ref>
+<ref id="pone.0296260.ref038"><label>38</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Yundt</surname> <given-names>KD</given-names></name>, <name name-style="western"><surname>Park</surname> <given-names>TS</given-names></name>, <name name-style="western"><surname>Tantuwaya</surname> <given-names>VS</given-names></name>, <name name-style="western"><surname>Kaufman</surname> <given-names>BA</given-names></name>. <article-title>Posterior fossa decompression without duraplasty in infants and young children for treatment of Chiari malformation and achondroplasia</article-title>. <source>Pediatr Neurosurg</source>. <year>1996</year>;<volume>25</volume>(<issue>5</issue>):<fpage>221</fpage>–<lpage>6</lpage>. Epub 1996/11/01. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1159/000121129" xlink:type="simple">10.1159/000121129</ext-link></comment> <object-id pub-id-type="pmid">9309784</object-id></mixed-citation></ref>
+<ref id="pone.0296260.ref039"><label>39</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Nakamura</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Iwasaki</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Hida</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Abe</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Fujioka</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Nagashima</surname> <given-names>K</given-names></name>. <article-title>Dural band pathology in syringomyelia with Chiari type I malformation</article-title>. <source>Neuropathology</source>. <year>2000</year>;<volume>20</volume>(<issue>1</issue>):<fpage>38</fpage>–<lpage>43</lpage>. Epub 2000/08/10. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1046/j.1440-1789.2000.00281.x" xlink:type="simple">10.1046/j.1440-1789.2000.00281.x</ext-link></comment> <object-id pub-id-type="pmid">10935435</object-id>.</mixed-citation></ref>
+</ref-list>
+</back>
+<sub-article article-type="aggregated-review-documents" id="pone.0296260.r001" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r001</article-id>
+<title-group>
+<article-title>Decision Letter 0</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Panthi</surname>
+<given-names>Sagar</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Sagar Panthi</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="article" id="rel-obj001" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>0</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">23 Oct 2023</named-content>
+</p>
+<p><!-- <div> -->PONE-D-23-31525<!-- </div> --></p>
+<p>Morphological and ultrastructural investigation of the posterior atlanto-occipital membrane: comparing children with Chiari malformation type I and controls</p>
+<p>PLOS ONE</p>
+<p>Dear Dr. Ravindra,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Dec 07 2023 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:</p>
+<p><list list-type="bullet"><list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item><list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item><list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list></p>
+<p>If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Sagar Panthi, MBBS</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>When submitting your revision, we need you to address these additional requirements.</p>
+<p>1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf</ext-link> and </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf</ext-link></p>
+<p>2. You indicated that you had ethical approval for your study. In your Methods section, please ensure you have also stated whether you obtained consent from parents or guardians of the minors included in the study or whether the research ethics committee or IRB specifically waived the need for their consent.</p>
+<p>3. Thank you for stating the following financial disclosure: </p>
+<p>   "The American Syringomyelia &amp; Chiari Alliance Project Inc. (ASAP) funded the project for a sum of $19,982.00 as part of the Timothy M. George Fellowship Award to Vijay Ravindra."</p>
+<p>Please state what role the funders took in the study.  If the funders had no role, please state: "The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript." </p>
+<p>If this statement is not correct you must amend it as needed. </p>
+<p>Please include this amended Role of Funder statement in your cover letter; we will change the online submission form on your behalf.</p>
+<p>4. In your Data Availability statement, you have not specified where the minimal data set underlying the results described in your manuscript can be found. PLOS defines a study's minimal data set as the underlying data used to reach the conclusions drawn in the manuscript and any additional data required to replicate the reported study findings in their entirety. All PLOS journals require that the minimal data set be made fully available. For more information about our data policy, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability</ext-link>.</p>
+<p>"Upon re-submitting your revised manuscript, please upload your study’s minimal underlying data set as either Supporting Information files or to a stable, public repository and include the relevant URLs, DOIs, or accession numbers within your revised cover letter. For a list of acceptable repositories, please see <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories</ext-link>. Any potentially identifying patient information must be fully anonymized.</p>
+<p>Important: If there are ethical or legal restrictions to sharing your data publicly, please explain these restrictions in detail. Please see our guidelines for more information on what we consider unacceptable restrictions to publicly sharing data: <ext-link ext-link-type="uri" xlink:href="http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions" xlink:type="simple">http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions</ext-link>. Note that it is not acceptable for the authors to be the sole named individuals responsible for ensuring data access.</p>
+<p>We will update your Data Availability statement to reflect the information you provide in your cover letter.</p>
+<p>5. Please amend the manuscript submission data (via Edit Submission) to include author  John R.W. Kestle, MD. </p>
+<p>Additional Editor Comments:</p>
+<p>Please check the following details to meet the journal's publication criteria. If anything is unaddressed, please make the necessary address in the subsequent revisions: </p>
+<p>1. Financial Disclosure:</p>
+<p>Enter a statement with the following details: Initials of the authors who received each award • • Grant numbers awarded to each author • The full name of each funder • <bold>URL of each funder website</bold></p>
+<p><bold>Did the sponsors or funders play any role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript? </bold></p>
+<p>2. Ethical Clearance: </p>
+<p>Please clarify in the ethical approval section that the hospital is affiliated to the university which approved the study as the hospital's name is not clearly indicated in the approval letter.</p>
+<p>3. Figure captions</p>
+<p><!-- <span style="font-family: Helvetica, Arial, sans-serif;"> -->Figure captions must be inserted in the text of the manuscript, immediately following the paragraph in which the figure is first cited (read order). Do not include captions as part of the figure files themselves or submit them in a separate document.<!-- </span> --></p>
+<p>[Note: HTML markup is below. Please do not edit.]</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Partly</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: The authors performed a study of children undergoing posterior fossa craniotomy for Chiari 1 malformation or brain tumor resection. They then compared the PAOM between these two groups. Differences between Chiari and tumor were seen in posterior fossa volume and disorganization score, with Chiari patients showing higher degree of disorganization. There were no significant associations between most imaging measurements and the collagen disorganization score.</p>
+<p>Recruitment was 9/21 to 6/23. Why were these dates chosen? How was sample size determined for this prospective study? There were differences seen between the groups, but many were not statistically significant. Is this because the sample is too small? What would be considered a clinically relevant difference in the key variables?</p>
+<p>The primary outcome seems to be the score indicating the degree of disorganization of the collagen (0 to 3). Has this score been validated? Any testing of reliability?</p>
+<p>How likely is it that the difference in posterior fossa volume observed here is related to the presence of a mass in the posterior fossa? This seems an odd control group for the volume measurement. Non-pathological controls might be more appropriate.</p>
+<p>In the Discussion and Conclusion, the authors state that their findings suggest that the collagen findings are more likely to be an adaptation rather than a cause of Chiari pathology. It is not clear what they base this statement on? How to the present results support this conclusion? This point is made in several places, including the Abstract. More justification of this statement is needed, or the conclusion should be revised.</p>
+<p>Reviewer #2: 1. A well written article. However the sample size is small and the cases and controls are unevenly distributed. A total of 35 children with 11 as controls. Were they matched? Pls explain.</p>
+<p>2. As the number of patients were few, I suggest the authors to list all 24 patients with age sex, preop imaging findings, post op complications and histological findings.</p>
+<p>3. Pls describe in the discussion section, the implication of this research to clinical practice. Will it affect the way we perform surgery or any medicines you theorize to address the disorganized membrane?</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: No</p>
+<p>Reviewer #2: No</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0296260.r002">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r002</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 0</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj002" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0296260.r001" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">9 Nov 2023</named-content>
+</p>
+<p>November 1, 2023</p>
+<p>Sagar Panthi, MBBS</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Dear Dr. Panthi:</p>
+<p>Thank you for sending us the reviewers’ comments regarding our paper, "Morphological and ultrastructural investigation of the posterior atlanto-occipital membrane: comparing children with Chiari malformation type I and controls” (PONE-D-23-31525). We are very pleased that the reviewers found the paper to be of interest. In response to their comments, we have made the following changes to the paper. </p>
+<p>RESPONSE TO REVIEWERS</p>
+<p>Reviewer #1</p>
+<p>1. The authors performed a study of children undergoing posterior fossa craniotomy for Chiari 1 malformation or brain tumor resection. They then compared the PAOM between these two groups. Differences between Chiari and tumor were seen in posterior fossa volume and disorganization score, with Chiari patients showing higher degree of disorganization. There were no significant associations between most imaging measurements and the collagen disorganization score.</p>
+<p>Recruitment was 9/21 to 6/23. Why were these dates chosen? How was sample size determined for this prospective study? There were differences seen between the groups, but many were not statistically significant. Is this because the sample is too small? What would be considered a clinically relevant difference in the key variables?</p>
+<p>RESPONSE: Recruitment for the study was based on the study timeline proposed as part of the funding mechanism. The original study was set to be completed over a 12-month period with the intention of examining and analyzing 40 specimens. Because of the COVID-19 pandemic, we had a difficult time enrolling patients and, therefore, obtaining specimens. The study was extended to June 2023, but the final enrollment was only 35 patients. </p>
+<p>This is the first study of its type, and therefore there was no specific primary outcome measure. Instead, we performed a comparative analysis of children with and without CM-I that required surgical treatment. Based on the findings of this exploratory study, there is no obvious clinically relevant difference per se. Additionally, no metric exists for disorganization scoring or thickness with respect to minimal clinically important difference. The results of this study, do, however, shed light on the potential pathophysiologic mechanism of CM-I and its effect on other mesodermal structures, in this case the PAOM. The sample size is small and a larger-scale study of the phenomena is warranted.</p>
+<p>As a result of the reviewer’s request, we have added this to the limitations section of the paper (page 24).</p>
+<p>2. The primary outcome seems to be the score indicating the degree of disorganization of the collagen (0 to 3). Has this score been validated? Any testing of reliability?</p>
+<p>RESPONSE: The outcome/variable of membrane disorganization was used to describe the structure of the PAOM in a clinically relevant manner. Initially, percentage of fat content and fiber organization were considered for use, but we determined that describing the structure that way would have very little meaning to the readership or clinicians. Because, to the knowledge of the authors, no published criteria for organization/disorganization is available, the ordinal disorganization index was derived by a senior, fellowship-trained neuropathologist and used with clear definitions and criteria. Each specimen was independently reviewed by two fellowship-trained neuropathologists who tested the method and consistently arrived at consensus; however, the grading system has not been formally validated. This information has been added to the methods (page 8) and limitations (page 23) sections of the paper.</p>
+<p>3. How likely is it that the difference in posterior fossa volume observed here is related to the presence of a mass in the posterior fossa? This seems an odd control group for the volume measurement. Non-pathological controls might be more appropriate.</p>
+<p>RESPONSE: The use of posterior fossa tumor patients as controls is a limitation, but for a surgical pathology study there is no other comparison with respect to membrane histology/ultrastructural properties. </p>
+<p>Chiari malformation is a congenital anomaly except in cases where a secondary malformation develops from a tumor, CSF leak, etc. On the other hand, posterior fossa tumor/mass lesion growth that occurs after development of the compartments of the cranium is not congenital. Thus, we would expect the volumetric measurements of the posterior fossa in patients with tumor/mass lesion growth to be a reasonable proxy for “normal,” despite not being ideal. In calculating posterior fossa volume, the goal was to compare the histological measures to the volumetric measure to correlate the specimens to the imaging findings. A third population of non-pathological controls would not allow us to achieve this goal. Additionally, non-pathological controls with imaging in the setting of TBI/concussion/epilepsy would not have the three-dimensional, fine-cut, high-resolution sequences available that are necessary to calculate posterior fossa volume. Had we included non-pathological control patients, additional recruitment and imaging studies would have been needed, which were outside the scope of and exceeded the financial constraints of the current study. </p>
+<p>The limitations of the use of posterior fossa tumor patients as the control population has been added to the paper (page 23). </p>
+<p>4. In the Discussion and Conclusion, the authors state that their findings suggest that the collagen findings are more likely to be an adaptation rather than a cause of Chiari pathology. It is not clear what they base this statement on? How to the present results support this conclusion? This point is made in several places, including the Abstract. More justification of this statement is needed, or the conclusion should be revised.</p>
+<p>RESPONSE: In patients with CM-I, the posterior fossa compartment is small (a), which is part of what leads to the clinical presentation—headaches, syringomyelia, bulbar symptoms, etc.—of children with the malformation. The small posterior fossa leads to crowding at the foramen magnum with associated hyperdynamic local CSF pulsation with nonlaminar flow at the foramen magnum (b,c,d). The surgical treatment for symptomatic CM-I involves expansion of the space at the foramen magnum via opening of the bone (suboccipital bone, C1 lamina), dura, and posterior atlanto-occipital membrane. Based on the findings of this study, the thinning and disorganization of the PAOM is an acquired mechanism or adaptation that is a physiologic response attempting to compensate for the malformation with auto-expansion of the posterior compartment. As a result, we posit that the membrane thins and becomes more disorganized with increased fat content (a chronic sign of tissue fatigue). This information, including references is included in the discussion portion of the paper (page 21). </p>
+<p>a. Botelho RV, Heringer LC, Botlho PB, Lopes RA, Waisberg J. Posterior fossa dimensions in chiari malformation patients compared with normal subjects: systematic review and meta-analysis. World Neurosurg. 2020 Jun: 138: 521-529.</p>
+<p>b. Heiss JD. Cerebrospinal fluid hydrodynamics in chiari i malformation and syringomyelia: modeling pathophysiology. Neurosurg Clin N Am. 2023 Jan; 34(1): 81-90. </p>
+<p>c. Chiari H. Ueber Veränderungen des Kleinhirns infolge von Hydrocephalie des Grosshirns. Dtsch Med Wochenschr 1891;17:1172–5. </p>
+<p>d. Wilkins RH, Brody IA. The Arnold-Chiari malformation. Neurological classics 38. Arch Neurol 1971;25:376–9. </p>
+<p>Reviewer #2:</p>
+<p>1. A well written article. However the sample size is small and the cases and controls are unevenly distributed. A total of 35 children with 11 as controls. Were they matched? Pls explain.</p>
+<p>RESPONSE: We thank the reviewer for their compliment. We recognized that the sample size is small with uneven distribution of cases and controls. As noted in response 1 to Reviewer #1, patient enrollment was interrupted by the COVID-19 pandemic and recruitment goals were necessarily altered. Given the desire to recruit as many subjects/pathological specimens as possible, the patients were not matched. Although disparities in body mass index, sex, and age were a concern, our post hoc analysis (Table 1) did not reveal any differences in age, sex distribution, or BMI. Thus, we believe a relative comparison is reasonable for this anatomic structure analysis. We have added the lack of formal matching to the limitations portion of the paper (page 24). </p>
+<p>2. As the number of patients were few, I suggest the authors to list all 24 patients with age sex, preop imaging findings, post op complications and histological findings.</p>
+<p>RESPONSE: We appreciate the suggestion, however because of the homogeneity in age and sex as well as histopathological findings and the lack of postoperative complications within the CM-I cohort we do not think that a table with this information would add to the paper. </p>
+<p>3. Pls describe in the discussion section, the implication of this research to clinical practice. Will it affect the way we perform surgery or any medicines you theorize to address the disorganized membrane?</p>
+<p>RESPONSE: Please see responses 1 and 4 to Reviewer #1 above. Our findings further the current understanding of the pathophysiology of CM-I and the role of the PAOM. This study is not likely to impact clinical practice directly, but thinning of the membrane as an adaptive response may represent a potential for therapeutic targets in the future to locally improve the flow of CSF and pulsatility at the foramen magnum (i.e., agents administered directly or indirectly to thin the membrane). We have added this to the discussion section of the paper, but we have kept this insertion brief so as not to overstate the clinical implications of our results (page 24). </p>
+<p>We thank the editor for the opportunity to revise the paper and believe that with the aforementioned changes it is significantly improved. </p>
+<p>We hope it meets the standard for publication in PLoS One and look forward to your decision.</p>
+<supplementary-material id="pone.0296260.s002" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.s002" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">responsetoreviewers.docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="aggregated-review-documents" id="pone.0296260.r003" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r003</article-id>
+<title-group>
+<article-title>Decision Letter 1</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Panthi</surname>
+<given-names>Sagar</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Sagar Panthi</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="article" id="rel-obj003" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">16 Nov 2023</named-content>
+</p>
+<p><!-- <div> -->PONE-D-23-31525R1<!-- </div> --><!-- <div> -->Morphological and ultrastructural investigation of the posterior atlanto-occipital membrane: comparing children with Chiari malformation type I and controls<!-- </div> --><!-- <div> -->PLOS ONE</p>
+<p>Dear Dr. Ravindra,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Dec 31 2023 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:<!-- </div> --><list list-type="bullet"><list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item><list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item><list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list><!-- <div> -->If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Sagar Panthi, MBBS</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>Please review your reference list to ensure that it is complete and correct. If you have cited papers that have been retracted, please include the rationale for doing so in the manuscript text, or remove these references and replace them with relevant current references. Any changes to the reference list should be mentioned in the rebuttal letter that accompanies your revised manuscript. If you need to cite a retracted article, indicate the article’s retracted status in the References list and also include a citation and full reference for the retraction notice.</p>
+<p>Additional Editor Comments:</p>
+<p>Thank you to the authors for sending us with the revisions addressing the suggestions and queries as asked by the reviewers. There are still a few suggestions from Reviewer 1 which needs addressing. In addition, please also address the suggestions made by the editorial team in the previous revision.</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.<!-- </font> --></p>
+<p>Reviewer #1: All comments have been addressed</p>
+<p>Reviewer #2: All comments have been addressed</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: N/A</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: The authors have addressed the reviewer comments.</p>
+<p>One additional suggestion:</p>
+<p>Recommend removing the final statement in conclusion regarding refutation of prior hypotheses. Because the abstract does not make reference to these hypotheses, it is difficult to understand what is meant by this comment.</p>
+<p>Also, in the Conclusion section, while the refuted hypotheses have now at least been mentioned in the Discussion, this statement is probably a bit too strong given the provided data. Removing that clause about refutation would do nothing to weaken this report.</p>
+<p>Reviewer #2: The authors have satisfactorily addressed my queries and I approve this manuscript for publication in the PLOS ONE</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->7. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: No</p>
+<p>Reviewer #2: <bold>Yes: </bold>Mohan Raj Sharma</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0296260.r004">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r004</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 1</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj004" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0296260.r003" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>2</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">17 Nov 2023</named-content>
+</p>
+<p>We thank the reviewer and have made the suggested change and have removed the sentence about refutation of prior hypotheses from the conclusion section of the abstract and the conclusion of the manuscript itself. </p>
+<p>We agree the suggested removal does nothing to weaken the report.</p>
+<p>We thank the editor for the opportunity to revise the paper and believe that with the changes it is improved. </p>
+<p>We hope it meets the standard for publication in PLoS One and look forward to your decision.</p>
+<p>Sincerely,</p>
+<p>Vijay M. Ravindra, MD, MSPH</p>
+<supplementary-material id="pone.0296260.s003" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0296260.s003" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">PLoS One R2 Letter to Reviewers.docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="editor-report" id="pone.0296260.r005" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r005</article-id>
+<title-group>
+<article-title>Decision Letter 2</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Panthi</surname>
+<given-names>Sagar</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Sagar Panthi</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="article" id="rel-obj005" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>2</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">10 Dec 2023</named-content>
+</p>
+<p>Morphological and ultrastructural investigation of the posterior atlanto-occipital membrane: comparing children with Chiari malformation type I and controls</p>
+<p>PONE-D-23-31525R2</p>
+<p>Dear Dr. Ravindra,</p>
+<p>We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.</p>
+<p>Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.</p>
+<p>An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at <ext-link ext-link-type="uri" xlink:href="http://www.editorialmanager.com/pone/" xlink:type="simple">http://www.editorialmanager.com/pone/</ext-link>, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at <email xlink:type="simple">authorbilling@plos.org</email>.</p>
+<p>If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>Kind regards,</p>
+<p>Sagar Panthi, MBBS</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Additional Editor Comments (optional):</p>
+<p>Reviewers' comments:</p>
+</body>
+</sub-article>
+<sub-article article-type="editor-report" id="pone.0296260.r006" specific-use="acceptance-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0296260.r006</article-id>
+<title-group>
+<article-title>Acceptance letter</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Panthi</surname>
+<given-names>Sagar</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Sagar Panthi</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0296260" document-id-type="doi" document-type="article" id="rel-obj006" link-type="peer-reviewed-article"/>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">5 Jan 2024</named-content>
+</p>
+<p>PONE-D-23-31525R2 </p>
+<p>PLOS ONE</p>
+<p>Dear Dr.  Ravindra, </p>
+<p>I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now being handed over to our production team.</p>
+<p>At this stage, our production department will prepare your paper for publication. This includes ensuring the following:</p>
+<p>* All references, tables, and figures are properly cited</p>
+<p>* All relevant supporting information is included in the manuscript submission,</p>
+<p>* There are no issues that prevent the paper from being properly typeset</p>
+<p>If revisions are needed, the production department will contact you directly to resolve them. If no revisions are needed, you will receive an email when the publication date has been set. At this time, we do not offer pre-publication proofs to authors during production of the accepted work. Please keep in mind that we are working through a large volume of accepted articles, so please give us a few weeks to review your paper and let you know the next and final steps. </p>
+<p>Lastly, if your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>If we can help with anything else, please email us at <email xlink:type="simple">customercare@plos.org</email>.</p>
+<p>Thank you for submitting your work to PLOS ONE and supporting open access. </p>
+<p>Kind regards, </p>
+<p>PLOS ONE Editorial Office Staff</p>
+<p>on behalf of</p>
+<p>Dr. Sagar Panthi </p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+</body>
+</sub-article>
+</article>

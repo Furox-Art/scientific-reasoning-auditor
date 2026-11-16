@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "kind": "manual_domain_expert_assessment_template",
+  "source_sha256": "5f4f0090f8c7f9c2a87242868caa2b8469ce80dde25ef59977cb4f403694e45d",
+  "discipline": "clinical",
+  "ruleset_sha256": "e6cc05bf541a6bc692c4e000d0c44e67b54b5c15126e926a8cf0068e717f1649",
+  "contract_sha256": "a013c533a45b91b04fe38eda8f6dc4c6ed404e88e411e52affe7ab7f8539cce3",
+  "blinded": true,
+  "assessments": [
+    {
+      "rule_id": "ethics_identifier",
+      "question": "Is ethics approval identifiable by an approval identifier?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "allocation_method",
+      "question": "Is a random allocation method described?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "adverse_event_counts",
+      "question": "Are adverse-event data quantified?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "primary_outcome_timing",
+      "question": "Is a primary outcome linked to an assessment time?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "sample_size_rationale",
+      "question": "Is sample-size planning linked to a numerical target?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "missing_data_strategy",
+      "question": "Is a strategy for missing data described?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "effect_confidence_interval",
+      "question": "Are effect estimates accompanied by uncertainty?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    }
+  ],
+  "instructions": [
+    "Do not reuse automated text cues as scientific truth.",
+    "Two real, distinct, qualified reviewers must assess the full manuscript separately.",
+    "Record individual verdicts and a reasoned adjudicated verdict for every rule.",
+    "For positive/partial verdicts provide exact source quotations (at least 12 characters).",
+    "A valid template or accepted import cannot prove qualifications or independent review."
+  ]
+}

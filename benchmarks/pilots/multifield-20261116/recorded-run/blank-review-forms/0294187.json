@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "kind": "manual_domain_expert_assessment_template",
+  "source_sha256": "80b1255b143c9453841d4d389f1389c9c8bd64e4cfa90920b6650566b98aa381",
+  "discipline": "chemistry",
+  "ruleset_sha256": "4282de7e74231b6f1faec5e0648339355cd4a0ecc7bffd0858a3557823ce4a2b",
+  "contract_sha256": "bc0dd18bca0753ae272b9306e303afb7a9b337571020e748385a04298cf01b77",
+  "blinded": true,
+  "assessments": [
+    {
+      "rule_id": "analytical_purity",
+      "question": "Is analytical purity reported quantitatively with a technique?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "calibration_concentrations",
+      "question": "Is calibration tied to a quantitative concentration?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "quantified_yield",
+      "question": "Is reaction or extraction yield reported with a value?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "nmr_characterization",
+      "question": "Does NMR characterization identify acquisition conditions?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "detection_limit",
+      "question": "Is an analytical detection limit quantified?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    },
+    {
+      "rule_id": "replicate_precision",
+      "question": "Are analytical replicates linked to a variability measure?",
+      "reviewer_assessments": [],
+      "adjudicated_verdict": null,
+      "adjudication_rationale": null
+    }
+  ],
+  "instructions": [
+    "Do not reuse automated text cues as scientific truth.",
+    "Two real, distinct, qualified reviewers must assess the full manuscript separately.",
+    "Record individual verdicts and a reasoned adjudicated verdict for every rule.",
+    "For positive/partial verdicts provide exact source quotations (at least 12 characters).",
+    "A valid template or accepted import cannot prove qualifications or independent review."
+  ]
+}

@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0295687</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-23-17996</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Engineering and technology</subject><subj-group><subject>Nanotechnology</subject><subj-group><subject>Nanoparticles</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Chemistry</subject><subj-group><subject>Chemical elements</subject><subj-group><subject>Chromium</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Chemistry</subject><subj-group><subject>Electrochemistry</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Engineering and technology</subject><subj-group><subject>Equipment</subject><subj-group><subject>Measurement equipment</subject><subj-group><subject>Spectrometers</subject><subj-group><subject>Spectrophotometers</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Mathematics</subject><subj-group><subject>Optimization</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Research and analysis methods</subject><subj-group><subject>Spectrum analysis techniques</subject><subj-group><subject>Ultraviolet-visible spectroscopy</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Materials science</subject><subj-group><subject>Materials</subject><subj-group><subject>Thin films</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Chemistry</subject><subj-group><subject>Chemical elements</subject><subj-group><subject>Gold</subject></subj-group></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>Cr-Detector: A simple chemosensing system for onsite Cr (VI) detection in water</article-title>
+<alt-title alt-title-type="running-head">Cr-Detector: A simple chemosensing system for onsite Cr (VI) detection in water</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Dei</surname>
+<given-names>Jyotsna</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/resources/">Resources</role>
+<role content-type="http://credit.niso.org/contributor-roles/software/">Software</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Mondal</surname>
+<given-names>Shirsak</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/software/">Software</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Biswas</surname>
+<given-names>Ayan</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/software/">Software</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Sarkar</surname>
+<given-names>Dhruba Jyoti</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Bhattacharyya</surname>
+<given-names>Soumyadeb</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Pal</surname>
+<given-names>Souvik</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Mukherjee</surname>
+<given-names>Subhankar</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/resources/">Resources</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Sarkar</surname>
+<given-names>Subrata</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Ghosh</surname>
+<given-names>Alokesh</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/resources/">Resources</role>
+<role content-type="http://credit.niso.org/contributor-roles/software/">Software</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-3354-4317</contrib-id>
+<name name-style="western">
+<surname>Bansal</surname>
+<given-names>Vipul</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff004"><sup>4</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Bandhyopadhyay</surname>
+<given-names>Rajib</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Das</surname>
+<given-names>Basanta Kumar</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+<contrib contrib-type="author" corresp="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0003-4960-9768</contrib-id>
+<name name-style="western">
+<surname>Behera</surname>
+<given-names>Bijay Kumar</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="aff" rid="aff005"><sup>5</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Aquatic Environmental Biotechnology and Nanotechnology Division, ICAR-Central Inland, Fisheries Research Institute, Kolkata, West Bengal, India</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>Department of Instrumentation and Electronics Engineering, Jadavpur University Salt Lake Campus, Kolkata, India</addr-line></aff>
+<aff id="aff003"><label>3</label> <addr-line>Agri and Environmental Electronics (AEE) Group, Centre for Development of Advanced Computing (C-DAC), Kolkata, West Bengal, India</addr-line></aff>
+<aff id="aff004"><label>4</label> <addr-line>Ian Potter NanoBioSensing Facility, NanoBiotechnology Research Laboratory, School of Science, RMIT University, Melbourne, Victoria, Australia</addr-line></aff>
+<aff id="aff005"><label>5</label> <addr-line>College of Fisheries, Rani Lakshmi Bai Central Agricultural University, Jhansi, Uttar Pradesh, India</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Barakat</surname>
+<given-names>Nasser A. M.</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>Minia University, EGYPT</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The authors have declared that no competing interests exist.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">beherabk18@yahoo.co.in</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>3</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0295687</elocation-id>
+<history>
+<date date-type="received">
+<day>9</day>
+<month>6</month>
+<year>2023</year>
+</date>
+<date date-type="accepted">
+<day>27</day>
+<month>11</month>
+<year>2023</year>
+</date>
+</history>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Dei et al</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0295687"/>
+<abstract>
+<p>Due to the increase in urbanization and industrialization, the load of toxicants in the environment is alarming. The most common toxicants, including heavy metals and metalloids such as hexavalent Chromium, have severe pathophysiological impacts on humans and other aquatic biotas. Therefore, developing a portable rapid detection device for such toxicants in the aquatic environment is necessary. This work portrays the development of a field-portable image analysis device coupled with 3,3’,5,5’-tetramethylbenzidine (TMB) as a sensing probe for chromium (VI) detection in the aquatic ecosystem. Sensor parameters, such as reagent concentration, reaction time, etc., were optimized for the sensor development and validation using a commercial UV-Vis spectrophotometer. The chemoreceptor integrated with a uniform illumination imaging system (UIIS) revealed the system’s applicability toward Cr(VI) detection. The calibration curve using the R-value of image parameters allows Cr(VI) detection in the linear range of 25 to 600 ppb, which covers the prescribed permissible limit by various regulatory authorities. Furthermore, the adjusted R<sup>2</sup> = 0.992 of the linear fit and correlation coefficients of 0.99018 against the spectrophotometric method signifies the suitability of the developed system. This TMB-coupled field-portable sensing system is the first-ever reported image analysis-based technology for detecting a wide range of Cr(VI) in aquatic ecosystems to our knowledge.</p>
+</abstract>
+<funding-group>
+<funding-statement>The author(s) received no specific funding for this work.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="4"/>
+<table-count count="2"/>
+<page-count count="16"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>All relevant data are within the paper and its <xref ref-type="sec" rid="sec026">Supporting information</xref> files.</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec001" sec-type="intro">
+<title>Introduction</title>
+<p>Industrial advancement has played a vital role in improving human life while presenting environmental challenges. One such challenge faced by our societies and the sustainability of our planet is the ongoing release of toxic heavy metals and metalloids into the aquatic environment. The toxic metalloids have been infiltrating our environments through industrial discharge, mining activities, and domestic discharge into surrounding water bodies, thus polluting the aquatic ecosystem [<xref ref-type="bibr" rid="pone.0295687.ref001">1</xref>]. Through bioaccumulation and bio-amplification across food chains, these heavy metal species have significantly influenced biodiversity and life on Earth [<xref ref-type="bibr" rid="pone.0295687.ref002">2</xref>]. Chromium (Cr), present in the effluents from several industrial activities, such as chemical synthesis, chrome plating, leather tanning, production of dyes, metallurgy, mining, and manufacturing of various alloys, has become one of the most toxic heavy metals in our environments. Because of their high toxicity, chromium and its compounds, commonly utilized in industrial chemical processes, have become environmental contaminants of genuine concern [<xref ref-type="bibr" rid="pone.0295687.ref003">3</xref>]. A massive influx of chromium pollution in soil, groundwater, and air due to industrial activities has been associated with an elevated risk of carcinogenicity, mutagenicity, chromosomal breakage, DNA damage, and genotoxicity, which are responsible for a range of debilitating diseases [<xref ref-type="bibr" rid="pone.0295687.ref004">4</xref>]. The Cr(VI) contamination was observed in higher concentrations in Changhua County compared to Taichung City, resulting in 60 times more gastric cancer incidence in the former compared to Taichung City. Overexposure to Cr(VI) was observed in China, where upper stretches of rivers such as the Luo and Sandao exceeded Cr(VI) permissible levels, whereas lower and middle stretches did not [<xref ref-type="bibr" rid="pone.0295687.ref005">5</xref>]. Similar reports of chromium contamination of water supplies have been registered globally from USA [<xref ref-type="bibr" rid="pone.0295687.ref006">6</xref>], Australia, India [<xref ref-type="bibr" rid="pone.0295687.ref007">7</xref>], Bangladesh [<xref ref-type="bibr" rid="pone.0295687.ref008">8</xref>], Greece [<xref ref-type="bibr" rid="pone.0295687.ref009">9</xref>], Japan [<xref ref-type="bibr" rid="pone.0295687.ref010">10</xref>], and Iraq [<xref ref-type="bibr" rid="pone.0295687.ref011">11</xref>], and many resulting in successful lawsuits.</p>
+<p>Chromium has two stable oxidation states viz. Cr(III) and Cr(VI), of which Cr(VI) is more soluble, mobile, and bioavailable in alkaline to slightly acidic conditions and, as a result, has a higher level of toxicity [<xref ref-type="bibr" rid="pone.0295687.ref012">12</xref>]. Cr(VI) is also regularly found in drinking and public water systems. In 1991, as a part of the Safe Water Drinking Act (SFDA), the United States Environmental Protection Agency placed chromium under the maximum contaminant level goal to have a maximum contaminant level of 100 ppb total chromium. However, even though it is recognized that Cr(VI) is significantly toxic while Cr(III) is not, the US EPA has not yet been able to establish MCL specifically for Cr(VI). However, according to research from the US National Toxicology Program, California could establish a state-wide drinking water standard of 10 ppb MCL for Cr(VI), under further review [<xref ref-type="bibr" rid="pone.0295687.ref013">13</xref>]. In addition, Japan and China also regulate Cr(VI). The chromium is detected by traditional laboratory tests using AAS [<xref ref-type="bibr" rid="pone.0295687.ref014">14</xref>] and ICP-MS [<xref ref-type="bibr" rid="pone.0295687.ref015">15</xref>]. For instance, for regulatory compliance, the total chromium in water is currently measured by ICP-MS using the US EPA Method 200.8 [<xref ref-type="bibr" rid="pone.0295687.ref016">16</xref>]. These tests are sensitive and reliable but require expensive equipment with a large footprint and trained technicians, making on-site detection challenging and delaying decision-making. Importantly, these assays do not allow specific detection of toxic Cr(VI). A rather complex anion-exchange chromatography-based US EPA Method 218.7 can be followed [<xref ref-type="bibr" rid="pone.0295687.ref006">6</xref>]. These limitations have led to an emerging interest in developing new methods for specific Cr(VI) detection in a point-of-care (POC). Notably, very few reported methods demonstrated the ability to detect Cr(VI) selectively. These methods have utilized various transducer/detection platforms, including fluorescence spectrometry [<xref ref-type="bibr" rid="pone.0295687.ref017">17</xref>] electrochemistry [<xref ref-type="bibr" rid="pone.0295687.ref018">18</xref>], and others. Among different transducers, colorimetric detection offers the key advantage of more practical deployment due to the ease of analyte detection by an unaided eye, as is evident from the success of COVID rapid antigen test (RAT) kits, and other standard POC devices such as pregnancy strips. Thus, colorimetric methods offer the opportunity to develop low-cost portable devices for rapid onsite monitoring of important target analytes, both qualitatively and semi-quantitatively. Chromium monitoring using the colorimetric method based on 1, 5-diphenylcarbazide dye is a well-known process [<xref ref-type="bibr" rid="pone.0295687.ref019">19</xref>], but over time it has faced many interference issues, and the better chromogenic substrate is well sought.</p>
+<p>The conventional analysis of Cr(VI) in water requires highly skilled staff, time-consuming sample pre-treatment, and sophisticated equipment, including AAS, ICP-MS, UV-Vis spectrometry, surface-enhanced Raman scattering spectroscopy, fluorescence, electrochemistry, and X-ray Fluorescence, etc. which are more specific and sensitive towards minute concentrations of Cr(VI) [<xref ref-type="bibr" rid="pone.0295687.ref020">20</xref>,<xref ref-type="bibr" rid="pone.0295687.ref021">21</xref>]. But, detection through conventional systems is costly, requires skilled human resources for device and software handling, is time-consuming, and lacks field portability. These drawbacks of the conventional system have encouraged the development of inexpensive sensor-based rapid detection systems with high field portability and sensitivity. The precise detection of toxic metalloids using suitable sensing techniques may also flourish their separation and elimination techniques towards increasing the safety status of the usable water [<xref ref-type="bibr" rid="pone.0295687.ref022">22</xref>]. Moreover, the sensor development study may also be integrated with novel nanomaterials and quantum dots [<xref ref-type="bibr" rid="pone.0295687.ref023">23</xref>] to increase the stability and sensitivity of the developed sensor. Not only that, but such sensors can also be used in conventional adsorption studies towards developing novel adsorption beds in water treatment plants, as mentioned by Ismail et al. [<xref ref-type="bibr" rid="pone.0295687.ref024">24</xref>]. In the present study, a portable field device has been developed by exploiting TMB as a chromogenic substance. The first part of this endeavor depicts the choice of material through UV-Vis Spectroscopy. Furthermore, after establishing chemosensor selectivity and specificity towards Cr (VI), UIIS<sup>Scan</sup>1.1, an advanced image array technology-based field-portable high-throughput sensory system, was [<xref ref-type="bibr" rid="pone.0295687.ref025">25</xref>] exploited towards a simple, rapid and on-site analysis of Cr(VI). The tailored system has been upgraded and trained with an image-processing algorithm. A software named ‘Cr-Detector’ was developed for this purpose (<bold><xref ref-type="fig" rid="pone.0295687.g001">Fig 1</xref></bold>).</p>
+<fig id="pone.0295687.g001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.g001</object-id>
+<label>Fig 1</label>
+<caption>
+<title>Graphical User Interface (GUI) and software operation flow diagram.</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.g001" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec002" sec-type="materials|methods">
+<title>Materials and methods</title>
+<p>This section outlines experimental design details performed experiments and data analysis techniques. At first, suitable chromogenic compounds are selected based on the observable and measurable color change with different concentrations of Cr(VI). Next, different image analysis algorithms have been explored, and suitable color analysis techniques have been finalized for data collection. Furthermore, experimentations of different concentrations of Cr(VI) with suitable chromogen have been performed, and optimized reaction parameters. Next, repetitive experimentation with all optimized reaction parameters and selected concentrations of Cr(VI) have been executed towards cumulative data collection and standard curve generation. Different image parameters have been extracted from the images captured through the portable field device and evaluated towards selective output signal generation and finalization of the algorithm towards accurate sample analysis and validation. Further selectivity study of the developed sensor with different positive and negative ions has also been performed. Furthermore, recovery analysis and accurate sample analysis have also been executed.</p>
+<sec id="sec003">
+<title>Reagents</title>
+<p>3,3′,5,5′-tetramethylbenzidine (TMB), o-Phenyldiamine (OPD), 2,2’-azino-bis (3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) hydrogen peroxide (H<sub>2</sub>O<sub>2</sub>, 30%), and DMSO, were obtained from Sigma-Aldrich. In addition, potassium dichromate (K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>), Chromium chloride hexahydrate (CrCl<sub>3</sub>.6H<sub>2</sub>O), Zinc sulphate (ZnSO<sub>4</sub>), Lead acetate trihydrate (Pb(C<sub>2</sub>H<sub>3</sub>O<sub>2</sub>)<sub>2</sub>.3(H<sub>2</sub>O)), Sodium sulfate (Na<sub>2</sub>SO<sub>4</sub>), Potassium carbonate (K<sub>2</sub>CO<sub>3</sub>), Sodium hydrogen carbonate (NaHCO<sub>3</sub>), Barium nitrate (Ba(NO<sub>3</sub>)<sub>2</sub>), Cadmium nitrate tetrahydrate (Cd (NO<sub>3</sub>)<sub>2</sub> · 4H<sub>2</sub>O), Mercury chloride (HgCl<sub>2</sub>) were purchased from HiMedia. Na<sub>2</sub>SO<sub>4</sub> and ZnSO<sub>4</sub> were used to obtain SO<sub>4</sub><sup>2-</sup> ions which were further used to check the specificity/cross-reactivity of the developed sensor intended to detect Cr(VI). In this article, water and other aqueous solutions with ultrapure water were purified with a Millipore system (18.2 MΩ·cm).</p>
+</sec>
+<sec id="sec004">
+<title>Instruments and apparatus</title>
+<p>Previously, an uniform illumination imaging system (UIIS) integrated with a portable scanner was reported that, allows the detection of an analyte through Mahanalobis Distance calculations [<xref ref-type="bibr" rid="pone.0295687.ref025">25</xref>]. The UIIS system can capture images of 96 well plates in 600 dpi resolution and operate at a wide temperature range, making it effective for spot experimentations in fields. The present study used a similar UIIS system with further modification. For capturing an image of the reaction colour, a different image analysis technique was explored to develop the algorithm for chromium detection. Here we have collected the ‘R’, ‘G’, and ‘B’ values of the reaction colour that signifies the ‘RED’, ‘GREEN’, and ‘BLUE’ parameters. Then we tried to find a predictive pattern with different colour parameters toward developing the standard curve. 96-well plates used in the study were obtained from Costar®, Corning Incorporated. For comparison with commercial spectrophotometer absorbance at a specific wavelength was measured by CLARIOstar<sup><italic>plus</italic></sup>, BMG Labtech.</p>
+</sec>
+<sec id="sec005">
+<title>Reaction parameter optimisation</title>
+<p>Different parameters regarding the Cr(VI) mediated oxidation of TMB were optimised initially. The optimisation of TMB concentration and H<sub>2</sub>O<sub>2</sub> concentration was done by single variable method and using various concentrations of the reagents. The reaction time optimisation was performed in the Cr-Detector system.</p>
+</sec>
+<sec id="sec006">
+<title>TMB concentration optimization</title>
+<p>The TMB concentrations ranging from 0.1 to 1.5 mM were used for the above experiment. A fixed concentration of H<sub>2</sub>O<sub>2</sub> and Cr(VI) was then added to the reaction mixture. Finally, the volume was adjusted to 200 μL with ultrapure deionised water. The absorbance maxima values at 650 nm of the concentrations were recorded.</p>
+</sec>
+<sec id="sec007">
+<title>H<sub>2</sub>O<sub>2</sub> concentration optimisation</title>
+<p>The different concentrations of H<sub>2</sub>O<sub>2</sub> (10 to 300 mM) were used for the optimisation experiment. At first, a fixed concentration of TMB was added to the wells, followed by different concentrations of H<sub>2</sub>O<sub>2</sub> and a fixed concentration of Cr(VI). Next, the reaction volume was adjusted to 200 μL with ultrapure deionised water. Finally, the absorbance maxima values at 650 nm were recorded.</p>
+</sec>
+<sec id="sec008">
+<title>Reaction time optimization</title>
+<p>The reaction time was optimised with fixed TMB, H<sub>2</sub>O<sub>2</sub> concentration, and different Cr(VI) concentration ranges from 0 to 1000 ppb. In addition, a kinetics study of the reaction was performed for 25 minutes with a time interval of 5 minutes. The image parameter values were recorded in the Cr-Detector system every 5 minutes.</p>
+</sec>
+<sec id="sec009">
+<title>Colorimetric determination of Cr(VI)</title>
+<p>In the present study, different parameters have been optimized to get a proper signal for detecting Cr(VI) up to the permissible limit by EPA. Solutions of Cr(VI) with concentrations ranging from 1ppb to 1000ppb were formed by serial dilution to obtain the detectable linear range of the Cr(VI). Concentrations of 1 ppb, 25 ppb, 50 ppb, 75 ppb, 100 ppb, 200 ppb, 400 ppb, 600 ppb, 800 ppb and 1000 ppb were used for the test. The different concentrations of Cr(VI) were added to the reaction mixture containing optimum concentrations of TMB and H<sub>2</sub>O<sub>2</sub>. The reaction volume was then adjusted to 200 μL with ultrapure deionised water, and absorbance was recorded at 650 nm after the optimized incubation. Further, the mentioned colorimetric experiment for Cr(VI) detection was repeated 500 times in the developed Cr-Detector towards the development of the calibration curve.</p>
+</sec>
+<sec id="sec010">
+<title>Specificity test</title>
+<p>Solution of other metals and ions like Hg<sup>2+</sup>, Pb<sup>2+</sup>, Ba<sup>2+</sup>, Cr<sup>3+</sup>, As<sup>3+</sup>, Cd, SO<sub>4</sub><sup>2−</sup> CO<sub>3</sub><sup>2−</sup>, and HCO<sup>3−</sup> were prepared from their respective salts. A fixed concentration of these ions, along with Cr(VI), was added to optimum concentrations of TMB and H<sub>2</sub>O<sub>2</sub>. The reaction volume was adjusted to 200 μL with ultrapure deionised water followed by measuring absorbance at 650 nm. Further anti-interference tests were performed using a mixture of different metal ions in the same reaction mixture. All the mentioned experiments were performed in triplicates and repeated more than once.</p>
+</sec>
+</sec>
+<sec id="sec011" sec-type="conclusions">
+<title>Results and discussion</title>
+<sec id="sec012">
+<title>Choice of materials</title>
+<p>Cr(VI) and Cr(III) redox conversion is ubiquitous in the environment. In other words, Cr(III) can easily be oxidised to Cr(VI) by an oxidant and Cr(VI) can quickly be reduced to Cr(III) by a reductant [<xref ref-type="bibr" rid="pone.0295687.ref026">26</xref>]. Several attempts have been envisaged toward colorimetric Cr(VI) detection. One such testimony is 1,5-diphenylcarbazide (DPC), which can produce a strong colour change for quantitative or semi-quantitative analysis [<xref ref-type="bibr" rid="pone.0295687.ref027">27</xref>,<xref ref-type="bibr" rid="pone.0295687.ref028">28</xref>]. The DPC-based sensor is one the favourites among several other chromogens for environment monitoring. Despite its advantages, the use of DPC is limited due to its unstable nature, reduced sensitivity, and narrow linear range [<xref ref-type="bibr" rid="pone.0295687.ref029">29</xref>]. Research works have been conducted to increase the stability of DPC by coating various polymers, which, moreover, increases the sensor fabrication cost. Therefore, in this study, other different chromogenic substances such as 3,3’,5,5’-tetramethylbenzidine (TMB), o-Phenyldiamine (OPD), 2,2’-azino-bis (3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) are envisaged towards cost effective colorimetric detection of Cr(VI). 3,3′,5,5′- tetramethylbenzidine (TMB) is one of the most used chromogenic substrates among peroxidase probes. In the presence of a catalyst, TMB can be oxidised by H<sub>2</sub>O<sub>2</sub> to oxidised TMB forming intense blue colour, which can be visualised through the naked eye and spectroscopy. The absorbance peak can be recorded at 650 nm [<xref ref-type="bibr" rid="pone.0295687.ref030">30</xref>]. On the other hand, o-phenylenediamine (OPD) is a chromogenic substrate that generates yellow colour upon oxidation. The oxidation by H<sub>2</sub>O<sub>2</sub> results in the formation of 2, 3-phenazinediamin, generating bright yellow colour and yellow fluorescence. The absorbance maxima of the colour change were measured at 420 nm [<xref ref-type="bibr" rid="pone.0295687.ref031">31</xref>]. Similarly, ABTS is a chemically stable and highly water-soluble peroxidase substrate. When oxidised by H<sub>2</sub>O<sub>2</sub>, it serves as a peroxidase substrate and creates a metastable cation by forming ABTS<sup>4+</sup>. The oxidation produces blue-green colour, which can be quantified by recording absorbance maxima at 734 nm [<xref ref-type="bibr" rid="pone.0295687.ref032">32</xref>]. This work chose TMB as the chromogenic substrate because of its superior sensitivity over OPD and ABTS comparatively. For example, a fixed concentration of the OPD and ABTS failed to produce a measurable colour change for different Cr(VI) concentrations in the presence of 50 mM H<sub>2</sub>O<sub>2</sub>, while the same concentration of TMB produced excellent measurable colour changes in the presence of 50mM H<sub>2</sub>O<sub>2</sub> (<bold><xref ref-type="fig" rid="pone.0295687.g002">Fig 2</xref></bold>). Also, TMB was found as the chosen substrate in almost every literature regarding peroxidise, nanozyme and DNAzyme activities [<xref ref-type="bibr" rid="pone.0295687.ref033">33</xref>].</p>
+<fig id="pone.0295687.g002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.g002</object-id>
+<label>Fig 2</label>
+<caption>
+<title>Choice of chromogen such as TMB, OPD and ABTS against Cr(VI) concentrations under the condition of H<sub>2</sub>O<sub>2</sub> = 50 mM in UV-Vis Spectrophotometer.</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.g002" xlink:type="simple"/>
+</fig>
+</sec>
+<sec id="sec013">
+<title>Reaction parameter optimisation</title>
+<sec id="sec014">
+<title>TMB concentration optimization</title>
+<p>The absorbance maxima values at 650 nm of the TMB concentrations of 0.1 mM to 1.5 mM were found to be in a range of 0.0047 to 0.0685. It was observed that, from 0.9 mM concentration, the absorbance values got saturated. Therefore, as per this study, 0.9 mM concentration of TMB was found to be optimum for further experiments. The graph for TMB concentration optimisation is represented in <bold>S1 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref>.</bold></p>
+</sec>
+</sec>
+<sec id="sec015">
+<title>H<sub>2</sub>O<sub>2</sub> concentration optimisation</title>
+<p>The absorbance maxima values at 650 nm of the H<sub>2</sub>O<sub>2</sub> concentrations of 10 mM to 300 mM were found in a range of 0.0243 to 0.1523. From the absorbance maxima values, it was observed that, the absorbance values get saturated from H<sub>2</sub>O<sub>2</sub> concentration of 50 mM to 300 mM. Thus, 50 mM H<sub>2</sub>O<sub>2</sub> was finalized as the optimum H<sub>2</sub>O<sub>2</sub> concentration for further experimentations. The graph for H<sub>2</sub>O<sub>2</sub> concentration optimisation is represented in S2 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref>.</p>
+</sec>
+<sec id="sec016">
+<title>Colorimetric detection of Cr(VI) through spectrophotometer</title>
+<p>In this work, the enzyme-linked immunosorbent assay (ELISA) substrate 3,3′,5,5′-Tetramethylbenzidine (TMB) is utilized as a probe for the colorimetric detection of Cr(VI). The sensing mechanism of this colorimetry is based on the oxidation of TMB by Cr(VI) in an acid media with the assistance of H<sup>+</sup> ions produced by H<sub>2</sub>O<sub>2</sub>. TMB is converted to oxidized TMB when Cr(VI) is reduced to Cr(III) in an acidic environment. When TMB is oxidized from its colorless form, it becomes blue. Maximum absorption for this blue color occurs at 650 nm wavelength. As a result, by measuring absorbance at 650 nm, the intensity of the generated color is assessed spectroscopically. The absorbance maxima values at 650 nm of different Cr(VI) concentrations of 1 ppb to 1000 ppb were found to be in the range of 0 to 0.2435. Furthermore, it was found that, as the concentration of Cr(VI) increased, the absorbance at 650 nm increased steadily. The inset of <bold><xref ref-type="fig" rid="pone.0295687.g003">Fig 3</xref></bold> provides images of the TMB-H<sub>2</sub>O<sub>2</sub> solutions mediated by various Cr(VI) concentrations for naked-eye examination. The linear fit analysis for the standard curve depicted excellent goodness of fit value of 0.994 (<bold><xref ref-type="fig" rid="pone.0295687.g003">Fig 3</xref></bold>). The equation for the standard curve is as follows:
+<disp-formula id="pone.0295687.e001">
+<alternatives>
+<graphic id="pone.0295687.e001g" mimetype="image" position="anchor" xlink:href="info:doi/10.1371/journal.pone.0295687.e001" xlink:type="simple"/>
+<mml:math display="block" id="M1">
+<mml:msub><mml:mrow><mml:mi>Y</mml:mi></mml:mrow><mml:mrow><mml:mn>1</mml:mn></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:msub><mml:mrow><mml:mi>m</mml:mi></mml:mrow><mml:mrow><mml:mn>1</mml:mn></mml:mrow></mml:msub><mml:mo>×</mml:mo><mml:msub><mml:mrow><mml:mi>X</mml:mi></mml:mrow><mml:mrow><mml:mn>1</mml:mn></mml:mrow></mml:msub><mml:mo>+</mml:mo><mml:msub><mml:mrow><mml:mi>c</mml:mi></mml:mrow><mml:mrow><mml:mn>1</mml:mn></mml:mrow></mml:msub>
+</mml:math>
+</alternatives>
+</disp-formula></p>
+<fig id="pone.0295687.g003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.g003</object-id>
+<label>Fig 3</label>
+<caption>
+<title>Calibration curve of Cr(VI) under the optimized condition of [TMB] = 900 μM and [H<sub>2</sub>O<sub>2</sub>] = 50mM using UV-Vis Spectrophotometer; Captured image of visual colour change against different [Cr(VI)] (Inset).</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.g003" xlink:type="simple"/>
+</fig>
+<p>Where ‘Y<sub>1</sub>’ is the absorbance value at 650 nm, ‘m<sub>1</sub>’ is the slope, i.e., 2.55744 x 10<sup>−4</sup> ± 6.25491 x 10<sup>−6</sup>, ‘X<sub>1</sub>’ is the Cr(VI) concentration and ‘c<sub>1</sub>’ is the intercept value, i.e., -0.00178 ± 0.00281.</p>
+</sec>
+<sec id="sec017">
+<title>Effects of oxidized ions on specificity and anti-interference</title>
+<p>To confirm the selective/specific response for detecting Cr(VI), numerous oxidized ions, including cations and anions (Cr<sup>3+</sup>, Pb<sup>2+</sup>, As<sup>3+</sup>, Hg<sup>2+</sup>, Cd<sup>2+</sup>, Ba<sup>2+</sup>, SO<sub>4</sub><sup>2-</sup>, HCO<sup>3-</sup>, PO<sub>4</sub><sup>3-</sup>) were supplemented in the reaction medium in presence and absence of Cr<sup>6+</sup>. The absorbance maxima values at 650 nm were recorded for several other ions in the same TMB-H<sub>2</sub>O<sub>2</sub> reaction system. <bold>S3 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref>.</bold> shows naked-eye color formation only in the wells where Cr(VI) was added. Also, there is a significantly high signal output in the case of Cr(VI), unlike other ions when the absorbance values were studied.</p>
+<p>To further investigate the viability of the new colorimetric chemosensor for Cr(VI), an anti-interference experiment was conducted. Under the optimized experimental conditions, equal amounts of other metals and other ions were added to the reaction system, and the absorbance maxima values were then measured at 650 nm. As shown in <bold>S3 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref></bold>, the presence of interfering ions has no discernible effect on the absorbance intensity at 650 nm of TMB solution after adding Cr(VI). These results demonstrated the novel visual chemosensor’s excellent specificity and anti-interference for a qualitative Cr(VI) study.</p>
+</sec>
+<sec id="sec018">
+<title>Development of UIIS sensing system for Cr(VI) detection</title>
+<sec id="sec019">
+<title>Image parameter selection</title>
+<p>In this work, different image parameter values, such as ‘RED’ ®, ‘GREEN’ (G), and ‘BLUE’ (B), are extracted from the Cr-Detector system for further data analysis. When the G and B values are plotted against the Cr(VI) concentrations, the different Cr(VI) concentrations cannot be clearly distinguished based on either G or B values, as both the G and B values for different concentrations appeared to be similar and thus no distinguishable pattern is observed. The linear fit equations for the plot of Cr(VI) concentration vs. G value and Cr(VI) concentration vs. B value provide poor goodness of fit values of 0.50 and 0.26. In contrast, the R-value and R+G+B value expressed a distinguishable pattern. The R-value for each concentration of Cr(VI) appeared to be much more distinguished; the linear regression analysis provided an excellent adjusted-R<sup>2</sup> value of 0.94. A similar pattern is observed for the R+G+B value vs. Cr(VI) concentration plot, where the linear fit with adjusted-R<sup>2</sup> value is 0.84. From this, R-value was targeted among other image parameters for all the experiments of colorimetric detection of Cr(VI) due to its highest linearity and adjusted-R<sup>2</sup> value. The image parameter selection is represented in <bold>S4 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref>.</bold></p>
+</sec>
+<sec id="sec020">
+<title>Reaction time optimization</title>
+<p>The reaction time was optimised with fixed TMB, H<sub>2</sub>O<sub>2</sub> concentration, and different Cr(VI) concentration ranges from 0 to 1000 ppb. Then, a kinetics study of the reaction is performed for 25 minutes with a minimum interval of 5 minutes. We considered the ‘RED’ ® value among the other image parameters for further analysis. The data generated every 5 minutes are plotted against the Cr(VI) concentration ranges from 0 ppb to 1000 ppb. Visual colour changes for the concentrations appeared from 15 minutes of the kinetics study. Before 15 minutes, the visual colour changes were negligible. The plot explained that the difference between the ‘R’ values of all the concentrations before 15 minutes of the kinetic study was significantly less and thus produced flat patterns with minimum slope. Whereas distinguishable differences appeared for the different concentrations from 15 to 25 minutes of the kinetic study, thus producing patterns with a higher slope. The linear regression analysis of the patterns observed at 15 minutes, 20 minutes and 25 minutes of the experiments showed adjusted goodness of fit values (R<sup>2</sup>) as 0.93, 0.90 and 0.86, respectively. From this, it was concluded that the reading could be taken in the Cr-Detector after 15 minutes of incubation of the reaction mixture to get the best possible output. The reaction time optimization through Cr-Detector is represented in <bold>S5 Fig in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref>.</bold></p>
+</sec>
+<sec id="sec021">
+<title>Colorimetric detection of Cr(VI) through Cr-Detector</title>
+<p>Further, the mentioned protocol for colorimetric detection of Cr(VI) was repeated 500 times in Cr-Detector to generate the R-values of the image acquired through scanning the 96 well plates towards developing the calibration curve (<bold><xref ref-type="fig" rid="pone.0295687.g004">Fig 4</xref></bold>).</p>
+<fig id="pone.0295687.g004" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.g004</object-id>
+<label>Fig 4</label>
+<caption>
+<title>Calibration curve of various [Cr(VI)] under optimized parameters in Cr-Detector; Full experimental range of different [Cr(VI)] from 0 to 1000 ppb under optimized parameters (Inset).</title>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.g004" xlink:type="simple"/>
+</fig>
+<p>The average R-values of the concentrations range from 0 ppb to 1000 ppb and are plotted against the concentrations towards the development of the calibration curve (Represented in the inset of <bold><xref ref-type="fig" rid="pone.0295687.g004">Fig 4</xref></bold>). The plot demonstrates the calibration curve with the linearity found from 25 ppb to 600 ppb of Cr(VI).</p>
+<p>The equation of the calibration curve is found to be:
+<disp-formula id="pone.0295687.e002">
+<alternatives>
+<graphic id="pone.0295687.e002g" mimetype="image" position="anchor" xlink:href="info:doi/10.1371/journal.pone.0295687.e002" xlink:type="simple"/>
+<mml:math display="block" id="M2">
+<mml:msub><mml:mrow><mml:mi>Y</mml:mi></mml:mrow><mml:mrow><mml:mn>2</mml:mn></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:msub><mml:mrow><mml:mi>m</mml:mi></mml:mrow><mml:mrow><mml:mn>2</mml:mn></mml:mrow></mml:msub><mml:mo>×</mml:mo><mml:msub><mml:mrow><mml:mi>X</mml:mi></mml:mrow><mml:mrow><mml:mn>2</mml:mn></mml:mrow></mml:msub><mml:mo>+</mml:mo><mml:msub><mml:mrow><mml:mi>c</mml:mi></mml:mrow><mml:mrow><mml:mn>2</mml:mn></mml:mrow></mml:msub>
+</mml:math>
+</alternatives>
+</disp-formula></p>
+<p>Where ‘Y<sub>2</sub>’ is R-value generated in Cr-Detector, ‘m<sub>2</sub>’ is the slope, i.e., -0.06134 ± 0.00222, ‘X<sub>2</sub>’ is the Cr(VI) concentration, and ‘c<sub>2</sub>’ is the intercept value, i.e., 100.49757 ± 0.63949. The adjusted-R<sup>2</sup> value is found to be 0.99216. The calculated theoretical Limit of Detection (LOD) and Limit of Quantification (LOQ) values from the calibration curve is 0.12 ppb and 0.36 ppb, respectively, with a linear detection range 25 to 600 ppb.</p>
+</sec>
+<sec id="sec022">
+<title>Recovery analysis</title>
+<p>A recovery analysis has been carried out to check the device’s applicability. 50, 100, 250 and 500 ppb of Cr(VI) were spiked in Milli-Q water, and the recovery percentages of the spiked concentrations are 101.056%, 100.026%, 100.0324% and 99.9716%, respectively. The recovery error (RE) percentages for 50, 100, 250 and 500 ppb are -1.056, -0.026, -0.3024 and 0.0284, respectively (<bold>S1 Table in <xref ref-type="supplementary-material" rid="pone.0295687.s001">S1 File</xref></bold>).</p>
+</sec>
+<sec id="sec023">
+<title>Real sample analysis</title>
+<p>Further, 27 samples from the southern belt of river Hooghly of West Bengal, India, were collected where most industries are located. The samples were analyzed per the above reaction protocol, and the data were taken with the spectrophotometer and Cr-Detector. The data are represented in <bold><xref ref-type="table" rid="pone.0295687.t001">Table 1</xref></bold>. Out of 27 samples, except 3, the rest of the samples’ detection was comparable with the conventional Spectrophotometric analysis. The correlation coefficient of the UIIS data with Spectrophotometer data was 0.99018.</p>
+<table-wrap id="pone.0295687.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.t001</object-id>
+<label>Table 1</label> <caption><title>Comparison of predictive data after analysis of the river water sample through commercial UV-Vis Spectrophotometer and Cr-Detector.</title></caption>
+<alternatives>
+<graphic id="pone.0295687.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left" rowspan="2">Sample ID</th>
+<th align="center" colspan="2">Spectrophotometer</th>
+<th align="center" colspan="3">Cr-Detector</th>
+</tr>
+<tr>
+<th align="center"/>
+<th align="center">Predictive [Cr(VI)] (ppb)</th>
+<th align="center">UIIS Index<break/>(A.U.)</th>
+<th align="center">Predictive [Cr(VI)] (ppb)</th>
+<th align="center">Error percentage (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">0.0005</td>
+<td align="center">20.643</td>
+<td align="center">86.213</td>
+<td align="center">232.875</td>
+<td align="center">10.281</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">0.0430</td>
+<td align="center">187.412</td>
+<td align="center">89.779</td>
+<td align="center">174.740</td>
+<td align="center">0.068</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">0.0716</td>
+<td align="center">299.569</td>
+<td align="center">83.092</td>
+<td align="center">283.752</td>
+<td align="center">0.053</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">0.1420</td>
+<td align="center">575.647</td>
+<td align="center">65.795</td>
+<td align="center">565.741</td>
+<td align="center">0.017</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">0.0001</td>
+<td align="center">19.176</td>
+<td align="center">N.D.<xref ref-type="table-fn" rid="t001fn001">*</xref></td>
+<td align="center">N.D.</td>
+<td align="center">N.A.<xref ref-type="table-fn" rid="t001fn002"><sup>#</sup></xref></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">0.0251</td>
+<td align="center">117.255</td>
+<td align="center">93.702</td>
+<td align="center">110.785</td>
+<td align="center">0.055</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">0.1101</td>
+<td align="center">450.549</td>
+<td align="center">73.373</td>
+<td align="center">442.200</td>
+<td align="center">0.019</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">0.0448</td>
+<td align="center">194.471</td>
+<td align="center">88.976</td>
+<td align="center">187.831</td>
+<td align="center">0.034</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">0.0770</td>
+<td align="center">320.745</td>
+<td align="center">81.041</td>
+<td align="center">317.192</td>
+<td align="center">0.011</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">0.1160</td>
+<td align="center">473.686</td>
+<td align="center">71.234</td>
+<td align="center">477.072</td>
+<td align="center">0.007</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">0.0100</td>
+<td align="center">58.000</td>
+<td align="center">97.994</td>
+<td align="center">40.815</td>
+<td align="center">0.296</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">0.0260</td>
+<td align="center">120.745</td>
+<td align="center">93.523</td>
+<td align="center">113.703</td>
+<td align="center">0.058</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">0.0002</td>
+<td align="center">19.569</td>
+<td align="center">N.D.</td>
+<td align="center">N.D.</td>
+<td align="center">N.A.</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">0.0200</td>
+<td align="center">97.216</td>
+<td align="center">94.593</td>
+<td align="center">96.260</td>
+<td align="center">0.010</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">0.1130</td>
+<td align="center">461.922</td>
+<td align="center">72.660</td>
+<td align="center">453.824</td>
+<td align="center">0.018</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">0.0160</td>
+<td align="center">81.529</td>
+<td align="center">N.D.</td>
+<td align="center">N.D.</td>
+<td align="center">N.A.</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">0.0603</td>
+<td align="center">255.255</td>
+<td align="center">84.607</td>
+<td align="center">259.057</td>
+<td align="center">0.015</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">0.1010</td>
+<td align="center">414.863</td>
+<td align="center">75.959</td>
+<td align="center">400.042</td>
+<td align="center">0.036</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">0.0003</td>
+<td align="center">19.961</td>
+<td align="center">N.D.</td>
+<td align="center">N.D.</td>
+<td align="center">N.A.</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">0.0011</td>
+<td align="center">23.098</td>
+<td align="center">N.D.</td>
+<td align="center">N.D.</td>
+<td align="center">N.A.</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">0.1060</td>
+<td align="center">434.471</td>
+<td align="center">73.908</td>
+<td align="center">433.478</td>
+<td align="center">0.002</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">0.1400</td>
+<td align="center">567.804</td>
+<td align="center">66.686</td>
+<td align="center">551.216</td>
+<td align="center">0.029</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">0.1470</td>
+<td align="center">595.255</td>
+<td align="center">64.623</td>
+<td align="center">584.848</td>
+<td align="center">0.017</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">0.0308</td>
+<td align="center">139.569</td>
+<td align="center">75.200</td>
+<td align="center">412.416</td>
+<td align="center">1.955</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">0.0520</td>
+<td align="center">222.706</td>
+<td align="center">86.218</td>
+<td align="center">232.794</td>
+<td align="center">0.045</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">0.0280</td>
+<td align="center">128.588</td>
+<td align="center">93.345</td>
+<td align="center">116.605</td>
+<td align="center">0.093</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">0.0148</td>
+<td align="center">76.824</td>
+<td align="center">96.109</td>
+<td align="center">71.545</td>
+<td align="center">0.069</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+<table-wrap-foot>
+<fn id="t001fn001"><p>*N.D. = Non-Detectable (when, 25 ppb&lt;predictive concentration&gt;600 ppb)</p></fn>
+<fn id="t001fn002"><p><sup>#</sup>N.A. = Not Applicable.</p></fn>
+</table-wrap-foot>
+</table-wrap>
+</sec>
+</sec>
+<sec id="sec024">
+<title>Comparison of ‘Cr-Detector’ with other sensors for detection of Cr(VI)</title>
+<p>Lots of similar work on sensor development for the detection of Cr(VI) have been reported in earlier studies. The result obtained from ‘Cr-Detector’ was compared with other sensors and it correlates well with other reported literature in <bold><xref ref-type="table" rid="pone.0295687.t002">Table 2</xref></bold>.</p>
+<table-wrap id="pone.0295687.t002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295687.t002</object-id>
+<label>Table 2</label> <caption><title>Recent advancements in sensor-based detection of Cr(VI).</title></caption>
+<alternatives>
+<graphic id="pone.0295687.t002g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.t002" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left">Developed sensor</th>
+<th align="left">Sensor design</th>
+<th align="left">Transduction principle</th>
+<th align="left"><break/>Linear Range<break/></th>
+<th align="left"><break/>Limit of Detection<break/></th>
+<th align="left">Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Colorimetric paper-based analytical device</td>
+<td align="left">Diphenylcarbazide on μPAD</td>
+<td align="left">Optical</td>
+<td align="left">10–90 ppb</td>
+<td align="left">3 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref034">34</xref>]</td>
+</tr>
+<tr>
+<td align="left">Wireless portable device<break/></td>
+<td align="left">Using 1, 5 diphenyl carbazide as chromogen</td>
+<td align="left">Optical</td>
+<td align="left">-</td>
+<td align="left">2 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref035">35</xref>]</td>
+</tr>
+<tr>
+<td align="left">POC device for on-the-spot detection of Cr(VI) in wastewater</td>
+<td align="left">Using citrate-capped silver nanoparticles</td>
+<td align="left">Optical</td>
+<td align="left">10–700 ppb</td>
+<td align="left">26 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref036">36</xref>]</td>
+</tr>
+<tr>
+<td align="left">Photoelectrochemical sensor for detection of trace hexavalent chromium</td>
+<td align="left">By facilitating the photon-excited electron-hole pair separation coupled with light-sensitive quercetin</td>
+<td align="left">Photo-electrochemical</td>
+<td align="left">1.4–2592.3 ppb</td>
+<td align="left">0.44 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref037">37</xref>]</td>
+</tr>
+<tr>
+<td align="left">Portable sensing device (Kavach) for non-invasive and selective detection of Cr(VI) in wastewater and living cells<break/></td>
+<td align="left">Devicethin layer (~1 mm) of carbon dot decorated boehmite nanostructure incorporated in a layer of polyvinylidene fluoride-co-hexafluoropropylene membrane.</td>
+<td align="left">Optical</td>
+<td align="left">-</td>
+<td align="left">3.4 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref038">38</xref>]</td>
+</tr>
+<tr>
+<td align="left">Cr(VI) detection with disposable screen-printed electrode modified with gold nanoparticles<break/></td>
+<td align="left">Gold nanoparticle electrodeposition-based voltammetric detection.</td>
+<td align="left">electrochemical</td>
+<td align="left">10–5000 ppb</td>
+<td align="left">5 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref039">39</xref>]</td>
+</tr>
+<tr>
+<td align="left">Gold-silver nanoparticles modified electrochemical sensor for determination of chromium (VI) in wastewater samples</td>
+<td align="left">Silver-gold bimetallic nanoparticles through electrochemical deposition</td>
+<td align="left">electrochemical</td>
+<td align="left">50–5000 ppb</td>
+<td align="left">0.1 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref040">40</xref>]</td>
+</tr>
+<tr>
+<td align="left">Electrochemical detection of Cr(VI) in water sample by using modified glassy carbon electrode (GCE)</td>
+<td align="left">Graphene carbon nitride decorated with silver molybdate immobilized with nafion modified glassy carbon electrode.<break/></td>
+<td align="left">electrochemical</td>
+<td align="left">5.199–36.39 ppb</td>
+<td align="left">0.0831 ppb<break/></td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref041">41</xref>]</td>
+</tr>
+<tr>
+<td align="left">Flower-like self-assembly of gold nanoparticles (AuNPs) on a glassy carbon electrode (GCE) for detection of chromium (VI)<break/></td>
+<td align="left">The first is sol–gel film derived from 3-mercaptopropyltrimethoxysilane (MPTS). The second AuNP layer is then self-assembled on the surface of the sol–gel film, forming flower-like gold nanoelectrodes enlarging the electrode surface.</td>
+<td align="left">electrochemical</td>
+<td align="left">0.01–1.2 ppb</td>
+<td align="left">0.0029 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref042">42</xref>]</td>
+</tr>
+<tr>
+<td align="left">Electrochemical detection of Chromium(VI) using NiO nanoparticles</td>
+<td align="left">Sol–gel synthesized Nickel Oxide (NiO) nanoparticles coated onto the fuorine doped tin oxide plate</td>
+<td align="left">Optical<break/></td>
+<td align="left">5000–50000 ppb</td>
+<td align="left">5000 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref043">43</xref>]</td>
+</tr>
+<tr>
+<td align="left">Electrochemical detection of Cr(VI) based on gold nanoparticle decorated titania nanotube arrays</td>
+<td align="left">Au-nanoparticle-decorated titania nanotubes (TiO<sub>2</sub>NTs) grown on a titanium substrate<break/></td>
+<td align="left">electrochemical</td>
+<td align="left">5.199–5448 ppb<break/></td>
+<td align="left">1.55 ppb<break/></td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref044">44</xref>]</td>
+</tr>
+<tr>
+<td align="left">Electrochemical detection of sub-ppb level chromium(VI) using nano-sized gold particle<break/></td>
+<td align="left">Nano-sized Au particles grown on a conducting substrate modified with sol–gel-derived thiol functionalized silicate network</td>
+<td align="left">electrochemical<break/></td>
+<td align="left">0.2–3 ppb<break/></td>
+<td align="left">0.1 ppb<break/></td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref045">45</xref>]</td>
+</tr>
+<tr>
+<td align="left">A miniaturized portable electrochemical system for Cr(VI)</td>
+<td align="left">Screen-printed carbon electrode with gold nanoparticles modification<break/></td>
+<td align="left">electrochemical</td>
+<td align="left">20–200 ppb<break/></td>
+<td align="left">5.4 ppb<break/></td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref046">46</xref>]</td>
+</tr>
+<tr>
+<td align="left">Electrodeposited AuNPs/rGO Nanocomposite as sensor for Cr(VI) determination in Water<break/></td>
+<td align="left">Electrodeposition of reduced graphene oxide (rGO) on GCE by electroreduction of GO using cyclic voltammetry (CV), and AuNPs were electrodeposited on rGO sheets using CV to obtain as AuNPs/rGO/GCE</td>
+<td align="left">electrochemical</td>
+<td align="left">5.19–1559 ppb<break/></td>
+<td align="left">2.39 ppb<break/></td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref047">47</xref>]</td>
+</tr>
+<tr>
+<td align="left">Ion-imprinted chitosan-graphene<break/>nanocomposites for the determination of Cr(VI)<break/></td>
+<td align="left">Ion-imprinted polymers electrodeposition of chitosan-graphene nanocomposites<break/>(IIP-S)</td>
+<td align="left">electrochemical</td>
+<td align="left">0.051–520 ppb<break/></td>
+<td align="left">0.33 ppb</td>
+<td align="left">[<xref ref-type="bibr" rid="pone.0295687.ref048">48</xref>]<break/></td>
+</tr>
+<tr>
+<td align="left">‘Cr-Detector’ system for specific detection of Cr(VI) in water</td>
+<td align="left">Image parameter extraction and analysis for TMB oxidation by Cr(VI) in presence of H<sub>2</sub>O<sub>2</sub><break/></td>
+<td align="left">Optical</td>
+<td align="left">25–600 ppb</td>
+<td align="left">0.12 ppb</td>
+<td align="left">Present study</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+</table-wrap>
+</sec>
+</sec>
+<sec id="sec025" sec-type="conclusions">
+<title>Conclusion</title>
+<p>Herein we report the development of a chemo-sensor, TMB, for detecting Cr(VI) in water using the spectrophotometric method. The sensor was tested against various interfering parameters. In the presence of those interfering substances, the chemo-sensor exhibited excellent specificity and selectivity towards Cr(VI). Using the spectrophotometric method, the linear range was 1 to 1000 ppb with an adjusted-R<sup>2</sup> value of 0.994. Furthermore, the chemo-sensor was integrated with Cr-Detector to demonstrate a lab-to-field application that, extended the sensing system’s applicability. Using a uniform illumination-based system, the linear range was found to be 25 to 600 ppb of Cr(VI) with LOD 0.12 ppb, which is well comparable with other reported literature concerning the linear range and detection limit, as presented in <bold><xref ref-type="table" rid="pone.0295687.t001">Table 1</xref></bold>.</p>
+<p>Furthermore, the exhibited wider linear range covers the prescribed permissible limit by USEPA and the Food Safety and Standards Authority of India (FSSAI). Real sample analysis revealed a good correlation with spectrophotometric data. Integrating TMB as a chemo-sensor and Cr-Detector, a selective, rapid, portable, user-friendly device for measuring Cr(VI) is first reported in this endeavor, to our knowledge. Image analysis-based field portable sensor and sensing system development for low-cost rapid onsite monitoring of environmental toxicants will encourage the future development of array-based sensor integrated devices that will enable cumulative detection and multi-parametric analysis of more than one analyte at a time. Moreover, the advancement in soft computing has revolutionized data analytics for sensor development. The rapid emergence of deep learning has been successfully applied to improve the analytical performance of colorimetric determination (e.g., UV-Vis spectrophotometer and colorimetric test paper), including denoising, recognition, and summary of every small characteristic change from each image [<xref ref-type="bibr" rid="pone.0295687.ref049">49</xref>–<xref ref-type="bibr" rid="pone.0295687.ref052">52</xref>]. One example is Deep Convolutional Neural Networks (DCNNs) [<xref ref-type="bibr" rid="pone.0295687.ref051">51</xref>]. DCNNs have excellent potential to increase the sensitivity and selectivity of any biosensor by rapid and effective decision generation. In comparison to human methods, the automated aspect of DCNNs enables quick and effective analysis. The rapid onsite one-click picture processing can be achieved through DCNNs. Moreover, Users with different degrees of image analysis or colorimetric sensing experience can utilize this one-click method since it is user-friendly and accessible. Again, Few-Shot Learning (FSL) and Generative Adversarial networks (GAN) can increase the accuracy of DCNNs. These soft computing technologies may be explored to develop effective decision support systems with superior sensitivity and selectivity in future.</p>
+</sec>
+<sec id="sec026" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0295687.s001" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0295687.s001" xlink:type="simple">
+<label>S1 File</label>
+<caption>
+<title>Supporting information contains supporting figures and table.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ack>
+<p>The authors acknowledge ICAR-NASF. The authors also thank the Ministry of Electronics and Information Technology (MeitY), Government of India, for their continuous support.</p>
+</ack>
+<ref-list>
+<title>References</title>
+<ref id="pone.0295687.ref001"><label>1</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gautam</surname> <given-names>RK</given-names></name>, <name name-style="western"><surname>Sharma</surname> <given-names>SK</given-names></name>, <name name-style="western"><surname>Mahiya</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Chattopadhyaya</surname> <given-names>MC</given-names></name>. <article-title>Contamination of Heavy Metals in Aquatic Media: Transport, Toxicity and Technologies for Remediation</article-title>. <source>Heavy Metals In Water</source>. <year>2014</year>; <fpage>1</fpage>–<lpage>24</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1039/9781782620174-00001" xlink:type="simple">10.1039/9781782620174-00001</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Su</surname> <given-names>C.</given-names></name> <article-title>A review on heavy metal contamination in the soil worldwide: Situation, impact and remediation techniques</article-title>. <source>Environmental Skeptics and Critics</source>. <year>2014</year>;<volume>3</volume>: <fpage>24</fpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhang</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Zhang</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Lu</surname> <given-names>X</given-names></name>. <article-title>Efficient Visual Chemosensor for Hexavalent Chromium via a Controlled Strategy for Signal Amplification in Water</article-title>. <source>Anal Chem</source>. <year>2020</year>;<volume>92</volume>: <fpage>3426</fpage>–<lpage>3433</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.9b05532" xlink:type="simple">10.1021/acs.analchem.9b05532</ext-link></comment> <object-id pub-id-type="pmid">31964141</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhitkovich</surname> <given-names>A.</given-names></name> <article-title>Chromium in drinking water: sources, metabolism, and cancer risks</article-title>. <source>Chem Res Toxicol</source>. <year>2011</year>;<volume>24</volume>: <fpage>1617</fpage>–<lpage>1629</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/tx200251t" xlink:type="simple">10.1021/tx200251t</ext-link></comment> <object-id pub-id-type="pmid">21766833</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>He</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>P</given-names></name>. <article-title>Surface Water Pollution in the Middle Chinese Loess Plateau with Special Focus on Hexavalent Chromium (Cr6+): Occurrence, Sources and Health Risks</article-title>. <source>Expo Health</source>. <year>2020</year>;<volume>12</volume>: <fpage>385</fpage>–<lpage>401</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/S12403-020-00344-X" xlink:type="simple">10.1007/S12403-020-00344-X</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref006"><label>6</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Coyte</surname> <given-names>RM</given-names></name>, <name name-style="western"><surname>McKinley</surname> <given-names>KL</given-names></name>, <name name-style="western"><surname>Jiang</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Karr</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Dwyer</surname> <given-names>GS</given-names></name>, <name name-style="western"><surname>Keyworth</surname> <given-names>AJ</given-names></name>, <etal>et al</etal>. <article-title>Occurrence and distribution of hexavalent chromium in groundwater from North Carolina, USA</article-title>. <source>Sci Total Environ</source>. <year>2020</year>;<fpage>711</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.scitotenv.2019.135135" xlink:type="simple">10.1016/j.scitotenv.2019.135135</ext-link></comment> <object-id pub-id-type="pmid">32000345</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Shankar</surname> <given-names>B.</given-names></name> <article-title>Chromium Pollution in the groundwaters of an industrial area in Bangalore, India</article-title>. <source>Environ Eng Sci</source>. <year>2009</year>;<volume>26</volume>: <fpage>305</fpage>–<lpage>310</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1089/EES.2008.0043" xlink:type="simple">10.1089/EES.2008.0043</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rahman</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Hoque</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Sarker</surname> <given-names>PK</given-names></name>, <name name-style="western"><surname>Safa</surname> <given-names>A</given-names></name>. <article-title>Assessment of Hexavalent Chromium Pollution in Buriganga and Dhaleshwari River Waterbodies Adjacent to Tannery Estates in Bangladesh</article-title>. <source>MIST INTERNATIONAL JOURNAL OF SCIENCE AND TECHNOLOGY</source>. <year>2020</year>;<volume>8</volume>: <fpage>11</fpage>–<lpage>15</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.47981/J.MIJST.08%2801%292020.160%2811%26%23x2013%3B15" xlink:type="simple">10.47981/J.MIJST.08(01)2020.160(11–15</ext-link></comment>).</mixed-citation></ref>
+<ref id="pone.0295687.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Vasilatos</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Megremi</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Economou-Eliopoulos</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Mitsis</surname> <given-names>I</given-names></name>. <article-title>Hexavalent chromium and other toxic elements in natural waters in the Thiva- Tanagra- Malakasa Basin, Greece</article-title>. <source>Hellenic Journal of Geosciences</source>. <year>2008</year>;<volume>43</volume>: <fpage>57</fpage>–<lpage>66</lpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hori</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Shozugawa</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Matsuo</surname> <given-names>M</given-names></name>. <article-title>Hexavalent chromium pollution caused by dumped chromium slag at the urban park in Tokyo</article-title>. <source>J Mater Cycles Waste Manag</source>. <year>2015</year>;<volume>17</volume>: <fpage>201</fpage>–<lpage>205</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/S10163-014-0243-0" xlink:type="simple">10.1007/S10163-014-0243-0</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Abdul Jabar</surname> <given-names>MAB</given-names></name>, <name name-style="western"><surname>Thabit</surname> <given-names>JA</given-names></name>. <article-title>Chemical Pollution Risks for Many Drinking Water Sources in Baghdad City, Iraq</article-title>. <source>Pol J Environ Stud</source>. <year>2021</year>;<volume>30</volume>: <fpage>1203</fpage>–<lpage>1214</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.15244/PJOES/120767" xlink:type="simple">10.15244/PJOES/120767</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Paul</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Choudhary</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Gupta</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Jose</surname> <given-names>MT</given-names></name>. <article-title>Spatial distribution and the extent of heavy metal and hexavalent chromium pollution in agricultural soils from Jajmau, India</article-title>. <source>Environ Earth Sci</source>. <year>2015</year>;<volume>73</volume>: <fpage>3565</fpage>–<lpage>3577</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/S12665-014-3642-6" xlink:type="simple">10.1007/S12665-014-3642-6</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Program</surname> <given-names>NT</given-names></name>. <article-title>Toxicology and carcinogenesis studies of sodium dichromate dihydrate (Cas No. 7789-12-0) in F344/N rats and B6C3F1 mice (drinking water studies)</article-title>. <source>Natl Toxicol Program Tech Rep Ser</source>. <year>2008</year>; <fpage>1</fpage>–<lpage>192</lpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sperling</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Xu</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Welz</surname> <given-names>B</given-names></name>. <article-title>Determination of Chromium(III) and Chromium(VI) in Water Using Flow Injection On-Line Preconcentration with Selective Adsorption on Activated Alumina and Flame Atomic Absorption Spectrometric Detection</article-title>. <source>Anal Chem</source>. <year>1992</year>;<volume>64</volume>: <fpage>3101</fpage>–<lpage>3108</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/AC00048A007" xlink:type="simple">10.1021/AC00048A007</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Parks</surname> <given-names>JL</given-names></name>, <name name-style="western"><surname>McNeill</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Frey</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Eaton</surname> <given-names>AD</given-names></name>, <name name-style="western"><surname>Haghani</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Ramirez</surname> <given-names>L</given-names></name>, <etal>et al</etal>. <article-title>Determination of total chromium in environmental water samples</article-title>. <source>Water Res</source>. <year>2004</year>;<volume>38</volume>: <fpage>2827</fpage>–<lpage>2838</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.watres.2004.04.024" xlink:type="simple">10.1016/j.watres.2004.04.024</ext-link></comment> <object-id pub-id-type="pmid">15223276</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Longbottom</surname> <given-names>JE</given-names></name>, <name name-style="western"><surname>Martin</surname> <given-names>TD</given-names></name>, <name name-style="western"><surname>Edgell</surname> <given-names>KW</given-names></name>, <name name-style="western"><surname>Long</surname> <given-names>SE</given-names></name>, <name name-style="western"><surname>Plantz</surname> <given-names>MR</given-names></name>, <name name-style="western"><surname>Warden</surname> <given-names>BE</given-names></name>. <article-title>Determination of Trace Elements in Water by Inductively Coupled Plasma–Mass Spectrometry: Collaborative Study</article-title>. <source>J AOAC Int</source>. <year>1994</year>;<volume>77</volume>: <fpage>1004</fpage>–<lpage>1023</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/JAOAC/77.4.1004" xlink:type="simple">10.1093/JAOAC/77.4.1004</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bahadir</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Bulut</surname> <given-names>VN</given-names></name>, <name name-style="western"><surname>Hidalgo</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Soylak</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Marguí</surname> <given-names>E</given-names></name>. <article-title>Determination of trace amounts of hexavalent chromium in drinking waters by dispersive microsolid-phase extraction using modified multiwalled carbon nanotubes combined with total reflection X-ray fluorescence spectrometry</article-title>. <source>Spectrochim Acta Part B At Spectrosc</source>. <year>2015</year>;<volume>107</volume>: <fpage>170</fpage>–<lpage>177</lpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hilali</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Mohammadi</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Amine</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Zine</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Errachid</surname> <given-names>A</given-names></name>. <article-title>Recent Advances in Electrochemical Monitoring of Chromium</article-title>. <source>Sensors 2020, Vol 20, Page 5153</source>. <year>2020</year>;<volume>20</volume>: <fpage>5153</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/s20185153" xlink:type="simple">10.3390/s20185153</ext-link></comment> <object-id pub-id-type="pmid">32917045</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lace</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Ryan</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Bowkett</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Cleary</surname> <given-names>J</given-names></name>. <article-title>Chromium Monitoring in Water by Colorimetry Using Optimised 1,5-</article-title><source>Diphenylcarbazide Method. International Journal of Environmental Research and Public Health</source> 2019, Vol 16, Page 1803. <year>2019</year>;<volume>16</volume>: <fpage>1803</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/IJERPH16101803" xlink:type="simple">10.3390/IJERPH16101803</ext-link></comment> <object-id pub-id-type="pmid">31117215</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhuang</surname> <given-names>YT</given-names></name>, <name name-style="western"><surname>Chen</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Jiang</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Yu</surname> <given-names>YL</given-names></name>, <name name-style="western"><surname>Wang</surname> <given-names>JH</given-names></name>. <article-title>Ultrasensitive Colorimetric Chromium Chemosensor Based on Dye Color Switching under the Cr(VI)-Stimulated Au NPs Catalytic Activity</article-title>. <source>Anal Chem</source>. <year>2019</year>;<volume>91</volume>: <fpage>5346</fpage>–<lpage>5353</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.9b00339" xlink:type="simple">10.1021/acs.analchem.9b00339</ext-link></comment> <object-id pub-id-type="pmid">30912435</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zheng</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Yu</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Huang</surname> <given-names>X</given-names></name>. <article-title>Visible-light photoreduction, adsorption, matrix conversion and membrane separation for ultrasensitive chromium determination in natural water by X-ray fluorescence</article-title>. <source>Sens Actuators B Chem</source>. <year>2016</year>;<volume>226</volume>: <fpage>500</fpage>–<lpage>505</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.SNB.2015.12.022" xlink:type="simple">10.1016/J.SNB.2015.12.022</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref022"><label>22</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Al-Rawashdeh</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Alzoubi</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Hanandeh</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Yousef</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Al-Nawaiseh</surname> <given-names>M</given-names></name>. <article-title>Performance of Mortar Incorporating Heat-Treated Drinking Water Treatment Sludge as a Silica-Sand Replacement</article-title>. <source>Civil Engineering Journal</source>. <year>2022</year>;<volume>8</volume>: <fpage>1639</fpage>–<lpage>1652</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.28991/CEJ-2022-08-08-08" xlink:type="simple">10.28991/CEJ-2022-08-08-08</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref023"><label>23</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Janet Priscilla</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Andria Judi</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Daniel</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Sivaji</surname> <given-names>K</given-names></name>. <article-title>Effects of Chromium Doping on the Electrical Properties of ZnO Nanoparticles</article-title>. <source>Emerging Science Journal</source>. <year>2020</year>;<volume>4</volume>: <fpage>82</fpage>–<lpage>88</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.28991/ESJ-2020-01212" xlink:type="simple">10.28991/ESJ-2020-01212</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref024"><label>24</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ismail</surname> <given-names>WNW</given-names></name>, <name name-style="western"><surname>Syah</surname> <given-names>MIAI</given-names></name>, <name name-style="western"><surname>Muhet</surname> <given-names>NHA</given-names></name>, <name name-style="western"><surname>Bakar</surname> <given-names>NHA</given-names></name>, <name name-style="western"><surname>Yusop</surname> <given-names>HM</given-names></name>, <name name-style="western"><surname>Samah</surname> <given-names>NA</given-names></name>. <article-title>Adsorption Behavior of Heavy Metal Ions by Hybrid Inulin-TEOS for Water Treatment.</article-title> <source>Civil Engineering Journal</source>. <year>2022</year>;<volume>8</volume>: <fpage>1787</fpage>–<lpage>1798</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.28991/CEJ-2022-08-09-03" xlink:type="simple">10.28991/CEJ-2022-08-09-03</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref025"><label>25</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Mukherjee</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Pal</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Pal</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Ghosh</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Sarkar</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Bhand</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>UIISScan 1.1: A Field portable high-throughput platform tool for biomedical and agricultural applications</article-title>. <source>J Pharm Biomed Anal</source>. <year>2019</year>;<volume>174</volume>: <fpage>70</fpage>–<lpage>80</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jpba.2019.05.042" xlink:type="simple">10.1016/j.jpba.2019.05.042</ext-link></comment> <object-id pub-id-type="pmid">31158608</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref026"><label>26</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhang</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>W</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Zhang</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Shan</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Xia</surname> <given-names>H</given-names></name>, <etal>et al</etal>. <article-title>Ultrahigh Selective Colorimetric Quantification of Chromium(VI) Ions Based on Gold Amalgam Catalyst Oxidoreductase-like Activity in Water</article-title>. <source>Anal Chem</source>. <year>2018</year>;<volume>90</volume>: <fpage>14309</fpage>–<lpage>14315</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.8b03597" xlink:type="simple">10.1021/acs.analchem.8b03597</ext-link></comment> <object-id pub-id-type="pmid">30474963</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref027"><label>27</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kim</surname> <given-names>BM</given-names></name>, <name name-style="western"><surname>Kim</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Nam</surname> <given-names>SE</given-names></name>, <name name-style="western"><surname>Eom</surname> <given-names>HJ</given-names></name>, <name name-style="western"><surname>Lee</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Kim</surname> <given-names>K</given-names></name>, <etal>et al</etal>. <article-title>Reductive Transformation of Hexavalent Chromium in Ice Decreases Chromium Toxicity in Aquatic Animals</article-title>. <source>Environ Sci Technol</source>. <year>2022</year>;<volume>56</volume>: <fpage>3503</fpage>–<lpage>3513</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.est.1c07336" xlink:type="simple">10.1021/acs.est.1c07336</ext-link></comment> <object-id pub-id-type="pmid">35245034</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref028"><label>28</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Alahmad</surname> <given-names>W</given-names></name>, <name name-style="western"><surname>Sahragard</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Varanusupakul</surname> <given-names>P</given-names></name>. <article-title>An overview of the recent developments of microfluidic paper-based analytical devices for the detection of chromium species</article-title>. <source>Microchemical Journal</source>. <year>2021</year>;<volume>170</volume>: <fpage>106699</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.MICROC.2021.106699" xlink:type="simple">10.1016/J.MICROC.2021.106699</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref029"><label>29</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Huang</surname> <given-names>ZJ</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Luo</surname> <given-names>JY</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>F</given-names></name>. <article-title>Few-Shot Learning-Based, Long-Term Stable, Sensitive Chemosensor for On-Site Colorimetric Detection of Cr(VI)</article-title>. <source>Anal Chem</source>. <year>2023</year>;<volume>95</volume>: <fpage>6156</fpage>–<lpage>6162</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.3c00604" xlink:type="simple">10.1021/acs.analchem.3c00604</ext-link></comment> <object-id pub-id-type="pmid">36992572</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref030"><label>30</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Li</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Su</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Tu</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Shang</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Peng</surname> <given-names>C</given-names></name>, <etal>et al</etal>. <article-title>Development and Application of an Efficient Medium for Chromogenic Catalysis of Tetramethylbenzidine with Horseradish Peroxidase</article-title>. <source>ACS Omega</source>. <year>2019</year>;<volume>4</volume>: <fpage>5459</fpage>–<lpage>5470</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/ACSOMEGA.8B03345" xlink:type="simple">10.1021/ACSOMEGA.8B03345</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref031"><label>31</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhou</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Ma</surname> <given-names>Z</given-names></name>. <article-title>Fluorescent and colorimetric dual detection of mercury (II) by H2O2 oxidation of o-phenylenediamine using Pt nanoparticles as the catalyst</article-title>. <source>Sens Actuators B Chem</source>. <year>2017</year>;<volume>C</volume>: <fpage>53</fpage>–<lpage>58</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.SNB.2017.04.076" xlink:type="simple">10.1016/J.SNB.2017.04.076</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref032"><label>32</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kumar</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Chaitanya</surname> <given-names>RK</given-names></name>, <name name-style="western"><surname>Preedy</surname> <given-names>VR</given-names></name>. <article-title>Assessment of antioxidant potential of dietary components</article-title>. <source>HIV/AIDS. Elsevier</source>; <year>2018</year>. pp. <fpage>239</fpage>–<lpage>253</lpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref033"><label>33</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhang</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Yang</surname> <given-names>Q</given-names></name>, <name name-style="western"><surname>Lang</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Jiang</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Wu</surname> <given-names>P</given-names></name>. <article-title>Rationale of 3,3’,5,5’-Tetramethylbenzidine as the Chromogenic Substrate in Colorimetric Analysis</article-title>. <source>Anal Chem</source>. <year>2020</year>;<volume>92</volume>: <fpage>12400</fpage>–<lpage>12406</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.0c02149" xlink:type="simple">10.1021/acs.analchem.0c02149</ext-link></comment> <object-id pub-id-type="pmid">32794705</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref034"><label>34</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Alahmad</surname> <given-names>W</given-names></name>, <name name-style="western"><surname>Tungkijanansin</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Kaneta</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Varanusupakul</surname> <given-names>P</given-names></name>. <article-title>A colorimetric paper-based analytical device coupled with hollow fiber membrane liquid phase microextraction (HF-LPME) for highly sensitive detection of hexavalent chromium in water samples</article-title>. <source>Talanta</source>. <year>2018</year>;<volume>190</volume>: <fpage>78</fpage>–<lpage>84</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.talanta.2018.07.056" xlink:type="simple">10.1016/j.talanta.2018.07.056</ext-link></comment> <object-id pub-id-type="pmid">30172544</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref035"><label>35</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Santra</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Mandal</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Santra</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Ghorai</surname> <given-names>UK</given-names></name>. <article-title>Cost-Effective, Wireless, Portable Device for Estimation of Hexavalent Chromium, Fluoride, and Iron in Drinking Water</article-title>. <source>Anal Chem</source>. <year>2018</year>;<volume>90</volume>: <fpage>12815</fpage>–<lpage>12823</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.8b03337" xlink:type="simple">10.1021/acs.analchem.8b03337</ext-link></comment> <object-id pub-id-type="pmid">30281277</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref036"><label>36</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kumar</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Madhwal</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Jain</surname> <given-names>VK</given-names></name>. <article-title>A POC device for on-the-spot detection of hexavalent chromium in wastewater</article-title>. <source>J Environ Chem Eng</source>. <year>2020</year>;<volume>8</volume>: <fpage>104342</fpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref037"><label>37</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Liu</surname> <given-names>Q</given-names></name>, <name name-style="western"><surname>Kim</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Chemical TC-S and</surname> <given-names>AB</given-names></name>. <article-title>A highly sensitive photoelectrochemical sensor with polarity-switchable photocurrent for detection of trace hexavalent chromium. Elsevier</article-title>. <source>Sens. Actuators B Chem</source>. <year>2020</year>; <volume>317</volume>, p.<fpage>128181</fpage></mixed-citation></ref>
+<ref id="pone.0295687.ref038"><label>38</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Roy</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Bardhan</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Mondal</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Saha</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Roy</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Das</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>Polymeric carbon dot/boehmite nanocomposite made portable sensing device (Kavach) for non-invasive and selective detection of Cr(VI) in wastewater and living cells</article-title>. <source>Sens Actuators B Chem</source>. <year>2021</year>;<fpage>348</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.SNB.2021.130662" xlink:type="simple">10.1016/J.SNB.2021.130662</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref039"><label>39</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Liu</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>YY</given-names></name>, <name name-style="western"><surname>Wu</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>Y</given-names></name>. <article-title>Voltammetric detection of Cr(VI) with disposable screen-printed electrode modified with gold nanoparticles</article-title>. <source>Environ Sci Technol</source>. <year>2007</year>;<volume>41</volume>: <fpage>8129</fpage>–<lpage>8134</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/es071726z" xlink:type="simple">10.1021/es071726z</ext-link></comment> <object-id pub-id-type="pmid">18186348</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref040"><label>40</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zhao</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Ge</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Wong</surname> <given-names>TI</given-names></name>, <name name-style="western"><surname>Zhou</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Lisak</surname> <given-names>G</given-names></name>. <article-title>Gold-silver nanoparticles modified electrochemical sensor array for simultaneous determination of chromium(III) and chromium(VI) in wastewater samples</article-title>. <source>Chemosphere</source>. <year>2021</year>;<fpage>281</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.CHEMOSPHERE.2021.130880" xlink:type="simple">10.1016/J.CHEMOSPHERE.2021.130880</ext-link></comment> <object-id pub-id-type="pmid">34029966</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref041"><label>41</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Karthika</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Nikhil</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Suganthi</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Rajarajan</surname> <given-names>M</given-names></name>. <article-title>A facile sonochemical approach based on graphene carbon nitride doped silver molybdate immobilized nafion for selective and sensitive electrochemical detection of chromium (VI) in real sample</article-title>. <source>Advanced Powder Technology</source>. <year>2020</year>;<volume>31</volume>: <fpage>1879</fpage>–<lpage>1890</lpage>.</mixed-citation></ref>
+<ref id="pone.0295687.ref042"><label>42</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ouyang</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Bragg</surname> <given-names>SA</given-names></name>, <name name-style="western"><surname>Chambers</surname> <given-names>JQ</given-names></name>, <name name-style="western"><surname>Xue</surname> <given-names>ZL</given-names></name>. <article-title>Flower-like self-assembly of gold nanoparticles for highly sensitive electrochemical detection of chromium(VI)</article-title>. <source>Anal Chim Acta</source>. <year>2012</year>;<volume>722</volume>: <fpage>1</fpage>–<lpage>7</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.aca.2012.01.032" xlink:type="simple">10.1016/j.aca.2012.01.032</ext-link></comment> <object-id pub-id-type="pmid">22444528</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref043"><label>43</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kowsalya</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Anusha Thampi V</surname> <given-names>V</given-names></name>., <name name-style="western"><surname>Sivakumar</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Subramanian</surname> <given-names>B</given-names></name>. <article-title>Electrochemical detection of Chromium(VI) using NiO nanoparticles</article-title>. <source>Journal of Materials Science: Materials in Electronics</source>. <year>2019</year>;<volume>30</volume>: <fpage>14755</fpage>–<lpage>14761</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/S10854-019-01847-3" xlink:type="simple">10.1007/S10854-019-01847-3</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref044"><label>44</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Jin</surname> <given-names>W</given-names></name>, <name name-style="western"><surname>Wu</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Chen</surname> <given-names>A</given-names></name>. <article-title>Sensitive and selective electrochemical detection of chromium (vi) based on gold nanoparticle-decorated titania nanotube arrays</article-title>. <source>Analyst</source>. <year>2013</year>;<volume>139</volume>: <fpage>235</fpage>–<lpage>241</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1039/c3an01614e" xlink:type="simple">10.1039/c3an01614e</ext-link></comment> <object-id pub-id-type="pmid">24191278</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref045"><label>45</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Jena</surname> <given-names>BK</given-names></name>, <name name-style="western"><surname>Raj</surname> <given-names>CR</given-names></name>. <article-title>Highly sensitive and selective electrochemical detection of sub-ppb level chromium(VI) using nano-sized gold particle</article-title>. <source>Talanta</source>. <year>2008</year>;<volume>76</volume>: <fpage>161</fpage>–<lpage>165</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.talanta.2008.02.027" xlink:type="simple">10.1016/j.talanta.2008.02.027</ext-link></comment> <object-id pub-id-type="pmid">18585258</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref046"><label>46</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Tu</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Gan</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Liang</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Wan</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Wang</surname> <given-names>P</given-names></name>. <article-title>A miniaturized electrochemical system for high sensitive determination of chromium(VI) by screen-printed carbon electrode with gold nanoparticles modification</article-title>. <source>Sens Actuators B Chem</source>. <year>2018</year>;<volume>C</volume>: <fpage>582</fpage>–<lpage>588</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/J.SNB.2018.06.006" xlink:type="simple">10.1016/J.SNB.2018.06.006</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref047"><label>47</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Liu</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Gao</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Hu</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Zou</surname> <given-names>X</given-names></name>. <article-title>ELECTROCHEMICAL SCIENCE Electrodeposited AuNPs/rGO Nanocomposite as sensor for Cr(VI) Determination in Water</article-title>. <source>Int J Electrochem Sci</source>. <year>2018</year>;<volume>13</volume>: <fpage>11853</fpage>–<lpage>11866</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.20964/2018.12.05" xlink:type="simple">10.20964/2018.12.05</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295687.ref048"><label>48</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wu</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Dai</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Cheng</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>S</given-names></name>. <article-title>Highly sensitive and selective ion-imprinted polymers based on one-step electrodeposition of chitosan-graphene nanocomposites for the determination of Cr(VI)</article-title>. <source>Carbohydr Polym</source>. <year>2018</year>;<volume>195</volume>: <fpage>199</fpage>–<lpage>206</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.carbpol.2018.04.077" xlink:type="simple">10.1016/j.carbpol.2018.04.077</ext-link></comment> <object-id pub-id-type="pmid">29804969</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref049"><label>49</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Huang</surname> <given-names>ZJ</given-names></name>, <name name-style="western"><surname>Luo</surname> <given-names>J yi</given-names></name>, <name name-style="western"><surname>Zheng</surname> <given-names>FY</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>SX</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>FJ</given-names></name>, <name name-style="western"><surname>Lin</surname> <given-names>LX</given-names></name>, <etal>et al</etal>. <article-title>Long-term stable, high accuracy, and visual detection platform for In-field analysis of nitrite in food based on colorimetric test paper and deep convolutional neural networks</article-title>. <source>Food Chem</source>. <year>2022</year>;<fpage>373</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.foodchem.2021.131593" xlink:type="simple">10.1016/j.foodchem.2021.131593</ext-link></comment> <object-id pub-id-type="pmid">34838401</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref050"><label>50</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Luo</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Huang</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Zheng</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Huang</surname> <given-names>Q</given-names></name>, <etal>et al</etal>. <article-title>Photodegradation Kinetics and Deep Learning-Based Intelligent Colorimetric Method for Bioavailability-Based Dissolved Iron Speciation</article-title>. <source>Anal Chem</source>. <year>2022</year>;<volume>94</volume>: <fpage>14801</fpage>–<lpage>14809</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.2c04014" xlink:type="simple">10.1021/acs.analchem.2c04014</ext-link></comment> <object-id pub-id-type="pmid">36239120</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref051"><label>51</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Huang</surname> <given-names>ZJ</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Luo</surname> <given-names>JY</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>F</given-names></name>. <article-title>Few-Shot Learning-Based, Long-Term Stable, Sensitive Chemosensor for On-Site Colorimetric Detection of Cr(VI)</article-title>. <source>Anal Chem</source>. <year>2023</year>;<volume>95</volume>: <fpage>6156</fpage>–<lpage>6162</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.3c00604" xlink:type="simple">10.1021/acs.analchem.3c00604</ext-link></comment> <object-id pub-id-type="pmid">36992572</object-id></mixed-citation></ref>
+<ref id="pone.0295687.ref052"><label>52</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Xue</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Sun</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Yang</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>X</given-names></name>, <name name-style="western"><surname>Hu</surname> <given-names>HY</given-names></name>, <name name-style="western"><surname>Deng</surname> <given-names>Y</given-names></name>, <etal>et al</etal>. <article-title>Advances in the Application of Artificial Intelligence-Based Spectral Data Interpretation: A Perspective</article-title>. <source>Anal Chem</source>. <year>2023</year>;<volume>95</volume>: <fpage>13733</fpage>–<lpage>13745</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1021/acs.analchem.3c02540" xlink:type="simple">10.1021/acs.analchem.3c02540</ext-link></comment> <object-id pub-id-type="pmid">37688541</object-id></mixed-citation></ref>
+</ref-list>
+</back>
+</article>

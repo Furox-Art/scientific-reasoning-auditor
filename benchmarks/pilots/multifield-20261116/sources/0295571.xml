@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0295571</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-23-24969</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Critical care and emergency medicine</subject><subj-group><subject>Trauma medicine</subject><subj-group><subject>Traumatic injury</subject><subj-group><subject>Musculoskeletal injury</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Sports and exercise medicine</subject></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Sports science</subject><subj-group><subject>Sports and exercise medicine</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Biological tissue</subject><subj-group><subject>Connective tissue</subject><subj-group><subject>Ligaments</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Biological tissue</subject><subj-group><subject>Connective tissue</subject><subj-group><subject>Ligaments</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Public and occupational health</subject><subj-group><subject>Physical activity</subject><subj-group><subject>Physical fitness</subject><subj-group><subject>Exercise</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Sports and exercise medicine</subject><subj-group><subject>Exercise</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Sports science</subject><subj-group><subject>Sports and exercise medicine</subject><subj-group><subject>Exercise</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Psychology</subject><subj-group><subject>Behavior</subject><subj-group><subject>Recreation</subject><subj-group><subject>Sports</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Social sciences</subject><subj-group><subject>Psychology</subject><subj-group><subject>Behavior</subject><subj-group><subject>Recreation</subject><subj-group><subject>Sports</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Sports science</subject><subj-group><subject>Sports</subject></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Science policy</subject><subj-group><subject>Science and technology workforce</subject><subj-group><subject>Careers in research</subject><subj-group><subject>Scientists</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>People and places</subject><subj-group><subject>Population groupings</subject><subj-group><subject>Professions</subject><subj-group><subject>Scientists</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Musculoskeletal system</subject><subj-group><subject>Skeleton</subject><subj-group><subject>Bone</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Musculoskeletal system</subject><subj-group><subject>Skeleton</subject><subj-group><subject>Bone</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Biological tissue</subject><subj-group><subject>Connective tissue</subject><subj-group><subject>Bone</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Medicine and health sciences</subject><subj-group><subject>Anatomy</subject><subj-group><subject>Biological tissue</subject><subj-group><subject>Connective tissue</subject><subj-group><subject>Bone</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Research and analysis methods</subject><subj-group><subject>Research assessment</subject><subj-group><subject>Systematic reviews</subject></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>The knowledge of movement experts about stretching effects: Does the science reach practice?</article-title>
+<alt-title alt-title-type="running-head">Knowledge about stretching: Does science reach practice?</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" corresp="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0003-4964-2867</contrib-id>
+<name name-style="western">
+<surname>Warneke</surname>
+<given-names>Konstantin</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Konrad</surname>
+<given-names>Andreas</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/funding-acquisition/">Funding acquisition</role>
+<role content-type="http://credit.niso.org/contributor-roles/resources/">Resources</role>
+<role content-type="http://credit.niso.org/contributor-roles/validation/">Validation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Wilke</surname>
+<given-names>Jan</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/investigation/">Investigation</role>
+<role content-type="http://credit.niso.org/contributor-roles/software/">Software</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Institute of Sport Science, Alpen-Adria-University Klagenfurt, Klagenfurt am Wörthersee, Austria</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>Institute of Human Movement Science, Sport and Health, University of Graz, Graz, Austria</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Ramskov</surname>
+<given-names>Daniel</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>Professionshøjskolen UCN: Professionshojskolen UCN, DENMARK</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The authors have declared that no competing interests exist.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">Konstantin.Warneke@aau.at</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>26</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0295571</elocation-id>
+<history>
+<date date-type="received">
+<day>25</day>
+<month>8</month>
+<year>2023</year>
+</date>
+<date date-type="accepted">
+<day>22</day>
+<month>11</month>
+<year>2023</year>
+</date>
+</history>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Warneke et al</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0295571"/>
+<abstract>
+<sec id="sec001">
+<title>Objective</title>
+<p>Stretching is performed with numerous purposes in multiple settings such as prevention, rehabilitation, fitness training and sports. Its patterns of use substantially depend on the education and beliefs of health care and exercise professionals as they represent the multiplicators recommending and prescribing interventions to clients, patients and athletes. This study investigated movement experts’ knowledge about the scientific evidence on stretching effects.</p>
+</sec>
+<sec id="sec002">
+<title>Design</title>
+<p>Survey study.</p>
+</sec>
+<sec id="sec003">
+<title>Participants</title>
+<p>A total of 117 exercise and health professionals (physiotherapists, sports scientists, coaches) attending a training convention in Austria (male: n = 44, female: n = 73, 36±11 years) completed a digital survey. With its 22 items, the questionnaire addressed the movement experts’ awareness of the evidence on stretching effects regarding a variety of related topics selected based on the findings of topical systematic reviews.</p>
+</sec>
+<sec id="sec004">
+<title>Results</title>
+<p>The majority of the individuals (57–88%) assumed positive effects of stretching on recovery, prevention of muscle injury, range of motion, muscular imbalance and artery elasticity. No or adverse effects were mostly claimed on bone injury prevention, maximal/explosive strength, and delayed-onset muscle soreness. In only 10 of 22 items, participants’ classifications were in accord with the scientific evidence.</p>
+</sec>
+<sec id="sec005">
+<title>Conclusions</title>
+<p>The awareness of research findings on stretching effects among exercise and health professionals is alarmingly low. Future studies may hence be geared to improve implementation and science communication.</p>
+</sec>
+</abstract>
+<funding-group>
+<award-group id="award001">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/501100002428</institution-id>
+<institution>Austrian Science Fund</institution>
+</institution-wrap>
+</funding-source>
+<award-id>Project P32078-B</award-id>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Konrad</surname>
+<given-names>Andreas</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<funding-statement>A.K. This study was funded by a grant (Project P32078-B) from the Austrian Science Fund FWF. Funders did not play a role in the study design, data collection and analysis, decision to publish or preparation of the manuscript.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="0"/>
+<table-count count="1"/>
+<page-count count="12"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>As per the ethics approval, the primary data must not be shared with third parties for non-scientific purposes. Thus, public download is not permitted. The data will, however, be available upon request to the local ethics committee of the Alpen-Adria University. The request shall be made at <email xlink:type="simple">Ethikrat@aau.at</email>.</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec006" sec-type="intro">
+<title>Introduction</title>
+<p>Stretching is primarily used to increase flexibility [<xref ref-type="bibr" rid="pone.0295571.ref001">1</xref>]. Although the exact mechanisms have been a matter of debate [<xref ref-type="bibr" rid="pone.0295571.ref002">2</xref>–<xref ref-type="bibr" rid="pone.0295571.ref006">6</xref>], a large body of evidence identified beneficial acute [<xref ref-type="bibr" rid="pone.0295571.ref007">7</xref>–<xref ref-type="bibr" rid="pone.0295571.ref011">11</xref>] and chronic [<xref ref-type="bibr" rid="pone.0295571.ref012">12</xref>–<xref ref-type="bibr" rid="pone.0295571.ref015">15</xref>] effects of stretch training on range of motion. Additional applications, inter alia, include treatments of muscle stiffness, pain or orthopedic complaints [<xref ref-type="bibr" rid="pone.0295571.ref016">16</xref>, <xref ref-type="bibr" rid="pone.0295571.ref017">17</xref>], as well as the prevention of sports injuries [<xref ref-type="bibr" rid="pone.0295571.ref018">18</xref>, <xref ref-type="bibr" rid="pone.0295571.ref019">19</xref>].</p>
+<p>Contrarily to popular beliefs and despite its widespread application, stretching does not always achieve the assumed benefits. As an example, static stretching, particularly when performed for more than 60 seconds [<xref ref-type="bibr" rid="pone.0295571.ref005">5</xref>, <xref ref-type="bibr" rid="pone.0295571.ref009">9</xref>, <xref ref-type="bibr" rid="pone.0295571.ref020">20</xref>, <xref ref-type="bibr" rid="pone.0295571.ref021">21</xref>], has adverse effects on explosive or maximal strength capacity [<xref ref-type="bibr" rid="pone.0295571.ref005">5</xref>, <xref ref-type="bibr" rid="pone.0295571.ref021">21</xref>–<xref ref-type="bibr" rid="pone.0295571.ref024">24</xref>]. Interestingly, dynamic stretching does not seem to cause such performance reductions [<xref ref-type="bibr" rid="pone.0295571.ref003">3</xref>]. Injury prevention represents another area of application with ambivalent results [<xref ref-type="bibr" rid="pone.0295571.ref009">9</xref>, <xref ref-type="bibr" rid="pone.0295571.ref025">25</xref>]. Most of the literature reported no preventive effects when considering total injury counts or other injury types such as ligament or bone injuries [<xref ref-type="bibr" rid="pone.0295571.ref026">26</xref>–<xref ref-type="bibr" rid="pone.0295571.ref029">29</xref>]. However, while Witvrouw et al. [<xref ref-type="bibr" rid="pone.0295571.ref029">29</xref>] indicated stretching could even increase the injury incidence in sports heavily relying on rapid stretch-shortening cycles (sprinting, change of directions), a more recent study by Behm et al. [<xref ref-type="bibr" rid="pone.0295571.ref009">9</xref>] reported static stretch to reduce incidence of musculotendinous injury incidence during activities and sports involving explosive contractions. Stretching is also often used for recovery, e.g., in delayed onset muscle soreness (DOMS) [<xref ref-type="bibr" rid="pone.0295571.ref030">30</xref>, <xref ref-type="bibr" rid="pone.0295571.ref031">31</xref>]. However, even though some individual studies indicated potential positive (chronic) effects [<xref ref-type="bibr" rid="pone.0295571.ref032">32</xref>, <xref ref-type="bibr" rid="pone.0295571.ref033">33</xref>], review articles failed to clearly identify significant improvements in this outcome [<xref ref-type="bibr" rid="pone.0295571.ref028">28</xref>, <xref ref-type="bibr" rid="pone.0295571.ref031">31</xref>, <xref ref-type="bibr" rid="pone.0295571.ref033">33</xref>–<xref ref-type="bibr" rid="pone.0295571.ref035">35</xref>]. Finally, for treatment of muscle imbalance, it is a widely performed practice to strengthen the presumably weakened or lengthened muscles and to stretch the tight or shortened muscles, which is known as the Janda approach [<xref ref-type="bibr" rid="pone.0295571.ref036">36</xref>, <xref ref-type="bibr" rid="pone.0295571.ref037">37</xref>]. While the combination of strengthening and stretching indeed shows significant improvements [<xref ref-type="bibr" rid="pone.0295571.ref038">38</xref>], there is no evidence that stretching alone improves posture.</p>
+<p>Coaches, exercise scientists and physiotherapists are well-known actuators in the health care and sports system [<xref ref-type="bibr" rid="pone.0295571.ref039">39</xref>]. They count among the most important promoters of movement [<xref ref-type="bibr" rid="pone.0295571.ref040">40</xref>] and exercise routines, using stretching in different settings such as sports or therapy [<xref ref-type="bibr" rid="pone.0295571.ref041">41</xref>]. Since Soligard et al [<xref ref-type="bibr" rid="pone.0295571.ref042">42</xref>] underlined the paramount importance of client compliance for successful implementation and effectiveness of prevention programs [<xref ref-type="bibr" rid="pone.0295571.ref043">43</xref>], the knowledge of the educators and experts can be assumed to be critical for the output of treatments.</p>
+<p>Previous research on methods and contents applied in sports and therapy revealed a lack of awareness about the underlying scientific evidence. For instance, survey research showed that the tests used to estimate injury risk in elite basketball lack empirical support [<xref ref-type="bibr" rid="pone.0295571.ref044">44</xref>] and that a significant portion of therapies applied in knee osteoarthritis are not efficacious [<xref ref-type="bibr" rid="pone.0295571.ref045">45</xref>]. With regard to stretching, earlier surveys already addressed the patterns of use in sports [<xref ref-type="bibr" rid="pone.0295571.ref046">46</xref>–<xref ref-type="bibr" rid="pone.0295571.ref048">48</xref>]. However, while Babault et al. [<xref ref-type="bibr" rid="pone.0295571.ref047">47</xref>] explored the motives of athletes and exercise professionals to use stretching (e.g. for recovery or warm-up), to the best of our knowledge, no study has yet explored the actual awareness of the scientific evidence. Against this background, our study aimed to investigate the knowledge of experts and health care professionals (i.e. sport scientists, coaches and physical therapists) regarding the evidence for or against stretching in different practice applications. Considering the widespread popularity and use of stretching techniques [<xref ref-type="bibr" rid="pone.0295571.ref047">47</xref>], we hypothesized that there would be a significant discrepancy between the available evidence and the reported knowledge of the surveyed movement experts.</p>
+</sec>
+<sec id="sec007" sec-type="materials|methods">
+<title>Methods</title>
+<sec id="sec008">
+<title>Ethics and design</title>
+<p>The present study had two parts. In a first step, the evidence on stretching applications (e.g., injury prevention, performance, recovery) was examined identifying and evaluating relevant systematic reviews with meta-analysis. Subsequently, for part two, a cross-sectional survey assessing knowledge of the evidence was performed among participants of the exercise and training convention taking place in Klagenfurt, Austria. The study was approved by the local ethics committee and all participants provided digital informed consent.</p>
+</sec>
+<sec id="sec009">
+<title>Evidence synthesis (study part 1)</title>
+<p>For <italic>step one</italic>, all three investigators performed a literature search identifying systematic reviews with or without meta-analysis on the acute and chronic effects of stretching. Exemplarily, we used the following search term in PubMed to identify the evidence for the acute effects of stretch training on flexibility:</p>
+<p>Stretch* AND acute AND (flexibility OR ROM OR “range of motion”) AND (“systematic review” OR “Meta analysis”)</p>
+<p>As indicated, searches were performed for both acute and chronic effects by adding respective key words (acute OR immediate OR short-term / chronic OR long-term). In addition to the PubMed search, a free-hand search was performed using Google Scholar and the reference lists of all included studies were screened for eligible studies.</p>
+<p>Based on the results of the identified reviews, findings on the effects of stretching were classified as negative effect, no effect, or positive effect. Classifications were based on results of meta-analyses (significance of pooled summary effect size) or the conclusions of the systematic reviews.</p>
+</sec>
+<sec id="sec010">
+<title>Participants (study part 2)</title>
+<p>All 191 healthy adults attending the training convention on 15<sup>th</sup> of April, were invited to participate in our digital survey. Following a verbal and written information, informed consent was provided by clicking on a button labeled “I want to participate” below the digital study information sheet.</p>
+<p>We obtained valid responses from n = 117 individuals (male: n = 44, female: n = 73, 36±11 years) which corresponds to a response rate of 61.26%. The majority of the participants were physiotherapists (n = 79), 10 of which stated a double education (both, Physiotherapy and Sport science). The remaining participants were sports scientists (at least, with a finalized three-years Bachelor degree) (n = 42) and coaches without the two beforementioned educations (n = 7). Most of the included individuals (n = 79) stated working with patients, while seven had elite athletes as clients. The remaining respondents reported working in the field of recreational sports.</p>
+</sec>
+<sec id="sec011">
+<title>Questionnaire (study part 2)</title>
+<p>The online questionnaire assessing the health experts`knowledge of the stretch evidence was generated using a consensus process among the authors and outcomes were based on the literature searches of step one. For face validation, the questionnaire was sent to three members of the target population (physiotherapists, fitness coaches, sports scientists) who were asked to independently judge the comprehensibility of the items. Their feedback was used to modify and refine the questionnaire. The final instrument mainly consisted of two tables (one for static and one for dynamic stretching) listing the identified fields of application with three options (positive/no/negative effect) for each row. The topics identified were: recovery, DOMS, muscle injury ligament injury, bone injury, range of motion (acute and chronic), maximal- and explosive strength (acute and chronic), muscle imbalance, and arterial elasticity. In addition, the questionnaire examined the sources used by the respondents to stay up to date about methods and their use (e.g., book reading, internet research, congresses).</p>
+</sec>
+<sec id="sec012">
+<title>Statistics</title>
+<p>Descriptive statistics (absolute and relative frequencies) were used to analyze the survey data. To compare the participants’ responses on stretching effects against the available scientific evidence, we applied the χ<sup>2</sup> proportions test. It was used to reveal significant differences between the proportions of participants choosing the correct answer (e.g., positive effect of stretching) and those selecting an incorrect answer (e.g., no effect and negative effect). Thus, we were able to determine, if the majority of participants was aware of the scientific evidence. P values &lt; .05 were considered significant, all calculations were performed with Jamovi (The Jamovi project).</p>
+</sec>
+</sec>
+<sec id="sec013" sec-type="results">
+<title>Results</title>
+<sec id="sec014">
+<title>Part one</title>
+<p>The literature search returned a total of 27 systematic reviews (n = 14 with meta-analysis) on a total of 11 topics. Two reviews addressed acute [<xref ref-type="bibr" rid="pone.0295571.ref049">49</xref>, <xref ref-type="bibr" rid="pone.0295571.ref050">50</xref>] and four [<xref ref-type="bibr" rid="pone.0295571.ref012">12</xref>, <xref ref-type="bibr" rid="pone.0295571.ref014">14</xref>, <xref ref-type="bibr" rid="pone.0295571.ref015">15</xref>, <xref ref-type="bibr" rid="pone.0295571.ref051">51</xref>] chronic ROM effects. The same applied to strength outcomes (acute: [<xref ref-type="bibr" rid="pone.0295571.ref021">21</xref>, <xref ref-type="bibr" rid="pone.0295571.ref049">49</xref>], chronic: [<xref ref-type="bibr" rid="pone.0295571.ref052">52</xref>–<xref ref-type="bibr" rid="pone.0295571.ref055">55</xref>]. Nine papers [<xref ref-type="bibr" rid="pone.0295571.ref009">9</xref>, <xref ref-type="bibr" rid="pone.0295571.ref026">26</xref>–<xref ref-type="bibr" rid="pone.0295571.ref028">28</xref>, <xref ref-type="bibr" rid="pone.0295571.ref034">34</xref>, <xref ref-type="bibr" rid="pone.0295571.ref035">35</xref>, <xref ref-type="bibr" rid="pone.0295571.ref056">56</xref>–<xref ref-type="bibr" rid="pone.0295571.ref058">58</xref>] examined prevention of injury, while three reviews investigated a potential prophylactic impact on muscle soreness [<xref ref-type="bibr" rid="pone.0295571.ref028">28</xref>, <xref ref-type="bibr" rid="pone.0295571.ref057">57</xref>, <xref ref-type="bibr" rid="pone.0295571.ref059">59</xref>]. We additionally identified two articles each on recovery following sports and exercise [<xref ref-type="bibr" rid="pone.0295571.ref031">31</xref>, <xref ref-type="bibr" rid="pone.0295571.ref060">60</xref>] and [<xref ref-type="bibr" rid="pone.0295571.ref061">61</xref>, <xref ref-type="bibr" rid="pone.0295571.ref062">62</xref>]. One review [<xref ref-type="bibr" rid="pone.0295571.ref038">38</xref>] explored stretching effects on muscular imbalance. The accumulated evidence found by the included reviews was used to classify the stated answers of the health care professionals in <xref ref-type="table" rid="pone.0295571.t001">Table 1</xref>, with green color indicating the response to be in accordance with the literature (correct) and red indicating the answer not to be in accordance with the literature (incorrect).</p>
+<table-wrap id="pone.0295571.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0295571.t001</object-id>
+<label>Table 1</label> <caption><title>Effects of static and dynamic stretching as assumed by the sample.</title> <p>Green (correct) and red (incorrect) colors indicate the correctness of the response options based on the literature search.</p></caption>
+<alternatives>
+<graphic id="pone.0295571.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0295571.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="justify" colspan="2" rowspan="2">Topic</th>
+<th align="justify" colspan="4">Total sample (n = 117)</th>
+<th align="justify" colspan="4">Physiotherapists (n = 79)</th>
+<th align="justify" colspan="3">Sport scientists (n = 42)</th>
+<th align="justify"/>
+</tr>
+<tr>
+<th align="justify">Negative Effect (percentage (n))</th>
+<th align="justify">No influence (percentage (n))</th>
+<th align="justify">Positive Effect (percentage (n))</th>
+<th align="justify">χ<sup>2</sup> test (p-value)</th>
+<th align="justify">Negative Effect (percentage (n))</th>
+<th align="justify">No influence (percentage (n))</th>
+<th align="justify">Positive Effect (percentage (n))</th>
+<th align="justify">χ<sup>2</sup> test (p-value)</th>
+<th align="justify">Negative Effect (percentage (n))</th>
+<th align="justify">No influence (percentage (n))</th>
+<th align="justify">Positive Effect (percentage (n))</th>
+<th align="justify">χ<sup>2</sup> test (p-value)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="justify" rowspan="11">Static stretching</td>
+<td align="justify">range of motion (acute)</td>
+<td align="justify" style="background-color:#F7CAAC">4.3 (5)</td>
+<td align="justify" style="background-color:#F7CAAC">20.5(24)</td>
+<td align="justify" style="background-color:#C5E0B3">75.2 (88)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">5.8 (2)</td>
+<td align="justify" style="background-color:#F7CAAC">22.8 (17)</td>
+<td align="justify" style="background-color:#C5E0B3">73.4 (58)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">4.8 (2)</td>
+<td align="justify" style="background-color:#F7CAAC">19.0 (8)</td>
+<td align="justify" style="background-color:#C5E0B3">76.2 (32)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">range of motion (chronic)</td>
+<td align="justify" style="background-color:#F7CAAC">0.9 (1)</td>
+<td align="justify" style="background-color:#F7CAAC">20.5 (24)</td>
+<td align="justify" style="background-color:#C5E0B3">78.6 (92)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">2.7 (1)</td>
+<td align="justify" style="background-color:#F7CAAC">22.8 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">75.9 (60)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">2.4 (1)</td>
+<td align="justify" style="background-color:#F7CAAC">26.2 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">71.4 (30)</td>
+<td align="justify">0.005</td>
+</tr>
+<tr>
+<td align="justify">maximal / explosive strength (acute)</td>
+<td align="justify" style="background-color:#C5E0B3">51.3 (60)</td>
+<td align="justify" style="background-color:#C5E0B3">32.5 (38)</td>
+<td align="justify" style="background-color:#F7CAAC">16.2 (19)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#C5E0B3">50.6 (40)</td>
+<td align="justify" style="background-color:#C5E0B3">34.2 (27)</td>
+<td align="justify" style="background-color:#F7CAAC">15.2 (12)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#C5E0B3">61.7 (26)</td>
+<td align="justify" style="background-color:#C5E0B3">21.4 (9)</td>
+<td align="justify" style="background-color:#F7CAAC">16.7 (7)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">maximal / explosive strength (chronic)</td>
+<td align="justify" style="background-color:#F7CAAC">26.5 (31)</td>
+<td align="justify" style="background-color:#F7CAAC">54.7 (64)</td>
+<td align="justify" style="background-color:#C5E0B3">18.8 (22)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">27.8 (22)</td>
+<td align="justify" style="background-color:#F7CAAC">57.0 (45)</td>
+<td align="justify" style="background-color:#C5E0B3">13.9 (11)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">31.0 (13)</td>
+<td align="justify" style="background-color:#F7CAAC">50 (21)</td>
+<td align="justify" style="background-color:#C5E0B3">19.0 (8)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">muscle injury</td>
+<td align="justify" style="background-color:#F7CAAC">8.5 (10)</td>
+<td align="justify" style="background-color:#C5E0B3">34.2 (40)</td>
+<td align="justify" style="background-color:#C5E0B3">57.23 (67)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">10.1 (8)</td>
+<td align="justify" style="background-color:#C5E0B3">32.9 (26)</td>
+<td align="justify" style="background-color:#F7CAAC">54.4 (43)</td>
+<td align="justify">0.004</td>
+<td align="justify" style="background-color:#F7CAAC">9.5 (4)</td>
+<td align="justify" style="background-color:#C5E0B3">33.3 (14)</td>
+<td align="justify" style="background-color:#F7CAAC">57.1 (24)</td>
+<td align="justify">0.031</td>
+</tr>
+<tr>
+<td align="justify">ligament injury</td>
+<td align="justify" style="background-color:#F7CAAC">9.4 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">41.2 (48)</td>
+<td align="justify" style="background-color:#F7CAAC">49.6 (58)</td>
+<td align="justify">0.052</td>
+<td align="justify" style="background-color:#F7CAAC">11.4 (9)</td>
+<td align="justify" style="background-color:#C5E0B3">43.0 (34)</td>
+<td align="justify" style="background-color:#F7CAAC">43.0 (34)</td>
+<td align="justify">0.305</td>
+<td align="justify" style="background-color:#F7CAAC">7.1 (3)</td>
+<td align="justify" style="background-color:#C5E0B3">47.6 (20)</td>
+<td align="justify" style="background-color:#F7CAAC">45.2 (19)</td>
+<td align="justify">0.76</td>
+</tr>
+<tr>
+<td align="justify">bone injury</td>
+<td align="justify" style="background-color:#F7CAAC">1.7 (2)</td>
+<td align="justify" style="background-color:#C5E0B3">65.8 (77)</td>
+<td align="justify" style="background-color:#F7CAAC">32.5 (38)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">1.3 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">65.8 (53)</td>
+<td align="justify" style="background-color:#F7CAAC">31.6 (25)</td>
+<td align="justify">0.003</td>
+<td align="justify" style="background-color:#F7CAAC">2.4 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">71.4 (30)</td>
+<td align="justify" style="background-color:#F7CAAC">26.2 (11)</td>
+<td align="justify">0.005</td>
+</tr>
+<tr>
+<td align="justify">recovery</td>
+<td align="justify" style="background-color:#F7CAAC">12.0 (14)</td>
+<td align="justify" style="background-color:#C5E0B3">24.8 (29)</td>
+<td align="justify" style="background-color:#F7CAAC">63.2 (74)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">13.9 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">26.6 (21)</td>
+<td align="justify" style="background-color:#F7CAAC">59.5 (47)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">9.5 (4)</td>
+<td align="justify" style="background-color:#C5E0B3">26.2 (11)</td>
+<td align="justify" style="background-color:#F7CAAC">64.3 (27)</td>
+<td align="justify">0.002</td>
+</tr>
+<tr>
+<td align="justify">delayed onset muscle soreness</td>
+<td align="justify" style="background-color:#F7CAAC">28.2 (33)</td>
+<td align="justify" style="background-color:#C5E0B3">43.6 (51)</td>
+<td align="justify" style="background-color:#F7CAAC">28.2 (33)</td>
+<td align="justify">0.166</td>
+<td align="justify" style="background-color:#F7CAAC">26.6 (21)</td>
+<td align="justify" style="background-color:#C5E0B3">46.8 (37)</td>
+<td align="justify" style="background-color:#F7CAAC">25.3 (20)</td>
+<td align="justify">0.651</td>
+<td align="justify" style="background-color:#F7CAAC">28.6 (12)</td>
+<td align="justify" style="background-color:#C5E0B3">47.6 (20)</td>
+<td align="justify" style="background-color:#F7CAAC">23.8 (10)</td>
+<td align="justify">0.135</td>
+</tr>
+<tr>
+<td align="justify">muscular imbalances</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#C5E0B3">40.2 (47)</td>
+<td align="justify" style="background-color:#F7CAAC">59.8 (70)</td>
+<td align="justify">0.033</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#C5E0B3">39.2 (32)</td>
+<td align="justify" style="background-color:#F7CAAC">59.5 (47)</td>
+<td align="justify">0.07</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#C5E0B3">45.2 (19)</td>
+<td align="justify" style="background-color:#F7CAAC">54.8 (23)</td>
+<td align="justify">0.537</td>
+</tr>
+<tr>
+<td align="justify">artery elasticity</td>
+<td align="justify" style="background-color:#F7CAAC">2.6 (3)</td>
+<td align="justify" style="background-color:#F7CAAC">34.2 (40)</td>
+<td align="justify" style="background-color:#C5E0B3">63.2 (74)</td>
+<td align="justify">0.004</td>
+<td align="justify" style="background-color:#F7CAAC">2.5 (2)</td>
+<td align="justify" style="background-color:#F7CAAC">35.4 (28)</td>
+<td align="justify" style="background-color:#C5E0B3">62 (49)</td>
+<td align="justify">0.033</td>
+<td align="justify" style="background-color:#F7CAAC">4.8 (2)</td>
+<td align="justify" style="background-color:#F7CAAC">31.0 (13)</td>
+<td align="justify" style="background-color:#C5E0B3">64.3 (27)</td>
+<td align="justify">0.064</td>
+</tr>
+<tr>
+<td align="justify" rowspan="11">Dynamic stretching</td>
+<td align="justify">range of motion (acute)</td>
+<td align="justify" style="background-color:#F7CAAC">2.6 (3)</td>
+<td align="justify" style="background-color:#F7CAAC">9.4 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">88.01 (103)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">2.5 (2)</td>
+<td align="justify" style="background-color:#F7CAAC">12.7 (10)</td>
+<td align="justify" style="background-color:#C5E0B3">83.5 (66)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">2.4 (1)</td>
+<td align="justify" style="background-color:#F7CAAC">4.8 (2)</td>
+<td align="justify" style="background-color:#C5E0B3">92.9 (39)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">range of motion (chronic)</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">26.45 (31)</td>
+<td align="justify" style="background-color:#C5E0B3">73.5 (86)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">30.4 (24)</td>
+<td align="justify" style="background-color:#C5E0B3">69.7 (55)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">33.3 (14)</td>
+<td align="justify" style="background-color:#C5E0B3">66.7 (28)</td>
+<td align="justify">0.031</td>
+</tr>
+<tr>
+<td align="justify">Maximal / explosive strength (acute)</td>
+<td align="justify" style="background-color:#F7CAAC">6.0 (7)</td>
+<td align="justify" style="background-color:#C5E0B3">29.1 (34)</td>
+<td align="justify" style="background-color:#C5E0B3">65.0 (76)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">6.3 (5)</td>
+<td align="justify" style="background-color:#C5E0B3">27.8 (22)</td>
+<td align="justify" style="background-color:#C5E0B3">65.8 (52)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">9.5 (4)</td>
+<td align="justify" style="background-color:#C5E0B3">26.2 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">64.3 (27)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">Maximal / explosive strength (chronic)</td>
+<td align="justify" style="background-color:#F7CAAC">3.4 (4)</td>
+<td align="justify" style="background-color:#C5E0B3">37.6 (44)</td>
+<td align="justify" style="background-color:#C5E0B3">59.0 (69)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">3.8 (3)</td>
+<td align="justify" style="background-color:#C5E0B3">38.0 (30)</td>
+<td align="justify" style="background-color:#C5E0B3">58.2 (46)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">2.4 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">40.5 (17)</td>
+<td align="justify" style="background-color:#C5E0B3">57.1 (24)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">muscle injury</td>
+<td align="justify" style="background-color:#F7CAAC">23.1 (27)</td>
+<td align="justify" style="background-color:#C5E0B3">17.9 (21)</td>
+<td align="justify" style="background-color:#C5E0B3">59.0 (69)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">19.0 (15)</td>
+<td align="justify" style="background-color:#C5E0B3">17.7 (14)</td>
+<td align="justify" style="background-color:#F7CAAC">60.8 (48)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">26.2 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">21.4 (9)</td>
+<td align="justify" style="background-color:#F7CAAC">52.4 (22)</td>
+<td align="justify">0.879</td>
+</tr>
+<tr>
+<td align="justify">ligament injury</td>
+<td align="justify" style="background-color:#F7CAAC">20.5 (24)</td>
+<td align="justify" style="background-color:#C5E0B3">30.78 (36)</td>
+<td align="justify" style="background-color:#F7CAAC">48.7 (57)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">17.8 (14)</td>
+<td align="justify" style="background-color:#C5E0B3">38.0 (30)</td>
+<td align="justify" style="background-color:#F7CAAC">44.3 (35)</td>
+<td align="justify">0.033</td>
+<td align="justify" style="background-color:#F7CAAC">26.2 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">23.9 (10)</td>
+<td align="justify" style="background-color:#F7CAAC">50 (21)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+<tr>
+<td align="justify">bone injury</td>
+<td align="justify" style="background-color:#F7CAAC">9.4 (11)</td>
+<td align="justify" style="background-color:#C5E0B3">59.8 (70)</td>
+<td align="justify" style="background-color:#F7CAAC">30.8 (36)</td>
+<td align="justify">0.033</td>
+<td align="justify" style="background-color:#F7CAAC">7.6 (6)</td>
+<td align="justify" style="background-color:#C5E0B3">63.3 (50)</td>
+<td align="justify" style="background-color:#F7CAAC">29.1 (23)</td>
+<td align="justify">0.018</td>
+<td align="justify" style="background-color:#F7CAAC">14.3 (6)</td>
+<td align="justify" style="background-color:#C5E0B3">57.1 (24)</td>
+<td align="justify" style="background-color:#F7CAAC">28.6 (12)</td>
+<td align="justify">0.355</td>
+</tr>
+<tr>
+<td align="justify">recovery</td>
+<td align="justify" style="background-color:#F7CAAC">6.8 (8)</td>
+<td align="justify" style="background-color:#C5E0B3">23.9 (28)</td>
+<td align="justify" style="background-color:#F7CAAC">69.2 (81)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">6.3 (5)</td>
+<td align="justify" style="background-color:#C5E0B3">25.3 (20)</td>
+<td align="justify" style="background-color:#F7CAAC">67.1 (53)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">9.5 (4)</td>
+<td align="justify" style="background-color:#C5E0B3">26.2 (11)</td>
+<td align="justify" style="background-color:#F7CAAC">64.3 (27)</td>
+<td align="justify">0.002</td>
+</tr>
+<tr>
+<td align="justify">delayed onset muscle soreness</td>
+<td align="justify" style="background-color:#F7CAAC">17.1 (20)</td>
+<td align="justify" style="background-color:#C5E0B3">26.45 (31)</td>
+<td align="justify" style="background-color:#F7CAAC">56.4 (66)</td>
+<td align="justify">0.013</td>
+<td align="justify" style="background-color:#F7CAAC">12.7 (10)</td>
+<td align="justify" style="background-color:#C5E0B3">26.6 (21)</td>
+<td align="justify" style="background-color:#F7CAAC">59.5 (47)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">23.8 (10)</td>
+<td align="justify" style="background-color:#C5E0B3">31.0 (13)</td>
+<td align="justify" style="background-color:#F7CAAC">45.2 (19)</td>
+<td align="justify">0.014</td>
+</tr>
+<tr>
+<td align="justify">muscular imbalances</td>
+<td align="justify" style="background-color:#F7CAAC">0.9 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">38.45 (45)</td>
+<td align="justify" style="background-color:#F7CAAC">60.67 (71)</td>
+<td align="justify">0.021</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#C5E0B3">41.8 (33)</td>
+<td align="justify" style="background-color:#F7CAAC">57.0 (45)</td>
+<td align="justify">0.174</td>
+<td align="justify" style="background-color:#F7CAAC">2.4 (1)</td>
+<td align="justify" style="background-color:#C5E0B3">38.1 (16)</td>
+<td align="justify" style="background-color:#F7CAAC">59.5 (25)</td>
+<td align="justify">0.123</td>
+</tr>
+<tr>
+<td align="justify">artery elasticity</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">26.5 (31)</td>
+<td align="justify" style="background-color:#C5E0B3">73.5 (86)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">30.4 (24)</td>
+<td align="justify" style="background-color:#C5E0B3">68.4 (54)</td>
+<td align="justify">&lt;0.001</td>
+<td align="justify" style="background-color:#F7CAAC">0 (0)</td>
+<td align="justify" style="background-color:#F7CAAC">23.8 (10)</td>
+<td align="justify" style="background-color:#C5E0B3">76.2 (32)</td>
+<td align="justify">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+</table-wrap>
+</sec>
+<sec id="sec015">
+<title>Part two</title>
+<sec id="sec016">
+<title>Sources of self-education</title>
+<p>One hundred-eight participants (92.3%) stated informing themselves by visiting congresses, while consulting colleagues (n = 66, 56.4%), book reading (n = 76, 65.0%), social media use (n = 63, 53.9%), scientific databases screening (n = 64, 54.7%) and website/blog reading (n = 54, 46.2%) were less frequently cited.</p>
+</sec>
+<sec id="sec017">
+<title>Descriptive results: Static stretching</title>
+<p>The majority (75.2% and 78.6%)of the participants stated static stretching to positively affect range of motion in the short- and long-term (<bold><xref ref-type="table" rid="pone.0295571.t001">Table 1</xref></bold>). Similarly, a high percentage (70–74%) assumed a beneficial impact on recovery, arterial elasticity and muscle imbalance. About the half of participants(57.2%/49.6%) suggested a protective effect of static stretching on muscle injuries and ligament injuries. No influence in either direction was mostly assumed for bone injuries and DOMS. The majority (83.8% and 81.2%) of the participants suggested negative or no acute or chronic effects of static stretching on maximal strength and explosive strength.</p>
+</sec>
+<sec id="sec018">
+<title>Descriptive results: Dynamic stretching</title>
+<p>Similar to static stretching, the vast majority of the participants (75.5 and 88.01%) assumed acute and chronic range of motion increases following dynamic stretching. Regarding maximal strength capacity adaptations, about 60–65% assumed positive chronic effects. While three quarters (73.5%) of the movement experts claimed a positive influence of dynamic stretching on artery stiffness, two to three quarters (56.4 and 69.2%) suggested a positive influence on recovery and DOMS. Regarding injury prevention, 60% stated no effects of dynamic stretching on bone injury, while about five and six out of ten (48.7% and 59%) assumed positive effects on muscle and ligament injuries, respectively.</p>
+</sec>
+<sec id="sec019">
+<title>Statistical evaluation of evidence awareness</title>
+<p>In 12 of the 22 items (static stretching: ROM acute/chronic, strength acute, prevention of muscle injury and bone injury, artery elasticity; dynamic stretching: ROM acute/chronic, strength acute/chronic, prevention of muscle injury, artery elasticity), the majority of the health professionals chose the correct answer (p &lt; .05, <bold><xref ref-type="table" rid="pone.0295571.t001">Table 1</xref></bold>). In 8 items (static stretching: strength chronic, recovery, muscular imbalance; dynamic stretching: prevention of ligament and bone injury, recovery, muscular imbalance, DOMS), the majority did not select the correct option (p &lt; .05). In the remaining two items (static stretching in DOMS and for prevention of ligament injury), no majority could be identified by the χ<sup>2</sup> proportion test (p&gt;.05), meaning that–similar to the 8 aforementioned items–the correct answer could not be identified by a majority of participants. Separate analyses for sports scientists and physiotherapists only are also shown in <bold><xref ref-type="table" rid="pone.0295571.t001">Table 1</xref></bold>. No differences (correct/incorrect answer) in evidence knowledge were found between members of the two professions (p&gt;0.5).</p>
+</sec>
+</sec>
+</sec>
+<sec id="sec020" sec-type="conclusions">
+<title>Discussion</title>
+<p>Stretching represents one of the most researched topics in sports and exercise and is addressed in numerous review articles [<xref ref-type="bibr" rid="pone.0295571.ref012">12</xref>, <xref ref-type="bibr" rid="pone.0295571.ref014">14</xref>, <xref ref-type="bibr" rid="pone.0295571.ref021">21</xref>, <xref ref-type="bibr" rid="pone.0295571.ref063">63</xref>, <xref ref-type="bibr" rid="pone.0295571.ref064">64</xref>]. Despite some knowledge gaps (e.g., with regard to the physiological mechanisms), a plethora of studies have unveiled the effectiveness of stretching for various fields of application e.g. flexibility [<xref ref-type="bibr" rid="pone.0295571.ref012">12</xref>, <xref ref-type="bibr" rid="pone.0295571.ref014">14</xref>, <xref ref-type="bibr" rid="pone.0295571.ref015">15</xref>], performance [<xref ref-type="bibr" rid="pone.0295571.ref052">52</xref>, <xref ref-type="bibr" rid="pone.0295571.ref053">53</xref>, <xref ref-type="bibr" rid="pone.0295571.ref055">55</xref>], cardiovascular health [<xref ref-type="bibr" rid="pone.0295571.ref062">62</xref>], and muscular imbalance [<xref ref-type="bibr" rid="pone.0295571.ref038">38</xref>]. Our study found that exercise professionals are highly confident about the effects of stretching as they assumed a beneficial effect in 16 of 22 fields of application. This high confidence, however, does not reflect the available evidence: In 10 out of 22 questions asked in the present investigation, the response option chosen by the majority of the participants was incorrect. In sum, we therefore suggest that a significant number of scientific findings on stretching may not reach the movement experts working in clinical practice.</p>
+<p>Previous stretching surveys provided valuable information regarding practical use of stretching in athletic populations and coaches [<xref ref-type="bibr" rid="pone.0295571.ref046">46</xref>–<xref ref-type="bibr" rid="pone.0295571.ref048">48</xref>]. However, no study had yet explored the evidence knowledge of movement experts. Notwithstanding, our finding of an unsatisfactory science to practice transfer with regard to stretching accords with a study by Zenko &amp; Ekkekakis et al. [<xref ref-type="bibr" rid="pone.0295571.ref065">65</xref>] on general training prescription. The authors found only about 40% correct answers in a sample of 1,808 certified exercise professionals being surveyed about their knowledge about evidence-based training program design. An evidence-practice gap has also been reported by surveys on exercise during pregnancy (60–80% not aware of relevant guidelines; [<xref ref-type="bibr" rid="pone.0295571.ref066">66</xref>, <xref ref-type="bibr" rid="pone.0295571.ref067">67</xref>]. In contrast, Bernhardsson et al. [<xref ref-type="bibr" rid="pone.0295571.ref068">68</xref>] observed a higher knowledge in Swedish physiotherapists. According to their results, 65 to 96% of the therapeutic advice provided by the included individuals (n = 271) were classified as being in line with the current evidence. Taken together, the findings of the present and the cited studies impressively demonstrate that scientific knowledge is transferred to practice to a highly variable degree.</p>
+<p>It could be argued that awareness about scientific data is dependent on the novelty of research findings. The beneficial effects of stretching on flexibility have been reported using meta-analysis back in 2006 [<xref ref-type="bibr" rid="pone.0295571.ref069">69</xref>] and it is known since 2002 that stretching is not effective in DOMS [<xref ref-type="bibr" rid="pone.0295571.ref031">31</xref>]. The majority of our participants indeed correctly classified the rather old evidence with regard to both topics. Also, they failed to recognize the recently identified a) positive impact of chronic static stretching on strength parameters [<xref ref-type="bibr" rid="pone.0295571.ref055">55</xref>] and b) lack of an impact on posture [<xref ref-type="bibr" rid="pone.0295571.ref038">38</xref>]. While these results seem to support the assumption that evidence novelty represents a decisive predictor of awareness, the surveyed individuals correctly classified the newly discovered influence of stretching on arterial stiffness [<xref ref-type="bibr" rid="pone.0295571.ref062">62</xref>] but incorrectly assumed a protective effect of stretching on ligament injuries [<xref ref-type="bibr" rid="pone.0295571.ref026">26</xref>–<xref ref-type="bibr" rid="pone.0295571.ref028">28</xref>]. Therefore, we believe that not merely novelty of findings but also science communication may be paramount to secure translation to clinical practice.</p>
+<p>Several authors have underscored the pivotal role of science communication and implementation research. As a consequence, researchers and journals have introduced a variety of strategies aiming to better disseminate study findings. Verhagen et al. [<xref ref-type="bibr" rid="pone.0295571.ref070">70</xref>] described the potential of social media, representing one of the most used platforms, to reach a large audience. Non-technical visualization, e.g., info graphics, sketch notes, video abstracts or video summaries, is another method to transmit complex findings [<xref ref-type="bibr" rid="pone.0295571.ref071">71</xref>]. Interestingly, while Wang et al. [<xref ref-type="bibr" rid="pone.0295571.ref072">72</xref>] suggested comics to be superior compared to info graphics regarding enjoyment and focus, Fontaine et al. [<xref ref-type="bibr" rid="pone.0295571.ref073">73</xref>] stated that high-quality studies investigating the effectiveness of such new science communication strategies are missing. Therefore, we argue that our results should represent a call to action for both practitioners to seek and use as well as for researchers to develop and apply science communication strategies.</p>
+<sec id="sec021">
+<title>Limitations</title>
+<p>Some methodological aspects merit consideration. A particular strength of our study was that we applied a census sampling methods inviting all participants of an exercise convention. With about 60%, the response rate was satisfactory. However, as our participants were registered for an educational event, we assume that they may have even be more interested in recent scientific knowledge than other non-registered colleagues. Furthermore, as the study focused on exercise professionals from Austria, Germany and Switzerland, caution is necessary when aiming to generalize the findings, as knowledge might differ between countries. Another issue relates to the evidence itself. In most cases, the classification of evidence as negative, neutral or positive was straightforward and unambiguous. However, in some areas of application, findings were more difficult to classify. For instance, static stretching has been demonstrated to reduce maximal/explosive strength. However, if stretch durations are very short, no impact of static stretching in either direction can be observed [<xref ref-type="bibr" rid="pone.0295571.ref005">5</xref>, <xref ref-type="bibr" rid="pone.0295571.ref021">21</xref>]. Therefore, our questionnaire had some very few items with more than one correct option.</p>
+<p>In literature, there is no clear definition of dynamic stretching, which could lead to some misunderstandings of the questions. Without scientifically clarify the dynamic stretching definition, this limitation cannot be counteract, yet.</p>
+<p>Finally, since no option for undecided respondents was provided, the participants had to decide for one answer, which could impact the number of answers being classified as incorrect. However, since we wanted to check the knowledge of current evidence, participants who could have indicated that they do not know would also be considered incorrect.</p>
+</sec>
+</sec>
+<sec id="sec022" sec-type="conclusions">
+<title>Conclusion</title>
+<p>While there is a high confidence of physiotherapists and practitioners regarding the effects of stretching (positive impact assumed in 15 out of 22 items), the evidence does not fully support these positive assumptions. The findings of our study therefore represent a call to action for implementation and awareness research aiming to better communicate exercise-related research findings to coaches and therapists.</p>
+</sec>
+<sec id="sec023" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0295571.s001" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0295571.s001" xlink:type="simple">
+<label>S1 Checklist</label>
+<caption>
+<title>Human participants research checklist.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0295571.s002" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0295571.s002" xlink:type="simple">
+<label>S1 File</label>
+<caption>
+<title>Survey.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ref-list>
+<title>References</title>
+<ref id="pone.0295571.ref001"><label>1</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>. <source>The Science and Physiology of Flexibility and Stretching: Impliactions and Applications in Sport Performance and Health</source>. <publisher-loc>London. UK</publisher-loc>: <publisher-name>Routledge Publisher</publisher-name>; <year>2018</year>.</mixed-citation></ref>
+<ref id="pone.0295571.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Opplert</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Babault</surname> <given-names>N</given-names></name>. <article-title>Effects of Dynamic Stretching on Mechanical Properties Result From both Muscle-Tendon Stretching and Muscle Warm-Up.</article-title> <source>J Sports Sci Med.</source> <year>2019</year>;<volume>18</volume>: <fpage>351</fpage>–<lpage>358</lpage>.</mixed-citation></ref>
+<ref id="pone.0295571.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Opplert</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Babault</surname> <given-names>N</given-names></name>. <article-title>Acute effects of dynamic stretching on muscle flexibility and performance: An analysis of the current literature.</article-title> <source>Sports Med</source>. <year>2018</year>;<volume>48</volume>: <fpage>299</fpage>–<lpage>225</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s40279-017-0797-9" xlink:type="simple">10.1007/s40279-017-0797-9</ext-link></comment> <object-id pub-id-type="pmid">29063454</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Opplert</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Genty</surname> <given-names>JB</given-names></name>, <name name-style="western"><surname>Babault</surname> <given-names>N</given-names></name>. <article-title>Do Stretch Durations Affect Muscle Mechanical and Neurophysiological Properties?</article-title> <source>Int J Sports Med.</source> <year>2016</year>;<volume>37</volume>: <fpage>673</fpage>–<lpage>679</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1055/s-0042-104934" xlink:type="simple">10.1055/s-0042-104934</ext-link></comment> <object-id pub-id-type="pmid">27191211</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Chaouachi</surname> <given-names>A</given-names></name>. <article-title>A review of the acute effects of static and dynamic stretching on performance</article-title>. <source>Eur J Appl Physiol</source>. <year>2011</year>;<volume>111</volume>: <fpage>2633</fpage>–<lpage>2651</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00421-011-1879-2" xlink:type="simple">10.1007/s00421-011-1879-2</ext-link></comment> <object-id pub-id-type="pmid">21373870</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref006"><label>6</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Kay</surname> <given-names>AD</given-names></name>, <name name-style="western"><surname>Trajano</surname> <given-names>GS</given-names></name>, <name name-style="western"><surname>Blazevich</surname> <given-names>AJ</given-names></name>. <article-title>Mechanisms underlying performance impairments following prolonged static stretching without a comprehensive warm-up</article-title>. <source>Eur J Appl Physiol</source>. <year>2021</year>;<volume>121</volume>: <fpage>67</fpage>–<lpage>94</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00421-020-04538-8" xlink:type="simple">10.1007/s00421-020-04538-8</ext-link></comment> <object-id pub-id-type="pmid">33175242</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Konrad</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Nakamura</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Paternoster</surname> <given-names>FK</given-names></name>, <name name-style="western"><surname>Tilp</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>. <article-title>A comparison of a single bout of stretching or foam rolling on range of motion in healthy adults</article-title>. <source>Eur J Appl Physiol</source>. <year>2022</year>;<volume>122</volume>: <fpage>1545</fpage>–<lpage>1557</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s00421-022-04927-1" xlink:type="simple">10.1007/s00421-022-04927-1</ext-link></comment> <object-id pub-id-type="pmid">35298696</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Konrad</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Tilp</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Nakamura</surname> <given-names>M</given-names></name>. <article-title>A Comparison of the Effects of Foam Rolling and Stretching on Physical Performance. A Systematic Review and Meta-Analysis.</article-title> <source>Front Physiol.</source> <year>2021</year>;<volume>12</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3389/fphys.2021.720531" xlink:type="simple">10.3389/fphys.2021.720531</ext-link></comment> <object-id pub-id-type="pmid">34658909</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Blazevich</surname> <given-names>AJ</given-names></name>, <name name-style="western"><surname>Kay</surname> <given-names>AD</given-names></name>, <name name-style="western"><surname>McHugh</surname> <given-names>M</given-names></name>. <article-title>Acute effects of muscle stretching on physical performance, range of motion, and injury incidence in healthy active individuals: A systematic review.</article-title> <source>Appl Physiol Nutr Metab</source>. <year>2016</year>;<volume>41</volume>: <fpage>1</fpage>–<lpage>11</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1139/apnm-2015-0235" xlink:type="simple">10.1139/apnm-2015-0235</ext-link></comment> <object-id pub-id-type="pmid">26642915</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lempke</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Wilkinson</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Murray</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Stanek</surname> <given-names>J</given-names></name>. <article-title>The effectiveness of PNF versus static stretching on increasing hip-flexion range of motion.</article-title> <source>J Sport Rehabil</source>. <year>2018</year>;<volume>27</volume>: <fpage>289</fpage>–<lpage>294</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1123/jsr.2016-0098" xlink:type="simple">10.1123/jsr.2016-0098</ext-link></comment> <object-id pub-id-type="pmid">28182516</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Alizadeh</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Daneshjoo</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Hadjizadeh</surname> <given-names>AS</given-names></name>, <name name-style="western"><surname>Graham</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Zahiri</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Acute effects of various stretching techniques on range of motion: A systematic review with meta-analysis.</article-title> <source>Sports Med.</source> <year>2023</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/s40798-023-00652-x" xlink:type="simple">10.1186/s40798-023-00652-x</ext-link></comment> <object-id pub-id-type="pmid">37962709</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Konrad</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Alizadeh</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Daneshjoo</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Hadjizadeh</surname> <given-names>AS</given-names></name>, <name name-style="western"><surname>Graham</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Zahiri</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Chronic effects of stretching on range of motion with consideration of potential moderating variables: A systematic review with meta-analysis.</article-title> <source>J Sport Health Sci.</source> <year>2023</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jshs.2023.06.002" xlink:type="simple">10.1016/j.jshs.2023.06.002</ext-link></comment> <object-id pub-id-type="pmid">37301370</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Alizadeh</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Daneshjoo</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Zahiri</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Anvar</surname> <given-names>SH</given-names></name>, <name name-style="western"><surname>Goudini</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Hicks</surname> <given-names>JP</given-names></name>, <etal>et al</etal>. <article-title>Resistance Training Induces Improvements in Range of Motion: A Systematic Review and Meta-Analysis.</article-title> <source>Sports Med.</source> <year>2023</year>;<volume>53</volume>: <fpage>707</fpage>–<lpage>722</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s40279-022-01804-x" xlink:type="simple">10.1007/s40279-022-01804-x</ext-link></comment> <object-id pub-id-type="pmid">36622555</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Medeiros</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Martini</surname> <given-names>TF</given-names></name>. <article-title>Chronic Effect of Different Types of Stretching on Ankle Dorsiflexion Range of Motion: Systematic Review and Meta-Analysis.</article-title> <source>Foot(Edinb).</source> <year>2018</year>;<volume>34</volume>: <fpage>28</fpage>–<lpage>35</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.foot.2017.09.006" xlink:type="simple">10.1016/j.foot.2017.09.006</ext-link></comment> <object-id pub-id-type="pmid">29223884</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Medeiros</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Cini</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Sbruzzi</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Lima</surname> <given-names>CS</given-names></name>. <article-title>Influence of static stretching on hamstring flexibility in healthy young adults: systematic review and meta analysis.</article-title> <source>Physio Ther Theory Pract</source>. <year>2016</year>;<volume>32</volume>: <fpage>438</fpage>–<lpage>445</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1080/09593985.2016.1204401" xlink:type="simple">10.1080/09593985.2016.1204401</ext-link></comment> <object-id pub-id-type="pmid">27458757</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Malliaropoulos</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Papalexandris</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Papalada</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Papacostas</surname> <given-names>E</given-names></name>. <article-title>The Role of Stretching in Rehabilitation of Hamstring Injuries: 80 Athletes Follow-Up.</article-title> <source>Med Sci Sports Exerc.</source> <year>2004</year>;<volume>36</volume>: <fpage>756</fpage>–<lpage>759</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1249/01.mss.0000126393.20025.5e" xlink:type="simple">10.1249/01.mss.0000126393.20025.5e</ext-link></comment> <object-id pub-id-type="pmid">15126706</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Tunwattanapong</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Kongkasuwan</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Kupniratsaikul</surname> <given-names>V</given-names></name>. <article-title>The Effectiveness of a Neck and Shoulder Stretching Exercise Program among Office Workers with Neck Pain: A Randomized Controlled Trial.</article-title> <source>Clin Rehabil</source>. <year>2016</year>;<volume>30</volume>: <fpage>64</fpage>–<lpage>72</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1177/0269215515575747" xlink:type="simple">10.1177/0269215515575747</ext-link></comment> <object-id pub-id-type="pmid">25780258</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Acevedo</surname> <given-names>RJ</given-names></name>, <name name-style="western"><surname>Rivera-Vega</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Miranda</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Micheo</surname> <given-names>W</given-names></name>. <article-title>Anterior Cruciate Ligament Injury.</article-title> <source>Curr Sports Med Rep.</source> <year>2014</year>;<volume>13</volume>: <fpage>186</fpage>–<lpage>191</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1249/JSR.0000000000000053" xlink:type="simple">10.1249/JSR.0000000000000053</ext-link></comment> <object-id pub-id-type="pmid">24819011</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Stojanovic</surname> <given-names>MD</given-names></name>, <name name-style="western"><surname>Ostojic</surname> <given-names>SM</given-names></name>. <article-title>Stretching and Injury Prevention in Football: Current Perspectives.</article-title> <source>Research in Sports Medicine.</source> <year>2011</year>;<volume>19</volume>: <fpage>73</fpage>–<lpage>91</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1080/15438627.2011.556476" xlink:type="simple">10.1080/15438627.2011.556476</ext-link></comment> <object-id pub-id-type="pmid">21480055</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Power</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Behm</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Cahill</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Carroll</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Young</surname> <given-names>W</given-names></name>. <article-title>An acute bout of static stretching: Effects on force and jumping performance.</article-title> <source>Med Sci Sports Exerc</source>. <year>2004</year>;<volume>36</volume>: <fpage>1389</fpage>–<lpage>1396</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1249/01.mss.0000135775.51937.53" xlink:type="simple">10.1249/01.mss.0000135775.51937.53</ext-link></comment> <object-id pub-id-type="pmid">15292748</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Simic</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Sarabon</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Markovic</surname> <given-names>G</given-names></name>. <article-title>Does pre-exercise static stretching inhibit maximal muscular performance? A meta-analytical review.</article-title> <source>Scand J Med Sci Sports</source>. <year>2013</year>;<volume>23</volume>: <fpage>131</fpage>–<lpage>148</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1600-0838.2012.01444.x" xlink:type="simple">10.1111/j.1600-0838.2012.01444.x</ext-link></comment> <object-id pub-id-type="pmid">22316148</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref022"><label>22</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ebadi</surname> <given-names>LA</given-names></name>, <name name-style="western"><surname>Çetin</surname> <given-names>E</given-names></name>. <article-title>Duration dependent effect of static stretching on quadriceps and hamstring muscle force.</article-title> <source>Sports</source>. <year>2018</year>;<volume>6</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/sports6010024" xlink:type="simple">10.3390/sports6010024</ext-link></comment> <object-id pub-id-type="pmid">29910328</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref023"><label>23</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kay</surname> <given-names>AD</given-names></name>, <name name-style="western"><surname>Blazevich</surname> <given-names>AJ</given-names></name>. <article-title>Effect of acute static stretch on maximal muscle performance: A systematic review.</article-title> <source>Med Sci Sports Exerc</source>. <year>2012</year>;<volume>44</volume>: <fpage>154</fpage>–<lpage>164</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1249/MSS.0b013e318225cb27" xlink:type="simple">10.1249/MSS.0b013e318225cb27</ext-link></comment> <object-id pub-id-type="pmid">21659901</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref024"><label>24</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rubini</surname> <given-names>EC</given-names></name>, <name name-style="western"><surname>Costa</surname> <given-names>AL</given-names></name>, <name name-style="western"><surname>Gomez</surname> <given-names>PS</given-names></name>. <article-title>The effects of stretching on strength performance.</article-title> <source>Sports Med</source>. <year>2007</year>;<volume>37</volume>: <fpage>213</fpage>–<lpage>224</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2165/00007256-200737030-00003" xlink:type="simple">10.2165/00007256-200737030-00003</ext-link></comment> <object-id pub-id-type="pmid">17326697</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref025"><label>25</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Woods</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Bishop</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Jones</surname> <given-names>E</given-names></name>. <article-title>Warm-up and stretching in the prevention of muscular injury.</article-title> <source>Sports Medicine.</source> <year>2007</year>;<volume>37</volume>: <fpage>1089</fpage>–<lpage>1099</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2165/00007256-200737120-00006" xlink:type="simple">10.2165/00007256-200737120-00006</ext-link></comment> <object-id pub-id-type="pmid">18027995</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref026"><label>26</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gleim</surname> <given-names>GW</given-names></name>, <name name-style="western"><surname>McHugh</surname> <given-names>MP</given-names></name>. <article-title>Flexibility and its effects on sports injury and performance.</article-title> <source>Sports Medicine.</source> <year>1997</year>;<volume>24</volume>: <fpage>289</fpage>–<lpage>299</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2165/00007256-199724050-00001" xlink:type="simple">10.2165/00007256-199724050-00001</ext-link></comment> <object-id pub-id-type="pmid">9368275</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref027"><label>27</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Andersen</surname> <given-names>JC</given-names></name>. <article-title>Stretcing Before and After Exercise: Effect on Muscle Soreness and Injury Risk.</article-title> <source>J AthlTrain.</source> <year>2005</year>;<volume>40</volume>: <fpage>218</fpage>–<lpage>220</lpage>.</mixed-citation></ref>
+<ref id="pone.0295571.ref028"><label>28</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Herbert</surname> <given-names>RD</given-names></name>, <name name-style="western"><surname>Gabriel</surname> <given-names>M</given-names></name>. <article-title>Effects of stretching before and after exercising on muscle soreness and risk of injury: systematic review</article-title>. <source>BMJ</source>. <year>2002</year>;<volume>325</volume>: <fpage>468</fpage>–468. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1136/bmj.325.7362.468" xlink:type="simple">10.1136/bmj.325.7362.468</ext-link></comment> <object-id pub-id-type="pmid">12202327</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref029"><label>29</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Witvrouw</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Mahieu</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Danneels</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>McNair</surname> <given-names>P</given-names></name>. <article-title>Stretching and injury prevention: An obscure relationship.</article-title> <source>Sports Medicine.</source> <year>2004</year>;<volume>34</volume>: <fpage>443</fpage>–<lpage>449</lpage>. Available: <ext-link ext-link-type="uri" xlink:href="http://ovidsp.ovid.com/ovidweb.cgi?T=JS&amp;PAGE=reference&amp;D=emed6&amp;NEWS=N&amp;AN=2004310839" xlink:type="simple">http://ovidsp.ovid.com/ovidweb.cgi?T=JS&amp;PAGE=reference&amp;D=emed6&amp;NEWS=N&amp;AN=2004310839</ext-link> <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2165/00007256-200434070-00003" xlink:type="simple">10.2165/00007256-200434070-00003</ext-link></comment> <object-id pub-id-type="pmid">15233597</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref030"><label>30</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sands</surname> <given-names>WA</given-names></name>, <name name-style="western"><surname>McNeal</surname> <given-names>JR</given-names></name>, <name name-style="western"><surname>Murray</surname> <given-names>SR</given-names></name>, <name name-style="western"><surname>Ramsey</surname> <given-names>MW</given-names></name>, <name name-style="western"><surname>Sato</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Mizuguchi</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>Stretching and Its Effects on Recovery.</article-title> <source>Strength Cond J.</source> <year>2013</year>;<volume>35</volume>: <fpage>30</fpage>–<lpage>36</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/SSC.0000000000000004" xlink:type="simple">10.1519/SSC.0000000000000004</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295571.ref031"><label>31</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Afonso</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Clemente</surname> <given-names>FM</given-names></name>, <name name-style="western"><surname>Nakamura</surname> <given-names>FY</given-names></name>, <name name-style="western"><surname>Morouço</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Sarmento</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Inman</surname> <given-names>RA</given-names></name>, <etal>et al</etal>. <article-title>The Effectiveness of Post-exercise Stretching in Short-Term and Delayed Recovery of Strength, Range of Motion and Delayed Onset Muscle Soreness: A Systematic Review and Meta-Analysis of Randomized Controlled Trials.</article-title> <source>Front Physiol.</source> <year>2021</year>;<volume>12</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3389/fphys.2021.677581" xlink:type="simple">10.3389/fphys.2021.677581</ext-link></comment> <object-id pub-id-type="pmid">34025459</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref032"><label>32</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Apostolopoulos</surname> <given-names>NC</given-names></name>, <name name-style="western"><surname>Lahart</surname> <given-names>IM</given-names></name>, <name name-style="western"><surname>Plyley</surname> <given-names>MJ</given-names></name>, <name name-style="western"><surname>Taunton</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Nevill</surname> <given-names>AM</given-names></name>, <name name-style="western"><surname>Koutedakis</surname> <given-names>Y</given-names></name>, <etal>et al</etal>. <article-title>The effects of different passive static stretching intensities on recovery from unaccustomed eccentric exercise–a randomized controlled trial.</article-title> <source>Applied Physiology, Nutrition, and Metabolism.</source> <year>2018</year>;<volume>43</volume>: <fpage>806</fpage>–<lpage>815</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1139/apnm-2017-0841" xlink:type="simple">10.1139/apnm-2017-0841</ext-link></comment> <object-id pub-id-type="pmid">29529387</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref033"><label>33</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Kay</surname> <given-names>AD</given-names></name>, <name name-style="western"><surname>Trajano</surname> <given-names>GS</given-names></name>, <name name-style="western"><surname>Alizadeh</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Blazevich</surname> <given-names>AJ</given-names></name>. <article-title>Effects of Acute and Chronic Stretching on Pain Control.</article-title> <source>J Clin Exerc Physiol</source>. <year>2021</year>;<volume>10</volume>: <fpage>150</fpage>–<lpage>159</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.31189/2165-6193-10.4.150" xlink:type="simple">10.31189/2165-6193-10.4.150</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295571.ref034"><label>34</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Herbert</surname> <given-names>RD</given-names></name>, <name name-style="western"><surname>de Noronha</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Kamper</surname> <given-names>SJ</given-names></name>. <article-title>Stretching to prevent or reduce muscle soreness after exercise.</article-title> <source>Cochrane Database of Systematic Reviews.</source> <year>2011</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/14651858.CD004577.pub3" xlink:type="simple">10.1002/14651858.CD004577.pub3</ext-link></comment> <object-id pub-id-type="pmid">21735398</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref035"><label>35</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Conolly</surname> <given-names>DAJ</given-names></name>, <name name-style="western"><surname>Sayers</surname> <given-names>SP</given-names></name>, <name name-style="western"><surname>McHugh</surname> <given-names>MP</given-names></name>. <article-title>Treatment and Prevention of Delayed Onset Muscle Soreness.</article-title> <source>The Journal of Strength and Conditioning Research</source>. <year>2003</year>;<volume>17</volume>: <fpage>197</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/1533-4287%282003%29017%26lt%3B0197%3Atapodo%26gt%3B2.0.co%3B2" xlink:type="simple">10.1519/1533-4287(2003)017&lt;0197:tapodo&gt;2.0.co;2</ext-link></comment> <object-id pub-id-type="pmid">12580677</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref036"><label>36</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Janda</surname> <given-names>V.</given-names></name> <article-title>Some aspects of extracranial causes of facial pain</article-title>. <source>J Prosthet Dent</source>. <year>1986</year>;<volume>56</volume>: <fpage>484</fpage>–<lpage>487</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/0022-3913%2886%2990394-x" xlink:type="simple">10.1016/0022-3913(86)90394-x</ext-link></comment> <object-id pub-id-type="pmid">3463758</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref037"><label>37</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Janda</surname> <given-names>V.</given-names></name> <article-title>On the Concept of Postural Muscles and Posture in Man.</article-title> <source>Australian Journal of Physiotherapy</source>. <year>1983</year>;<volume>29</volume>: <fpage>83</fpage>–<lpage>84</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/S0004-9514%2814%2960665-6" xlink:type="simple">10.1016/S0004-9514(14)60665-6</ext-link></comment> <object-id pub-id-type="pmid">25025491</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref038"><label>38</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>González-Gálvez</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Gea-García</surname> <given-names>GM</given-names></name>, <name name-style="western"><surname>Marcos-Pardo</surname> <given-names>PJ</given-names></name>. <article-title>Effects of exercise programs on kyphosis and lordosis angle: A systematic review and meta-analysis.</article-title> <source>PLoS One.</source> <year>2019</year>;<volume>14</volume>: <fpage>e0216180</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1371/journal.pone.0216180" xlink:type="simple">10.1371/journal.pone.0216180</ext-link></comment> <object-id pub-id-type="pmid">31034509</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref039"><label>39</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Langridge</surname> <given-names>N.</given-names></name> <article-title>The skills, knowledge and attributes needed as a first‐contact physiotherapist in musculoskeletal healthcare.</article-title> <source>Musculoskeletal Care</source>. <year>2019</year>;<volume>17</volume>: <fpage>253</fpage>–<lpage>260</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/msc.1401" xlink:type="simple">10.1002/msc.1401</ext-link></comment> <object-id pub-id-type="pmid">30993860</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref040"><label>40</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Aweto</surname> <given-names>HA</given-names></name>, <name name-style="western"><surname>Oligbo</surname> <given-names>CN</given-names></name>, <name name-style="western"><surname>Fapojuwo</surname> <given-names>OA</given-names></name>, <name name-style="western"><surname>Olawale</surname> <given-names>OA</given-names></name>. <article-title>Knowledge, attitude and practice of physiotherapists towards promotion of physically active lifestyles in patient management.</article-title> <source>BMC Health Serv Res</source>. <year>2013</year>;<volume>13</volume>: <fpage>21</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/1472-6963-13-21" xlink:type="simple">10.1186/1472-6963-13-21</ext-link></comment> <object-id pub-id-type="pmid">23316902</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref041"><label>41</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Reurink</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Tol</surname> <given-names>JL</given-names></name>, <name name-style="western"><surname>de Vos</surname> <given-names>RJ</given-names></name>. <article-title>Acute Hamstring Injuries in Athletes.</article-title> <source>Ned Tijdschr Geneeskd.</source> <year>2014</year>;<volume>159</volume>: <fpage>A8152</fpage>.</mixed-citation></ref>
+<ref id="pone.0295571.ref042"><label>42</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Soligard</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Nilstad</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Steffen</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Myklebust</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Holme</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Dvorak</surname> <given-names>J</given-names></name>, <etal>et al</etal>. <article-title>Compliance with a comprehensive warm-up programme to prevent injuries in youth football.</article-title> <source>Br J Sports Med</source>. <year>2010</year>;<volume>44</volume>: <fpage>787</fpage>–<lpage>793</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1136/bjsm.2009.070672" xlink:type="simple">10.1136/bjsm.2009.070672</ext-link></comment> <object-id pub-id-type="pmid">20551159</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref043"><label>43</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Pérez-Gómez</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Adsuar</surname> <given-names>JC</given-names></name>, <name name-style="western"><surname>Alcaraz</surname> <given-names>PE</given-names></name>, <name name-style="western"><surname>Carlos-Vivas</surname> <given-names>J</given-names></name>. <article-title>Physical exercises for preventing injuries among adult male football players: A systematic review.</article-title> <source>J Sport Health Sci</source>. <year>2022</year>;<volume>11</volume>: <fpage>115</fpage>–<lpage>122</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jshs.2020.11.003" xlink:type="simple">10.1016/j.jshs.2020.11.003</ext-link></comment> <object-id pub-id-type="pmid">33188962</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref044"><label>44</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wilke</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Niederer</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Vogt</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Banzer</surname> <given-names>W</given-names></name>. <article-title>Head coaches’ attitudes towards injury prevention and use of related methods in professional basketball: A survey.</article-title> <source>Physical Therapy in Sport</source>. <year>2018</year>;<volume>32</volume>: <fpage>133</fpage>–<lpage>139</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.ptsp.2018.04.011" xlink:type="simple">10.1016/j.ptsp.2018.04.011</ext-link></comment> <object-id pub-id-type="pmid">29793121</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref045"><label>45</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Walsh</surname> <given-names>NE</given-names></name>, <name name-style="western"><surname>Hurley M</surname> <given-names>V</given-names></name>. <article-title>Evidence based guidelines and current practice for physiotherapy management of knee osteoarthritis.</article-title> <source>Musculoskeletal Care</source>. <year>2009</year>;<volume>7</volume>: <fpage>45</fpage>–<lpage>56</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/msc.144" xlink:type="simple">10.1002/msc.144</ext-link></comment> <object-id pub-id-type="pmid">18972322</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref046"><label>46</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Popp</surname> <given-names>JK</given-names></name>, <name name-style="western"><surname>Bellar</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Hoover</surname> <given-names>DL</given-names></name>, <name name-style="western"><surname>Craig</surname> <given-names>BW</given-names></name>, <name name-style="western"><surname>Leitzelar</surname> <given-names>BN</given-names></name>, <name name-style="western"><surname>Wanless</surname> <given-names>EA</given-names></name>, <etal>et al</etal>. <article-title>Pre- and Post-Activity Stretching Practices of Collegiate Athletic Trainers in the United States.</article-title> <source>J Strength Cond Res</source>. <year>2017</year>;<volume>31</volume>: <fpage>2347</fpage>–<lpage>2354</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/JSC.0000000000000890" xlink:type="simple">10.1519/JSC.0000000000000890</ext-link></comment> <object-id pub-id-type="pmid">25734784</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref047"><label>47</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Babault</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Rodot</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Champelovier</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Cometti</surname> <given-names>C</given-names></name>. <article-title>A Survey on Stretching Practices in Women and Men from Various Sports or Physical Activity Programs.</article-title> <source>Int J Environ Res Public Health</source>. <year>2021</year>;<volume>18</volume>: <fpage>3928</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/ijerph18083928" xlink:type="simple">10.3390/ijerph18083928</ext-link></comment> <object-id pub-id-type="pmid">33918033</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref048"><label>48</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Judge</surname> <given-names>LW</given-names></name>, <name name-style="western"><surname>Petersen</surname> <given-names>JC</given-names></name>, <name name-style="western"><surname>Bellar</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Craig</surname> <given-names>BW</given-names></name>, <name name-style="western"><surname>Wanless</surname> <given-names>EA</given-names></name>, <name name-style="western"><surname>Benner</surname> <given-names>M</given-names></name>, <etal>et al</etal>. <article-title>An Examination of Preactivity and Postactivity Stretching Practices of Crosscountry and Track and Field Distance Coaches.</article-title> <source>J Strength Cond Res.</source> <year>2013</year>;<volume>27</volume>: <fpage>2456</fpage>–<lpage>2464</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/JSC.0b013e318257703c" xlink:type="simple">10.1519/JSC.0b013e318257703c</ext-link></comment> <object-id pub-id-type="pmid">22505134</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref049"><label>49</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bryant</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Cooper</surname> <given-names>DJ</given-names></name>, <name name-style="western"><surname>Peters</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Cook</surname> <given-names>MD</given-names></name>. <article-title>The Effects of Static Stretching Intensity on Range of Motion and Strength: A Systematic Review.</article-title> <source>J Funct Morphol Kinesiol.</source> <year>2023</year>;<volume>8</volume>: <fpage>37</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/jfmk8020037" xlink:type="simple">10.3390/jfmk8020037</ext-link></comment> <object-id pub-id-type="pmid">37092369</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref050"><label>50</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Cai</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Liu</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Li</surname> <given-names>H</given-names></name>. <article-title>Dynamic and static stretching on hamstring flexibility and stiffness: A systematic review and meta-analysis.</article-title> <source>Heliyon</source>. <year>2023</year>;<volume>9</volume>: <fpage>e18795</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.heliyon.2023.e18795" xlink:type="simple">10.1016/j.heliyon.2023.e18795</ext-link></comment> <object-id pub-id-type="pmid">37560703</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref051"><label>51</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Cayco</surname> <given-names>CS</given-names></name>, <name name-style="western"><surname>Labro</surname> <given-names>AV</given-names></name>, <name name-style="western"><surname>Gorgon</surname> <given-names>E</given-names></name>. <article-title>Hold-relax and contract-relax stretching for hamstrings flexibility: A systematic review with meta-analysis</article-title>. <source>Phys Ther Sport</source>. <year>2019</year>;<volume>35</volume>: <fpage>3542</fpage>–<lpage>3555</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.ptsp.2018.11.001" xlink:type="simple">10.1016/j.ptsp.2018.11.001</ext-link></comment> <object-id pub-id-type="pmid">30423500</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref052"><label>52</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Shrier</surname> <given-names>I.</given-names></name> <article-title>Does Stretching Improve Performance? A Systematic and Critical Review of the Literature.</article-title> <source>Clin J Sport Med.</source> <year>2004</year>;<volume>14</volume>: <fpage>267</fpage>–<lpage>273</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1097/00042752-200409000-00004" xlink:type="simple">10.1097/00042752-200409000-00004</ext-link></comment> <object-id pub-id-type="pmid">15377965</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref053"><label>53</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Medeiros</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Lima</surname> <given-names>CS</given-names></name>. <article-title>Influence of chronic stretching on muscle performance: Systematic review.</article-title> <source>Hum Mov Sci</source>. <year>2017</year>;<volume>54</volume>: <fpage>220</fpage>–<lpage>229</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.humov.2017.05.006" xlink:type="simple">10.1016/j.humov.2017.05.006</ext-link></comment> <object-id pub-id-type="pmid">28527424</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref054"><label>54</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Thomas</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Ficarra</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Nunes</surname> <given-names>JP</given-names></name>, <name name-style="western"><surname>Paoli</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Bellafiore</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Palma</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Does Stretching Training Influence Muscular Strength? A Systematic Review With Meta-Analysis and Meta-Regression.</article-title> <source>J Strength Cond Res.</source> <year>2023</year>;<volume>37</volume>: <fpage>1145</fpage>–<lpage>1156</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/JSC.0000000000004400" xlink:type="simple">10.1519/JSC.0000000000004400</ext-link></comment> <object-id pub-id-type="pmid">36525533</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref055"><label>55</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Arntz</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Markov</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Behm</surname> <given-names>DG</given-names></name>, <name name-style="western"><surname>Behrens</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Negra</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Nakamura</surname> <given-names>M</given-names></name>, <etal>et al</etal>. <article-title>Chronic Effects of Static Stretching Exercises on Muscle Strength and Power in Healthy Individuals Across the Lifespan: A Systematic Review with Multi-level Meta-analysis.</article-title> <source>Sports Med.</source> <year>2023</year>;<volume>53</volume>: <fpage>723</fpage>–<lpage>745</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/s40279-022-01806-9" xlink:type="simple">10.1007/s40279-022-01806-9</ext-link></comment> <object-id pub-id-type="pmid">36719536</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref056"><label>56</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lauersen</surname> <given-names>JB</given-names></name>, <name name-style="western"><surname>Bertelsen</surname> <given-names>DM</given-names></name>, <name name-style="western"><surname>Andersen</surname> <given-names>LB</given-names></name>. <article-title>The effectiveness of exercise interventions to prevent sports injuries: a systematic review and meta-analysis of randomised controlled trials.</article-title> <source>Br J Sports Med</source>. <year>2014</year>;<volume>48</volume>: <fpage>871</fpage>–<lpage>877</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1136/bjsports-2013-092538" xlink:type="simple">10.1136/bjsports-2013-092538</ext-link></comment> <object-id pub-id-type="pmid">24100287</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref057"><label>57</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lund</surname> <given-names>H.</given-names></name> <article-title>Stretching before or after exercising has no effect on muscle soreness or risk of injury</article-title>. <source>Australian Journal of Physiotherapy</source>. <year>2003</year>;<volume>49</volume>: <fpage>73</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/s0004-9514%2814%2960197-5" xlink:type="simple">10.1016/s0004-9514(14)60197-5</ext-link></comment> <object-id pub-id-type="pmid">12793442</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref058"><label>58</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lewis</surname> <given-names>J.</given-names></name> <article-title>A Systematic Literature Review of the Relationship Between Stretching and Athletic Injury Prevention.</article-title> <source>Orthopaedic Nursing.</source> <year>2014</year>;<volume>33</volume>: <fpage>312</fpage>–<lpage>320</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1097/NOR.0000000000000097" xlink:type="simple">10.1097/NOR.0000000000000097</ext-link></comment> <object-id pub-id-type="pmid">25401202</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref059"><label>59</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Herbert</surname> <given-names>RD</given-names></name>, <name name-style="western"><surname>de Noronha</surname> <given-names>M</given-names></name>. <source>Stretching to prevent or reduce muscle soreness after exercise</source>. In: <name name-style="western"><surname>Herbert</surname> <given-names>RD</given-names></name>, editor. <article-title>Cochrane Database of Systematic Reviews.</article-title> <publisher-loc>Chichester, UK</publisher-loc>: <publisher-name>John Wiley &amp; Sons, Ltd</publisher-name>; <year>2007</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1002/14651858.CD004577.pub2" xlink:type="simple">10.1002/14651858.CD004577.pub2</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295571.ref060"><label>60</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Afonso</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Claudino</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Fonseca</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Moreira-Gonçalves</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Ferreira</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Almeida</surname> <given-names>JM</given-names></name>, <etal>et al</etal>. <article-title>Stretching for Recovery from Groin Pain or Injury in Athletes: A Critical and Systematic Review.</article-title> <source>J Funct Morphol Kinesiol</source>. <year>2021</year>;<volume>6</volume>: <fpage>73</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/jfmk6030073" xlink:type="simple">10.3390/jfmk6030073</ext-link></comment> <object-id pub-id-type="pmid">34564192</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref061"><label>61</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kato</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Nihei Green</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Hotta</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Tsukamoto</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Kurita</surname> <given-names>Y</given-names></name>, <name name-style="western"><surname>Kubo</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>The Efficacy of Stretching Exercises on Arterial Stiffness in Middle-Aged and Older Adults: A Meta-Analysis of Randomized and Non-Randomized Controlled Trials.</article-title> <source>Int J Environ Res Public Health</source>. <year>2020</year>;<volume>17</volume>: <fpage>5643</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/ijerph17165643" xlink:type="simple">10.3390/ijerph17165643</ext-link></comment> <object-id pub-id-type="pmid">32764418</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref062"><label>62</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Thomas</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Bellafiore</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Gentile</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Paoli</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Palma</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Bianco</surname> <given-names>A</given-names></name>. <article-title>Cardiovascular Responses to Muscle Stretching: A Systematic Review and Meta-analysis.</article-title> <source>Int J Sports Med.</source> <year>2021</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1055/a-1312-7131" xlink:type="simple">10.1055/a-1312-7131</ext-link></comment> <object-id pub-id-type="pmid">33440445</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref063"><label>63</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Panidi</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Donti</surname> <given-names>O</given-names></name>, <name name-style="western"><surname>Konrad</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Petros</surname> <given-names>CD</given-names></name>, <name name-style="western"><surname>Terzis</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Mouratidis</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Muscle architecture adaptations to static stretching training: a systematic review with meta-analysis.</article-title> <source>Sports Med Open.</source> <year>2023</year>;<volume>9</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/s40798-023-00591-7" xlink:type="simple">10.1186/s40798-023-00591-7</ext-link></comment> <object-id pub-id-type="pmid">37318696</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref064"><label>64</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Afonso</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Ramirez-Campillo</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Moscão</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Rocha</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Zacca</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Martins</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Strength Training versus Stretching for Improving Range of Motion: A Systematic Review and Meta-Analysis.</article-title> <source>Healthcare.</source> <year>2021</year>;<volume>9</volume>: <fpage>427</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.3390/healthcare9040427" xlink:type="simple">10.3390/healthcare9040427</ext-link></comment> <object-id pub-id-type="pmid">33917036</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref065"><label>65</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Zenko</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Ekkekakis</surname> <given-names>P</given-names></name>. <article-title>Knowledge of Exercise Prescription Guidelines Among Certified Exercise Professionals.</article-title> <source>J Strength Cond Res.</source> <year>2015</year>;<volume>29</volume>: <fpage>1422</fpage>–<lpage>1432</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1519/JSC.0000000000000771" xlink:type="simple">10.1519/JSC.0000000000000771</ext-link></comment> <object-id pub-id-type="pmid">25474334</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref066"><label>66</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bauer</surname> <given-names>PW</given-names></name>, <name name-style="western"><surname>Broman</surname> <given-names>CL</given-names></name>, <name name-style="western"><surname>Pivarnik</surname> <given-names>JM</given-names></name>. <article-title>Exercise and Pregnancy Knowledge Among Healthcare Providers.</article-title> <source>J Womens Health.</source> <year>2010</year>;<volume>19</volume>: <fpage>335</fpage>–<lpage>341</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1089/jwh.2008.1295" xlink:type="simple">10.1089/jwh.2008.1295</ext-link></comment> <object-id pub-id-type="pmid">20113144</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref067"><label>67</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Watson</surname> <given-names>ED</given-names></name>, <name name-style="western"><surname>Oddie</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Constantinou</surname> <given-names>D</given-names></name>. <article-title>Exercise during pregnancy: knowledge and beliefs of medical practitioners in South Africa: a survey study.</article-title> <source>BMC Pregnancy Childbirth</source>. <year>2015</year>;<volume>15</volume>: <fpage>245</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1186/s12884-015-0690-1" xlink:type="simple">10.1186/s12884-015-0690-1</ext-link></comment> <object-id pub-id-type="pmid">26446911</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref068"><label>68</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bernhardsson</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Öberg</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Johansson</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Nilsen</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Larsson</surname> <given-names>MEH</given-names></name>. <article-title>Clinical practice in line with evidence? A survey among primary care physiotherapists in western Sweden.</article-title> <source>J Eval Clin Pract</source>. <year>2015</year>;<volume>21</volume>: <fpage>1169</fpage>–<lpage>1177</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/jep.12380" xlink:type="simple">10.1111/jep.12380</ext-link></comment> <object-id pub-id-type="pmid">25988993</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref069"><label>69</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Radford</surname> <given-names>JA</given-names></name>, <name name-style="western"><surname>Burns</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Buchbinder</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Landorf</surname> <given-names>KB</given-names></name>, <name name-style="western"><surname>Cook</surname> <given-names>C</given-names></name>. <article-title>Does stretching increase ankle dorsiflexion range of motion? A systematic review.</article-title> <source>Br J Sports Med</source>. <year>2006</year>;<volume>40</volume>: <fpage>870</fpage>–<lpage>875</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1136/bjsm.2006.029348" xlink:type="simple">10.1136/bjsm.2006.029348</ext-link></comment> <object-id pub-id-type="pmid">16926259</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref070"><label>70</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Verhagen</surname> <given-names>E</given-names></name>, <name name-style="western"><surname>Bower</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Khan</surname> <given-names>KM</given-names></name>. <article-title>How BJSM embraces the power of social media to disseminate research.</article-title> <source>Br J Sports Med</source>. <year>2014</year>;<volume>48</volume>: <fpage>680</fpage>–<lpage>681</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1136/bjsports-2013-092780" xlink:type="simple">10.1136/bjsports-2013-092780</ext-link></comment> <object-id pub-id-type="pmid">24065077</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref071"><label>71</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hayward</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Davis</surname> <given-names>A</given-names></name>. <article-title>Science Visualization: Approaches and Resources for Making Communication Simple but Not Simplistic</article-title>. <source>Stroke</source>. <year>2022</year>;<volume>53</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1161/STROKEAHA.122.037668" xlink:type="simple">10.1161/STROKEAHA.122.037668</ext-link></comment> <object-id pub-id-type="pmid">35912612</object-id></mixed-citation></ref>
+<ref id="pone.0295571.ref072"><label>72</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Wang</surname> <given-names>Z</given-names></name>, <name name-style="western"><surname>Wang</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Farinella</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Murray-Rust</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Henry Riche</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Bach</surname> <given-names>B</given-names></name>. <source>Comparing Effectiveness and Engagement of Data Comics and Infographics. Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems.</source> <publisher-loc>New York, NY, USA</publisher-loc>: <publisher-name>ACM</publisher-name>; <year>2019</year>. pp. <fpage>1</fpage>–<lpage>12</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1145/3290605.3300483" xlink:type="simple">10.1145/3290605.3300483</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0295571.ref073"><label>73</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Fontaine</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Maheu-Cadotte</surname> <given-names>MA</given-names></name>, <name name-style="western"><surname>Lavallée</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Mailhot</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Rouleau</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Bouix-Picasso</surname> <given-names>J</given-names></name>, <etal>et al</etal>. <article-title>Communicating Science in the Digital and Social Media Ecosystem: Scoping Review and Typology of Strategies Used by Health Scientists.</article-title> <source>Public Health Surveill</source>. <year>2019</year>;<volume>5</volume>: <fpage>e14447</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.2196/14447" xlink:type="simple">10.2196/14447</ext-link></comment> <object-id pub-id-type="pmid">31482854</object-id></mixed-citation></ref>
+</ref-list>
+</back>
+</article>

@@ -1,0 +1,2762 @@
+{
+  "schema_version": "cross-disciplinary-review/1.0",
+  "source": "0297197.md",
+  "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+  "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+  "execution_status": "complete",
+  "execution_scope": "Requested module execution only; not scientific quality or validity.",
+  "configuration": {
+    "study_type": "unknown",
+    "disciplines": [
+      "physics"
+    ],
+    "style_language": "none",
+    "online": false,
+    "send_to_model": false,
+    "model": null,
+    "timeout": 120,
+    "chunk_chars": 12000,
+    "visual_pages": false
+  },
+  "capability_contract_sha256": "920fa4ef6b863458139a6009918718c988ed3556663d320aaa1bc72bdf944714",
+  "applicability": {
+    "version": "explicit-study-type/1.0",
+    "declared_study_type": "unknown",
+    "review_required": true,
+    "note": "Study type and profile selection are caller declarations requiring human confirmation."
+  },
+  "modules": {
+    "statistics": {
+      "status": "not_requested",
+      "reason": "No explicit structured values supplied.",
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": null
+    },
+    "scientific": {
+      "status": "not_requested",
+      "reason": "No explicit structured values supplied.",
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": null
+    },
+    "preparation": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "schema_version": "inspection-preparation/1.0",
+        "execution_status": "complete",
+        "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "checks_executed": false,
+        "candidates": [
+          {
+            "id": "candidate_1",
+            "kind": "figure",
+            "start": 20941,
+            "end": 20997,
+            "line": 53,
+            "source_quote": "Example 1 Consider a CFG T = ( E , S ) given in a Fig 1.",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_2",
+            "kind": "figure",
+            "start": 20999,
+            "end": 21054,
+            "line": 55,
+            "source_quote": "10.1371/journal.pone.0297197.g001 Fig 1 T = ( E , S ) .",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_3",
+            "kind": "statistic",
+            "start": 21056,
+            "end": 21318,
+            "line": 57,
+            "source_quote": "The connectivity for the pair f, n is computed as [ C O N N T - ( f , n ) - ( f , n ) , C O N N T - ( f , n ) + ( f , n ) ] = [ 0 . 1 , 0 . 5 ] , C O N N T - ( f , n ) F ( f , n ) = 0 . 5 , [μ - ( f n ) , μ + ( f n ) ] = [ 0 . 4 , 0 . 7 ] , μ F ( f n ) = 0 . 5 .",
+            "requires_confirmation": true,
+            "suggested_check": null
+          },
+          {
+            "id": "candidate_4",
+            "kind": "figure",
+            "start": 21567,
+            "end": 21623,
+            "line": 61,
+            "source_quote": "Example 2 Consider a CFG T = ( E , S ) given in a Fig 2.",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_5",
+            "kind": "figure",
+            "start": 21625,
+            "end": 21680,
+            "line": 63,
+            "source_quote": "10.1371/journal.pone.0297197.g002 Fig 2 T = ( E , S ) .",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_6",
+            "kind": "statistic",
+            "start": 21682,
+            "end": 21941,
+            "line": 65,
+            "source_quote": "The connectivity of pair n, w is calculated as [ C O N N T - ( n , w ) - ( n , w ) , C O N N T - ( n , w ) + ( n , w ) ] = [ 0 . 2 , 0 . 5 ] , C O N N T - ( n , w ) F ( n , w ) = 0 . 2 , [μ - ( n w ) , μ + ( n w ) ] = [ 0 . 1 , 0 . 2 ] , μ F ( n w ) = 0 . 2 .",
+            "requires_confirmation": true,
+            "suggested_check": null
+          },
+          {
+            "id": "candidate_7",
+            "kind": "assumption",
+            "start": 27250,
+            "end": 27908,
+            "line": 103,
+            "source_quote": "Proof Assume that ij is α− strong. Then by definition, C O N N T - i j - ( i , j ) < μ - ( i j ) , C O N N T - i j + ( i , j ) < μ + ( i j ) , C O N N T - i j F ( i , j ) < μ F ( i j ) . This implies that ⟨ [ C I - ( T - i j ) , C I + ( T - i j ) ] , C I F ( T - i j ) ⟩ < ⟨ [ C I - ( T ) , C I + ( T ) ] , C I F ( T ) ⟩ . For converse, assume that ⟨ [ C I - ( T - i j ) , C I + ( T - i j ) ] , C I F ( T - i j ) ⟩ < ⟨ [ C I - ( T ) , C I + ( T ) ] , C I F ( T ) ⟩ . (2) suppose on contrary, ij is not α− strong, then either C O N N T - i j - ( i , j ) ≥ μ - ( i j ) or C O N N T - i j + ( i , j ) ≥ μ + ( i j ) or C O N N T - i j F ( i , j ) ≥ μ F ( i j ) .",
+            "requires_confirmation": true
+          },
+          {
+            "id": "candidate_8",
+            "kind": "statistic",
+            "start": 33104,
+            "end": 33558,
+            "line": 123,
+            "source_quote": "Definition 12 Average connectivity index ( A C I ∞ ) of T = ( σ , μ ) is denoted by A C I ∞ ( T ) and defined as A C I ∞ ( T ) = ⟨ [ A C I - ( T ) , A C I + ( T ) ] , A C I F ( T ) ⟩ , where A C I + ( T ) = 1 ( n 2 ) ∑ ( i , j ) ∈ σ * σ + ( i ) σ + ( j ) C O N N T + ( i , j ) , A C I - ( T ) = 1 ( n 2 ) ∑ ( i , j ) ∈ σ * σ - ( i ) σ - ( j ) C O N N T - ( i , j ) , A C I F ( T ) = 1 ( n 2 ) ∑ ( j , j ) ∈ σ * σ F ( i ) σ F ( j ) C O N N T F ( i , j ) .",
+            "requires_confirmation": true,
+            "suggested_check": null
+          },
+          {
+            "id": "candidate_9",
+            "kind": "statistic",
+            "start": 35925,
+            "end": 37075,
+            "line": 145,
+            "source_quote": "Proof By definition the node i is a neutral node if and only if A C I - ( T ) = A C I - ( T - i ) , A C I + ( T ) = A C I + ( T - i ) , and A C I F ( T ) = A C I F ( T - i ) . Now again by definition, we know that A C I - ( T ) = 1 ( n 2 ) ( C I - ( T ) ) , A C I + ( T ) = 1 ( n 2 ) ( C I + ( T ) ) , A C I F ( T ) = 1 ( n 2 ) ( C I F ( T ) ) and A C I - ( T - i ) = 1 ( n - 1 2 ) ( C I - ( T - i ) ) , A C I + ( T - i ) = 1 ( n - 1 2 ) ( C I + ( T - i ) ) , A C I F ( T - i ) = 1 ( n - 1 2 ) ( C I F ( T - i ) ) . Therefore, for A C I - ( T ) , we have A C I - ( T ) = A C I - ( T - i ) 1 ( n 2 ) ( C I - ( T ) ) = 1 ( n - 1 2 ) ( C I - ( T - i ) ) C I - ( T ) C I - ( T - i ) = ( n 2 ) ( n - 1 2 ) C I - ( T ) C I - ( T - i ) = n n - 2 Thus r - = n n - 2 Similarly r + = C I + ( T ) C I + ( T - i ) = ( n 2 ) ( n - 1 2 ) , and r F = C I F ( T ) C I F ( T - i ) = n n - 2 . Hence i is neutral node if and only if r = ⟨ [ r - , r + ] , r F ⟩ = ⟨ [ C I - ( T ) C I - ( T - i ) , C I + ( T ) C I + ( T - i ) ] , C I F ( T ) C I F ( T - i ) ⟩ = ⟨ [ n n - 2 , n n - 2 ] , n n - 2 ⟩ = n n - 2 ⟨ [ 1 , 1 ] , 1 ⟩ The proofs for PCCRN and PCCEN are similar.",
+            "requires_confirmation": true,
+            "suggested_check": null
+          },
+          {
+            "id": "candidate_10",
+            "kind": "figure",
+            "start": 40151,
+            "end": 41408,
+            "line": 163,
+            "source_quote": "FGs are two-dimensional models that represent the relationships between elements and their degree of membership using nodes and edges. Dealing with ambiguous data and discussing the nature of each edge in a FG can be complex when utilizing fuzzy theory. On the other hand, CFGs are an improved approach to FGs. The membership values of vertices and edges in a fuzzy graph are between 0 and 1, whereas CFGs are more significant because vertices and edges have both lower and upper IVF-membership values and F-membership values. These membership values can be any real number in the interval [0, 1]. CFGs are an effective approach to deal with inadequate information of relationships among areas and controlling information loss within a given system. An algorithm to identify the affecting areas due to tsunami threat is shown in Table 2. Consider the set X consisting of the areas a_(1), a_(2), a_(3), a_(4), a_(5) and a_(6), in the vicinity of an ocean where an earthquake takes place and these areas can be affected by tsunami. A tsunami threat model is developed with the help of CFG T = ( I , J ) shown in Fig 3. The IVF-memberships and F-memberships of the vertices of T = ( I , J ) and edges of T = ( I , J ) are given in Tables 3 and 4, respectively.",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_11",
+            "kind": "figure",
+            "start": 41410,
+            "end": 41465,
+            "line": 165,
+            "source_quote": "10.1371/journal.pone.0297197.g003 Fig 3 T = ( I , J ) .",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_12",
+            "kind": "figure",
+            "start": 45051,
+            "end": 46264,
+            "line": 173,
+            "source_quote": "List of all possible paths including the strengths and the strengths of their connections between a_(1) and a_(2) in a CFG are given in Table 5. Here, the edge (a_(1), a_(2)) in CFG is cubic α−strong. Likewise, it would be worthwhile to investigate the nature of other edges between areas. Analyzing the characteristics of each edge in the CFG would further underscore the significance and efficacy of our research. Based on Fig 3 and conventional computations, the connectivity between vertices in T = ( I , J ) can be determined as follows: C O N N T - ( a 1 a 2 ) ∞ ( a 1 , a 2 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 1 a 3 ) ∞ ( a 1 , a 3 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 2 a 3 ) ∞ ( a 2 , a 3 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 3 ⟩ , C O N N T - ( a 2 a 4 ) ∞ ( a 2 , a 4 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 2 ⟩ , C O N N T - ( a 3 a 4 ) ∞ ( a 3 , a 4 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 2 ⟩ , C O N N T - ( a 3 a 5 ) ∞ ( a 3 , a 5 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 4 a 5 ) ∞ ( a 4 , a 5 ) = ⟨ [ 0 . 2 , 0 . 3 ] , 0 . 3 ⟩ , C O N N T - ( a 4 a 6 ) ∞ ( a 4 , a 6 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 5 a 6 ) ∞ ( a 5 , a 6 ) = ⟨ [ 0 . 2 , 0 . 3 ] , 0 . 3 ⟩ . (14)",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          },
+          {
+            "id": "candidate_13",
+            "kind": "figure",
+            "start": 49256,
+            "end": 53083,
+            "line": 181,
+            "source_quote": "The concept of partial cubic α-strong and δ−weak edges presents a fresh expansion of the current notion of cubic α-strong and cubic δ-weak edges within the framework of earthquake-induced tsunami threat modeling. Through this comparative examination, it can be suggested that partial cubic α-strong and δ−weak edges provide specific advantages in contrast to cubic α-strong and cubic δ-weak edges. C O N N T - ( a 1 a 2 ) ∞ ( a 1 , a 2 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 1 a 3 ) ∞ ( a 1 , a 3 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 2 a 3 ) ∞ ( a 2 , a 3 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 3 ⟩ , C O N N T - ( a 2 a 4 ) ∞ ( a 2 , a 4 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 2 ⟩ , C O N N T - ( a 3 a 4 ) ∞ ( a 3 , a 4 ) = ⟨ [ 0 . 1 , 0 . 3 ] , 0 . 2 ⟩ , C O N N T - ( a 3 a 5 ) ∞ ( a 3 , a 5 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 4 a 5 ) ∞ ( a 4 , a 5 ) = ⟨ [ 0 . 2 , 0 . 3 ] , 0 . 3 ⟩ , C O N N T - ( a 4 a 6 ) ∞ ( a 4 , a 6 ) = ⟨ [ 0 . 1 , 0 . 2 ] , 0 . 2 ⟩ , C O N N T - ( a 5 a 6 ) ∞ ( a 5 , a 6 ) = ⟨ [ 0 . 2 , 0 . 3 ] , 0 . 3 ⟩ . (15) From Eq 15, when applying the concept of cubic α-strong, cubic β-strong, cubic δ-weak, partial cubic α-strong and partial cubic δ-weak edges to the tsunami threat model given in a Fig 3, specific edges can be identified with precision. These edges can be identified based on the satisfaction of the given edges conditions. Cubic α-strong edges are (a_(3), a_(5)), (a_(3), a_(4)), (a_(4), a_(6)), cubic β-strong edges are (a_(1), a_(2)), (a_(1), a_(3)), cubic δ-weak edges are (a_(4), a_(5)), (a_(5), a_(6)), partial cubic α-strong edge is (a_(2), a_(4)) and partial cubic δ− weak edge is (a_(2), a_(3)). In Cubic Fuzzy Graph, when we discuss only cubic strong and weak edges, we have the concept of cubic α-strong edge. This edge is such that if we remove it and then check the strength of connectivity, the IVF-connectivity is strictly less than the IVF-membership value of that edge. In terms of F-connectivity, it’s also strictly less than the F-membership value. However, in the condition of a cubic δ-weak edge, it’s strictly greater. But in the case of a cubic β-strong edge, the IVF-connectivity is equal to the IVF-membership value, and the F-connectivity is equal to the F-membership value. At times, we encounter cases where the IVF-connectivity is equal to the IVF-membership value, but the F-connectivity is strictly less or greater than the F-membership value, or the IVF-connectivity is strictly less or greater than the IVF-membership value while the F-connectivity is equal to the F-membership value. In such situations, the concept of cubic α-strong or cubic δ-weak edges cannot handle this. Therefore, in such conditions, the concept of partial cubic α-strong and partial cubic δ-weak edges plays an important role. It provides information not only about cubic α-strong, cubic β-strong and cubic δ-weak edges but also about the nature of the remaining edges. From Fig 3 and Eq 15, if we only consider the concepts of cubic α-strong, cubic β-strong and cubic δ-weak edges, we have cubic α-strong zones as (a_(3), a_(5)), (a_(3), a_(4)), (a_(4), a_(6)), cubic β-strong zones as (a_(1), a_(2)), (a_(1), a_(3)) and cubic δ-weak zones as (a_(4), a_(5)), (a_(5), a_(6)). However, the remaining edges that do not satisfy the conditions of these edges do not provide any information about their nature. Therefore, using the concepts of partial cubic α-strong and partial cubic δ-weak edges helps us understand the condition of the remaining edges. Hence, when viewed comparatively, the concept of partial cubic α-strong and δ-weak edges presents clear advantages over cubic α-strong and cubic δ-weak edges, particularly in terms of precise zone delineation and a thorough examination of tsunami conditions across past, present and future scenarios.",
+            "requires_confirmation": true,
+            "visual_interpretation_verified": false
+          }
+        ],
+        "proposed_toolkit_spec": null,
+        "proposed_toolkit_specs": [],
+        "limitations": [
+          "Candidates require confirmation before use as structured checks.",
+          "Inline math, line-based assumptions/statistics, Markdown tables and figure mentions are bounded syntax cues.",
+          "No automatic LaTeX/OCR equation semantics, raster figure interpretation or table-to-data mapping is certified."
+        ]
+      }
+    },
+    "extraction": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "backend": "python-utf8",
+        "input_format": "md",
+        "input_bytes": 66275,
+        "extracted_characters": 64427,
+        "page_details": {}
+      }
+    },
+    "reasoning": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "schema_version": "1.5",
+        "source": "0297197.md",
+        "sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "section_names": [
+          "Application of connectivity index of cubic fuzzy graphs for identification of danger zones of tsunami threat",
+          "Abstract",
+          "1 Introduction",
+          "2 Preliminaries",
+          "3 Partial cubic α− Strong and δ− Weak edges",
+          "4 Bounds for connectivity index of cubic fuzzy graph",
+          "5 Average connectivity index of a cubic fuzzy graph",
+          "6 Application to determine danger zone of tsunami threat",
+          "6.1 Tsunami threat model",
+          "7 Comparative analysis",
+          "8 Conclusion",
+          "References"
+        ],
+        "findings": [
+          {
+            "check_id": "structure.methods_missing",
+            "title": "Methods section not detected",
+            "severity": "warning",
+            "status": "review_required",
+            "message": "No recognizable methods heading was detected. It may be present under another name.",
+            "evidence": [],
+            "evidence_locations": []
+          },
+          {
+            "check_id": "structure.results_missing",
+            "title": "Results section not detected",
+            "severity": "warning",
+            "status": "review_required",
+            "message": "No recognizable Results heading was detected; result-to-conclusion checks may be incomplete.",
+            "evidence": [],
+            "evidence_locations": []
+          },
+          {
+            "check_id": "structure.limitations_missing",
+            "title": "Limitations section not detected",
+            "severity": "warning",
+            "status": "review_required",
+            "message": "No recognizable limitations heading was detected. Check whether limitations are discussed elsewhere.",
+            "evidence": [],
+            "evidence_locations": []
+          }
+        ],
+        "claim_evidence_candidates": [],
+        "scope_note": "Version 0.5.2 adds bounded model API response reads, strict semantic-review JSON parsing, typed reasoning-graph schema validation with versioned contract-aware fingerprints, source-reconstructed graph/node provenance, mandatory inference-to-claim links and empty-graph rejection, version-bound semantic-review 1.4 templates with legacy 1.0–1.3 fingerprint import support, separate raw-file and extracted-text SHA-256 provenance, exact source-hash file inventories with isolated pip-installed wheel and release-artifact verification, strict Content-Length grammar, and full-commit-SHA-pinned CI dependencies. Statistical output now states the common-variance assumptions and heteroskedasticity limitation of pooled-SD Cohen's d and classical Hedges' g. Version 0.5.1 hardened authenticated transport and strict model/statistics JSON, improved Welch numerical stability, and stabilized Hedges' g at very large degrees of freedom. Earlier releases added an OpenAI-compatible single-model review client and strengthened evidence provenance, semantic-review input validation, Markdown/plain-text section extraction, and negation-aware screening. Directional and causal language checks remain heuristics, not semantic proofs. It also retains the explicit claim-evidence-assumption-method-inference graph and an external semantic-review import/validation workflow. Graph relations are extracted with rules and lexical similarity; they are not proof of semantic support. Imported semantic reviews are structurally validated against source hashes, graph fingerprints, node IDs and source quotes, but the reviewer’s semantic judgment is not independently proven by this software. Existing direction, causality and claim-matching checks remain heuristics. Missing flags do not imply correctness; expert review and independent computational verification remain necessary.",
+        "reproducibility_manifest": {
+          "manifest_schema_version": "1.4",
+          "auditor_version": "0.10.0",
+          "installed_package_version": "0.10.0",
+          "ruleset_version": "0.10.0",
+          "generated_at_utc": "2026-11-16T19:44:10+00:00",
+          "input": {
+            "filename": "0297197.md",
+            "format": "md",
+            "size_bytes": 66275,
+            "sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          },
+          "parser": {
+            "backend": "python-utf8",
+            "section_parser": "markdown-fence-aware-and-plain-heading-v2",
+            "text_encoding": "utf-8"
+          },
+          "runtime": {
+            "python_version": "3.15.2",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26300-SP0",
+            "dependencies": {
+              "scipy": "1.18.1",
+              "pypdf": "7.0.1"
+            }
+          },
+          "configuration": {
+            "audit_report_schema_version": "1.5",
+            "manifest_schema_version": "1.4",
+            "claim_marker_version": 2,
+            "causal_design_rule_version": 4,
+            "direction_conflict_rule_version": 4,
+            "repeated_rate_ratio_ci_rule_version": 1,
+            "document_context_grouping_version": 2,
+            "section_heading_match_version": 3,
+            "welch_test_calculation_version": 2,
+            "reported_value_tolerance_policy": "half_displayed_unit_last_place_or_explicit_override-v1",
+            "reasoning_graph_schema_version": "1.4",
+            "semantic_review_schema_version": "1.4",
+            "lexical_candidate_minimum_jaccard": 0.15,
+            "max_evidence_excerpts_per_finding": 5
+          },
+          "configuration_sha256": "92468003cda5c043c3ddca04254d8e631e20d6ff90050f971b1df738357fe61d",
+          "environment_fingerprint": "fc35b7b3216c92b73fa2fa897c6bc61ca9c732809c1282b13362d7901827f61b",
+          "source_code_revision": "fad947c27572518d4fdd11da5e28e7ad87768ed4",
+          "source_code_sha256": "cf2f064d7d9efc5a326400ded84da714ec45cd2ed8f97272e6214814955febeb",
+          "source_code_hash_scope": "Python runtime source; JSON schemas; Python tests; Node adapter sources and tests; Build verification tools; Offline pilot recipes and instructions; GitHub Actions workflows; examples; package/build/documentation metadata",
+          "source_code_hash_files": [
+            ".github/workflows/mcp.yml",
+            ".github/workflows/npm-download-monitor.yml",
+            ".github/workflows/npm-publish.yml",
+            ".github/workflows/publish.yml",
+            ".github/workflows/pypi-download-monitor.yml",
+            ".github/workflows/tests.yml",
+            "LICENSE",
+            "MANIFEST.in",
+            "README.md",
+            "benchmarks/pilots/20261115-README.md",
+            "benchmarks/pilots/20261115-selection.json",
+            "benchmarks/pilots/multifield-20261116/first-run/papers/0297197.json",
+            "benchmarks/pilots/multifield-20261116/first-run/papers/0297197.md",
+            "benchmarks/pilots/multifield-20261116/frame/page-0000.json",
+            "benchmarks/pilots/multifield-20261116/frame/page-1000.json",
+            "benchmarks/pilots/multifield-20261116/initial-sources.json",
+            "benchmarks/pilots/multifield-20261116/normalization-and-replay-clarification.md",
+            "benchmarks/pilots/multifield-20261116/protocol.md",
+            "benchmarks/pilots/multifield-20261116/selection.json",
+            "benchmarks/pilots/multifield-20261116/sources.json",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0288477.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0291393.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0291744.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0292700.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0294187.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0295491.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0295571.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0295687.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0296260.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0296708.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0297197.md",
+            "benchmarks/pilots/multifield-20261116/texts-v2/0297402.md",
+            "benchmarks/pilots/multifield-20261116/texts/0288477.md",
+            "benchmarks/pilots/multifield-20261116/texts/0291393.md",
+            "benchmarks/pilots/multifield-20261116/texts/0291744.md",
+            "benchmarks/pilots/multifield-20261116/texts/0292700.md",
+            "benchmarks/pilots/multifield-20261116/texts/0294187.md",
+            "benchmarks/pilots/multifield-20261116/texts/0295491.md",
+            "benchmarks/pilots/multifield-20261116/texts/0295571.md",
+            "benchmarks/pilots/multifield-20261116/texts/0295687.md",
+            "benchmarks/pilots/multifield-20261116/texts/0296260.md",
+            "benchmarks/pilots/multifield-20261116/texts/0296708.md",
+            "benchmarks/pilots/multifield-20261116/texts/0297197.md",
+            "benchmarks/pilots/multifield-20261116/texts/0297402.md",
+            "benchmarks/pilots/published-reference-20261116/README.md",
+            "benchmarks/pilots/published-reference-20261116/attempts.md",
+            "benchmarks/pilots/published-reference-20261116/first-run.json",
+            "benchmarks/pilots/published-reference-20261116/first-run.md",
+            "benchmarks/pilots/published-reference-20261116/parser-clarification.md",
+            "benchmarks/pilots/published-reference-20261116/posthoc-source-notes.json",
+            "benchmarks/pilots/published-reference-20261116/protocol.md",
+            "benchmarks/pilots/statistical-context-20261116/README.md",
+            "benchmarks/pilots/statistical-context-20261116/cases.json",
+            "benchmarks/pilots/statistical-context-20261116/precision-clarification.md",
+            "benchmarks/pilots/statistical-context-20261116/protocol.md",
+            "benchmarks/pilots/statistical-context-20261116/recorded-run.json",
+            "benchmarks/pilots/statistical-context-20261116/recorded-run.md",
+            "bin/sra.js",
+            "examples/academic_writing_sample.md",
+            "examples/advanced_scientific_checks.json",
+            "examples/cluster-adjustments.json",
+            "examples/dependent-data.json",
+            "examples/doi_metadata_demo.md",
+            "examples/error_benchmark/numeric-boundary.json",
+            "examples/error_benchmark/synthetic-labels.json",
+            "examples/error_benchmark/synthetic.json",
+            "examples/evidence-checks.json",
+            "examples/extended_statistics.json",
+            "examples/grouped-methods.json",
+            "examples/inspection-checks.json",
+            "examples/inspection-paper.md",
+            "examples/logic_arithmetic.json",
+            "examples/logic_boolean.json",
+            "examples/logic_review_demo.md",
+            "examples/physics_domain_demo.md",
+            "examples/research-methods.json",
+            "examples/sample_manuscript.md",
+            "examples/statistical-context.json",
+            "examples/toolkit.json",
+            "examples/unified_review/cases.json",
+            "examples/unified_review/clinical_quantitative.md",
+            "examples/unified_review/computational_physics.md",
+            "examples/unified_review/qualitative_social.md",
+            "examples/unified_review/systematic_review.md",
+            "examples/unified_review/theoretical_math.md",
+            "examples/unified_review/unknown_field.md",
+            "examples/welch_t_example.json",
+            "index.d.ts",
+            "index.js",
+            "package.json",
+            "pyproject.toml",
+            "schemas/cross-disciplinary-review.schema.json",
+            "schemas/formal-logic-input.schema.json",
+            "schemas/semantic-review-completed.schema.json",
+            "schemas/semantic-review.schema.json",
+            "src/sra/__init__.py",
+            "src/sra/academic_benchmark.py",
+            "src/sra/advanced_checks.py",
+            "src/sra/advanced_spec.py",
+            "src/sra/audit.py",
+            "src/sra/benchmark.py",
+            "src/sra/capabilities.py",
+            "src/sra/checks.py",
+            "src/sra/cli.py",
+            "src/sra/criteria.py",
+            "src/sra/criteria_catalog.py",
+            "src/sra/dependent_checks.py",
+            "src/sra/dependent_spec.py",
+            "src/sra/discipline.py",
+            "src/sra/document.py",
+            "src/sra/doi.py",
+            "src/sra/domain_adjudication.py",
+            "src/sra/domain_cohort.py",
+            "src/sra/domain_evidence.py",
+            "src/sra/error_benchmark.py",
+            "src/sra/error_benchmark_cli.py",
+            "src/sra/error_evaluation.py",
+            "src/sra/error_reliability.py",
+            "src/sra/evidence_benchmark.py",
+            "src/sra/evidence_checks.py",
+            "src/sra/evidence_spec.py",
+            "src/sra/extended_inspection.py",
+            "src/sra/grammar_engine.py",
+            "src/sra/graph.py",
+            "src/sra/inspection.py",
+            "src/sra/inspection_calculations.py",
+            "src/sra/json_utils.py",
+            "src/sra/labeling.py",
+            "src/sra/logic.py",
+            "src/sra/logic_cli.py",
+            "src/sra/logic_report.py",
+            "src/sra/logic_spec.py",
+            "src/sra/model_client.py",
+            "src/sra/models.py",
+            "src/sra/multilingual.py",
+            "src/sra/paper_review.py",
+            "src/sra/pdf_visual.py",
+            "src/sra/provenance.py",
+            "src/sra/publication.py",
+            "src/sra/py.typed",
+            "src/sra/report.py",
+            "src/sra/research_checks.py",
+            "src/sra/research_spec.py",
+            "src/sra/review.py",
+            "src/sra/review_report.py",
+            "src/sra/rule_ablation.py",
+            "src/sra/scientific_validation.py",
+            "src/sra/semantic_review.py",
+            "src/sra/statistical_consistency.py",
+            "src/sra/statistics_review.py",
+            "src/sra/stats.py",
+            "src/sra/stats_extended.py",
+            "src/sra/symbolic.py",
+            "src/sra/tabular_values.py",
+            "src/sra/toolkit.py",
+            "src/sra/toolkit_cli.py",
+            "src/sra/toolkit_report.py",
+            "src/sra/toolkit_spec.py",
+            "src/sra/unified_cli.py",
+            "src/sra/validation.py",
+            "src/sra/writing.py",
+            "src/sra/writing_style.py",
+            "test/error-benchmark.test.js",
+            "test/interpreter-selection.test.js",
+            "test/interpreter-version-floor.test.js",
+            "test/logic.test.js",
+            "test/npm-adapter.test.js",
+            "test/paper-review-adapter.test.js",
+            "test/security-regressions.test.js",
+            "test/statistical-context.test.js",
+            "test/toolkit.test.js",
+            "test/unified-review.test.js",
+            "tests/pdf_table_fixture.py",
+            "tests/test_academic_benchmark.py",
+            "tests/test_additional_guardrails.py",
+            "tests/test_advanced_methods.py",
+            "tests/test_advanced_scientific_boundaries.py",
+            "tests/test_advanced_scientific_validation.py",
+            "tests/test_analysis_replay.py",
+            "tests/test_audit.py",
+            "tests/test_check_inventory.py",
+            "tests/test_cli_coverage.py",
+            "tests/test_cli_safety.py",
+            "tests/test_cluster_adjustments.py",
+            "tests/test_conditional_metadata.py",
+            "tests/test_coverage_boundaries.py",
+            "tests/test_criteria_matrix.py",
+            "tests/test_dependent_data.py",
+            "tests/test_domain_cli.py",
+            "tests/test_domain_reliability.py",
+            "tests/test_error_benchmark.py",
+            "tests/test_error_collection.py",
+            "tests/test_error_review_pack.py",
+            "tests/test_evidence_benchmark.py",
+            "tests/test_evidence_checks.py",
+            "tests/test_expansion.py",
+            "tests/test_followup_regressions.py",
+            "tests/test_hardening_regressions.py",
+            "tests/test_input_and_doi_guardrails.py",
+            "tests/test_input_integrity.py",
+            "tests/test_inspection_expansion.py",
+            "tests/test_labeling.py",
+            "tests/test_language_domain.py",
+            "tests/test_logic.py",
+            "tests/test_logic_integration.py",
+            "tests/test_merged_coverage.py",
+            "tests/test_meta_research_regressions.py",
+            "tests/test_multifield_audit.py",
+            "tests/test_multilingual.py",
+            "tests/test_paper_review.py",
+            "tests/test_pdf_visual_review.py",
+            "tests/test_publication_integration.py",
+            "tests/test_published_paper_regressions.py",
+            "tests/test_published_reference.py",
+            "tests/test_registry_boundaries.py",
+            "tests/test_release_ancestry.py",
+            "tests/test_reproducible_distributions.py",
+            "tests/test_research_methods.py",
+            "tests/test_research_reliability.py",
+            "tests/test_rule_ablation.py",
+            "tests/test_scientific_exact_precision_properties.py",
+            "tests/test_scientific_numeric_ci_regressions.py",
+            "tests/test_scientific_report_provenance.py",
+            "tests/test_semantic_coverage.py",
+            "tests/test_statistical_consistency.py",
+            "tests/test_statistical_context.py",
+            "tests/test_statistical_context_report.py",
+            "tests/test_statistics_review.py",
+            "tests/test_tabular_values.py",
+            "tests/test_toolkit.py",
+            "tests/test_toolkit_integration.py",
+            "tests/test_unified_cli.py",
+            "tests/test_unified_examples.py",
+            "tests/test_unified_review.py",
+            "tests/test_validation.py",
+            "tests/test_validation_pipeline.py",
+            "tests/test_windows_metadata.py",
+            "tests/test_writing.py",
+            "tools/audit_multifield_papers.py",
+            "tools/error_review_pack.py",
+            "tools/evaluate_heuristics.py",
+            "tools/evaluate_published_reference.py",
+            "tools/evaluate_statistical_context.py",
+            "tools/fetch_scifact.py",
+            "tools/make_ablation_corpus.py",
+            "tools/normalize_sdist.py",
+            "tools/replay_analysis.py",
+            "tools/run_rule_ablation.py",
+            "tools/verify_distributions.py",
+            "tools/verify_live_model_api.py",
+            "tools/verify_real_analysis_replay.py",
+            "tools/verify_real_pdf_ocr.py",
+            "tools/verify_reproducible_distributions.py"
+          ],
+          "working_tree_dirty": true,
+          "revision_note": "The source_code_sha256 covers exactly the relative paths listed in source_code_hash_files; source_code_hash_scope describes their categories. Other repository files are not included."
+        },
+        "reasoning_map": [
+          {
+            "relation": "conclusion_claim_extraction",
+            "status": "no_claims_extracted",
+            "note": "No conclusion sentences matched the current claim-marker lexicon."
+          }
+        ],
+        "reasoning_graph": {
+          "schema_version": "1.4",
+          "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+          "fingerprint_algorithm": "sha256-canonical-json-graph-contract-v2",
+          "node_types": [
+            "method",
+            "evidence",
+            "assumption",
+            "assumption_gap",
+            "limitation",
+            "inference",
+            "claim",
+            "document_context"
+          ],
+          "node_statuses": [
+            "extracted_heuristically",
+            "not_semantically_verified",
+            "document_context_only",
+            "candidate_assumptions_found_review_required",
+            "not_linked_to_claim_review_required",
+            "not_extracted_review_required"
+          ],
+          "edge_relations": [
+            "method_context_candidate",
+            "method_document_context",
+            "limitation_document_context",
+            "lexical_candidate_basis",
+            "yields_claim",
+            "assumption_candidate_required_for",
+            "assumption_review_required",
+            "qualifies_claim_candidate",
+            "possible_contradiction_candidate",
+            "document_context_membership"
+          ],
+          "edge_statuses": [
+            "structural_extraction_only",
+            "heuristic_only",
+            "structural_grouping_only",
+            "document_context_only",
+            "rule_based_gap_signal",
+            "heuristic_review_required"
+          ],
+          "edge_endpoint_types": {
+            "method_context_candidate": {
+              "source": [
+                "method"
+              ],
+              "target": [
+                "evidence"
+              ]
+            },
+            "method_document_context": {
+              "source": [
+                "document_context"
+              ],
+              "target": [
+                "inference"
+              ]
+            },
+            "limitation_document_context": {
+              "source": [
+                "document_context"
+              ],
+              "target": [
+                "inference"
+              ]
+            },
+            "lexical_candidate_basis": {
+              "source": [
+                "evidence"
+              ],
+              "target": [
+                "inference"
+              ]
+            },
+            "yields_claim": {
+              "source": [
+                "inference"
+              ],
+              "target": [
+                "claim"
+              ]
+            },
+            "assumption_candidate_required_for": {
+              "source": [
+                "assumption"
+              ],
+              "target": [
+                "inference"
+              ]
+            },
+            "assumption_review_required": {
+              "source": [
+                "assumption_gap"
+              ],
+              "target": [
+                "inference"
+              ]
+            },
+            "qualifies_claim_candidate": {
+              "source": [
+                "limitation"
+              ],
+              "target": [
+                "claim"
+              ]
+            },
+            "possible_contradiction_candidate": {
+              "source": [
+                "evidence"
+              ],
+              "target": [
+                "claim"
+              ]
+            },
+            "document_context_membership": {
+              "source": [
+                "limitation",
+                "method"
+              ],
+              "target": [
+                "document_context"
+              ]
+            }
+          },
+          "nodes": [
+            {
+              "node_id": "assumption:9755d3df8c6c6264",
+              "node_type": "assumption",
+              "text": "Proof Assume that ij is α− strong.",
+              "source_location": {
+                "line": 103,
+                "section": "4 Bounds for connectivity index of cubic fuzzy graph"
+              },
+              "extraction_method": "explicit_assumption_phrase_rules_v1",
+              "status": "extracted_heuristically",
+              "metadata": {}
+            },
+            {
+              "node_id": "assumption:cffa8d3ff6709ad0",
+              "node_type": "assumption",
+              "text": "For converse, assume that ⟨ [ C I - ( T - i j ) , C I + ( T - i j ) ] , C I F ( T - i j ) ⟩ < ⟨ [ C I - ( T ) , C I + ( T ) ] , C I F ( T ) ⟩ .",
+              "source_location": {
+                "line": 103,
+                "section": "4 Bounds for connectivity index of cubic fuzzy graph"
+              },
+              "extraction_method": "explicit_assumption_phrase_rules_v1",
+              "status": "extracted_heuristically",
+              "metadata": {}
+            }
+          ],
+          "edges": [],
+          "validation": {
+            "status": "FAIL",
+            "node_count": 2,
+            "edge_count": 0,
+            "invalid_node_entries": [],
+            "invalid_schema_metadata": [],
+            "invalid_node_types": [],
+            "invalid_node_statuses": [],
+            "invalid_node_schema": [],
+            "invalid_edge_entries": [],
+            "invalid_edge_schema": [],
+            "invalid_edge_relations": [],
+            "invalid_edge_statuses": [],
+            "invalid_edge_ids": [],
+            "invalid_edge_endpoint_types": [],
+            "duplicate_node_ids": [],
+            "duplicate_edge_ids": [],
+            "dangling_edges": [],
+            "dependency_cycle_detected": false,
+            "invalid_graph_content": [
+              "empty_edges"
+            ],
+            "invalid_claim_inference_links": [],
+            "inferences_without_lexical_evidence": [],
+            "limitations": [
+              "Graph integrity validation checks schema, references and structure, not truth or semantic validity.",
+              "An inference without a lexical evidence edge may still be supported by paraphrased or external evidence."
+            ],
+            "invalid_schema_version": [],
+            "invalid_graph_fields": [],
+            "invalid_source_sha256": [],
+            "invalid_graph_fingerprint": [],
+            "invalid_graph_validation": []
+          },
+          "graph_fingerprint": "b7e95d3c070e1e299116ae27bb992ae22176fcf9f8b402b7e9c8e5b7847616c7"
+        },
+        "semantic_review": null
+      }
+    },
+    "writing": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "schema_version": "1.0",
+        "tool": "academic-writing-audit",
+        "source": "0297197.md",
+        "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "genre": "general",
+        "status": "REVIEW_REQUIRED",
+        "metrics": {
+          "document_word_count": 10819,
+          "abstract_word_count": 292,
+          "section_count": 12,
+          "numeric_citation_keys": 45,
+          "author_year_citation_keys": 0,
+          "numbered_reference_entries": 0,
+          "author_year_reference_entries": 0
+        },
+        "settings": {
+          "abstract_min_words": null,
+          "abstract_max_words": null
+        },
+        "findings": [
+          {
+            "code": "potential_overclaim",
+            "severity": "review",
+            "line": 21,
+            "message": "Potentially absolute wording; assess scientific justification."
+          },
+          {
+            "code": "potential_overclaim",
+            "severity": "review",
+            "line": 185,
+            "message": "Potentially absolute wording; assess scientific justification."
+          },
+          {
+            "code": "numeric_reference_format_unrecognized",
+            "severity": "review",
+            "line": null,
+            "message": "Numeric citation candidates exist, but no supported numbered reference entries were parsed."
+          }
+        ],
+        "style_language": "none",
+        "style_suggestions": [],
+        "grammar_engine": "rules",
+        "grammar_suggestions": [],
+        "discipline_review": null,
+        "reporting_checklist": null,
+        "limitations": [
+          "Heuristic checks are editorial review prompts, not proof of correctness or scientific validity.",
+          "Only explicit bracket-number and simple first-author/year citation formats are checked; others are unverified.",
+          "First-author/year matching cannot establish source identity or whether a reference supports a claim.",
+          "Word counts are token estimates; journal-specific style, full grammar, plagiarism and external bibliographic accuracy are not assessed."
+        ]
+      }
+    },
+    "discipline:physics": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "schema_version": "1.0",
+        "discipline": "physics",
+        "guidance": "NIST uncertainty guidance; SRA original, abbreviated screening questions",
+        "guidance_url": "https://www.nist.gov/itl/sed/topic-areas/measurement-uncertainty",
+        "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "ruleset_sha256": "948bac599b66fe5c1eff8d9e9e6ef1de74427353228447af0d93ccb300e2a484",
+        "items": [
+          {
+            "rule_id": "quantified_uncertainty",
+            "review_question": "Is a measurement reported with a quantitative uncertainty?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot",
+              "results",
+              "findings",
+              "bulgular",
+              "sonuçlar"
+            ],
+            "signal_hit_counts": {
+              "uncertainty": 0,
+              "numeric": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          },
+          {
+            "rule_id": "instrument_calibration",
+            "review_question": "Is instrument calibration documented with a reference?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot"
+            ],
+            "signal_hit_counts": {
+              "calibration": 0,
+              "reference": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          },
+          {
+            "rule_id": "repeated_measurements",
+            "review_question": "Are repeated measurements quantified?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot",
+              "results",
+              "findings",
+              "bulgular",
+              "sonuçlar"
+            ],
+            "signal_hit_counts": {
+              "repeats": 0,
+              "count": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          },
+          {
+            "rule_id": "uncertainty_propagation",
+            "review_question": "Is an uncertainty propagation approach linked to component sources?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot"
+            ],
+            "signal_hit_counts": {
+              "propagation": 0,
+              "components": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          },
+          {
+            "rule_id": "instrument_resolution",
+            "review_question": "Is instrument resolution specified quantitatively?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot"
+            ],
+            "signal_hit_counts": {
+              "resolution": 0,
+              "value": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          },
+          {
+            "rule_id": "boundary_conditions",
+            "review_question": "Are boundary conditions identified with their constraints?",
+            "status": "NOT_DETECTED_REVIEW_MANUALLY",
+            "searched_sections": [
+              "methods",
+              "methodology",
+              "materials and methods",
+              "method",
+              "yöntem",
+              "yöntemler",
+              "gereç ve yöntem",
+              "materyal ve metot"
+            ],
+            "signal_hit_counts": {
+              "boundary": 0,
+              "constraint": 0
+            },
+            "evidence": [],
+            "expert_assessment": "REQUIRED"
+          }
+        ],
+        "summary": {
+          "textual_candidates": 0,
+          "partial_cues": 0,
+          "no_detected_cues": 6,
+          "expert_verified_items": 0
+        },
+        "limitations": [
+          "Evidence candidates are literal paragraph co-occurrences, not validated scientific reasoning.",
+          "A missing candidate does not establish a reporting omission or research deficiency.",
+          "Expert reviewers must check adequacy, applicability, contradictions, measurements, and original standards.",
+          "Rules are abbreviated original heuristics, not complete official reporting guideline checklists."
+        ]
+      }
+    },
+    "citations": {
+      "status": "completed",
+      "reason": null,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": {
+        "schema_version": "1.0",
+        "source": "0297197.md",
+        "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+        "online_lookup": false,
+        "registry": null,
+        "found_count": 45,
+        "checked_count": 20,
+        "truncated": true,
+        "results": [
+          {
+            "doi": "10.1371/journal.pone.0297197",
+            "line": 3,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.t001",
+            "line": 27,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.g001",
+            "line": 55,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.g002",
+            "line": 63,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.g003",
+            "line": 165,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.t002",
+            "line": 167,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.t003",
+            "line": 169,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.t004",
+            "line": 171,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1371/journal.pone.0297197.t005",
+            "line": 175,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1016/s0019-9958(65)90241-x",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1016/b978-0-12-775260-0.50008-6",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1016/b978-0-12-775260-0.50010-4",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1007/s12190-022-01749-4",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1007/s12190-021-01514-z",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1007/s12190-021-01604-y",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.2991/ijcis.d.210413.001",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.54216/ijns.200410",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1016/j.ins.2009.10.006",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.3233/ifs-2012-0573",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          },
+          {
+            "doi": "10.1016/0167-8655(91)90316-e",
+            "line": 189,
+            "status": "NOT_CHECKED_OFFLINE"
+          }
+        ],
+        "limitations": [
+          "Registry metadata establishes DOI presence, not scientific truth or claim support.",
+          "Crossref and DataCite cover different DOI registrants; lack of public metadata is not proof of invalidity.",
+          "This scan recognizes DOI patterns in document text; it does not determine which claim each DOI supports.",
+          "Online mode sends extracted DOI identifiers to Crossref and, if necessary, DataCite; manuscript text is not uploaded.",
+          "Crossref update metadata may be incomplete; absent update links do not prove that a publication is unretracted or current."
+        ]
+      }
+    },
+    "model": {
+      "status": "not_requested",
+      "reason": "External manuscript transmission was not requested.",
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "result": null
+    }
+  },
+  "excluded_findings": [],
+  "coverage_gaps": [
+    "raw_data_not_validated",
+    "analysis_code_not_reexecuted",
+    "mathematical_proofs_not_verified",
+    "exact_citation_claim_support_not_verified",
+    "figures_and_supplements_not_verified",
+    "independent_expert_validation_not_established",
+    "formal_logic_not_requested"
+  ],
+  "criteria_matrix": {
+    "schema_version": "scientific-criteria-matrix/1.0",
+    "catalog_sha256": "d3ed5bf0d38b011f878010b902282bfe2fa6a370254c938f699f63a6c122b744",
+    "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+    "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+    "declared_study_type": "unknown",
+    "criteria": [
+      {
+        "id": "research_question",
+        "title": "Research question and contribution",
+        "required_evidence": [
+          "Explicit question or objective, intended contribution and scope."
+        ],
+        "procedure": "Compare the stated objective with methods, results and conclusions.",
+        "limitation": "Scientific relevance and contribution require subject-matter judgment.",
+        "support_level": "human_review_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "novelty_and_literature",
+        "title": "Novelty and literature context",
+        "required_evidence": [
+          "Relevant prior work, comparison with competing explanations and claimed novelty."
+        ],
+        "procedure": "Screen lexical overlap with supplied sources; manually examine the literature and contribution.",
+        "limitation": "Supplied-source lexical overlap cannot establish novelty or exhaustive literature coverage.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [
+          "source_overlap"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "methods_transparency",
+        "title": "Methods sufficient for scrutiny",
+        "required_evidence": [
+          "Procedures, materials, assumptions and analysis decisions with enough detail to inspect."
+        ],
+        "procedure": "Screen structure; manually assess whether the actual method is described adequately.",
+        "limitation": "Headings and prose cues cannot establish methodological sufficiency.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [
+          "reasoning"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "reasoning",
+            "pointer": "/modules/reasoning",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "structure_and_reporting",
+        "title": "Structure and readable reporting",
+        "required_evidence": [
+          "Study-appropriate sections, clear terminology, results and limitations."
+        ],
+        "procedure": "Run editorial and structural screens with declared-type exclusions.",
+        "limitation": "Section presence and language signals do not establish content quality.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [
+          "writing",
+          "reasoning"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "writing",
+            "pointer": "/modules/writing",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          },
+          {
+            "module": "reasoning",
+            "pointer": "/modules/reasoning",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "claim_evidence_alignment",
+        "title": "Claims and supporting results",
+        "required_evidence": [
+          "Each material claim linked to the correct result, comparison and population."
+        ],
+        "procedure": "Inspect lexical evidence candidates and directional-conflict prompts.",
+        "limitation": "Lexical overlap and direction cues do not establish entailment.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [
+          "reasoning"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "reasoning",
+            "pointer": "/modules/reasoning",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "limitations_and_generalization",
+        "title": "Limitations and scope of inference",
+        "required_evidence": [
+          "Stated limitations, alternative explanations and justified target populations."
+        ],
+        "procedure": "Screen overclaim wording; examine inference scope and external validity manually.",
+        "limitation": "A limitations heading or hedged sentence does not validate generalization.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [
+          "reasoning",
+          "writing"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "reasoning",
+            "pointer": "/modules/reasoning",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          },
+          {
+            "module": "writing",
+            "pointer": "/modules/writing",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "citation_support",
+        "title": "Sources support the cited claims",
+        "required_evidence": [
+          "Exact claim and accessible source passages with their surrounding context."
+        ],
+        "procedure": "Retrieve supplied lexical contexts, then assess support and contradictions manually.",
+        "limitation": "DOI metadata and text similarity never establish semantic support.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [
+          "citation_match",
+          "citation_context"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "citation_metadata",
+        "title": "Citation identifiers and registration metadata",
+        "required_evidence": [
+          "Bibliographic identifiers and registry responses when lookup is requested."
+        ],
+        "procedure": "Inspect DOI syntax and optional bounded registration lookups.",
+        "limitation": "Offline scans do not confirm registration, authenticity or claim support.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [
+          "citations"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "citations",
+            "pointer": "/modules/citations",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "publication_updates",
+        "title": "Publication updates and editorial notices",
+        "required_evidence": [
+          "Dated registry snapshot, matching DOI and direction of update relationships."
+        ],
+        "procedure": "Interpret supplied or retrieved Crossref update metadata directionally.",
+        "limitation": "No reported update is not proof of completeness or an unretracted publication.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [
+          "publication_status"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "ethics_and_consent",
+        "title": "Applicable ethics review and consent",
+        "required_evidence": [
+          "If applicable: approval record, scope, participant consent or justified exemption."
+        ],
+        "procedure": "Screen selected profile cues; inspect approval and consent records manually.",
+        "limitation": "The software cannot authenticate approvals or determine all ethical obligations.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "ethics_identifier",
+          "consent_and_approval",
+          "animal_ethics_approval"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "conflicts_and_funding",
+        "title": "Funding, conflicts and contributor transparency",
+        "required_evidence": [
+          "Funding, competing interests, sponsor role and contributor declarations."
+        ],
+        "procedure": "Compare declarations with available project records and contribution descriptions.",
+        "limitation": "Completeness and authenticity of declarations are not independently verified.",
+        "support_level": "human_review_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "registration_and_protocol",
+        "title": "Registration, protocol and analysis-plan deviations",
+        "required_evidence": [
+          "When applicable: dated registration, protocol, analysis plan, amendments and deviations."
+        ],
+        "procedure": "Compare literal caller-mapped protocol/manuscript values anchored by snapshot quotes.",
+        "limitation": "Literal caller-mapped field comparison cannot authenticate timestamps, plans or mapping semantics.",
+        "support_level": "structured_checks",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "protocol_consistency"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "data_and_materials",
+        "title": "Data and materials access",
+        "required_evidence": [
+          "Data/materials locations, access conditions, documentation and restrictions."
+        ],
+        "procedure": "Screen selected access cues; verify the supplied resources and access claims manually.",
+        "limitation": "A repository mention does not prove availability, completeness or authenticity.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "data_and_code_access"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "code_and_environment",
+        "title": "Analysis code, environment and randomness",
+        "required_evidence": [
+          "Versioned analysis code, dependencies, commands and random-state handling."
+        ],
+        "procedure": "Screen environment/seed cues and inspect a reproducible execution manifest.",
+        "limitation": "Descriptions do not prove the actual analysis environment can be recreated.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "seed_and_environment",
+          "data_and_code_access"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "code_reexecution",
+        "title": "Reexecution of the manuscript analysis",
+        "required_evidence": [
+          "Executable code, permitted data, dependency environment and expected outputs."
+        ],
+        "procedure": "Use the explicit offline source-checkout replay tool after independent code/input inspection; examine its separate receipt manually.",
+        "limitation": "Unified review does not execute analysis code or import replay receipts; this matrix integration is not implemented.",
+        "support_level": "not_implemented",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_implemented",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "research_integrity",
+        "title": "Originality, data authenticity and research integrity",
+        "required_evidence": [
+          "Original records, provenance, comparison sources and relevant image/data originals."
+        ],
+        "procedure": "Screen supplied-source lexical overlap; arrange qualified provenance and integrity review.",
+        "limitation": "No comprehensive plagiarism, fabricated-data or manipulated-image detector is implemented.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [
+          "source_overlap"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "design_and_confounding",
+        "title": "Design, identification and confounding",
+        "required_evidence": [
+          "Design rationale, causal assumptions, confounders and any declared identification graph."
+        ],
+        "procedure": "Check the supplied DAG backdoor criterion and inspect design/confounding cues.",
+        "limitation": "Declared graphs and observed associations do not establish real-world identification.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational"
+        ],
+        "conditional": false,
+        "toolkit_checks": [
+          "causal_graph"
+        ],
+        "modules": [
+          "reasoning"
+        ],
+        "profile_rules": [
+          "confounding_strategy"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "reasoning",
+            "pointer": "/modules/reasoning",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "text_or_metadata_screening_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "sampling",
+        "title": "Sampling, selection and experimental units",
+        "required_evidence": [
+          "Population, sampling/recruitment, eligibility, exclusions and unit of analysis."
+        ],
+        "procedure": "Inspect paragraph cues and assess selection and sampling adequacy manually.",
+        "limitation": "Reported counts do not establish representativeness or independent observations.",
+        "support_level": "screening_only",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "sampling_and_n",
+          "experimental_unit",
+          "group_sample_size"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "measurement_validity",
+        "title": "Measurement validity, calibration and reliability",
+        "required_evidence": [
+          "Operational definitions, measurement properties, calibration and uncertainty evidence."
+        ],
+        "procedure": "Inspect measurement/calibration cues and evaluate measurement quality manually.",
+        "limitation": "Instrument mentions and numeric uncertainty do not establish construct validity.",
+        "support_level": "screening_only",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "quantified_uncertainty",
+          "instrument_calibration",
+          "analytical_purity",
+          "calibration_concentrations",
+          "repeated_measurements"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "screening_completed",
+        "evidence": [
+          {
+            "module": "discipline:physics",
+            "pointer": "/modules/discipline:physics/result/items/0",
+            "check_id": "quantified_uncertainty",
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "paragraph_cues_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          },
+          {
+            "module": "discipline:physics",
+            "pointer": "/modules/discipline:physics/result/items/1",
+            "check_id": "instrument_calibration",
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "paragraph_cues_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          },
+          {
+            "module": "discipline:physics",
+            "pointer": "/modules/discipline:physics/result/items/2",
+            "check_id": "repeated_measurements",
+            "check_status": null,
+            "module_status": "completed",
+            "execution_status": "completed",
+            "assessment_scope": "paragraph_cues_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "randomization_and_blinding",
+        "title": "Applicable allocation and blinding",
+        "required_evidence": [
+          "If applicable: sequence generation, concealment, blinded roles and deviations."
+        ],
+        "procedure": "Inspect allocation/blinding cues and caller-supplied bias evidence.",
+        "limitation": "Neither cues nor caller judgments establish that allocation was implemented correctly.",
+        "support_level": "screening_only",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "bias_assessment"
+        ],
+        "modules": [],
+        "profile_rules": [
+          "allocation_method",
+          "randomization_details",
+          "blinding_role"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "sample_size_power",
+        "title": "Sample-size and precision rationale",
+        "required_evidence": [
+          "Design, target precision/power, standardized effect, alpha, allocation and planning assumptions."
+        ],
+        "procedure": "Recalculate supported individual/paired or balanced equal-size cluster-mean prospective t-test power.",
+        "limitation": "Supported planning models do not establish ICC, equal-size/variance assumptions or design adequacy.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "computational"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "power_analysis",
+          "cluster_power_analysis"
+        ],
+        "modules": [],
+        "profile_rules": [
+          "sample_size_rationale"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "statistical_inference",
+        "title": "Statistical estimates, uncertainty and assumptions",
+        "required_evidence": [
+          "Data or summaries, estimand, test/model specification, uncertainty and assumptions."
+        ],
+        "procedure": "Replay supported statistics and rounding-aware consistency checks.",
+        "limitation": "Arithmetic agreement cannot validate test selection, all models or data authenticity.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "computational",
+          "systematic-review"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "statistical_replay",
+          "statistic_consistency",
+          "statistical_analysis:linear_regression",
+          "statistical_analysis:assumption_diagnostics",
+          "cluster_robust_regression",
+          "wild_cluster_bootstrap"
+        ],
+        "modules": [
+          "statistics"
+        ],
+        "profile_rules": [
+          "effect_confidence_interval",
+          "outcome_dispersion"
+        ],
+        "scientific_checks": [
+          "semantic_ci",
+          "unadjusted_risk_ratio"
+        ],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [
+          {
+            "module": "statistics",
+            "pointer": "/modules/statistics",
+            "check_id": null,
+            "check_status": null,
+            "module_status": "not_requested",
+            "execution_status": "not_requested",
+            "assessment_scope": "supplied_formulas_or_values_only",
+            "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+            "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+          }
+        ],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "multiplicity",
+        "title": "Multiplicity and analysis-family definition",
+        "required_evidence": [
+          "Complete intended hypothesis family, p-values and prespecified correction procedure."
+        ],
+        "procedure": "Calculate supported Holm, Bonferroni or BH adjustments on supplied families.",
+        "limitation": "Family completeness and dependence assumptions are not inferred.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "computational",
+          "systematic-review"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "statistical_analysis:multiple_testing"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "missing_data",
+        "title": "Missing observations and handling assumptions",
+        "required_evidence": [
+          "Missingness counts/reasons, handling procedure and sensitivity to missingness assumptions."
+        ],
+        "procedure": "Report missing regression pairs and calculate exact binary missing-outcome bounds/tipping counts.",
+        "limitation": "Complete-case replay and binary sensitivity do not identify missingness mechanisms or validate imputation models.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "statistical_analysis:linear_regression",
+          "missing_binary_sensitivity"
+        ],
+        "modules": [],
+        "profile_rules": [
+          "missing_data_strategy",
+          "missing_responses"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "robustness",
+        "title": "Sensitivity and robustness of conclusions",
+        "required_evidence": [
+          "Alternative specifications, justified sensitivity scenarios and changes in conclusions."
+        ],
+        "procedure": "Inspect declared graph/covariance scenarios, estimate/cluster omissions and binary missing-outcome bounds.",
+        "limitation": "These bounded scenarios do not cover arbitrary model or assumption sensitivity.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "computational",
+          "systematic-review"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "causal_graph:sensitivity",
+          "meta_analysis",
+          "correlated_meta_analysis",
+          "cluster_robust_regression:sensitivity",
+          "missing_binary_sensitivity",
+          "wild_cluster_bootstrap"
+        ],
+        "modules": [],
+        "profile_rules": [
+          "robustness_check"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "bias_assessment",
+        "title": "Evidence-linked risk-of-bias judgments",
+        "required_evidence": [
+          "Domain judgments, source quotations, unknowns and methodological rationale."
+        ],
+        "procedure": "Validate and organize caller-supplied evidence; inspect judgments independently.",
+        "limitation": "Caller judgments are not automated bias assessment or licensed-tool conformance.",
+        "support_level": "screening_only",
+        "study_types": [
+          "quantitative",
+          "qualitative",
+          "computational",
+          "systematic-review"
+        ],
+        "conditional": false,
+        "toolkit_checks": [
+          "bias_assessment"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "mathematical_consistency",
+        "title": "Supplied mathematics and formal consistency",
+        "required_evidence": [
+          "Explicit formulas, domains, variable definitions, premises and proof obligations."
+        ],
+        "procedure": "Run bounded polynomial/symbolic checks or Boolean/linear formal verification.",
+        "limitation": "Prose-to-formula mapping and general mathematical proofs remain unverified.",
+        "support_level": "structured_checks",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "polynomial_identity",
+          "derivative",
+          "antiderivative",
+          "symbolic_identity",
+          "symbolic_derivative",
+          "symbolic_antiderivative"
+        ],
+        "modules": [
+          "logic"
+        ],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "units_and_dimensions",
+        "title": "Units and dimensional consistency",
+        "required_evidence": [
+          "Quantities, units, dimensions, equations and permitted conversion tolerances."
+        ],
+        "procedure": "Check explicit supported conversions and supplied dimensional equations.",
+        "limitation": "This does not establish measurement validity or the correctness of a physical law.",
+        "support_level": "structured_checks",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "unit_conversion"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [
+          "dimension_equation"
+        ],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "table_consistency",
+        "title": "Tables and supplementary numeric agreement",
+        "required_evidence": [
+          "Manuscript/supplement CSV snapshots, matching keys and justified tolerances."
+        ],
+        "procedure": "Compare supplied keyed tables and inspect extracted impossible-value prompts.",
+        "limitation": "Extraction, authenticity and manuscript-to-snapshot mapping need confirmation.",
+        "support_level": "structured_checks",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "table_compare"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "figure_interpretation",
+        "title": "Figures, axes, uncertainty and visual evidence",
+        "required_evidence": [
+          "Original figures, captions, axes, uncertainty definitions and corresponding data."
+        ],
+        "procedure": "Inventory inert SVG labels/structure; inspect scientific meaning and raster images manually.",
+        "limitation": "No comprehensive visual interpretation, digitization or manipulation detection is provided.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "figure_svg"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "ml_validation",
+        "title": "Applicable ML splitting and preprocessing protocol",
+        "required_evidence": [
+          "If ML is used: split/group/time manifests and preprocessing fit IDs."
+        ],
+        "procedure": "Check declared sample/group overlap, ordering and training-only preprocessing fit IDs.",
+        "limitation": "Manifests cannot establish actual code behavior, feature timing or generalization.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "computational",
+          "quantitative"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "ml_validation"
+        ],
+        "modules": [],
+        "profile_rules": [
+          "split_and_leakage"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "computational_validation",
+        "title": "Computational evaluation and external validity",
+        "required_evidence": [
+          "Relevant baselines, metrics, tuning protocol, uncertainty and independent evaluation data."
+        ],
+        "procedure": "Inspect baseline/metric cues; assess evaluation design and transportability manually.",
+        "limitation": "No general model-training, tuning or independent external-validation replay is implemented.",
+        "support_level": "screening_only",
+        "study_types": [
+          "computational"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "baseline_and_metric"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "bayesian_diagnostics",
+        "title": "Applicable Bayesian chain diagnostics and model checks",
+        "required_evidence": [
+          "If sampling is used: chains, diagnostic thresholds, priors and predictive/sensitivity checks."
+        ],
+        "procedure": "Calculate rank R-hat and bulk/tail ESS for supplied bounded chains.",
+        "limitation": "These diagnostics do not establish posterior correctness, prior adequacy or predictive fit.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "quantitative",
+          "computational",
+          "systematic-review"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "bayesian_diagnostics"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "qualitative_credibility",
+        "title": "Qualitative analysis and credibility",
+        "required_evidence": [
+          "Sampling rationale, analysis/coding process, supporting material and credibility procedures."
+        ],
+        "procedure": "Review the evidence-to-interpretation chain using the appropriate qualitative methodology.",
+        "limitation": "No automated qualitative methodological adequacy assessment is implemented.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "qualitative"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "reflexivity",
+        "title": "Qualitative reflexivity and researcher positioning",
+        "required_evidence": [
+          "Researcher roles, relevant relationships, positionality and their influence on interpretation."
+        ],
+        "procedure": "Assess reflexivity in the context of the declared qualitative approach.",
+        "limitation": "Adequacy is a contextual human judgment.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "qualitative"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "systematic_search",
+        "title": "Systematic-review search and retrieval process",
+        "required_evidence": [
+          "Databases, complete queries, dates, coverage, restrictions and search updates."
+        ],
+        "procedure": "Compare documented searches and protocol with reproducible search records.",
+        "limitation": "No comprehensive database search or recall audit is performed.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "systematic-review"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "screening_and_extraction",
+        "title": "Review eligibility, screening and extraction",
+        "required_evidence": [
+          "Eligibility rules, study-flow records, screening decisions and extraction/adjudication forms."
+        ],
+        "procedure": "Inspect selection/extraction consistency and included-study evidence manually.",
+        "limitation": "No automatic study-inclusion or extraction-validity decision is made.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "systematic-review"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "meta_analysis",
+        "title": "Applicable evidence pooling and comparability",
+        "required_evidence": [
+          "If pooling is used: study effects/variances, common estimand, dependence assumptions and model."
+        ],
+        "procedure": "Calculate supported independent pooling, supplied-covariance common-effect GLS, or one group random-intercept REML model.",
+        "limitation": "Comparability, sampling covariance/dependence assumptions and study validity are not independently verified.",
+        "support_level": "structured_checks",
+        "study_types": [
+          "systematic-review",
+          "quantitative"
+        ],
+        "conditional": true,
+        "toolkit_checks": [
+          "meta_analysis",
+          "correlated_meta_analysis",
+          "multilevel_meta_analysis"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "narrative_synthesis",
+        "title": "Review synthesis and balanced interpretation",
+        "required_evidence": [
+          "Review scope, selection rationale, contradictory findings and justified synthesis."
+        ],
+        "procedure": "Evaluate synthesis against its sources and stated review approach.",
+        "limitation": "No comprehensive semantic synthesis or literature-completeness verification is performed.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "narrative-review",
+          "systematic-review"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "proof_completeness",
+        "title": "Theoretical proof completeness",
+        "required_evidence": [
+          "Definitions, assumptions, every derivation step, boundary cases and theorem dependencies."
+        ],
+        "procedure": "Inspect the complete argument and proof obligations with appropriate mathematical expertise.",
+        "limitation": "Bounded formula checks cannot certify an entire manuscript proof.",
+        "support_level": "human_review_only",
+        "study_types": [
+          "theoretical"
+        ],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Study type is unknown or mixed; confirm criterion applicability.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "definitions_and_assumptions",
+        "title": "Definitions and scope of assumptions",
+        "required_evidence": [
+          "Operational/formal definitions, explicit assumptions and their role in each inference."
+        ],
+        "procedure": "Check that meanings and assumptions are consistent across the manuscript.",
+        "limitation": "Implicit assumptions and terminology are not automatically formalized.",
+        "support_level": "human_review_only",
+        "study_types": [],
+        "conditional": false,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "applicable",
+        "applicability_reason": "Included for the declared study type; adequacy still requires human assessment.",
+        "execution_status": "human_review_required",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "harms_and_safety",
+        "title": "Applicable harms and safety reporting",
+        "required_evidence": [
+          "If applicable: harms collection, denominators, timing, severity and reporting scope."
+        ],
+        "procedure": "Inspect quantified adverse-event cues and compare safety reporting with the protocol.",
+        "limitation": "Text cues do not establish safety, complete ascertainment or ethical acceptability.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [],
+        "modules": [],
+        "profile_rules": [
+          "adverse_event_counts"
+        ],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      },
+      {
+        "id": "reporting_guideline_completeness",
+        "title": "Applicable full reporting-guideline assessment",
+        "required_evidence": [
+          "Selected study-appropriate guideline, complete item mapping and adequacy judgments."
+        ],
+        "procedure": "Audit caller-supplied checklist records for quoted evidence, missing mappings and exclusion rationales.",
+        "limitation": "Caller-supplied checklist record coverage cannot establish official completeness, relevance or adequacy.",
+        "support_level": "screening_only",
+        "study_types": [],
+        "conditional": true,
+        "toolkit_checks": [
+          "checklist_evidence"
+        ],
+        "modules": [],
+        "profile_rules": [],
+        "scientific_checks": [],
+        "applicability": "requires_review",
+        "applicability_reason": "Applicability depends on methods, subjects or claims that require human confirmation.",
+        "execution_status": "not_requested",
+        "evidence": [],
+        "scientific_verdict": "NOT_ASSESSED",
+        "human_review_required": true
+      }
+    ],
+    "summary": {
+      "criteria_total": 43,
+      "applicability": {
+        "applicable": 12,
+        "requires_review": 31,
+        "not_applicable": 0
+      },
+      "support_level": {
+        "structured_checks": 13,
+        "screening_only": 20,
+        "human_review_only": 9,
+        "not_implemented": 1
+      },
+      "execution_status": {
+        "checks_completed": 0,
+        "screening_completed": 7,
+        "partial": 0,
+        "failed": 0,
+        "unavailable": 0,
+        "not_requested": 26,
+        "human_review_required": 9,
+        "not_implemented": 1,
+        "not_applicable": 0
+      }
+    },
+    "limitations": [
+      "Original extensible review catalog; not exhaustive or official guideline certification.",
+      "Applicability is conditional on caller declarations; not-applicable rows are not independent exclusions.",
+      "Evidence pointers show execution or supplied observations, not satisfaction of a scientific criterion.",
+      "Source hashes do not establish data authenticity or correct prose-to-formula mapping.",
+      "Every scientific verdict remains NOT_ASSESSED, including after successful calculations or model advice.",
+      "Unsupported checks and human judgments remain explicit; no scientific completeness or quality score is produced."
+    ],
+    "matrix_sha256": "73fa000e28d5207c1fef5f95a37af33706adc379fb33d96deb8b01dff99c1a14"
+  },
+  "reproducibility_manifest": {
+    "manifest_schema_version": "1.4",
+    "auditor_version": "0.10.0",
+    "installed_package_version": "0.10.0",
+    "ruleset_version": "0.10.0",
+    "generated_at_utc": "2026-11-16T19:44:10+00:00",
+    "input": {
+      "filename": "0297197.md",
+      "format": "md",
+      "size_bytes": 66275,
+      "sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "extracted_text_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4"
+    },
+    "parser": {
+      "backend": "python-utf8",
+      "section_parser": "markdown-fence-aware-and-plain-heading-v2",
+      "text_encoding": "utf-8"
+    },
+    "runtime": {
+      "python_version": "3.15.2",
+      "implementation": "CPython",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "dependencies": {
+        "scipy": "1.18.1",
+        "pypdf": "7.0.1"
+      }
+    },
+    "configuration": {
+      "audit_report_schema_version": "1.5",
+      "manifest_schema_version": "1.4",
+      "claim_marker_version": 2,
+      "causal_design_rule_version": 4,
+      "direction_conflict_rule_version": 4,
+      "repeated_rate_ratio_ci_rule_version": 1,
+      "document_context_grouping_version": 2,
+      "section_heading_match_version": 3,
+      "welch_test_calculation_version": 2,
+      "reported_value_tolerance_policy": "half_displayed_unit_last_place_or_explicit_override-v1",
+      "reasoning_graph_schema_version": "1.4",
+      "semantic_review_schema_version": "1.4",
+      "lexical_candidate_minimum_jaccard": 0.15,
+      "max_evidence_excerpts_per_finding": 5
+    },
+    "configuration_sha256": "92468003cda5c043c3ddca04254d8e631e20d6ff90050f971b1df738357fe61d",
+    "environment_fingerprint": "fc35b7b3216c92b73fa2fa897c6bc61ca9c732809c1282b13362d7901827f61b",
+    "source_code_revision": "fad947c27572518d4fdd11da5e28e7ad87768ed4",
+    "source_code_sha256": "cf2f064d7d9efc5a326400ded84da714ec45cd2ed8f97272e6214814955febeb",
+    "source_code_hash_scope": "Python runtime source; JSON schemas; Python tests; Node adapter sources and tests; Build verification tools; Offline pilot recipes and instructions; GitHub Actions workflows; examples; package/build/documentation metadata",
+    "source_code_hash_files": [
+      ".github/workflows/mcp.yml",
+      ".github/workflows/npm-download-monitor.yml",
+      ".github/workflows/npm-publish.yml",
+      ".github/workflows/publish.yml",
+      ".github/workflows/pypi-download-monitor.yml",
+      ".github/workflows/tests.yml",
+      "LICENSE",
+      "MANIFEST.in",
+      "README.md",
+      "benchmarks/pilots/20261115-README.md",
+      "benchmarks/pilots/20261115-selection.json",
+      "benchmarks/pilots/multifield-20261116/first-run/papers/0297197.json",
+      "benchmarks/pilots/multifield-20261116/first-run/papers/0297197.md",
+      "benchmarks/pilots/multifield-20261116/frame/page-0000.json",
+      "benchmarks/pilots/multifield-20261116/frame/page-1000.json",
+      "benchmarks/pilots/multifield-20261116/initial-sources.json",
+      "benchmarks/pilots/multifield-20261116/normalization-and-replay-clarification.md",
+      "benchmarks/pilots/multifield-20261116/protocol.md",
+      "benchmarks/pilots/multifield-20261116/selection.json",
+      "benchmarks/pilots/multifield-20261116/sources.json",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0288477.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0291393.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0291744.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0292700.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0294187.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0295491.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0295571.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0295687.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0296260.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0296708.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0297197.md",
+      "benchmarks/pilots/multifield-20261116/texts-v2/0297402.md",
+      "benchmarks/pilots/multifield-20261116/texts/0288477.md",
+      "benchmarks/pilots/multifield-20261116/texts/0291393.md",
+      "benchmarks/pilots/multifield-20261116/texts/0291744.md",
+      "benchmarks/pilots/multifield-20261116/texts/0292700.md",
+      "benchmarks/pilots/multifield-20261116/texts/0294187.md",
+      "benchmarks/pilots/multifield-20261116/texts/0295491.md",
+      "benchmarks/pilots/multifield-20261116/texts/0295571.md",
+      "benchmarks/pilots/multifield-20261116/texts/0295687.md",
+      "benchmarks/pilots/multifield-20261116/texts/0296260.md",
+      "benchmarks/pilots/multifield-20261116/texts/0296708.md",
+      "benchmarks/pilots/multifield-20261116/texts/0297197.md",
+      "benchmarks/pilots/multifield-20261116/texts/0297402.md",
+      "benchmarks/pilots/published-reference-20261116/README.md",
+      "benchmarks/pilots/published-reference-20261116/attempts.md",
+      "benchmarks/pilots/published-reference-20261116/first-run.json",
+      "benchmarks/pilots/published-reference-20261116/first-run.md",
+      "benchmarks/pilots/published-reference-20261116/parser-clarification.md",
+      "benchmarks/pilots/published-reference-20261116/posthoc-source-notes.json",
+      "benchmarks/pilots/published-reference-20261116/protocol.md",
+      "benchmarks/pilots/statistical-context-20261116/README.md",
+      "benchmarks/pilots/statistical-context-20261116/cases.json",
+      "benchmarks/pilots/statistical-context-20261116/precision-clarification.md",
+      "benchmarks/pilots/statistical-context-20261116/protocol.md",
+      "benchmarks/pilots/statistical-context-20261116/recorded-run.json",
+      "benchmarks/pilots/statistical-context-20261116/recorded-run.md",
+      "bin/sra.js",
+      "examples/academic_writing_sample.md",
+      "examples/advanced_scientific_checks.json",
+      "examples/cluster-adjustments.json",
+      "examples/dependent-data.json",
+      "examples/doi_metadata_demo.md",
+      "examples/error_benchmark/numeric-boundary.json",
+      "examples/error_benchmark/synthetic-labels.json",
+      "examples/error_benchmark/synthetic.json",
+      "examples/evidence-checks.json",
+      "examples/extended_statistics.json",
+      "examples/grouped-methods.json",
+      "examples/inspection-checks.json",
+      "examples/inspection-paper.md",
+      "examples/logic_arithmetic.json",
+      "examples/logic_boolean.json",
+      "examples/logic_review_demo.md",
+      "examples/physics_domain_demo.md",
+      "examples/research-methods.json",
+      "examples/sample_manuscript.md",
+      "examples/statistical-context.json",
+      "examples/toolkit.json",
+      "examples/unified_review/cases.json",
+      "examples/unified_review/clinical_quantitative.md",
+      "examples/unified_review/computational_physics.md",
+      "examples/unified_review/qualitative_social.md",
+      "examples/unified_review/systematic_review.md",
+      "examples/unified_review/theoretical_math.md",
+      "examples/unified_review/unknown_field.md",
+      "examples/welch_t_example.json",
+      "index.d.ts",
+      "index.js",
+      "package.json",
+      "pyproject.toml",
+      "schemas/cross-disciplinary-review.schema.json",
+      "schemas/formal-logic-input.schema.json",
+      "schemas/semantic-review-completed.schema.json",
+      "schemas/semantic-review.schema.json",
+      "src/sra/__init__.py",
+      "src/sra/academic_benchmark.py",
+      "src/sra/advanced_checks.py",
+      "src/sra/advanced_spec.py",
+      "src/sra/audit.py",
+      "src/sra/benchmark.py",
+      "src/sra/capabilities.py",
+      "src/sra/checks.py",
+      "src/sra/cli.py",
+      "src/sra/criteria.py",
+      "src/sra/criteria_catalog.py",
+      "src/sra/dependent_checks.py",
+      "src/sra/dependent_spec.py",
+      "src/sra/discipline.py",
+      "src/sra/document.py",
+      "src/sra/doi.py",
+      "src/sra/domain_adjudication.py",
+      "src/sra/domain_cohort.py",
+      "src/sra/domain_evidence.py",
+      "src/sra/error_benchmark.py",
+      "src/sra/error_benchmark_cli.py",
+      "src/sra/error_evaluation.py",
+      "src/sra/error_reliability.py",
+      "src/sra/evidence_benchmark.py",
+      "src/sra/evidence_checks.py",
+      "src/sra/evidence_spec.py",
+      "src/sra/extended_inspection.py",
+      "src/sra/grammar_engine.py",
+      "src/sra/graph.py",
+      "src/sra/inspection.py",
+      "src/sra/inspection_calculations.py",
+      "src/sra/json_utils.py",
+      "src/sra/labeling.py",
+      "src/sra/logic.py",
+      "src/sra/logic_cli.py",
+      "src/sra/logic_report.py",
+      "src/sra/logic_spec.py",
+      "src/sra/model_client.py",
+      "src/sra/models.py",
+      "src/sra/multilingual.py",
+      "src/sra/paper_review.py",
+      "src/sra/pdf_visual.py",
+      "src/sra/provenance.py",
+      "src/sra/publication.py",
+      "src/sra/py.typed",
+      "src/sra/report.py",
+      "src/sra/research_checks.py",
+      "src/sra/research_spec.py",
+      "src/sra/review.py",
+      "src/sra/review_report.py",
+      "src/sra/rule_ablation.py",
+      "src/sra/scientific_validation.py",
+      "src/sra/semantic_review.py",
+      "src/sra/statistical_consistency.py",
+      "src/sra/statistics_review.py",
+      "src/sra/stats.py",
+      "src/sra/stats_extended.py",
+      "src/sra/symbolic.py",
+      "src/sra/tabular_values.py",
+      "src/sra/toolkit.py",
+      "src/sra/toolkit_cli.py",
+      "src/sra/toolkit_report.py",
+      "src/sra/toolkit_spec.py",
+      "src/sra/unified_cli.py",
+      "src/sra/validation.py",
+      "src/sra/writing.py",
+      "src/sra/writing_style.py",
+      "test/error-benchmark.test.js",
+      "test/interpreter-selection.test.js",
+      "test/interpreter-version-floor.test.js",
+      "test/logic.test.js",
+      "test/npm-adapter.test.js",
+      "test/paper-review-adapter.test.js",
+      "test/security-regressions.test.js",
+      "test/statistical-context.test.js",
+      "test/toolkit.test.js",
+      "test/unified-review.test.js",
+      "tests/pdf_table_fixture.py",
+      "tests/test_academic_benchmark.py",
+      "tests/test_additional_guardrails.py",
+      "tests/test_advanced_methods.py",
+      "tests/test_advanced_scientific_boundaries.py",
+      "tests/test_advanced_scientific_validation.py",
+      "tests/test_analysis_replay.py",
+      "tests/test_audit.py",
+      "tests/test_check_inventory.py",
+      "tests/test_cli_coverage.py",
+      "tests/test_cli_safety.py",
+      "tests/test_cluster_adjustments.py",
+      "tests/test_conditional_metadata.py",
+      "tests/test_coverage_boundaries.py",
+      "tests/test_criteria_matrix.py",
+      "tests/test_dependent_data.py",
+      "tests/test_domain_cli.py",
+      "tests/test_domain_reliability.py",
+      "tests/test_error_benchmark.py",
+      "tests/test_error_collection.py",
+      "tests/test_error_review_pack.py",
+      "tests/test_evidence_benchmark.py",
+      "tests/test_evidence_checks.py",
+      "tests/test_expansion.py",
+      "tests/test_followup_regressions.py",
+      "tests/test_hardening_regressions.py",
+      "tests/test_input_and_doi_guardrails.py",
+      "tests/test_input_integrity.py",
+      "tests/test_inspection_expansion.py",
+      "tests/test_labeling.py",
+      "tests/test_language_domain.py",
+      "tests/test_logic.py",
+      "tests/test_logic_integration.py",
+      "tests/test_merged_coverage.py",
+      "tests/test_meta_research_regressions.py",
+      "tests/test_multifield_audit.py",
+      "tests/test_multilingual.py",
+      "tests/test_paper_review.py",
+      "tests/test_pdf_visual_review.py",
+      "tests/test_publication_integration.py",
+      "tests/test_published_paper_regressions.py",
+      "tests/test_published_reference.py",
+      "tests/test_registry_boundaries.py",
+      "tests/test_release_ancestry.py",
+      "tests/test_reproducible_distributions.py",
+      "tests/test_research_methods.py",
+      "tests/test_research_reliability.py",
+      "tests/test_rule_ablation.py",
+      "tests/test_scientific_exact_precision_properties.py",
+      "tests/test_scientific_numeric_ci_regressions.py",
+      "tests/test_scientific_report_provenance.py",
+      "tests/test_semantic_coverage.py",
+      "tests/test_statistical_consistency.py",
+      "tests/test_statistical_context.py",
+      "tests/test_statistical_context_report.py",
+      "tests/test_statistics_review.py",
+      "tests/test_tabular_values.py",
+      "tests/test_toolkit.py",
+      "tests/test_toolkit_integration.py",
+      "tests/test_unified_cli.py",
+      "tests/test_unified_examples.py",
+      "tests/test_unified_review.py",
+      "tests/test_validation.py",
+      "tests/test_validation_pipeline.py",
+      "tests/test_windows_metadata.py",
+      "tests/test_writing.py",
+      "tools/audit_multifield_papers.py",
+      "tools/error_review_pack.py",
+      "tools/evaluate_heuristics.py",
+      "tools/evaluate_published_reference.py",
+      "tools/evaluate_statistical_context.py",
+      "tools/fetch_scifact.py",
+      "tools/make_ablation_corpus.py",
+      "tools/normalize_sdist.py",
+      "tools/replay_analysis.py",
+      "tools/run_rule_ablation.py",
+      "tools/verify_distributions.py",
+      "tools/verify_live_model_api.py",
+      "tools/verify_real_analysis_replay.py",
+      "tools/verify_real_pdf_ocr.py",
+      "tools/verify_reproducible_distributions.py"
+    ],
+    "working_tree_dirty": true,
+    "revision_note": "The source_code_sha256 covers exactly the relative paths listed in source_code_hash_files; source_code_hash_scope describes their categories. Other repository files are not included."
+  },
+  "limitations": [
+    "Study type is caller-declared, not independently classified.",
+    "Other scientific fields can use common checks; specialist coverage is limited to the listed profiles.",
+    "Profile cues, arithmetic agreement and model interpretations are not scientific certification.",
+    "Only English and Turkish editorial style rules are available; multilingual scientific terminology has uneven coverage.",
+    "No independent multi-field expert-labeled accuracy estimate has been established."
+  ]
+}

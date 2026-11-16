@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1d3 20150301//EN" "http://jats.nlm.nih.gov/publishing/1.1d3/JATS-journalpublishing1.dtd">
+<article article-type="research-article" dtd-version="1.1d3" xml:lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<front>
+<journal-meta>
+<journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>
+<journal-id journal-id-type="publisher-id">plos</journal-id>
+<journal-id journal-id-type="pmc">plosone</journal-id>
+<journal-title-group>
+<journal-title>PLOS ONE</journal-title>
+</journal-title-group>
+<issn pub-type="epub">1932-6203</issn>
+<publisher>
+<publisher-name>Public Library of Science</publisher-name>
+<publisher-loc>San Francisco, CA USA</publisher-loc>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1371/journal.pone.0291393</article-id>
+<article-id pub-id-type="publisher-id">PONE-D-23-02122</article-id>
+<article-categories>
+<subj-group subj-group-type="heading">
+<subject>Research Article</subject>
+</subj-group>
+<subj-group subj-group-type="Discipline-v3">
+<subject>Earth sciences</subject><subj-group><subject>Geography</subject><subj-group><subject>Cartography</subject><subj-group><subject>Latitude</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Physical sciences</subject><subj-group><subject>Physics</subject><subj-group><subject>Classical mechanics</subject><subj-group><subject>Mechanical stress</subject><subj-group><subject>Thermal stresses</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Entomology</subject><subj-group><subject>Insects</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Invertebrates</subject><subj-group><subject>Arthropoda</subject><subj-group><subject>Insects</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Invertebrates</subject><subj-group><subject>Arthropoda</subject><subj-group><subject>Insects</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Evolutionary biology</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Taxonomy</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Computer and information sciences</subject><subj-group><subject>Data management</subject><subj-group><subject>Taxonomy</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Evolutionary biology</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject><subj-group><subject>Phylogenetic analysis</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Taxonomy</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject><subj-group><subject>Phylogenetic analysis</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Computer and information sciences</subject><subj-group><subject>Data management</subject><subj-group><subject>Taxonomy</subject><subj-group><subject>Evolutionary systematics</subject><subj-group><subject>Phylogenetics</subject><subj-group><subject>Phylogenetic analysis</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Biochemistry</subject><subj-group><subject>Metabolism</subject><subj-group><subject>Protein metabolism</subject></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Entomology</subject><subj-group><subject>Insects</subject><subj-group><subject>Moths and butterflies</subject></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Organisms</subject><subj-group><subject>Eukaryota</subject><subj-group><subject>Animals</subject><subj-group><subject>Invertebrates</subject><subj-group><subject>Arthropoda</subject><subj-group><subject>Insects</subject><subj-group><subject>Moths and butterflies</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Zoology</subject><subj-group><subject>Animals</subject><subj-group><subject>Invertebrates</subject><subj-group><subject>Arthropoda</subject><subj-group><subject>Insects</subject><subj-group><subject>Moths and butterflies</subject></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group></subj-group><subj-group subj-group-type="Discipline-v3">
+<subject>Biology and life sciences</subject><subj-group><subject>Developmental biology</subject><subj-group><subject>Life cycles</subject><subj-group><subject>Pupae</subject></subj-group></subj-group></subj-group></subj-group></article-categories>
+<title-group>
+<article-title>How development and survival combine to determine the thermal sensitivity of insects</article-title>
+<alt-title alt-title-type="running-head">Insect thermal sensitivity</alt-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" corresp="yes" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-6944-2574</contrib-id>
+<name name-style="western">
+<surname>Abarca</surname>
+<given-names>Mariana</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/project-administration/">Project administration</role>
+<role content-type="http://credit.niso.org/contributor-roles/supervision/">Supervision</role>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff001"><sup>1</sup></xref>
+<xref ref-type="corresp" rid="cor001">*</xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Parker</surname>
+<given-names>Anna L.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/visualization/">Visualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-original-draft/">Writing – original draft</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff002"><sup>2</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<contrib-id authenticated="true" contrib-id-type="orcid">https://orcid.org/0000-0002-9238-6777</contrib-id>
+<name name-style="western">
+<surname>Larsen</surname>
+<given-names>Elise A.</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/data-curation/">Data curation</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Umbanhowar</surname>
+<given-names>James</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff004"><sup>4</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Earl</surname>
+<given-names>Chandra</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/formal-analysis/">Formal analysis</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff005"><sup>5</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Guralnick</surname>
+<given-names>Robert</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff006"><sup>6</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Kingsolver</surname>
+<given-names>Joel</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/funding-acquisition/">Funding acquisition</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff004"><sup>4</sup></xref>
+<xref ref-type="fn" rid="econtrib001"><sup>‡</sup></xref>
+</contrib>
+<contrib contrib-type="author" xlink:type="simple">
+<name name-style="western">
+<surname>Ries</surname>
+<given-names>Leslie</given-names>
+</name>
+<role content-type="http://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
+<role content-type="http://credit.niso.org/contributor-roles/funding-acquisition/">Funding acquisition</role>
+<role content-type="http://credit.niso.org/contributor-roles/methodology/">Methodology</role>
+<role content-type="http://credit.niso.org/contributor-roles/resources/">Resources</role>
+<role content-type="http://credit.niso.org/contributor-roles/writing-review-editing/">Writing – review &amp; editing</role>
+<xref ref-type="aff" rid="aff003"><sup>3</sup></xref>
+<xref ref-type="fn" rid="econtrib001"><sup>‡</sup></xref>
+</contrib>
+</contrib-group>
+<aff id="aff001"><label>1</label> <addr-line>Department of Biological Sciences, Smith College, Northampton, Massachusetts, United States of America</addr-line></aff>
+<aff id="aff002"><label>2</label> <addr-line>Department of Biology, Wake Forest University, Winston-Salem, North Carolina United States of America</addr-line></aff>
+<aff id="aff003"><label>3</label> <addr-line>Department of Biology, The University of North Carolina at Chapel Hill, Chapel Hill, North Carolina, United States of America</addr-line></aff>
+<aff id="aff004"><label>4</label> <addr-line>Department of Biology, Georgetown University, Washington, District of Columbia, United States of America</addr-line></aff>
+<aff id="aff005"><label>5</label> <addr-line>Department of Natural Sciences, Bernice Pauahi Bishop Museum, Honolulu, Hawaii, United States of America</addr-line></aff>
+<aff id="aff006"><label>6</label> <addr-line>Florida Museum of Natural History, University of Florida, Gainesville, Florida, United States of America</addr-line></aff>
+<contrib-group>
+<contrib contrib-type="editor" xlink:type="simple">
+<name name-style="western">
+<surname>Silva</surname>
+<given-names>Daniel de Paiva</given-names>
+</name>
+<role>Editor</role>
+<xref ref-type="aff" rid="edit1"/>
+</contrib>
+</contrib-group>
+<aff id="edit1"><addr-line>Instituto Federal de Educacao Ciencia e Tecnologia Goiano - Campus Urutai, BRAZIL</addr-line></aff>
+<author-notes>
+<fn fn-type="conflict" id="coi001">
+<p>The authors have declared that no competing interests exist.</p>
+</fn>
+<fn fn-type="other" id="econtrib001">
+<p>‡ JK and LR are joint senior authors on this work.</p>
+</fn>
+<corresp id="cor001">* E-mail: <email xlink:type="simple">mabarca@smith.edu</email></corresp>
+</author-notes>
+<pub-date pub-type="epub">
+<day>30</day>
+<month>1</month>
+<year>2024</year>
+</pub-date>
+<pub-date pub-type="collection">
+<year>2024</year>
+</pub-date>
+<volume>19</volume>
+<issue>1</issue>
+<elocation-id>e0291393</elocation-id>
+<history>
+<date date-type="received">
+<day>24</day>
+<month>1</month>
+<year>2023</year>
+</date>
+<date date-type="accepted">
+<day>28</day>
+<month>8</month>
+<year>2023</year>
+</date>
+</history>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Abarca et al</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<self-uri content-type="pdf" xlink:href="info:doi/10.1371/journal.pone.0291393"/>
+<abstract>
+<p>Thermal performance curves (TPCs) depict variation in vital rates in response to temperature and have been an important tool to understand ecological and evolutionary constraints on the thermal sensitivity of ectotherms. TPCs allow for the calculation of indicators of thermal tolerance, such as minimum, optimum, and maximum temperatures that allow for a given metabolic function. However, these indicators are computed using only responses from surviving individuals, which can lead to underestimation of deleterious effects of thermal stress, particularly at high temperatures. Here, we advocate for an integrative framework for assessing thermal sensitivity, which combines both vital rates and survival probabilities, and focuses on the temperature interval that allows for population persistence. Using a collated data set of Lepidopteran development rate and survival measured on the same individuals, we show that development rate is generally limiting at low temperatures, while survival is limiting at high temperatures. We also uncover differences between life stages and across latitudes, with extended survival at lower temperatures in temperate regions. Our combined performance metric demonstrates similar thermal breadth in temperate and tropical individuals, an effect that only emerges from integration of both development and survival trends. We discuss the benefits of using this framework in future predictive and management contexts.</p>
+</abstract>
+<funding-group>
+<award-group id="award001">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/100000001</institution-id>
+<institution>National Science Foundation</institution>
+</institution-wrap>
+</funding-source>
+<award-id>MSB-1702664</award-id>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Ries</surname>
+<given-names>Leslie</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<award-group id="award002">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/100000001</institution-id>
+<institution>National Science Foundation</institution>
+</institution-wrap>
+</funding-source>
+<award-id>EAGER-1839021</award-id>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Ries</surname>
+<given-names>Leslie</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<award-group id="award003">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/100000001</institution-id>
+<institution>National Science Foundation</institution>
+</institution-wrap>
+</funding-source>
+<award-id>DEB 1950055</award-id>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Kingsolver</surname>
+<given-names>Joel</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<award-group id="award004">
+<funding-source>
+<institution-wrap>
+<institution-id institution-id-type="funder-id">http://dx.doi.org/10.13039/100008064</institution-id>
+<institution>Georgetown University</institution>
+</institution-wrap>
+</funding-source>
+<principal-award-recipient>
+<name name-style="western">
+<surname>Ries</surname>
+<given-names>Leslie</given-names>
+</name>
+</principal-award-recipient>
+</award-group>
+<funding-statement>This work was funded by Georgetown University and NSF awards: MSB-1702664 and EAGER-1839021 to LR and NSF DEB 1950055 to JGK. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="4"/>
+<table-count count="1"/>
+<page-count count="14"/>
+</counts>
+<custom-meta-group>
+<custom-meta id="data-availability">
+<meta-name>Data Availability</meta-name>
+<meta-value>Data can be found in Dryad (accession number: DOI: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.0.19.197/dryad.qjq2bvqk4" xlink:type="simple">10.5061/dryad.qjq2bvqk4</ext-link>)</meta-value>
+</custom-meta>
+</custom-meta-group>
+</article-meta>
+</front>
+<body>
+<sec id="sec001" sec-type="intro">
+<title>Introduction</title>
+<p>The relationship between performance and temperature is one of the primary factors used in physiological ecology to understand species’ evolutionary adaptations to climate and to estimate past, current, and future geographic and temporal distributions. Thermal performance curves (TPCs) depict patterns in vital rates or behaviors in response to temperature and have been an important tool to understand ecological and evolutionary constraints on thermal sensitivity of ectotherms [<xref ref-type="bibr" rid="pone.0291393.ref001">1</xref>–<xref ref-type="bibr" rid="pone.0291393.ref004">4</xref>]. TPCs have a characteristic unimodal, left-skew shape in which performance gradually increases with temperature up to a maximum, followed by a steep decline as temperature becomes too high for metabolic reactions to occur (<xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>). This basic shape is consistent for a variety of biological rates across taxa and levels of organization, from individual rates such as growth, development, digestion, and locomotion, to population (e.g. fecundity, population growth) and interaction rates (e.g. predator attack, parasitism; [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>]. The consistency of TPC shape allows for the calculation of indicators of ectotherm thermal tolerance (<xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>) that are subsequently used in comparative studies (e.g. [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>]. These metrics include T<sub>min</sub> and T<sub>max</sub>, the rearing temperatures at which the rate of interest reaches zero, and T<sub>opt</sub>, the rearing temperature that maximizes that rate (<xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>). Another commonly-computed metric, T<sub>0</sub> [<xref ref-type="bibr" rid="pone.0291393.ref006">6</xref>, <xref ref-type="bibr" rid="pone.0291393.ref007">7</xref>], is estimated by fitting a regression line to the rising linear portion of the curve (black line fitted to black points, <xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>) and taking its x-intercept.</p>
+<fig id="pone.0291393.g001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0291393.g001</object-id>
+<label>Fig 1</label>
+<caption>
+<title>Thermal performance curve of development rate (grey) and common metrics obtained from it: T<sub>min</sub>, T<sub>opt</sub>, T<sub>max</sub>.</title>
+<p>Linear approximation (black) for temperatures below the optimum to obtain the x-intercept, T<sub>0</sub>. This linear regression applied to development rate data is the basis for developing growing degree-day models, which have been extensively used to develop phenological predictions. Curve generated with data from Butler &amp; Hamilton, 1976 (<italic>Heliothis virescens</italic>, [<xref ref-type="bibr" rid="pone.0291393.ref008">8</xref>].</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.g001" xlink:type="simple"/>
+</fig>
+<p>In turn, a large body of literature has compiled these thermal performance data to make predictions about ectothermic temperature responses along latitudinal [<xref ref-type="bibr" rid="pone.0291393.ref009">9</xref>–<xref ref-type="bibr" rid="pone.0291393.ref013">13</xref>] and altitudinal gradients [<xref ref-type="bibr" rid="pone.0291393.ref014">14</xref>], as well as across different life stages [<xref ref-type="bibr" rid="pone.0291393.ref013">13</xref>, <xref ref-type="bibr" rid="pone.0291393.ref015">15</xref>]. However, the incorporation of these data into predictive contexts is not straight-forward. Traditionally, TPCs have been created with a performance or fitness proxy, such as locomotion, development rate, or digestion [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>] as the response variable. While this strategy is helpful in that it characterizes an ecologically-relevant response for a particular organism, it often underestimates thermal stress at high temperatures: while surviving individuals may appear to perform well due to high vital rates, severe population-level mortality is often observed at high temperatures. Measuring the thermal response of a survivor-biased subsample can be misleading, particularly in comparative studies, where taxa have different evolutionary histories or face different thermal tradeoffs and thus have different adaptations to cope with thermal stress. Similarly, utilizing only survival as a fitness proxy also has its flaws. While organisms may survive a broad range of thermal conditions in a controlled laboratory setting, they often face constraints in nature that are not simulated in the laboratory, such as short growing seasons or predation risk [<xref ref-type="bibr" rid="pone.0291393.ref016">16</xref>]. Surviving, but developing slowly due to thermal limits, may result in decreased fitness in natural settings, limiting the utility of survival-only TPCs.</p>
+<p>Neither performance or survival as proxies can identify which underlying process is determining organismal responses at a certain temperature: which process is most limiting to overall performance at low temperatures? At high temperatures? This is particularly important because the shapes of TPCs for different processes can be quite different [<xref ref-type="bibr" rid="pone.0291393.ref004">4</xref>, <xref ref-type="bibr" rid="pone.0291393.ref017">17</xref>]. For example, development rate TPCs are typically left-skewed with a well-defined intermediate optimum temperature and a rapid decline at temperatures above the optimum (c.f. <xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>), whereas survival TPCs are typically flat across intermediate temperatures and rapid declines at both low and high temperatures [<xref ref-type="bibr" rid="pone.0291393.ref018">18</xref>]. This basic difference suggests the need for some form of TPC integration. Ideally, a complete performance profile for a given population would be the result of integrating multiple performance curves [<xref ref-type="bibr" rid="pone.0291393.ref017">17</xref>], including responses such as fecundity in addition to survival and development time [<xref ref-type="bibr" rid="pone.0291393.ref019">19</xref>]. However, TPCs on multiple performance metrics are usually limited to extensively studied species such as <italic>Drosophila melanogaster</italic> [<xref ref-type="bibr" rid="pone.0291393.ref020">20</xref>, <xref ref-type="bibr" rid="pone.0291393.ref021">21</xref>] but see [<xref ref-type="bibr" rid="pone.0291393.ref022">22</xref>], and there are limited data for TPCs for overall fitness (e.g. intrinsic rate of increase) for insects and other ectotherms [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>, <xref ref-type="bibr" rid="pone.0291393.ref023">23</xref>].</p>
+<p>Another issue with the extrapolation of individual species’ or population’s TPCs to general predictions is the choice of parameters to use. Traditionally, thermal minima (T<sub>min</sub> in <xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>) and maxima (T<sub>max</sub> in <xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>) are used to characterize a species’ thermal tolerance [<xref ref-type="bibr" rid="pone.0291393.ref024">24</xref>] and refs therein). While these are useful in that they describe the extremes at which organisms can no longer perform, key ecologically relevant processes stop before an organism ceases to function due to thermal stress [<xref ref-type="bibr" rid="pone.0291393.ref025">25</xref>]. When considering only minimum and maximum temperatures that halt function entirely, it is difficult to predict the effects of stressful but not debilitating temperature exposure. Even when surviving individuals appear to perform well (i.e. fast development) at extreme, but sub-lethal, temperatures, they may have lower fitness due to an unmeasured metric (i.e. reduced fertility due to sterility; [<xref ref-type="bibr" rid="pone.0291393.ref025">25</xref>, <xref ref-type="bibr" rid="pone.0291393.ref026">26</xref>]. Such temperatures are also less useful when modeling population-level effects because sublethal thermal stress can have severe [<xref ref-type="bibr" rid="pone.0291393.ref027">27</xref>] and cumulative effects that influence population and community dynamics [<xref ref-type="bibr" rid="pone.0291393.ref028">28</xref>].</p>
+<p>Here, we advocate for a conceptual framework for assessing thermal sensitivity, which considers both development rates and survival probabilities and focuses on the temperature interval that allows for population persistence [<xref ref-type="bibr" rid="pone.0291393.ref029">29</xref>]. Even though multiple components of fitness could be combined [<xref ref-type="bibr" rid="pone.0291393.ref019">19</xref>], we focus on development and survivorship because these are the two that are most likely to be reported within studies across a broad range of taxa. In particular, we focus on whether interpretation of broad-scale patterns of thermal sensitivity are different when combining survival and development compared to using only one or the other of those variables. Our framework expands on existing literature in two main aspects:</p>
+<list list-type="order">
+<list-item><p>We multiply development rate and survival TPCs to create a performance metric <bold>P</bold> (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref>), sensitive to differences between these components of fitness and able to identify the factor driving responses at different temperatures.</p></list-item>
+<list-item><p>We use 50% performance limits (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref>), rather than minima and maxima, to define thermal performance thresholds that exclude the most stressful conditions where individual function is compromised, thus creating more ecologically-relevant limits to interpret.</p></list-item>
+</list>
+<fig id="pone.0291393.g002" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0291393.g002</object-id>
+<label>Fig 2</label>
+<caption>
+<title/>
+<p>Overlap of TPCs (left column) for survival (<bold>S</bold>, solid grey lines) and development (<bold>D</bold>, dotted lines) to determine whether <bold>D</bold> or <bold>S</bold> limit overall performance (<bold>P</bold>, purple solid line) at different temperatures, and the relationships between <bold>S</bold> and <bold>D</bold> limits, both lower (center column, blue circles) and upper (right column, orange squares). Open symbols correspond to <bold>D</bold> limits and solid to <bold>S</bold> limits. Horizontal lines in the left column indicate thermal breadths, and the suitable range (<bold>P</bold><sub><bold>breadth</bold></sub>) is highlighted in purple. Black lines in the right column indicate deviations from the dotted diagonal: vertical deviations indicate development is limiting, while horizontal deviations indicate survival is limiting. <bold>When D limits P at all temperatures</bold>: A) Development limits are contained within survival limits, and B) the low limit would be above the diagonal and the high limit underneath it. <bold>When both D and S limit P</bold>: C) Survival and development limits are the same and D) both points fall along the diagonal. <bold>When S limits P at high temperatures</bold>: E) Development limits are higher than survival limits (<bold>D</bold> curve is shifted to the right) and F) both points fall above the diagonal. <bold>When D limits P at high temperatures</bold>: G) Survival limits are higher than development limits (<bold>S</bold> curve is shifted to the right) and H) both points fall under the diagonal.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.g002" xlink:type="simple"/>
+</fig>
+<p>To illustrate the non-additive effects of incorporating multiple thermal performance measurements when studying broad latitudinal patterns, we collated Lepidopteran thermal tolerance data from empirical research on 59 populations of 40 lepidoptera species. We reconstructed TPCs for development rate (<bold>D</bold>) survival (<bold>S</bold>), and performance (<bold>P</bold>) to estimate lower (<bold>D</bold><sub><bold>l</bold></sub><bold>, S</bold><sub><bold>l</bold></sub><bold>, P</bold><sub><bold>l</bold></sub>) and upper (<bold>D</bold><sub><bold>h</bold></sub><bold>, S</bold><sub><bold>h</bold></sub><bold>, P</bold><sub><bold>h</bold></sub>) temperature thresholds. These thresholds demarcate the temperature intervals that allow for 50% of the maximum value (i.e. values of.5 or above on a scale of 0–1) in each of these variables, and can be used to compare populations by characterizing them as cold-tolerant (lower values for <bold>D</bold><sub><bold>l</bold></sub><bold>, S</bold><sub><bold>l</bold></sub><bold>, P</bold><sub><bold>l</bold></sub><bold>)</bold> or heat-tolerant (higher values of <bold>D</bold><sub><bold>h</bold></sub><bold>, S</bold><sub><bold>h</bold></sub><bold>, P</bold><sub><bold>h</bold></sub>). Additionally, the width of these 50% intervals (<bold>D</bold><sub><bold>breadth</bold></sub><bold>, S</bold><sub><bold>breadth</bold></sub>) is an indicator of thermal tolerance, and we define the suitable thermal range for a given population as <bold>P</bold><sub><bold>breadth</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref>).</p>
+<p>By using this framework, we can assess which component of performance (in this case, development rate or survival) is driving the shape of the TPC over a given temperature range. The different ways in which the individual development rate and survival curves could overlap have distinct consequences. When the interval of temperatures that allows for 50% development rate is located within the interval that maximizes survival, performance is entirely limited by development rate (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2A</xref>). When development limits (<bold>D</bold><sub><bold>l</bold></sub> and <bold>D</bold><sub><bold>h</bold></sub>) are equal to survival limits (<bold>S</bold><sub><bold>l</bold></sub> and <bold>S</bold><sub><bold>h</bold></sub>), the suitable range is reduced, with <bold>P</bold><sub><bold>l</bold></sub> being higher than both <bold>D</bold><sub><bold>l</bold></sub> and <bold>S</bold><sub><bold>l</bold></sub>, and <bold>P</bold><sub><bold>h</bold></sub> lower than both <bold>D</bold><sub><bold>h</bold></sub> and <bold>S</bold><sub><bold>h</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2C</xref>). Another possibility is to have the development curve shifted to the right, in which case both development thresholds are higher than their corresponding survival thresholds (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E</xref>). By contrast, when the survival curve is shifted to the right, survival thresholds are higher than the corresponding development thresholds (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2G</xref>). Each of the different relative patterns illustrated in <xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref> may predict different evolutionary responses to temperature, and by both comparing and combining relative development and survivorship TPCs, we may see emergent patterns across populations, species, and clades.</p>
+<p>Here, we will first explore the relationship between developmental and survivorship metrics to assess variability in the overlapping patterns of development and survival curves across latitude. In addition, we explore how variability in <bold>D</bold>, <bold>S</bold> and <bold>P</bold> limits is explained by phylogenetic history, latitude, and life stage. By comparing latitudinal variation patterns of each of these thermal limits from the same populations, we show that development and survival exhibit non-additive effects, particularly for thermal breadth. Finally, we discuss the utility of 50% performance limits in the context of anthropogenic climate change.</p>
+</sec>
+<sec id="sec002" sec-type="materials|methods">
+<title>Methods</title>
+<sec id="sec003">
+<title>Compiling development and performance data</title>
+<p>We compiled a database of published peer-reviewed articles reporting development time and/or survival of insects from the order Lepidoptera (butterflies and moths) reared at constant temperatures (<ext-link ext-link-type="uri" xlink:href="https://doi.org/10.5061/dryad.qjq2bvqk4" xlink:type="simple">10.5061/dryad.qjq2bvqk4</ext-link>). We define each experimental unit from which a thermal performance curve can be extracted as a “set”: each set consists of 4 to 20 constant temperature treatments (mode = 5) and the corresponding values of mean development time and/or survival. We only included sets containing the most commonly reported life stages: eggs, larvae (hatch to pupation) and pupae (pupation to adult emergence).</p>
+<p>When studies reported multiple sets per temperature treatment (i.e. when performance was evaluated in multiple experimental conditions or differentially by sex), we considered sets from the same species, locality, and ontogenetic stage that were reported in the same article to be non-independent. We combined non-independent sets by obtaining the geometric mean at each temperature treatment. We also extracted the latitudinal data from the locality of origin/collection site for each set and excluded sets that averaged individual responses across collection locations. Some studies did not report the locality of origin of their specimens. These studies typically reported performance of crop pests of local importance in the region of the author’s institution. Thus, we assigned them the coordinates of the author’s affiliation institution and labeled the locality as “inferred” (S1 Fig in <xref ref-type="supplementary-material" rid="pone.0291393.s001">S1 File</xref>). Analyses yielded the same qualitative results whether data points from inferred localities were included or not, so we present results including these data and report the percentage of data from “inferred” locality in each particular analysis. After these considerations, our <bold>“full dataset”</bold> consisted of overlapping suites of sets reporting development time (n = 75 species, 173 sets, 24% inferred locations) and/or survival (n = 54 species, 117 sets, 31% inferred locations) data.</p>
+<p>In order to make direct comparisons of our novel performance parameter <italic>vs</italic> using development or survival data only, we needed to reduce this dataset further to include only sets that contained both development time and survival data. After this final reduction, our <bold>“analytical dataset”</bold> consisted of 46 sets, from n = 26 species and 17% inferred locations. Not all of the sets, however, contained a “complete curve”, or one that had a rise, a peak and a fall, including values of 0.5 or lower at both extremes of the curve. Therefore, we conducted analyses separately for our metrics [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>], using all curves with a rise to calculate our low parameters (<bold>D</bold><sub><bold>l</bold></sub><bold>, S</bold><sub><bold>l</bold></sub><bold>, P</bold><sub><bold>l</bold></sub><bold>,</bold> 37 sets from 21 species and 22% inferred locations), all curves with a fall to calculate our high parameters (<bold>D</bold><sub><bold>h</bold></sub><bold>, S</bold><sub><bold>h</bold></sub><bold>, P</bold><sub><bold>h</bold></sub><bold>,</bold> 35 sets from 20 species and 11% inferred locations), and only complete curves to calculate our breadth parameters (<bold>D</bold><sub><bold>breadth</bold></sub><bold>, S</bold><sub><bold>breadth</bold></sub><bold>, P</bold><sub><bold>breadth</bold></sub><bold>,</bold> 26 sets from 15 species and 15% inferred locations). We conducted the analyses below on both the analytical dataset and the full dataset. After comparison, the trends present in the analytical dataset hold true for the full dataset, thus only those for the analytical dataset are reported below. See <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref> for a description of the full dataset analyses, including model results and figures.</p>
+</sec>
+<sec id="sec004">
+<title>Calculating thermal performance parameters</title>
+<p>The analytical dataset allowed us to quantify thermal performance curves for development rate, survival, and performance (Figs <xref ref-type="fig" rid="pone.0291393.g001">1</xref> and <xref ref-type="fig" rid="pone.0291393.g002">2</xref>). There is an extensive empirical and theoretical literature on building models (both statistical and mechanistic) to characterize TPCs for development [<xref ref-type="bibr" rid="pone.0291393.ref007">7</xref>, <xref ref-type="bibr" rid="pone.0291393.ref030">30</xref>]. However, a preferred non-linear model has yet to emerge, likely due to both biological and methodological reasons. There may be slight differences in the real shape of the TPC depending on the taxa and performance metric studied [<xref ref-type="bibr" rid="pone.0291393.ref007">7</xref>], and the observed shapes of the curves depend heavily on the number and identity of temperature treatments (which vary widely among sets in our analytical dataset). This methodological constraint may favor different shapes for spurious reasons or provide too little data to allow more complex models to converge. Because of this, the dominant approach in the insect literature used to characterize the typical TPC has remained simply fitting the linear regression for the rising portion of the curve (solid line in <xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>; [<xref ref-type="bibr" rid="pone.0291393.ref007">7</xref>]. However, this approach is insufficient for our analyses for two important reasons: first, it does not quantify the shape of the curves across their whole temperature width; and second, the shape of the survival curve (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2A</xref>) is not consistent with the typical TPC shape (<xref ref-type="fig" rid="pone.0291393.g001">Fig 1</xref>), and thus would require a different modeling approach. Due to these important considerations, we opted instead for simple linear interpolation across the full range of temperatures and computed thermal thresholds based on these interpolations to describe the TPCs. This conservative approach may simplify the curves for which we have fine-scale data; however, this cost is outweighed by the benefit of not biasing against studies with coarser data (fewer temperature treatments, spaced further apart).</p>
+<p>For each set, we standardized development rate (the reciprocal of development time) and survivorship so they varied between 0 and 1 (representing the maximum value) and subsequently multiplied them to obtain performance (Performance = Standardized Development Rate × Standardized Survivorship). We then estimated high and low thermal thresholds for survival, development, and performance (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref><bold>; S</bold><sub><bold>l</bold></sub><bold>, S</bold><sub><bold>h</bold></sub><bold>, D</bold><sub><bold>l</bold></sub><bold>, D</bold><sub><bold>h</bold></sub><bold>, P</bold><sub><bold>l</bold></sub><bold>, P</bold><sub><bold>h</bold></sub>) using linear interpolation.</p>
+</sec>
+<sec id="sec005">
+<title>Analyses</title>
+<p>To assess overlap patterns of survivorship <bold>S</bold> and development <bold>D</bold> TPCs (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref>, left-hand column), we extracted the corresponding thermal limits (<bold>D</bold><sub><bold>l</bold></sub> and <bold>S</bold><sub><bold>l</bold></sub>; <bold>D</bold><sub><bold>h</bold></sub> and <bold>S</bold><sub><bold>h</bold></sub>; <bold>D</bold><sub><bold>breadth</bold></sub> and <bold>S</bold><sub><bold>breadth</bold></sub>) and used linear regression to evaluate their relationships (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2</xref>, middle and right-hand columns). To investigate the effects of ontogenetic stage and latitude on all thermal thresholds and breadths, we used a linear mixed modeling approach. For each response variable (all thermal limits for <bold>S, D,</bold> and <bold>P</bold>), we built a model including ontogenetic stage, latitude, and their interaction as fixed effects, and species as a random effect, using the <italic>lmer</italic> function (package lme4 1.1–23, in R version 4.0.2). To facilitate the interpretation of effect sizes, we fitted the models without an intercept. We used AIC and BIC to select between full (with interaction terms) and additive models. To account for phylogenetic history, we custom built a phylogenetic tree for the 102 species used here. In short, we searched Genbank for 11 full-length, commonly sequenced genomic DNA markers, while accounting for taxonomic issues e.g. synonymy. Five species were not available on Genbank, and in those cases we utilized a congener as a surrogate. Sequences were aligned using mafft v7.294b [<xref ref-type="bibr" rid="pone.0291393.ref031">31</xref>]; Those locus alignments containing 10 or less species were removed, leaving a total of 8 usable loci. We used the resulting supermatrix and built an unpartitioned maximum likelihood tree using RaxML-NG v0.9.0 [<xref ref-type="bibr" rid="pone.0291393.ref032">32</xref>] under a GTR-G substitution model. See <xref ref-type="supplementary-material" rid="pone.0291393.s003">S3 File</xref> for full details. With a phylogenetic hypothesis in hand, we fitted the models described above, but including the phylogenetic tree, using the R package <italic>phyr</italic> [<xref ref-type="bibr" rid="pone.0291393.ref033">33</xref>]. Due to the small sample size of our analytical dataset, this phylogenetic model was fitted to our full dataset (found in <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>). For each response variable, we first fitted a non-phylogenetic model, including species as a random effect (equivalent to the first set of models) and then a phylogenetic model which accounts for phylogenetic autocorrelation. We used partial R<sup>2</sup> [<xref ref-type="bibr" rid="pone.0291393.ref034">34</xref>] to compare phylogenetic to non-phylogenetic models. In all cases we obtained very small R<sup>2</sup><sub>lik</sub> values, indicating a negligible effect of phylogeny [<xref ref-type="bibr" rid="pone.0291393.ref035">35</xref>]; thus, we report throughout results from the regular linear mixed models. Results from the phylogenetic models can be found in <xref ref-type="supplementary-material" rid="pone.0291393.s004">S4 File</xref>.</p>
+</sec>
+</sec>
+<sec id="sec006" sec-type="results">
+<title>Results</title>
+<sec id="sec007">
+<title>Thermal performance curve overlap</title>
+<p>The lower limit for 50% development (<bold>D</bold><sub><bold>l</bold></sub>) ranged from 13.6 to 28.1 °C and was significantly correlated with <bold>S</bold><sub><bold>l</bold></sub> (R<sup>2</sup> = 0.4, <italic>P</italic> &lt; 0.0001, N = 37; <xref ref-type="fig" rid="pone.0291393.g003">Fig 3A</xref>), which in turn ranged from 4.1 to 25.9 °C. On average, <bold>D</bold><sub><bold>l</bold></sub> was 5.5 °C higher than the corresponding <bold>S</bold><sub><bold>l</bold></sub>, consistent with a right shift of the development curve (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E and 2F</xref>). The slope of this relationship (<xref ref-type="fig" rid="pone.0291393.g003">Fig 3B</xref>) indicates that differences between <bold>D</bold><sub><bold>l</bold></sub> and <bold>S</bold><sub><bold>l</bold></sub> were greater for those exhibiting relatively low <bold>S</bold><sub><bold>l</bold></sub> and <bold>D</bold><sub><bold>l</bold></sub> values (cold-tolerant populations). Variation in higher limits was also consistent with a right shift in the development curve (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E and 2F</xref>), but it exhibited a steeper slope and stronger correlation (R<sup>2</sup> = 0.78, <italic>P</italic> &lt; 0.0001, N = 35; <xref ref-type="fig" rid="pone.0291393.g003">Fig 3A</xref>), with <bold>D</bold><sub><bold>h</bold></sub> varying from 26.2 to 39.5 °C and <bold>S</bold><sub><bold>h</bold></sub> from 22.5 to 38.4°C. On average <bold>D</bold><sub><bold>h</bold></sub> was 1.2 °C higher than the corresponding <bold>S</bold><sub><bold>h</bold></sub>. These results confirm that TPCs are right-shifted for development but not for survival, and that upper thermal limits are generally higher for development than for survival.</p>
+<fig id="pone.0291393.g003" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0291393.g003</object-id>
+<label>Fig 3</label>
+<caption>
+<title/>
+<p>Relationship between survival and development for high-temperature limits (A, closed circles), low-temperature limits (B, squares), and thermal breadth (C, open circles). Dashed lines are a reference for exact correspondence; solid lines depict model predictions for each regression. The color gradient represents the latitude of the sets; populations at higher latitudes (yellow) tend to be more cold-tolerant than those at lower latitudes (purple).</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.g003" xlink:type="simple"/>
+</fig>
+<p>Thermal breadth for development ranged from 8 to 18.7°C (mean ± SD = 12.9 ± 2.19°C) and was on average 4.7 °C narrower than thermal breadth for survival (mean = 16.64 ± 4.7 °C, range: 7.7–26.1 °C). While <bold>D</bold><sub><bold>breadth</bold></sub> and <bold>S</bold><sub><bold>breadth</bold></sub> were significantly correlated (R<sup>2</sup> = 0.14, <italic>P</italic> = 0.03, N = 26; <xref ref-type="fig" rid="pone.0291393.g003">Fig 3C</xref>), their relationship exhibited a relatively flat slope (slope estimate = 0.2, <xref ref-type="fig" rid="pone.0291393.g003">Fig 3C</xref>), and explains only 3% of the variation.</p>
+</sec>
+<sec id="sec008">
+<title>Effects of ontogenetic stage and latitude</title>
+<p>High thermal performance limits (<bold>D</bold><sub><bold>h</bold></sub><bold>, S</bold><sub><bold>h</bold></sub><bold>, P</bold><sub><bold>h</bold></sub>) did not differ much from one another in terms of their relationship to latitude (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4A–4C</xref>), as evidenced by the similar latitude coefficients in the linear mixed-effect model results and lack of relationship between latitude and each limit (<xref ref-type="table" rid="pone.0291393.t001">Table 1A</xref>, <italic>P</italic> &gt; 0.05). All of the lower performance limits (<bold>D</bold><sub><bold>l</bold></sub><bold>, S</bold><sub><bold>l</bold></sub><bold>, P</bold><sub><bold>l</bold></sub>) varied with latitude (<xref ref-type="table" rid="pone.0291393.t001">Table 1B</xref>, <italic>P</italic> &lt; 0.05), though <bold>S</bold><sub><bold>l</bold></sub> decreased more dramatically with latitude than development or performance (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4D–4F</xref>). This provides confidence that the relationships between our calculated upper and lower thermal limits and latitude are robust to inclusion of any of the three metrics. By contrast, latitudinal patterns in thermal breadth were very different, depending on the variable used to estimate them: <bold>D</bold><sub><bold>breadth</bold></sub> and <bold>S</bold><sub><bold>breadth</bold></sub> both separately increased with latitude (<xref ref-type="table" rid="pone.0291393.t001">Table 1C</xref>, p-values &lt; 0.05), but <bold>P</bold><sub><bold>breadth</bold></sub>, which is the combination of the previous two, exhibited an almost flat slope (<xref ref-type="table" rid="pone.0291393.t001">Table 1C</xref>, p-value = .520), indicating the same thermal breadth across latitudes (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4G–4I</xref>). This demonstrates that, rather than an additive effect of development and survival resulting in an increased response to latitude, the effects of each metric cancel each other out, negating the observed latitudinal pattern.</p>
+<fig id="pone.0291393.g004" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0291393.g004</object-id>
+<label>Fig 4</label>
+<caption>
+<title/>
+<p>Regression lines demonstrating the relationship between development (left column), survival (middle column), and performance (right column) metrics and latitude across life stages (purple: egg; magenta: larva; orange: pupa). Solid lines show model predictions bounded by the dashed lines, which represent 95% confidence interval boundaries.</p>
+</caption>
+<graphic mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.g004" xlink:type="simple"/>
+</fig>
+<table-wrap id="pone.0291393.t001" position="float">
+<object-id pub-id-type="doi">10.1371/journal.pone.0291393.t001</object-id>
+<label>Table 1</label> <caption><title>Coefficients with standard errors of absolute latitude in each linear mixed-effects model.</title> <p>P-values reported in parentheses, with bolded values indicating significance. Complete model outputs, including life stage coefficients and interaction terms (where applicable), can be found in <bold>Table 1 in</bold> <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>.</p></caption>
+<alternatives>
+<graphic id="pone.0291393.t001g" mimetype="image" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.t001" xlink:type="simple"/>
+<table>
+<colgroup>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+<col align="left" valign="middle"/>
+</colgroup>
+<thead>
+<tr>
+<th align="left"/>
+<th align="center">Development</th>
+<th align="center">Survival</th>
+<th align="center">Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">A) High</td>
+<td align="left">-0.056 ± 0.042 (0.200)</td>
+<td align="left">-0.050 ± 0.051 (0.336)</td>
+<td align="left">-0.061 ± 0.045 (0.188)</td>
+</tr>
+<tr>
+<td align="left">B) Low</td>
+<td align="left">-0.149 ± 0.038 (<bold>0.001</bold>)</td>
+<td align="left">-0.196 ± 0.056 (<bold>0.003</bold>)</td>
+<td align="left">-0.135 ± 0.036 (<bold>0.002</bold>)</td>
+</tr>
+<tr>
+<td align="left">C) Breadth</td>
+<td align="left">0.074 ± 0.025 (<bold>0.017</bold>)</td>
+<td align="left">0.201 ± 0.075 (<bold>0.016</bold>)</td>
+<td align="left">0.026 ± 0.039 (0.520)</td>
+</tr>
+</tbody>
+</table>
+</alternatives>
+</table-wrap>
+<p>Thermal thresholds based on development rate were more consistent across life stages than survivorship thresholds. This pattern was observed in analyses of both the analytical (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4</xref>, Table 1 in <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>) and full data sets (Table 2 in <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>). Specifically, the relationship between <bold>S</bold><sub><bold>breadth</bold></sub> and latitude varied strongly with life stage (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4H</xref>, Table 1 in <xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>), with pupal <bold>S</bold><sub><bold>breadth</bold></sub> changing the least across latitudes.</p>
+</sec>
+</sec>
+<sec id="sec009" sec-type="conclusions">
+<title>Discussion</title>
+<p>By investigating thermal performance in terms of both development and survival, as well as at 50% performance limits rather than thermal extremes, we uncovered key features missing in traditional analyses of thermal performance in ectotherms. We found a consistent pattern of thermal performance curve overlap in which development rate limited performance at low temperatures, while survivorship was the limiting factor at high temperatures. Additionally, when estimating thermal breadth (the favorable temperature range), we detected an unexpected, non-additive effect of survival and development rate. If thermal breadth is estimated using survival or development rate alone, it follows an increasing latitudinal pattern in which temperate species had a larger thermal breadth than tropical species (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4G and 4H</xref>). However, when combining both curves, this pattern disappeared, with species exhibiting a thermal breadth of ~12 °C regardless of latitude (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4I</xref>). Below, we discuss the implications of our findings in the context of adaptation to global change and call for an integration of thermal performance curves to better understand ectotherm thermal sensitivities.</p>
+<sec id="sec010">
+<title>General patterns of curve overlap</title>
+<p>We found a consistent pattern of thermal performance curve overlap in which development thresholds for both high and low limits are higher than survival thresholds. Thus, our results (<xref ref-type="fig" rid="pone.0291393.g003">Fig 3A and 3B</xref>) most closely resemble the hypothetical relationship demonstrated in <xref ref-type="fig" rid="pone.0291393.g002">Fig 2E and 2F</xref>. This pattern, in which each <bold>S</bold><sub><bold>l</bold></sub> has a lower value than the corresponding <bold>D</bold><sub><bold>l</bold></sub>, indicates that development rate is limiting at low temperatures, while survival is limiting at high temperatures (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E and 2F</xref>). While this general pattern was overall consistent across latitudes, we found that the difference between <bold>D</bold><sub><bold>l</bold></sub> and <bold>S</bold><sub><bold>l</bold></sub> limits was greater at high latitudes (<xref ref-type="fig" rid="pone.0291393.g003">Fig 3A</xref>), with temperate populations exhibiting lower survival limits than tropical populations, but all populations exhibiting similar development rate limits regardless of origin. Variation patterns in survival reflect the variety of physiological adaptations that allow temperate species to withstand cold stress at temperatures significantly lower than those that permit metabolism [<xref ref-type="bibr" rid="pone.0291393.ref036">36</xref>]–some at temperatures as low as -40 °C [<xref ref-type="bibr" rid="pone.0291393.ref037">37</xref>]. These adaptations include both immediate responses to cold stress in metabolically active life stages (e.g. cold stupor or chill coma responses [<xref ref-type="bibr" rid="pone.0291393.ref038">38</xref>, <xref ref-type="bibr" rid="pone.0291393.ref039">39</xref>] and those of metabolically inactive life stages (e.g. diapause or hardiness to sub-freezing temperatures [<xref ref-type="bibr" rid="pone.0291393.ref040">40</xref>]. On the other hand, adaptations to heat stress involve the production of heat shock proteins, but are very metabolically expensive and only allow for survival at temperatures a few degrees above the metabolic optimum [<xref ref-type="bibr" rid="pone.0291393.ref041">41</xref>]. We found that the overlap and overall shape of <bold>S</bold> and <bold>P</bold> curves reflect this pattern, in which the range of survival optima is predominantly lower than the singular development optimum, extending the survival curve farther towards the low-temperature end of the spectrum (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E</xref>). Consistently, the interval allowing for 50% survival, <bold>S</bold><sub><bold>breadth</bold></sub>, was larger than the corresponding threshold for development, <bold>D</bold><sub><bold>breadth</bold></sub>, especially at high latitudes (<xref ref-type="fig" rid="pone.0291393.g003">Fig 3C</xref>). At high temperatures, however, the close values of <bold>S</bold><sub><bold>h</bold></sub> and <bold>D</bold><sub><bold>h</bold></sub> leave less room for selection to act to improve overall performance. By calculating thermal limits that allow for 50% performance, we can identify temperature ranges where selection would be likely to occur as opposed to ranges where survivorship is too low to allow for population persistence. These limits can be used to identify geographic areas of interest for conservation purposes, where populations may be rescued via selection.</p>
+</sec>
+<sec id="sec011">
+<title>Differences across life stages and latitudes</title>
+<p>Our analysis of both development and survival curves indicates differences in thermal parameters across life stages that were not detectable from the development curves alone (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4</xref>) that warrant further analyses. Specifically, across life stages, <bold>S</bold><sub><bold>l</bold></sub> showed greater variation at low latitudes (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4E</xref>) than <bold>D</bold><sub><bold>l</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4D</xref>), and <bold>S</bold><sub><bold>h</bold></sub> showed greater variation at high latitudes (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4B</xref>) than <bold>D</bold><sub><bold>h</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4A</xref>). This pattern is consistent with the different selective pressures that would be expected across latitudinal gradients, with heat tolerance selected for in tropical populations and cold tolerance in temperate populations. While activation temperature for metabolic reactions is fairly conserved across taxa [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>], functional traits and ecological roles can trigger deviations from this pattern; for example, Dell et al. [<xref ref-type="bibr" rid="pone.0291393.ref005">5</xref>] showed that prey had lower activation energy than predators, reflecting the asymmetric nature of predator-prey interactions. In holometabolous insects, different life stages have contrasting ecological roles and can occur at different times of the year: thus, they face different selective pressures. Consistently, we found that variation in thermal limits occurred not only across latitudinal gradients, but also across life stages (<xref ref-type="supplementary-material" rid="pone.0291393.s002">S2 File</xref>). This is supported by work in other ectothermic systems [<xref ref-type="bibr" rid="pone.0291393.ref013">13</xref>, <xref ref-type="bibr" rid="pone.0291393.ref042">42</xref>, <xref ref-type="bibr" rid="pone.0291393.ref043">43</xref>] that demonstrates changing thermal parameters depending on life stage. Kingsolver and Buckley [<xref ref-type="bibr" rid="pone.0291393.ref013">13</xref>] found changes in T<sub>0</sub> based on ontogenetic stage and latitude to be highly variable between species as well.</p>
+<p>The most striking difference observed in a performance metric is the relationship between <bold>P</bold><sub><bold>breadth</bold></sub> and latitude (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4I</xref>). As expected, <bold>D</bold><sub><bold>breadth</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4G</xref>) and <bold>S</bold><sub><bold>breadth</bold></sub> (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4H</xref>) increased with increasing latitude, as species experience a wider range of temperature conditions in temperate climates and must be prepared to withstand them [<xref ref-type="bibr" rid="pone.0291393.ref024">24</xref>, <xref ref-type="bibr" rid="pone.0291393.ref044">44</xref>]. However, when combined, those relationships disappear entirely in larvae and pupae, and lessen in magnitude for eggs (flat slopes of regression lines in <xref ref-type="fig" rid="pone.0291393.g004">Fig 4I</xref>). This suggests that the development and survival curves do not overlap in a manner that increases performance (<xref ref-type="fig" rid="pone.0291393.g002">Fig 2E</xref>); rather, the curves are offset from one another along the temperature x-axis such that their combination does not reflect the full breadth of either curve. In other words, at high latitudes, the development and survival optimum temperatures are separated along the temperature x-axis, negating the positive effects of increased thermal breadth in each metric alone. This is consistent with recent studies [<xref ref-type="bibr" rid="pone.0291393.ref029">29</xref>, <xref ref-type="bibr" rid="pone.0291393.ref045">45</xref>] but differs from the conclusions of previous research that utilize traditional metrics such as T<sub>min</sub> or T<sub>max</sub> as an estimate of thermal tolerance [<xref ref-type="bibr" rid="pone.0291393.ref002">2</xref>, <xref ref-type="bibr" rid="pone.0291393.ref046">46</xref>, <xref ref-type="bibr" rid="pone.0291393.ref047">47</xref>]. Such studies assert that broader thermal tolerance at high latitudes is expected due to lower T<sub>min</sub> values and explained by climatic conditions; indeed, it is the pattern we expected to find with our analyses. From a more holistic performance viewpoint, however, this assumption does not hold: a testament to the necessity of including survival data in thermal tolerance calculations. It is important to note, however, that our analytical dataset includes mainly sets from intermediate latitudes (see S1 Fig in <xref ref-type="supplementary-material" rid="pone.0291393.s001">S1 File</xref>); thus, points from very low or high latitudes will have a large influence on the reported relationship between latitude and our metrics. We hope that future research from these regions will solidify our findings.</p>
+</sec>
+<sec id="sec012">
+<title>Future directions and applications</title>
+<p>As the planet continues to warm, organisms will be affected holistically by changing mean and extreme temperatures [<xref ref-type="bibr" rid="pone.0291393.ref048">48</xref>]. Understanding how increasing temperatures will affect each facet of an organism’s performance is critical to making predictions about its success. Moreover, measuring metrics that are relevant on a population-level scale are crucial to extrapolating individual-level effects onto whole species or geographic ranges. Due to their integrative, holistic nature, the performance metrics we propose are more comprehensive than previously-utilized ones that focus on survival or development alone. By calculating values that represent a temperature range at which functions are sustainable, not when either are optimized or completely halted, we can make more informed predictions about population persistence or success. These thresholds can also be applied to identify areas where selection still has the capacity to increase thermal tolerance and/or fitness; we believe understanding the implications of the selection landscape on insect thermal tolerance will be a crucial area of future study as climate change progresses.</p>
+<p>Our results regarding <bold>P</bold><sub><bold>breadth</bold></sub> are critical when considering insect responses to climate change. A general expectation that comes from looking at critical thermal limits is that temperate species should be more able to survive warming temperatures [<xref ref-type="bibr" rid="pone.0291393.ref002">2</xref>, <xref ref-type="bibr" rid="pone.0291393.ref024">24</xref>], due to having a broader thermal range and currently inhabiting a lower region of that thermal range [<xref ref-type="bibr" rid="pone.0291393.ref049">49</xref>]–although phenological or life history patterns may reduce that survival ability (see [<xref ref-type="bibr" rid="pone.0291393.ref050">50</xref>]. Broadly, this should result in temperate species having enough time for either a) selection to act and their thermal tolerance to increase, or b) populations to disperse towards the poles or upward in elevation. However, the observed overlap pattern between development and survival curves at high latitudes offer a key counterpoint. Since survival is limiting at high temperatures, and the expansion of <bold>S</bold><sub><bold>breadth</bold></sub> at high latitudes is occurring on the cool end of the range (not the warm end), we would not necessarily expect that temperate populations would be better able to withstand higher temperatures [<xref ref-type="bibr" rid="pone.0291393.ref024">24</xref>]. Also, we did not see a broader thermal tolerance at high latitudes, as <bold>P</bold><sub><bold>breadth</bold></sub> did not increase with latitude (<xref ref-type="fig" rid="pone.0291393.g004">Fig 4I</xref>). Combined, this suggests we cannot assume that temperate species exhibit increased persistence under warming global conditions. However, it is important to highlight that we do not consider tolerance to thermal conditions above our <bold>P</bold><sub><bold>h</bold></sub> metric (between <bold>P</bold><sub><bold>h</bold></sub> and T<sub>max</sub>), which may have severe consequences on organismal persistence [<xref ref-type="bibr" rid="pone.0291393.ref051">51</xref>, <xref ref-type="bibr" rid="pone.0291393.ref052">52</xref>] and further modify our predictions.</p>
+<p>The framework we propose can be implemented by modelers and empiricists alike to quantify thermal tolerance, especially in insect systems. As the study of thermal limits increases in popularity due to climate change, further integration of thermal performance curves will be possible. We advocate for a broader experimental approach that includes developmental and survival metrics when making TPCs, to aid in population-level predictive efforts. As we attempt to conserve at-risk species and maintain ecosystem services in the face of vast, heterogeneous insect declines world-wide [<xref ref-type="bibr" rid="pone.0291393.ref053">53</xref>, <xref ref-type="bibr" rid="pone.0291393.ref054">54</xref>], integrative approaches that further improve our predictive toolkit are imperative.</p>
+</sec>
+</sec>
+<sec id="sec013" sec-type="supplementary-material">
+<title>Supporting information</title>
+<supplementary-material id="pone.0291393.s001" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.s001" xlink:type="simple">
+<label>S1 File</label>
+<caption>
+<title>List of species and location of populations included in analyses.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0291393.s002" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.s002" xlink:type="simple">
+<label>S2 File</label>
+<caption>
+<title>Model results from the “analytical” and “full” data sets.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0291393.s003" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.s003" xlink:type="simple">
+<label>S3 File</label>
+<caption>
+<title>Phylogenetic analyses.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+<supplementary-material id="pone.0291393.s004" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.s004" xlink:type="simple">
+<label>S4 File</label>
+<caption>
+<title>Models with phylogenetic correction.</title>
+<p>(DOCX)</p>
+</caption>
+</supplementary-material>
+</sec>
+</body>
+<back>
+<ack>
+<p>We are thankful to the team that participated in data gathering: Andra Doherty, Sophie Lokwood, Madeline Lee, Declan Mirabella, Kevin Czachura, Jonas Goldman, and Erin Leeds.</p>
+</ack>
+<ref-list>
+<title>References</title>
+<ref id="pone.0291393.ref001"><label>1</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Huey</surname> <given-names>RB</given-names></name>, <name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>. <article-title>Evolution of thermal sensitivity of ectotherm performance</article-title>. <source>Trends in Ecology and Evolution</source>. <year>1989</year>;<volume>4</volume>: <fpage>131</fpage>–<lpage>135</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/0169-5347%2889%2990211-5" xlink:type="simple">10.1016/0169-5347(89)90211-5</ext-link></comment> <object-id pub-id-type="pmid">21227334</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref002"><label>2</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Deutsch</surname> <given-names>CA</given-names></name>, <name name-style="western"><surname>Tewksbury</surname> <given-names>JJ</given-names></name>, <name name-style="western"><surname>Huey</surname> <given-names>RB</given-names></name>, <name name-style="western"><surname>Sheldon</surname> <given-names>KS</given-names></name>, <name name-style="western"><surname>Ghalambor</surname> <given-names>CK</given-names></name>, <name name-style="western"><surname>Haak</surname> <given-names>DC</given-names></name>, <etal>et al</etal>. <article-title>Impacts of climate warming on terrestrial ectotherms across latitude</article-title>. <source>Proceedings of the National Academy of Sciences</source>. <year>2008</year>;<volume>105</volume>: <fpage>6668</fpage>–<lpage>6672</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1073/pnas.0709472105" xlink:type="simple">10.1073/pnas.0709472105</ext-link></comment> <object-id pub-id-type="pmid">18458348</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref003"><label>3</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Vasseur</surname> <given-names>DA</given-names></name>, <name name-style="western"><surname>Delong</surname> <given-names>JP</given-names></name>, <name name-style="western"><surname>Gilbert</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Greig</surname> <given-names>HS</given-names></name>, <name name-style="western"><surname>Harley</surname> <given-names>CDG</given-names></name>, <name name-style="western"><surname>Mccann</surname> <given-names>KS</given-names></name>, <etal>et al</etal>. <article-title>Increased temperature variation poses a greater risk to species than climate warming</article-title>. <source>Proceedings of the Royal Society B: Biological Sciences</source>. <year>2014</year>;<volume>281</volume>: <fpage>20132612</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rspb.2013.2612" xlink:type="simple">10.1098/rspb.2013.2612</ext-link></comment> <object-id pub-id-type="pmid">24478296</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref004"><label>4</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sinclair</surname> <given-names>BJ</given-names></name>, <name name-style="western"><surname>Marshall</surname> <given-names>KE</given-names></name>, <name name-style="western"><surname>Sewell</surname> <given-names>MA</given-names></name>, <name name-style="western"><surname>Levesque</surname> <given-names>DL</given-names></name>, <name name-style="western"><surname>Willett</surname> <given-names>CS</given-names></name>, <name name-style="western"><surname>Slotsbo</surname> <given-names>S</given-names></name>, <etal>et al</etal>. <article-title>Can we predict ectotherm responses to climate change using thermal performance curves and body temperatures?</article-title> <source>Ecology Letters</source>. <year>2016</year>;<volume>19</volume>: <fpage>1372</fpage>–<lpage>1385</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/ele.12686" xlink:type="simple">10.1111/ele.12686</ext-link></comment> <object-id pub-id-type="pmid">27667778</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref005"><label>5</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Dell</surname> <given-names>AI</given-names></name>, <name name-style="western"><surname>Pawar</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Savage</surname> <given-names>VM</given-names></name>. <article-title>Systematic variation in the temperature dependence of physiological and ecological traits</article-title>. <source>Proceedings of the National Academy of Sciences</source>. <year>2011</year>;<volume>108</volume>: <fpage>10591</fpage>–<lpage>10596</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1073/pnas.1015178108" xlink:type="simple">10.1073/pnas.1015178108</ext-link></comment> <object-id pub-id-type="pmid">21606358</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref006"><label>6</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bonhomme</surname> <given-names>R</given-names></name>. <article-title>Bases and limits to using “degree.day” units</article-title>. <source>European Journal of Agronomy</source>. <year>2000</year>;<volume>13</volume>: <fpage>1</fpage>–<lpage>10</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/S1161-0301%2800%2900058-7" xlink:type="simple">10.1016/S1161-0301(00)00058-7</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref007"><label>7</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rebaudo</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Rabhi</surname> <given-names>VB</given-names></name>. <article-title>Modeling temperature-dependent development rate and phenology in insects: review of major developments, challenges, and future directions</article-title>. <source>Entomologia Experimentalis et Applicata</source>. <year>2018</year>;<volume>166</volume>: <fpage>607</fpage>–<lpage>617</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/eea.12693" xlink:type="simple">10.1111/eea.12693</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref008"><label>8</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Butler</surname> <given-names>GD</given-names></name>, <name name-style="western"><surname>Hamilton</surname> <given-names>AG</given-names></name>. <article-title>Development Time of Heliothis virescens in Relation to Constant Temperature</article-title>. <source>Environmental Entomology</source>. <year>1976</year>;<volume>5</volume>: <fpage>759</fpage>–<lpage>760</lpage>.</mixed-citation></ref>
+<ref id="pone.0291393.ref009"><label>9</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Honěk</surname> <given-names>A.</given-names></name> <article-title>Geographical variation in thermal requirements for insect development</article-title>. <source>European Journal of Entomology</source>. <year>1996</year>. pp. <fpage>303</fpage>–<lpage>312</lpage>.</mixed-citation></ref>
+<ref id="pone.0291393.ref010"><label>10</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Jarošík</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Honěk</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Magarey</surname> <given-names>RD</given-names></name>, <name name-style="western"><surname>Skuhrovec</surname> <given-names>J</given-names></name>. <article-title>Developmental database for phenology models: related insect and mite species have similar thermal requirements</article-title>. <source>Journal of Economic Entomology</source>. <year>2011</year>;<volume>104</volume>: <fpage>1870</fpage>–<lpage>1876</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1603/ec11247" xlink:type="simple">10.1603/ec11247</ext-link></comment> <object-id pub-id-type="pmid">22299347</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref011"><label>11</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sunday</surname> <given-names>JM</given-names></name>, <name name-style="western"><surname>Bates</surname> <given-names>AE</given-names></name>, <name name-style="western"><surname>Dulvy</surname> <given-names>NK</given-names></name>. <article-title>Global analysis of thermal tolerance and latitude in ectotherms</article-title>. <source>Proceedings of the Royal Society B: Biological Sciences</source>. <year>2011</year>;<volume>278</volume>: <fpage>1823</fpage>–<lpage>1830</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rspb.2010.1295" xlink:type="simple">10.1098/rspb.2010.1295</ext-link></comment> <object-id pub-id-type="pmid">21106582</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref012"><label>12</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Buckley</surname> <given-names>LB</given-names></name>. <article-title>Quantifying thermal extremes and biological variation to predict evolutionary responses to changing climate</article-title>. <source>Philosophical Transactions of the Royal Society B: Biological Sciences</source>. <year>2017</year>;<volume>372</volume>: <fpage>20160147</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rstb.2016.0147" xlink:type="simple">10.1098/rstb.2016.0147</ext-link></comment> <object-id pub-id-type="pmid">28483862</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref013"><label>13</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Buckley</surname> <given-names>LB</given-names></name>. <article-title>Ontogenetic variation in thermal sensitivity shapes insect ecological responses to climate change</article-title>. <source>Current Opinion in Insect Science</source>. <year>2020</year>;<volume>41</volume>: <fpage>17</fpage>–<lpage>24</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.cois.2020.05.005" xlink:type="simple">10.1016/j.cois.2020.05.005</ext-link></comment> <object-id pub-id-type="pmid">32599547</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref014"><label>14</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>García-Robledo</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Kuprewicz</surname> <given-names>EK</given-names></name>, <name name-style="western"><surname>Staines</surname> <given-names>CL</given-names></name>, <name name-style="western"><surname>Erwin</surname> <given-names>TL</given-names></name>, <name name-style="western"><surname>Kress</surname> <given-names>WJ</given-names></name>. <article-title>Limited tolerance by insects to high temperatures across tropical elevational gradients and the implications of global warming for extinction</article-title>. <source>Proceedings of the National Academy of Sciences of the United States of America</source>. <year>2016</year>;<volume>113</volume>: <fpage>680</fpage>–<lpage>685</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1073/pnas.1507681113" xlink:type="simple">10.1073/pnas.1507681113</ext-link></comment> <object-id pub-id-type="pmid">26729867</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref015"><label>15</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Bowler</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Terblanche</surname> <given-names>JS</given-names></name>. <article-title>Insect thermal tolerance: What is the role of ontogeny, ageing and senescence?</article-title> <source>Biological Reviews</source>. <year>2008</year>;<volume>83</volume>: <fpage>339</fpage>–<lpage>355</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1469-185x.2008.00046.x" xlink:type="simple">10.1111/j.1469-185x.2008.00046.x</ext-link></comment> <object-id pub-id-type="pmid">18979595</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref016"><label>16</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Forkner</surname> <given-names>RE</given-names></name>, <name name-style="western"><surname>Marquis</surname> <given-names>RJ</given-names></name>, <name name-style="western"><surname>Lill</surname> <given-names>JT</given-names></name>, <name name-style="western"><surname>Le Corff</surname> <given-names>J</given-names></name>. <article-title>Timing is everything? Phenological synchrony and population variability in leaf-chewing herbivores of Quercus</article-title>. <source>Ecological Entomology</source>. <year>2008</year>;<volume>33</volume>: <fpage>276</fpage>–<lpage>285</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1365-2311.2007.00976.x" xlink:type="simple">10.1111/j.1365-2311.2007.00976.x</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref017"><label>17</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kellermann</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Chown</surname> <given-names>SL</given-names></name>, <name name-style="western"><surname>Schou</surname> <given-names>MF</given-names></name>, <name name-style="western"><surname>Aitkenhead</surname> <given-names>I</given-names></name>, <name name-style="western"><surname>Janion-Scheepers</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Clemson</surname> <given-names>A</given-names></name>, <etal>et al</etal>. <article-title>Comparing thermal performance curves across traits: How consistent are they?</article-title> <source>Journal of Experimental Biology</source>. <year>2019</year>;<volume>222</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1242/jeb.193433" xlink:type="simple">10.1242/jeb.193433</ext-link></comment> <object-id pub-id-type="pmid">31085593</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref018"><label>18</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Amarasekare</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Sifuentes</surname> <given-names>R</given-names></name>. <article-title>Elucidating the temperature response of survivorship in insects</article-title>. <source>Functional Ecology</source>. <year>2012</year>;<volume>26</volume>: <fpage>959</fpage>–<lpage>968</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1365-2435.2012.02000.x" xlink:type="simple">10.1111/j.1365-2435.2012.02000.x</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref019"><label>19</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Amarasekare</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Savage</surname> <given-names>V</given-names></name>. <article-title>A framework for elucidating the temperature dependence of fitness</article-title>. <source>American Naturalist</source>. <year>2012</year>;<volume>179</volume>: <fpage>178</fpage>–<lpage>191</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1086/663677" xlink:type="simple">10.1086/663677</ext-link></comment> <object-id pub-id-type="pmid">22218308</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref020"><label>20</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Fasolo</surname> <given-names>AG</given-names></name>, <name name-style="western"><surname>Krebs</surname> <given-names>RA</given-names></name>. <article-title>A comparison of behavioural change in Drosophila during exposure to thermal stress</article-title>. <source>Biological Journal of the Linnean Society</source>. <year>2004</year>;<volume>83</volume>: <fpage>197</fpage>–<lpage>205</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1095-8312.2004.00380.x" xlink:type="simple">10.1111/j.1095-8312.2004.00380.x</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref021"><label>21</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kellermann</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>van Heerwaarden</surname> <given-names>B</given-names></name>. <article-title>Terrestrial insects and climate change: adaptive responses in key traits</article-title>. <source>Physiological Entomology</source>. <year>2019</year>;<volume>44</volume>: <fpage>99</fpage>–<lpage>115</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/phen.12282" xlink:type="simple">10.1111/phen.12282</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref022"><label>22</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Chirault</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Lucas</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Goubault</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Chevrier</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Bressac</surname> <given-names>C</given-names></name>, <name name-style="western"><surname>Lécureuil</surname> <given-names>C</given-names></name>. <article-title>A combined approach to heat stress effect on male fertility in nasonia vitripennis: From the physiological consequences on spermatogenesis to the reproductive adjustment of females mated with stressed males</article-title>. <source>PLoS ONE</source>. <year>2015</year>;<volume>10</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1371/journal.pone.0120656" xlink:type="simple">10.1371/journal.pone.0120656</ext-link></comment> <object-id pub-id-type="pmid">25807005</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref023"><label>23</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Frazier</surname> <given-names>MRR</given-names></name>, <name name-style="western"><surname>Huey</surname> <given-names>RBB</given-names></name>, <name name-style="western"><surname>Berrigan</surname> <given-names>D</given-names></name>. <article-title>Thermodynamics constrains the evolution of insect population growth rates: “Warmer is better.”</article-title> <source>American Naturalist</source>. <year>2006</year>;<volume>168</volume>: <fpage>512</fpage>–<lpage>520</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1086/506977" xlink:type="simple">10.1086/506977</ext-link></comment> <object-id pub-id-type="pmid">17004222</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref024"><label>24</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Addo-Bediako</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Chown</surname> <given-names>SL</given-names></name>, <name name-style="western"><surname>Gaston</surname> <given-names>KJ</given-names></name>. <article-title>Thermal tolerance, climatic variability and latitude</article-title>. <source>Proceedings of the Royal Society B: Biological Sciences</source>. <year>2000</year>;<volume>267</volume>: <fpage>739</fpage>–<lpage>745</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rspb.2000.1065" xlink:type="simple">10.1098/rspb.2000.1065</ext-link></comment> <object-id pub-id-type="pmid">10819141</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref025"><label>25</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Parratt</surname> <given-names>SR</given-names></name>, <name name-style="western"><surname>Walsh</surname> <given-names>BS</given-names></name>, <name name-style="western"><surname>Metelmann</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>White</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Manser</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Bretman</surname> <given-names>AJ</given-names></name>, <etal>et al</etal>. <article-title>Temperatures that sterilize males better match global species distributions than lethal temperatures</article-title>. <source>Nature Climate Change</source>. <year>2021</year>;<volume>11</volume>: <fpage>481</fpage>–<lpage>484</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/s41558-021-01047-0" xlink:type="simple">10.1038/s41558-021-01047-0</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref026"><label>26</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rukke</surname> <given-names>BA</given-names></name>, <name name-style="western"><surname>Aak</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Edgar</surname> <given-names>KS</given-names></name>. <article-title>Mortality, temporary sterilization, and maternal effects of sublethal heat in bed bugs</article-title>. <source>PLOS One</source>. <year>2015</year>;<volume>10</volume>: <fpage>e0127555</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1371/journal.pone.0127555" xlink:type="simple">10.1371/journal.pone.0127555</ext-link></comment> <object-id pub-id-type="pmid">25996999</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref027"><label>27</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Conradie</surname> <given-names>SR</given-names></name>, <name name-style="western"><surname>Woodborne</surname> <given-names>SM</given-names></name>, <name name-style="western"><surname>Cunningham</surname> <given-names>SJ</given-names></name>, <name name-style="western"><surname>McKechnie</surname> <given-names>AE</given-names></name>. <article-title>Chronic, sublethal effects of high temperatures will cause severe declines in southern African arid-zone birds during the 21st century</article-title>. <source>Proceedings of the National Academy of Sciences of the United States of America</source>. <year>2019</year>;<volume>116</volume>: <fpage>14065</fpage>–<lpage>14070</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1073/pnas.1821312116" xlink:type="simple">10.1073/pnas.1821312116</ext-link></comment> <object-id pub-id-type="pmid">31235571</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref028"><label>28</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Dallas</surname> <given-names>HF</given-names></name>, <name name-style="western"><surname>Ross-Gillespie</surname> <given-names>V</given-names></name>. <article-title>Sublethal effects of temperature on freshwater organisms, with special reference to aquatic insects</article-title>. <source>Water SA</source>. <year>2015</year>;<volume>41</volume>: <fpage>712</fpage>–<lpage>726</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.4314/wsa.v41i5.15" xlink:type="simple">10.4314/wsa.v41i5.15</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref029"><label>29</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>MacLean</surname> <given-names>HJ</given-names></name>, <name name-style="western"><surname>Sørensen</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Kristensen</surname> <given-names>TN</given-names></name>, <name name-style="western"><surname>Loeschcke</surname> <given-names>V</given-names></name>, <name name-style="western"><surname>Beedholm</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Kellermann</surname> <given-names>V</given-names></name>, <etal>et al</etal>. <article-title>Evolution and plasticity of thermal performance: An analysis of variation in thermal tolerance and fitness in 22 Drosophila species</article-title>. <source>Philosophical Transactions of the Royal Society B: Biological Sciences</source>. <year>2019</year>;<volume>374</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rstb.2018.0548" xlink:type="simple">10.1098/rstb.2018.0548</ext-link></comment> <object-id pub-id-type="pmid">31203763</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref030"><label>30</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Régnière</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Powell</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Bentz</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Nealis</surname> <given-names>V</given-names></name>. <article-title>Effects of temperature on development, survival and reproduction of insects: Experimental design, data analysis and modeling</article-title>. <source>Journal of Insect Physiology</source>. <year>2012</year>;<volume>58</volume>: <fpage>634</fpage>–<lpage>647</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.jinsphys.2012.01.010" xlink:type="simple">10.1016/j.jinsphys.2012.01.010</ext-link></comment> <object-id pub-id-type="pmid">22310012</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref031"><label>31</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Russell</surname> <given-names>DJ</given-names></name>, editor. <source>Multiple Sequence Alignment Methods</source>. <publisher-loc>Totowa, NJ</publisher-loc>: <publisher-name>Humana Press</publisher-name>; <year>2014</year>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1007/978-1-62703-646-7" xlink:type="simple">10.1007/978-1-62703-646-7</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref032"><label>32</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kozlov</surname> <given-names>AM</given-names></name>, <name name-style="western"><surname>Darriba</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Flouri</surname> <given-names>T</given-names></name>, <name name-style="western"><surname>Morel</surname> <given-names>B</given-names></name>, <name name-style="western"><surname>Stamatakis</surname> <given-names>A</given-names></name>. <article-title>RAxML-NG: a fast, scalable and user-friendly tool for maximum likelihood phylogenetic inference</article-title>. <name name-style="western"><surname>Wren</surname> <given-names>J</given-names></name>, editor. <source>Bioinformatics</source>. <year>2019</year>;<volume>35</volume>: <fpage>4453</fpage>–<lpage>4455</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/bioinformatics/btz305" xlink:type="simple">10.1093/bioinformatics/btz305</ext-link></comment> <object-id pub-id-type="pmid">31070718</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref033"><label>33</label><mixed-citation publication-type="other" xlink:type="simple">Ives A, Dinnage R, Nell LA, Helmus M, Li D. phyr: Model Based Phylogenetic Analysis. 2019.</mixed-citation></ref>
+<ref id="pone.0291393.ref034"><label>34</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ives</surname> <given-names>AR</given-names></name>. <article-title>R 2 s for Correlated Data: Phylogenetic Models, LMMs, and GLMMs</article-title>. <source>Systematic Biology</source>. <year>2019</year>;<volume>68</volume>: <fpage>234</fpage>–<lpage>251</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/sysbio/syy060" xlink:type="simple">10.1093/sysbio/syy060</ext-link></comment> <object-id pub-id-type="pmid">30239975</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref035"><label>35</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Li</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Dinnage</surname> <given-names>R</given-names></name>, <name name-style="western"><surname>Nell</surname> <given-names>L</given-names></name>, <name name-style="western"><surname>Helmus</surname> <given-names>MR</given-names></name>, <name name-style="western"><surname>Ives</surname> <given-names>A</given-names></name>. <article-title>phyr: An R package for phylogenetic species-distribution modelling in ecological communities</article-title>. <source>bioRxiv</source>. <year>2020</year>; <fpage>1</fpage>–<lpage>16</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1101/2020.02.17.952317" xlink:type="simple">10.1101/2020.02.17.952317</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref036"><label>36</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Hoffmann</surname> <given-names>AA</given-names></name>, <name name-style="western"><surname>Chown</surname> <given-names>SL</given-names></name>, <name name-style="western"><surname>Clusella-Trullas</surname> <given-names>S</given-names></name>. <article-title>Upper thermal limits in terrestrial ectotherms: How constrained are they?</article-title> <source>Functional Ecology</source>. <year>2013</year>;<volume>27</volume>: <fpage>934</fpage>–<lpage>949</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/j.1365-2435.2012.02036.x" xlink:type="simple">10.1111/j.1365-2435.2012.02036.x</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref037"><label>37</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Uelmen</surname> <given-names>JA</given-names></name>, <name name-style="western"><surname>Duman</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Lindroth</surname> <given-names>RL</given-names></name>, <name name-style="western"><surname>Schwartzberg</surname> <given-names>EG</given-names></name>, <name name-style="western"><surname>Raffa</surname> <given-names>KF</given-names></name>. <article-title>Supercooling points of diapausing forest tent caterpillar (Lepidoptera: Lasiocampidae) eggs</article-title>. <source>The Canadian Entomologist</source>. <year>2016</year>;<volume>8</volume>: <fpage>1</fpage>–<lpage>8</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.4039/tce.2015.88" xlink:type="simple">10.4039/tce.2015.88</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref038"><label>38</label><mixed-citation publication-type="book" xlink:type="simple"><name name-style="western"><surname>Tauber</surname> <given-names>MJ</given-names></name>, <name name-style="western"><surname>Tauber</surname> <given-names>CA</given-names></name>, <name name-style="western"><surname>Masaki</surname> <given-names>S</given-names></name>. <source>Seasonal adaptations of insects</source>. <publisher-loc>Oxford</publisher-loc>: <publisher-name>Oxford University Press</publisher-name>; <year>1986</year>.</mixed-citation></ref>
+<ref id="pone.0291393.ref039"><label>39</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Ramløv</surname> <given-names>H.</given-names></name> <article-title>Aspects of natural cold tolerance in ectothermic animals</article-title>. <source>Human Reproduction</source>. <year>2000</year>;<volume>15</volume>: <fpage>26</fpage>–<lpage>46</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/humrep/15.suppl%5F5.26" xlink:type="simple">10.1093/humrep/15.suppl_5.26</ext-link></comment> <object-id pub-id-type="pmid">11263535</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref040"><label>40</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sinclair</surname> <given-names>BJ</given-names></name>, <name name-style="western"><surname>Vernon</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Klok</surname> <given-names>CJ</given-names></name>, <name name-style="western"><surname>Chown</surname> <given-names>SL</given-names></name>. <article-title>Insects at low temperatures: An ecological perspective</article-title>. <source>Trends in Ecology and Evolution</source>. <year>2003</year>;<volume>18</volume>: <fpage>257</fpage>–<lpage>262</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/S0169-5347%2803%2900014-4" xlink:type="simple">10.1016/S0169-5347(03)00014-4</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref041"><label>41</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>González-Tokman</surname> <given-names>D</given-names></name>, <name name-style="western"><surname>Córdoba-Aguilar</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Dáttilo</surname> <given-names>W</given-names></name>, <name name-style="western"><surname>Lira-Noriega</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Sánchez-Guillén</surname> <given-names>RA</given-names></name>, <name name-style="western"><surname>Villalobos</surname> <given-names>F</given-names></name>, <etal>et al</etal>. <article-title>Insect responses to heat: physiological mechanisms, evolution and ecological implications in a warming world</article-title>. <source>Biological Reviews</source>. <year>2020</year>;<volume>3</volume>: <fpage>802</fpage>–<lpage>821</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/brv.12588" xlink:type="simple">10.1111/brv.12588</ext-link></comment> <object-id pub-id-type="pmid">32035015</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref042"><label>42</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Arthur Woods</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Buckley</surname> <given-names>LB</given-names></name>, <name name-style="western"><surname>Potter</surname> <given-names>KA</given-names></name>, <name name-style="western"><surname>MacLean</surname> <given-names>HJ</given-names></name>, <name name-style="western"><surname>Higgins</surname> <given-names>JK</given-names></name>. <article-title>Complex life cycles and the responses of insects to climate change</article-title>. <source>Integrative and Comparative Biology</source>. <year>2011</year>;<volume>51</volume>: <fpage>719</fpage>–<lpage>732</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1093/icb/icr015" xlink:type="simple">10.1093/icb/icr015</ext-link></comment> <object-id pub-id-type="pmid">21724617</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref043"><label>43</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Rebolledo</surname> <given-names>AP</given-names></name>, <name name-style="western"><surname>Sgrò</surname> <given-names>CM</given-names></name>, <name name-style="western"><surname>Monro</surname> <given-names>K</given-names></name>, <name name-style="western"><surname>Sgro</surname> <given-names>CM</given-names></name>, <name name-style="western"><surname>Monro</surname> <given-names>K</given-names></name>. <article-title>Thermal performance curves reveal shifts in optima, limits and breadth in early life</article-title>. <source>The Journal of Experimental Biology</source>. <year>2020</year>;<volume>223</volume>: <fpage>jeb233254</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1242/jeb.233254" xlink:type="simple">10.1242/jeb.233254</ext-link></comment> <object-id pub-id-type="pmid">33071221</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref044"><label>44</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Gutiérrez-Pesquera</surname> <given-names>LM</given-names></name>, <name name-style="western"><surname>Tejedo</surname> <given-names>M</given-names></name>, <name name-style="western"><surname>Olalla-Tárraga</surname> <given-names>MA</given-names></name>, <name name-style="western"><surname>Duarte</surname> <given-names>H</given-names></name>, <name name-style="western"><surname>Nicieza</surname> <given-names>A</given-names></name>, <name name-style="western"><surname>Solé</surname> <given-names>M</given-names></name>. <article-title>Testing the climate variability hypothesis in thermal tolerance limits of tropical and temperate tadpoles</article-title>. <source>Journal of Biogeography</source>. <year>2016</year>;<volume>43</volume>: <fpage>1166</fpage>–<lpage>1178</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/jbi.12700" xlink:type="simple">10.1111/jbi.12700</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref045"><label>45</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Tüzün</surname> <given-names>N</given-names></name>, <name name-style="western"><surname>Stoks</surname> <given-names>R</given-names></name>. <article-title>Evolution of geographic variation in thermal performance curves in the face of climate change and implications for biotic interactions</article-title>. <source>Current Opinion in Insect Science</source>. <year>2018</year>;<volume>29</volume>: <fpage>78</fpage>–<lpage>84</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1016/j.cois.2018.07.004" xlink:type="simple">10.1016/j.cois.2018.07.004</ext-link></comment> <object-id pub-id-type="pmid">30551830</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref046"><label>46</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Lancaster</surname> <given-names>LT</given-names></name>. <article-title>Widespread range expansions shape latitudinal variation in insect thermal limits</article-title>. <source>Nature Climate Change</source>. <year>2016</year>;<volume>6</volume>: <fpage>618</fpage>–<lpage>621</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/nclimate2945" xlink:type="simple">10.1038/nclimate2945</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref047"><label>47</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sunday</surname> <given-names>J</given-names></name>, <name name-style="western"><surname>Bennett</surname> <given-names>JM</given-names></name>, <name name-style="western"><surname>Calosi</surname> <given-names>P</given-names></name>, <name name-style="western"><surname>Clusella-Trullas</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Gravel</surname> <given-names>S</given-names></name>, <name name-style="western"><surname>Hargreaves</surname> <given-names>AL</given-names></name>, <etal>et al</etal>. <article-title>Thermal tolerance patterns across latitude and elevation</article-title>. <source>Philosophical Transactions of the Royal Society B: Biological Sciences</source>. <year>2019</year>;<volume>374</volume>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1098/rstb.2019.0036" xlink:type="simple">10.1098/rstb.2019.0036</ext-link></comment> <object-id pub-id-type="pmid">31203755</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref048"><label>48</label><mixed-citation publication-type="other" xlink:type="simple">IPCC. Climate Change 2014: Impacts, Adaptation, and Vulnerability. Part A: Global and Sectoral Aspects. Contribution of Working Group II. In: Field CB, Barros VR, Dokken DJ, Mach KJ, Mastrandrea MD, Bilir TE, et al., editors. Fifth Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge, United Kingdom &amp; New York, USA: Cambridge University press; 2014. p. 688.</mixed-citation></ref>
+<ref id="pone.0291393.ref049"><label>49</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Sunday</surname> <given-names>JM</given-names></name>, <name name-style="western"><surname>Bates</surname> <given-names>AE</given-names></name>, <name name-style="western"><surname>Dulvy</surname> <given-names>NK</given-names></name>. <article-title>Thermal tolerance and the global redistribution of animals</article-title>. <source>Nature Climate Change</source>. <year>2012</year>;<volume>2</volume>: <fpage>686</fpage>–<lpage>690</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/nclimate1539" xlink:type="simple">10.1038/nclimate1539</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref050"><label>50</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Johansson</surname> <given-names>F</given-names></name>, <name name-style="western"><surname>Orizaola</surname> <given-names>G</given-names></name>, <name name-style="western"><surname>Nilsson-örtman</surname> <given-names>V</given-names></name>. <article-title>Temperate insects with narrow seasonal activity periods can be as vulnerable to climate change as tropical insect species</article-title>. <source>Scientific Reports</source>. <year>2020</year>;<volume>10</volume>: <fpage>1</fpage>–<lpage>8</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1038/s41598-020-65608-7" xlink:type="simple">10.1038/s41598-020-65608-7</ext-link></comment> <object-id pub-id-type="pmid">32483233</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref051"><label>51</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>, <name name-style="western"><surname>Diamond</surname> <given-names>SE</given-names></name>, <name name-style="western"><surname>Buckley</surname> <given-names>LB</given-names></name>. <article-title>Heat stress and the fitness consequences of climate change for terrestrial ectotherms</article-title>. <source>Functional Ecology</source>. <year>2013</year>;<volume>27</volume>: <fpage>1415</fpage>–<lpage>1423</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/1365-2435.12145" xlink:type="simple">10.1111/1365-2435.12145</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref052"><label>52</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Buckley</surname> <given-names>LB</given-names></name>, <name name-style="western"><surname>Huey</surname> <given-names>RB</given-names></name>, <name name-style="western"><surname>Kingsolver</surname> <given-names>JG</given-names></name>. <article-title>Asymmetry of thermal sensitivity and the thermal risk of climate change</article-title>. <source>Global Ecology and Biogeography</source>. <year>2022</year>; <fpage>1</fpage>–<lpage>14</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1111/geb.13570" xlink:type="simple">10.1111/geb.13570</ext-link></comment></mixed-citation></ref>
+<ref id="pone.0291393.ref053"><label>53</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wagner</surname> <given-names>DL</given-names></name>, <name name-style="western"><surname>Grames</surname> <given-names>EM</given-names></name>, <name name-style="western"><surname>Forister</surname> <given-names>ML</given-names></name>, <name name-style="western"><surname>Berenbaum</surname> <given-names>MR</given-names></name>, <name name-style="western"><surname>Stopak</surname> <given-names>D</given-names></name>. <article-title>Insect decline in the Anthropocene: Death by a thousand cuts</article-title>. <source>Proceedings of the National Academy of Sciences</source>. <year>2021</year>;<volume>118</volume>: <fpage>e2023989118</fpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1073/pnas.2023989118" xlink:type="simple">10.1073/pnas.2023989118</ext-link></comment> <object-id pub-id-type="pmid">33431573</object-id></mixed-citation></ref>
+<ref id="pone.0291393.ref054"><label>54</label><mixed-citation publication-type="journal" xlink:type="simple"><name name-style="western"><surname>Wagner</surname> <given-names>DL</given-names></name>. <article-title>Insect Declines in the Anthropocene</article-title>. <source>Annual Review of Entomology</source>. <year>2020</year>;<volume>65</volume>: <fpage>457</fpage>–<lpage>480</lpage>. <comment>doi: <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.1146/annurev-ento-011019-025151" xlink:type="simple">10.1146/annurev-ento-011019-025151</ext-link></comment> <object-id pub-id-type="pmid">31610138</object-id></mixed-citation></ref>
+</ref-list>
+</back>
+<sub-article article-type="aggregated-review-documents" id="pone.0291393.r001" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0291393.r001</article-id>
+<title-group>
+<article-title>Decision Letter 0</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Silva</surname>
+<given-names>Daniel de Paiva</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Daniel de Paiva Silva</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0291393" document-id-type="doi" document-type="article" id="rel-obj001" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>0</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">5 Jul 2023</named-content>
+</p>
+<p><!-- <div> -->PONE-D-23-02122<!-- </div> --><!-- <div> -->How development and survival combine to determine the thermal sensitivity of insects<!-- </div> --><!-- <div> -->PLOS ONE</p>
+<p>Dear Dr. Abarca,</p>
+<p>Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.</p>
+<p>Please submit your revised manuscript by Aug 19 2023 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at <email xlink:type="simple">plosone@plos.org</email>. When you're ready to submit your revision, log on to <ext-link ext-link-type="uri" xlink:href="https://www.editorialmanager.com/pone/" xlink:type="simple">https://www.editorialmanager.com/pone/</ext-link> and select the 'Submissions Needing Revision' folder to locate your manuscript file.</p>
+<p>Please include the following items when submitting your revised manuscript:<!-- </div> --><list list-type="bullet"><list-item><p>A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.</p></list-item><list-item><p>A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.</p></list-item><list-item><p>An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.</p></list-item></list><!-- <div> -->If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.</p>
+<p>If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: <ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols" xlink:type="simple">https://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols</ext-link>. Additionally, PLOS ONE offers an option for publishing peer-reviewed Lab Protocol articles, which describe protocols hosted on protocols.io. Read more information on sharing protocols at <ext-link ext-link-type="uri" xlink:href="https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols" xlink:type="simple">https://plos.org/protocols?utm_medium=editorial-email&amp;utm_source=authorletters&amp;utm_campaign=protocols</ext-link>.</p>
+<p>We look forward to receiving your revised manuscript.</p>
+<p>Kind regards,</p>
+<p>Daniel de Paiva Silva, Ph.D.</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Journal Requirements:</p>
+<p>When submitting your revision, we need you to address these additional requirements.</p>
+<p>1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf</ext-link> and </p>
+<p><ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf" xlink:type="simple">https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf</ext-link></p>
+<p>2. Thank you for stating the following financial disclosure: </p>
+<p>This work was funded by Georgetown University and NSF awards:  MSB-1702664 and  EAGER-1839021 to LR and NSF DEB 1950055 to JGK.</p>
+<p>Please state what role the funders took in the study.  If the funders had no role, please state: "The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript." </p>
+<p>If this statement is not correct you must amend it as needed. </p>
+<p>Please include this amended Role of Funder statement in your cover letter; we will change the online submission form on your behalf.</p>
+<p>3. We note that you have stated that you will provide repository information for your data at acceptance. Should your manuscript be accepted for publication, we will hold it until you provide the relevant accession numbers or DOIs necessary to access your data. If you wish to make changes to your Data Availability statement, please describe these changes in your cover letter and we will update your Data Availability statement to reflect the information you provide.</p>
+<p>4. Please review your reference list to ensure that it is complete and correct. If you have cited papers that have been retracted, please include the rationale for doing so in the manuscript text, or remove these references and replace them with relevant current references. Any changes to the reference list should be mentioned in the rebuttal letter that accompanies your revised manuscript. If you need to cite a retracted article, indicate the article’s retracted status in the References list and also include a citation and full reference for the retraction notice.</p>
+<p>[Note: HTML markup is below. Please do not edit.]</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black"> --><bold>Comments to the Author</bold></p>
+<p>1. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->2. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: I Don't Know</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->3. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->4. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: Yes</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->5. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: Dear authors,</p>
+<p>I have had the opportunity to review your manuscript, and I would like to express my appreciation for the valuable contribution you have made to the field of thermal biology. The study is well-conducted and the manuscript is well-written, providing important insights into the thermal sensitivity of insects.I have thoroughly reviewed your manuscript and found it to be exceptionally well-crafted with no significant concerns or shortcomings. This level of quality and attention to detail is truly commendable.</p>
+<p>I would like to offer a suggestion for improvement regarding the detailing of the construction of the phylogenetic tree. Please provide the reader with more details on the phylogenetic methods employed. This will provide more clarity on the phylogeny implications of your results. Once this concern is addressed, I am confident that your work will make a significant contribution.</p>
+<p>Thank you for the opportunity to review your manuscript.</p>
+<p>Reviewer #2: Overview</p>
+<p>In this manuscript, the authors use models to overlap the development and survival performance curves of an array of Lepidopteran species in order to determine which affects their persistence in an area the most, as well as what effects sub-lethal impacts might have on their performance. This was done across different life stages and latitudes.</p>
+<p>This is a very well and clearly written manuscript that I believe will be accessible by a reader who is not an expert in the field. The majority of my comments below are purely just to add a little clarity or higher quality reader experience here and there rather than commenting on issues with the study itself or the writing of the manuscript. I have selected ‘minor revision’ for the paper only because there are a very small number of changes that I recommend below under the ‘specific comments’ heading.</p>
+<p>The question of incorporating multiple different physiological measurements into one single profile for an animal while simultaneously considering sub-lethal effects is something that I have pondered on many an occasion, although I had not combined the two thoughts (single profile and sub-lethal effects) into one yet. Because this manuscript answers questions that I have thought about myself, as well as had discussions with many other thermal physiologists about, I believe it is an important paper with high relevance to its field. Thank you to the authors for answering these questions that have plagued me but that I have not had the chance to focus my full attention on answering yet! Furthermore, this paper directly responds to the growing trend of moving away from single-limit investigations and considering animals more holistically, particularly in the context of climate change. I believe that it will become a staple reading for all researchers working in the field of thermal ecophysiology.</p>
+<p>General comments</p>
+<p>Abstract</p>
+<p>This is a good abstract that encompasses all of the sections well. I have no suggested changes here.</p>
+<p>Introduction</p>
+<p>I find the arguments presented here to be valid and sound. They are backed up and responsive to other published literature. A sufficient and detailed background is provided to support the approach taken, which is cleverly done and fully captures what the authors state they aim to achieve. I put some thought into whether the paragraphs from line 130 onwards belonged in the introduction or the discussion rather. However, I ultimately decided that they fit better in the introduction where they currently are to give background on how the models were due to work. Finally, aims for the paper are given, which aim to test the developed models. I have no general suggestions for changes in this section.</p>
+<p>Methods</p>
+<p>I believe that this study would be reproducible from the methods as presented here. That said, I wonder if an infographic or flowchart of some kind would help the reader fully grasp the process described in lines 180-205? This is not vital for the publication of this manuscript, I think it would just add a little extra clarity if such a figure is possible to make. The steps described in this section in order to prepare the data for analysis make sense to me and are presented in a logical way, a visual representation would just be a nice addition. The supplementary information is appreciated to back the study and its conclusions up.</p>
+<p>The arguments presented in the section titled ‘Calculating thermal performance parameters’ that support the methodological decisions made are logical and valid. I think it is valuable to show these background workings that went into the development of the ideas in the manuscript to validate the final steps. Furthermore, the statistical models used make sense to me.</p>
+<p>Results</p>
+<p>The results are well-described and logical to follow. The general trends described here align with what I have found in my own studies on individual species and my understanding of thermal tolerance, which I wanted to highlight to demonstrate that they make sense. I have no general suggested changes here.</p>
+<p>Discussion</p>
+<p>This is a good discussion where the claims are fully supported by the data and analyses from the results section. The conclusion that development limits performance at low temperatures, while survival limits it at high temperatures, is logical. I am glad to see it so clearly stated here with support from the results. The finding that the thermal breadth for all species across latitudes was very similar is extremely interesting. Perhaps this is the first support for a ‘12deg C performance law’ for insects?!?</p>
+<p>The first paragraph in the discussion is very good at getting the message of this manuscript across in a clear and punchy way. The rest of the discussion thereafter makes the findings very clear and digestible. Valid explanations that are supported by sufficient and relevant literature are also presented for each observed trend. It is fantastic to see this discussion extended beyond thermal tolerance to selection for population persistence too.</p>
+<p>The final section on future directions and applications is very good. I completely agree with all points raised here. This expansion of the study’s findings to understanding how species might respond to climate change is brilliant and should make the reader challenge what they have been thinking thus far, as it did for me.</p>
+<p>Specific comments</p>
+<p>Title</p>
+<p>Short title: I think this could be shortened and made punchier</p>
+<p>Introduction</p>
+<p>Line 85: Replace “lab” with “laboratory”</p>
+<p>Methods</p>
+<p>Line 182: A comment has been left in the text to “insert data repository info”, which needs to be done</p>
+<p>Line 124: I would remove the semi-colon and split this sentence into two as follows “…full dataset. After comparison…”</p>
+<p>Line 239-241: Would it not look better and be clearer if a formula was provided here? E.g. Performance = Standardized Development Rate x Standardized Survivorship. This will just help the reader find this easier if they are following the method and looking for the formula.</p>
+<p>Results</p>
+<p>Figure 3: Perhaps it is just the version of PDF that I downloaded, but the found the quality of all figures to be quite poor. This was particularly important for Figure 3, where I struggled to tell circles and squares apart as a result. I hope that the figures submitted for final publication are of a better quality.</p>
+<p>Table 1 and Figure 4: This table and figure are misplaced. They are first referred to in the paragraph starting on line 292, so I think they should be moved to line 306.</p>
+<p>**********</p>
+<p><!-- <font color="black"> -->6. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: No</p>
+<p>Reviewer #2: <bold>Yes: </bold>Candice Ann Owen</p>
+<p>**********</p>
+<p>[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]</p>
+<p>While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, <ext-link ext-link-type="uri" xlink:href="https://pacev2.apexcovantage.com/" xlink:type="simple">https://pacev2.apexcovantage.com/</ext-link>. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at <email xlink:type="simple">figures@plos.org</email>. Please note that Supporting Information files do not need this step.</p>
+</body>
+</sub-article>
+<sub-article article-type="author-comment" id="pone.0291393.r002">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0291393.r002</article-id>
+<title-group>
+<article-title>Author response to Decision Letter 0</article-title>
+</title-group>
+<related-object document-id="10.1371/journal.pone.0291393" document-id-type="doi" document-type="peer-reviewed-article" id="rel-obj002" link-type="rebutted-decision-letter" object-id="10.1371/journal.pone.0291393.r001" object-id-type="doi" object-type="decision-letter"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="author-response-date">3 Aug 2023</named-content>
+</p>
+<p>Dear Dr. de Paiva Silva, </p>
+<p>We would like to thank you, Dr.  Owen and reviewer #1 for your thoughtful comments and suggestions, which allowed us to prepare an improved version of our manuscript “PONE-D-23-02122. How development and survival combine to determine the thermal sensitivity of insects”. </p>
+<p> In this new version we include a description of how we built the phylogenetic tree used in our analyses, we edited the text to comply with PLOS ONE formatting guidelines, we included the accession number Dryad assigned to the data presented here and we updated the information about our funding sources (see cover letter). </p>
+<p>We thank both reviewers for their positive feedback and constructive comments that allowed us to improve our manuscript. Please find below a list of the reviewers’ suggestions and descriptions on how we addressed each of them.</p>
+<p>We would like to update our financial disclosures to state that: </p>
+<p> "The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript."</p>
+<p>List of responses to reviewer comments:</p>
+<p>Reviewer #1. </p>
+<p>1- “I would like to offer a suggestion for improvement regarding the detailing of the construction of the phylogenetic tree. Please provide the reader with more details on the phylogenetic methods employed. This will provide more clarity on the phylogeny implications of your results. Once this concern is addressed, I am confident that your work will make a significant contribution.”</p>
+<p>We included the following statement in the revised manuscript explaining our phylogenetic methods (lines 311-318): </p>
+<p>“To account for phylogenetic history, we custom built a phylogenetic tree for the 102 species used here. In short, we searched Genbank for 11 full-length, commonly sequenced genomic DNA markers, while accounting for taxonomic issues e.g. synonymy. Five species were not available on Genbank, and in those cases we utilized a congener as a surrogate. Sequences were aligned using mafft v7.294b [31]; Those locus alignments containing 10 or less species were removed, leaving a total of 8 usable loci. We used the resulting supermatrix and built an unpartitioned maximum likelihood tree using RaxML-NG v0.9.0 [32] under a GTR-G substitution model. See supporting information S3 for full details. With a phylogenetic hypothesis in hand, we fitted the models described above, but including the phylogenetic tree, using the R package phyr [33]”</p>
+<p>We also updated Supplement 3, which describes in more depth the process outlined above, including a table of the DNA markers we used and a list of substitutions due to lack of DNA information.</p>
+<p>Reviewer #2: </p>
+<p>Methods</p>
+<p>1. I believe that this study would be reproducible from the methods as presented here. That said, I wonder if an infographic or flowchart of some kind would help the reader fully grasp the process described in lines 180-205? This is not vital for the publication of this manuscript, I think it would just add a little extra clarity if such a figure is possible to make. </p>
+<p>We sketched an infographic but did not consider that it would improve the clarity of the methods described in lines (now 196 to 217) so we decided to keep the original version of this section. </p>
+<p>2. Short title could be shortened and punchier.</p>
+<p>We changed the short title to “Insect thermal sensitivity”</p>
+<p>3. Line 85: Replace “lab” with “laboratory”</p>
+<p>We changed “lab” to “laboratory” as suggested (now line 116)</p>
+<p>4. Line 182: A comment has been left in the text to “insert data repository info”, which needs to be done</p>
+<p>We included Dryad information (line 223):-  DOI: 10.5061/dryad.qjq2bvqk4</p>
+<p>5. Line 124: I would remove the semi-colon and split this sentence into two as follows “…full dataset. After comparison…”</p>
+<p>We think this refers to line 214 (now 235). We removed the semi-colon as suggested.</p>
+<p>6. Line 239-241: Would it not look better and be clearer if a formula was provided here? E.g. Performance = Standardized Development Rate x Standardized Survivorship. This will just help the reader find this easier if they are following the method and looking for the formula.</p>
+<p>We included the formula as suggested (lines 292-293): </p>
+<p>“For each set, we standardized development rate (the reciprocal of development time) and survivorship so they varied between 0 and 1 (representing the maximum value) and subsequently multiplied them to obtain performance (Performance = Standardized Development Rate × Standardized Survivorship).”</p>
+<p>Results</p>
+<p>7. Figure 3: Perhaps it is just the version of PDF that I downloaded, but the found the quality of all figures to be quite poor. This was particularly important for Figure 3, where I struggled to tell circles and squares apart as a result. I hope that the figures submitted for final publication are of a better quality.</p>
+<p>We updated all of our figures using PACE to make sure they meet PLOS format requirements.</p>
+<p>8. Table 1 and Figure 4: This table and figure are misplaced. They are first referred to in the paragraph starting on line 292, so I think they should be moved to line 306.</p>
+<p>We moved Table 1 and Figure 4 so they now appear at the end of the paragraph where they are first mentioned.</p>
+<supplementary-material id="pone.0291393.s005" mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document" position="float" xlink:href="info:doi/10.1371/journal.pone.0291393.s005" xlink:type="simple">
+<label>Attachment</label>
+<caption>
+<p>Submitted filename: <named-content content-type="submitted-filename">ResponseToReviewers.docx</named-content></p>
+</caption>
+</supplementary-material>
+</body>
+</sub-article>
+<sub-article article-type="aggregated-review-documents" id="pone.0291393.r003" specific-use="decision-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0291393.r003</article-id>
+<title-group>
+<article-title>Decision Letter 1</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Silva</surname>
+<given-names>Daniel de Paiva</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Daniel de Paiva Silva</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0291393" document-id-type="doi" document-type="article" id="rel-obj003" link-type="peer-reviewed-article"/>
+<custom-meta-group>
+<custom-meta>
+<meta-name>Submission Version</meta-name>
+<meta-value>1</meta-value>
+</custom-meta>
+</custom-meta-group>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">29 Aug 2023</named-content>
+</p>
+<p>How development and survival combine to determine the thermal sensitivity of insects</p>
+<p>PONE-D-23-02122R1</p>
+<p>Dear Dr. Abarca,</p>
+<p>We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.</p>
+<p>Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.</p>
+<p>An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at <ext-link ext-link-type="uri" xlink:href="http://www.editorialmanager.com/pone/" xlink:type="simple">http://www.editorialmanager.com/pone/</ext-link>, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at <email xlink:type="simple">authorbilling@plos.org</email>.</p>
+<p>If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>Kind regards,</p>
+<p>Daniel de Paiva Silva, Ph.D.</p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+<p>Additional Editor Comments (optional):</p>
+<p>Dr. Abarca,</p>
+<p>Congratulations on your hard work on improving your manuscript! I am pleased to inform that your manuscript has been accepted for publication in PLoS One!</p>
+<p>Best regards,</p>
+<p>Daniel Silva.</p>
+<p>Reviewers' comments:</p>
+<p>Reviewer's Responses to Questions</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> --><bold>Comments to the Author</bold></p>
+<p>1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.<!-- </font> --></p>
+<p>Reviewer #1: All comments have been addressed</p>
+<p>Reviewer #2: All comments have been addressed</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->2. Is the manuscript technically sound, and do the data support the conclusions?</p>
+<p>The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented. <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->3. Has the statistical analysis been performed appropriately and rigorously? <!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->4. Have the authors made all data underlying the findings in their manuscript fully available?</p>
+<p>The <ext-link ext-link-type="uri" xlink:href="http://www.plosone.org/static/policies.action#sharing" xlink:type="simple">PLOS Data policy</ext-link> requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->5. Is the manuscript presented in an intelligible fashion and written in standard English?</p>
+<p>PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.<!-- </font> --></p>
+<p>Reviewer #1: Yes</p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->6. Review Comments to the Author</p>
+<p>Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)<!-- </font> --></p>
+<p>Reviewer #1: Dear authors</p>
+<p>I am writing to inform you that I have carefully reviewed the revised version of your manuscript titled "How Development and Survival Combine to Determine the Thermal Sensitivity of Insects." I am pleased to convey that all of my previous concerns have been thoroughly addressed, and I would like to commend you and your co-authors for the meticulous effort you have put into incorporating my suggested additions.</p>
+<p>The manuscript has evolved into an even more captivating read, offering valuable insights into the intricate interplay between development, survival, and thermal sensitivity in insects. Your study promises to make a significant advancement in our understanding of this subject matter, and I believe it will undoubtedly stimulate further research in the field.</p>
+<p>Thanks for the opportunity.</p>
+<p>Reviewer #2: (No Response)</p>
+<p>**********</p>
+<p><!-- <font color="black" data-darkreader-inline-color="" style="darkreader-inline-color: #e8e6e3;"> -->7. PLOS authors have the option to publish the peer review history of their article (<ext-link ext-link-type="uri" xlink:href="https://journals.plos.org/plosone/s/editorial-and-peer-review-process#loc-peer-review-history" xlink:type="simple">what does this mean?</ext-link>). If published, this will include your full peer review and any attached files.</p>
+<p>If you choose “no”, your identity will remain anonymous but your review may still be made public.</p>
+<p><bold>Do you want your identity to be public for this peer review?</bold> For information about this choice, including consent withdrawal, please see our <ext-link ext-link-type="uri" xlink:href="https://www.plos.org/privacy-policy" xlink:type="simple">Privacy Policy</ext-link>.<!-- </font> --></p>
+<p>Reviewer #1: <bold>Yes: </bold>Vinicius Marques Lopez</p>
+<p>Reviewer #2: <bold>Yes: </bold>Candice Ann Owen</p>
+<p>**********</p>
+</body>
+</sub-article>
+<sub-article article-type="editor-report" id="pone.0291393.r004" specific-use="acceptance-letter">
+<front-stub>
+<article-id pub-id-type="doi">10.1371/journal.pone.0291393.r004</article-id>
+<title-group>
+<article-title>Acceptance letter</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name name-style="western">
+<surname>Silva</surname>
+<given-names>Daniel de Paiva</given-names>
+</name>
+<role>Academic Editor</role>
+</contrib>
+</contrib-group>
+<permissions>
+<copyright-year>2024</copyright-year>
+<copyright-holder>Daniel de Paiva Silva</copyright-holder>
+<license xlink:href="http://creativecommons.org/licenses/by/4.0/">
+<license-p>This is an open access article distributed under the terms of the <ext-link ext-link-type="uri" xlink:href="http://creativecommons.org/licenses/by/4.0/" xlink:type="simple">Creative Commons Attribution License</ext-link>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+</license>
+</permissions>
+<related-object document-id="10.1371/journal.pone.0291393" document-id-type="doi" document-type="article" id="rel-obj004" link-type="peer-reviewed-article"/>
+</front-stub>
+<body>
+<p>
+<named-content content-type="letter-date">19 Sep 2023</named-content>
+</p>
+<p>PONE-D-23-02122R1 </p>
+<p>How development and survival combine to determine the thermal sensitivity of insects </p>
+<p>Dear Dr. Abarca:</p>
+<p>I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now with our production department. </p>
+<p>If your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information please contact <email xlink:type="simple">onepress@plos.org</email>.</p>
+<p>If we can help with anything else, please email us at <email xlink:type="simple">plosone@plos.org</email>. </p>
+<p>Thank you for submitting your work to PLOS ONE and supporting open access. </p>
+<p>Kind regards, </p>
+<p>PLOS ONE Editorial Office Staff</p>
+<p>on behalf of</p>
+<p>Dr. Daniel de Paiva Silva </p>
+<p>Academic Editor</p>
+<p>PLOS ONE</p>
+</body>
+</sub-article>
+</article>
