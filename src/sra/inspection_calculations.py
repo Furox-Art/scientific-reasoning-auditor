@@ -9,28 +9,46 @@ from xml.etree import ElementTree
 
 def statistic_consistency(item,stats):
     from sra.toolkit import _STATISTICS_LOCK
+    alternative=item['alternative']
+    details={'meaning':'Reported statistic/p-value consistency conditional on declared central distribution, tail, exact df and rounding; study validity is unverified.',
+             'alternative':alternative,'alternative_source':item['alternative_source'],
+             'df':item['df'],'df_precision':item['df_precision'],
+             'distribution_assumptions_verified':False,'correction_method_verified':False}
+    if alternative=='unknown' or item['df_precision']!='exact':
+        details['meaning']='Unknown test direction or unresolved df rounding/precision; no consistency verdict. Confirm the direction and exact df from the analysis.'
+        return 'UNDETERMINED',details
+    degrees=[float(v) for v in item['df']]
+    details['backend_df_conversion_exact']=all(Decimal.from_float(value)==Decimal(raw) for value,raw in zip(degrees,item['df']))
+    if not details['backend_df_conversion_exact']:
+        details['meaning']='Exact decimal df cannot be preserved by the float backend; no consistency verdict. Parameter-conversion uncertainty is not bounded.'
+        return 'UNDETERMINED',details
     with localcontext(Context(prec=256)):
         statistic=Decimal(item['statistic'])
         half=Decimal(1).scaleb(statistic.as_tuple().exponent)/2
         low,high=statistic-half,statistic+half
-        if item['test'] in ('t','z'):
+        if alternative=='two-sided':
             low,high=(Decimal(0) if low<=0<=high else min(abs(low),abs(high))),max(abs(low),abs(high))
-        else:
+        elif item['test'] in ('F','chi2'):
             low=max(Decimal(0),low)
+        def outward(value,direction):
+            converted=float(value)
+            if (direction<0 and Decimal.from_float(converted)>value) or (direction>0 and Decimal.from_float(converted)<value):
+                converted=math.nextafter(converted,direction*math.inf)
+            return converted
+        backend_low,backend_high=outward(low,-1),outward(high,1)
         with _STATISTICS_LOCK,warnings.catch_warnings(record=True) as alerts:
             warnings.simplefilter('always')
             def survival(value):
-                if item['test']=='t':
-                    return 2*float(stats.t.sf(float(value),item['df'][0]))
-                if item['test']=='z':
-                    return 2*float(stats.norm.sf(float(value)))
-                distribution=stats.f if item['test']=='F' else stats.chi2
-                return float(distribution.sf(float(value),*item['df']))
-            p_low,p_high=survival(high),survival(low)
-        details={'meaning':'Reported statistic/p-value consistency with two-sided t/z or upper-tail F/chi-square and rounding intervals; study validity is unverified.',
-                 'computed_p_interval':[p_low,p_high],'statistic_interval':[str(low),str(high)]}
-        if alerts or not all(math.isfinite(v) and v>0 for v in (p_low,p_high)):
-            return 'UNDETERMINED',{'meaning':'Numerical warning or unresolved tail underflow; no consistency verdict.'}
+                distribution=getattr(stats,{'t':'t','z':'norm','F':'f','chi2':'chi2'}[item['test']])
+                operation=distribution.cdf if alternative=='less' else distribution.sf
+                return (2 if alternative=='two-sided' else 1)*float(operation(value,*degrees))
+            p_low,p_high=(survival(backend_low),survival(backend_high)) if alternative=='less' else (survival(backend_high),survival(backend_low))
+        details.update(computed_p_interval=[p_low,p_high],statistic_interval=[str(low),str(high)],
+                       backend_statistic_interval=[backend_low,backend_high])
+        if alerts or not all(math.isfinite(v) and 0<v<=1 for v in (p_low,p_high)):
+            details.update(meaning='Numerical warning, invalid probability or unresolved tail underflow; no consistency verdict.')
+            details.pop('computed_p_interval')
+            return 'UNDETERMINED',details
         p=Decimal(item['reported_p'])
         p_half=Decimal(1).scaleb(p.as_tuple().exponent)/2
         margin=8*max(math.ulp(p_low),math.ulp(p_high),math.ulp(float(p)))

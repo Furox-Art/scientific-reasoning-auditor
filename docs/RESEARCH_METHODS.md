@@ -154,6 +154,12 @@ fit preprocessing; it does not inspect or confirm the actual pipeline.
 
 ## Prioritized remaining gaps
 
+Reported-statistic inspection now accepts explicitly declared one-sided t/z
+directions and exact positive fractional df; unknown direction or df precision
+abstains. See `INSPECTION_EXPANSION.md` and the frozen distribution-table protocol
+under `benchmarks/pilots/statistical-context-20261116/`. These are conditional
+numerical/software controls, not new independent human or whole-paper validation.
+
 Three additional offline evidence operations now compare supplied-source lexical
 overlap, caller-mapped protocol fields and supplied-checklist evidence records.
 See `EVIDENCE_CHECKS.md` for exact inputs, bounds and abstention behavior. These

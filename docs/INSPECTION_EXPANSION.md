@@ -83,14 +83,38 @@ interpreter must have this source checkout installed, as required by Node too.
   independence, and no automatic test selection is made.
 
 `statistic_consistency` accepts a test (`t`, `z`, `F`, `chi2`), decimal-string
-`statistic`, exact integer `df` list, decimal-string `reported_p` and `relation`
-(`=`, `<`, `>`; default `=`). t/z are two-sided; F/chi-square upper-tail.
+`statistic`, `df` list, decimal-string `reported_p` and `relation`
+(`=`, `<`, `>`; default `=`). `alternative` accepts `two-sided`, `greater`,
+`less` or `unknown` for t/z, and `greater` or `unknown` for F/chi-square.
+Omitted directions retain two-sided t/z and upper-tail F/chi-square defaults,
+explicitly marked as defaults in the report. Signed t/z statistics are retained
+for one-sided checks: `less` uses the CDF, `greater` the survival function.
+Unknown direction abstains; direction is never selected to improve p agreement.
+
+Degrees of freedom are positive decimals in [1e-6, 1e6]. Decimal strings retain
+the supplied representation. Integer values default to `df_precision: exact`;
+fractional values default to `unknown` and abstain. Declare `df_precision: exact`
+only when the actual analysis supplies exact df. Explicit `rounded` or `unknown`
+abstains: df-rounding interval propagation is not implemented. Corrected df may
+be supplied, but correction choice and calculation remain unverified.
+Even declared exact df abstain when their decimal value cannot be represented
+exactly by the float backend (for example 1.3); .5 and 10.5 are representable.
+No parameter-conversion error bound is assumed. Statistic interval endpoints
+are converted outward so a narrow decimal interval does not silently collapse.
+F/chi-square lower/two-sided tests and noncentral distributions are unsupported.
+
+Automatic source preparation now marks direction and any df precision as unknown,
+including for fractional df; these require caller confirmation. It does not infer
+one-sided intent, Welch df or a correction from prose/contextual notes.
 Both statistic and equal-sign p-value rounding are represented as intervals.
 All possible rounded statistic values agreeing with the reported interval can
 be verified; disjoint intervals can be refuted; overlaps remain undetermined.
 Inequality thresholds are explicit. Tail zero/underflow, nonfinite outputs or
 numerical warnings cannot yield agreement. These checks do not validate study
-design, one-sided-test intent, corrected degrees of freedom or data authenticity.
+design, test direction, df derivation or data authenticity. See the
+[frozen numerical controls](../benchmarks/pilots/statistical-context-20261116/protocol.md)
+for NIST table and separately marked synthetic controls. These controls do not
+estimate whole-paper accuracy or independent human-review performance.
 
 ## 4. Citation source context
 

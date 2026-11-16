@@ -4,10 +4,10 @@ import re
 from bisect import bisect_right
 
 from sra.document import without_fenced_code
-from sra.toolkit_spec import digest
+from sra.toolkit_spec import digest,number
 
 _NUM=r'[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?'
-_REPORTED=re.compile(r'\b(t|F|z|chi2)\s*(?:\((\d+(?:\s*,\s*\d+)?)\))?\s*=\s*('+_NUM+r')\s*[,;]\s*p\s*([=<>])\s*('+_NUM+r')')
+_REPORTED=re.compile(r'\b(t|F|z|chi2)\s*(?:\(\s*('+_NUM+r'(?:\s*,\s*'+_NUM+r')?)\s*\))?\s*=\s*('+_NUM+r')\s*[,;]\s*p\s*([=<>])\s*('+_NUM+r')')
 
 
 def prepare_inspection(document):
@@ -48,10 +48,12 @@ def prepare_inspection(document):
             suggestion=None
             if match:
                 name,dfs,value,relation,p=match.groups()
-                suggestion={'id':f'statistic_{len(candidates)+1}','kind':'statistic_consistency','test':name,
-                            'df':[int(v) for v in dfs.split(',')] if dfs else [],'statistic':value,'reported_p':p,'relation':relation}
                 from sra.extended_inspection import prepare_extra
                 try:
+                    suggestion={'id':f'statistic_{len(candidates)+1}','kind':'statistic_consistency','test':name,
+                                'df':[int(number(v.strip())) if number(v.strip())==number(v.strip()).to_integral_value() else v.strip() for v in dfs.split(',')] if dfs else [],
+                                'statistic':value,'reported_p':p,'relation':relation,'alternative':'unknown',
+                                'df_precision':'unknown' if dfs else 'exact'}
                     prepare_extra(suggestion,None)
                 except ValueError:
                     suggestion=None

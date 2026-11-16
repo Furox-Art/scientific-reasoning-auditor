@@ -52,11 +52,21 @@ def prepare_extra(item,document):
         from sra.symbolic import prepare_symbolic
         return prepare_symbolic(item)
     if kind=='statistic_consistency':
-        _fields(item,base+('test','statistic','df','reported_p'),('relation',))
+        _fields(item,base+('test','statistic','df','reported_p'),('relation','alternative','df_precision'))
         df=item['df']
         counts={'t':1,'F':2,'z':0,'chi2':1}
-        if not isinstance(item['test'],str) or item['test'] not in counts or not isinstance(df,list) or len(df)!=counts[item['test']] or any(type(v) is not int or not 1<=v<=1000000 for v in df):
-            raise ValueError('Statistic test or exact degrees of freedom are unsupported.')
+        if not isinstance(item['test'],str) or item['test'] not in counts or not isinstance(df,list) or len(df)!=counts[item['test']]:
+            raise ValueError('Statistic test or degrees-of-freedom count is unsupported.')
+        degrees=[number(v) for v in df]
+        if any(not number('1e-6')<=v<=1000000 for v in degrees):
+            raise ValueError('Degrees of freedom must be in [1e-6, 1e6].')
+        alternative=item.get('alternative','two-sided' if item['test'] in ('t','z') else 'greater')
+        allowed=('two-sided','greater','less','unknown') if item['test'] in ('t','z') else ('greater','unknown')
+        precision=item.get('df_precision','exact' if all(v==v.to_integral_value() for v in degrees) else 'unknown')
+        if alternative not in allowed or precision not in ('exact','rounded','unknown') or (not degrees and precision!='exact'):
+            raise ValueError('Unsupported tail or degrees-of-freedom precision declaration.')
+        result.update(df=[str(v) for v in degrees],alternative=alternative,
+                      alternative_source='caller' if 'alternative' in item else 'default',df_precision=precision)
         result.update(statistic=str(number(item['statistic'])),reported_p=str(number(item['reported_p'])),relation=item.get('relation','='))
         if not 0<=number(result['reported_p'])<=1 or result['relation'] not in ('=','<','>') or (item['test'] in ('F','chi2') and number(result['statistic'])<0):
             raise ValueError('Unsupported reported statistic or p-value relation.')

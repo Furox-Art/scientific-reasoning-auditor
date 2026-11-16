@@ -8,6 +8,20 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_declared_statistical_context_survives_real_transport(self):
+        base=dict(kind='statistic_consistency',test='t',df=[1],
+                  statistic='2.000000000000',reported_p='.147584')
+        spec={'schema_version':'1.0','checks':[
+            dict(base,id='one_sided',alternative='greater'),
+            dict(base,id='unknown',alternative='unknown'),
+            dict(base,id='fractional',test='F',df=['2','.5'],df_precision='exact',reported_p='.577350')]}
+        response=server.verify_toolkit(json.dumps(spec))
+        self.assertTrue(response['ok'],response)
+        result=response['result']
+        self.assertEqual([r['status'] for r in result['checks']],['VERIFIED','UNDETERMINED','VERIFIED'])
+        self.assertEqual(result['execution_status'],'partial')
+        self.assertFalse(result['checks'][2]['details']['correction_method_verified'])
+
     def test_grouped_methods_survive_real_transport(self):
         path=Path(__file__).parents[2]/'examples/grouped-methods.json'
         response=server.verify_toolkit(path.read_text(encoding='utf-8'))
