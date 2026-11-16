@@ -303,7 +303,8 @@ def execute_paper(row, out):
             raise ValueError("Unexpected scientific verdict in execution-only audit.")
         profile = report["modules"]["discipline:" + row["stratum"]]
         preparation = report["modules"].get("preparation", {}).get("result") or {}
-        item.update(execution_status=report["execution_status"] if equal else "repeat_mismatch",
+        item.update(requested_module_execution_status=report["execution_status"],
+            execution_status=report["execution_status"] if equal else "repeat_mismatch",
             criteria_summary=matrix["summary"],
             profile_states=dict(Counter(c["status"] for c in (profile["result"] or {}).get("items", []))),
             preparation_candidates=dict(Counter(c["kind"] for c in preparation.get("candidates", []))),
@@ -322,6 +323,9 @@ def execute_paper(row, out):
 def run(out):
     import sra
     out = Path(out)
+    repository = Path(__file__).resolve().parents[1]
+    if out.resolve().is_relative_to(repository):
+        raise ValueError("Write audit outputs outside the repository; output files alter repository provenance.")
     if out.exists():
         raise FileExistsError("Choose a fresh output directory; first runs are immutable.")
     selection_raw = (FOLDER / "selection.json").read_bytes()
@@ -366,6 +370,7 @@ def run(out):
         frame_size=selection["frame_size"], unmatched=selection["unmatched"], strata=selection["strata"],
         selected=len(results), available=sum(r["source_status"] == "available" for r in results),
         completed=sum(r.get("execution_status") == "complete" for r in results),
+        requested_modules_complete=sum(r.get("requested_module_execution_status") == "complete" for r in results),
         repeat_equal=sum(r.get("repeat_equal") is True for r in results),
         new_human_labels=0, scientific_accuracy=None, papers=results,
         scope="Prospective six-stratum finite-frame full-text execution audit; not scientific-error accuracy.",

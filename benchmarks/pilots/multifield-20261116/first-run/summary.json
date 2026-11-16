@@ -1,0 +1,864 @@
+{
+  "schema_version": "multifield-execution/1.0",
+  "engine_version": "0.10.0",
+  "python": "3.15.2",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "protocol_sha256": "622f21258f9b6c89da0eb0d486c04b18136fe857992c61f3c66c9b9eca2896f2",
+  "selection_sha256": "efbb643ba6a6d23a53500db42fe5de00298923740ba3efd9c9f4ff3d6e89a773",
+  "inventory_sha256": "7ae14fad08d2945ac450543af74cfaf7f6b75bab99d8d6498d662bbd5db60551",
+  "producer_sha256": "9584afc2d72939c67a8b7dca327310247f75941d44c473fc95d491781af85ad2",
+  "runtime_source_files": {
+    "__init__.py": "bf8ce62a3b0a38f65ba7a06b5a8cfb88ae124f4b1d65d521f5b41226696e679a",
+    "academic_benchmark.py": "11d2e491cbe92cd97516f57fd801055e941cc535e0582486e1213874c7c3da5a",
+    "advanced_checks.py": "8727a071bf1c2cf8ec31b58afa2d50f69087517a8f565f0bbe742b56c70fc1a2",
+    "advanced_spec.py": "352e99f294380f18be2469cf7fa12ebb45e4d907323abed51ee50c8006822daa",
+    "audit.py": "3e5b5829830977ca98afd59ea6a60877d8182f2637b58e03cada6f716cc76fb3",
+    "benchmark.py": "110cdf05341f1b4db7583729191bc0062b12ca097f52126bed34a946e94dbf4f",
+    "capabilities.py": "8c55eb70e412d6dbf30041aa8d59bed10db71c619decfed9fefbb97982d33d08",
+    "checks.py": "c6e67533cd4fa934ab0333827409aa1fb342f70746aa3a6e2f7a4f36b4a6ca72",
+    "cli.py": "bd34c7d76abde344adcb7f38c2756936f3f566f5ff02c5529f3ad1d8a7bb09ab",
+    "criteria.py": "90ef04895fb9e8d031e94539b8df072d9cbb499f076f2d8bd53ae9be8ab5c7f9",
+    "criteria_catalog.py": "a7d0a41546f3046b09014fa0104becc8195be730a03ca21a143239b70c2a4089",
+    "dependent_checks.py": "83d04cf9bb2b1f371175af8964e949307a149ee4fc24a8878ab3c5f278c80613",
+    "dependent_spec.py": "87fd06f61c86771bd4ce6f5f36fc5436a1234ef56b23e7f5e895fbca7c4ec450",
+    "discipline.py": "866cf2bef2c0ee1f1c6e6b3c2a160472be2c8c43f3540dc51e8a95f5d35a2542",
+    "document.py": "0fce823e2bea74dae51b0fea5268a461a0e080ed138f17f13762b222cf73eb2c",
+    "doi.py": "c396eb3d04c70cb094c2fb147da52a5b8d9dedba3bd973c25db211cdd8c18133",
+    "domain_adjudication.py": "185911db40da2ce016d0b8a2fa80b7f577d70c4f8912320994bbb0ad2f13f979",
+    "domain_cohort.py": "7e86210ca972e4e61eb7dca94f8b69de93dfb71a3fc0defadeeb92e7a1b27a0e",
+    "domain_evidence.py": "d131c1a5fd2bfff616013decd50988fd2a68593f36471ca105a26d05f5586fbe",
+    "error_benchmark.py": "3222028b3ddb47cd64a7a77901fae684ce2d9e9fe6a7a751ae296e8c950193ad",
+    "error_benchmark_cli.py": "2748553b07e3c875a64f958123b14daae60a6f19e04210b25289e583a2f40040",
+    "error_evaluation.py": "0329f32b26e3986d69a4e045fc2b6ac92fea3ce41b7d57854dd8f727e83e4fbd",
+    "error_reliability.py": "064144d4d9747c64b0a55c056c3820fdda84a4b476c1ba010b2262d70b04cf3e",
+    "evidence_benchmark.py": "c98360a680f850201519aee14713a724ebbf33e992a106151cdb39c3f8079023",
+    "evidence_checks.py": "a71b212f53fc6929d65cca312e8a3a0edb95d1c1d3074092c9e29f9f0a49b93b",
+    "evidence_spec.py": "3737cef4faf4162c506ada94ae7659709a04fffce1536fe9fd748f96100927f8",
+    "extended_inspection.py": "1dc1464be24c51a1490a309caa263a429be9cf7cbebf82f9f02bb03f389aaab9",
+    "grammar_engine.py": "14ec900222be7b622797da0823e1c95907ebba54ebf3aef14d9944604032551c",
+    "graph.py": "f96b07b522572b3d98b15140c3810083d90fcef8f7daefc25a40bc69ba9e90b9",
+    "inspection.py": "5fa83e555b6bbde379a0ce075610aace101d56bf15a25fac8679d9525e3a947e",
+    "inspection_calculations.py": "f49fe1ed1c1b22c40261f329c85ea92e894efb8437e8bbb261fcf1294523d700",
+    "json_utils.py": "b0b2ed2e45fdb60fd5a280101dc4201bc9fea1f4ae6b6ec00131dbb17d62264e",
+    "labeling.py": "cd2c2ea3c414a3471f618909c466d048c5ce3776328a93ecb135624dd7d0b857",
+    "logic.py": "299d6e2e4e1683e420ef9f2cdcd93a7d72f27fa6c93cc9e1109488c79d34ac57",
+    "logic_cli.py": "9cf9d5aa14ca5617647a12308ace19c48eadc87ed3b9050b8a2bc32ee056c8c6",
+    "logic_report.py": "d2b9578bc57f2a88c939fd320d305402d10bfce59a4218ea8c6ea3562e21f901",
+    "logic_spec.py": "4df8b45e3559272981ac9deec2a8b10d45ab44484576cb92ca1d0b6a45b06be5",
+    "model_client.py": "d7a24b8d1519f3046b57f1e4e73d019fa6d0f40e57d1f1f50b59747263725701",
+    "models.py": "e69049974ec3d8ba5e02e19e33112396a476f23500f0108c3394cd545c665336",
+    "multilingual.py": "a23b094323772031f7f39324411a2624dfafac9cf6b4f70e3e31f3f3591ad3a8",
+    "paper_review.py": "d182a28e9cbc5bacf6d64fe63ca4fdd329d4cab6d04798f2fdd14bb8d127e3b6",
+    "pdf_visual.py": "765ad74e9cdd68477701f859c7ab48a9747daa6eb9b418dbd449508295744958",
+    "provenance.py": "962cb116d67f08eed5321153254454fde61e348284e4fc8973bb1969e09ca7ed",
+    "publication.py": "90b8baada53798c347c866011bdc65da204412738df8f9cd87620e4acdc9a370",
+    "py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "report.py": "75de846b6e2a2bfdccffb13f3ea5419505c70fb2e33193daa9d2c1162cad9ab3",
+    "research_checks.py": "8e3f5fab8efc6bd8504cf93e251a4af3ce6c0305e57ab0bd69ae31cca9bb4224",
+    "research_spec.py": "110e757f45e2029459dc08876b6fffe5a7dddad80ca139796705c9e6949fea91",
+    "review.py": "12a8821481b4962de4264fcfe33c18dcc2a40ecb8c62ed284d34f23a3e555089",
+    "review_report.py": "b97dfaf8e90c2e73d90e0854183fe05c8ee43f777578cdaed00dd6c75305906f",
+    "rule_ablation.py": "6b483f05309177f68aa6702f42754c56e016d0c3b90cc64966aae073f46b3707",
+    "scientific_validation.py": "5c5b93316b076504859b40b37d83a4bef1e6502de06b49b51b5ecbfe1aeead25",
+    "semantic_review.py": "5e8f4159fd439156e8d87a37d1d485c7c92d245bc13c3cfa95cf3ec478e92c99",
+    "statistical_consistency.py": "a06e99018738afedb9ee654ed7f73056d03c58636fd49f9009810417271d2890",
+    "statistics_review.py": "e2333c331353be9746826a1e8120728632baf5539c9352e0782e5eaec8653c67",
+    "stats.py": "b1ac6ee73c5e0ab3d112c3239ac36e70a34c4b670eb7a0ef36840028f49d9e09",
+    "stats_extended.py": "42d483ae4b34b76b9b05ba29d28726d33abb76950cf425865f8c885a2bd44487",
+    "symbolic.py": "ba834d3f2673682e2d13e31d505f55983d228397b35b6f4c5495a9ac86e07ddc",
+    "tabular_values.py": "c1c095dd4b1af3ce913d9bc7a5ec25610641211a63665312eb2af7684c4a4bb2",
+    "toolkit.py": "42c4322d1525af1d07531d91880ee5732c60dc6b3904a60651c5f124aaa6c6f5",
+    "toolkit_cli.py": "820e69afd8c756eb030a6acc7b841a9c20363a5ac3a6573dec1582fd1c999334",
+    "toolkit_report.py": "6f4c96fb06beff97e1897f88d6c23c6c64275b44a369e9a2f641997b4c4dcd64",
+    "toolkit_spec.py": "5ee7664f4683e0a984efd3a108f9b48176ec829d1d003702f5d0d387f29c5f03",
+    "unified_cli.py": "5531a9697354c1f0ea5e5d974157187c1e8752a8b911c657d7f1dae946139e65",
+    "validation.py": "32d49c9023e2e67e0e1bdb77964170c65790314c85dfb07c2f0a0e81ad070644",
+    "writing.py": "121f3966abd43b1e99a073350c6098d9353c2f529f1178e96b9d3177c4c8fcb9",
+    "writing_style.py": "2662ef862c766f96900aa32be69a4c56bc86b07599741804129844cf7b347e5c"
+  },
+  "clarification_sha256": "3916e8498e9ad0d197c69aa03dbb5afdc18ce0e238ca51b95afef943e2fe0969",
+  "semantic_comparison": "Exact findings/results/hashes; only enumerated timestamps/display paths excluded. Raw reports retained.",
+  "frame_size": 1022,
+  "unmatched": 21,
+  "strata": [
+    {
+      "stratum": "physics",
+      "frame_size": 117,
+      "sample_size": 2,
+      "sampling_fraction": 0.017094017094017096
+    },
+    {
+      "stratum": "chemistry",
+      "frame_size": 94,
+      "sample_size": 2,
+      "sampling_fraction": 0.02127659574468085
+    },
+    {
+      "stratum": "computing",
+      "frame_size": 207,
+      "sample_size": 2,
+      "sampling_fraction": 0.00966183574879227
+    },
+    {
+      "stratum": "animal",
+      "frame_size": 74,
+      "sample_size": 2,
+      "sampling_fraction": 0.02702702702702703
+    },
+    {
+      "stratum": "social-science",
+      "frame_size": 255,
+      "sample_size": 2,
+      "sampling_fraction": 0.00784313725490196
+    },
+    {
+      "stratum": "clinical",
+      "frame_size": 254,
+      "sample_size": 2,
+      "sampling_fraction": 0.007874015748031496
+    }
+  ],
+  "selected": 12,
+  "available": 12,
+  "completed": 0,
+  "repeat_equal": 0,
+  "new_human_labels": 0,
+  "scientific_accuracy": null,
+  "papers": [
+    {
+      "doi": "10.1371/journal.pone.0297197",
+      "stratum": "physics",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "079436090a72ffac594d95246b7bade4e83c77ad2e2e23cb983d2fb3e9d567a4",
+      "first_report_sha256": "6c11ed851977bedc96ee3f990347ed1ce5fca9900a283490c67ee3c92ef80390",
+      "repeat_equal": false,
+      "repeat_report_sha256": "80eafbee96a69ecea7065f5399b6bfe350a05b24cb3fbbe5706ca8247323777f",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 7,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 26,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "NOT_DETECTED_REVIEW_MANUALLY": 6
+      },
+      "preparation_candidates": {
+        "figure": 8,
+        "statistic": 4,
+        "assumption": 1
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:physics": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "52dba8d504fdf8946f0fc77ee94a4c0498a9266f1641aaab6cb5a86dcf6caac6",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0291393",
+      "stratum": "physics",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "56c782a40e6982557ff8dfc66ef75d6d35074c0a639d3075691014c68bf775cd",
+      "first_report_sha256": "4f01e6584c0b861a7b3da339411d1ba8fa2bd5a229200dd48d3372e87804e569",
+      "repeat_equal": false,
+      "repeat_report_sha256": "6fdc0f0a631c6ab772092c7c7e78166a16b32194a613461354acb11c819ab588",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 7,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 26,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "TEXTUAL_EVIDENCE_CANDIDATE": 1,
+        "NOT_DETECTED_REVIEW_MANUALLY": 3,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 2
+      },
+      "preparation_candidates": {
+        "figure": 22,
+        "assumption": 2
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:physics": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "d3e7a2e0ff5fc0f3cf399496387cf1bb97aceeb732ce9029bbf0c0397f0b6d4e",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0294187",
+      "stratum": "chemistry",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "80b1255b143c9453841d4d389f1389c9c8bd64e4cfa90920b6650566b98aa381",
+      "first_report_sha256": "46adea28c8d961fe326ef4608ffac69ebd2ed643e5dbec1e4576bc5da2e127d7",
+      "repeat_equal": false,
+      "repeat_report_sha256": "630bfb56bde8c8db21e34e38e11258992415fe46e958d30a548411cea3448044",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 7,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 26,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "PARTIAL_CUES_REVIEW_MANUALLY": 5,
+        "NOT_DETECTED_REVIEW_MANUALLY": 1
+      },
+      "preparation_candidates": {
+        "figure": 20,
+        "statistic": 9
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:chemistry": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "0b99619449221364661adb00e26b0bdfc294799ac07bc68ccf08aee47ef92b6c",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0295687",
+      "stratum": "chemistry",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "72349493ea663154e331d11655264565c1a4641a73ab3a3865244f32801072f7",
+      "first_report_sha256": "7374e57dd5f9adf2a12a95e2f997bf1c78e5e70854f8a4e7db54fb1b4888494d",
+      "repeat_equal": false,
+      "repeat_report_sha256": "86e87752d34a6b0778fb0a23de0cd02179ac4d0c04e22f7cbd8288a6b0b36675",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 7,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 26,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "PARTIAL_CUES_REVIEW_MANUALLY": 3,
+        "NOT_DETECTED_REVIEW_MANUALLY": 3
+      },
+      "preparation_candidates": {
+        "figure": 9
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:chemistry": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "566fda7f1888bcc562cf71ad4d7758ee3e06bf97e89bb9538cfd47353ed92806",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0295491",
+      "stratum": "computing",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "624cc76c879ae3079142847f15e5ad1486d6d7f1f0d53ea90f19f7e469207351",
+      "first_report_sha256": "a0f5d77ab7e9b2285112cdc819196a1d064a5085a182da2e24f5097513c17664",
+      "repeat_equal": false,
+      "repeat_report_sha256": "08941e01db0f065a66d175a2ccbd866ade1cf0e9a1441891bab576004579efc7",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "NOT_DETECTED_REVIEW_MANUALLY": 5,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 2
+      },
+      "preparation_candidates": {
+        "figure": 4,
+        "statistic": 5
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:computing": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "346f5edcddd4f37a89a5b1b040a0b6d853728522bb7970479802de274cab23b6",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0297402",
+      "stratum": "computing",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "dcd0bfceea3b01996f577eb9edd60b7ab44ede277b0713f974c4fb9af0785483",
+      "first_report_sha256": "10eb897901057a3dabb26de26a934f5814b3516abc0b978d3a9ccab1feefd07e",
+      "repeat_equal": false,
+      "repeat_report_sha256": "b7badcf835280511fbc00dde08ca62353b70a397d2f9cbd7b5efb6104824bc2f",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "NOT_DETECTED_REVIEW_MANUALLY": 3,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 4
+      },
+      "preparation_candidates": {
+        "statistic": 7,
+        "figure": 11
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:computing": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "688599632f195bbc8464cb187ca4eacebc9b61d061381dd244a3c39072021f26",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0288477",
+      "stratum": "animal",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "b1285f4f9856fcde30cab651d5f6ce1cf5c4b4be0704bdcae14f5c470a3acb58",
+      "first_report_sha256": "8f819421fa8a84ed53d42bd9ab32685ec7f0e9b752fb404478197fb60a27ccda",
+      "repeat_equal": false,
+      "repeat_report_sha256": "513b46b1f368c82a2bdd9f65d3165983b1b190e08e0bc4d79f31332d9a2ba62f",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "NOT_DETECTED_REVIEW_MANUALLY": 5,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 1,
+        "TEXTUAL_EVIDENCE_CANDIDATE": 1
+      },
+      "preparation_candidates": {
+        "figure": 8
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:animal": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "c90bb1a7b0b7e344426ce8570b9a0e2b84607e23f494d70ba1cb1cb80fb1790e",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0291744",
+      "stratum": "animal",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "f20457de98155ba676bf6cc282a1c004d05c22b7a5fe9fecfa3c482a4d1a271f",
+      "first_report_sha256": "131b4b57f581e2ae68bfad1b73ba83f78314c76d01dc4fb9853aaa8b83fc901e",
+      "repeat_equal": false,
+      "repeat_report_sha256": "4030231f9f280cb3ead0538cac267e7d160f12ff08e76dde1c254077913fbaa5",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "NOT_DETECTED_REVIEW_MANUALLY": 2,
+        "TEXTUAL_EVIDENCE_CANDIDATE": 1,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 4
+      },
+      "preparation_candidates": {
+        "equation": 1,
+        "figure": 23,
+        "statistic": 15
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:animal": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "25ca54e10a2062cba926a447cd9a1567ee078404e5815b215dd98f7046f7e1c8",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0292700",
+      "stratum": "social-science",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "4570d80bdd457eafddf5ae98ef7bd20b73cdc64f84640e15b74021b03eec2c9f",
+      "first_report_sha256": "3cd084f52d20cdbf6d045ef17b829715b46755fecce27ebf178e939c7cd553be",
+      "repeat_equal": false,
+      "repeat_report_sha256": "378d3f04a3fc37d46abf82aa8637b0599e0fb682655cfb7b1858b362066a1c4e",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "TEXTUAL_EVIDENCE_CANDIDATE": 2,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 2,
+        "NOT_DETECTED_REVIEW_MANUALLY": 2
+      },
+      "preparation_candidates": {
+        "figure": 28,
+        "assumption": 2
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:social-science": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "f2c418dfdb5f198a9b4814113ff2fe143609d68e28c46de951c5f8f94309ad69",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0295571",
+      "stratum": "social-science",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "08a4b343cb7a6262b6bf98a5467c86a74eef9ceedec4e29a922730d55739f7a6",
+      "first_report_sha256": "7d9cda35b1895511dc8a011d031f0bfc27cd30c952a8a8c5dbca132aca11536d",
+      "repeat_equal": false,
+      "repeat_report_sha256": "389d609b3b5a36ebf72638e29a8c6c21301d86187157de3455ebb1123d3ec20d",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 10,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 23,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "TEXTUAL_EVIDENCE_CANDIDATE": 2,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 2,
+        "NOT_DETECTED_REVIEW_MANUALLY": 2
+      },
+      "preparation_candidates": {
+        "statistic": 1,
+        "assumption": 2
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:social-science": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "15dea463813bf32edbcb330e3936fc012973e26efb66a4a55be6c1e071859d72",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0296708",
+      "stratum": "clinical",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "d7861d7382f819257d49e8955e170f0373c8bf20d6f0206715870168b83b60a8",
+      "first_report_sha256": "fb9437c086ec5e6d744b3e80326da683ec4779353fe460f446cb220a474e27ed",
+      "repeat_equal": false,
+      "repeat_report_sha256": "4117268029e00b39a60791e54ac9ec6f9fc7bc68eccc88e10891d590aba904ac",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 12,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 21,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "TEXTUAL_EVIDENCE_CANDIDATE": 1,
+        "NOT_DETECTED_REVIEW_MANUALLY": 3,
+        "PARTIAL_CUES_REVIEW_MANUALLY": 3
+      },
+      "preparation_candidates": {
+        "statistic": 10,
+        "figure": 15,
+        "assumption": 1
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:clinical": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "1134e8d44aa1194cefde192016554b3c2bf7ae30d2cce1b3e2ef4e3e96ea858c",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    },
+    {
+      "doi": "10.1371/journal.pone.0296260",
+      "stratum": "clinical",
+      "source_status": "available",
+      "scientific_accuracy": null,
+      "human_labels": null,
+      "human_full_reading": false,
+      "source_sha256": "5f4f0090f8c7f9c2a87242868caa2b8469ce80dde25ef59977cb4f403694e45d",
+      "first_report_sha256": "e695356a53e83af2e9cc6166578b3ff59c10882c3b684a758170cd6b83e35d64",
+      "repeat_equal": false,
+      "repeat_report_sha256": "c2cf988d9da7b33f667747bdce7d5dacb870201ad865405f5ef72df5e48b4f3c",
+      "execution_status": "repeat_mismatch",
+      "criteria_summary": {
+        "criteria_total": 43,
+        "applicability": {
+          "applicable": 12,
+          "requires_review": 31,
+          "not_applicable": 0
+        },
+        "support_level": {
+          "structured_checks": 13,
+          "screening_only": 20,
+          "human_review_only": 9,
+          "not_implemented": 1
+        },
+        "execution_status": {
+          "checks_completed": 0,
+          "screening_completed": 12,
+          "partial": 0,
+          "failed": 0,
+          "unavailable": 0,
+          "not_requested": 21,
+          "human_review_required": 9,
+          "not_implemented": 1,
+          "not_applicable": 0
+        }
+      },
+      "profile_states": {
+        "PARTIAL_CUES_REVIEW_MANUALLY": 2,
+        "NOT_DETECTED_REVIEW_MANUALLY": 5
+      },
+      "preparation_candidates": {
+        "statistic": 8,
+        "figure": 14
+      },
+      "suggested_checks": 0,
+      "module_states": {
+        "statistics": "not_requested",
+        "scientific": "not_requested",
+        "preparation": "completed",
+        "extraction": "completed",
+        "reasoning": "completed",
+        "writing": "completed",
+        "discipline:clinical": "completed",
+        "citations": "completed",
+        "model": "not_requested"
+      },
+      "semantic_report_sha256": "c25372da899592f40e77a3370908e7f7ed845414163f553956b615857627d1b7",
+      "failure": "First and repeated semantic reports differ; both raw reports retained."
+    }
+  ],
+  "scope": "Prospective six-stratum finite-frame full-text execution audit; not scientific-error accuracy.",
+  "limitations": [
+    "One publisher and one month; not representative of all science.",
+    "Equal stratum allocation is not a self-weighted population sample.",
+    "Taxonomy and profile applicability require human confirmation.",
+    "Machine-ingested full text is not an expert or human whole-paper review.",
+    "Flattened equations/tables; linked figures and supplements not verified.",
+    "No independent human gold labels; precision, recall and scientific accuracy not estimated."
+  ]
+}

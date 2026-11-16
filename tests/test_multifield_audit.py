@@ -188,6 +188,10 @@ class RepeatTests(unittest.TestCase):
             self.assertEqual(result["execution_status"], "failed")
             self.assertTrue((root / "out/papers/0000001.json").exists())
 
+    def test_output_inside_source_tree_rejected_before_any_audit(self):
+        with self.assertRaisesRegex(ValueError, "outside the repository"):
+            audit.run(audit.FOLDER / "must-not-exist")
+
     def test_existing_outputs_and_symlinks_are_not_overwritten(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "existing"
