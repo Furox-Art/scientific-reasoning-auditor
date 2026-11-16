@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0",
+  "scope": "Distribution-table and synthetic software controls; no whole-paper or human-review validation.",
+  "sources": [
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3671.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3673.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm"
+  ],
+  "cases": [
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_1_greater",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          1
+        ],
+        "statistic": "6.314",
+        "reported_p": "0.050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_1_less",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          1
+        ],
+        "statistic": "-6.314",
+        "reported_p": "0.050",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_1_two_sided",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          1
+        ],
+        "statistic": "6.314",
+        "reported_p": "0.100",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_2_greater",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          10
+        ],
+        "statistic": "1.812",
+        "reported_p": "0.050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_2_less",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          10
+        ],
+        "statistic": "-1.812",
+        "reported_p": "0.050",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_2_two_sided",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          10
+        ],
+        "statistic": "1.812",
+        "reported_p": "0.100",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_3_greater",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          20
+        ],
+        "statistic": "1.725",
+        "reported_p": "0.050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_3_less",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          20
+        ],
+        "statistic": "-1.725",
+        "reported_p": "0.050",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "t_3_two_sided",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          20
+        ],
+        "statistic": "1.725",
+        "reported_p": "0.100",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_1_greater",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.645",
+        "reported_p": "0.050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_1_less",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "-1.645",
+        "reported_p": "0.050",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_1_two_sided",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.645",
+        "reported_p": "0.100",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_2_greater",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.960",
+        "reported_p": "0.025",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_2_less",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "-1.960",
+        "reported_p": "0.025",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_2_two_sided",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.960",
+        "reported_p": "0.050",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_3_greater",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "2.576",
+        "reported_p": "0.005",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_3_less",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "-2.576",
+        "reported_p": "0.005",
+        "alternative": "less"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST table with declared symmetry transformation",
+      "check": {
+        "id": "z_3_two_sided",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "2.576",
+        "reported_p": "0.010",
+        "alternative": "two-sided"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "F_1",
+        "kind": "statistic_consistency",
+        "test": "F",
+        "df": [
+          1,
+          10
+        ],
+        "statistic": "4.965",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "F_2",
+        "kind": "statistic_consistency",
+        "test": "F",
+        "df": [
+          2,
+          10
+        ],
+        "statistic": "4.103",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "F_3",
+        "kind": "statistic_consistency",
+        "test": "F",
+        "df": [
+          5,
+          10
+        ],
+        "statistic": "3.326",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "chi2_1",
+        "kind": "statistic_consistency",
+        "test": "chi2",
+        "df": [
+          1
+        ],
+        "statistic": "3.841",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "chi2_2",
+        "kind": "statistic_consistency",
+        "test": "chi2",
+        "df": [
+          2
+        ],
+        "statistic": "5.991",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "NIST upper-tail table",
+      "check": {
+        "id": "chi2_3",
+        "kind": "statistic_consistency",
+        "test": "chi2",
+        "df": [
+          10
+        ],
+        "statistic": "18.307",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "VERIFIED"
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "check": {
+        "id": "unknown_t",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          10
+        ],
+        "statistic": "1.812",
+        "reported_p": ".050",
+        "alternative": "unknown"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "check": {
+        "id": "unknown_z",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.645",
+        "reported_p": ".050",
+        "alternative": "unknown"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "check": {
+        "id": "unknown_F",
+        "kind": "statistic_consistency",
+        "test": "F",
+        "df": [
+          1,
+          10
+        ],
+        "statistic": "4.965",
+        "reported_p": ".050",
+        "alternative": "unknown"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic unknown-direction control",
+      "check": {
+        "id": "unknown_chi2",
+        "kind": "statistic_consistency",
+        "test": "chi2",
+        "df": [
+          1
+        ],
+        "statistic": "3.841",
+        "reported_p": ".050",
+        "alternative": "unknown"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic unresolved df-precision control",
+      "check": {
+        "id": "df_t",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          "10.5"
+        ],
+        "statistic": "3.000",
+        "reported_p": ".050",
+        "alternative": "greater"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic unresolved df-precision control",
+      "check": {
+        "id": "df_F",
+        "kind": "statistic_consistency",
+        "test": "F",
+        "df": [
+          "1.5",
+          "10.5"
+        ],
+        "statistic": "3.000",
+        "reported_p": ".050",
+        "alternative": "greater",
+        "df_precision": "rounded"
+      },
+      "expected_status": "UNDETERMINED"
+    },
+    {
+      "origin": "Synthetic intentionally wrong direction/p pair",
+      "check": {
+        "id": "wrong_direction_t",
+        "kind": "statistic_consistency",
+        "test": "t",
+        "df": [
+          10
+        ],
+        "statistic": "1.812",
+        "reported_p": ".050",
+        "alternative": "less"
+      },
+      "expected_status": "REFUTED"
+    },
+    {
+      "origin": "Synthetic intentionally wrong direction/p pair",
+      "check": {
+        "id": "wrong_direction_z",
+        "kind": "statistic_consistency",
+        "test": "z",
+        "df": [],
+        "statistic": "1.645",
+        "reported_p": ".050",
+        "alternative": "less"
+      },
+      "expected_status": "REFUTED"
+    }
+  ]
+}
