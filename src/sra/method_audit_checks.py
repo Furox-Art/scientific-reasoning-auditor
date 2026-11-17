@@ -14,30 +14,41 @@ def _compare(left, right, fields):
             for field in fields]
 
 
+def _unresolved(rows):
+    return [row['field'] + (':ambiguous_quote' if row['comparison'] != 'unknown' else '')
+            for row in rows if row['comparison'] == 'unknown' or
+            any(value is not None and value.get('selection') == 'ambiguous_first'
+                for value in (row['left'], row['right']))]
+
+
 def novelty_comparison(item, backend):
     comparisons, unknown = [], []
     for source in item['comparators']:
         rows = _compare(item['contribution'], source['features'], item['dimensions'])
-        missing = [row['field'] for row in rows if row['comparison'] == 'unknown']
+        missing = _unresolved(rows)
         unknown.extend(source['id'] + ':' + field for field in missing)
         state = ('unknown' if missing else 'same_declared_features' if
                  all(row['comparison'] == 'equal' for row in rows) else 'different_declared_features')
         comparisons.append(dict(id=source['id'], sha256=source['sha256'], comparison=state, fields=rows))
+    required = item.get('required_comparator_ids')
+    missing_required = [] if required is None else [key for key in required if key not in {row['id'] for row in comparisons}]
+    unknown.extend('required_comparator:' + key for key in missing_required)
     return 'UNDETERMINED' if unknown else 'CANDIDATES', {
         'text_sha256': item['text_sha256'], 'comparisons': comparisons,
+        'required_comparator_ids': required, 'missing_required_comparators': missing_required,
         'same_feature_sources': [row['id'] for row in comparisons if row['comparison'] == 'same_declared_features'],
         'unassessed_checks': unknown, 'scientific_novelty': 'NOT_ASSESSED', 'corpus_recall': 'NOT_ASSESSED',
-        'meaning': 'Case-sensitive comparison of caller-mapped features in supplied snapshots only. Equal features identify prior-work review candidates; differences do not establish novelty. Source selection, historical priority, mapping semantics and literature completeness are unverified. Quotes use the first exact occurrence in each snapshot.'}
+        'meaning': 'Case-sensitive comparison of caller-mapped features in supplied snapshots only. Equal features identify prior-work review candidates; differences do not establish novelty. Source selection, historical priority, mapping semantics and literature completeness are unverified. Quotes use explicit offsets or a unique occurrence; ambiguous unselected quotes abstain.'}
 
 
 def question_method_alignment(item, backend):
     rows = _compare(item['question'], item['method'], TARGET_FIELDS)
-    unknown = [row['field'] for row in rows if row['comparison'] == 'unknown']
+    unknown = _unresolved(rows)
     differences = [row['field'] for row in rows if row['comparison'] == 'different']
     return 'UNDETERMINED' if unknown else 'REFUTED' if differences else 'VERIFIED', {
         'text_sha256': item['text_sha256'], 'fields': rows, 'differences': differences,
         'unassessed_checks': unknown, 'method_appropriateness': 'NOT_ASSESSED',
-        'meaning': 'Literal equality of six caller-mapped question/method target fields only. VERIFIED means the supplied strings agree, not that a method identifies the target or answers the research question. Different strings may describe equivalent concepts; equal strings may hide substantive differences. Causal identification, model choice and mapping semantics require review. Quotes use the first exact occurrence.'}
+        'meaning': 'Literal equality of six caller-mapped question/method target fields only. VERIFIED means the supplied strings agree, not that a method identifies the target or answers the research question. Different strings may describe equivalent concepts; equal strings may hide substantive differences. Causal identification, model choice and mapping semantics require review. Ambiguous unselected quote occurrences abstain; explicit offsets remain caller-supplied evidence roles.'}
 
 
 def literature_search_audit(item, backend):
@@ -68,12 +79,21 @@ def literature_search_audit(item, backend):
         count_agreement = counts['records_before'] - counts['duplicates_removed'] == counts['records_after']
         if not count_agreement:
             issues.append('deduplication_count_mismatch')
+    coverage = None
+    if 'reference_coverage' in item:
+        selected = item['reference_coverage']
+        retrieved = set(selected['retrieved'])
+        absent = [key for key in selected['required'] if key not in retrieved]
+        coverage = dict(selected, missing_required=absent,
+                        matched_count=len(selected['required']) - len(absent), required_count=len(selected['required']))
+        issues.extend('required_reference_not_retrieved:' + key for key in absent)
     return 'UNDETERMINED' if unknown else 'REFUTED' if issues else 'VERIFIED', {
         'as_of': item['as_of'], 'max_age_days': item['max_age_days'],
         'required_sources': item['required_sources'], 'missing_sources': missing_sources,
         'searches': records, 'deduplication': dict(counts, arithmetic_agrees=count_agreement),
+        'reference_coverage': coverage,
         'issues': issues, 'unassessed_checks': unknown, 'literature_adequacy': 'NOT_ASSESSED',
-        'meaning': 'Audit of supplied search records, caller-selected sources/age threshold and deduplication arithmetic only. VERIFIED is record consistency, not adequate literature coverage or PRISMA-S compliance. Queries were not executed; source choice, query sensitivity, database coverage, screening and authenticity are unverified. Counts from overlapping searches are not assumed additive.'}
+        'meaning': 'Audit of supplied search records, caller-selected sources/age threshold and deduplication arithmetic only. VERIFIED is record consistency, not adequate literature coverage or PRISMA-S compliance. Queries were not executed; source choice, query sensitivity, database coverage, screening and authenticity are unverified. Counts from overlapping searches are not assumed additive. Optional reference coverage concerns only caller-selected, case-sensitive record IDs, not overall search recall.'}
 
 
 def measurement_agreement(item, backend):
@@ -103,7 +123,25 @@ def measurement_agreement(item, backend):
             unknown.append('floating_point_boundary')
         if not unknown:
             agreement = bounds[0] <= limits[0] and limits[1] <= bounds[1]
-    return 'UNDETERMINED' if unknown else 'VERIFIED' if agreement else 'REFUTED', {
+    confidence = None
+    decision = 'UNDETERMINED' if unknown else 'VERIFIED' if agreement else 'REFUTED'
+    if 'confidence_level' in item:
+        from sra.measurement_uncertainty import normal_agreement_confidence, confidence_decision
+        if any(item[key] is not True for key in ('independent_pairs', 'normal_differences', 'constant_bias_and_variance')) or sd == 0:
+            confidence = dict(status='UNDETERMINED', reason='assumptions_or_dispersion_unresolved')
+        else:
+            confidence = normal_agreement_confidence(mean, sd, len(differences), item['confidence_level'])
+        if confidence['status'] != 'CALCULATED':
+            unknown.append('confidence_region:' + confidence['reason'])
+        elif band is not None and not unknown:
+            decision = confidence_decision(confidence, bounds)
+            if decision == 'UNDETERMINED':
+                unknown.append('confidence_region_crosses_or_touches_acceptance_boundary')
+        if unknown:
+            decision = 'UNDETERMINED'
+    return decision, {
+        'confidence_region': confidence,
+        'decision_basis': 'simultaneous_confidence_bounds' if 'confidence_level' in item else 'estimated_limits',
         'unit': item['unit'], 'n_pairs': len(differences),
         'pairs': [dict(reference=reference, measured=measured, difference=difference) for reference, measured, difference in
                   zip(item['reference'], item['measured'], differences)],
@@ -113,4 +151,4 @@ def measurement_agreement(item, backend):
         'acceptable_difference': band, 'estimated_limits_within_bounds': agreement,
         'assumptions': {key: item[key] for key in ('independent_pairs', 'normal_differences', 'constant_bias_and_variance')},
         'unassessed_checks': unknown, 'measurement_validity': 'NOT_ASSESSED',
-        'meaning': 'Measured minus reference, paired mean +/- 1.96 sample SD: approximate normal Bland-Altman limits, not confidence intervals. VERIFIED means estimated limits fall within caller-selected bounds under caller-declared assumptions; it does not establish population coverage or general measurement validity. No independence, normality, proportional bias, constant variance, reference accuracy, unit equivalence or acceptable threshold is inferred. Repeated observations per subject require a different model; small samples leave substantial estimation uncertainty. Endpoints within 16 local floating-point ULPs of a bound abstain.'}
+        'meaning': 'Measured minus reference, paired mean +/- 1.96 sample SD: approximate normal Bland-Altman limits, not confidence intervals by themselves. Default VERIFIED means estimated limits fall within caller-selected bounds; when confidence_level is supplied, the entire conservative confidence region must be inside those bounds under caller-declared assumptions; it does not establish population coverage or general measurement validity. No independence, normality, proportional bias, constant variance, reference accuracy, unit equivalence or acceptable threshold is inferred. Repeated observations per subject require a different model; small samples leave substantial estimation uncertainty. Point-estimate endpoints within 16 local floating-point ULPs of a bound abstain. Confidence decisions also use a conservative 1e-10 construction-scale safety margin; this is not a certified numerical error bound.'}

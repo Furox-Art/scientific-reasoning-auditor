@@ -87,53 +87,65 @@
       "question": {
         "population": {
           "value": "adults",
-          "quote": "Population: adults."
+          "quote": "Population: adults.",
+          "start": 134
         },
         "outcome": {
           "value": "systolic blood pressure",
-          "quote": "Outcome: systolic blood pressure."
+          "quote": "Outcome: systolic blood pressure.",
+          "start": 154
         },
         "contrast": {
           "value": "intervention versus control",
-          "quote": "Contrast: intervention versus control."
+          "quote": "Contrast: intervention versus control.",
+          "start": 188
         },
         "timepoint": {
           "value": "12 weeks",
-          "quote": "Timepoint: 12 weeks."
+          "quote": "Timepoint: 12 weeks.",
+          "start": 227
         },
         "effect_measure": {
           "value": "mean difference",
-          "quote": "Effect measure: mean difference."
+          "quote": "Effect measure: mean difference.",
+          "start": 248
         },
         "analysis_unit": {
           "value": "participant",
-          "quote": "Analysis unit: participant."
+          "quote": "Analysis unit: participant.",
+          "start": 281
         }
       },
       "method": {
         "population": {
           "value": "adults",
-          "quote": "Population: adults."
+          "quote": "Population: adults.",
+          "start": 320
         },
         "outcome": {
           "value": "systolic blood pressure",
-          "quote": "Outcome: systolic blood pressure."
+          "quote": "Outcome: systolic blood pressure.",
+          "start": 340
         },
         "contrast": {
           "value": "intervention versus control",
-          "quote": "Contrast: intervention versus control."
+          "quote": "Contrast: intervention versus control.",
+          "start": 374
         },
         "timepoint": {
           "value": "12 weeks",
-          "quote": "Timepoint: 12 weeks."
+          "quote": "Timepoint: 12 weeks.",
+          "start": 413
         },
         "effect_measure": {
           "value": "mean difference",
-          "quote": "Effect measure: mean difference."
+          "quote": "Effect measure: mean difference.",
+          "start": 434
         },
         "analysis_unit": {
           "value": "participant",
-          "quote": "Analysis unit: participant."
+          "quote": "Analysis unit: participant.",
+          "start": 467
         }
       }
     }

@@ -2,7 +2,9 @@
 
 ## 0.11.0 — 2026-11-17 (prepared, unpublished)
 
-- Add four scoped method audits: supplied contribution-feature comparisons, search-record consistency, paired measurement agreement and question/method target alignment. Preserve overall adequacy abstentions and source evidence; toolkit adapter is bounded-toolkit-4.
+- Strengthen method audits with explicit quote offsets/ambiguous-occurrence abstention, selected comparator/reference coverage, and optional conservative normal-model confidence bounds for paired measurement limits.
+
+- Add four scoped method audits: supplied contribution-feature comparisons, search-record consistency, paired measurement agreement and question/method target alignment. Preserve overall adequacy abstentions and source evidence; toolkit adapter is bounded-toolkit-5.
 
 - Default unified Markdown reports to concise English with explicit execution states and a compact criteria worksheet. Preserve module evidence, numerical results and uncertainty; retain the full technical presentation as an option.
 - Add CLI `--report-style`, Python `review_markdown(..., style=...)`, Node `reportStyle`, and opt-in MCP `report_style` / `readable_report`. JSON calculations and manuscripts are unchanged.

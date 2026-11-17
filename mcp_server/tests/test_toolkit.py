@@ -8,6 +8,19 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_advanced_evidence_gaps_and_confidence_bounds_survive_transport(self):
+        path = Path(__file__).parents[2] / 'examples/method-audits-advanced.json'
+        response = server.verify_toolkit(path.read_text())
+        self.assertTrue(response['ok'], response)
+        rows = response['result']['checks']
+        self.assertEqual([row['status'] for row in rows], ['UNDETERMINED', 'REFUTED', 'UNDETERMINED', 'VERIFIED'])
+        self.assertEqual(rows[0]['details']['missing_required_comparators'], ['missing_prior'])
+        self.assertEqual(rows[1]['details']['reference_coverage']['missing_required'], ['synthetic:paper_B'])
+        self.assertEqual(rows[2]['details']['confidence_region']['status'], 'CALCULATED')
+        self.assertEqual(rows[2]['details']['measurement_validity'], 'NOT_ASSESSED')
+        for row in rows[3]['details']['fields']:
+            self.assertGreater(row['right']['start'], row['left']['start'])
+
     def test_scientific_method_audits_survive_transport_with_scoped_verdicts(self):
         path = Path(__file__).parents[2] / 'examples/method-audits.json'
         response = server.verify_toolkit(path.read_text())

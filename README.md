@@ -758,3 +758,9 @@ The prepared Python 0.11.0 / npm 0.4.0 release also adds four scoped checks:
 These compare supplied evidence/records or paired measurements; they do not
 certify novelty, complete literature, construct validity or method adequacy.
 The toolkit now has 35 kinds. See [inputs, verdicts and limits](docs/METHOD_AUDITS.md).
+
+The method audits additionally support explicit quote occurrence offsets,
+required comparator/reference sets and optional normal-model measurement
+confidence bounds. The advanced synthetic fixture is
+`examples/method-audits-advanced.json`; its missing evidence and uncertainty
+intentionally produce abstentions. See [the exact contracts](docs/METHOD_AUDITS.md).

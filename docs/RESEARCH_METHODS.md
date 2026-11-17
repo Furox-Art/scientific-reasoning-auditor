@@ -281,3 +281,11 @@ alignment. They support bounded parts of the four review questions; all overall
 novelty, literature adequacy, measurement validity and method-appropriateness
 judgments remain NOT_ASSESSED. The synthetic example does not execute searches
 or provide new human labels. Existing arithmetic and reasoning rules are unchanged.
+
+
+Method audits also accept explicit quote occurrence offsets and caller-selected
+comparison/reference requirements. Optional `confidence_level` in paired
+measurement agreement uses a conservative Bonferroni mean/SD confidence rectangle
+under independent normal differences; it needs SciPy. High sampling uncertainty,
+ambiguous evidence or missing selected sources remain explicit. This does not
+provide global scientific adequacy, search recall or measurement-validity labels.

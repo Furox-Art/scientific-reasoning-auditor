@@ -27,6 +27,7 @@
     "docs/METHOD_AUDITS.md",
     "examples/method-audits.json",
     "examples/method-audits.md",
+    "examples/method-audits-advanced.json",
     "docs/INSPECTION_EXPANSION.md",
     "examples/statistical-context.json",
     "examples/statistic-preparation.md"

@@ -175,7 +175,7 @@ def verify_prepared_toolkit(prepared):
             details = {"meaning":"Local backend did not complete; check optional dependencies and supported inputs. Details withheld."}
         row.update(status=status,details=details)
         results.append(row)
-    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-4",
+    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-5",
               "input_sha256":prepared["input_sha256"],"source_binding":prepared["source_binding"],
               'numerical_environment':_numerical_environment(),
               "execution_status":"partial" if any(r["status"] in ("UNAVAILABLE","FAILED","UNDETERMINED") for r in results) else "complete",
