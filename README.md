@@ -42,7 +42,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: Python v0.10.0 / Node v0.3.0
+## Current status: Python v0.11.0 / Node v0.4.0
 
 The [local inspection toolkit](docs/DETERMINISTIC_TOOLKIT.md)
 integrates SymPy polynomial/calculus checks, Pint unit conversions, SciPy raw-data
