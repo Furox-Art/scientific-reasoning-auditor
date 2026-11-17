@@ -289,3 +289,13 @@ measurement agreement uses a conservative Bonferroni mean/SD confidence rectangl
 under independent normal differences; it needs SciPy. High sampling uncertainty,
 ambiguous evidence or missing selected sources remain explicit. This does not
 provide global scientific adequacy, search recall or measurement-validity labels.
+
+
+## Independent proof engine
+
+The standalone [scientific proof kernel](SCIENCE_KERNEL.md) adds a reusable own
+finite-model solver and exact rational interval arithmetic, with a separate
+scalar/endpoint certificate checker. It can prove/refute formal implications
+under explicit premises and expose unresolved cases and conflicts. It does not
+call Z3/SymPy/SciPy or a language model. General scientific adequacy remains
+unassessed; factual premises, bounds and semantic formalization need justification.

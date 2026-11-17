@@ -23,6 +23,7 @@ from sra.domain_cohort import aggregate_domain_reports
 from sra.scientific_validation import verify_scientific_file
 from sra.review import review_manuscript
 from sra.unified_cli import configure_review_commands, execute_review_command
+from sra.science_kernel_cli import COMMANDS as SCIENCE_COMMANDS, configure_science_commands, execute_science_command
 from sra.logic_cli import configure_logic_commands, execute_logic_command
 from sra.toolkit_cli import configure_toolkit_commands, execute_toolkit_command
 from sra.error_benchmark_cli import COMMANDS as ERROR_COMMANDS, configure_error_commands, execute_error_command
@@ -77,6 +78,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(prog="sra", description="Audit scientific manuscript reasoning.")
     sub = parser.add_subparsers(dest="command", required=True)
     configure_review_commands(sub)
+    configure_science_commands(sub)
     configure_logic_commands(sub)
     configure_toolkit_commands(sub)
     configure_error_commands(sub)
@@ -239,6 +241,8 @@ def main() -> int:
     science.add_argument("--out", default="science-verification.json", help="Output JSON path.")
 
     args = parser.parse_args()
+    if args.command in SCIENCE_COMMANDS:
+        return execute_science_command(args, parser, _reject_input_overwrite, _same_document)
     if args.command in ERROR_COMMANDS:
         return execute_error_command(args, parser, _reject_input_overwrite, _same_document)
     if args.command == "verify-logic":

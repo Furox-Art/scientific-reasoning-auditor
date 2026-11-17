@@ -133,5 +133,17 @@ def main() -> None:
     mcp.run(transport="stdio")
 
 
+
+@mcp.tool(title="Prove a bounded scientific formal statement", annotations=_LOCAL)
+def prove_science(spec_json: str) -> dict[str, Any]:
+    """Run SRA's independent exact-rational interval and finite-model kernel. Max 16 atoms, 512 expression nodes. No LLM, SMT solver, network, paths or executable code. Returns conditional conclusions, counter-worlds, explanation bases and a recheckable certificate. Quotations anchor caller premises; empirical scientific truth is not certified."""
+    return bridge.prove_science(spec_json)
+
+
+@mcp.tool(title="Recheck a scientific proof certificate", annotations=_LOCAL)
+def verify_science_certificate(spec_json: str, certificate_json: str) -> dict[str, Any]:
+    """Separate scalar/endpoint interpretation checks the finite proof certificate, including bases and counter-worlds. A valid certificate establishes conditional formal reasoning, not factual premises or independent expert validation. Inline bounded JSON only; no network or paths."""
+    return bridge.verify_science_certificate(spec_json, certificate_json)
+
 if __name__ == "__main__":
     main()

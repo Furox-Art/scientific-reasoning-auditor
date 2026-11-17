@@ -764,3 +764,14 @@ required comparator/reference sets and optional normal-model measurement
 confidence bounds. The advanced synthetic fixture is
 `examples/method-audits-advanced.json`; its missing evidence and uncertainty
 intentionally produce abstentions. See [the exact contracts](docs/METHOD_AUDITS.md).
+
+### Independent scientific proof kernel
+
+The prepared release now includes SRA's own standard-library finite-model and
+exact-rational interval engine: `sra prove-science examples/scientific-proof.json
+--out reports/proof`. Recheck with `sra verify-science-certificate
+examples/scientific-proof.json reports/proof.json --out reports/rechecked`.
+It produces conditional conclusions, counter-worlds, explanation bases and
+recheckable certificates without an SMT solver or LLM. This is a standalone
+bounded formal engine, not general scientific-truth certification.
+See [language, bounds and certificate semantics](docs/SCIENCE_KERNEL.md).

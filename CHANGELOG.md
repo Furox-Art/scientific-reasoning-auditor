@@ -2,6 +2,8 @@
 
 ## 0.11.0 — 2026-11-17 (prepared, unpublished)
 
+- Add an own standalone finite-model/exact-rational-interval proof kernel with counter-worlds, deletion-minimal explanations, source anchors and a separate scalar certificate verifier. Expose Python, CLI, Node and MCP interfaces without external solver/model dependencies.
+
 - Strengthen method audits with explicit quote offsets/ambiguous-occurrence abstention, selected comparator/reference coverage, and optional conservative normal-model confidence bounds for paired measurement limits.
 
 - Add four scoped method audits: supplied contribution-feature comparisons, search-record consistency, paired measurement agreement and question/method target alignment. Preserve overall adequacy abstentions and source evidence; toolkit adapter is bounded-toolkit-5.

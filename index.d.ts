@@ -140,3 +140,8 @@ export function languageBenchmark(input: string, options: LanguageBenchmarkOptio
  * Software only checks file structure; it cannot verify reviewer credentials.
  */
 export function domainAggregate(reports: string[], options?: OutputOptions): Promise<CommandResult>;
+
+/** Independent exact-interval / finite-model proof kernel. Conclusions are conditional. */
+export function proveScience(input: string, options?: OutputOptions): Promise<CommandResult>;
+/** Recheck certificate with a separate scalar/endpoint interpreter; exit 1 means invalid. */
+export function verifyScienceCertificate(input: string, certificate: string, options?: OutputOptions): Promise<CommandResult>;

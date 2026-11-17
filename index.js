@@ -409,6 +409,8 @@ const STUDY_TYPES = ['unknown', 'quantitative', 'qualitative', 'computational',
   'theoretical', 'systematic-review', 'narrative-review', 'mixed'];
 
 async function runUnified(args, options) {
+  const delimiter = args.indexOf('--');
+  const flags = delimiter < 0 ? args : args.slice(0, delimiter);
   // A version alone cannot distinguish published 0.8.0 from a newer source
   // checkout that exposes this additive interface. Probe the actual contract.
   const probe = await run(['capabilities'], { ...options, stdio: 'pipe' });
@@ -417,19 +419,23 @@ async function runUnified(args, options) {
   if (probe.code !== 0 || catalog?.schema_version !== 'cross-disciplinary-review/1.0') {
     throw new Error('The selected Python engine does not support unified review. Install a source checkout containing "sra capabilities" in the interpreter selected by SRA_PYTHON.');
   }
-  if ((args[0] === 'verify-logic' || args.includes('--logic-spec')) && catalog?.formal_logic?.backend !== 'Z3') {
+  if ((args[0] === 'verify-logic' || flags.includes('--logic-spec')) && catalog?.formal_logic?.backend !== 'Z3') {
     throw new Error('The selected Python engine lacks Z3 formal verification. Install this source checkout with the [logic] extra.');
+  }
+  if (['prove-science', 'verify-science-certificate'].includes(args[0]) &&
+      catalog?.scientific_proof_kernel?.engine !== 'sra-finite-interval-1') {
+    throw new Error('The selected Python engine lacks the independent scientific proof kernel. Install the current source checkout.');
   }
   if (args[0] === 'capabilities' && options.stdio === 'pipe') return probe;
   if (['benchmark-errors', 'error-label-template', 'evaluate-errors'].includes(args[0]) &&
       catalog?.error_benchmark?.schema_version !== 'error-benchmark/1.0') {
     throw new Error('The selected Python engine lacks structured-error evaluation. Install the current source checkout.');
   }
-  if ((args[0] === 'prepare-inspection' || args.includes('--prepare-inputs')) &&
+  if ((args[0] === 'prepare-inspection' || flags.includes('--prepare-inputs')) &&
       catalog?.input_preparation?.schema_version !== 'inspection-preparation/1.0') {
     throw new Error('The selected Python engine lacks inspection preparation. Install the current source checkout.');
   }
-  if ((args[0] === 'verify-toolkit' || args.includes('--toolkit-spec')) &&
+  if ((args[0] === 'verify-toolkit' || flags.includes('--toolkit-spec')) &&
       catalog?.deterministic_toolkit?.schema_version !== 'deterministic-toolkit/1.0') {
     throw new Error('The selected Python engine lacks the inspection toolkit. Install this source checkout with the [toolkit] extra.');
   }
@@ -510,7 +516,23 @@ function verifyToolkit(input, options = {}) {
   return runUnified(args, options);
 }
 
+/** Run the independent finite scientific proof kernel; no external solver. */
+function proveScience(input, options = {}) {
+  if (typeof input !== 'string' || !input.length) return Promise.reject(new TypeError('input must be a non-empty JSON path'));
+  return runUnified(['prove-science', `--out=${options.out || 'science-proof'}`, '--', input], options);
+}
+
+/** Recheck formal conclusions with the separate scalar certificate interpreter. */
+function verifyScienceCertificate(input, certificate, options = {}) {
+  if (typeof input !== 'string' || !input.length || typeof certificate !== 'string' || !certificate.length) {
+    return Promise.reject(new TypeError('input and certificate must be non-empty JSON paths'));
+  }
+  return runUnified(['verify-science-certificate', `--out=${options.out || 'science-proof-verification'}`, '--', input, certificate], options);
+}
+
 module.exports = {
+  proveScience,
+  verifyScienceCertificate,
   benchmarkErrors,
   errorLabelTemplate,
   evaluateErrors,

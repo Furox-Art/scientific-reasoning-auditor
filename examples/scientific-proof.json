@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "atoms": [
+    "prior_match",
+    "corpus_ready",
+    "references_found",
+    "measurement_ok",
+    "targets_match",
+    "novelty_goal",
+    "literature_goal"
+  ],
+  "sources": [
+    {
+      "id": "synthetic_source",
+      "text": "The supplied comparator uses a different sensor.\nThe declared population and outcome match.\n",
+      "sha256": "5ce043d2f216a80fc01d02b5a749b63ea148b4fc4cc277373d539b5da42ff699"
+    }
+  ],
+  "facts": [
+    {
+      "id": "comparison_record",
+      "atom": "prior_match",
+      "value": false,
+      "origin": "evidence",
+      "source_refs": [
+        {
+          "source_id": "synthetic_source",
+          "quote": "The supplied comparator uses a different sensor.",
+          "start": 0
+        }
+      ]
+    },
+    {
+      "id": "selected_corpus",
+      "atom": "corpus_ready",
+      "value": true,
+      "origin": "assumption"
+    },
+    {
+      "id": "missing_search_evidence",
+      "atom": "references_found",
+      "value": null,
+      "origin": "assumption"
+    },
+    {
+      "id": "target_record",
+      "atom": "targets_match",
+      "value": true,
+      "origin": "evidence",
+      "source_refs": [
+        {
+          "source_id": "synthetic_source",
+          "quote": "The declared population and outcome match.",
+          "start": 49
+        }
+      ]
+    }
+  ],
+  "arithmetic": [
+    {
+      "id": "exact_sum",
+      "atom": "measurement_ok",
+      "relation": "eq",
+      "left": {
+        "op": "add",
+        "args": [
+          "0.1",
+          "0.2"
+        ]
+      },
+      "right": "0.3"
+    }
+  ],
+  "rules": [
+    {
+      "id": "corpus_definition",
+      "expression": {
+        "op": "iff",
+        "args": [
+          {
+            "atom": "novelty_goal"
+          },
+          {
+            "op": "and",
+            "args": [
+              {
+                "atom": "corpus_ready"
+              },
+              {
+                "op": "not",
+                "args": [
+                  {
+                    "atom": "prior_match"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "search_definition",
+      "expression": {
+        "op": "iff",
+        "args": [
+          {
+            "atom": "literature_goal"
+          },
+          {
+            "op": "and",
+            "args": [
+              {
+                "atom": "corpus_ready"
+              },
+              {
+                "atom": "references_found"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "within_selected_features",
+      "scope": "supplied_corpus",
+      "expression": {
+        "atom": "novelty_goal"
+      }
+    },
+    {
+      "id": "selected_search_requirement",
+      "scope": "supplied_search",
+      "expression": {
+        "atom": "literature_goal"
+      }
+    },
+    {
+      "id": "exact_model_bound",
+      "scope": "supplied_measurement_model",
+      "expression": {
+        "atom": "measurement_ok"
+      }
+    },
+    {
+      "id": "declared_target_alignment",
+      "scope": "declared_method",
+      "expression": {
+        "atom": "targets_match"
+      }
+    },
+    {
+      "id": "negated_exact_bound",
+      "scope": "declared_problem",
+      "expression": {
+        "op": "not",
+        "args": [
+          {
+            "atom": "measurement_ok"
+          }
+        ]
+      }
+    }
+  ]
+}

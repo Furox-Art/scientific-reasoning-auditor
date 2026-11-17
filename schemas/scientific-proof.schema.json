@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Finite scientific proof certificate (shape only; use semantic certificate verifier)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "engine_version",
+    "kernel_sha256",
+    "input_sha256",
+    "certificate_sha256",
+    "atom_order",
+    "universe_worlds",
+    "admissible_worlds",
+    "admissible_worlds_sha256",
+    "basis_state",
+    "constraint_ids",
+    "conflict_core",
+    "premises",
+    "arithmetic",
+    "rules",
+    "sources",
+    "scientific_assessment",
+    "limitations",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "scientific-proof/1.0"
+    },
+    "engine_version": {
+      "const": "sra-finite-interval-1"
+    },
+    "kernel_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "certificate_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "atom_order": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "universe_worlds": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 65536
+    },
+    "admissible_worlds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65536
+    },
+    "admissible_worlds_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "basis_state": {
+      "enum": [
+        "CONSISTENT",
+        "INCONSISTENT"
+      ]
+    },
+    "constraint_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+      },
+      "uniqueItems": true
+    },
+    "conflict_core": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+      },
+      "uniqueItems": true
+    },
+    "premises": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object"
+      }
+    },
+    "arithmetic": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object"
+      }
+    },
+    "scientific_assessment": {
+      "const": {
+        "novelty": "NOT_ASSESSED",
+        "literature_adequacy": "NOT_ASSESSED",
+        "measurement_validity": "NOT_ASSESSED",
+        "method_appropriateness": "NOT_ASSESSED"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "scope",
+          "expression",
+          "status",
+          "reason",
+          "basis_ids",
+          "supporting_models",
+          "counter_models",
+          "supporting_world",
+          "counter_world"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+          },
+          "scope": {
+            "enum": [
+              "declared_problem",
+              "supplied_corpus",
+              "supplied_search",
+              "supplied_measurement_model",
+              "declared_method"
+            ]
+          },
+          "expression": {
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "ENTAILED",
+              "CONTRADICTED",
+              "UNRESOLVED"
+            ]
+          },
+          "reason": {
+            "enum": [
+              "ALL_ADMISSIBLE_MODELS",
+              "NO_ADMISSIBLE_SUPPORTING_MODEL",
+              "BOTH_MODELS_POSSIBLE",
+              "INCONSISTENT_PREMISES"
+            ]
+          },
+          "basis_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+            },
+            "uniqueItems": true
+          },
+          "supporting_models": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65536
+          },
+          "counter_models": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65536
+          },
+          "supporting_world": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "world_index",
+                  "assignment"
+                ],
+                "properties": {
+                  "world_index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 65535
+                  },
+                  "assignment": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "maxProperties": 16,
+                    "additionalProperties": {
+                      "type": "boolean"
+                    },
+                    "propertyNames": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "counter_world": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "world_index",
+                  "assignment"
+                ],
+                "properties": {
+                  "world_index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 65535
+                  },
+                  "assignment": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "maxProperties": 16,
+                    "additionalProperties": {
+                      "type": "boolean"
+                    },
+                    "propertyNames": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

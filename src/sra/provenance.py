@@ -86,6 +86,7 @@ REPOSITORY_HASH_FILES = (
     "README.md",
     "docs/REPORT_STYLE.md",
     "docs/METHOD_AUDITS.md",
+    "docs/SCIENCE_KERNEL.md",
     "docs/RESEARCH_METHODS.md",
     "docs/releases/0.11.0.md",
     "LICENSE",

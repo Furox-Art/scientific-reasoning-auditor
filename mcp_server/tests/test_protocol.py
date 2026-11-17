@@ -19,6 +19,7 @@ class ProtocolTests(unittest.TestCase):
         tools = asyncio.run(discover())
         found = {tool.name: tool for tool in tools}
         self.assertEqual(set(found), {
+            'prove_science', 'verify_science_certificate',
             "audit_manuscript", "audit_academic_writing", "check_citations",
             "verify_statistics", "verify_scientific_claims", "review_scientific_paper",
             "review_manuscript", "get_review_capabilities",

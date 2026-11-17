@@ -309,3 +309,21 @@ def prepare_inspection(content: str,file_format: str='md',encoding: str='text') 
         with _uploaded(data,_EXTENSIONS[file_format]) as (path,root):
             return _scrub(prepare(load_document(path)),root)
     return _invoke(task)
+
+
+def prove_science(spec_json: str) -> dict[str, Any]:
+    """Own exact interval/finite-model engine; bounded inline JSON, offline."""
+    def task():
+        from sra.science_kernel import prove_science as prove
+        _json_bytes(spec_json)
+        return prove(spec_json)
+    return _invoke(task)
+
+
+def verify_science_certificate(spec_json: str, certificate_json: str) -> dict[str, Any]:
+    def task():
+        from sra.science_certificate import verify_science_certificate as verify
+        _json_bytes(spec_json)
+        _json_bytes(certificate_json)
+        return verify(spec_json, certificate_json)
+    return _invoke(task)
