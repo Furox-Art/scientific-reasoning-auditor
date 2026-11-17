@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.11.0 — 2026-11-17
+
+- Read manuscript bytes in bounded 64 KiB pieces to avoid allocating the full input cap for small files under memory pressure; retain the 32 MiB plus-one oversize guard.
+
+- Add an own standalone finite-model/exact-rational-interval proof kernel with counter-worlds, deletion-minimal explanations, source anchors and a separate scalar certificate verifier. Expose Python, CLI, Node and MCP interfaces without external solver/model dependencies.
+
+- Strengthen method audits with explicit quote offsets/ambiguous-occurrence abstention, selected comparator/reference coverage, and optional conservative normal-model confidence bounds for paired measurement limits.
+
+- Add four scoped method audits: supplied contribution-feature comparisons, search-record consistency, paired measurement agreement and question/method target alignment. Preserve overall adequacy abstentions and source evidence; toolkit adapter is bounded-toolkit-5.
+
+- Default unified Markdown reports to concise English with explicit execution states and a compact criteria worksheet. Preserve module evidence, numerical results and uncertainty; retain the full technical presentation as an option.
+- Add CLI `--report-style`, Python `review_markdown(..., style=...)`, Node `reportStyle`, and opt-in MCP `report_style` / `readable_report`. JSON calculations and manuscripts are unchanged.
+- Raise the npm adapter's Python engine floor to 0.11.0 for the new CLI option. The adapter version is 0.4.0. Calculation rules remain 0.10.1.
+
+
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

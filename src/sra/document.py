@@ -178,8 +178,17 @@ def load_document(
         raise FileNotFoundError(f"Input file not found: {file_path}")
     # Bounded read avoids loading a hostile or accidental multi-gigabyte file
     # before the size check (stat-only preflights are vulnerable to file races).
-    with file_path.open("rb") as stream:
-        raw = stream.read(MAX_DOCUMENT_BYTES + 1)
+    # Small reads avoid allocating the whole 32 MiB cap for tiny files under
+    # Windows commit pressure. Continue to cap actual bytes, not a stat hint.
+    with file_path.open("rb") as stream, BytesIO() as buffer:
+        remaining = MAX_DOCUMENT_BYTES + 1
+        while remaining:
+            chunk = stream.read(min(64 * 1024, remaining))
+            if not chunk:
+                break
+            buffer.write(chunk)
+            remaining -= len(chunk)
+        raw = buffer.getvalue()
     if len(raw) > MAX_DOCUMENT_BYTES:
         raise ValueError("Document exceeds the 32 MiB input limit.")
     suffix = file_path.suffix.lower()

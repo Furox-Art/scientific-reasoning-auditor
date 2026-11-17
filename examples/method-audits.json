@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "id": "prior_work",
+      "kind": "novelty_comparison",
+      "text": "# Synthetic method audit example\nThese records and measurements are fictional; no search was actually performed.\n\n# Research question\nPopulation: adults. Outcome: systolic blood pressure.\nContrast: intervention versus control. Timepoint: 12 weeks.\nEffect measure: mean difference. Analysis unit: participant.\n\n# Methods\nPopulation: adults. Outcome: systolic blood pressure.\nContrast: intervention versus control. Timepoint: 12 weeks.\nEffect measure: mean difference. Analysis unit: participant.\n\n# Contribution\nSensor: optical.\n",
+      "dimensions": [
+        "sensor"
+      ],
+      "contribution": {
+        "sensor": {
+          "value": "optical",
+          "quote": "Sensor: optical."
+        }
+      },
+      "comparators": [
+        {
+          "id": "prior",
+          "text": "Sensor: impedance.",
+          "sha256": "c705fca47bf29d6481758d0a1a4cef3c4bad5d7316add4073b985158b8ae7fb6",
+          "features": {
+            "sensor": {
+              "value": "impedance",
+              "quote": "Sensor: impedance."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "search_record",
+      "kind": "literature_search_audit",
+      "required_sources": [
+        "index_a"
+      ],
+      "as_of": "2026-11-17",
+      "max_age_days": 30,
+      "searches": [
+        {
+          "id": "search_1",
+          "source": "index_a",
+          "platform": "Synthetic index",
+          "query": "sensor AND agreement",
+          "searched_on": "2026-11-16",
+          "coverage_start": "2020-01-01",
+          "coverage_end": "2026-11-16",
+          "records_found": 20
+        }
+      ],
+      "deduplication": {
+        "records_before": 20,
+        "duplicates_removed": 5,
+        "records_after": 15
+      }
+    },
+    {
+      "id": "agreement",
+      "kind": "measurement_agreement",
+      "reference": [
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "measured": [
+        10,
+        21,
+        29,
+        42,
+        48
+      ],
+      "unit": "same caller-declared unit",
+      "independent_pairs": true,
+      "normal_differences": true,
+      "constant_bias_and_variance": true,
+      "acceptable_difference": {
+        "lower": -4,
+        "upper": 4
+      }
+    },
+    {
+      "id": "target_alignment",
+      "kind": "question_method_alignment",
+      "text": "# Synthetic method audit example\nThese records and measurements are fictional; no search was actually performed.\n\n# Research question\nPopulation: adults. Outcome: systolic blood pressure.\nContrast: intervention versus control. Timepoint: 12 weeks.\nEffect measure: mean difference. Analysis unit: participant.\n\n# Methods\nPopulation: adults. Outcome: systolic blood pressure.\nContrast: intervention versus control. Timepoint: 12 weeks.\nEffect measure: mean difference. Analysis unit: participant.\n\n# Contribution\nSensor: optical.\n",
+      "question": {
+        "population": {
+          "value": "adults",
+          "quote": "Population: adults.",
+          "start": 134
+        },
+        "outcome": {
+          "value": "systolic blood pressure",
+          "quote": "Outcome: systolic blood pressure.",
+          "start": 154
+        },
+        "contrast": {
+          "value": "intervention versus control",
+          "quote": "Contrast: intervention versus control.",
+          "start": 188
+        },
+        "timepoint": {
+          "value": "12 weeks",
+          "quote": "Timepoint: 12 weeks.",
+          "start": 227
+        },
+        "effect_measure": {
+          "value": "mean difference",
+          "quote": "Effect measure: mean difference.",
+          "start": 248
+        },
+        "analysis_unit": {
+          "value": "participant",
+          "quote": "Analysis unit: participant.",
+          "start": 281
+        }
+      },
+      "method": {
+        "population": {
+          "value": "adults",
+          "quote": "Population: adults.",
+          "start": 320
+        },
+        "outcome": {
+          "value": "systolic blood pressure",
+          "quote": "Outcome: systolic blood pressure.",
+          "start": 340
+        },
+        "contrast": {
+          "value": "intervention versus control",
+          "quote": "Contrast: intervention versus control.",
+          "start": 374
+        },
+        "timepoint": {
+          "value": "12 weeks",
+          "quote": "Timepoint: 12 weeks.",
+          "start": 413
+        },
+        "effect_measure": {
+          "value": "mean difference",
+          "quote": "Effect measure: mean difference.",
+          "start": 434
+        },
+        "analysis_unit": {
+          "value": "participant",
+          "quote": "Analysis unit: participant.",
+          "start": 467
+        }
+      }
+    }
+  ]
+}

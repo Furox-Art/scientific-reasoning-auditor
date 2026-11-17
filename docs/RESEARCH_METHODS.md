@@ -262,3 +262,40 @@ The separate conditional numerical replay is not a confirmed paper-error label.
 This post-hoc development reuse does not resolve representative scientific-error
 accuracy or independent human labeling; see
 [the complete follow-up](../benchmarks/pilots/statistic-preparation-20261116/README.md).
+
+## Report presentation
+
+Python 0.11.0 adds a deterministic natural English presentation for unified
+review. It shortens the criteria worksheet and states execution outcomes in
+plain sentences; it does not alter any statistical method or infer missing
+assumptions. Full evidence requirements and procedures remain in JSON and the
+technical presentation. Module-specific numerical results, evidence and limits
+are retained in both presentations. See [report style](REPORT_STYLE.md).
+
+## Scoped novelty, literature, measurement and target checks
+
+Four additional toolkit kinds are documented in [method audits](METHOD_AUDITS.md):
+source-anchored contribution-feature comparison, search-record consistency,
+paired Bland-Altman measurement agreement, and literal question/method target
+alignment. They support bounded parts of the four review questions; all overall
+novelty, literature adequacy, measurement validity and method-appropriateness
+judgments remain NOT_ASSESSED. The synthetic example does not execute searches
+or provide new human labels. Existing arithmetic and reasoning rules are unchanged.
+
+
+Method audits also accept explicit quote occurrence offsets and caller-selected
+comparison/reference requirements. Optional `confidence_level` in paired
+measurement agreement uses a conservative Bonferroni mean/SD confidence rectangle
+under independent normal differences; it needs SciPy. High sampling uncertainty,
+ambiguous evidence or missing selected sources remain explicit. This does not
+provide global scientific adequacy, search recall or measurement-validity labels.
+
+
+## Independent proof engine
+
+The standalone [scientific proof kernel](SCIENCE_KERNEL.md) adds a reusable own
+finite-model solver and exact rational interval arithmetic, with a separate
+scalar/endpoint certificate checker. It can prove/refute formal implications
+under explicit premises and expose unresolved cases and conflicts. It does not
+call Z3/SymPy/SciPy or a language model. General scientific adequacy remains
+unassessed; factual premises, bounds and semantic formalization need justification.

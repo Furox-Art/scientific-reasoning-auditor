@@ -1,8 +1,12 @@
 """Unified MCP consent boundaries and real-engine source binding."""
 import asyncio
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
+from pathlib import Path
+
+import jsonschema
 import unittest
 from unittest.mock import patch
 
@@ -30,6 +34,29 @@ class UnifiedMCPTests(unittest.TestCase):
         self.assertEqual(criteria['code_reexecution']['scientific_verdict'],'NOT_ASSESSED')
         self.assertEqual(report["source"], "uploaded.md")
         self.assertNotIn("sra-mcp-", json.dumps(report))
+
+    @patch("sra.provenance.datetime")
+    def test_readable_report_is_opt_in_bounded_and_uses_scrubbed_source(self, clock):
+        clock.now.return_value = datetime(2026, 11, 17, tzinfo=timezone.utc)
+        original = bridge.review_manuscript(DOC)['result']
+        self.assertNotIn('readable_report', original)
+        for style in ('natural', 'technical'):
+            response = server.review_manuscript(DOC, report_style=style)
+            self.assertTrue(response['ok'], response)
+            result = response['result']
+            schema = json.loads((Path(__file__).parents[2] / 'schemas/cross-disciplinary-review.schema.json').read_text())
+            jsonschema.validate(result, schema)
+            text = result.pop('readable_report')
+            self.assertEqual(result, original)
+            self.assertIn('uploaded.md', text)
+            self.assertNotIn('sra-mcp-', text)
+            self.assertIn('NOT_ASSESSED', text)
+        with patch.object(bridge, 'MAX_RESPONSE_BYTES', len(json.dumps(original).encode()) + 100):
+            self.assertEqual(bridge.review_manuscript(DOC, report_style='natural')['error'], 'INVALID_INPUT')
+        with patch('sra.review.review_document') as run:
+            for style in ('auto', 1, ['natural']):
+                self.assertEqual(bridge.review_manuscript(DOC, report_style=style)['error'], 'INVALID_INPUT')
+            run.assert_not_called()
 
     def test_both_per_call_and_host_consent_are_needed(self):
         run = self.api()

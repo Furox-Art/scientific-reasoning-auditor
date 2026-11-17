@@ -11,7 +11,20 @@ from sra.toolkit_report import toolkit_markdown
 from sra.criteria import criteria_markdown
 
 
-def review_markdown(report: dict) -> str:
+def review_markdown(report: dict, *, style: str = "natural") -> str:
+    """Render English prose without changing analysis or rewriting the manuscript.
+
+    Natural reports shorten the coverage worksheet; technical reports retain its
+    full procedures. Both retain module evidence, verdicts and interpretation limits.
+    """
+    if style not in ("natural", "technical"):
+        raise ValueError("Report style must be natural or technical.")
+    if style == "natural":
+        return _natural_markdown(report)
+    return _technical_markdown(report)
+
+
+def _technical_markdown(report: dict) -> str:
     lines = ["# Cross-disciplinary scientific review", "",
              f"**Source:** {_safe_md(report['source'])}",
              f"**SHA-256:** {report['source_sha256']}",
@@ -32,6 +45,14 @@ def review_markdown(report: dict) -> str:
         lines.append(f"- **{_safe_md(item['finding']['check_id'])}:** {_safe_md(item['reason'])}")
     if not report["excluded_findings"]:
         lines.append("No findings were excluded by the declared study type.")
+    lines.extend(_module_details(report))
+    lines.extend(["", "## Interpretation limits", ""])
+    lines.extend(f"- {_safe_md(item)}" for item in report["limitations"])
+    return "\n".join(lines) + "\n"
+
+
+def _module_details(report: dict) -> list[str]:
+    lines = []
     for name, module in report["modules"].items():
         if module["result"] is None:
             continue
@@ -82,6 +103,64 @@ def review_markdown(report: dict) -> str:
             serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
             fence = "`" * max(3, 1 + max((len(run) for run in re.findall(r"`+", serialized)), default=0))
             lines.append(f"{fence}json\n{serialized}\n{fence}")
+    return lines
+
+
+def _natural_markdown(report: dict) -> str:
+    complete = report["execution_status"] == "complete"
+    lines = ["# Scientific review", "",
+             "Requested checks finished." if complete else "Some requested checks did not finish.",
+             "This describes execution, not the scientific validity of the paper.", "",
+             f"- **Source:** {_safe_md(report['source'])}",
+             f"- **Source SHA-256:** {_safe_md(report['source_sha256'])}",
+             f"- **Execution:** {_safe_md(report['execution_status'])}",
+             "", _safe_md(report["execution_scope"]), "",
+             f"- **Declared study type:** {_safe_md(report['configuration']['study_type'])}",
+             f"- **Applicability review required:** {_safe_md(report['applicability']['review_required'])}",
+             "", "## What ran", ""]
+    explanations = {
+        "completed": "Finished",
+        "failed": "Failed",
+        "unavailable": "Unavailable",
+        "not_requested": "Not requested",
+        "not_applicable": "Excluded by the declared study type",
+    }
+    groups = {}
+    for name, module in report["modules"].items():
+        groups.setdefault(module["status"], []).append(name)
+    for status, names in groups.items():
+        label = explanations.get(status, "Inspect this module's execution state")
+        lines.append(f"- **{label}** ({_safe_md(status)}): " +
+                     ", ".join(_safe_md(name) for name in names) + ".")
+        for name in names:
+            reason = report["modules"][name]["reason"]
+            if reason:
+                lines.append(f"  - **{_safe_md(name)}:** {_safe_md(reason)}")
+    lines.extend(["", "## Coverage gaps", ""])
+    lines.extend(f"- {_safe_md(gap.replace('_', ' '))}." for gap in report["coverage_gaps"])
+    if "criteria_matrix" in report:
+        matrix = report["criteria_matrix"]
+        lines.extend(["", "## Scientific criteria coverage", "",
+                      "All scientific verdicts remain NOT_ASSESSED. Finished checks do not establish that a criterion is satisfied.",
+                      "Required evidence, procedures and evidence pointers are in the JSON report and the technical presentation.", "",
+                      "| Criterion | Applicability | This run |",
+                      "| --- | --- | --- |"])
+        for row in matrix["criteria"]:
+            cells = [_safe_md(row[key].replace("_", " ") if key != "title" else row[key]).replace("|", "&#124;") for key in
+                     ("title", "applicability", "execution_status")]
+            lines.append("| " + " | ".join(cells) + " |")
+        lines.extend(["", f"- **Catalog SHA-256:** {_safe_md(matrix['catalog_sha256'])}",
+                      f"- **Matrix SHA-256:** {_safe_md(matrix['matrix_sha256'])}"])
+        lines.extend(f"- {_safe_md(limit)}" for limit in matrix["limitations"])
+    lines.extend(["", "## Excluded findings", ""])
+    for item in report["excluded_findings"]:
+        lines.append(f"- **{_safe_md(item['finding']['check_id'])}:** {_safe_md(item['reason'])}")
+    if not report["excluded_findings"]:
+        lines.append("No findings were excluded by the declared study type.")
+    lines.extend(["", "## Findings and check results", "",
+                  "VERIFIED and REFUTED apply to supplied inputs and assumptions. UNDETERMINED means the check could not decide.",
+                  "Text cues and model advice require review; neither establishes a scientific error."])
+    lines.extend(_module_details(report))
     lines.extend(["", "## Interpretation limits", ""])
     lines.extend(f"- {_safe_md(item)}" for item in report["limitations"])
     return "\n".join(lines) + "\n"

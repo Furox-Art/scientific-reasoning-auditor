@@ -7,3 +7,6 @@ recursive-include .github/workflows *.yml
 include index.js index.d.ts package.json
 recursive-include tools *.py
 recursive-include benchmarks/pilots *.json *.md
+
+include docs/REPORT_STYLE.md docs/METHOD_AUDITS.md docs/RESEARCH_METHODS.md docs/releases/0.11.0.md
+include docs/SCIENCE_KERNEL.md

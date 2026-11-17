@@ -734,3 +734,44 @@ A separate GitHub Actions workflow checks the npm Downloads API once per day usi
 Parsing improvements can change extracted claims, node IDs and reasoning-graph fingerprints. Regenerate templates and re-review affected manuscripts; historical imports remain supported only when the reconstructed source-bound graph matches. CI enforces 100% Python statement coverage over src/sra without coverage exclusions. This is not a claim of 100% branch/path coverage, defect absence or scientific validity. A synthetic rule benchmark tests planted warnings, not real scientific precision/recall. Full-text literature verification, raw-data/code execution, discipline-specific validation and independent expert adjudication remain future work.
 
 Release tags are permitted to publish only if the tagged commit is reachable from `origin/main`; both PyPI and npm workflows enforce this ancestry before build or publishing. This repository-side guard complements, but does not replace, GitHub protected tags and release-environment approval.
+
+### Readable English reports (Python 0.11.0 / npm 0.4.0)
+
+Unified review now defaults to a concise English report. Use
+`sra review paper.md --report-style technical --out reports/review` for the full
+coverage procedures. Both styles retain module findings, source evidence,
+conditional verdicts and limitations; JSON output is unchanged.
+Python: `review_markdown(report, style="natural")`. Node:
+`reviewManuscript("paper.md", { reportStyle: "natural" })`.
+MCP: `review_manuscript(content, report_style="natural")` adds `readable_report`;
+omit the option to retain the original structured response.
+Python 0.11.0 is required by npm 0.4.0.
+See [report presentation](docs/REPORT_STYLE.md). This feature does not rewrite
+manuscripts or identify whether text was written by AI.
+
+### Scientific-method record audits
+
+Python 0.11.0 / npm 0.4.0 also add four scoped checks:
+`novelty_comparison`, `literature_search_audit`, `measurement_agreement`, and
+`question_method_alignment`. Run
+`sra verify-toolkit examples/method-audits.json --out reports/methods`.
+These compare supplied evidence/records or paired measurements; they do not
+certify novelty, complete literature, construct validity or method adequacy.
+The toolkit now has 35 kinds. See [inputs, verdicts and limits](docs/METHOD_AUDITS.md).
+
+The method audits additionally support explicit quote occurrence offsets,
+required comparator/reference sets and optional normal-model measurement
+confidence bounds. The advanced synthetic fixture is
+`examples/method-audits-advanced.json`; its missing evidence and uncertainty
+intentionally produce abstentions. See [the exact contracts](docs/METHOD_AUDITS.md).
+
+### Independent scientific proof kernel
+
+Python 0.11.0 includes SRA's own standard-library finite-model and
+exact-rational interval engine: `sra prove-science examples/scientific-proof.json
+--out reports/proof`. Recheck with `sra verify-science-certificate
+examples/scientific-proof.json reports/proof.json --out reports/rechecked`.
+It produces conditional conclusions, counter-worlds, explanation bases and
+recheckable certificates without an SMT solver or LLM. This is a standalone
+bounded formal engine, not general scientific-truth certification.
+See [language, bounds and certificate semantics](docs/SCIENCE_KERNEL.md).

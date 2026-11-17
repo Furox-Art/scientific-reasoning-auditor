@@ -12,6 +12,7 @@ from threading import Lock
 
 from sra.toolkit_spec import KINDS, digest, prepare_toolkit_spec
 from sra.evidence_spec import EVIDENCE_KINDS
+from sra.method_audit_spec import METHOD_AUDIT_KINDS
 from sra.dependent_spec import DEPENDENT_KINDS
 
 BACKENDS = dict.fromkeys(KINDS[:3],"sympy") | {"unit_conversion":"pint", "statistical_replay":"scipy.stats",
@@ -23,7 +24,7 @@ BACKENDS.update(causal_graph='networkx',bias_assessment='json',power_analysis='s
                 meta_analysis='statsmodels.stats.meta_analysis',
                 bayesian_diagnostics='arviz_stats' if sys.version_info>=(3,12) else 'arviz',
                 ml_validation='json',publication_status='json')
-BACKENDS.update(dict.fromkeys(EVIDENCE_KINDS, 'json'))
+BACKENDS.update(dict.fromkeys(EVIDENCE_KINDS + METHOD_AUDIT_KINDS, 'json'))
 BACKENDS.update(dict.fromkeys(DEPENDENT_KINDS, 'scipy.stats'))
 BACKENDS['missing_binary_sensitivity'] = 'json'
 
@@ -147,6 +148,9 @@ def verify_prepared_toolkit(prepared):
             elif item['kind'] in ('symbolic_identity','symbolic_derivative','symbolic_antiderivative'):
                 from sra.symbolic import verify_symbolic
                 status,details=verify_symbolic(item,module)
+            elif item['kind'] in METHOD_AUDIT_KINDS:
+                from sra import method_audit_checks
+                status,details=getattr(method_audit_checks,item['kind'])(item,module)
             elif item['kind'] in EVIDENCE_KINDS:
                 from sra import evidence_checks
                 status,details=getattr(evidence_checks,item['kind'])(item,module)
@@ -171,7 +175,7 @@ def verify_prepared_toolkit(prepared):
             details = {"meaning":"Local backend did not complete; check optional dependencies and supported inputs. Details withheld."}
         row.update(status=status,details=details)
         results.append(row)
-    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-3",
+    report = {"schema_version":"deterministic-toolkit/1.0","adapter_version":"bounded-toolkit-5",
               "input_sha256":prepared["input_sha256"],"source_binding":prepared["source_binding"],
               'numerical_environment':_numerical_environment(),
               "execution_status":"partial" if any(r["status"] in ("UNAVAILABLE","FAILED","UNDETERMINED") for r in results) else "complete",

@@ -232,7 +232,7 @@ def prepare_toolkit_spec(value, document=None):
         raise ValueError('At most eight bounded symbolic checks per report.')
     if len({item["id"] for item in checks}) != len(checks):
         raise ValueError("Check identifiers must be unique.")
-    canonical = json.dumps(spec,sort_keys=True,ensure_ascii=False,default=str,separators=(",",":"))
+    canonical = json.dumps(spec,sort_keys=True,ensure_ascii=False,default=lambda value: str(value).replace("e", "E"),separators=(",",":"))
     return {"checks":checks,"input_sha256":digest(canonical),
             "source_binding":{"status":"source_matched" if document is not None else "unbound",
                               "source_sha256":document.sha256 if document is not None else None,

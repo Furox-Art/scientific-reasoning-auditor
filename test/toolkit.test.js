@@ -91,3 +91,34 @@ test('toolkit Node adapter executes real exact-math backend and validates paths'
     assert.equal(groupedReport.checks[2].details.inference_df, 22);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+
+
+test('scientific method record and measurement audits retain scoped results', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'sra-methods-'));
+  try {
+    const input = join(__dirname, '../examples/method-audits.json');
+    const result = await sra.verifyToolkit(input, { stdio: 'pipe', out: join(dir, 'report') });
+    assert.equal(result.code, 0, result.stderr);
+    const report = JSON.parse(readFileSync(join(dir, 'report.json'), 'utf8'));
+    assert.deepEqual(report.checks.map(row => row.status), ['CANDIDATES', 'VERIFIED', 'VERIFIED', 'VERIFIED']);
+    const fields = ['scientific_novelty', 'literature_adequacy', 'measurement_validity', 'method_appropriateness'];
+    report.checks.forEach((row, index) => assert.equal(row.details[fields[index]], 'NOT_ASSESSED'));
+    assert.ok(Math.abs(report.checks[2].details.sample_sd_difference - Math.sqrt(2.5)) < 1e-12);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+
+test('known evidence gaps and normal-model confidence bounds reach Node reports', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'sra-evidence-gaps-'));
+  try {
+    const input = join(__dirname, '../examples/method-audits-advanced.json');
+    const result = await sra.verifyToolkit(input, { stdio: 'pipe', out: join(dir, 'report') });
+    assert.equal(result.code, 1, result.stderr);
+    const report = JSON.parse(readFileSync(join(dir, 'report.json'), 'utf8'));
+    assert.deepEqual(report.checks.map(row => row.status), ['UNDETERMINED', 'REFUTED', 'UNDETERMINED', 'VERIFIED']);
+    assert.equal(report.execution_status, 'partial');
+    assert.deepEqual(report.checks[1].details.reference_coverage.missing_required, ['synthetic:paper_B']);
+    assert.equal(report.checks[2].details.confidence_region.method, 'bonferroni_mean_sd_rectangle');
+    assert.equal(report.checks[2].details.measurement_validity, 'NOT_ASSESSED');
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});

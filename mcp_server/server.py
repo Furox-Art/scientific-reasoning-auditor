@@ -81,11 +81,12 @@ def review_manuscript(
     logic_spec_json: str | None = None,
     toolkit_spec_json: str | None = None,
     prepare_inputs: bool = False,
+    report_style: str | None = None,
 ) -> dict[str, Any]:
-    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
+    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. Optional report_style (natural or technical) adds English readable_report Markdown; calculations are unchanged. PDF OCR and vision are unavailable here. No paths or URLs."""
     return bridge.review_manuscript(
         content, file_format, encoding, study_type, disciplines, style_language,
-        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,
+        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,report_style,
     )
 
 
@@ -131,6 +132,18 @@ def main() -> None:
     """Local desktop MCP transport; does not require a network auth token."""
     mcp.run(transport="stdio")
 
+
+
+@mcp.tool(title="Prove a bounded scientific formal statement", annotations=_LOCAL)
+def prove_science(spec_json: str) -> dict[str, Any]:
+    """Run SRA's independent exact-rational interval and finite-model kernel. Max 16 atoms, 512 expression nodes. No LLM, SMT solver, network, paths or executable code. Returns conditional conclusions, counter-worlds, explanation bases and a recheckable certificate. Quotations anchor caller premises; empirical scientific truth is not certified."""
+    return bridge.prove_science(spec_json)
+
+
+@mcp.tool(title="Recheck a scientific proof certificate", annotations=_LOCAL)
+def verify_science_certificate(spec_json: str, certificate_json: str) -> dict[str, Any]:
+    """Separate scalar/endpoint interpretation checks the finite proof certificate, including bases and counter-worlds. A valid certificate establishes conditional formal reasoning, not factual premises or independent expert validation. Inline bounded JSON only; no network or paths."""
+    return bridge.verify_science_certificate(spec_json, certificate_json)
 
 if __name__ == "__main__":
     main()

@@ -84,6 +84,10 @@ def _evidence(row, modules, requested, scientific_kinds):
                                'citation_context': 'lexical_retrieval_only',
                                'citation_match': 'lexical_retrieval_only',
                                'source_overlap': 'lexical_overlap_only',
+                               'novelty_comparison': 'declared_feature_comparison_only',
+                               'literature_search_audit': 'caller_search_records_only',
+                               'measurement_agreement': 'supplied_measurement_pairs_only',
+                               'question_method_alignment': 'caller_target_mappings_only',
                                'checklist_evidence': 'caller_checklist_records_only',
                                'figure_svg': 'svg_inventory_only',
                                'publication_status': 'registry_update_snapshot_only'}.get(item['kind'], 'supplied_structured_inputs_only'))
@@ -132,7 +136,9 @@ def _execution(row, applicability, refs):
         if states != {'completed'}:
             return 'partial'
         structured = {'supplied_formulas_or_values_only', 'supplied_structured_inputs_only',
-                      'supplied_scientific_values_only', 'declared_manifest_only'}
+                      'supplied_scientific_values_only', 'declared_manifest_only',
+                      'caller_search_records_only', 'supplied_measurement_pairs_only',
+                      'caller_target_mappings_only'}
         return 'checks_completed' if any(ref['execution_status'] == 'completed' and
                                         ref['assessment_scope'] in structured for ref in refs) else 'screening_completed'
     return {'human_review_only': 'human_review_required', 'not_implemented': 'not_implemented'}.get(

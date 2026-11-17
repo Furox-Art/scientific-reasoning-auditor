@@ -234,7 +234,7 @@ class EvidenceChecksTests(unittest.TestCase):
             self.assertEqual(rows['research_integrity']['execution_status'], 'screening_completed')
             self.assertEqual(rows['reporting_guideline_completeness']['execution_status'], 'partial')
             self.assertTrue(all(row['scientific_verdict'] == 'NOT_ASSESSED' for row in rows.values()))
-            self.assertIn('caller\\_checklist\\_records\\_only', review_markdown(report))
+            self.assertIn('caller\\_checklist\\_records\\_only', review_markdown(report, style='technical'))
             path = Path(directory) / 'spec.json'
             path.write_text(json.dumps(spec(checks())), encoding='utf-8')
             output = Path(directory) / 'result'
