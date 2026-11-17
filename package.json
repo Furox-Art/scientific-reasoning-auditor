@@ -24,6 +24,9 @@
     "docs/releases/0.10.1.md",
     "docs/releases/0.11.0.md",
     "docs/REPORT_STYLE.md",
+    "docs/METHOD_AUDITS.md",
+    "examples/method-audits.json",
+    "examples/method-audits.md",
     "docs/INSPECTION_EXPANSION.md",
     "examples/statistical-context.json",
     "examples/statistic-preparation.md"

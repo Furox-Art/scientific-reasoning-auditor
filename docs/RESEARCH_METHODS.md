@@ -271,3 +271,13 @@ plain sentences; it does not alter any statistical method or infer missing
 assumptions. Full evidence requirements and procedures remain in JSON and the
 technical presentation. Module-specific numerical results, evidence and limits
 are retained in both presentations. See [report style](REPORT_STYLE.md).
+
+## Scoped novelty, literature, measurement and target checks
+
+Four additional toolkit kinds are documented in [method audits](METHOD_AUDITS.md):
+source-anchored contribution-feature comparison, search-record consistency,
+paired Bland-Altman measurement agreement, and literal question/method target
+alignment. They support bounded parts of the four review questions; all overall
+novelty, literature adequacy, measurement validity and method-appropriateness
+judgments remain NOT_ASSESSED. The synthetic example does not execute searches
+or provide new human labels. Existing arithmetic and reasoning rules are unchanged.

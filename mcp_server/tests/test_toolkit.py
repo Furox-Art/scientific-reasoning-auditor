@@ -8,6 +8,21 @@ from mcp_server import bridge,server
 
 
 class MCPToolkitTests(unittest.TestCase):
+    def test_scientific_method_audits_survive_transport_with_scoped_verdicts(self):
+        path = Path(__file__).parents[2] / 'examples/method-audits.json'
+        response = server.verify_toolkit(path.read_text())
+        self.assertTrue(response['ok'], response)
+        rows = response['result']['checks']
+        self.assertEqual([row['status'] for row in rows], ['CANDIDATES', 'VERIFIED', 'VERIFIED', 'VERIFIED'])
+        for row, field in zip(rows, ('scientific_novelty', 'literature_adequacy', 'measurement_validity', 'method_appropriateness')):
+            self.assertEqual(row['details'][field], 'NOT_ASSESSED')
+        spec = json.loads(path.read_text())
+        spec['checks'][2]['normal_differences'] = None
+        result = server.verify_toolkit(json.dumps(spec))
+        self.assertTrue(result['ok'], result)
+        self.assertEqual(result['result']['checks'][2]['status'], 'UNDETERMINED')
+        self.assertEqual(result['result']['execution_status'], 'partial')
+
     def test_literal_source_preparation_keeps_unknown_assumptions(self):
         content = 'X^(2) = 7.66, df = 2, P = 0.02; X²(2) = 11.54, P < .01'
         response = server.prepare_inspection(content)

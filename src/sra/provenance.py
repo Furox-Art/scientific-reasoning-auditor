@@ -84,6 +84,10 @@ REPOSITORY_HASH_FILES = (
     "index.d.ts",
     "MANIFEST.in",
     "README.md",
+    "docs/REPORT_STYLE.md",
+    "docs/METHOD_AUDITS.md",
+    "docs/RESEARCH_METHODS.md",
+    "docs/releases/0.11.0.md",
     "LICENSE",
 )
 INSTALLED_PACKAGE_HASH_SCOPE = "installed Python package source files only"

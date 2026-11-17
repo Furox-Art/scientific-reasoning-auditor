@@ -15,6 +15,7 @@ EMPIRICAL_STRUCTURE = ("structure.methods_missing", "structure.results_missing")
 
 def capabilities() -> dict[str, Any]:
     """Return a fresh catalog; abbreviated field cues never imply expert coverage."""
+    from sra.toolkit_spec import KINDS
     catalog = {
         "schema_version": REPORT_SCHEMA,
         "applicability_version": APPLICABILITY_VERSION,
@@ -36,15 +37,7 @@ def capabilities() -> dict[str, Any]:
                             'publication_updates':'directional_Crossref_metadata_not_completeness_proof'},
         "deterministic_toolkit": {"schema_version":"deterministic-toolkit/1.0", "extra":"toolkit",
                                   "backends":["SymPy","Pint","SciPy","spaCy","RapidFuzz"],
-                                  "checks":["polynomial_identity","derivative","antiderivative","unit_conversion",
-                                            "statistical_replay","claim_candidates","citation_match",
-                                            'symbolic_identity','symbolic_derivative','symbolic_antiderivative','statistical_analysis',
-                                            'statistic_consistency','citation_context','table_compare','figure_svg',
-                                            'causal_graph','bias_assessment','power_analysis','meta_analysis',
-                                            'bayesian_diagnostics','ml_validation','publication_status',
-                                            'source_overlap','protocol_consistency','checklist_evidence',
-                                            'cluster_robust_regression','correlated_meta_analysis','missing_binary_sensitivity',
-                                            'multilevel_meta_analysis','wild_cluster_bootstrap','cluster_power_analysis'],
+                                  "checks":list(KINDS),
                                   "candidate_results_are_proofs":False,"manuscript_access":"read_only",
                                   "cluster_covariance_methods":['CR1','CR2','CR3'],
                                   "findings_destination":"separate_user_report"},

@@ -748,3 +748,13 @@ omit the option to retain the original structured response.
 Python 0.11.0 is required by npm 0.4.0.
 See [report presentation](docs/REPORT_STYLE.md). This feature does not rewrite
 manuscripts or identify whether text was written by AI.
+
+### Scientific-method record audits
+
+The prepared Python 0.11.0 / npm 0.4.0 release also adds four scoped checks:
+`novelty_comparison`, `literature_search_audit`, `measurement_agreement`, and
+`question_method_alignment`. Run
+`sra verify-toolkit examples/method-audits.json --out reports/methods`.
+These compare supplied evidence/records or paired measurements; they do not
+certify novelty, complete literature, construct validity or method adequacy.
+The toolkit now has 35 kinds. See [inputs, verdicts and limits](docs/METHOD_AUDITS.md).
