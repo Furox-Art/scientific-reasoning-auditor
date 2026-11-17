@@ -262,3 +262,12 @@ The separate conditional numerical replay is not a confirmed paper-error label.
 This post-hoc development reuse does not resolve representative scientific-error
 accuracy or independent human labeling; see
 [the complete follow-up](../benchmarks/pilots/statistic-preparation-20261116/README.md).
+
+## Report presentation
+
+Python 0.11.0 adds a deterministic natural English presentation for unified
+review. It shortens the criteria worksheet and states execution outcomes in
+plain sentences; it does not alter any statistical method or infer missing
+assumptions. Full evidence requirements and procedures remain in JSON and the
+technical presentation. Module-specific numerical results, evidence and limits
+are retained in both presentations. See [report style](REPORT_STYLE.md).

@@ -15,6 +15,8 @@ def configure_review_commands(sub) -> None:
     command.add_argument("--out", default="review-report")
     command.add_argument("--study-type", choices=STUDY_TYPES, default="unknown")
     command.add_argument("--discipline", action="append", choices=tuple(PROFILES), default=[])
+    command.add_argument("--report-style", choices=("natural", "technical"), default="natural",
+                         help="English report presentation; calculations and JSON are unchanged.")
     command.add_argument("--style-language", choices=("en", "tr", "none"), default="en")
     command.add_argument("--statistics-spec", help="Explicit bounded statistics JSON; never inferred from prose.")
     command.add_argument("--scientific-spec", help="Explicit bounded scientific-check JSON.")
@@ -56,7 +58,7 @@ def execute_review_command(args, parser, protect, same_document, review=review_m
             pdf_ocr_mode=args.ocr_mode, ocr_languages=args.ocr_languages, visual_pages=args.visual_pages,
         )
         serialized = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
-        markdown = review_markdown(result)
+        markdown = review_markdown(result, style=args.report_style)
         for target, content in zip(targets, (serialized, markdown)):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(content, encoding="utf-8")

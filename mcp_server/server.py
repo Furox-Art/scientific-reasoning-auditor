@@ -81,11 +81,12 @@ def review_manuscript(
     logic_spec_json: str | None = None,
     toolkit_spec_json: str | None = None,
     prepare_inputs: bool = False,
+    report_style: str | None = None,
 ) -> dict[str, Any]:
-    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. PDF OCR and vision are unavailable here. No paths or URLs."""
+    """Compose reasoning, writing, selected field cues, DOI metadata and explicit arithmetic checks in one source-bound report. Discover profiles with get_review_capabilities. Offline by default. Only set send_to_model=true after explicit document-owner consent; online/model requests also require host opt-in. Inspect result.execution_status and each module, even when ok=true. Optional report_style (natural or technical) adds English readable_report Markdown; calculations are unchanged. PDF OCR and vision are unavailable here. No paths or URLs."""
     return bridge.review_manuscript(
         content, file_format, encoding, study_type, disciplines, style_language,
-        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,
+        online, statistics_spec_json, scientific_spec_json, send_to_model, logic_spec_json, toolkit_spec_json,prepare_inputs,report_style,
     )
 
 

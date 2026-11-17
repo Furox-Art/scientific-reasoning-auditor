@@ -149,7 +149,7 @@ class UnifiedReviewTests(unittest.TestCase):
         from sra.review_report import review_markdown
         report = api.review_manuscript(self.paper, study_type="theoretical")
         report["source"] = "<script>alert(1)</script>"
-        rendered = review_markdown(report)
+        rendered = review_markdown(report, style="technical")
         self.assertNotIn("<script>", rendered)
         for label in ("Execution", "Coverage gaps", "Excluded", "not_requested", "structure.methods\\_missing"):
             self.assertIn(label, rendered)

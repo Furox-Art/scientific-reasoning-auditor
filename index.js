@@ -10,7 +10,7 @@ const { spawn, spawnSync } = require('node:child_process');
  * to check only "is `sra` importable", which let an outdated engine answer
  * successfully and then fail at runtime on a command it does not have.
  */
-const MINIMUM_PYTHON_PACKAGE = '0.5.2';
+const MINIMUM_PYTHON_PACKAGE = '0.11.0';
 
 // Exit codes: 0 = usable, 1 = no Python 3.11+/no `sra`, 2 = `sra` present but
 // older than the floor. On 2 the probe prints the version it found so the error
@@ -459,6 +459,9 @@ function reviewManuscript(input, options = {}) {
       options.sendToModel && (typeof options.model !== 'string' || !options.model.trim() || options.model.length > 128)) {
     return Promise.reject(new TypeError('model review requires explicit sendToModel and a model identifier'));
   }
+  if (options.reportStyle !== undefined && !['natural', 'technical'].includes(options.reportStyle)) {
+    return Promise.reject(new TypeError('reportStyle must be natural or technical'));
+  }
   if (options.styleLanguage !== undefined && !['en', 'tr', 'none'].includes(options.styleLanguage) ||
       options.ocrMode !== undefined && !['off', 'missing', 'all'].includes(options.ocrMode)) {
     return Promise.reject(new TypeError('Unsupported language or OCR mode'));
@@ -470,7 +473,7 @@ function reviewManuscript(input, options = {}) {
   }
   const args = ['review', input, '--study-type', kind, '--out', options.out || 'review-report'];
   for (const key of disciplines) args.push('--discipline', key);
-  for (const [key, flag] of [['styleLanguage', '--style-language'], ['statisticsSpec', '--statistics-spec'],
+  for (const [key, flag] of [['reportStyle', '--report-style'], ['styleLanguage', '--style-language'], ['statisticsSpec', '--statistics-spec'],
     ['scientificSpec', '--scientific-spec'], ['logicSpec', '--logic-spec'], ['toolkitSpec', '--toolkit-spec'], ['model', '--model'], ['baseUrl', '--base-url'],
     ['apiKeyEnv', '--api-key-env'], ['timeout', '--timeout'], ['chunkChars', '--chunk-chars'],
     ['ocrMode', '--ocr-mode'], ['ocrLanguages', '--ocr-languages']]) {

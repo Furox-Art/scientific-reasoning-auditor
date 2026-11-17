@@ -37,7 +37,7 @@ test('an outdated Python engine is refused with an upgrade instruction', async (
     sra.run(['--help'], { stdio: 'pipe', env: { SRA_PYTHON: launcher } }),
     (error) => {
       assert.match(error.message, /is 0\.1\.1/);
-      assert.match(error.message, /requires at least 0\.5\.2/);
+      assert.match(error.message, /requires at least 0\.11\.0/);
       assert.match(error.message, /pip install --upgrade scientific-reasoning-auditor/);
       return true;
     },
@@ -46,7 +46,7 @@ test('an outdated Python engine is refused with an upgrade instruction', async (
 
 test('a Python engine at the floor is accepted', async (t) => {
   if (process.platform === 'win32') return;
-  const launcher = fakeInterpreter(t, '0.5.2', 0);
+  const launcher = fakeInterpreter(t, '0.11.0', 0);
   const out = await sra.run(['--help'], { stdio: 'pipe', env: { SRA_PYTHON: launcher } });
   assert.equal(out.code, 0);
 });

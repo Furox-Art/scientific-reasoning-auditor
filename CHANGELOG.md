@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.0 — 2026-11-17
+
+- Default unified Markdown reports to concise English with explicit execution states and a compact criteria worksheet. Preserve module evidence, numerical results and uncertainty; retain the full technical presentation as an option.
+- Add CLI `--report-style`, Python `review_markdown(..., style=...)`, Node `reportStyle`, and opt-in MCP `report_style` / `readable_report`. JSON calculations and manuscripts are unchanged.
+- Raise the npm adapter's Python engine floor to 0.11.0 for the new CLI option. The adapter version is 0.4.0. Calculation rules remain 0.10.1.
+
+
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

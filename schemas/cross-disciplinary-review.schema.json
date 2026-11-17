@@ -7,6 +7,7 @@
   "properties": {
     "schema_version": {"const":"cross-disciplinary-review/1.0"},
     "source": {"type":"string"},
+    "readable_report": {"type":"string","maxLength":2097152,"description":"Optional English Markdown presentation requested through MCP; not a scientific verdict."},
     "source_sha256": {"$ref":"#/$defs/digest"},
     "extracted_text_sha256": {"$ref":"#/$defs/digest"},
     "execution_status": {"enum":["complete","partial"]},

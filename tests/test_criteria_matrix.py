@@ -234,7 +234,7 @@ class CriteriaMatrixTests(unittest.TestCase):
         report=self.review(study_type='qualitative')
         self.assertIn('criteria_matrix',report)
         jsonschema.validate(report,schema)
-        rendered=review_markdown(report)
+        rendered=review_markdown(report, style="technical")
         self.assertIn('Scientific criteria coverage',rendered)
         self.assertIn('Required evidence',rendered)
         self.assertIn('NOT_ASSESSED',rendered)

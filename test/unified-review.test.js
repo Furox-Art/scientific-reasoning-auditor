@@ -12,7 +12,7 @@ test('unified API exposes capability discovery and typed input validation', asyn
   for (const options of [{ studyType: 'fiction' }, { disciplines: 'physics' },
     { disciplines: ['unsupported'] }, { online: 1 }, { sendToModel: 1 },
     { model: 'fake' }, { sendToModel: true }, { styleLanguage: 'auto' },
-    { timeout: 0 }, { chunkChars: 1 }, { visualPages: true }]) {
+    { reportStyle: 'auto' }, { reportStyle: null }, { timeout: 0 }, { chunkChars: 1 }, { visualPages: true }]) {
     await assert.rejects(sra.reviewManuscript('paper.md', options), TypeError);
   }
   await assert.rejects(sra.reviewManuscript(''), TypeError);
@@ -25,7 +25,7 @@ test('unified Node wrapper executes real Python engine and preserves module iden
     const paper = join(dir, 'paper.md');
     writeFileSync(paper, '# Proof\nAssume an exact identity.\n');
     const options = { stdio: 'pipe', out: join(dir, 'report'), studyType: 'theoretical',
-      disciplines: ['physics', 'computing'], styleLanguage: 'none', timeout: 30,
+      disciplines: ['physics', 'computing'], reportStyle: 'technical', styleLanguage: 'none', timeout: 30,
       chunkChars: 2000, ocrMode: 'off', ocrLanguages: 'eng' };
     const result = await sra.reviewManuscript(paper, options);
     assert.equal(result.code, 0, result.stderr);
@@ -37,6 +37,19 @@ test('unified Node wrapper executes real Python engine and preserves module iden
     assert.ok(report.criteria_matrix.criteria.every(row => row.scientific_verdict === 'NOT_ASSESSED'));
     const proof = report.criteria_matrix.criteria.find(row => row.id === 'proof_completeness');
     assert.equal(proof.execution_status, 'human_review_required');
+    assert.match(readFileSync(join(dir, 'report.md'), 'utf8'), /Module execution/);
+    const natural = await sra.reviewManuscript(paper, { ...options, reportStyle: 'natural' });
+    assert.equal(natural.code, 0, natural.stderr);
+    // Independent executions may cross a second; only manifest creation times vary.
+    const withoutClock = value => JSON.parse(JSON.stringify(value, (key, item) => {
+      if (key === 'reproducibility_manifest' && item) {
+        const { generated_at_utc, ...stable } = item;
+        return stable;
+      }
+      return item;
+    }));
+    assert.deepEqual(withoutClock(JSON.parse(readFileSync(join(dir, 'report.json'), 'utf8'))), withoutClock(report));
+    assert.match(readFileSync(join(dir, 'report.md'), 'utf8'), /Requested checks finished/);
     const catalog = await sra.capabilities({ stdio: 'pipe' });
     assert.equal(catalog.code, 0, catalog.stderr);
     assert.equal(JSON.parse(catalog.stdout).schema_version, 'cross-disciplinary-review/1.0');

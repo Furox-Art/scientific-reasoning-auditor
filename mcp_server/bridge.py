@@ -226,11 +226,14 @@ def review_manuscript(
     logic_spec_json: str | None = None,
     toolkit_spec_json: str | None = None,
     prepare_inputs: bool = False,
+    report_style: str | None = None,
 ) -> dict[str, Any]:
     """Compose one source-bound review; transport ok is separate from execution status."""
     def task() -> dict[str, Any]:
         from sra.document import load_document
         from sra.review import review_document
+        if report_style is not None and report_style not in ("natural", "technical"):
+            raise ValueError("Report style must be natural or technical.")
         if type(online) is not bool or type(send_to_model) is not bool:
             raise ValueError("online and send_to_model must be booleans.")
         if online and os.getenv("SRA_MCP_ENABLE_NETWORK") != "1":
@@ -260,7 +263,11 @@ def review_manuscript(
                 base_url=os.getenv("SRA_MCP_MODEL_BASE_URL", "https://api.openai.com/v1"),
                 api_key_env="OPENAI_API_KEY", timeout=60, visual_pages=False,
             )
-            return _scrub(result, root)
+            result = _scrub(result, root)
+            if report_style is not None:
+                from sra.review_report import review_markdown
+                result["readable_report"] = review_markdown(result, style=report_style)
+            return result
     return _invoke(task)
 
 

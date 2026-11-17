@@ -11,6 +11,8 @@ export type Discipline = 'clinical' | 'animal' | 'physics' | 'chemistry' | 'comp
 export interface UnifiedReviewOptions extends RunOptions {
   out?: string;
   studyType?: StudyType;
+  /** English presentation only; does not affect calculations or JSON. Defaults to natural. */
+  reportStyle?: 'natural' | 'technical';
   disciplines?: Discipline[];
   styleLanguage?: 'en' | 'tr' | 'none';
   statisticsSpec?: string;

@@ -1,5 +1,6 @@
 """CLI execution semantics and input/output protection."""
 import contextlib
+from datetime import datetime, timezone
 import io
 import json
 import os
@@ -41,6 +42,20 @@ class UnifiedCLITests(unittest.TestCase):
         self.assertEqual(criteria['proof_completeness']['execution_status'],'human_review_required')
         self.assertIn("not scientific", output)
         self.assertTrue((self.root / "out/report.md").is_file())
+
+    @patch("sra.provenance.datetime")
+    def test_presentation_changes_markdown_but_not_json_or_manuscript(self, clock):
+        clock.now.return_value = datetime(2026, 11, 17, tzinfo=timezone.utc)
+        original = self.paper.read_bytes()
+        for style in ('natural', 'technical'):
+            self.call('review', self.paper, '--report-style', style, '--out', self.root / style)
+        self.assertEqual((self.root / 'natural.json').read_bytes(), (self.root / 'technical.json').read_bytes())
+        self.assertIn('Requested checks finished.', (self.root / 'natural.md').read_text())
+        self.assertIn('Module execution', (self.root / 'technical.md').read_text())
+        self.assertEqual(self.paper.read_bytes(), original)
+        with patch('sra.cli.review_manuscript') as run, self.assertRaises(SystemExit):
+            self.call('review', self.paper, '--report-style', 'auto')
+        run.assert_not_called()
 
     def test_inputs_are_protected_before_any_analysis(self):
         with patch("sra.cli.review_manuscript") as run:
