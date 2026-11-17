@@ -4,7 +4,7 @@ Four toolkit checks (dependency-free by default) support parts of novelty, searc
 measurement agreement and question/method alignment. They do not decide global
 scientific adequacy. Existing `source_overlap` remains a separate lexical screen.
 The toolkit now exposes 35 check kinds; not all kinds produce mathematical proofs.
-These changes are prepared for the unpublished Python 0.11.0 / npm 0.4.0 release.
+These checks are included in Python 0.11.0 / npm 0.4.0.
 
 ```bash
 sra verify-toolkit examples/method-audits.json --out reports/method-audits

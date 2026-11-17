@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.11.0 — 2026-11-17 (prepared, unpublished)
+## 0.11.0 — 2026-11-17
+
+- Read manuscript bytes in bounded 64 KiB pieces to avoid allocating the full input cap for small files under memory pressure; retain the 32 MiB plus-one oversize guard.
 
 - Add an own standalone finite-model/exact-rational-interval proof kernel with counter-worlds, deletion-minimal explanations, source anchors and a separate scalar certificate verifier. Expose Python, CLI, Node and MCP interfaces without external solver/model dependencies.
 

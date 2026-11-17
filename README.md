@@ -751,7 +751,7 @@ manuscripts or identify whether text was written by AI.
 
 ### Scientific-method record audits
 
-The prepared Python 0.11.0 / npm 0.4.0 release also adds four scoped checks:
+Python 0.11.0 / npm 0.4.0 also add four scoped checks:
 `novelty_comparison`, `literature_search_audit`, `measurement_agreement`, and
 `question_method_alignment`. Run
 `sra verify-toolkit examples/method-audits.json --out reports/methods`.
@@ -767,7 +767,7 @@ intentionally produce abstentions. See [the exact contracts](docs/METHOD_AUDITS.
 
 ### Independent scientific proof kernel
 
-The prepared release now includes SRA's own standard-library finite-model and
+Python 0.11.0 includes SRA's own standard-library finite-model and
 exact-rational interval engine: `sra prove-science examples/scientific-proof.json
 --out reports/proof`. Recheck with `sra verify-science-certificate
 examples/scientific-proof.json reports/proof.json --out reports/rechecked`.
