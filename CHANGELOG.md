@@ -25,6 +25,23 @@ The Python package (`scientific-reasoning-auditor`) and the Node.js adapter
 
 ## [Unreleased]
 
+- `statistic_consistency` now abstains (UNDETERMINED) instead of refuting when a
+  discrepancy under the default undeclared two-sided t/z tail or uncorrected F df is
+  also consistent with a plausible undeclared analysis choice: a one-tailed test in
+  the statistic direction, or a sphericity df correction (Greenhouse-Geisser /
+  Huynh-Feldt) reachable within the epsilon lower bound. Caller-declared tails and
+  supplied corrected df are unaffected and resolve the abstention; VERIFIED results
+  are never overturned. Fail-closed, consistent with the unknown-direction abstention.
+- Re-measured on the frozen 1120-result published psychology reference cohort: false
+  alarms 20 -> 1, decided precision 63.0% -> 96.4%, selective risk 2.98% -> 0.15%, at a
+  documented recall cost (reference-frame recall 34/49 -> 27/49; 7 genuine errors move
+  to transparent abstention because they share the undeclared-choice numeric signature).
+  Retrospective in-sample tuning on a psychology-only cohort; the frozen 0.9.0 first
+  run is preserved unchanged. See benchmarks/reference_abstention_remeasurement_20261120.
+- README current status aligned to Python 0.11.0 / Node 0.4.0; prospective blinded
+  human validation explicitly marked PENDING (cannot be performed by the software).
+  No new human labels, prospective or multi-field accuracy claim is made.
+
 ## [0.10.0] - 2026-11-16
 
 Python engine/ruleset 0.10.0 and Node adapter 0.3.0.

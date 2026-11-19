@@ -1,0 +1,485 @@
+{
+  "schema_version": "reference-abstention-remeasurement/1.0",
+  "date": "2026-11-20",
+  "comparison_mode": "retrospective_in_sample_remeasurement",
+  "purpose": "Before/after false-alarm and recall measurement of a fail-closed tail/df-correction abstention on the SAME frozen published-reference cohort. Not a new frozen baseline, not prospective validation.",
+  "cohort": {
+    "source": "benchmarks/pilots/published-reference-20261116/first-run.json",
+    "source_sha256": "e99491bbc0817074b9237fdb129eb192aca49a962bcdff78b03274056c0a92a0",
+    "retained_cases": 1120,
+    "group_count": 48,
+    "gold_label_origin": "historical manual coding (Wicherts, Bakker & Molenaar 2011; statcheck codebook), CC BY 4.0",
+    "frozen_first_run_unchanged": true
+  },
+  "engine": {
+    "before_version": "0.11.0 (numerically identical to frozen 0.9.0 on this cohort)",
+    "after_version": "0.11.0 + unreleased abstention refinement",
+    "modified_source": "src/sra/inspection_calculations.py",
+    "modified_source_sha256": "fa0454871d837d5b9e9f4a7ef9ce38f3942f4280fae69f77073e746988aebb5d",
+    "backend": "scipy.stats"
+  },
+  "rule_change": {
+    "kind": "fail-closed abstention (UNDETERMINED), not a tolerance/threshold loosening",
+    "one_tailed": "Default two-sided t/z REFUTED, but the printed p is not refuted by a one-tailed test in the statistic direction -> abstain. Only when alternative_source=='default'.",
+    "df_correction": "Default uncorrected F (numerator df>=2) REFUTED with reported p above the computed interval, and reachable by a sphericity correction at the Greenhouse-Geisser epsilon lower bound (df -> (1, df2/df1)) -> abstain.",
+    "guards": "Never fires for caller-declared tails/df; never overturns VERIFIED; numerical warnings/nonfinite tails keep the prior verdict."
+  },
+  "before": {
+    "confusion": {
+      "tp": 34,
+      "fp": 20,
+      "fn": 0,
+      "tn": 618
+    },
+    "abstentions": {
+      "error": 15,
+      "no_error": 433
+    },
+    "metrics": {
+      "decision_coverage": {
+        "numerator": 672,
+        "denominator": 1120,
+        "value": 0.6
+      },
+      "selective_accuracy": {
+        "numerator": 652,
+        "denominator": 672,
+        "value": 0.9702380952380952
+      },
+      "selective_risk": {
+        "numerator": 20,
+        "denominator": 672,
+        "value": 0.02976190476190476
+      },
+      "decided_precision": {
+        "numerator": 34,
+        "denominator": 54,
+        "value": 0.6296296296296297
+      },
+      "decided_recall": {
+        "numerator": 34,
+        "denominator": 34,
+        "value": 1.0
+      },
+      "decided_specificity": {
+        "numerator": 618,
+        "denominator": 638,
+        "value": 0.9686520376175548
+      },
+      "decided_false_positive_rate": {
+        "numerator": 20,
+        "denominator": 638,
+        "value": 0.03134796238244514
+      },
+      "false_alarms_per_labeled_negative": {
+        "numerator": 20,
+        "denominator": 1071,
+        "value": 0.018674136321195144
+      },
+      "reference_frame_recall": {
+        "numerator": 34,
+        "denominator": 49,
+        "value": 0.6938775510204082
+      }
+    }
+  },
+  "after": {
+    "confusion": {
+      "tp": 27,
+      "fp": 1,
+      "fn": 0,
+      "tn": 618
+    },
+    "abstentions": {
+      "error": 22,
+      "no_error": 452
+    },
+    "metrics": {
+      "decision_coverage": {
+        "numerator": 646,
+        "denominator": 1120,
+        "value": 0.5767857142857142
+      },
+      "selective_accuracy": {
+        "numerator": 645,
+        "denominator": 646,
+        "value": 0.9984520123839009
+      },
+      "selective_risk": {
+        "numerator": 1,
+        "denominator": 646,
+        "value": 0.0015479876160990713
+      },
+      "decided_precision": {
+        "numerator": 27,
+        "denominator": 28,
+        "value": 0.9642857142857143
+      },
+      "decided_recall": {
+        "numerator": 27,
+        "denominator": 27,
+        "value": 1.0
+      },
+      "decided_specificity": {
+        "numerator": 618,
+        "denominator": 619,
+        "value": 0.9983844911147012
+      },
+      "decided_false_positive_rate": {
+        "numerator": 1,
+        "denominator": 619,
+        "value": 0.0016155088852988692
+      },
+      "false_alarms_per_labeled_negative": {
+        "numerator": 1,
+        "denominator": 1071,
+        "value": 0.0009337068160597573
+      },
+      "reference_frame_recall": {
+        "numerator": 27,
+        "denominator": 49,
+        "value": 0.5510204081632653
+      }
+    }
+  },
+  "fixed_false_alarms": [
+    {
+      "id": "row_262",
+      "raw": "t(69) = 1.68, p <.05",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_263",
+      "raw": "t(69) = 1.73, p <.05",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_266",
+      "raw": "t(29) = 2.06, p <.025",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_394",
+      "raw": "F(9, 504) = 2.25, p =.036",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_395",
+      "raw": "F(9, 513) = 2.27, p =.032",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_396",
+      "raw": "F(9, 504) = 2.30, p =.035",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_397",
+      "raw": "F(9, 504) = 2.49, p =.033",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_398",
+      "raw": "F(9, 504) = 2.81, p =.011",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_399",
+      "raw": "F(9, 513) = 2.98, p =.035",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_400",
+      "raw": "F(9, 513) = 3.11, p =.023",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_409",
+      "raw": "F(48, 720) = 2.89, p =.005",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_418",
+      "raw": "F(2, 30) = 3.46, p =.047",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_436",
+      "raw": "F(2, 30) = 6.51, p =.008",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_437",
+      "raw": "F(2, 30) = 6.63, p =.01",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_703",
+      "raw": "t(14) = 2.0, p <.03",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_711",
+      "raw": "t(29) = 1.80, p = .04",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_712",
+      "raw": "t(31) = 1.86, p = .04",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_713",
+      "raw": "t(35) = 2.00, p = .03",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_714",
+      "raw": "t(29) = 2.40, p = .01",
+      "mechanism": "one_tailed"
+    }
+  ],
+  "lost_true_positives_recall_cost": [
+    {
+      "id": "row_65",
+      "raw": "t(15) = 2.75, p <.01",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_98",
+      "raw": "t(18) = 1.99, p <.05",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_526",
+      "raw": "t(27) = 2.02, p <.05",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_540",
+      "raw": "F(4, 15) = 11.01, p =.005",
+      "mechanism": "df_correction"
+    },
+    {
+      "id": "row_656",
+      "raw": "t(115) = 2.57, p <.01",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_811",
+      "raw": "t(18) = 3.78, p <.001",
+      "mechanism": "one_tailed"
+    },
+    {
+      "id": "row_813",
+      "raw": "t(18) = 3.85, p <.001",
+      "mechanism": "one_tailed"
+    }
+  ],
+  "remaining_false_alarm": [
+    {
+      "id": "row_548",
+      "raw": "F(1, 53) = 2.91, p <.05"
+    }
+  ],
+  "prediction_flips": [
+    {
+      "id": "row_65",
+      "raw": "t(15) = 2.75, p <.01",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_98",
+      "raw": "t(18) = 1.99, p <.05",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_262",
+      "raw": "t(69) = 1.68, p <.05",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_263",
+      "raw": "t(69) = 1.73, p <.05",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_266",
+      "raw": "t(29) = 2.06, p <.025",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_394",
+      "raw": "F(9, 504) = 2.25, p =.036",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_395",
+      "raw": "F(9, 513) = 2.27, p =.032",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_396",
+      "raw": "F(9, 504) = 2.30, p =.035",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_397",
+      "raw": "F(9, 504) = 2.49, p =.033",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_398",
+      "raw": "F(9, 504) = 2.81, p =.011",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_399",
+      "raw": "F(9, 513) = 2.98, p =.035",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_400",
+      "raw": "F(9, 513) = 3.11, p =.023",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_409",
+      "raw": "F(48, 720) = 2.89, p =.005",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_418",
+      "raw": "F(2, 30) = 3.46, p =.047",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_436",
+      "raw": "F(2, 30) = 6.51, p =.008",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_437",
+      "raw": "F(2, 30) = 6.63, p =.01",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_526",
+      "raw": "t(27) = 2.02, p <.05",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_540",
+      "raw": "F(4, 15) = 11.01, p =.005",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_656",
+      "raw": "t(115) = 2.57, p <.01",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_703",
+      "raw": "t(14) = 2.0, p <.03",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_711",
+      "raw": "t(29) = 1.80, p = .04",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_712",
+      "raw": "t(31) = 1.86, p = .04",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_713",
+      "raw": "t(35) = 2.00, p = .03",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_714",
+      "raw": "t(29) = 2.40, p = .01",
+      "gold": "no_error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_811",
+      "raw": "t(18) = 3.78, p <.001",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    },
+    {
+      "id": "row_813",
+      "raw": "t(18) = 3.85, p <.001",
+      "gold": "error",
+      "before": "error",
+      "after": "abstain"
+    }
+  ],
+  "trade_off": {
+    "summary": "False alarms 20->1 and decided precision 63.0%->96.4%, bought with reference-frame recall 34/49->27/49. Seven genuine reference errors move to transparent abstention (not silent false negatives; decided FN stays 0).",
+    "identifiability": "The removed false alarms and the lost true positives share the same numeric signature once the tail/correction is undeclared; no rule on the input string alone can separate them. The abstention is the honest fail-closed response to an undeclared analysis choice.",
+    "resolution": "Declaring alternative (greater/less/two-sided) or supplying the corrected df restores a definite verdict."
+  },
+  "limitations": [
+    "Retrospective, in-sample tuning on the SAME psychology-only cohort used to design the rule; the after numbers are not a held-out or prospective estimate.",
+    "Selected significant psychology results; not representative multi-field or whole-paper accuracy.",
+    "Inputs are third-party (statcheck) strings, not SRA text extraction; missing strings abstain.",
+    "Historical labels/joins and original papers are not independently re-adjudicated or authenticated.",
+    "One-tailed and sphericity-correction explanations are plausible hypotheses, not confirmed causes for any specific row.",
+    "No new human reviews collected; prospective blinded human validation remains PENDING and cannot be performed by this software.",
+    "Case counts are correlated within source author-key groups; no inferential confidence intervals are claimed."
+  ],
+  "new_human_reviews_collected": 0,
+  "prospective_human_validation": "PENDING"
+}

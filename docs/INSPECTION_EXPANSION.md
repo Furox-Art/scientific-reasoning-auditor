@@ -98,6 +98,13 @@ Omitted directions retain two-sided t/z and upper-tail F/chi-square defaults,
 explicitly marked as defaults in the report. Signed t/z statistics are retained
 for one-sided checks: `less` uses the CDF, `greater` the survival function.
 Unknown direction abstains; direction is never selected to improve p agreement.
+When a default (undeclared) two-sided t/z or uncorrected-df F calculation refutes the
+printed p, but that p is also consistent with a plausible undeclared choice — a
+one-tailed test in the statistic direction, or a sphericity df correction on F with
+numerator df >= 2 reachable within the Greenhouse-Geisser epsilon lower bound — the
+check abstains (UNDETERMINED) rather than declaring a reporting error. This never
+applies to caller-declared tails or supplied corrected df, and never overturns a
+VERIFIED result; it is the same fail-closed stance as unknown direction.
 
 Degrees of freedom are positive decimals in [1e-6, 1e6]. Decimal strings retain
 the supplied representation. Integer values default to `df_precision: exact`;

@@ -24,6 +24,21 @@ reference errors flagged and 34/54 flags agreeing with the reference. This is
 retrospective conditional agreement, not whole-paper or multi-field validation;
 the third-party input strings do not test SRA text extraction.
 
+A fail-closed refinement to `statistic_consistency` now abstains instead of declaring
+a reporting error when a discrepancy under the *default* (undeclared) two-sided t/z
+tail or uncorrected F degrees of freedom is also consistent with a plausible
+undeclared analysis choice — a one-tailed test in the statistic's direction, or a
+sphericity df correction (Greenhouse-Geisser/Huynh-Feldt) on F. Re-measured on the
+same frozen 1120-result psychology cohort, false alarms fell from 20 to 1 and decided
+precision rose from 63.0% to 96.4%, at a documented recall cost (reference-frame
+recall 34/49 → 27/49): the removed false alarms and some genuine errors share the
+same numeric signature once the tail/correction is undeclared, so they cannot be
+separated from the input string alone. Caller-declared tails and corrected df are
+unaffected and resolve the abstention. This is retrospective, in-sample tuning on a
+psychology-only cohort — not prospective, held-out or multi-field validation. See
+[the remeasurement](benchmarks/reference_abstention_remeasurement_20261120.md).
+Prospective blinded human validation remains PENDING.
+
 Offline [human-review collection](docs/ERROR_COLLECTION.md) now packages any
 bounded frozen cohort into separate blank reviewer archives, inspects returned
 disagreements before adjudication and exports a separate blank adjudicator packet.
@@ -42,7 +57,7 @@ A research-software project for auditing the reasoning chain in scientific manus
 
 The software exposes reviewable reasoning risks with evidence locations and reproducibility metadata. It does not declare a manuscript scientifically true or false.
 
-## Current status: Python v0.10.0 / Node v0.3.0
+## Current status: Python v0.11.0 / Node v0.4.0
 
 The [local inspection toolkit](docs/DETERMINISTIC_TOOLKIT.md)
 integrates SymPy polynomial/calculus checks, Pint unit conversions, SciPy raw-data
@@ -70,12 +85,15 @@ study-type applicability, required evidence, available checks, source-bound
 execution references and explicit human/unsupported assessments. It covers broad
 review questions without claiming exhaustive coverage or scientific certification.
 
-Python 0.10.0 and Node adapter 0.3.0 include the source-bound review, deterministic
+Python 0.11.0 and Node adapter 0.4.0 include the source-bound review, deterministic
 toolkit, research/grouped methods and discrepancy-evaluation interfaces described
 above. Install the required optional Python extras for the requested backends.
 The GitHub source archive includes the MCP adapter, examples and offline reviewer
 collection/replay tools. New blinded human reviews and representative multi-field
-scientific-error validation remain outstanding. Package versions are independent; the Node adapter
+scientific-error validation remain outstanding. **Prospective human validation is
+PENDING:** it requires recruited independent reviewers adjudicating real manuscripts
+and cannot be performed or simulated by this software; no prospective accuracy claim
+is made. Package versions are independent; the Node adapter
 checks the Python engine's baseline version and probes newer feature contracts.
 
 The Python source distribution (`.tar.gz`) and npm archive include

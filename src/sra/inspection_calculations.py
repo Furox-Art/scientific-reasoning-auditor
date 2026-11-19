@@ -26,6 +26,7 @@ def statistic_consistency(item,stats):
         statistic=Decimal(item['statistic'])
         half=Decimal(1).scaleb(statistic.as_tuple().exponent)/2
         low,high=statistic-half,statistic+half
+        signed_low,signed_high=low,high
         if alternative=='two-sided':
             low,high=(Decimal(0) if low<=0<=high else min(abs(low),abs(high))),max(abs(low),abs(high))
         elif item['test'] in ('F','chi2'):
@@ -62,6 +63,54 @@ def statistic_consistency(item,stats):
             threshold=float(p)
             verified=p_high<threshold-margin if relation=='<' else p_low>threshold+margin
             refuted=p_low>threshold+margin if relation=='<' else p_high<threshold-margin
+        # A REFUTED verdict under a *default* (undeclared) tail or uncorrected df
+        # is only a verdict about that assumption. When the printed p is instead
+        # consistent with a plausible undeclared analysis choice, the honest
+        # fail-closed outcome is abstention, not a declared reporting error. This
+        # never fires for caller-declared tails/df, and never overturns VERIFIED.
+        if refuted and item['alternative_source']=='default':
+            if item['test'] in ('t','z') and alternative=='two-sided' and statistic!=0:
+                tail='greater' if statistic>0 else 'less'
+                s_lo,s_hi=outward(signed_low,-1),outward(signed_high,1)
+                with _STATISTICS_LOCK,warnings.catch_warnings(record=True) as one_alerts:
+                    warnings.simplefilter('always')
+                    dist=getattr(stats,{'t':'t','z':'norm'}[item['test']])
+                    if tail=='greater':
+                        one_p_low,one_p_high=float(dist.sf(s_hi,*degrees)),float(dist.sf(s_lo,*degrees))
+                    else:
+                        one_p_low,one_p_high=float(dist.cdf(s_lo,*degrees)),float(dist.cdf(s_hi,*degrees))
+                if not one_alerts and all(math.isfinite(v) and 0<v<=1 for v in (one_p_low,one_p_high)):
+                    if relation=='=':
+                        one_refuted=one_p_high<a-margin or one_p_low>b+margin
+                    elif relation=='<':
+                        one_refuted=one_p_low>threshold+margin
+                    else:
+                        one_refuted=one_p_high<threshold-margin
+                    if not one_refuted:
+                        details['possible_undeclared_one_tailed']=True
+                        details['one_tailed_p_interval']=[one_p_low,one_p_high]
+                        details['meaning']=('Reported p is inconsistent with the default two-sided calculation but not refuted '
+                            'by a one-tailed test in the statistic direction. The tail was not declared, so no error verdict '
+                            'is issued. Declare alternative (greater/less/two-sided) to resolve the ambiguity.')
+                        return 'UNDETERMINED',details
+            if item['test']=='F' and degrees[0]>=2:
+                upward=(relation=='=' and p_high<a-margin) or (relation=='>' and p_high<threshold-margin)
+                if upward:
+                    # Sphericity corrections (Greenhouse-Geisser/Huynh-Feldt) scale
+                    # both df by epsilon in [1/df1, 1], raising the upper-tail p for
+                    # F>1. The most conservative valid correction (epsilon=1/df1)
+                    # gives df (1, df2/df1) and the largest reachable p.
+                    with _STATISTICS_LOCK,warnings.catch_warnings(record=True) as corr_alerts:
+                        warnings.simplefilter('always')
+                        p_max=float(stats.f.sf(backend_low,1.0,degrees[1]/degrees[0]))
+                    lower_edge=a if relation=='=' else threshold
+                    if not corr_alerts and math.isfinite(p_max) and 0<p_max<=1 and p_max>=lower_edge-margin:
+                        details['possible_undeclared_df_correction']=True
+                        details['df_correction_p_max']=p_max
+                        details['meaning']=('Reported p exceeds the uncorrected-df calculation but is reachable by a sphericity '
+                            'degrees-of-freedom correction (for example Greenhouse-Geisser or Huynh-Feldt). No correction or '
+                            'corrected df was declared, so no error verdict is issued. Supply the corrected df to resolve.')
+                        return 'UNDETERMINED',details
         return ('VERIFIED' if verified else 'REFUTED' if refuted else 'UNDETERMINED'),details
 
 
